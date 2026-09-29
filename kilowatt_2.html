@@ -1,0 +1,1369 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>La Quête du Kilowatt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;600;700&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: one retro console — HUD strip, pixel screen, objective strip, touch pad — centred on a night-blue desk. Single committed dark look. */
+:root{
+  --desk:#131a2b;      /* page ground, deep grid blue */
+  --ink:#1c2440;       /* frames, dialog border */
+  --paper:#f7f0dc;     /* dialog + panels */
+  --paper-2:#ece2c4;
+  --text:#1c2440;
+  --muted:#5b6380;
+  --amber:#f2a33a;     /* XP, highlights */
+  --teal:#2aa198;      /* electricity */
+  --flame:#e2573b;     /* gas */
+  --ok:#2f8f4e; --bad:#c43d3d;
+  --on-desk:#e8e4d6;
+  --f-pix:"Pixelify Sans", "Courier New", monospace;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{background:var(--desk);color:var(--on-desk);font-family:var(--f-body);
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:24px 24px;padding-inline:16px;padding-block:12px 24px}
+.console{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.hud{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--f-pix);background:var(--ink);border:3px solid #0b1020;border-radius:6px;padding:6px 10px;color:var(--on-desk)}
+.hud .who{font-weight:700;font-size:15px}
+.hud .rank{color:var(--amber);font-size:14px}
+.hud .lvl{font-size:14px}
+.xpbar{flex:1;min-width:90px;height:8px;background:#0b1020;border-radius:4px;overflow:hidden;border:1px solid #39426a}
+.xpbar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s}
+.hud button{font:inherit;font-size:13px;background:#2c365c;color:var(--on-desk);border:2px solid #4a5588;border-radius:4px;padding:3px 8px;cursor:pointer}
+.hud button:hover,.hud button:focus-visible{border-color:var(--amber);outline:none}
+.badges{display:flex;gap:3px}
+.badges span{width:14px;height:14px;border-radius:50%;background:#2c365c;border:1px solid #4a5588;display:inline-block}
+.badges span.on{background:var(--amber);border-color:#ffd48a;box-shadow:0 0 6px rgba(242,163,58,.6)}
+.screen-wrap{position:relative;border:6px solid #0b1020;border-radius:8px;background:#000;overflow:hidden;box-shadow:0 0 0 3px #2c365c,0 12px 30px rgba(0,0,0,.45)}
+canvas#screen{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges}
+.objective{font-family:var(--f-pix);font-size:15px;background:#1a223a;border:2px dashed #3a4470;border-radius:6px;padding:6px 10px;color:var(--on-desk)}
+.objective b{color:var(--amber);font-weight:600}
+.keys{font-size:12.5px;color:#9aa3c4;text-align:center}
+/* dialog */
+.dialog{position:absolute;left:2%;right:2%;bottom:3%;background:var(--paper);color:var(--text);border:4px double var(--ink);border-radius:6px;padding:10px 14px 12px;font-family:var(--f-pix);font-size:clamp(13px,2.6vw,18px);line-height:1.35;min-height:28%;box-shadow:0 3px 0 rgba(0,0,0,.35)}
+.dialog .spk{position:absolute;top:-14px;left:12px;background:var(--ink);color:var(--paper);font-size:.8em;padding:1px 8px;border-radius:3px}
+.dialog .more{position:absolute;right:10px;bottom:4px;animation:blink 1s steps(2) infinite;color:var(--flame)}
+@keyframes blink{50%{opacity:0}}
+.toast{position:fixed;z-index:60;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);background:var(--amber);color:var(--ink);font-family:var(--f-pix);font-weight:700;padding:4px 12px;border-radius:4px;border:2px solid var(--ink);white-space:nowrap;font-size:clamp(12px,2.4vw,16px);pointer-events:none;animation:pop 2.2s forwards}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-8px)}10%{opacity:1;transform:translate(-50%,0)}80%{opacity:1}100%{opacity:0}}
+/* touch pad */
+.pad{display:none;justify-content:space-between;align-items:center;padding:6px 8px;user-select:none;-webkit-user-select:none;touch-action:none}
+.dpad{display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:2px}
+.dpad button,.ab button{background:#2c365c;border:2px solid #4a5588;color:var(--on-desk);font-family:var(--f-pix);font-size:18px;border-radius:8px;touch-action:none}
+.dpad button:active,.ab button:active,.dpad button.held{background:#4a5588}
+.ab{display:flex;gap:12px;align-items:center}
+.ab button{width:62px;height:62px;border-radius:50%;font-weight:700}
+.ab .a{background:var(--flame);border-color:#ff9a80}
+@media (pointer:coarse),(max-width:680px){.pad{display:flex}.keys{display:none}}
+/* overlays */
+.overlay{position:fixed;inset:0;background:rgba(8,11,22,.78);display:flex;align-items:flex-start;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px 16px;z-index:20;overflow-y:auto}
+.panel{background:var(--paper);color:var(--text);border:4px double var(--ink);border-radius:8px;width:100%;max-width:680px;margin:auto 0;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.panel header{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--ink);color:var(--paper);font-family:var(--f-pix);padding:8px 14px;font-size:17px}
+.panel header .step{color:var(--amber);font-size:14px}
+.pbody{padding:16px 18px 18px;font-size:16px;line-height:1.5}
+.pbody h3{font-family:var(--f-pix);font-size:20px;margin:0 0 8px;text-wrap:balance}
+.pbody p{margin:0 0 10px;max-width:65ch}
+.pbody .ctx{background:var(--paper-2);border-left:4px solid var(--teal);padding:8px 12px;border-radius:0 4px 4px 0;margin-bottom:12px}
+.pbody .ctx.gas{border-left-color:var(--flame)}
+.pbody .num{font-variant-numeric:tabular-nums;font-family:var(--f-pix);font-size:1.05em}
+.opts{display:grid;gap:8px;margin:10px 0}
+.opt{text-align:left;font:inherit;background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:9px 12px;cursor:pointer;color:var(--text)}
+.opt:hover:not(:disabled),.opt:focus-visible{border-color:var(--ink);outline:none;background:#fff}
+.opt.good{border-color:var(--ok);background:#e3f4e6}
+.opt.badc{border-color:var(--bad);background:#f8e1dd;opacity:.8}
+.opt .mono{font-family:var(--f-pix);letter-spacing:.06em}
+.fb{border-radius:6px;padding:9px 12px;margin:8px 0;font-size:15px}
+.fb.ok{background:#e3f4e6;border:2px solid var(--ok)}
+.fb.ko{background:#f8e1dd;border:2px solid var(--bad)}
+.btn{font-family:var(--f-pix);font-size:17px;background:var(--ink);color:var(--paper);border:0;border-radius:6px;padding:9px 18px;cursor:pointer;margin-top:6px}
+.btn:hover,.btn:focus-visible{background:#2f3a66;outline:2px solid var(--amber)}
+.btn.alt{background:#fffaf0;color:var(--ink);border:2px solid var(--ink)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.field{display:grid;gap:4px;margin-bottom:10px}
+.field label{font-weight:700;font-size:14px}
+.field select,.field input{font:inherit;padding:7px 8px;border:2px solid #c9bb92;border-radius:5px;background:#fffaf0;color:var(--text);max-width:100%}
+.chk{display:flex;gap:10px;align-items:flex-start;background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:8px 10px;cursor:pointer}
+.chk input{margin-top:4px;width:18px;height:18px;accent-color:var(--ink)}
+.chk.good{border-color:var(--ok);background:#e3f4e6}.chk.badc{border-color:var(--bad);background:#f8e1dd}
+.chk small{display:block;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px}
+.card{background:#fffaf0;border:3px solid #c9bb92;border-radius:8px;padding:10px;cursor:pointer;text-align:left;font:inherit;color:var(--text);display:flex;flex-direction:column;gap:6px}
+.card:hover,.card:focus-visible{border-color:var(--ink);outline:none}
+.card canvas{width:100%;image-rendering:pixelated;background:#7cc56a;border-radius:4px}
+.card b{font-family:var(--f-pix);font-size:17px}
+.card small{color:var(--muted);font-size:13.5px;line-height:1.35}
+.tag{display:inline-block;font-family:var(--f-pix);font-size:13px;padding:1px 6px;border-radius:3px;background:var(--ink);color:var(--paper)}
+.seq{display:flex;gap:6px;flex-wrap:wrap;min-height:40px;padding:6px;border:2px dashed #c9bb92;border-radius:6px;margin:8px 0}
+.seq .it{background:var(--ink);color:var(--paper);padding:4px 10px;border-radius:4px;font-family:var(--f-pix)}
+.tbl{overflow-x:auto}
+.tbl table{border-collapse:collapse;width:100%;font-size:14.5px;font-variant-numeric:tabular-nums}
+.tbl th,.tbl td{border-bottom:1px solid #d6caa6;padding:6px 8px;text-align:left}
+.tbl th{font-family:var(--f-pix);font-weight:600}
+.sig{width:100%;height:140px;background:#fff;border:2px dashed var(--ink);border-radius:6px;touch-action:none;cursor:crosshair}
+.chart{width:100%;height:auto;background:#fffaf0;border:2px solid #c9bb92;border-radius:6px}
+input[type=range]{width:100%;accent-color:var(--flame)}
+.sticker{display:inline-block;font-family:var(--f-pix);background:#fff;border:2px solid #444;padding:2px 8px;border-radius:3px;margin:3px;color:#222}
+.meter-art{display:flex;justify-content:center;margin:6px 0 12px}
+.meter-art canvas{width:min(260px,70%);image-rendering:pixelated}
+/* battle */
+.battle{position:fixed;inset:0;z-index:25;background:rgba(8,11,22,.85);display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.arena{width:100%;max-width:680px;background:linear-gradient(#cfe8d0 0 55%,#a9d39a 55%);border:4px double var(--ink);border-radius:8px;overflow:hidden;color:var(--text)}
+.field2{position:relative;height:clamp(200px,42vw,280px)}
+.hpbox{position:absolute;background:var(--paper);border:3px solid var(--ink);border-radius:6px 6px 14px 6px;padding:6px 10px;font-family:var(--f-pix);min-width:190px;font-size:15px}
+.hpbox .bar{height:8px;background:#ddd;border:1px solid var(--ink);border-radius:4px;overflow:hidden;margin-top:4px}
+.hpbox .bar i{display:block;height:100%;background:var(--ok);transition:width .6s}
+.hpbox.enemy{top:12px;left:12px}.hpbox.me{right:12px;bottom:12px}
+.mon{position:absolute;right:8%;top:10%;width:clamp(96px,20vw,140px);image-rendering:pixelated}
+.hero{position:absolute;left:8%;bottom:4%;width:clamp(96px,20vw,130px);image-rendering:pixelated}
+.mon.hit{animation:shake .5s}
+@keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+.mon.ko{transition:opacity .8s,transform .8s;opacity:0;transform:translateY(20px) scale(.6)}
+.bmsg{background:var(--paper);border-top:4px double var(--ink);padding:10px 14px;font-family:var(--f-pix);font-size:16px;min-height:64px;line-height:1.35}
+.bdata{font-family:var(--f-body);font-size:15px;background:var(--paper-2);padding:6px 10px;border-radius:4px;margin-top:6px}
+.moves{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 12px 12px;background:var(--paper)}
+@media (max-width:520px){.moves{grid-template-columns:1fr}}
+.moves button{font-family:var(--f-body);font-size:14.5px;text-align:left;background:#fffaf0;border:2px solid var(--ink);border-radius:6px;padding:8px 10px;cursor:pointer;color:var(--text)}
+.moves button:hover,.moves button:focus-visible{background:#fff;outline:2px solid var(--amber)}
+.moves button:disabled{opacity:.45;cursor:default}
+/* title & evolution */
+.title-screen{position:fixed;inset:0;z-index:30;background:var(--desk);display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.title-box{max-width:560px;width:100%;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+.logo{font-family:var(--f-pix);font-weight:700;font-size:clamp(34px,8vw,58px);line-height:1;color:var(--amber);text-shadow:3px 3px 0 var(--flame),6px 6px 0 #0b1020;letter-spacing:.02em;text-wrap:balance}
+.logo small{display:block;font-size:.34em;color:var(--on-desk);text-shadow:none;margin-top:10px;letter-spacing:.12em;text-transform:uppercase}
+.title-box p{color:#b7bdd6;max-width:48ch;margin:0}
+.title-box input{font-family:var(--f-pix);font-size:18px;padding:8px 10px;border-radius:6px;border:2px solid #4a5588;background:#0f1424;color:var(--on-desk);text-align:center;width:220px}
+.title-box .btn{background:var(--amber);color:var(--ink)}
+.title-box .btn.alt{background:transparent;color:var(--on-desk);border-color:#4a5588}
+.ranks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-family:var(--f-pix);font-size:13px;color:#9aa3c4}
+.ranks span{border:1px solid #39426a;border-radius:4px;padding:2px 8px}
+.evo{position:fixed;inset:0;z-index:40;background:#0b1020;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:var(--on-desk);font-family:var(--f-pix);text-align:center;padding:16px}
+.evo canvas{width:160px;image-rendering:pixelated}
+.evo .t{font-size:clamp(18px,4vw,26px);max-width:30ch}
+.menu-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.menu-tabs button{font-family:var(--f-pix);font-size:15px;background:#fffaf0;border:2px solid #c9bb92;border-radius:5px;padding:4px 10px;cursor:pointer;color:var(--text)}
+.menu-tabs button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.dex div{background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:6px;text-align:center;font-size:13.5px}
+.dex canvas{width:64px;image-rendering:pixelated}
+.dex .unk{opacity:.45}
+/* avatar & étapes */
+.av-grid{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:560px){.av-grid{grid-template-columns:1fr}}
+.av-prev{display:flex;flex-direction:column;gap:6px;align-items:center;background:#7cc56a;border:3px solid var(--ink);border-radius:8px;padding:10px}
+.av-prev canvas{width:100%;max-width:200px;image-rendering:pixelated}
+.av-prev small{color:var(--ink);font-size:12px;text-align:center}
+.swatches,.pills{display:flex;flex-wrap:wrap;gap:6px}
+.sw{width:28px;height:28px;border-radius:50%;border:3px solid #fffaf0;box-shadow:0 0 0 2px #c9bb92;cursor:pointer;padding:0}
+.sw.on{box-shadow:0 0 0 3px var(--ink)}
+.sw:focus-visible,.pill:focus-visible{outline:2px solid var(--flame);outline-offset:2px}
+.pill{font:inherit;font-size:14px;background:#fffaf0;border:2px solid #c9bb92;border-radius:999px;padding:4px 12px;cursor:pointer;color:var(--text)}
+.pill.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chap{display:grid;gap:6px;margin:10px 0}
+.chap .opt .num{color:var(--muted);margin-right:6px}
+.chap .chap-done{background:#eef6ea}
+.chap .chap-cur{border-color:var(--amber);background:#fff3dc}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="console" id="console">
+  <div class="hud" role="status">
+    <span class="who" id="hudName">—</span>
+    <span class="rank" id="hudRank">Gestionnaire de site</span>
+    <span class="lvl" id="hudLvl">Nv 1</span>
+    <div class="xpbar" title="Expérience"><i id="hudXp"></i></div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+    <button id="sndBtn" type="button" aria-pressed="true">♪ Son</button>
+    <button id="menuBtn" type="button">Menu</button>
+  </div>
+  <div class="screen-wrap" id="wrap">
+    <canvas id="screen" width="240" height="176" aria-label="Écran de jeu"></canvas>
+  </div>
+  <div class="objective" id="objective"><b>Objectif :</b> …</div>
+  <div class="keys">Flèches ou ZQSD/WASD pour marcher · Espace ou Entrée pour parler, lire, interagir · Échap ou M pour le menu</div>
+  <div class="pad" id="pad">
+    <div class="dpad">
+      <span></span><button data-k="up" aria-label="Haut">▲</button><span></span>
+      <button data-k="left" aria-label="Gauche">◀</button><span></span><button data-k="right" aria-label="Droite">▶</button>
+      <span></span><button data-k="down" aria-label="Bas">▼</button><span></span>
+    </div>
+    <div class="ab"><button class="b" data-b="menu" aria-label="Menu">B</button><button class="a" data-b="a" aria-label="Action">A</button></div>
+  </div>
+</div>
+<div id="layer"></div>
+<script>
+"use strict";
+/* ================= ÉTAT & SAUVEGARDE ================= */
+const SAVE_KEY='quete-kilowatt-v1';
+const RANKS=['Gestionnaire de site','Energy Manager','Gestionnaire de patrimoine'];
+const BADGES=['Cadrer','Collecter','Fiabiliser','Structurer','Analyser','Détecter','Agir','Piloter'];
+const DEF=()=>({ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},name:'Alex',av:null,secrets:{},maxCh:0,sobriete:false});
+let S=DEF();
+function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(S))}catch(e){}}
+function loadSave(){try{const r=localStorage.getItem(SAVE_KEY);return r?JSON.parse(r):null}catch(e){return null}}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Number(n).toLocaleString('fr-FR');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const hash=(x,y)=>{let h=x*374761393+y*668265263;h=(h^(h>>13))*1274126177;return ((h^(h>>16))>>>0)/4294967295};
+
+/* ================= SITES ================= */
+const SITES={
+  ecole:{id:'ecole',name:'École Jean-Jaurès',short:"l'école",kind:'une école primaire',addr:'12 rue Jean-Jaurès',cp:'45100 Ampère-sur-Loire',
+    surface:2000,activite:'Enseignement (école primaire)',annee:1972,occ:'250 élèves, 18 adultes',kva:60,pointe:57,souscrit:80,psOpts:[50,60,80,100],psOk:60,
+    pdl:'30001234567890',serie:'021472215896',pce:'GI084512',gazSerie:'0C19123456',elec:86,gaz:208,titulaire:"Mairie d'Ampère-sur-Loire",siret:'21450123400017',
+    sub:'Sous-compteur de la cuisine',subShort:'la cuisine',roof:'#c0503a',wall:'#f0e0c8',floor:['#d9d2b5','#cfc7a6'],
+    derRdc:['Tableau numérique et PC de la salle info restés en veille tout le week-end',1.6],derCave:['Chauffe-eau électrique en marche pendant les vacances',0.9]},
+  bureau:{id:'bureau',name:'Bureaux Le Carré',short:'les bureaux',kind:'un immeuble de bureaux',addr:'3 place de la Gare',cp:'45100 Ampère-sur-Loire',
+    surface:1500,activite:'Bureaux',annee:1994,occ:'90 salariés',kva:120,pointe:104,souscrit:150,psOpts:[90,110,150,180],psOk:110,
+    pdl:'25893076451208',serie:'113620894417',pce:'GI217703',gazSerie:'0C21558204',elec:165,gaz:120,titulaire:'SCI Le Carré',siret:'81234567800024',
+    sub:'Sous-compteur de la salle serveurs',subShort:'la salle serveurs',roof:'#3f7f8f',wall:'#d6dde6',floor:['#9fb0c2','#95a6b8'],
+    derRdc:['Écrans, imprimantes et machine à café en veille toute la nuit',1.3],derCave:['Centrale de ventilation qui tourne 24 h/24',1.2]},
+  boulangerie:{id:'boulangerie',name:'Boulangerie du Moulin',short:'la boulangerie',kind:'une boulangerie',addr:'7 rue du Four',cp:'45100 Ampère-sur-Loire',
+    surface:140,activite:'Commerce alimentaire (boulangerie)',annee:1958,occ:'6 salariés',kva:36,pointe:27,souscrit:36,psOpts:[24,30,36],psOk:30,
+    pdl:'19427730562814',serie:'061925504731',pce:'GI390156',gazSerie:'0C17430981',elec:62,gaz:48,titulaire:'SARL Boulangerie du Moulin',siret:'49876543200031',
+    sub:'Sous-compteur du fournil',subShort:'le fournil',roof:'#b8864a',wall:'#f3e2c4',floor:['#e8e0d0','#d8cdb8'],
+    derRdc:['Vitrine réfrigérée ouverte, sans rideau de nuit',1.7],derCave:['Chambre froide dont la porte ferme mal',0.8]}
+};
+const site=()=>SITES[S.site]||SITES.ecole;
+const elecChannel=s=>s.kva>36?'SGE':'Data Connect';
+const assujetti=s=>s.surface>=1000;
+
+/* ================= CARTES ================= */
+const TS=16,VW=15,VH=11;
+const BLD=[
+  {id:'office',x:4,y:3,w:6,h:5,door:[6,7],roof:'#5a6b8c',wall:'#e6e2d8'},
+  {id:'ecole',x:14,y:3,w:9,h:6,door:[18,8]},
+  {id:'bureau',x:26,y:3,w:7,h:7,door:[29,9]},
+  {id:'boulangerie',x:24,y:16,w:7,h:5,door:[27,20]},
+];
+BLD.forEach(b=>{if(SITES[b.id]){b.roof=SITES[b.id].roof;b.wall=SITES[b.id].wall}});
+function grid(w,h,ch){return Array.from({length:h},()=>Array(w).fill(ch))}
+function rect(g,x0,y0,x1,y1,ch){for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)if(g[y]&&g[y][x]!==undefined)g[y][x]=ch}
+function genTown(){
+  const W=36,H=26,g=grid(W,H,'.');
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(x<2||y<2||x>=W-2||y>=H-2)g[y][x]='T';
+  rect(g,3,12,33,13,'=');            // grande rue
+  rect(g,6,8,6,11,'=');rect(g,18,9,18,11,'=');rect(g,29,10,29,11,'=');rect(g,23,14,23,22,'=');rect(g,23,22,27,22,'=');rect(g,27,21,27,21,'=');rect(g,8,14,8,14,'=');
+  rect(g,18,14,19,22,'=');
+  // parc des données (hautes herbes) clôturé
+  rect(g,3,15,13,23,'f');rect(g,4,16,12,22,':');g[15][8]='=';
+  rect(g,15,18,16,21,'~');rect(g,14,19,17,20,'~');
+  [[11,5],[12,6],[3,9],[23,10],[33,14],[21,16],[22,17],[31,21],[32,22],[11,9],[24,23],[21,23]].forEach(([x,y])=>{if(g[y][x]==='.')g[y][x]='*'});
+  [[12,3],[24,6],[2,12],[33,9],[21,19],[31,15],[32,15]].forEach(([x,y])=>g[y][x]='T');
+  BLD.forEach(b=>{rect(g,b.x,b.y,b.x+b.w-1,b.y+b.h-1,'B');g[b.door[1]][b.door[0]]='D'});
+  return g;
+}
+function genOffice(){const W=12,H=9,g=grid(W,H,'o');rect(g,0,0,W-1,1,'W');rect(g,0,0,0,H-1,'W');rect(g,W-1,0,W-1,H-1,'W');rect(g,0,H-1,W-1,H-1,'W');g[H-1][5]='E';return g}
+function genRdc(){const W=16,H=11,g=grid(W,H,'o');rect(g,0,0,W-1,1,'W');rect(g,0,0,0,H-1,'W');rect(g,W-1,0,W-1,H-1,'W');rect(g,0,H-1,W-1,H-1,'W');
+  rect(g,5,2,5,6,'W');g[4][5]='o'; // cloison de la pièce technique / cuisine
+  g[H-1][7]='E';g[2][14]='S';return g}
+function genCave(){const W=12,H=9,g=grid(W,H,'c');rect(g,0,0,W-1,1,'W');rect(g,0,0,0,H-1,'W');rect(g,W-1,0,W-1,H-1,'W');rect(g,0,H-1,W-1,H-1,'W');g[2][1]='U';return g}
+const MAPS={town:{g:genTown(),name:'Ampère-sur-Loire'},office:{g:genOffice(),name:'Ton bureau'},rdc:{g:genRdc(),name:'Rez-de-chaussée'},cave:{g:genCave(),name:'Cave'}};
+const SOLID=new Set(['T','W','~','f','B']);
+
+/* ================= DESSIN PIXEL ================= */
+const cv=$('screen'),ctx=cv.getContext('2d');ctx.imageSmoothingEnabled=false;
+function R(c,x,y,w,h,col){c.fillStyle=col;c.fillRect(x,y,w,h)}
+function drawTile(c,ch,x,y,mapId){
+  const X=x*TS,Y=y*TS,h=hash(x,y);
+  const grass=()=>{R(c,X,Y,16,16,'#7cc56a');if(h>.5){R(c,X+3+(h*8|0),Y+4,1,2,'#5fa854');R(c,X+10-(h*5|0),Y+11,1,2,'#5fa854')}};
+  switch(ch){
+    case '.':case 'B':case 'D':grass();break;
+    case '*':grass();[[3,4,'#e2573b'],[10,6,'#f7e36b'],[6,11,'#fff'],[12,12,'#e2573b']].forEach(([a,b,col])=>{R(c,X+a,Y+b,2,2,col);R(c,X+a,Y+b+2,1,1,'#3f8a3a')});break;
+    case ':':R(c,X,Y,16,16,'#4f9a4a');for(let i=0;i<4;i++){const bx=X+1+i*4,by=Y+(i%2?3:8);R(c,bx,by+2,1,5,'#2f6d34');R(c,bx+1,by,1,7,'#6fbf5f');R(c,bx+2,by+2,1,5,'#2f6d34')}break;
+    case '=':R(c,X,Y,16,16,'#e3cf98');if(h>.3)R(c,X+(h*13|0),Y+(h*97%13|0),2,1,'#cdb57a');if(h>.7)R(c,X+4,Y+10,1,1,'#cdb57a');break;
+    case 'T':grass();R(c,X+6,Y+11,4,5,'#6b4a2b');c.fillStyle='#2e7d4f';c.beginPath();c.arc(X+8,Y+7,7,0,7);c.fill();c.fillStyle='#3f9a5f';c.beginPath();c.arc(X+6,Y+5,3,0,7);c.fill();break;
+    case '~':R(c,X,Y,16,16,'#4aa3d8');R(c,X+2+(h*4|0),Y+5,5,1,'#8fd0f0');R(c,X+8,Y+11,5,1,'#8fd0f0');break;
+    case 'f':grass();R(c,X,Y+5,16,2,'#a07845');R(c,X,Y+10,16,2,'#a07845');R(c,X+2,Y+3,3,11,'#8a6538');R(c,X+11,Y+3,3,11,'#8a6538');break;
+    case 'o':{let a='#c89b62',b='#b3874f';if(mapId==='rdc'){[a,b]=site().floor}
+      R(c,X,Y,16,16,a);if(mapId==='rdc'&&S.site==='boulangerie'){if((x+y)%2)R(c,X,Y,16,16,b)}else if(mapId==='rdc'&&S.site==='bureau'){if(h>.6)R(c,X+(h*12|0),Y+(h*71%12|0),2,2,b)}else{R(c,X,Y+7,16,1,b);R(c,X+((y%2)?4:11),Y,1,7,b);R(c,X+((y%2)?12:2),Y+8,1,8,b)}break}
+    case 'c':R(c,X,Y,16,16,'#6b6f78');if(h>.4)R(c,X+(h*12|0),Y+(h*37%12|0),3,2,'#5d616a');if(h>.8)R(c,X+3,Y+12,2,1,'#80848d');break;
+    case 'E':R(c,X,Y,16,16,mapId==='cave'?'#6b6f78':'#c89b62');R(c,X+2,Y+3,12,10,'#8a3b3b');R(c,X+3,Y+4,10,8,'#a54a4a');break;
+    case 'S':R(c,X,Y,16,16,'#3b3240');for(let i=0;i<4;i++)R(c,X+1,Y+2+i*4,14,2,i%2?'#6d5d4d':'#86735f');break;
+    case 'U':R(c,X,Y,16,16,'#3b3240');for(let i=0;i<4;i++)R(c,X+1,Y+1+i*4,14-i*2,3,'#9a9aa2');break;
+    case 'W':{const below=MAPS[mapId].g[y+1]&&MAPS[mapId].g[y+1][x];const face=below&&below!=='W';
+      if(face){const wc=mapId==='cave'?'#555a64':mapId==='rdc'?site().wall:'#e8dcc0';R(c,X,Y,16,16,wc);R(c,X,Y+13,16,3,mapId==='cave'?'#3d414a':'#8c6d4a');if(mapId==='cave'){R(c,X+(h*10|0),Y+4,4,2,'#4a4f58')}}
+      else R(c,X,Y,16,16,mapId==='cave'?'#2a2c33':'#3b3240');break}
+  }
+}
+function drawBuilding(c,b){
+  const X=b.x*TS,Y=b.y*TS,W=b.w*TS,H=b.h*TS,rh=Math.ceil(b.h*.45)*TS;
+  R(c,X,Y+rh,W,H-rh,b.wall);R(c,X,Y+H-3,W,3,'#8c7a62');
+  R(c,X-2,Y,W+4,rh,b.roof);for(let i=4;i<rh;i+=5)R(c,X-2,Y+i,W+4,1,'rgba(0,0,0,.18)');R(c,X-3,Y+rh-3,W+6,3,'rgba(0,0,0,.35)');
+  const dx=b.door[0]*TS;
+  for(let tx=b.x;tx<b.x+b.w;tx++){if(tx===b.door[0])continue;for(let ty=b.y+Math.ceil(b.h*.45);ty<b.y+b.h;ty++){if(ty===b.y+b.h-1&&b.h>5&&(tx%2))continue;R(c,tx*TS+3,ty*TS+3,10,8,'#4a5566');R(c,tx*TS+4,ty*TS+4,8,6,'#8ec9e8');R(c,tx*TS+4,ty*TS+4,3,2,'#c9ecfa')}}
+  const dy=(b.y+b.h-1)*TS;R(c,dx+2,dy+1,12,15,'#4a3421');R(c,dx+3,dy+2,10,14,'#6b4a2b');R(c,dx+10,dy+9,2,2,'#f2a33a');
+  // enseigne
+  const sy=Y+rh+1;R(c,dx-4,sy-12<Y?Y:sy-11,24,9,'#1c2440');const iy=(sy-11<Y?Y:sy-11)+2,ix=dx+2;
+  if(b.id==='ecole'){R(c,ix,iy,12,5,'#f7f0dc');R(c,ix+1,iy+1,10,1,'#c0503a');R(c,ix+1,iy+3,7,1,'#1c2440')}
+  if(b.id==='bureau'){R(c,ix+3,iy,6,5,'#f7f0dc');R(c,ix+4,iy+1,4,3,'#3f7f8f')}
+  if(b.id==='boulangerie'){R(c,ix,iy+1,12,3,'#e3b066');R(c,ix+2,iy+1,1,2,'#b8864a');R(c,ix+5,iy+1,1,2,'#b8864a');R(c,ix+8,iy+1,1,2,'#b8864a')}
+  if(b.id==='office'){R(c,ix+1,iy,3,5,'#f2a33a');R(c,ix+5,iy+2,2,1,'#f7f0dc');R(c,ix+8,iy,3,5,'#2aa198')}
+  if(b.id===S.site){R(c,X+W-10,Y-6,2,10,'#1c2440');R(c,X+W-8,Y-6,7,5,'#f2a33a')}
+}
+const mapCache={};
+function buildMapCanvas(id){
+  const m=MAPS[id],H=m.g.length,W=m.g[0].length,c=document.createElement('canvas');c.width=W*TS;c.height=H*TS;const x2=c.getContext('2d');
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++)drawTile(x2,m.g[y][x],x,y,id);
+  if(id==='town')BLD.forEach(b=>drawBuilding(x2,b));
+  mapCache[id]=c;
+}
+function rebuildMaps(){Object.keys(MAPS).forEach(buildMapCanvas)}
+
+/* Personnages */
+const SKINS=['#f6d3b3','#f1c7a1','#e0ac7e','#c68a5c','#9a6440','#6b4128'];
+const HAIRC=['#2b1d14','#5a3a22','#8a5a2b','#d9a441','#b8431f','#9a9aa2','#ece6d6','#3a5fc0','#c94f8a'];
+const TOPS=['#7a8594','#c43d3d','#2f6db5','#2f9e7a','#e2a13a','#8a3b8f','#f7f0dc','#2c2c34','#e57399'];
+const BOTS=['#2f3a5c','#333338','#6b4a2b','#6d7896','#8a3b3b','#2f6d34','#c9b28a'];
+const STYLES={court:'Court',long:'Long',queue:'Queue-de-cheval',carre:'Carré',boucle:'Bouclé',chauve:'Crâne rasé'};
+const AVDEF=g=>g==='f'?{g:'f',skin:1,style:'long',hair:1,top:1,bot:0,bt:'jupe'}:{g:'h',skin:1,style:'court',hair:1,top:0,bot:0,bt:'pantalon'};
+function avPal(rank,av){av=av||S.av||AVDEF('h');
+  return{skin:SKINS[av.skin],hair:HAIRC[av.hair],style:av.style,shirt:TOPS[av.top],pants:BOTS[av.bot],skirt:av.bt==='jupe',
+    hat:rank===1?'#f2c12e':null,vest:rank===1,jacket:rank===2?'#262b4f':null,tie:rank===2?'#f2a33a':null,lash:av.g==='f'}}
+const PAL=[0,1,2].map(r=>new Proxy({}, {get:(_,k)=>avPal(r)[k]}));
+function drawChar(c,x,y,dir,frame,p){
+  x=Math.round(x);y=Math.round(y);const skin=p.skin||'#f1c7a1',hc=p.hair,st=p.style||'court';
+  c.fillStyle='rgba(0,0,0,.22)';c.fillRect(x+3,y+14,10,2);
+  const l=frame%2?1:0;
+  // tresse/cheveux longs derrière le corps (vue de dos)
+  if(dir==='up'&&(st==='long'))R(c,x+4,y+5,8,5,hc);
+  if(p.skirt){R(c,x+5,y+13-(l?1:0),2,2,skin);R(c,x+9,y+13-(l?0:1),2,2,skin);R(c,x+5,y+14,2,1,'#222');R(c,x+9,y+14,2,1,'#222');R(c,x+4,y+11,8,2,p.pants);R(c,x+3,y+12,10,1,p.pants)}
+  else{R(c,x+5,y+12-(l?1:0),3,3,p.pants);R(c,x+8,y+12-(l?0:1),3,3,p.pants);R(c,x+5,y+14,3,1,'#222');R(c,x+8,y+14,3,1,'#222')}
+  R(c,x+4,y+7,8,p.skirt?5:6,p.shirt);R(c,x+3,y+8,1,4,skin);R(c,x+12,y+8,1,4,skin);
+  if(p.jacket){if(dir==='up')R(c,x+4,y+7,8,5,p.jacket);else{R(c,x+4,y+7,3,5,p.jacket);R(c,x+9,y+7,3,5,p.jacket)}R(c,x+3,y+8,1,3,p.jacket);R(c,x+12,y+8,1,3,p.jacket)}
+  if(p.vest){R(c,x+4,y+7,2,5,'#f2c12e');R(c,x+10,y+7,2,5,'#f2c12e');if(dir==='up')R(c,x+4,y+7,8,5,'#f2c12e');R(c,x+4,y+10,8,1,'#e8e4d6')}
+  if(p.tie&&dir==='down')R(c,x+7,y+8,2,4,p.tie);
+  R(c,x+4,y+1,8,7,skin);
+  if(st==='chauve'){if(dir!=='up')R(c,x+5,y+1,2,1,'rgba(255,255,255,.35)');else R(c,x+4,y+1,8,2,'rgba(0,0,0,.08)')}
+  else if(dir==='up'){R(c,x+4,y+1,8,6,hc);if(st==='queue')R(c,x+7,y+7,2,3,hc);if(st==='carre')R(c,x+4,y+1,8,7,hc);if(st==='boucle'){R(c,x+3,y,10,6,hc)}}
+  else{
+    if(st==='boucle'){R(c,x+3,y-1,10,4,hc);R(c,x+3,y+2,2,3,hc);R(c,x+11,y+2,2,3,hc)}
+    else R(c,x+4,y,8,3,hc);
+    if(st==='long'){if(dir!=='right')R(c,x+3,y+2,2,7,hc);if(dir!=='left')R(c,x+11,y+2,2,7,hc);if(dir==='left')R(c,x+10,y+1,3,8,hc);if(dir==='right')R(c,x+3,y+1,3,8,hc)}
+    if(st==='carre'){if(dir!=='right')R(c,x+3,y+2,2,5,hc);if(dir!=='left')R(c,x+11,y+2,2,5,hc)}
+    if(st==='queue'){if(dir==='left')R(c,x+12,y+2,2,5,hc);if(dir==='right')R(c,x+2,y+2,2,5,hc)}
+    if(dir==='left'&&st!=='long')R(c,x+9,y+1,3,4,hc);if(dir==='right'&&st!=='long')R(c,x+4,y+1,3,4,hc);
+    const ey=y+4;if(dir==='down'){R(c,x+6,ey,1,2,'#222');R(c,x+9,ey,1,2,'#222');if(p.lash){R(c,x+5,ey,1,1,'#222');R(c,x+10,ey,1,1,'#222')}}
+    if(dir==='left')R(c,x+5,ey,1,2,'#222');if(dir==='right')R(c,x+10,ey,1,2,'#222')}
+  if(p.hat){R(c,x+3,y,10,3,p.hat);R(c,x+4,y-1,8,1,p.hat)}
+  if(p.glasses&&dir!=='up'){R(c,x+5,y+4,6,1,'#222')}
+}
+
+/* ================= OBJETS PAR CARTE ================= */
+function objsFor(id){
+  const s=site(),o=[];
+  if(id==='town'){
+    BLD.forEach(b=>{if(!SITES[b.id])return;const d=b.door,sd=SITES[b.id];
+      o.push({x:d[0]+2,y:d[1]+1,kind:'mailbox',solid:1,act:()=>actMailbox(b.id)});
+      o.push({x:d[0]-2,y:d[1]+1,kind:'panel',solid:1,act:()=>actPanel(b.id)});});
+    o.push({x:16,y:14,kind:'sign',solid:1,act:()=>say([{t:"Ampère-sur-Loire (45) · Zone climatique H1 · Station météo de référence : Orléans-Bricy."},{t:"Plus bas : le Parc des Données, où vivent les données brutes sauvages."}])});
+    o.push({x:S.ch>=4?10:8,y:S.ch>=4?14:15,kind:'npc',solid:1,pal:{shirt:'#2aa198',pants:'#333',hair:'#222',hat:'#e2573b'},dir:'down',act:actTech});
+    o.push({x:21,y:14,kind:'npc',solid:1,pal:{shirt:'#4a78c9',pants:'#333',hair:'#a0602a'},dir:'left',act:()=>say([{w:'Agent Enedis',t:"Je pose et je relève les compteurs électriques : je suis le distributeur. La facture, c'est le fournisseur qui l'envoie. Deux métiers, deux entreprises !"},{w:'Agent Enedis',t:"Au-dessus de 36 kVA, les données passent par le SGE. En dessous, avec un Linky, par Data Connect."}])});
+    o.push({x:12,y:11,kind:'npc',solid:1,pal:{shirt:'#e2573b',pants:'#333',hair:'#333',hat:'#1c6fb3'},dir:'down',act:()=>say([{w:'Technicienne GRDF',t:"Un compteur gaz mesure un volume, en m³. Pour avoir des kWh, on multiplie par le coefficient de conversion : entre 10 et 11,5 kWh/m³ selon la commune et le mois."}])});
+    o.push({x:31,y:17,kind:'npc',solid:1,pal:{shirt:'#b8864a',pants:'#5a3a22',hair:'#ddd'},dir:'left',act:()=>say([{w:'Retraité',t:"De mon temps, on relevait les index à la main. Une fois j'ai lu 404 989 au lieu de 413 989... la consommation était négative !"}])});
+  }
+  if(id==='office'){
+    o.push({x:2,y:2,kind:'pc',solid:1,act:actPC},{x:1,y:2,kind:'desk',solid:1,act:()=>secret('postit',["Un post-it collé sur le bureau : « Mot de passe du portail Enedis : NE PAS L'ÉCRIRE SUR UN POST-IT ».","Au dos : le mot de passe. Évidemment."])},{x:3,y:2,kind:'desk',solid:1,act:actPC});
+    o.push({x:8,y:4,kind:'npc',solid:1,pal:{shirt:'#8a3b8f',pants:'#2f3a5c',hair:'#9a9aa2',glasses:1},dir:'left',act:actJoule});
+    o.push({x:10,y:2,kind:'shelf',solid:1,act:actArchives},{x:9,y:2,kind:'shelf',solid:1,act:actArchives});
+    o.push({x:6,y:1,kind:'mapwall',act:()=>say([{t:"Plan d'Ampère-sur-Loire. Trois sites y sont épinglés : l'école Jean-Jaurès, les bureaux Le Carré et la boulangerie du Moulin."}])});
+    {const pl=()=>secret('plante',["Une plante verte. Consommation : 0 kWh. Production : de l'oxygène.","Meilleur ratio du bâtiment, et de loin. Elle n'a jamais réclamé la clim, contrairement à la direction."]);o.push({x:1,y:6,kind:'plant',solid:1,act:pl},{x:10,y:7,kind:'plant',solid:1,act:pl})}
+  }
+  if(id==='rdc'){
+    o.push({x:11,y:1,kind:'coffret',act:actElec},{x:2,y:1,kind:'submeter',act:actSub});
+    furniture(o);
+    if(S.ch===7)o.push({x:13,y:1,kind:'derive',did:'light',act:()=>actDerive('light')},{x:3,y:3,kind:'derive',did:'rdc',solid:1,act:()=>actDerive('rdc')});
+  }
+  if(id==='cave'){
+    o.push({x:8,y:1,kind:'gasmeter',act:actGas});
+    o.push({x:4,y:3,kind:'boiler',solid:1,act:S.ch===7?()=>actDerive('boiler'):()=>say([{t:"La chaudière gaz. Elle chauffe tout le bâtiment : c'est elle qui fait tourner le compteur gaz l'hiver."}])},{x:5,y:3,kind:'boiler2',solid:1,act:S.ch===7?()=>actDerive('boiler'):null});
+    {const cr=()=>secret('carton',["Un carton : « PLAN DE COMPTAGE 2003 – NE PAS JETER ».","Dedans : trois PDL de bâtiments démolis, un index noté au crayon et un sandwich. Le sandwich a mieux vieilli que les données."]);o.push({x:9,y:5,kind:'crate',solid:1,act:cr},{x:10,y:5,kind:'crate',solid:1,act:cr})}
+    if(S.ch===7)o.push({x:2,y:6,kind:'derive',did:'cave',solid:1,act:()=>actDerive('cave')});
+  }
+  secretObjs(id,o);
+  return o;
+}
+function furniture(o){
+  const t=S.site;
+  if(t==='ecole'){for(const y of [4,6])for(const x of [8,10,12])o.push({x,y,kind:'schooldesk',solid:1});o.push({x:9,y:1,kind:'board',solid:0,act:actMobilier},{x:1,y:5,kind:'stove',solid:1},{x:2,y:5,kind:'stove',solid:1})}
+  if(t==='bureau'){for(const x of [8,9,12,13])o.push({x,y:4,kind:'officedesk',solid:1,act:actMobilier});for(const x of [8,9,12,13])o.push({x,y:7,kind:'officedesk',solid:1});o.push({x:1,y:5,kind:'rack',solid:1},{x:2,y:5,kind:'rack',solid:1},{x:14,y:8,kind:'plant',solid:1})}
+  if(t==='boulangerie'){for(const x of [8,9,10,11,12])o.push({x,y:6,kind:'counter',solid:1,act:actMobilier});o.push({x:1,y:5,kind:'oven',solid:1},{x:2,y:5,kind:'oven',solid:1},{x:3,y:5,kind:'oven',solid:1},{x:13,y:3,kind:'plant',solid:1})}
+}
+function drawObj(c,o,ox,oy,t){
+  const X=o.x*TS-ox,Y=o.y*TS-oy;
+  switch(o.kind){
+    case 'mailbox':R(c,X+7,Y+8,2,8,'#6b4a2b');R(c,X+3,Y+2,10,7,'#c43d3d');R(c,X+4,Y+3,8,2,'#e25f5f');R(c,X+11,Y+1,1,4,'#f2a33a');break;
+    case 'panel':R(c,X+2,Y+12,2,4,'#555');R(c,X+12,Y+12,2,4,'#555');R(c,X+1,Y+2,14,10,'#1c2440');R(c,X+2,Y+3,12,8,'#f7f0dc');for(let i=0;i<3;i++)R(c,X+3,Y+4+i*2,i===0?7:10,1,'#5b6380');break;
+    case 'sign':R(c,X+7,Y+9,2,7,'#6b4a2b');R(c,X+2,Y+3,12,7,'#a07845');R(c,X+3,Y+5,10,1,'#5a3a22');R(c,X+3,Y+7,7,1,'#5a3a22');break;
+    case 'npc':drawChar(c,X,Y-2,o.dir,0,o.pal);break;
+    case 'pc':R(c,X,Y+4,16,12,'#8a5f36');R(c,X+3,Y-2,10,8,'#1c2440');R(c,X+4,Y-1,8,6,(t>>4)%2?'#2aa198':'#34b5aa');R(c,X+7,Y+6,2,2,'#333');break;
+    case 'desk':R(c,X,Y+4,16,12,'#8a5f36');R(c,X,Y+4,16,2,'#a0764a');if(o.x===1)R(c,X+4,Y+1,8,4,'#f7f0dc');break;
+    case 'shelf':R(c,X+1,Y-6,14,22,'#6b4a2b');for(let i=0;i<4;i++){R(c,X+2,Y-5+i*5,12,4,'#4a3421');for(let j=0;j<4;j++)R(c,X+3+j*3,Y-4+i*5,2,3,['#c0503a','#2aa198','#f2a33a','#4a78c9'][(i+j+o.x)%4])}break;
+    case 'mapwall':R(c,X+1,Y+2,14,10,'#f7f0dc');R(c,X+2,Y+3,12,8,'#9fd08a');R(c,X+4,Y+6,8,1,'#e3cf98');R(c,X+5,Y+4,2,2,'#c0503a');R(c,X+10,Y+4,2,2,'#3f7f8f');R(c,X+9,Y+8,2,2,'#b8864a');break;
+    case 'plant':R(c,X+5,Y+10,6,6,'#a0522d');c.fillStyle='#3f9a5f';c.beginPath();c.arc(X+8,Y+7,5,0,7);c.fill();break;
+    case 'coffret':R(c,X+2,Y+1,12,12,'#9aa0a8');R(c,X+3,Y+2,10,10,'#c4c9cf');R(c,X+5,Y+4,6,4,'#1c2440');R(c,X+6,Y+5,4,2,(t>>5)%2?'#2aa198':'#1c7a73');R(c,X+4,Y+9,8,2,'#7a8088');break;
+    case 'submeter':R(c,X+4,Y+3,8,9,'#c4c9cf');R(c,X+5,Y+4,6,3,'#1c2440');R(c,X+6,Y+5,3,1,'#2aa198');R(c,X+7,Y+12,2,2,'#333');break;
+    case 'gasmeter':R(c,X+2,Y+2,12,11,'#e8d24a');R(c,X+3,Y+3,10,6,'#f7f0dc');R(c,X+4,Y+5,8,2,'#333');R(c,X+4,Y+13,2,3,'#888');R(c,X+10,Y+13,2,3,'#888');break;
+    case 'boiler':R(c,X+1,Y-8,15,24,'#d9d9dc');R(c,X+3,Y-6,11,6,'#bbb');R(c,X+5,Y+4,6,4,S.ch===7?((t>>3)%2?'#e2573b':'#f2a33a'):'#555');break;
+    case 'boiler2':R(c,X,Y-8,14,24,'#cfcfd3');R(c,X+4,Y-10,4,4,'#888');R(c,X+2,Y+2,8,2,'#999');break;
+    case 'crate':R(c,X+1,Y+2,14,13,'#a07845');R(c,X+1,Y+8,14,1,'#6b4a2b');R(c,X+7,Y+2,1,13,'#6b4a2b');break;
+    case 'schooldesk':R(c,X+1,Y+4,14,7,'#c89b62');R(c,X+1,Y+4,14,2,'#dcb07a');R(c,X+2,Y+11,2,4,'#555');R(c,X+12,Y+11,2,4,'#555');R(c,X+5,Y+12,6,3,'#4a78c9');break;
+    case 'board':R(c,X-10,Y+1,36,11,'#8a6538');R(c,X-9,Y+2,34,9,'#2f5a45');R(c,X-6,Y+4,10,1,'#e8e4d6');R(c,X+6,Y+7,14,1,'#e8e4d6');break;
+    case 'stove':R(c,X+1,Y+2,14,14,'#b0b4ba');R(c,X+3,Y+4,4,3,'#333');R(c,X+9,Y+4,4,3,'#333');R(c,X+3,Y+10,10,4,'#8a8f96');break;
+    case 'officedesk':R(c,X,Y+5,16,7,'#e6e2d8');R(c,X+1,Y+12,2,4,'#777');R(c,X+13,Y+12,2,4,'#777');R(c,X+4,Y,8,6,'#1c2440');R(c,X+5,Y+1,6,4,'#4a78c9');break;
+    case 'rack':R(c,X+2,Y-6,12,22,'#1c2440');for(let i=0;i<6;i++)R(c,X+4,Y-4+i*3,8,1,(t>>3)%3===i%3?'#2aa198':'#39426a');break;
+    case 'counter':R(c,X,Y+3,16,13,'#b8864a');R(c,X,Y+3,16,3,'#e3cfa0');R(c,X+2,Y+7,12,5,'#c9ecfa');R(c,X+3,Y+9,5,2,'#d9a55a');break;
+    case 'oven':R(c,X+1,Y-4,14,20,'#7a7f88');R(c,X+3,Y,10,7,'#1f1f22');R(c,X+4,Y+1,8,5,'#e2573b');R(c,X+3,Y+9,10,1,'#ccc');break;
+    case 'bin':R(c,X+3,Y+4,10,11,'#5b6380');R(c,X+2,Y+3,12,2,'#39426a');R(c,X+5,Y+1,6,3,'#f7f0dc');R(c,X+6,Y+7,1,6,'#39426a');R(c,X+9,Y+7,1,6,'#39426a');break;
+    case 'cat':{const b=(t>>5)%2;R(c,X+3,Y+8,9,5,'#e0913a');R(c,X+10,Y+5,5,5,'#e0913a');R(c,X+10,Y+4,1,2,'#e0913a');R(c,X+14,Y+4,1,2,'#e0913a');R(c,X+11,Y+7,1,1,'#222');R(c,X+13,Y+7,1,1,'#222');R(c,X+1,Y+(b?7:9),3,2,'#e0913a');R(c,X+4,Y+9,6,1,'#c0712a');break}
+    case 'legend':R(c,X+4,Y+3,8,10,'#6b5a3a');R(c,X+5,Y+4,6,5,'#d9d2b5');R(c,X+6,Y+6,4,1,(t>>3)%2?'#222':'#888');R(c,X+2,Y+11,12,5,'#3f8a3a');R(c,X+1,Y+9,4,4,'#2e7d4f');R(c,X+11,Y+10,4,4,'#2e7d4f');break;
+    case 'derive':if(!S.derives[o.did]){const g=c.createRadialGradient(X+8,Y+8,1,X+8,Y+8,14);g.addColorStop(0,'rgba(255,230,120,.95)');g.addColorStop(1,'rgba(255,230,120,0)');c.fillStyle=g;c.fillRect(X-8,Y-8,32,32);R(c,X+6,Y+5,4,5,'#fff6c0');R(c,X+7,Y+10,2,2,'#999')}break;
+  }
+}
+
+/* ================= CIBLES (flèche d'objectif) ================= */
+function targets(){
+  const s=S.site,m=S.map,T=[],b=BLD.find(x=>x.id===s),off=BLD[0];
+  const toOffice=()=>{if(m==='town')T.push(off.door);else if(m!=='office')T.push(m==='cave'?[1,2]:[7,10])};
+  const toSite=()=>{if(m==='town'&&b)T.push(b.door);else if(m==='office')T.push([5,8])};
+  switch(S.ch){
+    case 0:if(m==='office')T.push([8,4]);else toOffice();break;
+    case 1:if(m==='town'){if(!S.notes.adresse)T.push([b.door[0]+2,b.door[1]+1]);if(!S.notes.surface)T.push([b.door[0]-2,b.door[1]+1])}else if(m==='office')T.push([5,8]);else T.push(m==='cave'?[1,2]:[7,10]);break;
+    case 2:toSite();if(m==='rdc'){if(!S.flags.elec)T.push([11,1]);if(!S.flags.gas)T.push([14,2])}if(m==='cave'&&!S.flags.gas)T.push([8,1]);if(m==='cave'&&S.flags.gas)T.push([1,2]);break;
+    case 3:case 6:case 8:case 9:toOffice();if(m==='office')T.push([2,2]);break;
+    case 4:if(m==='town')T.push([8,15]);else toOffice();break;
+    case 5:toOffice();if(m==='office')T.push([10,2]);break;
+    case 7:toSite();if(m==='rdc'&&(!S.derives.boiler||!S.derives.cave))T.push([14,2]);if(m==='cave'&&!S.derives.boiler)T.push([4,3]);break;
+    case 10:toOffice();if(m==='office')T.push([8,4]);break;
+  }
+  return T;
+}
+
+/* ================= BOUCLE DE JEU ================= */
+const P={x:5,y:6,px:5*TS,py:6*TS,dir:'up',moving:false,step:0,frame:0};
+const keys={up:0,down:0,left:0,right:0};
+let tick=0,busy=false; // busy = dialogue/modal/combat
+function blocked(){return busy||dlg.open}
+function tileAt(x,y){const g=MAPS[S.map].g;return g[y]&&g[y][x]}
+function objAt(x,y){return objsFor(S.map).find(o=>o.x===x&&o.y===y)}
+function isSolid(x,y){const t=tileAt(x,y);if(t===undefined||SOLID.has(t))return true;const o=objAt(x,y);return !!(o&&o.solid)}
+const DIRS={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
+function tryMove(d){
+  P.dir=d;const [dx,dy]=DIRS[d],nx=P.x+dx,ny=P.y+dy,t=tileAt(nx,ny);
+  if(t==='D'){enterDoor(nx,ny);return}
+  if(t==='E'){exitBuilding();return}
+  if(t==='S'){warp('cave',2,2,'down');return}
+  if(t==='U'){warp('rdc',13,2,'left');return}
+  if(isSolid(nx,ny)){const n=performance.now();if(n-(tryMove.b||0)>260){sfx('bump');tryMove.b=n}return}
+  P.x=nx;P.y=ny;P.moving=true;
+}
+function warp(map,x,y,dir){S.map=map;P.x=x;P.y=y;P.px=x*TS;P.py=y*TS;P.dir=dir;P.moving=false;S.x=x;S.y=y;S.dir=dir;save();fadeIn();sfx('door');updateMusic()}
+let fade=0;function fadeIn(){fade=1}
+function enterDoor(x,y){
+  const b=BLD.find(b=>b.door[0]===x&&b.door[1]===y);if(!b)return;
+  if(b.id==='office'){warp('office',5,7,'up');return}
+  if(!S.site){say([{t:"Ce bâtiment n'est pas encore dans ton périmètre. Parle d'abord à Mme Joule, au bureau."}]);return}
+  if(b.id!==S.site){say([{t:`${SITES[b.id].name} : ce n'est pas (encore) ton site. ${S.ch>=10?"Tu le gères maintenant depuis la vue patrimoine, au bureau.":"Un jour, peut-être..."}`}]);return}
+  if(S.ch<2){say([{t:"Pas si vite ! Avant d'entrer, cadre ton site depuis l'extérieur : boîte aux lettres et fiche technique."}]);return}
+  warp('rdc',7,9,'up');
+}
+function exitBuilding(){
+  if(S.map==='office'){const d=BLD[0].door;warp('town',d[0],d[1]+1,'down')}
+  else{const b=BLD.find(b=>b.id===S.site);warp('town',b.door[0],b.door[1]+1,'down')}
+}
+function update(){
+  tick++;
+  if(fade>0)fade=Math.max(0,fade-.06);
+  if(P.moving){const tx=P.x*TS,ty=P.y*TS,sp=2;P.px+=Math.sign(tx-P.px)*Math.min(sp,Math.abs(tx-P.px));P.py+=Math.sign(ty-P.py)*Math.min(sp,Math.abs(ty-P.py));P.step++;if(P.step%8===0)P.frame++;
+    if(P.px===tx&&P.py===ty){P.moving=false;S.x=P.x;S.y=P.y;S.dir=P.dir;onStep()}}
+  if(!P.moving&&!blocked()){for(const d of ['up','down','left','right'])if(keys[d]){tryMove(d);break}}
+  if(!P.moving&&!Object.values(keys).some(Boolean))P.frame=0;
+}
+function onStep(){
+  if(S.map==='town'&&tileAt(P.x,P.y)===':'&&S.ch>=4&&Math.random()<.16){startEncounter()}
+}
+function render(){
+  const m=MAPS[S.map],mc=mapCache[S.map],mw=mc.width,mh=mc.height;
+  let ox=P.px+8-VW*TS/2,oy=P.py+8-VH*TS/2;
+  ox=mw<VW*TS?(mw-VW*TS)/2:Math.max(0,Math.min(mw-VW*TS,ox));oy=mh<VH*TS?(mh-VH*TS)/2:Math.max(0,Math.min(mh-VH*TS,oy));
+  ox=Math.round(ox);oy=Math.round(oy);
+  R(ctx,0,0,cv.width,cv.height,'#0b1020');ctx.drawImage(mc,-ox,-oy);
+  const objs=objsFor(S.map),pal=PAL[S.rank];
+  const ents=objs.map(o=>({y:o.y*TS,f:()=>drawObj(ctx,o,ox,oy,tick)}));
+  ents.push({y:P.py+1,f:()=>drawChar(ctx,P.px-ox,P.py-oy-2,P.dir,P.frame,pal)});
+  ents.sort((a,b)=>a.y-b.y).forEach(e=>e.f());
+  // hautes herbes par-dessus les pieds
+  if(S.map==='town'&&tileAt(P.x,P.y)===':'&&!P.moving){R(ctx,P.px-ox+2,P.py-oy+11,12,5,'#4f9a4a');R(ctx,P.px-ox+4,P.py-oy+10,1,4,'#6fbf5f');R(ctx,P.px-ox+10,P.py-oy+10,1,4,'#6fbf5f')}
+  // nuit / cave
+  const night=S.ch===7,dark=S.map==='cave'?(night?.9:.55):(night?(S.map==='town'?.6:.86):0);
+  if(dark>0){const cx=P.px-ox+8,cy=P.py-oy+8,g=ctx.createRadialGradient(cx,cy,8,cx,cy,night?58:80);g.addColorStop(0,'rgba(6,9,24,0)');g.addColorStop(1,`rgba(6,9,24,${dark})`);ctx.fillStyle=g;ctx.fillRect(0,0,cv.width,cv.height);
+    if(night)objs.filter(o=>o.kind==='derive'||(o.kind==='boiler'&&!S.derives.boiler)).forEach(o=>{if(o.kind==='boiler'){const X=o.x*TS-ox,Y=o.y*TS-oy,g2=ctx.createRadialGradient(X+8,Y+6,1,X+8,Y+6,16);g2.addColorStop(0,'rgba(255,120,60,.8)');g2.addColorStop(1,'rgba(255,120,60,0)');ctx.fillStyle=g2;ctx.fillRect(X-10,Y-12,36,36)}else drawObj(ctx,o,ox,oy,tick)})}
+  // flèches d'objectif
+  const bob=Math.sin(tick/8)*2;
+  targets().forEach(([x,y])=>{const X=x*TS-ox+8,Y=y*TS-oy-8+bob;ctx.fillStyle='#f2a33a';ctx.beginPath();ctx.moveTo(X-5,Y-6);ctx.lineTo(X+5,Y-6);ctx.lineTo(X,Y);ctx.fill();ctx.strokeStyle='#1c2440';ctx.lineWidth=1;ctx.stroke()});
+  // nom de lieu
+  if(fade>0){ctx.globalAlpha=fade;R(ctx,0,0,cv.width,cv.height,'#000');ctx.globalAlpha=1}
+}
+function loop(){update();render();requestAnimationFrame(loop)}
+
+/* ================= DIALOGUE ================= */
+const dlg={open:false,q:[],cur:null,shown:0,cb:null,el:null};
+function say(lines,cb){lines=lines.map(l=>typeof l==='string'?{t:l}:l);dlg.q=lines.slice();dlg.cb=cb||null;dlg.open=true;nextLine()}
+function nextLine(){
+  if(!dlg.q.length){dlg.open=false;if(dlg.el){dlg.el.remove();dlg.el=null}const cb=dlg.cb;dlg.cb=null;if(cb)setTimeout(cb,30);return}
+  dlg.cur=dlg.q.shift();dlg.shown=0;
+  if(!dlg.el){dlg.el=document.createElement('div');dlg.el.className='dialog';dlg.el.addEventListener('click',pressA);$('wrap').appendChild(dlg.el)}
+  const txt=dlg.cur.t.replace(/\{name\}/g,S.name);dlg.cur.full=txt;typeTick();
+}
+function typeTick(){
+  if(!dlg.open||!dlg.el)return;const c=dlg.cur;dlg.shown=Math.min(c.full.length,dlg.shown+2);
+  dlg.el.innerHTML=(c.w?`<span class="spk">${esc(c.w)}</span>`:'')+esc(c.full.slice(0,dlg.shown))+(dlg.shown>=c.full.length?'<span class="more">▼</span>':'');
+  if(dlg.shown<c.full.length){sfx('blip');setTimeout(typeTick,16)}
+}
+function pressA(){
+  if(busy)return;
+  if(dlg.open){if(dlg.shown<dlg.cur.full.length){dlg.shown=dlg.cur.full.length;typeTick()}else nextLine();return}
+  if(P.moving)return;
+  const [dx,dy]=DIRS[P.dir],o=objAt(P.x+dx,P.y+dy);
+  if(o&&o.act){if(o.kind==='npc')o.dir={up:'down',down:'up',left:'right',right:'left'}[P.dir];o.act()}
+}
+
+/* ================= HUD / XP ================= */
+const level=()=>Math.floor(S.xp/90)+1;
+function hud(){
+  S.maxCh=Math.max(S.maxCh||0,S.ch);updateMusic();
+  $('hudName').textContent=S.name;$('hudRank').textContent=RANKS[S.rank];$('hudLvl').textContent='Nv '+level();
+  $('hudXp').style.width=((S.xp%90)/90*100)+'%';
+  $('hudBadges').innerHTML=BADGES.map(b=>`<span class="${S.badges.includes(b)?'on':''}" title="Badge ${b}${S.badges.includes(b)?'':' (à gagner)'}"></span>`).join('');
+  $('objective').innerHTML='<b>Objectif :</b> '+esc(objectiveText());
+}
+let toastQ=[],toastOn=false;function toast(msg){toastQ.push(msg);if(!toastOn)nextToast()}
+function nextToast(){const msg=toastQ.shift();if(!msg){toastOn=false;return}toastOn=true;const t=document.createElement('div');t.className='toast';t.textContent=msg;document.body.appendChild(t);setTimeout(()=>t.remove(),2300);setTimeout(nextToast,900)}
+function gainXP(n){sfx('good');const before=level();S.xp+=n;save();hud();if(level()>before)setTimeout(()=>toast(`Niveau ${level()} !`),400);else toast(`+${n} XP`)}
+function badge(name){if(!S.badges.includes(name)){S.badges.push(name);S.xp+=60;save();hud();jingle('badge');toast(`Badge ${name} obtenu !`)}}
+function objectiveText(){
+  const s=site(),n=Object.keys(S.dex).length,d=Object.keys(S.derives).length;
+  return ["Parle à Mme Joule, dans ton bureau (en haut à gauche de la ville).",
+  `Explore l'extérieur de ${s.short} : trouve l'adresse (boîte aux lettres) et la surface (fiche technique).`,
+  `Entre dans ${s.short} et trouve les compteurs : l'électrique dans un mur, le gaz à la cave.`,
+  "Retourne au bureau et utilise l'ordinateur pour collecter les données.",
+  `Parc des Données, au sud-ouest : corrige les anomalies sauvages (${n}/7).`,
+  "Range les données : armoire à archives du bureau.",
+  "Analyse la consommation sur l'ordinateur du bureau.",
+  `Ronde de nuit dans ${s.short} : trouve les 4 dérives (${d}/4).`,
+  "Construis ton plan d'action sur l'ordinateur du bureau.",
+  "Mesure, vérifie et déclare : ordinateur du bureau.",
+  "Parle à Mme Joule : un patrimoine entier t'attend.",
+  "Quête terminée ! Rejoue avec un autre site depuis le menu."][S.ch]||'';
+}
+/* ================= MUSIQUE CHIPTUNE (compositions originales) ================= */
+const AUD={ctx:null,on:true,master:null,waves:{},noise:null,cur:null,curName:null,want:null,step:0,next:0,jingle:false};
+try{if(localStorage.getItem('qk-sound')==='0')AUD.on=false}catch(e){}
+const NI={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+function nf(t){const m=/^([A-G])(#|b)?(\d)$/.exec(t);if(!m)return 0;const midi=12*(+m[3]+1)+NI[m[1]]+(m[2]==='#'?1:m[2]==='b'?-1:0);return 440*Math.pow(2,(midi-69)/12)}
+const tok=s=>s.replace(/\|/g,' ').trim().split(/\s+/);
+const bars=(map,order)=>tok(order.split(' ').map(k=>map[k]).join(' '));
+function mk(bpm,voices,drums,once){const v=voices.map(([w,vol,s])=>({w,vol,s:Array.isArray(s)?s:tok(s)}));const d=drums?tok(drums):null;return{bpm,v,d,once,len:Math.max(...v.map(x=>x.s.length),d?d.length:0)}}
+const rep=(s,n)=>Array(n).fill(s).join(' ');
+const TRACKS={
+  title:mk(116,[
+    ['p50',.10,'C5 - - - G4 - C5 - | E5 - - - D5 - C5 - | F5 - - - A5 - F5 - | G5 - - - - - . . | A5 - G5 - E5 - C5 - | F5 - E5 - D5 - C5 - | D5 - E5 - F5 - D5 - | C5 - - - - - . .'],
+    ['p25',.045,bars({C:'E4 G4 C5 G4 E4 G4 C5 G4',F:'F4 A4 C5 A4 F4 A4 C5 A4',G:'D4 G4 B4 G4 D4 G4 B4 G4',Am:'E4 A4 C5 A4 E4 A4 C5 A4'},'C C F G Am F G C')],
+    ['tri',.16,bars({C:'C3 - - - G2 - - -',F:'F2 - - - C3 - - -',G:'G2 - - - D3 - - -',Am:'A2 - - - E2 - - -'},'C C F G Am F G C')]],rep('k . h . s . h .',8)),
+  town:mk(138,[
+    ['p50',.10,'E5 - G5 - C6 - B5 A5 | G5 - E5 - C5 - D5 E5 | F5 - A5 - C6 - A5 F5 | G5 - - - D5 - . . | E5 - G5 - C6 - D6 E6 | D6 - C6 - A5 - G5 A5 | F5 - A5 - G5 - F5 D5 | C5 - - - . . . .'],
+    ['p12',.05,bars({C:'. G4 . E4 . G4 . E4',Am:'. A4 . E4 . A4 . E4',F:'. A4 . F4 . A4 . F4',G:'. B4 . G4 . B4 . D5'},'C Am F G C Am F G')],
+    ['tri',.16,bars({C:'C3 . C4 . G2 . C3 .',Am:'A2 . A3 . E2 . A2 .',F:'F2 . F3 . C3 . F2 .',G:'G2 . G3 . D3 . G2 .'},'C Am F G C Am F G')]],rep('k . h . s . h h',8)),
+  indoor:mk(108,[
+    ['p25',.09,'A4 - C5 - F5 - E5 - | D5 - - - A4 - - - | D5 - F5 - Bb5 - A5 G5 | A5 - G5 - E5 - - - | A4 - C5 - F5 - G5 A5 | Bb5 - A5 - F5 - D5 - | G5 - Bb5 - A5 - G5 E5 | F5 - - - - - . .'],
+    ['p12',.035,bars({F:'F4 A4 C5 A4 F4 A4 C5 A4',Dm:'D4 F4 A4 F4 D4 F4 A4 F4',Bb:'D4 F4 Bb4 F4 D4 F4 Bb4 F4',C:'E4 G4 C5 G4 E4 G4 C5 G4'},'F Dm Bb C F Dm Bb C')],
+    ['tri',.15,bars({F:'F2 - - - C3 - - -',Dm:'D2 - - - A2 - - -',Bb:'Bb1 - - - F2 - - -',C:'C2 - - - G2 - - -'},'F Dm Bb C F Dm Bb C')]],rep('h . . . h . . .',8)),
+  night:mk(92,[
+    ['p25',.08,'A4 - - - C5 - B4 - | G#4 - - - E4 - - - | A4 - - - C5 - D5 - | E5 - - - D5 C5 B4 G#4 | A4 - E5 - - - D5 C5 | D5 - F5 - - - E5 D5 | C5 - B4 - A4 - G#4 - | B4 - - - - - . .'],
+    ['p12',.035,bars({Am:'A3 C4 E4 C4 A3 C4 E4 C4',E:'G#3 B3 E4 B3 G#3 B3 E4 B3',F:'A3 C4 F4 C4 A3 C4 F4 C4',Dm:'A3 D4 F4 D4 A3 D4 F4 D4'},'Am E F E Am Dm Am E')],
+    ['tri',.14,bars({Am:'A2 - - - - - - -',E:'E2 - - - - - - -',F:'F2 - - - - - - -',Dm:'D2 - - - - - - -'},'Am E F E Am Dm Am E')]],rep('k . . . . . h .',8)),
+  battle:mk(172,[
+    ['p50',.10,'E5 - G5 - B5 - A5 G5 | F#5 - D5 - E5 - - - | E5 - G5 - C6 - B5 A5 | B5 - - - F#5 - D5 - | E6 - D6 - B5 - G5 - | A5 - G5 - E5 - C5 - | A5 - C6 - B5 - A5 G5 | F#5 - - - D#5 - B4 -'],
+    ['p25',.045,bars({Em:'E4 G4 B4 G4 E4 G4 B4 G4',C:'E4 G4 C5 G4 E4 G4 C5 G4',D:'F#4 A4 D5 A4 F#4 A4 D5 A4',Am:'E4 A4 C5 A4 E4 A4 C5 A4',B:'F#4 B4 D#5 B4 F#4 B4 D#5 B4'},'Em Em C D Em C Am B')],
+    ['tri',.17,bars({Em:'E2 E3 E2 E3 E2 E3 E2 E3',C:'C2 C3 C2 C3 C2 C3 C2 C3',D:'D2 D3 D2 D3 D2 D3 D2 D3',Am:'A1 A2 A1 A2 A1 A2 A1 A2',B:'B1 B2 B1 B2 B1 B2 B1 B2'},'Em Em C D Em C Am B')]],rep('k h s h k k s h',8)),
+  victory:mk(150,[['p50',.11,'C5 E5 G5 C6 - - G5 - C6 - - - - - . .'],['p25',.05,'E4 G4 C5 E5 - - C5 - E5 - - - - - . .'],['tri',.16,'C3 - - - - - G2 - C3 - - - - - . .']],'k . . . s . . . k . . . . . . .',true),
+  badge:mk(140,[['p50',.11,'G5 - G5 G5 C6 - - - E6 - D6 - C6 - - - . .'],['p25',.05,'E5 - E5 E5 G5 - - - C6 - B5 - G5 - - - . .'],['tri',.16,'C3 - - - C3 - - - G2 - G2 - C3 - - - . .']],null,true),
+  evo:mk(130,[['p50',.10,'C5 E5 G5 C6 D5 F5 A5 D6 E5 G5 B5 E6 F5 A5 C6 F6 G5 - B5 - D6 - G6 - - - - - - - . .'],['tri',.16,'C3 - - - D3 - - - E3 - - - F3 - - - G2 - - - G2 - - - C3 - - - - - . .']],'. . . . . . . . . . . . . . . . s . s . s . k . . . . . . . . .',true)
+};
+function audInit(){
+  if(AUD.ctx){if(AUD.ctx.state==='suspended')AUD.ctx.resume();return}
+  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
+  try{
+    const c=AUD.ctx=new AC();AUD.master=c.createGain();AUD.master.gain.value=AUD.on?.5:0;AUD.master.connect(c.destination);
+    [['p50',.5],['p25',.25],['p12',.125]].forEach(([k,d])=>{const n=40,re=new Float32Array(n),im=new Float32Array(n);for(let i=1;i<n;i++)re[i]=(2/(i*Math.PI))*Math.sin(i*Math.PI*d);AUD.waves[k]=c.createPeriodicWave(re,im)});
+    const b=c.createBuffer(1,c.sampleRate,c.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;AUD.noise=b;
+    setInterval(schedule,25);
+    if(AUD.want){const w=AUD.want;AUD.want=null;playTrack(w)}
+  }catch(e){AUD.ctx=null}
+}
+function tone(w,f,t,dur,vol,slide){
+  const c=AUD.ctx;if(!c||!f)return;const o=c.createOscillator(),g=c.createGain();
+  if(w==='tri')o.type='triangle';else o.setPeriodicWave(AUD.waves[w]);
+  o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(slide,t+dur);
+  g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol,t+.006);g.gain.setTargetAtTime(vol*.65,t+.02,.09);g.gain.setTargetAtTime(0,t+Math.max(.02,dur*.88),.025);
+  o.connect(g).connect(AUD.master);o.start(t);o.stop(t+dur+.15);
+}
+function drum(k,t){
+  const c=AUD.ctx;if(!c)return;
+  if(k==='k'){tone('tri',150,t,.12,.35,40);return}
+  const s=c.createBufferSource();s.buffer=AUD.noise;const f=c.createBiquadFilter(),g=c.createGain();
+  f.type=k==='s'?'bandpass':'highpass';f.frequency.value=k==='s'?1800:7000;const dur=k==='s'?.12:.035;
+  g.gain.setValueAtTime(k==='s'?.22:.09,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);s.connect(f).connect(g).connect(AUD.master);s.start(t);s.stop(t+dur+.02);
+}
+function schedule(){
+  const c=AUD.ctx,T=AUD.cur;if(!c||!T)return;const sd=60/T.bpm/2;
+  while(AUD.next<c.currentTime+.15){
+    const i=AUD.step;
+    T.v.forEach(v=>{const n=v.s[i%v.s.length];if(n&&n!=='-'&&n!=='.'){let len=1;while(v.s[(i+len)%v.s.length]==='-'&&len<v.s.length)len++;tone(v.w,nf(n),AUD.next,len*sd,v.vol)}});
+    if(T.d){const n=T.d[i%T.d.length];if(n&&n!=='.')drum(n,AUD.next)}
+    AUD.step++;AUD.next+=sd;
+    if(T.once&&AUD.step>=T.len){const cb=T.cb;AUD.cur=null;setTimeout(()=>cb&&cb(),Math.max(0,(AUD.next-c.currentTime)*1000));break}
+  }
+}
+function playTrack(name){
+  AUD.want=name;if(!AUD.ctx||AUD.jingle)return;if(AUD.curName===name&&AUD.cur)return;
+  AUD.cur=TRACKS[name];AUD.curName=name;AUD.step=0;AUD.next=AUD.ctx.currentTime+.06;
+}
+function jingle(name,cb){
+  if(!AUD.ctx){if(cb)cb();return}
+  AUD.jingle=true;const T=Object.assign({},TRACKS[name]);T.cb=()=>{AUD.jingle=false;AUD.curName=null;if(AUD.want)playTrack(AUD.want);if(cb)cb()};
+  AUD.cur=T;AUD.curName='#'+name;AUD.step=0;AUD.next=AUD.ctx.currentTime+.05;
+}
+function setSound(on){AUD.on=on;try{localStorage.setItem('qk-sound',on?'1':'0')}catch(e){}if(AUD.master)AUD.master.gain.setTargetAtTime(on?.5:0,AUD.ctx.currentTime,.05);const b=document.getElementById('sndBtn');if(b){b.textContent=on?'♪ Son':'♪ Muet';b.setAttribute('aria-pressed',on)}}
+let lastBlip=0;
+function sfx(n){
+  const c=AUD.ctx;if(!c||!AUD.on)return;const t=c.currentTime+.01;
+  switch(n){
+    case 'blip':if(t-lastBlip<.05)return;lastBlip=t;tone('p50',1180,t,.025,.035);break;
+    case 'select':tone('p25',880,t,.04,.06);tone('p25',1320,t+.045,.05,.06);break;
+    case 'good':tone('p50',1047,t,.07,.07);tone('p50',1319,t+.07,.07,.07);tone('p50',1568,t+.14,.14,.07);break;
+    case 'bad':tone('p25',220,t,.16,.08,150);break;
+    case 'bump':tone('tri',110,t,.06,.18,70);break;
+    case 'door':{const s=c.createBufferSource();s.buffer=AUD.noise;const f=c.createBiquadFilter(),g=c.createGain();f.type='bandpass';f.frequency.setValueAtTime(2500,t);f.frequency.exponentialRampToValueAtTime(400,t+.2);g.gain.setValueAtTime(.18,t);g.gain.exponentialRampToValueAtTime(.001,t+.22);s.connect(f).connect(g).connect(AUD.master);s.start(t);s.stop(t+.25);break}
+    case 'encounter':['C5','E5','G5','C6','E5','G5','C6','E6'].forEach((x,i)=>tone('p50',nf(x),t+i*.045,.045,.06));break;
+    case 'secret':['C6','G5','E6','C6','G6'].forEach((x,i)=>tone('p50',nf(x),t+i*.07,.07,.07));break;
+  }
+}
+function musicFor(){
+  if(document.querySelector('.title-screen'))return 'title';
+  if(document.querySelector('.battle'))return 'battle';
+  if(S.ch===7||S.map==='cave')return 'night';
+  return S.map==='town'?'town':'indoor';
+}
+function updateMusic(){playTrack(musicFor())}
+['pointerdown','keydown'].forEach(ev=>addEventListener(ev,()=>{audInit();if(!AUD.cur&&!AUD.jingle)updateMusic()},{passive:true}));
+/* ================= SECRETS & HUMOUR ================= */
+const SECRETS={
+  plante:'La plante verte',postit:'Le post-it',poubelle:'Les audits oubliés',etang:"L'étang",chat:'Le chat de la chaufferie',consultant:'Le consultant',
+  commercial:'Le prix fixe',legendaire:'Le Compteur Légendaire',arbre:"L'arbre non déclaré",konami:'Le mode sobriété',prenom:'Un prénom prédestiné',
+  carton:'Le carton de 2003',mobilier:'Le mobilier bavard',joule:'Harceler Mme Joule',fuite:'La stratégie de fuite',panneau:'Le règlement du parc'
+};
+const NSEC=Object.keys(SECRETS).length;
+function secret(id,lines,cb){
+  const first=!S.secrets[id];
+  say(lines,()=>{if(first){S.secrets[id]=1;save();sfx('secret');gainXP(15);toast(`Secret trouvé ! ${Object.keys(S.secrets).length}/${NSEC}`)}if(cb)cb()});
+}
+const QUIPS=[
+  "Petit conseil : ne dis jamais « c'est la faute du compteur » avant d'avoir vérifié l'unité.",
+  "Un tableau Excel sans date de mise à jour, c'est une œuvre de fiction.",
+  "La meilleure énergie est celle qu'on ne consomme pas. La deuxième meilleure, c'est celle qu'on facture correctement.",
+  "Si ton tableau de bord a plus de douze couleurs, ce n'est plus un tableau de bord, c'est un vitrail.",
+  "Le décret tertiaire, c'est comme le sport : tout le monde a une année de référence où il était en meilleure forme.",
+  "En réunion, si quelqu'un dit « on va mettre de l'IA », demande-lui d'abord où sont les compteurs.",
+  "Un audit énergétique non lu reste un excellent isolant. Pour les tiroirs."
+];
+let jouleTalks={ch:-1,n:0};
+function jouleExtra(lines){
+  if(jouleTalks.ch!==S.ch){jouleTalks={ch:S.ch,n:0}}
+  jouleTalks.n++;
+  if(jouleTalks.n===6)return secret('joule',[...lines,{w:'Mme Joule',t:"Tu me parles plus souvent que le fournisseur ne répond à ses mails. Va travailler !"}]);
+  if(Math.random()<.4)lines=[...lines,{w:'Mme Joule',t:QUIPS[Math.floor(Math.random()*QUIPS.length)]}];
+  say(lines);
+}
+function nameEgg(){
+  const n=S.name.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''),J='Mme Joule';
+  const map={joule:"Une autre Joule ? Il va falloir un sous-compteur pour nous distinguer.",watt:"{name} ? Enchantée. Mais un watt sans heure, ça ne se facture pas.",
+    enedis:"{name} ? C'est donc toi qui ne réponds jamais à mes demandes d'habilitation SGE ?",grdf:"{name} ? Tu viens relever le compteur ? Il est à la cave, derrière les cartons de 2003.",
+    volt:"{name} ! Tes parents étaient électriciens, ou juste optimistes ?",ampere:"{name} ! Tes parents étaient électriciens, ou juste optimistes ?",kelvin:"{name}… Tu vas nous refroidir l'ambiance, toi.",
+    pikachu:"Ce prénom appartient à des avocats bien plus puissants que 60 kVA. Je vais t'appeler « le stagiaire ».",linky:"{name} ? On t'a posé un jour sans prévenir, toi aussi ?",
+    gazpar:"{name} ? Tu envoies tes nouvelles une fois par jour, avec 24 h de retard. Je note."};
+  return map[n]?{w:J,t:map[n]}:null;
+}
+function secretObjs(id,o){
+  const s=site();
+  if(id==='town'){
+    o.push({x:10,y:7,kind:'bin',solid:1,act:()=>secret('poubelle',["Une poubelle pleine de rapports d'audit énergétique : 2009, 2014, 2019.","Les trois concluent : « isoler les combles ». Les combles attendent toujours. Ils sont très patients, les combles."])});
+    [[15,18],[16,18],[15,21],[16,21],[14,19],[15,19],[16,19],[17,19],[14,20],[15,20],[16,20],[17,20]].forEach(([x,y])=>o.push({x,y,kind:'none',act:()=>secret('etang',["Tu contemples l'étang. Ton reflet te contemple.","Aucun de vous deux ne sait convertir des m³ en kWh sans le coefficient de conversion. Vous détournez le regard."])}));
+    o.push({x:20,y:15,kind:'cat',solid:1,act:()=>secret('chat',[{w:'Chat',t:"Miaou."},{t:"Le chat passe ses journées dans la chaufferie. En juillet."},{t:"Il a repéré la chaudière qui tourne l'été bien avant ton logiciel de détection à 40 000 €. Il réclame une augmentation en croquettes."}])});
+    o.push({x:12,y:14,kind:'npc',solid:1,pal:{shirt:'#2c2c34',pants:'#2c2c34',hair:'#d9a441',tie:'#c43d3d'},dir:'down',act:()=>secret('consultant',[{w:'Consultant',t:"Bonjour ! Je vends une plateforme IA-blockchain-métavers de pilotage énergétique prédictif."},{w:'Consultant',t:"Pour 80 000 €, elle vous dira d'éteindre la lumière en partant. En PowerPoint, avec des dégradés."},{w:'Consultant',t:"Vous n'avez pas encore de compteurs fiables ? Aucun problème : notre IA invente les données manquantes. Avec assurance."},{t:"Il te laisse une plaquette imprimée en couleur, recto seul. Tu la ranges avec les audits."}])});
+    o.push({x:32,y:11,kind:'npc',solid:1,pal:{shirt:'#c43d3d',pants:'#333',hair:'#2b1d14'},dir:'left',act:()=>secret('commercial',[{w:'Commercial',t:"Contrat d'électricité à prix FIXE garanti trois ans !"},{w:'Commercial',t:"(Hors TURPE, accise, CTA, TVA, capacité, CEE, indexation, révision et cas de force majeure.)"},{w:'Commercial',t:"Mais le prix est fixe. Enfin, la police de caractères du prix est fixe."}])});
+    o.push({x:33,y:23,kind:'legend',solid:1,act:()=>secret('legendaire',["Dans les buissons : un vieux compteur électromécanique à disque, couvert de mousse.","Son disque tourne à l'envers depuis 1987. Personne n'a jamais osé le relever.","Tu as trouvé le Compteur Légendaire ! Il n'a pas de PDL. Il est au-delà des PDL."])});
+    o.push({x:12,y:3,kind:'none',act:()=>secret('arbre',["Cet arbre stocke du CO₂ gratuitement depuis soixante ans, sans subvention ni certificat d'économies d'énergie.","Il n'a jamais déclaré sur OPERAT. Personne n'a osé lui demander sa surface de plancher."])});
+    o.push({x:7,y:14,kind:'sign',solid:1,act:()=>secret('panneau',["« PARC DES DONNÉES. Merci de ne pas nourrir les données brutes. »","« Interdiction d'extrapoler après 22 h. Les moyennes glissantes doivent être tenues en laisse. »"])});
+  }
+}
+const MOBILIER={
+  ecole:["Au tableau, à la craie : « Le radiateur sous la fenêtre ouverte n'est PAS une climatisation. »","Signé : la direction. En dessous, un élève a ajouté : « et la chaudière n'est pas un sèche-linge »."],
+  bureau:["Un écran resté allumé affiche « Suivi_conso_FINAL_v3_vraiment_final (2).xlsx ».","Dernière modification : 2019. Trois onglets s'appellent « Feuil1 ». C'est ça, le système d'information énergie."],
+  boulangerie:["Le boulanger t'explique que son four à 250 °C est une mesure de sobriété : il ne chauffe plus la boutique, le four s'en charge.","Tu notes « récupération de chaleur fatale » dans ton carnet. Il note « croissant pour le monsieur du compteur » dans le sien."]
+};
+const actMobilier=()=>secret('mobilier',MOBILIER[S.site]||MOBILIER.ecole);
+
+/* ================= KONAMI ================= */
+const KONAMI=['arrowup','arrowup','arrowdown','arrowdown','arrowleft','arrowright','arrowleft','arrowright','b','a'];let kbuf=[];
+addEventListener('keydown',e=>{kbuf.push((e.key||'').toLowerCase());kbuf=kbuf.slice(-10);
+  if(kbuf.join()===KONAMI.join()){kbuf=[];S.sobriete=!S.sobriete;applySobriete();save();
+    if(S.sobriete)secret('konami',["Code secret accepté. MODE SOBRIÉTÉ activé : l'écran passe en noir et blanc.","Économie estimée : 3 %. Personne ne l'a remarqué, comme la plupart des mesures de sobriété."]);else say(["Mode sobriété désactivé. Les couleurs reviennent, la facture aussi."])}});
+function applySobriete(){cv.style.filter=S.sobriete?'grayscale(1) contrast(1.1)':''}
+
+/* ================= AVATAR ================= */
+function openAvatar(onDone){
+  const av=Object.assign({},S.av||AVDEF('h'));busy=true;clearKeys();
+  const ov=openPanel('Ton avatar'),b=ov.querySelector('.pbody');
+  const sw=(key,list)=>`<div class="swatches" role="radiogroup">${list.map((c,i)=>`<button type="button" class="sw${av[key]===i?' on':''}" data-k="${key}" data-v="${i}" style="background:${c}" aria-label="Couleur ${i+1}"></button>`).join('')}</div>`;
+  const pills=(key,obj)=>`<div class="pills">${Object.entries(obj).map(([v,l])=>`<button type="button" class="pill${av[key]===v?' on':''}" data-k="${key}" data-v="${v}">${l}</button>`).join('')}</div>`;
+  const draw=()=>{
+    b.innerHTML=`<div class="av-grid"><div class="av-prev"><canvas id="avc" width="64" height="24" aria-label="Aperçu de l'avatar"></canvas><small>Rangs : gestionnaire de site, energy manager, gestionnaire de patrimoine</small></div><div class="av-ctl">
+      <div class="field"><label>Personnage</label>${pills('g',{h:'Homme',f:'Femme'})}</div>
+      <div class="field"><label>Peau</label>${sw('skin',SKINS)}</div>
+      <div class="field"><label>Coiffure</label>${pills('style',STYLES)}</div>
+      <div class="field"><label>Cheveux</label>${sw('hair',HAIRC)}</div>
+      <div class="field"><label>Haut</label>${sw('top',TOPS)}</div>
+      <div class="field"><label>Bas</label>${pills('bt',{pantalon:'Pantalon',jupe:'Jupe'})}${sw('bot',BOTS)}</div>
+    </div></div><div class="row"><button class="btn alt" type="button" id="avRnd">Au hasard</button><button class="btn" type="button" id="avOk">Valider mon avatar ▸</button></div>`;
+    b.querySelectorAll('[data-k]').forEach(x=>x.onclick=()=>{const k=x.dataset.k;let v=x.dataset.v;if(['skin','hair','top','bot'].includes(k))v=+v;
+      if(k==='g'&&av.g!==v){const d=AVDEF(v);av.style=d.style;av.bt=d.bt}av[k]=v;sfx('select');draw()});
+    b.querySelector('#avRnd').onclick=()=>{const r=n=>Math.floor(Math.random()*n);av.g=r(2)?'f':'h';av.skin=r(SKINS.length);av.hair=r(HAIRC.length);av.top=r(TOPS.length);av.bot=r(BOTS.length);av.style=Object.keys(STYLES)[r(6)];av.bt=r(2)?'jupe':'pantalon';sfx('select');draw()};
+    b.querySelector('#avOk').onclick=()=>{S.av=av;save();closePanel();if(onDone)onDone()};
+    anim();
+  };
+  let fr=0,raf=0;
+  const anim=()=>{cancelAnimationFrame(raf);const c=b.querySelector('#avc');if(!c)return;const x=c.getContext('2d');
+    (function loopA(){if(!document.body.contains(c))return;fr++;x.clearRect(0,0,64,24);const dirs=['down','left','up','right'],d=dirs[Math.floor(fr/90)%4];
+      [0,1,2].forEach(r=>drawChar(x,2+r*21,5,d,Math.floor(fr/12),avPal(r,av)));raf=requestAnimationFrame(loopA)})()};
+  draw();
+}
+
+/* ================= CHOIX D'ÉTAPE ================= */
+const CHAPTERS=['Accueil · choix du site','Jeu 1 · Patrimoine','Jeu 2 · Plan de comptage','Jeu 3 · Collecte des données','Jeu 4 · Fiabiliser (combats)','Jeu 5 · Structurer','Jeu 6 · Analyser','Jeu 7 · Détecter (ronde de nuit)','Jeu 8 · Agir','Jeu 9 · Piloter','Final · Patrimoine','Épilogue · exploration libre'];
+const XPMIN=[0,0,60,200,380,620,900,1100,1250,1450,1720,1800];
+function chapterList(el,onPick){
+  let sid=S.site||'ecole';
+  const render=()=>{
+    el.innerHTML=`<p>Reprends à n'importe quelle étape. Les étapes précédentes sont validées automatiquement (badges, carnet, rang).</p>
+    <div class="field"><label>Site</label><div class="pills">${Object.values(SITES).map(s=>`<button type="button" class="pill${sid===s.id?' on':''}" data-site="${s.id}">${s.name}</button>`).join('')}</div></div>
+    <div class="chap">${CHAPTERS.map((c,i)=>{const st=S.site===sid?(i<S.ch?'done':i===S.ch?'cur':''):'';return `<button type="button" class="opt chap-${st}" data-ch="${i}"><span class="num">${String(i).padStart(2,'0')}</span> ${c}${st==='cur'?' <span class="tag">en cours</span>':st==='done'?' ✔':''}</button>`}).join('')}</div>`;
+    el.querySelectorAll('[data-site]').forEach(x=>x.onclick=()=>{sid=x.dataset.site;sfx('select');render()});
+    el.querySelectorAll('[data-ch]').forEach(x=>x.onclick=()=>onPick(+x.dataset.ch,sid));
+  };render();
+}
+function openChapterSelect(){
+  const ov=openPanel('Choisir une étape'),b=ov.querySelector('.pbody');const inner=document.createElement('div');b.appendChild(inner);
+  chapterList(inner,(ch,sid)=>{closePanel();jumpTo(ch,sid)});
+  const c=document.createElement('button');c.className='btn alt';c.textContent='Annuler';c.onclick=closePanel;b.appendChild(c);
+}
+function jumpTo(ch,sid){
+  const s=SITES[sid];
+  S.site=sid;S.ch=ch;S.notes={};S.flags={};S.derives={};S.dex={};
+  if(ch>=2){S.notes.adresse=`${s.addr}, ${s.cp}`;S.notes.surface=s.surface;S.notes.activite=s.activite}
+  if(ch>=3){S.notes.pdl=s.pdl;S.notes.pce=s.pce;S.flags={elec:true,gas:true,sub:true}}
+  if(ch>=5)ANOM.forEach(a=>S.dex[a.id]=1);
+  S.badges=BADGES.slice(0,Math.max(0,Math.min(8,ch-2)));
+  S.rank=ch>=10?2:ch>=6?1:0;S.xp=XPMIN[ch];
+  const b=BLD.find(x=>x.id===sid);let pos;
+  if([1].includes(ch))pos=['town',6,9,'down'];else if(ch===2||ch===7)pos=['town',b.door[0],b.door[1]+1,'up'];else if(ch===4)pos=['town',8,13,'down'];else if(ch===11)pos=['town',18,12,'down'];else pos=['office',5,6,'up'];
+  S.map=pos[0];S.x=pos[1];S.y=pos[2];S.dir=pos[3];save();
+  if(!document.querySelector('.title-screen'))boot(true);
+  const hint=JOULE_HINTS[ch];
+  setTimeout(()=>say([{t:`Reprise : ${CHAPTERS[ch]} · ${s.name}.`},...(hint?hint.map(t=>({w:'Mme Joule',t})):[{t:objectiveText()}])]),350);
+}
+/* ================= PANNEAUX / MINI-JEUX ================= */
+let panelEl=null;
+function clearKeys(){for(const k in keys)keys[k]=0;document.querySelectorAll('.dpad .held').forEach(b=>b.classList.remove('held'))}
+function openPanel(title){busy=true;clearKeys();const ov=document.createElement('div');ov.className='overlay';ov.innerHTML=`<div class="panel" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header><span>${esc(title)}</span><span class="step"></span></header><div class="pbody"></div></div>`;$('layer').appendChild(ov);panelEl=ov;return ov}
+function closePanel(){if(panelEl){panelEl.remove();panelEl=null}busy=false;clearKeys();hud()}
+function runSteps(title,steps,done){
+  const ov=openPanel(title),body=ov.querySelector('.pbody'),st=ov.querySelector('.step');let i=0;
+  const render=()=>{st.textContent=steps.length>1?`${i+1} / ${steps.length}`:'';body.innerHTML='';ov.scrollTop=0;steps[i](body,next)};
+  const next=()=>{i++;if(i>=steps.length){closePanel();save();if(done)done()}else render()};render();
+}
+function contBtn(el,next,label='Continuer'){const b=document.createElement('button');b.className='btn';b.textContent=label+' ▸';b.onclick=next;el.appendChild(b);b.focus();return b}
+const info=(html,label)=>(el,next)=>{el.innerHTML=html;contBtn(el,next,label)};
+const choice=({title,ctx,gas,q,opts,keep})=>(el,next)=>{
+  let tries=0;
+  el.innerHTML=(title?`<h3>${title}</h3>`:'')+(ctx?`<div class="ctx${gas?' gas':''}">${ctx}</div>`:'')+`<p><b>${q}</b></p><div class="opts"></div><div class="fbz"></div>`;
+  const box=el.querySelector('.opts'),fbz=el.querySelector('.fbz');
+  (keep?opts:shuffle(opts)).forEach(o=>{const b=document.createElement('button');b.className='opt';b.innerHTML=o[0];box.appendChild(b);
+    b.onclick=()=>{if(o[1]){b.classList.add('good');box.querySelectorAll('.opt').forEach(x=>x.disabled=true);fbz.innerHTML=`<div class="fb ok">✔ ${o[2]||'Exact !'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
+      else{tries++;b.classList.add('badc');b.disabled=true;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${o[2]||'Pas tout à fait.'} Réessaie.</div>`}}});
+};
+const multi=({title,ctx,gas,q,items,okMsg})=>(el,next)=>{
+  let tries=0;
+  el.innerHTML=(title?`<h3>${title}</h3>`:'')+(ctx?`<div class="ctx${gas?' gas':''}">${ctx}</div>`:'')+`<p><b>${q}</b></p><div class="opts"></div><div class="fbz"></div>`;
+  const box=el.querySelector('.opts'),fbz=el.querySelector('.fbz');const rows=[];
+  items.forEach((it,i)=>{const l=document.createElement('label');l.className='chk';l.innerHTML=`<input type="checkbox" id="mc${i}_${Date.now()%1e5}"><span>${it[0]}<small></small></span>`;box.appendChild(l);rows.push(l)});
+  const v=document.createElement('button');v.className='btn';v.textContent='Valider ▸';el.appendChild(v);
+  v.onclick=()=>{let bad=0;rows.forEach((l,i)=>{const it=items[i],c=l.querySelector('input').checked,sm=l.querySelector('small');l.classList.remove('good','badc');sm.textContent='';
+      const wrong=(it[1]===true&&!c)||(it[1]===false&&c);if(wrong){bad++;l.classList.add('badc');sm.textContent=it[2]||''}else if(c){l.classList.add('good');sm.textContent=it[2]||''}});
+    if(bad){tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${bad} case${bad>1?'s':''} à revoir (en rouge).</div>`}
+    else{v.remove();rows.forEach(l=>l.querySelector('input').disabled=true);fbz.innerHTML=`<div class="fb ok">✔ ${okMsg||'Parfait.'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}};
+};
+const form=({title,ctx,gas,fields,okMsg})=>(el,next)=>{
+  let tries=0;
+  el.innerHTML=(title?`<h3>${title}</h3>`:'')+(ctx?`<div class="ctx${gas?' gas':''}">${ctx}</div>`:'')+`<div class="ff"></div><div class="fbz"></div>`;
+  const ff=el.querySelector('.ff'),fbz=el.querySelector('.fbz');const sels=[];const uid=Math.random().toString(36).slice(2,7);
+  fields.forEach((f,i)=>{const d=document.createElement('div');d.className='field';const opts=shuffle(f.opts);d.innerHTML=`<label for="f${uid}${i}">${f.label}</label><select id="f${uid}${i}"><option value="">— choisir —</option>${opts.map((o,j)=>`<option value="${f.opts.indexOf(o)}">${esc(o[0])}</option>`).join('')}</select><small class="m"></small>`;ff.appendChild(d);sels.push(d)});
+  const v=document.createElement('button');v.className='btn';v.textContent='Valider ▸';el.appendChild(v);
+  v.onclick=()=>{let bad=0;sels.forEach((d,i)=>{const s=d.querySelector('select'),m=d.querySelector('.m'),o=fields[i].opts[s.value];s.style.borderColor='';m.textContent='';
+      if(!o){bad++;s.style.borderColor='var(--bad)';m.textContent='Choisis une valeur.'}else if(!o[1]){bad++;s.style.borderColor='var(--bad)';m.textContent='✘ '+(o[2]||'Incorrect.')}else{s.style.borderColor='var(--ok)';m.textContent=o[2]?'✔ '+o[2]:'✔'}});
+    if(bad){tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${bad} champ${bad>1?'s':''} à corriger.</div>`}
+    else{v.remove();sels.forEach(d=>d.querySelector('select').disabled=true);fbz.innerHTML=`<div class="fb ok">✔ ${okMsg||'Formulaire valide.'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}};
+};
+const order=({title,ctx,q,items,okMsg})=>(el,next)=>{
+  let tries=0,seq=[];
+  el.innerHTML=(title?`<h3>${title}</h3>`:'')+(ctx?`<div class="ctx">${ctx}</div>`:'')+`<p><b>${q}</b></p><div class="seq" aria-live="polite"></div><div class="opts"></div><div class="fbz"></div>`;
+  const sq=el.querySelector('.seq'),box=el.querySelector('.opts'),fbz=el.querySelector('.fbz');
+  const draw=()=>{sq.innerHTML=seq.length?seq.map((s,i)=>`<span class="it">${i+1}. ${esc(s)}</span>`).join(''):'<span style="color:var(--muted)">Clique les étapes dans l\'ordre…</span>';
+    box.innerHTML='';shuffledItems.filter(x=>!seq.includes(x)).forEach(x=>{const b=document.createElement('button');b.className='opt';b.textContent=x;b.onclick=()=>{seq.push(x);draw();if(seq.length===items.length)check()};box.appendChild(b)})};
+  const shuffledItems=shuffle(items);
+  const check=()=>{if(seq.every((s,i)=>s===items[i])){fbz.innerHTML=`<div class="fb ok">✔ ${okMsg||'Bon ordre !'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
+    else{tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ Ce n'est pas le bon ordre.</div>`;const r=document.createElement('button');r.className='btn alt';r.textContent='Recommencer';r.onclick=()=>{seq=[];fbz.innerHTML='';draw()};fbz.appendChild(r)}};
+  draw();
+};
+const signature=(who,orgName)=>(el,next)=>{
+  const d=new Date().toLocaleDateString('fr-FR');
+  el.innerHTML=`<h3>Signature du mandat ${orgName}</h3><p>Le titulaire (${esc(who)}) signe le mandat qui t'autorise à récupérer ses données. Signe dans le cadre avec la souris ou le doigt.</p><canvas class="sig" width="600" height="140" aria-label="Zone de signature"></canvas><div class="row"><button class="btn alt" id="sigClr">Effacer</button><button class="btn" id="sigOk" disabled>Signer le mandat</button></div><div class="fbz"></div>`;
+  const c=el.querySelector('canvas'),x=c.getContext('2d');let drawing=false,len=0,last=null;x.lineWidth=3;x.lineCap='round';x.strokeStyle='#1c2440';
+  const pos=e=>{const r=c.getBoundingClientRect();return[(e.clientX-r.left)*c.width/r.width,(e.clientY-r.top)*c.height/r.height]};
+  c.onpointerdown=e=>{drawing=true;last=pos(e);c.setPointerCapture(e.pointerId)};
+  c.onpointermove=e=>{if(!drawing)return;const p=pos(e);x.beginPath();x.moveTo(...last);x.lineTo(...p);x.stroke();len+=Math.hypot(p[0]-last[0],p[1]-last[1]);last=p;if(len>120)el.querySelector('#sigOk').disabled=false};
+  c.onpointerup=()=>drawing=false;
+  el.querySelector('#sigClr').onclick=()=>{x.clearRect(0,0,c.width,c.height);len=0;el.querySelector('#sigOk').disabled=true};
+  el.querySelector('#sigOk').onclick=e=>{e.target.remove();el.querySelector('#sigClr').remove();c.style.pointerEvents='none';
+    el.querySelector('.fbz').innerHTML=`<div class="fb ok">✔ Mandat ${orgName} signé le ${d}. Le consentement est enregistré : il vaut pour ces points, ces données et jusqu'à la date de fin choisie.</div>`;gainXP(20);contBtn(el.querySelector('.fbz'),next)};
+};
+function meterCanvas(kind){
+  const c=document.createElement('canvas');c.width=64;c.height=48;const x=c.getContext('2d');R(x,0,0,64,48,kind==='gas'?'#6b6f78':site().wall);
+  if(kind==='gas'){R(x,14,6,36,32,'#e8d24a');R(x,17,9,30,14,'#f7f0dc');R(x,20,13,24,5,'#333');for(let i=0;i<5;i++)R(x,21+i*5,14,3,3,'#e8e4d6');R(x,18,26,28,3,'#c9b640');R(x,20,38,4,10,'#888');R(x,40,38,4,10,'#888');R(x,44,24,4,4,'#fff')}
+  else{R(x,10,4,44,40,'#9aa0a8');R(x,12,6,40,36,'#c4c9cf');R(x,18,10,28,14,'#1c2440');R(x,20,13,24,8,'#2aa198');R(x,22,15,4,4,'#bff');R(x,16,28,12,6,'#fff');R(x,34,28,12,6,'#fff');R(x,16,36,30,3,'#7a8088')}
+  c.style.width='min(260px,70%)';return c;
+}
+const withArt=(kind,stepFn)=>(el,next)=>{stepFn(el,next);const a=document.createElement('div');a.className='meter-art';a.appendChild(meterCanvas(kind));el.insertBefore(a,el.firstChild)};
+
+/* ================= HISTOIRE ================= */
+const JOULE_HINTS={get 1(){return[`Va voir ${site().short} de l'extérieur. L'adresse est sur la boîte aux lettres, la surface sur la fiche technique près de la porte.`]},
+    0:["Parle-moi : on choisit ton site et on commence."],10:["Viens me voir au bureau : tu vas gérer tout le patrimoine."],
+    2:["Entre dans ton site. Le compteur électrique est dans un coffret au mur ; le gaz, c'est souvent à la cave."],
+    3:["Les données de mesure appartiennent au titulaire du contrat. Sans son consentement signé, pas de données. File sur l'ordinateur !"],
+    4:["Les données brutes arrivent au Parc des Données, au sud-ouest. Elles sont pleines d'anomalies. Corrige-les toutes, mais garde toujours la donnée brute."],
+    5:["Des données justes, c'est bien. Des données bien rangées, c'est mieux. L'armoire à archives est juste là."],
+    6:["Lis la courbe comme un électrocardiogramme : le repos, les pics, ce qui sort de l'ordinaire. L'ordinateur t'attend."],
+    7:["Ce soir, fais une ronde de nuit dans ton site. Tout ce qui brille dans le noir consomme pour rien."],
+    8:["Sobriété d'abord, contrat ensuite, travaux enfin. Compose ton plan sur l'ordinateur."],
+    9:["Une action n'a marché que si on le prouve à conditions égales. Direction l'ordinateur : mesure et vérification."],
+    11:["Tu as bouclé la boucle. Et une boucle, ça recommence : nouvelles données, nouveaux objectifs !"]
+};
+
+function actJoule(){
+  const J='Mme Joule',s=site();
+  if(S.ch===0){const egg=nameEgg();const L0=[{w:J,t:"Ah, {name} ! Bienvenue dans l'équipe. On m'a dit que tu ne connaissais rien à l'énergie ?"},{w:J,t:"Excellent. Ici, on transforme des kilowattheures en tableaux, et des tableaux en économies. Parfois même dans cet ordre."},{w:J,t:"Parfait : on va tout apprendre dans l'ordre. Un energy manager ne suit jamais « l'énergie » en général. Il suit un patrimoine, des sites, des bâtiments, et des points de comptage."},{w:J,t:"Pour commencer, tu vas t'occuper d'un seul site. Choisis-le."}];return egg?secret('prenom',[L0[0],egg,...L0.slice(1)],chooseSite):say(L0,chooseSite)}
+  if(S.ch===10)return say([{w:J,t:"{name}, la direction a vu ton travail. À partir d'aujourd'hui, tu gères les trois sites de la ville : l'école, les bureaux et la boulangerie."},{w:J,t:"Un patrimoine, ça se pilote avec des ratios, des priorités et un peu de bon sens. Montre-moi."}],gameFinale);
+  jouleExtra((JOULE_HINTS[S.ch]||["Bon travail."]).map(t=>({w:J,t})));
+}
+function chooseSite(){
+  const ov=openPanel('Choisis ton site'),b=ov.querySelector('.pbody');
+  b.innerHTML=`<p>Tu es <b>gestionnaire de site</b>. Choisis le bâtiment dont tu vas t'occuper. Chaque site a ses propres chiffres et ses pièges.</p><div class="cards"></div>`;
+  const cards=b.querySelector('.cards');
+  const blurb={ecole:'Bâtiment public, 250 élèves. Chauffage gaz, cantine, vacances scolaires.',bureau:'Tertiaire privé, 90 salariés. Grosse puissance, salle serveurs.',boulangerie:'Petit commerce avec compteur Linky. Le fournil travaille la nuit.'};
+  ['ecole','bureau','boulangerie'].forEach(id=>{const s=SITES[id],bd=BLD.find(x=>x.id===id);
+    const c=document.createElement('button');c.className='card';const cv2=document.createElement('canvas');cv2.width=(bd.w+2)*TS;cv2.height=(bd.h+1)*TS;const x=cv2.getContext('2d');
+    R(x,0,0,cv2.width,cv2.height,'#7cc56a');drawBuilding(x,{...bd,x:1,y:.7,door:[bd.door[0]-bd.x+1,bd.door[1]-bd.y+.7]});
+    c.appendChild(cv2);c.insertAdjacentHTML('beforeend',`<b>${s.name}</b><span><span class="tag">${fmt(s.surface)} m²</span> <span class="tag">${s.kva} kVA</span></span><small>${blurb[id]}</small>`);
+    c.onclick=()=>{S.site=id;S.ch=1;S.notes={};S.flags={};closePanel();rebuildMaps();save();hud();
+      say([{w:'Mme Joule',t:`${s.name}, bon choix ! Première étape de la démarche : cadrer. Avant de mesurer quoi que ce soit, on sait quoi suivre, où, et pourquoi.`},{w:'Mme Joule',t:`Va dehors. Trouve l'adresse sur la boîte aux lettres, et la surface sur la fiche technique affichée près de l'entrée. Suis la flèche orange.`}])};
+    cards.appendChild(c)});
+}
+function actMailbox(id){
+  const s=SITES[id];
+  if(id!==S.site)return say([{t:`Boîte aux lettres : ${s.name}, ${s.addr}. Ce n'est pas ton site.`}]);
+  if(S.ch<1)return;
+  if(S.notes.adresse)return say([{t:`${s.name} · ${s.addr}, ${s.cp}. C'est noté dans ton carnet.`}]);
+  S.notes.adresse=`${s.addr}, ${s.cp}`;save();gainXP(10);
+  say([{t:`Sur la boîte aux lettres : « ${s.name} · ${s.addr} · ${s.cp} ».`},{t:"Adresse notée dans ton carnet ! L'adresse donne la localisation : la commune, donc la station météo et la zone climatique. Elle servira à corriger la consommation de la météo."}],checkCh1);
+}
+function actPanel(id){
+  const s=SITES[id],txt=`FICHE TECHNIQUE · ${s.name} · Activité : ${s.activite} · Surface de plancher : ${fmt(s.surface)} m² · Construit en ${s.annee} · Occupants : ${s.occ}.`;
+  if(id!==S.site||S.ch<1)return say([{t:txt}]);
+  if(S.notes.surface)return say([{t:txt}]);
+  S.notes.surface=s.surface;S.notes.activite=s.activite;save();gainXP(10);
+  say([{t:txt},{t:"Surface et activité notées ! La surface sert aux ratios (kWh/m²) et à savoir si le décret tertiaire s'applique."}],checkCh1);
+}
+function checkCh1(){if(S.ch===1&&S.notes.adresse&&S.notes.surface)say([{t:"Tu as tout ce qu'il faut pour remplir la fiche patrimoine !"}],gamePatrimoine)}
+function others(key){return Object.values(SITES).filter(x=>x.id!==S.site).map(x=>x[key])}
+function gamePatrimoine(){
+  const s=site();
+  runSteps('Jeu 1 · Fiche patrimoine',[
+    info(`<h3>Du patrimoine au point de comptage</h3><p>Un energy manager suit des objets emboîtés :</p><div class="ctx"><b>Patrimoine</b> (tous les sites d'un propriétaire) → <b>Site</b> (${esc(s.name)}) → <b>Bâtiment</b> → <b>Points de comptage</b> (un par énergie livrée).</div><p>Tout ce que le logiciel affichera ensuite sera rattaché à l'un de ces objets. Remplis la fiche de ton site avec ce que tu as trouvé dehors.</p>`),
+    form({title:'Fiche patrimoine',fields:[
+      {label:'Adresse du site',opts:[[`${s.addr}, ${s.cp}`,1,'Lue sur la boîte aux lettres.'],...others('addr').map(a=>[`${a}, 45100 Ampère-sur-Loire`,0,"C'est l'adresse d'un autre site de la ville."])]},
+      {label:'Localisation',opts:[['Ampère-sur-Loire (45) · zone climatique H1 · météo Orléans-Bricy',1,'La commune donne la station météo de référence.'],['Ampère-sur-Loire (45) · zone climatique H3',0,'H3 correspond au pourtour méditerranéen.'],['Siège du fournisseur d\'énergie, à Paris',0,'On localise le bâtiment, pas le fournisseur.']]},
+      {label:'Activité',opts:[[s.activite,1],...others('activite').map(a=>[a,0,"Ce n'est pas l'activité de ton site."])]},
+      {label:'Surface de référence',opts:[[`${fmt(s.surface)} m²`,1,'Lue sur la fiche technique.'],[`${fmt(s.surface/10)} m²`,0,'Relis la fiche technique : il manque un zéro.'],[`${fmt(s.surface*10)} m²`,0,'Relis la fiche technique : un zéro de trop.']]}
+    ],okMsg:'Fiche patrimoine complète : adresse, localisation, activité, surface.'}),
+    choice({q:'Pourquoi la localisation est-elle importante pour un energy manager ?',opts:[
+      ['Elle donne la météo locale (DJU), pour corriger la consommation de chauffage du climat',1,'Un hiver doux fait baisser le chauffage sans que personne n\'ait rien fait. Sans météo locale, impossible de comparer deux années.'],
+      ['Elle sert uniquement à envoyer les factures',0,'La facture utilise l\'adresse, mais l\'energy manager s\'en sert surtout pour la météo.'],
+      ['Elle détermine le prix du kWh',0,'Le prix dépend du contrat, pas de la commune.']]}),
+    choice({title:'Décret tertiaire',ctx:`Le décret tertiaire (dispositif Éco Énergie Tertiaire) vise les bâtiments accueillant des activités tertiaires sur <b>au moins 1 000 m²</b> (surfaces cumulées sur le site). Ton site : <span class="num">${fmt(s.surface)} m²</span>.`,q:'Ton site est-il concerné ?',opts:[
+      ['Oui, il a au moins 1 000 m² de surface tertiaire',assujetti(s),assujetti(s)?'Il devra réduire sa consommation (−40 % en 2030) et la déclarer chaque année sur OPERAT.':`${fmt(s.surface)} m², c'est sous le seuil.`],
+      ['Non, il fait moins de 1 000 m²',!assujetti(s),!assujetti(s)?'Pas d\'obligation réglementaire, mais le suivi reste utile pour la facture et le climat.':`${fmt(s.surface)} m², c'est au-dessus du seuil.`],
+      ['Oui, tous les bâtiments de France sont concernés',0,'Le décret ne vise que le tertiaire, à partir de 1 000 m².']]})
+  ],()=>{S.ch=2;save();hud();say([{w:'Mme Joule',t:"(au téléphone) Fiche patrimoine complète, bravo ! Maintenant, le plan de comptage : entre dans le bâtiment et trouve les compteurs."}])});
+}
+function actElec(){
+  const s=site();
+  if(S.ch<2)return say([{t:'Un coffret électrique.'}]);
+  if(S.flags.elec)return say([{t:`Compteur électrique. PDL ${s.pdl}, ${s.kva} kVA souscrits à l'origine.`}]);
+  const other=others('pdl')[0];
+  runSteps('Jeu 2 · Plan de comptage : électricité',[
+    withArt('elec',choice({ctx:`Tu ouvres le coffret encastré dans le mur. Plusieurs étiquettes sont collées sur le compteur, sans légende :<br>${[s.pdl,s.serie,s.pdl.slice(0,13),s.pdl+'1'].map(n=>`<span class="sticker">${n}</span>`).join('')}`,q:'Lequel est le PDL (Point De Livraison, appelé PRM chez Enedis) ?',opts:[
+      [`<span class="mono">${s.pdl}</span>`,1,'14 chiffres : c\'est le PDL. Il identifie le point de raccordement au réseau.'],
+      [`<span class="mono">${s.serie}</span>`,0,'12 chiffres : c\'est le numéro de série du compteur. Il désigne l\'appareil, pas le point.'],
+      [`<span class="mono">${s.pdl.slice(0,13)}</span>`,0,'13 chiffres : il en manque un. Un PDL en compte exactement 14.'],
+      [`<span class="mono">${s.pdl}1</span>`,0,'15 chiffres : un de trop.'],
+      [`<span class="mono">${s.pdl.slice(0,2)}-${s.pdl.slice(2,6)}-${s.pdl.slice(6,10)}-${s.pdl.slice(10,12)}</span>`,0,'Tirets et seulement 12 chiffres : ce n\'est pas un format de PDL.']]})),
+    choice({q:'Demain, Enedis remplace ce compteur par un neuf. Que devient le PDL ?',opts:[
+      ['Il reste le même : il désigne le raccordement, pas l\'appareil',1,'Seul le numéro de série change. Le logiciel doit donc distinguer « point de comptage » et « compteur ».'],
+      ['Il change, comme le numéro du compteur',0,'Le PDL est attaché au raccordement.'],
+      ['Il est supprimé jusqu\'à la prochaine facture',0,'Le point de livraison ne disparaît pas.']]}),
+    choice({ctx:`Puissance souscrite de ton site : <span class="num">${s.souscrit} kVA</span>.`,q:'Quel type de compteur et quel pas de temps ?',opts:[
+      ['Compteur Linky, courbe de charge au pas de 30 minutes',s.souscrit<=36,s.souscrit<=36?'Jusqu\'à 36 kVA (segment C5), c\'est un Linky. Pas de 30 minutes.':'Linky, c\'est jusqu\'à 36 kVA.'],
+      ['Compteur professionnel télérelevé, courbe au pas de 10 minutes',s.souscrit>36,s.souscrit>36?'Au-delà de 36 kVA (segments C1 à C4), compteur pro télérelevé, courbe plus fine.':'Au-delà de 36 kVA seulement.'],
+      ['Un compteur à relever à la main une fois par an',0,'Les compteurs communicants sont télérelevés.']]})
+  ],()=>{S.flags.elec=true;S.notes.pdl=s.pdl;save();hud();say([{t:`Compteur électrique identifié : PDL ${s.pdl}.`}],checkCh2)});
+}
+function actGas(){
+  const s=site();
+  if(S.ch<2)return say([{t:'Un compteur gaz.'}]);
+  if(S.flags.gas)return say([{t:`Compteur gaz Gazpar. PCE ${s.pce}.`}]);
+  runSteps('Jeu 2 · Plan de comptage : gaz',[
+    withArt('gas',choice({gas:1,ctx:`À la cave, un compteur Gazpar jaune. Sur la plaque et les étiquettes :<br>${[s.gazSerie,s.pce,'41 940 m³',s.pce.slice(0,7)].map(n=>`<span class="sticker">${n}</span>`).join('')}`,q:'Lequel est le PCE (Point de Comptage et d\'Estimation) ?',opts:[
+      [`<span class="mono">${s.pce}</span>`,1,'« GI » suivi de 6 chiffres : c\'est un format de PCE (on trouve aussi des PCE à 14 chiffres).'],
+      [`<span class="mono">${s.pce.slice(0,7)}</span>`,0,'Seulement 5 chiffres après GI : il en faut 6.'],
+      [`<span class="mono">G1${s.pce.slice(2)}</span>`,0,'Regarde bien : c\'est un 1, pas un I.'],
+      ['<span class="mono">41 940 m³</span>',0,'C\'est l\'index : le totalisateur du compteur, en m³.'],
+      [`<span class="mono">${s.gazSerie}</span>`,0,'C\'est le numéro de série du Gazpar : l\'appareil, pas le point.']]})),
+    choice({gas:1,q:'Que mesure ce compteur gaz ?',opts:[
+      ['Un volume en m³, converti en kWh avec un coefficient de conversion',1,'kWh = m³ × coefficient (en général entre 10 et 11,5 kWh/m³, variable selon la commune et le mois).'],
+      ['Directement des kWh',0,'Le compteur mesure un volume.'],
+      ['Une puissance en kW',0,'Gazpar transmet un volume par jour.']]}),
+    choice({gas:1,ctx:'En janvier : <span class="num">4 000 m³</span>, coefficient <span class="num">11,2 kWh/m³</span>.',q:'Combien de kWh ?',opts:[['44 800 kWh',1,'4 000 × 11,2 = 44 800 kWh.'],['4 000 kWh',0,'Il faut convertir les m³.'],['357 kWh',0,'On multiplie, on ne divise pas.']]})
+  ],()=>{S.flags.gas=true;S.notes.pce=s.pce;save();hud();say([{t:`Compteur gaz identifié : PCE ${s.pce}.`}],checkCh2)});
+}
+function actSub(){
+  const s=site();
+  if(S.ch<2||S.flags.sub)return say([{t:`${s.sub}. Il mesure une partie de ce que mesure déjà le compteur principal.`}]);
+  runSteps('Bonus · Sous-compteur',[
+    choice({ctx:`Tu trouves un petit compteur : « ${s.sub} ». Il mesure uniquement ${s.subShort}.`,q:'Le compteur principal indique 80 MWh sur l\'année, ce sous-compteur 10 MWh. Quelle est la consommation électrique du site ?',opts:[
+      ['80 MWh',1,`${s.subShort[0].toUpperCase()+s.subShort.slice(1)} est déjà comptée dans le principal. Un sous-compteur est un « enfant » du compteur principal.`],['90 MWh',0,'Tu comptes deux fois la même énergie.'],['70 MWh',0,'Le principal mesure déjà tout le site.']]})
+  ],()=>{S.flags.sub=true;save();say([{t:'Sous-compteur ajouté au plan de comptage.'}])});
+}
+function checkCh2(){
+  if(S.ch!==2||!S.flags.elec||!S.flags.gas)return;
+  const s=site();
+  runSteps('Jeu 2 · Ton plan de comptage',[
+    info(`<h3>Plan de comptage de ${esc(s.name)}</h3><div class="tbl"><table><tr><th>Objet</th><th>Identifiant</th><th>Rôle</th></tr>
+      <tr><td>Site</td><td>${esc(s.addr)}</td><td>${fmt(s.surface)} m², ${esc(s.activite)}</td></tr>
+      <tr><td>Point de comptage élec</td><td class="num">PDL ${s.pdl}</td><td>Enedis · ${s.souscrit} kVA</td></tr>
+      <tr><td>↳ compteur</td><td class="num">n° ${s.serie}</td><td>${s.souscrit>36?'Compteur pro télérelevé':'Linky'}</td></tr>
+      ${S.flags.sub?`<tr><td>↳ sous-compteur</td><td>${esc(s.subShort)}</td><td>Partie du principal</td></tr>`:''}
+      <tr><td>Point de comptage gaz</td><td class="num">PCE ${s.pce}</td><td>GRDF</td></tr>
+      <tr><td>↳ compteur</td><td class="num">Gazpar ${s.gazSerie}</td><td>Volume journalier</td></tr></table></div>
+      ${S.flags.sub?'':'<p><i>Astuce : un sous-compteur se cache aussi dans le bâtiment. Tu peux encore le trouver.</i></p>'}`),
+    choice({q:'Combien de points de comptage a ton site ?',opts:[['Deux : un pour l\'électricité, un pour le gaz',1,'Un point de comptage par énergie livrée. Les usages ne sont pas des points de comptage, sauf s\'ils ont un sous-compteur.'],['Autant que d\'usages (chauffage, éclairage…)',0,'Un compteur mesure un point, pas un usage.'],['Un seul, pour tout le site',0,'Électricité et gaz arrivent par deux raccordements.']]}),
+    choice({ctx:'Cas réel : un seul PDL alimente l\'école et le gymnase voisin.',q:'Comment le modéliser ?',opts:[['Un lien « plusieurs à plusieurs » entre sites et points, avec une clé de répartition (ex. 80 % / 20 %) et des dates de validité',1,'Un site peut avoir plusieurs PDL, un PDL peut alimenter plusieurs bâtiments, et ça change avec le temps.'],['On attribue tout au bâtiment le plus grand',0,'Le gymnase disparaîtrait des bilans.'],['On crée un faux PDL pour le gymnase',0,'Un identifiant inventé ne correspondra à aucune donnée.']]})
+  ],()=>{S.ch=3;badge('Cadrer');save();hud();say([{w:'Mme Joule',t:"(au téléphone) Plan de comptage bouclé ! Badge Cadrer obtenu. Reviens au bureau : sur l'ordinateur, tu vas demander l'accès aux données."}])});
+}
+function actPC(){
+  const m={0:"Ton ordinateur. Parle d'abord à Mme Joule.",1:"Rien à faire ici pour l'instant : cadre ton site depuis l'extérieur.",2:"Pas encore : trouve d'abord les compteurs de ton site.",4:"Les données arrivent… mais elles sont pleines d'anomalies. Va au Parc des Données.",5:"Avant d'analyser, range les données : armoire à archives.",7:"Ce soir, c'est ronde de nuit dans ton site.",10:"Tableau de bord : Mme Joule veut te parler.",11:"Tableau de bord du patrimoine : tout est au vert. Enfin, presque."};
+  if(S.ch===3)return gameCollecte();if(S.ch===6)return gameAnalyse();if(S.ch===8)return gameAgir();if(S.ch===9)return gamePiloter();
+  say([{t:m[S.ch]||'Ton ordinateur.'}]);
+}
+function mandateSteps(org){
+  const s=site(),isE=org==='Enedis',gas=!isE,now=new Date(),d=n=>{const x=new Date(now);x.setFullYear(x.getFullYear()+n);return x.toLocaleDateString('fr-FR')},hier=new Date(now-864e5).toLocaleDateString('fr-FR');
+  const oth=Object.values(SITES).find(x=>x.id!==S.site);
+  return [
+    form({title:`Mandat ${org} · Informations obligatoires`,gas,ctx:`Portail tiers ${org}${isE?` · canal ${elecChannel(s)}`:' · API ADICT'}. Tu remplis la demande au nom du titulaire du contrat.`,fields:[
+      {label:'Titulaire du contrat (celui qui consent)',opts:[[s.titulaire,1],["Volt&Co Énergie (le fournisseur)",0,"Le fournisseur vend l'énergie : il n'est pas le titulaire qui consent."],[`${S.name} (gestionnaire)`,0,'Tu agis pour le titulaire, mais le consentement doit venir de lui.']]},
+      {label:'SIRET du titulaire',opts:[[s.siret,1,'14 chiffres : SIREN + NIC.'],[s.siret.slice(0,9),0,'9 chiffres : c\'est un SIREN, il manque le NIC de l\'établissement.'],[s.siret+'5',0,'15 chiffres : un de trop.']]},
+      {label:'Adresse du point',opts:[[`${s.addr}, ${s.cp}`,1],[`${oth.addr}, ${oth.cp}`,0,'Adresse d\'un autre site.']]},
+      {label:'Signataire',opts:[['Représentant légal du titulaire, ou personne habilitée',1],[`Un technicien ${org}`,0,`${org} reçoit le consentement, il ne le donne pas.`],["N'importe quel salarié du site",0,'Il faut une personne habilitée à engager le titulaire.']]}
+    ],okMsg:'Informations obligatoires complètes.'}),
+    multi({title:`Mandat ${org} · Données demandées`,gas,q:'Coche les données à récupérer (juste le nécessaire).',items:isE?[
+      [`Courbe de charge (pas de ${s.souscrit>36?10:30} min)`,true,'Indispensable pour analyser : elle montre quand on consomme.'],
+      ['Index et consommations journalières',true,'La référence du comptage, pour contrôler.'],
+      ['Données contractuelles (puissance souscrite, option tarifaire)',true,'Pour vérifier le contrat et la puissance.'],
+      ['Données techniques du compteur',null,'Utile, facultatif.'],
+      ["Factures d'électricité",false,"Les factures viennent du fournisseur, pas d'Enedis."],
+      ['Liste nominative des occupants',false,'Données personnelles sans rapport : on ne demande que le nécessaire.']]:[
+      ['Consommations quotidiennes (Gazpar)',true,'La consommation du jour J arrive le lendemain.'],
+      ['Données techniques : coefficient de conversion (PCS)',true,'Sans lui, impossible de passer des m³ aux kWh.'],
+      ['Consommations mensuelles publiées',null,'Utile pour recouper, facultatif.'],
+      ['Données contractuelles',null,'Utile, facultatif.'],
+      ['Courbe de charge au pas de 10 minutes',false,'Gazpar transmet un volume par jour, pas une courbe 10 min.'],
+      ['Factures de gaz',false,'Elles viennent du fournisseur, pas de GRDF.']],okMsg:'Chaque source a son usage : analyser, contrôler, chiffrer.'}),
+    form({title:`Mandat ${org} · Durée et historique`,gas,fields:[
+      {label:'Date de fin du consentement',opts:[[`${hier} (hier)`,0,'Un consentement déjà expiré ne donne accès à rien.'],[`${d(1)} (1 an)`,1,'Valide. Pense à le renouveler avant l\'échéance.'],[`${d(3)} (3 ans)`,1,'Valide : c\'est la durée maximale couramment admise.'],['Sans date de fin',0,'Un consentement est toujours limité dans le temps.']]},
+      {label:'Historique demandé',opts:[['Les 36 derniers mois',1,'Assez pour comparer plusieurs hivers.'],['Aucun historique',0,'Sans historique, pas de référence pour détecter les dérives.'],['Depuis 1950',0,'Aucune donnée n\'existe aussi loin.']]}
+    ],okMsg:'Durée et historique fixés.'}),
+    multi({title:`Mandat ${org} · Liste des points`,gas,q:'Coche uniquement les points couverts par ce mandat.',items:isE?[
+      [`<span class="mono">${s.pdl}</span> · ton PDL`,true,'Ton point électrique.'],
+      [`<span class="mono">${oth.pdl}</span>`,false,`PDL de ${oth.name} : son titulaire n'a pas consenti. Hors périmètre.`],
+      [`<span class="mono">${s.pdl.slice(0,12)+s.pdl[13]+s.pdl[12]}</span>`,false,'Presque ton PDL, mais deux chiffres sont inversés.'],
+      [`<span class="mono">${s.pce}</span>`,false,'C\'est un PCE gaz : il va dans le mandat GRDF.']]:[
+      [`<span class="mono">${s.pce}</span> · ton PCE`,true,'Ton point gaz.'],
+      [`<span class="mono">${oth.pce}</span>`,false,`PCE de ${oth.name} : hors périmètre.`],
+      [`<span class="mono">${s.pdl}</span>`,false,'C\'est un PDL électrique : mandat Enedis.']],okMsg:'Liste des points correcte.'}),
+    signature(s.titulaire,org)
+  ];
+}
+function gameCollecte(){
+  const s=site();
+  runSteps('Jeu 3 · Collecte des données',[
+    info(`<h3>D'où viennent les données ?</h3><p>La donnée d'énergie arrive par trois canaux :</p><div class="tbl"><table><tr><th>Source</th><th>Pas</th><th>Sert à</th></tr><tr><td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'10 min':'30 min'} (élec), 1 jour (gaz)</td><td>Analyser</td></tr><tr><td>Index</td><td>1 relevé par période</td><td>Contrôler</td></tr><tr><td>Facture</td><td>1 montant par période</td><td>Chiffrer le coût</td></tr></table></div><p>Avant de recevoir la moindre donnée de mesure, il faut le <b>consentement</b> du titulaire du contrat : ${esc(s.titulaire)}.</p>`),
+    choice({q:'Qui te fournit les données de mesure de ton site ?',opts:[['Le distributeur : Enedis pour l\'électricité, GRDF pour le gaz',1,'Le distributeur pose et relève les compteurs. Le fournisseur, lui, vend l\'énergie et envoie la facture.'],['Le fournisseur qui envoie la facture',0,'Le fournisseur facture, il ne relève pas les compteurs.'],['La mairie',0,'Elle peut être titulaire du contrat, pas gestionnaire du réseau.']]}),
+    choice({ctx:`Ton site a souscrit <span class="num">${s.souscrit} kVA</span>.`,q:'Par quel canal Enedis passer ?',opts:[
+      ['Data Connect (API, compteur Linky ≤ 36 kVA)',s.souscrit<=36,s.souscrit<=36?'Le client donne son consentement sur son espace Enedis, pour une durée qu\'il choisit.':'Data Connect, c\'est pour les Linky jusqu\'à 36 kVA.'],
+      ['SGE (web services, segments C1 à C4, > 36 kVA)',s.souscrit>36,s.souscrit>36?'Consentement écrit du client, et une habilitation qui prend plusieurs mois.':'Le SGE, c\'est au-delà de 36 kVA.'],
+      ['Le site du fournisseur',0,'Le fournisseur n\'a pas les données de mesure fines.']]}),
+    ...mandateSteps('Enedis'),...mandateSteps('GRDF'),
+    dataAnim,
+    choice({q:"Le logiciel appelle l'API pour un PDL sans consentement valide. Que se passe-t-il ?",opts:[['Refus : sans consentement valide, pour ce point et à cette date, pas de données',1,'Même chose après l\'expiration du consentement : la collecte s\'arrête. Il faut surveiller les dates de fin.'],['L\'API renvoie les données, c\'est une formalité',0,'Le consentement est obligatoire.'],['L\'API renvoie des données estimées',0,'Elle ne renvoie rien.']]})
+  ],()=>{S.ch=4;badge('Collecter');save();hud();say([{w:'Mme Joule',t:"Mandats signés, données en route ! Badge Collecter obtenu."},{w:'Mme Joule',t:"Mais attention : les données brutes sont sauvages. Doublons, trous, pics absurdes… Elles t'attendent dans les hautes herbes du Parc des Données, au sud-ouest."},{w:'Mme Joule',t:"Corrige les 7 espèces d'anomalies. Règle d'or : on ne corrige jamais en silence, on garde la donnée brute."}])});
+}
+function dataAnim(el,next){
+  const s=site();
+  el.innerHTML=`<h3>Récupération des données</h3><p>Les compteurs remontent leurs mesures au distributeur, qui les transmet à ton logiciel grâce au mandat.</p><canvas class="chart" width="640" height="260" aria-label="Animation de collecte"></canvas><p class="num" id="cnt"></p>`;
+  const c=el.querySelector('canvas'),x=c.getContext('2d'),cnt=el.querySelector('#cnt');let t0=performance.now(),pk=[],done=false,pts=0,days=0;
+  const nodes={le:[70,70],lg:[70,190],en:[320,70],gr:[320,190],pc:[566,130]};
+  const box=(p,col,lab,sub)=>{x.fillStyle=col;x.fillRect(p[0]-56,p[1]-28,112,56);x.fillStyle='#fff';x.font='600 14px "Pixelify Sans",monospace';x.textAlign='center';x.fillText(lab,p[0],p[1]-2);x.font='12px "Atkinson Hyperlegible",sans-serif';x.fillText(sub,p[0],p[1]+16)};
+  function frame(now){
+    const t=now-t0;x.fillStyle='#fffaf0';x.fillRect(0,0,640,260);x.strokeStyle='#c9bb92';x.lineWidth=3;x.setLineDash([6,6]);
+    [['le','en'],['lg','gr'],['en','pc'],['gr','pc']].forEach(([a,b])=>{x.beginPath();x.moveTo(...nodes[a]);x.lineTo(...nodes[b]);x.stroke()});x.setLineDash([]);
+    box(nodes.le,'#2aa198',s.souscrit>36?'Compteur pro':'Linky',`PDL …${s.pdl.slice(-4)}`);box(nodes.lg,'#c9a82a','Gazpar',`PCE ${s.pce}`);box(nodes.en,'#2f6db5','Enedis',elecChannel(s));box(nodes.gr,'#1c7a9a','GRDF','ADICT');box(nodes.pc,'#1c2440','Ton EMS','base de données');
+    if(t<5200&&Math.random()<.25){const e=Math.random()<.65;pk.push({a:e?'le':'lg',b:e?'en':'gr',p:0,e})}
+    pk.forEach(k=>{k.p+=.02;if(k.p>=1){if(k.b==='pc'){k.dead=1;if(k.e)pts+=48;else days++}else{k.a=k.b;k.b='pc';k.p=0}}const A=nodes[k.a],B=nodes[k.b];x.fillStyle=k.e?'#2aa198':'#e2573b';x.fillRect(A[0]+(B[0]-A[0])*k.p-5,A[1]+(B[1]-A[1])*k.p-5,10,10)});
+    pk=pk.filter(k=>!k.dead);
+    cnt.textContent=`Courbe de charge : ${fmt(pts)} points reçus · Gazpar : ${days} jours reçus`;
+    if(t<6500||pk.length)requestAnimationFrame(frame);else if(!done){done=true;cnt.textContent+=' · Collecte terminée.';contBtn(el,next)}
+  }
+  requestAnimationFrame(frame);
+}
+
+/* ================= COMBATS : ANOMALIES ================= */
+const ANOM=[
+  {id:'doublon',name:'Doublonix',col:'#8a5fc9',sym:'×2',data:'2 décembre : le créneau 10 h – 11 h arrive deux fois (12 mesures au lieu de 6).',moves:[['Retirer le doublon, statut « corrigée », garder la brute',1,'Un doublon ressemblait à une surconsommation. Correction tracée et réversible.'],['Additionner les deux séries',0,'Tu doubles l\'énergie de cette heure.'],['Supprimer toute la journée',0,'Tu crées un trou bien plus gros.'],['Garder : c\'est une vraie surconsommation',0,'La consommation réelle n\'a pas doublé : c\'est la transmission.']]},
+  {id:'trou',name:'Lacunor',col:'#5a6b8c',sym:'∅',data:'18 novembre : aucune mesure de 8 h à 20 h.',moves:[['Estimer avec un profil type, statut « estimée »',1,'Le trou est comblé et marqué comme estimé. Il sera remplacé si la vraie donnée arrive.'],['Mettre 0 kWh',0,'Un trou ressemble alors à une économie !'],['Copier le 19 novembre sans le signaler',0,'On ne corrige jamais en silence.'],['Ignorer, ça ne change rien',0,'Les totaux et les alertes seront faux.']]},
+  {id:'pic',name:'Picatron',col:'#e2573b',sym:'999',data:'20 janvier, 14 h 10 : 999,9 kW, pour un site qui plafonne bien en dessous.',moves:[['Rejeter la valeur (statut « rejetée »), conserver la brute',1,'999,9 kW est physiquement impossible pour ce raccordement : c\'est un bug de mesure.'],['La remplacer par 20 kW sans le noter',0,'Une correction doit rester traçable.'],['La garder : c\'est une vraie pointe',0,'Impossible physiquement.'],['Augmenter la puissance souscrite',0,'Tu paierais pour une pointe qui n\'existe pas.']]},
+  {id:'recule',name:'Reculax',col:'#c9a82a',sym:'↩',data:'Index HPB : 413 989 kWh le 1er mars, 404 989 kWh le 1er avril.',moves:[['Signaler une erreur de saisie et estimer en attendant',1,'413 → 404 : deux chiffres inversés. Un index doit toujours croître.'],['Consommation de mars = −9 000 kWh',0,'Une consommation négative est impossible.'],['C\'est un bouclage du compteur',0,'Le compteur est loin de son maximum.'],['Accepter le relevé',0,'Un index qui recule déclenche toujours une vérification.']]},
+  {id:'boucle',name:'Boucloop',col:'#2aa198',sym:'∞',data:'Compteur gaz à 5 chiffres : 99 850 m³ le 1er mars, 00 420 m³ le 1er avril.',moves:[['570 m³ : (100 000 − 99 850) + 420',1,'Le compteur a bouclé, comme un vieux compteur kilométrique.'],['−99 430 m³',0,'Consommation négative : c\'est le signe d\'un bouclage.'],['420 m³',0,'Tu oublies les 150 m³ avant le passage à zéro.'],['Rejeter le relevé',0,'Le relevé est juste : il faut le bon calcul.']]},
+  {id:'unite',name:'Wattomix',col:'#4a78c9',sym:'W?',data:'À midi, l\'API renvoie « 22 500 » pour la puissance du site.',moves:[['C\'est en W : 22,5 kW',1,'Toujours vérifier l\'unité : W, kW, kVA, m³, kWh.'],['Le site appelle 22 500 kW',0,'Impossible pour ce raccordement.'],['Rejeter la valeur',0,'Elle est juste, dans une autre unité.'],['Diviser par 6',0,'Ça, c\'est pour passer de kW au pas 10 min à des kWh.']]},
+  {id:'heure',name:'Horlogix',col:'#8a3b3b',sym:'23h',data:'29 mars 2026, au pas de 10 min : seulement 138 mesures au lieu de 144.',moves:[['Normal : passage à l\'heure d\'été, journée de 23 h. Stocker en UTC',1,'23 × 6 = 138. En UTC, chaque mesure a un horodatage unique.'],['C\'est un trou : estimer 6 mesures',0,'Ce n\'est pas un trou : la journée dure 23 h.'],['Dupliquer la dernière heure',0,'Tu inventerais une heure qui n\'existe pas.'],['Rejeter la journée',0,'Elle est complète.']]}
+];
+function monCanvas(a,size=40){
+  const c=document.createElement('canvas');c.width=size;c.height=size;const x=c.getContext('2d'),k=size/40;x.scale(k,k);
+  x.fillStyle='rgba(0,0,0,.2)';x.fillRect(8,35,24,3);
+  x.fillStyle=a.col;x.beginPath();x.moveTo(6,34);x.quadraticCurveTo(2,8,20,6);x.quadraticCurveTo(38,8,34,34);x.closePath();x.fill();
+  x.fillStyle='rgba(255,255,255,.25)';x.fillRect(11,11,5,3);
+  R(x,12,16,5,5,'#fff');R(x,23,16,5,5,'#fff');R(x,14,18,2,2,'#111');R(x,25,18,2,2,'#111');R(x,15,26,10,2,'#111');
+  x.fillStyle='#fff';x.font='bold 7px monospace';x.textAlign='center';x.fillText(a.sym,20,33);
+  return c;
+}
+function startEncounter(){
+  const rest=ANOM.filter(a=>!S.dex[a.id]),pool=rest.length&&Math.random()<.85?rest:ANOM;
+  battle(pool[Math.floor(Math.random()*pool.length)]);
+}
+function battle(a){
+  busy=true;clearKeys();let cred=100,over=false;
+  const ov=document.createElement('div');ov.className='battle';ov.innerHTML=`<div class="arena" role="dialog" aria-label="Combat"><div class="field2"><div class="hpbox enemy"><b>${a.name}</b> <small>anomalie sauvage</small><div class="bar"><i style="width:100%"></i></div></div><div class="hpbox me"><b>${esc(S.name)}</b> <small>Nv ${level()}</small><div class="bar"><i style="width:100%"></i></div><small>Crédibilité</small></div></div><div class="bmsg"></div><div class="moves"></div></div>`;
+  $('layer').appendChild(ov);sfx('encounter');updateMusic();
+  const f=ov.querySelector('.field2'),mon=monCanvas(a,40);mon.className='mon';f.appendChild(mon);
+  const hc=document.createElement('canvas');hc.width=20;hc.height=20;hc.className='hero';const hx=hc.getContext('2d');drawChar(hx,2,3,'up',0,PAL[S.rank]);f.appendChild(hc);
+  const msg=ov.querySelector('.bmsg'),mv=ov.querySelector('.moves'),ebar=ov.querySelector('.enemy i'),mbar=ov.querySelector('.me i');
+  const end=cb=>{ov.remove();busy=false;clearKeys();hud();save();updateMusic();if(cb)cb()};
+  msg.innerHTML=`Une anomalie sauvage apparaît : <b>${a.name}</b> !<div class="bdata">${a.data}</div>`;
+  const moves=shuffle(a.moves);
+  moves.forEach(m=>{const b=document.createElement('button');b.textContent=m[0];mv.appendChild(b);b.onclick=()=>{if(over)return;
+    if(m[1]){over=true;mv.querySelectorAll('button').forEach(x=>x.disabled=true);ebar.style.width='0%';mon.classList.add('hit');
+      msg.innerHTML=`C'est super efficace ! ${m[2]}`;jingle('victory');setTimeout(()=>mon.classList.add('ko'),600);
+      const first=!S.dex[a.id];S.dex[a.id]=1;S.xp+=first?30:10;
+      setTimeout(()=>{msg.innerHTML=`<b>${a.name}</b> est corrigée${first?' et rejoint ton Anomalidex':''} ! +${first?30:10} XP`;const c=document.createElement('button');c.textContent='Continuer ▸';c.style.gridColumn='1/-1';mv.innerHTML='';mv.appendChild(c);c.focus();c.onclick=()=>end(afterCapture)},1300)}
+    else{b.disabled=true;cred-=34;mbar.style.width=Math.max(0,cred)+'%';mbar.style.background=cred<40?'var(--bad)':'var(--amber)';
+      msg.innerHTML=`Ce n'est pas très efficace… ${m[2]}<br><b>${a.name}</b> sème le doute : ta crédibilité baisse !`;
+      if(cred<=0){over=true;mv.innerHTML='';setTimeout(()=>{msg.innerHTML='Ta crédibilité est à zéro ! Même le fournisseur ne te croit plus. Tu te replies au bureau pour relire tes notes.';const c=document.createElement('button');c.textContent='Retour au bureau ▸';c.style.gridColumn='1/-1';mv.appendChild(c);c.onclick=()=>end(()=>warp('office',5,6,'up'))},900)}}}});
+  const run=document.createElement('button');run.textContent='Fuir';run.onclick=()=>{if(!over){over=true;S.flees=(S.flees||0)+1;end(S.flees===3?()=>secret('fuite',["Tu fuis. Encore.","L'anomalie reste dans la base. Elle attendra le prochain audit, comme toutes les autres. Stratégie validée par 80 % des organisations."]):null)}};mv.appendChild(run);
+  mv.querySelector('button').focus();
+}
+function afterCapture(){
+  if(S.ch===4&&ANOM.every(a=>S.dex[a.id])){S.ch=5;badge('Fiabiliser');save();hud();
+    say([{w:'Mme Joule',t:"(au téléphone) Les 7 anomalies sont corrigées ! Badge Fiabiliser obtenu."},{w:'Mme Joule',t:"Retiens la règle : on détecte sur des données fiabilisées, et on garde toujours la brute avec son statut (brute, corrigée, estimée, rejetée)."},{w:'Mme Joule',t:"Reviens au bureau : il faut maintenant ranger tout ça. L'armoire à archives t'attend."}])}
+  else if(S.ch===4)toast(`Anomalidex : ${Object.keys(S.dex).length}/7`);
+}
+function actTech(){
+  if(S.ch<4)return say([{w:'Technicien',t:"Le Parc des Données est fermé. Aucune donnée n'arrive ici tant que les mandats Enedis et GRDF ne sont pas signés."}]);
+  say([{w:'Technicien',t:"Les hautes herbes grouillent de données brutes sauvages. Marche dedans, et choisis la bonne correction pour chaque anomalie !"},{w:'Technicien',t:`Anomalidex : ${Object.keys(S.dex).length}/7 espèces corrigées.`}]);
+}
+
+/* ================= STRUCTURER ================= */
+function actArchives(){
+  if(S.ch!==5)return say([{t:"L'armoire à archives : plans, contrats, factures, et bientôt des données bien rangées."}]);
+  const s=site();
+  runSteps('Jeu 5 · Structurer les données',[
+    info(`<h3>Ranger pour pouvoir comparer</h3><p>On range les données dans un modèle commun, à la même unité et au bon pas de temps. C'est comme une bibliothèque : le classement ne change pas les livres, mais il change ce que tu trouves facilement.</p>`),
+    order({q:'Remets le modèle de données dans l\'ordre, du plus large au plus fin.',items:['Site','Point de comptage','Compteur','Mesure'],okMsg:'Un site regroupe des points de comptage, qui portent des compteurs successifs, qui produisent des mesures.'}),
+    choice({ctx:'Le lundi 12 janvier, le compteur électrique a envoyé 144 puissances moyennes au pas de 10 min. Leur somme : <span class="num">2 503,5 kW</span>.',q:'Quelle énergie pour la journée ?',opts:[['417 kWh',1,'Chaque pas dure 1/6 h : E = 2 503,5 × 1/6 = 417 kWh.'],['2 503,5 kWh',0,'Additionner des kW sans tenir compte du pas donne 6 fois trop.'],['17,4 kWh',0,'Ça, c\'est la moyenne des puissances, en kW.']]}),
+    choice({gas:1,ctx:'Le même jour : <span class="num">229,1 m³</span> de gaz, coefficient <span class="num">11,21 kWh/m³</span>.',q:'Consommation totale du site ce jour-là ?',opts:[['2 985 kWh (417 + 2 568)',1,'On convertit d\'abord le gaz en kWh, puis on additionne des énergies dans la même unité.'],['646,1 (417 + 229,1)',0,'Tu additionnes des kWh et des m³.'],['2 568 kWh',0,'Tu as oublié l\'électricité.']]}),
+    multi({q:'Coche les compteurs à additionner pour obtenir la consommation du site.',items:[['Compteur principal électrique (PDL)',true],['Compteur gaz converti en kWh (PCE)',true],[s.sub,false,'Il est déjà inclus dans le principal : tu compterais deux fois la même énergie.'],['Compteur gaz en m³ bruts',false,'Pas dans la même unité.']],okMsg:'Agréger, c\'est additionner des énergies dans la même unité, sans les sous-compteurs.'}),
+    choice({ctx:'La facture couvre du 14 janvier au 13 février.',q:'Pour le bilan de janvier, la méthode la plus juste ?',opts:[['Répartir selon la courbe de charge réelle',1,'La courbe dit quelle part a vraiment été consommée en janvier. Le prorata au nombre de jours n\'est qu\'une approximation.'],['Compter toute la facture en janvier',0,'Elle déborde sur février.'],['Compter toute la facture en février',0,'La moitié de la période est en janvier.']]}),
+    choice({q:'Le compteur gaz est remplacé le 15 janvier. Dans le modèle, on…',opts:[['Ajoute un nouveau compteur au même point, avec dates de pose et de dépose',1,'Le PCE reste le même. Tout ce qui change dans le temps porte des dates de validité.'],['Crée un nouveau point de comptage',0,'Le point de raccordement n\'a pas changé.'],['Écrase l\'ancien compteur',0,'Tu perdrais l\'historique.']]})
+  ],()=>{badge('Structurer');S.ch=6;save();hud();evolve(1,()=>say([{w:'Mme Joule',t:"Tu as des données justes et bien rangées. Te voilà Energy Manager !"},{w:'Mme Joule',t:"Place à la deuxième moitié du métier : comprendre la consommation et la réduire. Commence par l'analyse, sur l'ordinateur."}]))});
+}
+
+/* ================= ANALYSER ================= */
+function weekCurve(id){
+  const out=[];let seed=7;const rnd=()=>{seed=(seed*9301+49297)%233280;return seed/233280};
+  for(let d=0;d<7;d++)for(let h=0;h<48;h++){const H=h/2;let p;
+    if(id==='ecole'){p=6;const cl=d<5,wed=d===2;if(cl&&!wed){if(H>=7&&H<8)p=24;else if(H>=8&&H<11.5)p=38;else if(H>=11.5&&H<13.5)p=52;else if(H>=13.5&&H<16.5)p=36;else if(H>=16.5&&H<18)p=16}if(wed){if(H>=7.5&&H<12)p=34;else if(H>=12&&H<14)p=12}}
+    if(id==='bureau'){p=18;if(d<5){if(H>=7&&H<8)p=60;else if(H>=8&&H<12)p=92;else if(H>=12&&H<14)p=80;else if(H>=14&&H<18)p=96;else if(H>=18&&H<20)p=44}}
+    if(id==='boulangerie'){p=4;if(d!==0){if(H>=3&&H<7)p=24;else if(H>=7&&H<13)p=14;else if(H>=13&&H<15)p=7;else if(H>=15&&H<19.5)p=12}}
+    out.push(Math.max(0,p+(rnd()-.5)*2.4));}
+  return out;
+}
+const BASE={ecole:6,bureau:18,boulangerie:4};
+function talonStep(el,next){
+  const s=site(),c=weekCurve(s.id),mx=Math.ceil(Math.max(...c)/10)*10,base=BASE[s.id];let tries=0;
+  el.innerHTML=`<h3>Trouve le talon</h3><p>Voici une semaine de courbe de charge électrique de ${esc(s.short)} (pas de 30 min, du lundi au dimanche). Le <b>talon</b>, c'est ce que le bâtiment consomme quand il est vide : la nuit, le week-end${s.id==='boulangerie'?', le lundi (jour de fermeture)':''}.</p><canvas class="chart" width="640" height="240" aria-label="Courbe de charge d'une semaine"></canvas><div class="field"><label for="talonR">Place la ligne pointillée rouge sur le talon : <span class="num" id="talonV"></span></label><input type="range" id="talonR" min="0" max="${mx}" step="0.5" value="${Math.round(mx*.6)}"></div><button class="btn" id="tv">Valider ▸</button><div class="fbz"></div>`;
+  const cv2=el.querySelector('canvas'),x=cv2.getContext('2d'),r=el.querySelector('#talonR'),lab=el.querySelector('#talonV'),fbz=el.querySelector('.fbz');
+  const L=44,T=12,W=640-L-10,Hh=240-T-30,Y=v=>T+Hh-v/mx*Hh;
+  const draw=()=>{const v=+r.value;lab.textContent=v.toLocaleString('fr-FR')+' kW';x.fillStyle='#fffaf0';x.fillRect(0,0,640,240);
+    x.strokeStyle='#e6dcc0';x.lineWidth=1;x.fillStyle='#5b6380';x.font='12px "Atkinson Hyperlegible",sans-serif';x.textAlign='right';
+    const st=[5,10,20,25,50].find(v=>mx/v<=6)||50;for(let g=0;g<=mx;g+=st){x.beginPath();x.moveTo(L,Y(g));x.lineTo(L+W,Y(g));x.stroke();x.fillText(Math.round(g)+' kW',L-4,Y(g)+4)}
+    x.textAlign='center';['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'].forEach((d,i)=>{x.fillText(d,L+W*(i+.5)/7,236);if(i){x.beginPath();x.moveTo(L+W*i/7,T);x.lineTo(L+W*i/7,T+Hh);x.stroke()}});
+    x.beginPath();c.forEach((p,i)=>{const px=L+W*i/c.length,py=Y(p);i?x.lineTo(px,py):x.moveTo(px,py)});x.lineTo(L+W,T+Hh);x.lineTo(L,T+Hh);x.closePath();x.fillStyle='rgba(42,161,152,.18)';x.fill();
+    x.beginPath();c.forEach((p,i)=>{const px=L+W*i/c.length,py=Y(p);i?x.lineTo(px,py):x.moveTo(px,py)});x.strokeStyle='#2aa198';x.lineWidth=2;x.stroke();
+    x.strokeStyle='#e2573b';x.lineWidth=3;x.setLineDash([8,5]);x.beginPath();x.moveTo(L,Y(v));x.lineTo(L+W,Y(v));x.stroke();x.setLineDash([])};
+  r.oninput=draw;draw();
+  el.querySelector('#tv').onclick=e=>{const v=+r.value;if(Math.abs(v-base)<=Math.max(1.5,base*.25)){e.target.remove();r.disabled=true;
+      fbz.innerHTML=`<div class="fb ok">✔ Le talon est d'environ <b>${base} kW</b>. Il tourne 24 h/24 : ${s.id==='ecole'?'éclairage de sécurité, informatique, ventilation, veilles':s.id==='bureau'?'serveurs, ventilation, veilles':'froid (vitrines, chambre froide), veilles'}.</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
+    else{tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${v>base?'Trop haut : regarde les nuits et le week-end, pas les journées.':'Trop bas : même vide, le bâtiment consomme quelque chose.'}</div>`}};
+}
+function gameAnalyse(){
+  const s=site(),c=weekCurve(s.id),base=BASE[s.id],share=Math.round(c.reduce((a,p)=>a+Math.min(p,base),0)/c.reduce((a,p)=>a+p,0)*100/5)*5;
+  const ratio=Math.round((s.elec+s.gaz)*1000/s.surface),re=Math.round(s.elec*1000/s.surface),gain=(s.souscrit-s.psOk)*13.5;
+  runSteps('Jeu 6 · Analyser la consommation',[
+    info(`<h3>Lire la courbe comme un électrocardiogramme</h3><p>Le cardiologue regarde le rythme au repos, les pics à l'effort et ce qui sort de l'ordinaire. Une courbe de charge se lit de la même façon : le talon, les heures d'occupation, les pointes.</p>`),
+    talonStep,
+    choice({ctx:`Talon : <span class="num">${base} kW</span>, 168 heures par semaine.`,q:'Quelle part de l\'électricité de cette semaine part dans le talon ?',opts:[[`Environ ${share} %`,1,`Une grosse part ! Sur une année avec les vacances${s.id==='ecole'?' (l\'école est vide plus de 80 % des heures)':''}, elle est encore plus grande. D'où l'intérêt d'analyser les nuits et les week-ends.`],[`Environ ${Math.max(5,share-25)} %`,0,'Plus que ça : le talon tourne toutes les heures de la semaine.'],[`Environ ${Math.min(95,share+30)} %`,0,'Moins que ça : les heures d\'occupation pèsent aussi.']]}),
+    choice({title:'Signature énergétique',ctx:'DJU (degré-jour unifié) = 18 °C − température moyenne du jour (0 s\'il fait plus de 18 °C). Le chauffage suit les DJU.',gas:1,q:'Un jour à 8 °C de moyenne compte combien de DJU ?',opts:[['10',1,'18 − 8 = 10 DJU.'],['8',0,'On part du seuil de 18 °C.'],['26',0,'On soustrait, on n\'additionne pas.']]}),
+    choice({gas:1,ctx:'La signature du chauffage s\'écrit <b>E = a + b × DJU</b>.',q:'Que représente b ?',opts:[['Les kWh supplémentaires par degré-jour de froid (thermosensibilité)',1,'Si b augmente, le bâtiment chauffe moins bien : réglage, isolation, chaudière.'],['La consommation de base, hors météo',0,'Ça, c\'est a.'],['La température de consigne',0,'b est une pente, en kWh/DJU.']]}),
+    choice({title:'Puissance souscrite',ctx:`Pointe annuelle mesurée : <span class="num">${s.pointe} kVA</span>. Souscrit aujourd'hui : <span class="num">${s.souscrit} kVA</span>. Part fixe (fictive) : 13,50 €/kVA/an.`,q:'Quelle puissance souscrire ?',opts:s.psOpts.map(v=>[`${v} kVA`,v===s.psOk,v===s.psOk?`Juste au-dessus de la pointe, avec une petite marge. Économie : ${s.souscrit-v} × 13,50 = ${fmt(gain)} € HT/an.`:v<s.pointe?'Sous la pointe : dépassements et pénalités.':v===s.souscrit?`Tu paies ${s.souscrit-s.pointe} kVA que tu n'utilises jamais.`:'Encore plus de puissance inutile.'])}),
+    choice({title:'Ratios',ctx:`${esc(s.name)} : ${s.elec} MWh d'électricité + ${s.gaz} MWh de gaz par an, pour ${fmt(s.surface)} m².`,q:'Quel est son ratio de consommation totale ?',opts:[[`${fmt(ratio)} kWh/m²/an`,1,s.id==='boulangerie'?'Très élevé, mais normal pour un fournil : un ratio se lit toujours avec son contexte (activité, horaires).':'Le ratio rend les bâtiments comparables, à lire avec leur contexte (horaires, usages).'],[`${fmt(re)} kWh/m²/an`,0,'Ça, c\'est l\'électricité seule.'],[`${fmt(ratio*10)} kWh/m²/an`,0,'Attention aux MWh → kWh : ×1 000, pas ×10 000.'],[`${fmt(Math.round(ratio/10))} kWh/m²/an`,0,'N\'oublie pas de convertir les MWh en kWh.']]})
+  ],()=>{badge('Analyser');S.ch=7;S.derives={};save();hud();say([{w:'Mme Joule',t:"Belle analyse ! Badge Analyser obtenu."},{w:'Mme Joule',t:`La nuit tombe… Parfait pour une ronde. Va dans ${s.short} et repère tout ce qui consomme alors que le bâtiment est vide. Il y a 4 dérives, dont une à la cave.`}])});
+}
+
+/* ================= DÉTECTER ================= */
+function actDerive(id){
+  const s=site();if(S.ch!==7)return;
+  if(S.derives[id])return say([{t:'Déjà noté dans ton rapport de ronde.'}]);
+  const D={light:['Éclairage des circulations resté allumé toute la nuit',0.5],rdc:s.derRdc,cave:s.derCave,boiler:null};
+  S.derives[id]=1;save();gainXP(15);
+  const lines=id==='boiler'?[{t:"La chaudière tourne un samedi soir, bâtiment vide ! Dérive gaz : le réduit de week-end n'est pas programmé."},{t:"Une règle métier liée au calendrier (« chaudière en marche le week-end ») la repère tout de suite."}]:[{t:`Dérive trouvée : ${D[id][0]}.`},{t:`+${String(D[id][1]).replace('.',',')} kW sur le talon, toutes les nuits et tous les week-ends.`}];
+  const n=Object.keys(S.derives).length;
+  say([...lines,{t:`Rapport de ronde : ${n}/4 dérives.`}],()=>{hud();if(n>=4)gameDetect()});
+}
+function gameDetect(){
+  runSteps('Jeu 7 · Détecter les dérives',[
+    info(`<h3>Rapport de ronde</h3><p>Les trois dérives électriques font monter le talon de <b>3 kW</b> au total. À midi, c'est invisible. Sur une année, c'est une autre histoire.</p><div class="ctx">Heures « bâtiment vide » sur un an (nuits, week-ends, vacances) : environ <span class="num">7 240 h</span>.</div>`),
+    choice({q:'Combien d\'énergie gaspillée par an ?',opts:[['21 720 kWh',1,'3 kW × 7 240 h = 21 720 kWh, soit environ 21,7 MWh.'],['3 kWh',0,'Des kW multipliés par des heures donnent des kWh.'],['2 413 kWh',0,'On multiplie, on ne divise pas.']]}),
+    choice({ctx:'Prix du kWh électrique évité : environ <span class="num">0,186 € HT</span>.',q:'Coût annuel de ces dérives ?',opts:[['≈ 4 040 € HT par an',1,'21 720 × 0,186 ≈ 4 040 €. Une petite puissance devient une grosse facture.'],['≈ 40 € HT par an',0,'Refais le calcul : 21 720 × 0,186.'],['≈ 116 000 € HT par an',0,'On multiplie par 0,186, on ne divise pas.']]}),
+    choice({title:'Régler les alertes',q:'Quelle référence (baseline) pour repérer une dérive sans fausse alerte ?',opts:[['Une régression sur DJU, occupation et calendrier',1,'Elle compare à ce que le site aurait dû consommer. Elle demande un historique propre.'],['La moyenne des 4 dernières semaines',0,'Elle apprend la dérive et finit par la cacher.'],['Le même mois l\'an dernier',0,'Météo et calendrier différents.']]}),
+    choice({q:'Une alerte se déclenche le 20 janvier à cause d\'une valeur de 999,9 kW. C\'est…',opts:[['Un faux positif dû à la qualité des données',1,'D\'où l\'étape Fiabiliser avant Détecter. Trop de fausses alertes, et plus personne ne les lit.'],['Une vraie surconsommation',0,'Souviens-toi de Picatron !'],['Un faux négatif',0,'Un faux négatif, c\'est un vrai problème sans alerte.']]}),
+    choice({q:'Exiger qu\'un écart dure 2 jours de suite avant d\'alerter (persistance) permet surtout de…',opts:[['Réduire les fausses alertes ponctuelles',1,'En contrepartie, la détection est un peu plus lente.'],['Détecter plus vite',0,'C\'est l\'inverse.'],['Supprimer tous les faux négatifs',0,'Au contraire, un seuil plus strict peut en ajouter.']]})
+  ],()=>{badge('Détecter');S.ch=8;save();hud();say([{t:"Le jour se lève sur Ampère-sur-Loire."},{w:'Mme Joule',t:"(au téléphone) Badge Détecter obtenu ! Maintenant qu'on sait où ça fuit, on agit. Compose ton plan d'action sur l'ordinateur."}])});
+}
+
+/* ================= AGIR ================= */
+const ACTIONS=[
+  {id:'consigne',t:'Consigne des locaux de 20 à 19 °C',cat:'Sobriété',cost:0,gain:1220},
+  {id:'reduit',t:'Programmer le réduit nuit et week-end',cat:'Sobriété',cost:800,gain:1900},
+  {id:'veilles',t:'Chasse aux veilles (horloges, prises coupe-veille)',cat:'Sobriété',cost:400,gain:900},
+  {id:'ps',t:'Ajuster la puissance souscrite',cat:'Contrat',cost:0,gain:270},
+  {id:'led',t:'Relamping LED',cat:'Efficacité',cost:9000,gain:1400},
+  {id:'combles',t:'Isolation des combles',cat:'Efficacité',cost:22000,gain:2100},
+  {id:'pv',t:'Panneaux photovoltaïques (36 kWc)',cat:'Production',cost:40000,gain:3200}
+];
+function planStep(el,next){
+  const BUD=12000,GOAL=4000;let tries=0;
+  el.innerHTML=`<h3>Compose ton plan d'action</h3><div class="ctx">Budget travaux cette année : <b class="num">${fmt(BUD)} €</b>. Objectif : au moins <b class="num">${fmt(GOAL)} € HT</b> d'économies par an. <i>Valeurs fictives.</i></div><div class="opts" id="acts"></div><div class="ctx" id="tot" aria-live="polite"></div><button class="btn" id="pv">Valider le plan ▸</button><div class="fbz"></div>`;
+  const box=el.querySelector('#acts'),tot=el.querySelector('#tot'),fbz=el.querySelector('.fbz');
+  ACTIONS.forEach(a=>{const l=document.createElement('label');l.className='chk';l.innerHTML=`<input type="checkbox" id="act_${a.id}" value="${a.id}"><span><span class="tag">${a.cat}</span> ${a.t}<small>Coût ${fmt(a.cost)} € · gain ${fmt(a.gain)} €/an · retour ${a.cost?String(Math.round(a.cost/a.gain*10)/10).replace('.',',')+' ans':'immédiat'}</small></span>`;box.appendChild(l)});
+  const calc=()=>{const sel=ACTIONS.filter(a=>el.querySelector('#act_'+a.id).checked),c=sel.reduce((s,a)=>s+a.cost,0),g=sel.reduce((s,a)=>s+a.gain,0);
+    tot.innerHTML=`Coût : <b class="num" style="color:${c>BUD?'var(--bad)':'inherit'}">${fmt(c)} €</b> / ${fmt(BUD)} € · Gain : <b class="num">${fmt(g)} €/an</b> · Retour global : <b class="num">${g?(c?String(Math.round(c/g*10)/10).replace('.',',')+' ans':'immédiat'):'—'}</b>`;return{c,g,sel}};
+  box.onchange=calc;calc();
+  el.querySelector('#pv').onclick=e=>{const {c,g,sel}=calc();const sob=sel.filter(a=>a.cat==='Sobriété').length;
+    if(c>BUD){tries++;sfx('bad');fbz.innerHTML='<div class="fb ko">✘ Budget dépassé. Les gros travaux attendront : commence par ce qui ne coûte presque rien.</div>';return}
+    if(g<GOAL){tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ Seulement ${fmt(g)} €/an. Il manque ${fmt(GOAL-g)} €. As-tu pris toutes les actions de sobriété ?</div>`;return}
+    e.target.remove();box.querySelectorAll('input').forEach(i=>i.disabled=true);
+    fbz.innerHTML=`<div class="fb ok">✔ Plan validé : ${fmt(g)} €/an pour ${fmt(c)} €. ${sob===3?'Toute la sobriété est dedans : c\'est la base.':'Astuce : la sobriété, presque gratuite, passe toujours en premier.'} Isoler un bâtiment qu'on chauffe le week-end, c'est payer des travaux pour chauffer du vide.</div>`;gainXP(tries?5:20);contBtn(fbz,next)};
+}
+function gameAgir(){
+  runSteps('Jeu 8 · Agir',[
+    info(`<h3>Trois marches</h3><p>Pour un foyer : d'abord on éteint les lumières et on baisse le chauffage, ensuite on renégocie ses abonnements, enfin, si ça vaut le coup, on isole la maison. Pour un bâtiment, c'est pareil. Chaque marche coûte plus cher et prend plus de temps.</p>`),
+    order({q:'Dans quel ordre agir ?',items:['Sobriété','Efficacité','Production'],okMsg:'On réduit d\'abord le besoin (souvent gratuit), puis on consomme mieux, puis on produit.'}),
+    planStep,
+    choice({q:'Deux actions de 10 % chacune sur le chauffage donnent au total…',opts:[['19 %',1,'La seconde s\'applique à ce qui reste : 1 − 0,9 × 0,9 = 19 %.'],['20 %',0,'Les pourcentages se multiplient, ils ne s\'additionnent pas.'],['10 %',0,'La seconde action compte aussi.']]}),
+    choice({q:'Un investissement de 30 000 € économise 2 500 € par an. Temps de retour simple ?',opts:[['12 ans',1,'30 000 / 2 500 = 12 ans. C\'est un premier filtre : il ignore la hausse des prix, la durée de vie et les aides (CEE).'],['8 ans',0,'Refais la division.'],['75 ans',0,'On divise l\'investissement par l\'économie annuelle.']]}),
+    choice({q:'Baisser la puissance souscrite réduit surtout…',opts:[['La part fixe de l\'acheminement (et la CTA)',1,'Elle agit sur la part fixe, pas sur les kWh consommés.'],['Les kWh consommés',0,'La puissance souscrite ne change pas les kWh.'],['L\'abonnement du fournisseur',0,'Celui-là ne bouge pas.']]})
+  ],()=>{badge('Agir');S.ch=9;save();hud();say([{w:'Mme Joule',t:"Plan validé, badge Agir obtenu ! Un an a passé, les actions sont en place. Reste la question qui fâche : est-ce que ça a vraiment marché ? Retourne sur l'ordinateur."}])});
+}
+
+/* ================= PILOTER ================= */
+function gamePiloter(){
+  const s=site(),a=assujetti(s);
+  runSteps('Jeu 9 · Piloter',[
+    info(`<h3>L'action a-t-elle marché ?</h3><p>Tu te pèses en manteau en janvier et en t-shirt en juillet : tu as « perdu » 3 kg. Pour savoir si le régime a marché, il faut se peser dans les mêmes conditions. Pour un bâtiment, les conditions, c'est surtout la météo : on corrige avec les DJU. C'est la <b>mesure et vérification</b> (M&V).</p>`),
+    choice({q:'L\'hiver a été 15 % plus doux et le chauffage a baissé de 15 %. L\'action a-t-elle marché ?',opts:[['On ne peut pas conclure sans corriger du climat : l\'effet réel est proche de 0',1,'La météo explique toute la baisse.'],['Oui, −15 %, bravo !',0,'L\'hiver doux a fait tout le travail.'],['Non, elle a augmenté la consommation',0,'Rien ne le montre.']]}),
+    choice({gas:1,ctx:'Année de référence : <span class="num">196 157 kWh</span> de chauffage pour <span class="num">2 244 DJU</span>, soit 87,4 kWh/DJU.<br>Année suivante : <span class="num">1 900 DJU</span> et <span class="num">139 000 kWh</span> mesurés.',q:'Quelle économie est vraiment due à l\'action ?',opts:[['−16,3 %',1,'Sans action : 87,4 × 1 900 = 166 060 kWh. Économie : 166 060 − 139 000 = 27 060 kWh, soit −16,3 %.'],['−29,1 %',0,'C\'est la comparaison brute : 13 points viennent de la météo.'],['−9,7 %',0,'Refais le calcul avec 87,4 kWh/DJU.']]}),
+    choice({title:'Décret tertiaire',q:'Objectif de réduction pour 2030, par rapport à l\'année de référence ?',opts:[['−40 % (puis −50 % en 2040, −60 % en 2050)',1,'Ou atteindre un seuil en valeur absolue (kWh/m²/an) fixé par activité.'],['−10 %',0,'Bien plus ambitieux que ça.'],['−100 %',0,'Pas tout à fait !']]}),
+    a?choice({q:`${s.name} est assujetti. Avant quelle date déclarer les consommations de l'année précédente sur OPERAT ?`,opts:[['Avant le 30 septembre, chaque année',1,'Sur la plateforme OPERAT de l\'ADEME. Ces paramètres évoluent par arrêté : toujours revérifier sur les textes officiels.'],['Avant le 31 décembre',0,'Non, c\'est le 30 septembre.'],['Uniquement tous les 10 ans',0,'La déclaration est annuelle.']]})
+     :choice({q:`${s.name} doit-elle déclarer ses consommations sur OPERAT ?`,opts:[['Non : moins de 1 000 m² de surface tertiaire',1,'Pas d\'obligation. Mais le suivi reste utile : la facture et le climat, eux, ne connaissent pas de seuil.'],['Oui, avant le 30 septembre',0,'Seulement au-delà de 1 000 m².'],['Oui, tous les mois',0,'Même les assujettis déclarent une fois par an.']]}),
+    choice({q:'Pour ton site, quel indicateur fait le plus ressortir le gaz ?',opts:[['Les émissions de CO₂ (tCO₂e)',1,'Le gaz émet environ 4 fois plus de CO₂ par kWh que l\'électricité française.'],['Les kWh d\'énergie finale',0,'Le gaz pèse lourd, mais le CO₂ l\'amplifie.'],['Les kWh/m²',0,'C\'est un ratio de consommation, pas d\'émissions.']]}),
+    order({title:'ISO 50001',q:'La norme ISO 50001 impose une boucle d\'amélioration continue. Remets-la dans l\'ordre.',items:['Planifier','Faire','Vérifier','Agir'],okMsg:'Et on repart au début : nouvelles données, nouveaux objectifs, nouveau périmètre.'})
+  ],()=>{badge('Piloter');S.ch=10;save();hud();evolve(2,()=>say([{w:'Mme Joule',t:"(au téléphone) {name}, tu as bouclé les 8 étapes ! Passe me voir au bureau, j'ai une nouvelle à t'annoncer."}]))});
+}
+
+/* ================= FINALE : PATRIMOINE ================= */
+function gameFinale(){
+  const rows=Object.values(SITES).map(s=>({s,r:Math.round((s.elec+s.gaz)*1000/s.surface)}));
+  runSteps('Final · Gestionnaire de patrimoine',[
+    info(`<h3>Ton patrimoine</h3><div class="tbl"><table><tr><th>Site</th><th>Surface</th><th>Élec</th><th>Gaz</th><th>Ratio</th></tr>${rows.map(({s,r})=>`<tr><td>${esc(s.name)}</td><td>${fmt(s.surface)} m²</td><td>${s.elec} MWh</td><td>${s.gaz} MWh</td><td>${fmt(r)} kWh/m²</td></tr>`).join('')}</table></div><p>À l'échelle d'un patrimoine, on compare, on classe et on priorise.</p>`),
+    choice({q:'Quels sites sont assujettis au décret tertiaire ?',opts:[['L\'école et les bureaux',1,'Tous deux dépassent 1 000 m². La boulangerie (140 m²) n\'est pas concernée.'],['Les trois',0,'La boulangerie fait 140 m².'],['Seulement la boulangerie, qui a le pire ratio',0,'Le seuil porte sur la surface, pas sur le ratio.']]}),
+    choice({q:'La boulangerie a le plus gros ratio (786 kWh/m²). Faut-il l\'isoler en priorité ?',opts:[['Non : son ratio vient surtout du process (fours, froid). Il se lit avec son contexte',1,'Un ratio compare des bâtiments comparables. Pour la boulangerie, on regarde plutôt kWh par fournée ou le talon du froid.'],['Oui, c\'est le pire ratio donc le pire bâtiment',0,'Un fournil n\'est pas une salle de classe.'],['Oui, et fermer le fournil la nuit',0,'Le pain se fait la nuit !']]}),
+    choice({q:'Par où commencer à l\'échelle du patrimoine ?',opts:[['Sobriété partout (quasi gratuite), puis travaux sur les sites assujettis au plus gros potentiel en kWh',1,'On combine l\'ordre sobriété → efficacité → production avec l\'obligation réglementaire et le potentiel.'],['Panneaux solaires sur tous les toits d\'abord',0,'La production vient en dernier.'],['Attendre l\'échéance 2030',0,'Chaque année compte, et la sobriété ne coûte presque rien.']]}),
+    choice({q:'Pour suivre les trois sites d\'une année à l\'autre, que faut-il faire avant de comparer le chauffage ?',opts:[['Corriger du climat avec les DJU de la station locale',1,'La normalisation climatique rend les hivers comparables.'],['Rien, les kWh suffisent',0,'Un hiver doux fausserait tout.'],['Diviser par le nombre de salariés',0,'Ça ne corrige pas la météo.']]})
+  ],()=>{S.ch=11;save();hud();endScreen()});
+}
+
+/* ================= ÉVOLUTION, FIN, TITRE, MENU ================= */
+function evolve(rank,cb){
+  busy=true;clearKeys();const old=S.rank;
+  jingle('evo');const ov=document.createElement('div');ov.className='evo';ov.innerHTML=`<div class="t">Quoi ? ${esc(S.name)}, ${RANKS[old]}, évolue !</div><canvas width="20" height="20" aria-hidden="true"></canvas><div class="row" style="justify-content:center"></div>`;
+  $('layer').appendChild(ov);const c=ov.querySelector('canvas'),x=c.getContext('2d'),t=ov.querySelector('.t');let n=0,start=performance.now();
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const drawP=r=>{x.clearRect(0,0,20,20);drawChar(x,2,3,'down',0,PAL[r])};
+  (function anim(now){const el=now-start,period=Math.max(60,300-el/12);if(!reduce&&el<3200){drawP(Math.floor(el/period)%2?rank:old);requestAnimationFrame(anim)}else{
+    drawP(rank);S.rank=rank;const need=rank===1?9:19;if(level()<need+1)S.xp=need*90;save();hud();
+    t.innerHTML=`Félicitations ! Tu deviens <b style="color:var(--amber)">${RANKS[rank]}</b> !`;
+    const b=document.createElement('button');b.className='btn';b.style.background='var(--amber)';b.style.color='var(--ink)';b.textContent='Continuer ▸';b.onclick=()=>{ov.remove();busy=false;hud();if(cb)cb()};ov.querySelector('.row').appendChild(b);b.focus()}})(start);
+}
+function endScreen(){
+  const ov=openPanel('Quête terminée'),b=ov.querySelector('.pbody');
+  b.innerHTML=`<h3>Diplôme de l'Energy Management par la donnée</h3><p><b>${esc(S.name)}</b>, ${RANKS[S.rank]}, niveau ${level()}.</p><p>Tu as parcouru les 8 étapes de la démarche sur ${esc(site().name)}, puis tu as pris en main un patrimoine entier.</p><div class="tbl"><table><tr><th>Étape</th><th>Ce que tu sais faire</th></tr>
+  <tr><td>Cadrer</td><td>Périmètre, fiche patrimoine, PDL et PCE, plan de comptage</td></tr><tr><td>Collecter</td><td>Distributeur ≠ fournisseur, mandats, consentement</td></tr><tr><td>Fiabiliser</td><td>Doublons, trous, pics, index, bouclage, unités, heure</td></tr><tr><td>Structurer</td><td>Site → point → compteur → mesure, kW → kWh, m³ → kWh</td></tr><tr><td>Analyser</td><td>Talon, DJU, signature, puissance souscrite, ratios</td></tr><tr><td>Détecter</td><td>Dérives, baseline, faux positifs, coût d'une dérive</td></tr><tr><td>Agir</td><td>Sobriété → efficacité → production, temps de retour</td></tr><tr><td>Piloter</td><td>M&V corrigée des DJU, décret tertiaire, OPERAT, ISO 50001</td></tr></table></div><div class="row"><button class="btn" id="endStay">Continuer à explorer</button><button class="btn alt" id="endNew">Rejouer avec un autre site</button></div>`;
+  b.querySelector('#endStay').onclick=closePanel;b.querySelector('#endNew').onclick=()=>{const nm=S.name;S=DEF();S.name=nm;save();closePanel();boot()};
+}
+function openMenu(){
+  if(busy||dlg.open)return;
+  const ov=openPanel('Menu'),b=ov.querySelector('.pbody'),s=S.site?site():null;
+  b.innerHTML=`<div class="menu-tabs"><button data-t="carnet" class="on">Carnet</button><button data-t="badges">Badges</button><button data-t="dex">Anomalidex</button><button data-t="sec">Secrets</button><button data-t="etapes">Étapes</button><button data-t="avatar">Avatar</button><button data-t="opt">Partie</button></div><div id="mt"></div><button class="btn" id="mClose">Fermer</button>`;
+  const mt=b.querySelector('#mt');
+  const tabs={
+    carnet:()=>s?`<h3>${esc(s.name)}</h3><div class="tbl"><table>
+      <tr><th>Adresse</th><td>${S.notes.adresse?esc(S.notes.adresse):'<i>à trouver (boîte aux lettres)</i>'}</td></tr>
+      <tr><th>Surface</th><td>${S.notes.surface?fmt(S.notes.surface)+' m²':'<i>à trouver (fiche technique)</i>'}</td></tr>
+      <tr><th>Activité</th><td>${S.notes.activite?esc(S.notes.activite):'<i>à trouver</i>'}</td></tr>
+      <tr><th>Localisation</th><td>${S.notes.adresse?'Ampère-sur-Loire (45), zone H1, météo Orléans-Bricy':'<i>—</i>'}</td></tr>
+      <tr><th>PDL (élec)</th><td class="num">${S.notes.pdl||'<i>à trouver</i>'}</td></tr>
+      <tr><th>PCE (gaz)</th><td class="num">${S.notes.pce||'<i>à trouver</i>'}</td></tr>
+      <tr><th>Décret tertiaire</th><td>${S.ch>=2?(assujetti(s)?'Assujetti (≥ 1 000 m²)':'Non concerné (< 1 000 m²)'):'<i>—</i>'}</td></tr></table></div><p style="margin-top:10px"><b>Objectif :</b> ${esc(objectiveText())}</p>`:'<p>Parle à Mme Joule pour choisir ton site.</p>',
+    badges:()=>`<p>Les 8 étapes de la démarche. Rang : <b>${RANKS[S.rank]}</b>, niveau ${level()} (${S.xp} XP).</p><div class="dex">${BADGES.map((x,i)=>`<div class="${S.badges.includes(x)?'':'unk'}"><b>${i+1}. ${x}</b><br>${S.badges.includes(x)?'Obtenu':'À gagner'}</div>`).join('')}</div><p style="margin-top:10px">Évolutions : Gestionnaire de site → Energy Manager (après Structurer) → Gestionnaire de patrimoine (après Piloter).</p>`,
+    dex:()=>`<p>${Object.keys(S.dex).length}/7 anomalies corrigées.</p><div class="dex" id="dexg"></div>`,
+    sec:()=>`<p>${Object.keys(S.secrets).length}/${NSEC} secrets trouvés. Explore, parle à tout le monde, examine tout (et pas seulement les compteurs).</p><div class="dex">${Object.entries(SECRETS).map(([k,v])=>`<div class="${S.secrets[k]?'':'unk'}">${S.secrets[k]?'<b>'+esc(v)+'</b>':'???'}</div>`).join('')}</div>`,
+    etapes:()=>`<div id="chl"></div>`,
+    avatar:()=>`<p>Change de tête, de coiffure ou de tenue quand tu veux. Le casque et la veste arrivent avec les promotions.</p><button class="btn" id="avEdit">Modifier mon avatar</button>`,
+    opt:()=>`<p>La partie est sauvegardée automatiquement dans ce navigateur.</p><div class="row"><button class="btn" id="sndT">${AUD.on?'Couper la musique':'Activer la musique'}</button><button class="btn alt" id="rst">Recommencer depuis le début</button></div><div id="rstc"></div>`
+  };
+  const show=k=>{b.querySelectorAll('.menu-tabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===k));mt.innerHTML=tabs[k]();
+    if(k==='dex'){const g=mt.querySelector('#dexg');ANOM.forEach(a=>{const d=document.createElement('div');const got=S.dex[a.id];if(!got)d.className='unk';d.appendChild(monCanvas(got?a:{...a,col:'#999',sym:'?'},40));d.insertAdjacentHTML('beforeend',`<br><b>${got?a.name:'???'}</b><br>${got?esc(a.data):''}`);g.appendChild(d)})}
+    if(k==='etapes')chapterList(mt.querySelector('#chl'),(ch,sid)=>{closePanel();jumpTo(ch,sid)});
+    if(k==='avatar')mt.querySelector('#avEdit').onclick=()=>{closePanel();openAvatar()};
+    if(k==='opt')mt.querySelector('#sndT').onclick=e=>{audInit();setSound(!AUD.on);e.target.textContent=AUD.on?'Couper la musique':'Activer la musique'};
+    if(k==='opt')mt.querySelector('#rst').onclick=()=>{mt.querySelector('#rstc').innerHTML='<p><b>Toute ta progression sera effacée.</b></p><button class="btn" id="rstOk" style="background:var(--bad)">Oui, tout effacer</button>';mt.querySelector('#rstOk').onclick=()=>{S=DEF();save();closePanel();titleScreen()}}};
+  b.querySelectorAll('.menu-tabs button').forEach(x=>x.onclick=()=>show(x.dataset.t));show('carnet');
+  b.querySelector('#mClose').onclick=closePanel;
+}
+function titleScreen(){
+  busy=true;const sv=loadSave(),has=!!(sv&&sv.site);
+  const ov=document.createElement('div');ov.className='title-screen';
+  ov.innerHTML=`<div class="title-box"><div class="logo">La Quête du Kilowatt<small>Energy management par la donnée</small></div>
+  <canvas width="60" height="22" style="width:240px;image-rendering:pixelated" aria-hidden="true"></canvas>
+  <p>Tu es gestionnaire de site et tu ne connais rien à l'énergie. Explore, trouve les compteurs, signe les mandats, dompte les anomalies… et deviens gestionnaire de patrimoine.</p>
+  <div class="ranks"><span>Gestionnaire de site</span><span>→ Energy Manager</span><span>→ Gestionnaire de patrimoine</span></div>
+  <label for="pname" style="font-family:var(--f-pix)">Ton prénom</label><input id="pname" maxlength="14" value="${esc((sv&&sv.name)||S.name||'Alex')}">
+  <div class="row" style="justify-content:center">${has?`<button class="btn" id="tCont">Continuer · ${esc(CHAPTERS[sv.ch]||'')}</button>`:''}<button class="btn${has?' alt':''}" id="tNew">Nouvelle partie</button><button class="btn alt" id="tChap">Choisir une étape</button></div>
+  <p style="font-size:13px">♪ La musique démarre au premier clic. Tu peux la couper avec le bouton ♪ en haut du jeu.</p></div>`;
+  $('layer').appendChild(ov);updateMusic();
+  const c=ov.querySelector('canvas'),x=c.getContext('2d');R(x,0,0,60,22,'#131a2b');[0,1,2].forEach(r=>drawChar(x,4+r*20,3,'down',0,avPal(r,sv&&sv.av)));
+  const nm=()=>(ov.querySelector('#pname').value||'Alex').trim().slice(0,14)||'Alex';
+  const leave=()=>{ov.remove();busy=false};
+  ov.querySelector('#tNew').onclick=()=>{const n=nm();S=DEF();S.name=n;save();leave();openAvatar(()=>boot())};
+  if(has)ov.querySelector('#tCont').onclick=()=>{const n=nm();S=Object.assign(DEF(),sv);S.name=n;save();leave();if(!S.av)openAvatar(()=>boot());else boot()};
+  ov.querySelector('#tChap').onclick=()=>{const n=nm();S=Object.assign(DEF(),sv||{});S.name=n;save();leave();
+    const pick=()=>{const o2=openPanel('Choisir une étape'),b=o2.querySelector('.pbody'),inner=document.createElement('div');b.appendChild(inner);
+      chapterList(inner,(ch,sid)=>{closePanel();jumpTo(ch,sid)});
+      const cc=document.createElement('button');cc.className='btn alt';cc.textContent='Retour';cc.onclick=()=>{closePanel();titleScreen()};b.appendChild(cc)};
+    if(!S.av)openAvatar(pick);else pick()};
+  (ov.querySelector('#tCont')||ov.querySelector('#tNew')).focus();
+}
+
+/* ================= ENTRÉES ================= */
+const KEYMAP={ArrowUp:'up',ArrowDown:'down',ArrowLeft:'left',ArrowRight:'right',KeyW:'up',KeyS:'down',KeyA:'left',KeyD:'right'};
+addEventListener('keydown',e=>{
+  const tag=(e.target.tagName||'').toLowerCase();if(tag==='input'||tag==='select'||tag==='textarea')return;
+  if(busy){if(e.key==='Escape'&&panelEl&&panelEl.querySelector('#mClose'))closePanel();return}
+  const k=KEYMAP[e.code]||KEYMAP[e.key];
+  if(k){keys[k]=1;e.preventDefault();return}
+  if(e.code==='Space'||e.key==='Enter'||e.code==='KeyE'){e.preventDefault();if(!e.repeat)pressA();return}
+  if(e.key==='Escape'||e.code==='KeyM'){openMenu()}
+});
+addEventListener('keyup',e=>{const k=KEYMAP[e.code]||KEYMAP[e.key];if(k)keys[k]=0});
+addEventListener('blur',clearKeys);
+document.querySelectorAll('.dpad button').forEach(b=>{const k=b.dataset.k;
+  b.addEventListener('pointerdown',e=>{e.preventDefault();if(busy)return;keys[k]=1;b.classList.add('held');b.setPointerCapture(e.pointerId)});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,()=>{keys[k]=0;b.classList.remove('held')}))});
+document.querySelector('.ab .a').addEventListener('pointerdown',e=>{e.preventDefault();pressA()});
+document.querySelector('.ab .b').addEventListener('pointerdown',e=>{e.preventDefault();openMenu()});
+$('menuBtn').onclick=openMenu;
+cv.addEventListener('click',()=>{if(!busy)pressA()});
+
+function boot(){
+  rebuildMaps();P.x=S.x;P.y=S.y;P.px=S.x*TS;P.py=S.y*TS;P.dir=S.dir||'up';P.moving=false;
+  if(isSolid(P.x,P.y)){const f={office:[5,6],town:[6,9],rdc:[7,9],cave:[2,2]}[S.map]||[5,6];P.x=f[0];P.y=f[1];P.px=P.x*TS;P.py=P.y*TS}
+  hud();fadeIn();applySobriete();updateMusic();
+  if(S.ch===0&&S.map==='office')setTimeout(()=>{if(!busy&&!dlg.open)say([{t:"Ton premier jour. Mme Joule, l'energy manager senior, t'attend à droite. Approche-toi et appuie sur A (Espace)."}])},500);
+}
+rebuildMaps();hud();requestAnimationFrame(loop);titleScreen();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{});
+$('sndBtn').onclick=()=>{audInit();setSound(!AUD.on)};setSound(AUD.on);
+</script>
+
+</body></html>
