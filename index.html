@@ -99,6 +99,8 @@ canvas#screen{display:block;width:100%;height:auto;image-rendering:pixelated;ima
 .ab{display:flex;gap:12px;align-items:center}
 .ab button{width:62px;height:62px;border-radius:50%;font-weight:700}
 .ab .a{background:var(--flame);border-color:#ff9a80}
+.ab .run{width:auto;height:40px;border-radius:20px;font-size:14px;padding:0 12px;align-self:flex-end}
+.ab .run[aria-pressed=true]{background:var(--amber);color:var(--ink);border-color:#ffd48a}
 @media (pointer:coarse),(max-width:680px){.pad{display:flex}.keys{display:none}}
 /* overlays */
 .overlay{position:fixed;inset:0;background:rgba(8,11,22,.78);display:flex;align-items:flex-start;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) 16px 16px;z-index:20;overflow-y:auto}
@@ -293,14 +295,14 @@ button,input,select{font:inherit}
     <canvas id="screen" width="240" height="176" aria-label="Écran de jeu"></canvas>
   </div>
   <div class="objective" id="objective"><b>Objectif :</b> …</div>
-  <div class="keys">Flèches ou ZQSD/WASD pour marcher · Espace ou Entrée pour parler, lire, interagir · Échap ou M pour le menu · F pour le plein écran</div>
+  <div class="keys">Flèches ou ZQSD/WASD pour marcher · Espace ou Entrée pour parler, lire, interagir · Maj (maintenue) ou R pour courir · Échap ou M pour le menu · F pour le plein écran</div>
   <div class="pad" id="pad">
     <div class="dpad">
       <span></span><button data-k="up" aria-label="Haut">▲</button><span></span>
       <button data-k="left" aria-label="Gauche">◀</button><span></span><button data-k="right" aria-label="Droite">▶</button>
       <span></span><button data-k="down" aria-label="Bas">▼</button><span></span>
     </div>
-    <div class="ab"><button class="b" data-b="menu" aria-label="Menu">B</button><button class="a" data-b="a" aria-label="Action">A</button></div>
+    <div class="ab"><button class="run" data-b="run" aria-pressed="false" aria-label="Courir">Courir</button><button class="b" data-b="menu" aria-label="Menu">B</button><button class="a" data-b="a" aria-label="Action">A</button></div>
   </div>
 </div>
 <div id="layer"></div></div>
@@ -625,16 +627,44 @@ function avPal(rank,av){av=av||S.av||AVDEF('h');
   return{skin:SKINS[av.skin],hair:HAIRC[av.hair],style:av.style,shirt:TOPS[av.top],pants:BOTS[av.bot],skirt:av.bt==='jupe',
     hat:rank===1?'#f2c12e':null,vest:rank===1,jacket:rank===2?'#262b4f':null,tie:rank===2?'#f2a33a':null,lash:av.g==='f'}}
 const PAL=[0,1,2].map(r=>new Proxy({}, {get:(_,k)=>avPal(r)[k]}));
-function drawChar(c,x,y,dir,frame,p){
+/* Jambes : ph = phase du cycle (0 debout, 1 pas A, 2 passage, 3 pas B), run = course */
+function drawLegs(c,x,y,dir,ph,p,run){
+  const skin=p.skin||'#f1c7a1',leg=p.skirt?skin:p.pants,shoe='#222',dark='rgba(0,0,0,.28)';
+  const lift=run?2:1,A=ph===1,B=ph===3;
+  if(dir==='down'||dir==='up'){
+    // vue de face/dos : une jambe s'allonge vers l'avant, l'autre se replie
+    const lx=x+5,rx=x+8,w=p.skirt?2:3,rx2=p.skirt?x+9:rx;
+    const lh=A?3+lift:B?3-lift:3,rh=B?3+lift:A?3-lift:3;
+    const ly=y+12+(B?lift:0),ry=y+12+(A?lift:0);
+    R(c,lx,ly,w,lh,leg);R(c,rx2,ry,w,rh,leg);
+    R(c,lx,ly+lh-1,w,1,shoe);R(c,rx2,ry+rh-1,w,1,shoe);
+    if(A)R(c,rx2,ry,w,1,dark);if(B)R(c,lx,ly,w,1,dark);
+  }else{
+    // vue de profil : les jambes s'écartent en ciseaux
+    const f=dir==='right'?1:-1,sp=A||B?(run?3:2):0,back=B?'front':'back';
+    const fx=x+6+f*sp,bx=x+7-f*sp;
+    const legB=(A||B)?shade(leg):leg;
+    R(c,bx,y+12,3,3,legB);R(c,bx+(f>0?-1:1)*(sp?1:0),y+14,3,1,shoe);
+    R(c,fx,y+12,3,3,leg);R(c,fx+(f>0?1:0),y+14,3,1,shoe);
+    if(run&&(A||B))R(c,fx+(f>0?2:-1),y+13,1,1,leg);
+  }
+  if(p.skirt){R(c,x+4,y+11,8,2,p.pants);R(c,x+3,y+12,10,1,p.pants)}
+}
+function shade(hex){const n=parseInt(String(hex).slice(1),16);if(isNaN(n))return hex;const r=Math.max(0,(n>>16)-28),g=Math.max(0,((n>>8)&255)-28),b=Math.max(0,(n&255)-28);return `rgb(${r},${g},${b})`}
+function drawChar(c,x,y,dir,frame,p,run){
   x=Math.round(x);y=Math.round(y);const skin=p.skin||'#f1c7a1',hc=p.hair,st=p.style||'court';
+  const ph=((frame|0)%4+4)%4,bob=(ph===1||ph===3)?1:0;
   c.fillStyle='rgba(0,0,0,.22)';c.fillRect(x+3,y+14,10,2);
-  const l=frame%2?1:0;
+  if(dir==='up'&&(st==='long'))R(c,x+4,y+5-bob,8,5,hc);
+  drawLegs(c,x,y,dir,ph,p,run);
+  y-=bob;
+  const sw=ph===1?1:ph===3?-1:0,sa=run?2:1;
   // tresse/cheveux longs derrière le corps (vue de dos)
   if(dir==='up'&&(st==='long'))R(c,x+4,y+5,8,5,hc);
-  if(p.skirt){R(c,x+5,y+13-(l?1:0),2,2,skin);R(c,x+9,y+13-(l?0:1),2,2,skin);R(c,x+5,y+14,2,1,'#222');R(c,x+9,y+14,2,1,'#222');R(c,x+4,y+11,8,2,p.pants);R(c,x+3,y+12,10,1,p.pants)}
-  else{R(c,x+5,y+12-(l?1:0),3,3,p.pants);R(c,x+8,y+12-(l?0:1),3,3,p.pants);R(c,x+5,y+14,3,1,'#222');R(c,x+8,y+14,3,1,'#222')}
-  R(c,x+4,y+7,8,p.skirt?5:6,p.shirt);R(c,x+3,y+8,1,4,skin);R(c,x+12,y+8,1,4,skin);
-  if(p.jacket){if(dir==='up')R(c,x+4,y+7,8,5,p.jacket);else{R(c,x+4,y+7,3,5,p.jacket);R(c,x+9,y+7,3,5,p.jacket)}R(c,x+3,y+8,1,3,p.jacket);R(c,x+12,y+8,1,3,p.jacket)}
+  R(c,x+4,y+7,8,p.skirt?5:6,p.shirt);
+  if(dir==='down'||dir==='up'){R(c,x+3,y+8-sw*sa,1,4,skin);R(c,x+12,y+8+sw*sa,1,4,skin)}
+  else{const f=dir==='right'?1:-1;R(c,x+7+f*sw*sa,y+8,2,4,shade(p.shirt));R(c,x+7+f*sw*sa+(f>0?1:0),y+11,1,1,skin)}
+  if(p.jacket){if(dir==='up')R(c,x+4,y+7,8,5,p.jacket);else{R(c,x+4,y+7,3,5,p.jacket);R(c,x+9,y+7,3,5,p.jacket)}if(dir==='down'||dir==='up'){R(c,x+3,y+8-sw*sa,1,3,p.jacket);R(c,x+12,y+8+sw*sa,1,3,p.jacket)}}
   if(p.vest){R(c,x+4,y+7,2,5,'#f2c12e');R(c,x+10,y+7,2,5,'#f2c12e');if(dir==='up')R(c,x+4,y+7,8,5,'#f2c12e');R(c,x+4,y+10,8,1,'#e8e4d6')}
   if(p.tie&&dir==='down')R(c,x+7,y+8,2,4,p.tie);
   R(c,x+4,y+1,8,7,skin);
@@ -770,7 +800,9 @@ function targets(){
 }
 
 /* ================= BOUCLE DE JEU ================= */
-const P={x:5,y:6,px:5*TS,py:6*TS,dir:'up',moving:false,step:0,frame:0};
+const P={x:5,y:6,px:5*TS,py:6*TS,dir:'up',moving:false,step:0,frame:0,dist:0,runHeld:false,runToggle:false,puffs:[]};
+const WALK_SPEED=60,RUN_SPEED=128; // pixels par seconde (1 case = 16 px)
+const isRunning=()=>P.runHeld||P.runToggle;
 const keys={up:0,down:0,left:0,right:0};
 let tick=0,busy=false; // busy = dialogue/modal/combat
 function blocked(){return busy||dlg.open}
@@ -805,13 +837,15 @@ function exitBuilding(){
   else if(S.map==='local'){const b=BLD.find(b=>b.id===S.inside);warp('town',b.door[0],b.door[1]+1,'down')}
   else{const b=BLD.find(b=>b.id===S.site);warp('town',b.door[0],b.door[1]+1,'down')}
 }
-function update(){
-  tick++;
+function update(k){
+  k=k||1;tick++;
   if(fade>0)fade=Math.max(0,fade-.06);
-  if(P.moving){const tx=P.x*TS,ty=P.y*TS,sp=2;P.px+=Math.sign(tx-P.px)*Math.min(sp,Math.abs(tx-P.px));P.py+=Math.sign(ty-P.py)*Math.min(sp,Math.abs(ty-P.py));P.step++;if(P.step%8===0)P.frame++;
+  if(P.moving){const tx=P.x*TS,ty=P.y*TS,run=isRunning(),sp=(run?RUN_SPEED:WALK_SPEED)/60*k;const dx=Math.min(sp,Math.abs(tx-P.px)),dy=Math.min(sp,Math.abs(ty-P.py));P.px+=Math.sign(tx-P.px)*dx;P.py+=Math.sign(ty-P.py)*dy;P.dist+=dx+dy;P.step++;P.frame=1+Math.floor(P.dist/(run?5:4));
+    if(run&&tick%7===0)P.puffs.push({x:P.px+8,y:P.py+15,t:0});
     if(P.px===tx&&P.py===ty){P.moving=false;S.x=P.x;S.y=P.y;S.dir=P.dir;onStep()}}
   if(!P.moving&&!blocked()){for(const d of ['up','down','left','right'])if(keys[d]){tryMove(d);break}}
-  if(!P.moving&&!Object.values(keys).some(Boolean))P.frame=0;
+  if(!P.moving&&!Object.values(keys).some(Boolean)){P.frame=0;P.dist=0}
+  P.puffs=P.puffs.filter(q=>(q.t+=k)<18);
 }
 function onStep(){
   if(S.map==='town'&&tileAt(P.x,P.y)===':'&&S.ch>=4&&Math.random()<.16){startEncounter()}
@@ -824,7 +858,8 @@ function render(){
   R(ctx,0,0,cv.width,cv.height,'#0b1020');ctx.drawImage(mc,-ox,-oy);
   const objs=objsFor(S.map),pal=PAL[S.rank];
   const ents=objs.map(o=>({y:o.y*TS,f:()=>drawObj(ctx,o,ox,oy,tick)}));
-  ents.push({y:P.py+1,f:()=>drawChar(ctx,P.px-ox,P.py-oy-2,P.dir,P.frame,pal)});
+  P.puffs.forEach(q=>{const a=1-q.t/18;ctx.fillStyle=`rgba(230,222,200,${a*.8})`;const r=1+q.t/6;ctx.fillRect(Math.round(q.x-ox-r),Math.round(q.y-oy-r-q.t/5),Math.round(r*2),Math.round(r*2))});
+  ents.push({y:P.py+1,f:()=>drawChar(ctx,P.px-ox,P.py-oy-2,P.dir,P.moving?P.frame:0,pal,P.moving&&isRunning())});
   ents.sort((a,b)=>a.y-b.y).forEach(e=>e.f());
   // hautes herbes par-dessus les pieds
   if(S.map==='town'&&tileAt(P.x,P.y)===':'&&!P.moving){R(ctx,P.px-ox+2,P.py-oy+11,12,5,'#4f9a4a');R(ctx,P.px-ox+4,P.py-oy+10,1,4,'#6fbf5f');R(ctx,P.px-ox+10,P.py-oy+10,1,4,'#6fbf5f')}
@@ -839,7 +874,7 @@ function render(){
   // nom de lieu
   if(fade>0){ctx.globalAlpha=fade;R(ctx,0,0,cv.width,cv.height,'#000');ctx.globalAlpha=1}
 }
-function loop(){if(!QK_HOST.hidden){update();render()}requestAnimationFrame(loop)}
+let lastT=0;function loop(now){const k=lastT?Math.min(3,(now-lastT)/16.667):1;lastT=now;if(!QK_HOST.hidden){update(k);render()}requestAnimationFrame(loop)}
 
 /* ================= DIALOGUE ================= */
 const dlg={open:false,q:[],cur:null,shown:0,cb:null,el:null};
@@ -1897,8 +1932,11 @@ addEventListener('keydown',e=>{
   if(e.code==='Space'||e.key==='Enter'||e.code==='KeyE'){e.preventDefault();if(!e.repeat)pressA();return}
   if(e.key==='Escape'||e.code==='KeyM'){openMenu()}
 });
-addEventListener('keyup',e=>{const k=KEYMAP[e.code]||KEYMAP[e.key];if(k)keys[k]=0});
-addEventListener('blur',clearKeys);
+addEventListener('keyup',e=>{if(e.key==='Shift')P.runHeld=false;const k=KEYMAP[e.code]||KEYMAP[e.key];if(k)keys[k]=0});
+addEventListener('keydown',e=>{if(QK_HOST.hidden)return;const t=((e.composedPath&&e.composedPath()[0])||e.target).tagName||'';if(/INPUT|SELECT|TEXTAREA/.test(t))return;if(e.key==='Shift')P.runHeld=true;if(e.code==='KeyR'&&!e.repeat&&!busy){setRun(!P.runToggle)}});
+function setRun(on){P.runToggle=on;const b=ROOT.querySelector('.ab .run');if(b)b.setAttribute('aria-pressed',on);toast(on?'Course activée':'Marche')}
+ROOT.querySelector('.ab .run').addEventListener('pointerdown',e=>{e.preventDefault();setRun(!P.runToggle)});
+addEventListener('blur',()=>{clearKeys();P.runHeld=false});
 ROOT.querySelectorAll('.dpad button').forEach(b=>{const k=b.dataset.k;
   b.addEventListener('pointerdown',e=>{e.preventDefault();if(busy)return;keys[k]=1;b.classList.add('held');b.setPointerCapture(e.pointerId)});
   ['pointerup','pointercancel','lostpointercapture'].forEach(ev=>b.addEventListener(ev,()=>{keys[k]=0;b.classList.remove('held')}))});
