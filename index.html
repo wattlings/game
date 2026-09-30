@@ -174,12 +174,31 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 .moves button:disabled{opacity:.45;cursor:default}
 /* title & evolution */
 .title-screen{position:fixed;inset:0;z-index:30;background:var(--desk);display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
-.title-box{max-width:560px;width:100%;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+.title-box{max-width:760px;width:100%;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
 .logo{font-family:var(--f-pix);font-weight:700;font-size:clamp(34px,8vw,58px);line-height:1;color:var(--amber);text-shadow:3px 3px 0 var(--flame),6px 6px 0 #0b1020;letter-spacing:.02em;text-wrap:balance}
 .logo small{display:block;font-size:.34em;color:var(--on-desk);text-shadow:none;margin-top:10px;letter-spacing:.12em;text-transform:uppercase}
 .title-box p{color:#b7bdd6;max-width:48ch;margin:0}
 .title-box input{font-family:var(--f-pix);font-size:18px;padding:8px 10px;border-radius:6px;border:2px solid #4a5588;background:#0f1424;color:var(--on-desk);text-align:center;width:220px}
 .title-box .btn{background:var(--amber);color:var(--ink)}
+.hud .saved{font-size:12px;color:#8fd19e;opacity:0;white-space:nowrap}
+.hud .saved.on{animation:svf 2.4s ease forwards}
+@keyframes svf{0%{opacity:0}12%{opacity:1}75%{opacity:1}100%{opacity:0}}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;text-align:left}
+@media (max-width:720px){.slots{grid-template-columns:1fr}}
+.slot{background:#1a223a;border:2px solid #3a4470;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.slot.cur{border-color:var(--amber)}
+.slot-h{display:flex;gap:10px;align-items:center}
+.slot-h canvas{width:44px;height:44px;image-rendering:pixelated;background:#7cc56a;border-radius:6px;border:2px solid #0b1020;flex:none}
+.slot b{font-family:var(--f-pix);font-size:16px;color:var(--on-desk)}
+.slot small{display:block;color:#b7bdd6;font-size:12.5px;line-height:1.35}
+.slot .stats{font-family:var(--f-pix);font-size:12.5px;color:var(--amber)}
+.slot .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.slot .acts .btn{font-size:13.5px;padding:6px 10px;margin:0}
+.slot .acts .btn.danger{background:transparent;color:#ff9a8a;border:2px solid #6b2a2a}
+.slot input{width:100%;font-size:15px;padding:6px 8px}
+.save-list{display:grid;gap:8px;margin:10px 0}
+.save-list div{background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:8px 10px;font-size:14px}
+.save-list div.cur{border-color:var(--amber)}
 .title-box .btn.alt{background:transparent;color:var(--on-desk);border-color:#4a5588}
 .ranks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-family:var(--f-pix);font-size:13px;color:#9aa3c4}
 .ranks span{border:1px solid #39426a;border-radius:4px;padding:2px 8px}
@@ -316,6 +335,7 @@ button,input,select{font:inherit}
     <div class="xpbar" title="Expérience"><i id="hudXp"></i></div>
     <div class="badges" id="hudBadges" aria-label="Badges"></div>
     <button id="sndBtn" type="button" aria-pressed="true">♪ Son</button>
+    <span class="saved" id="hudSaved" aria-live="polite"></span>
     <button id="menuBtn" type="button">Menu</button>
   </div>
   <div class="screen-wrap" id="wrap">
@@ -520,8 +540,18 @@ const RANKS=['Gestionnaire de site','Energy Manager','Gestionnaire de patrimoine
 const BADGES=['Cadrer','Collecter','Fiabiliser','Structurer','Analyser','Détecter','Agir','Piloter'];
 const DEF=()=>({ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,secrets:{},maxCh:0,sobriete:false});
 let S=DEF();
-function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(S))}catch(e){}}
-function loadSave(){try{const r=localStorage.getItem(SAVE_KEY);return r?JSON.parse(r):null}catch(e){return null}}
+/* 3 emplacements de sauvegarde dans le navigateur */
+const SLOT_N=3,SLOT_KEY=n=>'wattlings-slot-'+n,ACTIVE_KEY='wattlings-active';
+let SLOT=1;try{SLOT=Math.min(SLOT_N,Math.max(1,+localStorage.getItem(ACTIVE_KEY)||1))}catch(e){}
+function readSlot(n){try{const r=localStorage.getItem(SLOT_KEY(n));return r?JSON.parse(r):null}catch(e){return null}}
+function setSlot(n){SLOT=n;try{localStorage.setItem(ACTIVE_KEY,String(n))}catch(e){}}
+let saveOK=true;
+function save(){S.savedAt=Date.now();try{localStorage.setItem(SLOT_KEY(SLOT),JSON.stringify(S));localStorage.setItem(ACTIVE_KEY,String(SLOT));saveOK=true}catch(e){saveOK=false}if(typeof savedFlash==='function')savedFlash()}
+function loadSave(){return readSlot(SLOT)}
+try{if(!readSlot(1)){const old=localStorage.getItem(SAVE_KEY);if(old)localStorage.setItem(SLOT_KEY(1),old)}}catch(e){}
+const fmtDate=ts=>ts?new Date(ts).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
+function restartStory(){const k={name:S.name,av:S.av,secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees};S=Object.assign(DEF(),k);save()}
+let lastFlash=0;function savedFlash(){const el=typeof ROOT!=='undefined'&&ROOT.getElementById&&ROOT.getElementById('hudSaved');if(!el)return;const n=Date.now();if(n-lastFlash<2500)return;lastFlash=n;el.textContent=saveOK?'✓ Sauvegardé':'⚠ Sauvegarde impossible';el.classList.remove('on');void el.offsetWidth;el.classList.add('on')}
 const $=id=>ROOT.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=n=>Number(n).toLocaleString('fr-FR');
@@ -1229,13 +1259,15 @@ function openChapterSelect(){
   const c=document.createElement('button');c.className='btn alt';c.textContent='Annuler';c.onclick=closePanel;b.appendChild(c);
 }
 function jumpTo(ch,sid){
-  const s=SITES[sid];
+  const s=SITES[sid],keep={badges:(S.badges||[]).slice(),fiches:Object.assign({},S.fiches),dex:Object.assign({},S.dex),xp:S.xp||0,rank:S.rank||0};
   S.site=sid;S.ch=ch;S.notes={};S.flags={pmIntro:ch>=10?1:0};S.fiches={};FICHES.forEach(f=>{if(STEP_CH[f.st]<ch)S.fiches[f.id]=1});S.pm=ch>=11?6:0;S.derives={};S.dex={};
   if(ch>=2){S.notes.adresse=`${s.addr}, ${s.cp}`;S.notes.surface=s.surface;S.notes.activite=s.activite}
   if(ch>=3){S.notes.pdl=s.pdl;S.notes.pce=s.pce;Object.assign(S.flags,{elec:true,gas:true,sub:true})}
   if(ch>=5)ANOM.forEach(a=>S.dex[a.id]=1);
   S.badges=BADGES.slice(0,Math.max(0,Math.min(8,ch-2)));
   S.rank=ch>=10?2:ch>=6?1:0;S.xp=XPMIN[ch];
+  // la collection déjà gagnée n'est jamais perdue
+  S.badges=BADGES.filter(b=>S.badges.includes(b)||keep.badges.includes(b));S.fiches=Object.assign(keep.fiches,S.fiches);S.dex=Object.assign(keep.dex,S.dex);S.rank=Math.max(S.rank,keep.rank);S.xp=Math.max(S.xp,keep.xp);
   const b=BLD.find(x=>x.id===sid);let pos;
   if([1].includes(ch))pos=['town',6,9,'down'];else if(ch===2||ch===7)pos=['town',b.door[0],b.door[1]+1,'up'];else if(ch===4)pos=['town',8,13,'down'];else if(ch===10)pos=['town',28,29,'up'];else if(ch===11)pos=['town',18,12,'down'];else pos=['office',5,6,'up'];
   S.map=pos[0];S.x=pos[1];S.y=pos[2];S.dir=pos[3];save();
@@ -1935,6 +1967,7 @@ function gameFinale(){
 
 /* ================= ÉVOLUTION, FIN, TITRE, MENU ================= */
 function evolve(rank,cb){
+  if(S.rank>=rank){hud();if(cb)cb();return}
   busy=true;clearKeys();const old=S.rank;
   jingle('evo');const ov=document.createElement('div');ov.className='evo';ov.innerHTML=`<div class="t">Quoi ? ${esc(S.name)}, ${RANKS[old]}, évolue !</div><canvas width="20" height="20" aria-hidden="true"></canvas><div class="row" style="justify-content:center"></div>`;
   $('layer').appendChild(ov);const c=ov.querySelector('canvas'),x=c.getContext('2d'),t=ov.querySelector('.t');let n=0,start=performance.now();
@@ -1948,13 +1981,13 @@ function evolve(rank,cb){
 function endScreen(){
   const ov=openPanel('Quête terminée'),b=ov.querySelector('.pbody');
   b.innerHTML=`<h3>Diplôme de l'Energy Management par la donnée</h3><p><b>${esc(S.name)}</b>, ${RANKS[S.rank]}, niveau ${level()}.</p><p>Tu as parcouru les 8 étapes de la démarche sur ${esc(site().name)}, puis tu as pris en main un patrimoine entier.</p><div class="tbl"><table><tr><th>Étape</th><th>Ce que tu sais faire</th></tr>
-  <tr><td>Cadrer</td><td>Périmètre, fiche patrimoine, PDL et PCE, plan de comptage</td></tr><tr><td>Collecter</td><td>Distributeur ≠ fournisseur, mandats, consentement</td></tr><tr><td>Fiabiliser</td><td>Doublons, trous, pics, index, bouclage, unités, heure</td></tr><tr><td>Structurer</td><td>Site → point → compteur → mesure, kW → kWh, m³ → kWh</td></tr><tr><td>Analyser</td><td>Talon, DJU, signature, puissance souscrite, ratios</td></tr><tr><td>Détecter</td><td>Dérives, baseline, faux positifs, coût d'une dérive</td></tr><tr><td>Agir</td><td>Sobriété → efficacité → production, temps de retour</td></tr><tr><td>Patrimoine</td><td>Pareto en MWh, € et CO₂, comparaison par activité, benchmark, gisements</td></tr><tr><td>Piloter</td><td>M&V corrigée des DJU, décret tertiaire, OPERAT, ISO 50001</td></tr></table></div><div class="row"><button class="btn" id="endStay">Continuer à explorer</button><button class="btn alt" id="endNew">Rejouer avec un autre site</button></div>`;
-  b.querySelector('#endStay').onclick=closePanel;b.querySelector('#endNew').onclick=()=>{const nm=S.name;S=DEF();S.name=nm;save();closePanel();boot()};
+  <tr><td>Cadrer</td><td>Périmètre, fiche patrimoine, PDL et PCE, plan de comptage</td></tr><tr><td>Collecter</td><td>Distributeur ≠ fournisseur, mandats, consentement</td></tr><tr><td>Fiabiliser</td><td>Doublons, trous, pics, index, bouclage, unités, heure</td></tr><tr><td>Structurer</td><td>Site → point → compteur → mesure, kW → kWh, m³ → kWh</td></tr><tr><td>Analyser</td><td>Talon, DJU, signature, puissance souscrite, ratios</td></tr><tr><td>Détecter</td><td>Dérives, baseline, faux positifs, coût d'une dérive</td></tr><tr><td>Agir</td><td>Sobriété → efficacité → production, temps de retour</td></tr><tr><td>Patrimoine</td><td>Pareto en MWh, € et CO₂, comparaison par activité, benchmark, gisements</td></tr><tr><td>Piloter</td><td>M&V corrigée des DJU, décret tertiaire, OPERAT, ISO 50001</td></tr></table></div><div class="row"><button class="btn" id="endStay">Continuer à explorer</button><button class="btn alt" id="endNew">Rejouer avec un autre site (collection conservée)</button></div>`;
+  b.querySelector('#endStay').onclick=closePanel;b.querySelector('#endNew').onclick=()=>{restartStory();closePanel();boot()};
 }
 function openMenu(){
   if(busy||dlg.open)return;
   const ov=openPanel('Menu'),b=ov.querySelector('.pbody'),s=S.site?site():null;
-  b.innerHTML=`<div class="menu-tabs"><button data-t="carnet" class="on">Carnet</button><button data-t="badges">Badges</button><button data-t="classeur">Classeur</button><button data-t="dex">Anomalidex</button><button data-t="sec">Secrets</button><button data-t="etapes">Étapes</button><button data-t="avatar">Avatar</button><button data-t="opt">Partie</button></div><div id="mt"></div><button class="btn" id="mClose">Fermer</button>`;
+  b.innerHTML=`<div class="menu-tabs"><button data-t="carnet" class="on">Carnet</button><button data-t="badges">Badges</button><button data-t="classeur">Classeur</button><button data-t="dex">Anomalidex</button><button data-t="sec">Secrets</button><button data-t="etapes">Étapes</button><button data-t="avatar">Avatar</button><button data-t="save">Sauvegarde</button><button data-t="opt">Partie</button></div><div id="mt"></div><button class="btn" id="mClose">Fermer</button>`;
   const mt=b.querySelector('#mt');
   const tabs={
     carnet:()=>s?`<h3>${esc(s.name)}</h3><div class="tbl"><table>
@@ -1971,40 +2004,50 @@ function openMenu(){
     sec:()=>`<p>${Object.keys(S.secrets).length}/${NSEC} secrets trouvés. Explore, parle à tout le monde, examine tout (et pas seulement les compteurs).</p><div class="dex">${Object.entries(SECRETS).map(([k,v])=>`<div class="${S.secrets[k]?'':'unk'}">${S.secrets[k]?'<b>'+esc(v)+'</b>':'???'}</div>`).join('')}</div>`,
     etapes:()=>`<div id="chl"></div>`,
     avatar:()=>`<p>Change de tête, de coiffure ou de tenue quand tu veux. Le casque et la veste arrivent avec les promotions.</p><button class="btn" id="avEdit">Modifier mon avatar</button>`,
-    opt:()=>`<p>La partie est sauvegardée automatiquement dans ce navigateur.</p><div class="row"><button class="btn" id="sndT">${AUD.on?'Couper la musique':'Activer la musique'}</button><button class="btn alt" id="rst">Recommencer depuis le début</button></div><div id="rstc"></div>`
+    save:()=>`<p>Emplacement <b>${SLOT}</b> · dernière sauvegarde : <b>${fmtDate(S.savedAt)}</b>.</p><p>Le jeu sauvegarde tout seul à chaque progrès, dans ce navigateur. Ta collection (badges, secrets, fiches, Anomalidex, XP) est conservée même si tu rejoues une étape.</p><div class="row"><button class="btn" id="svNow">Sauvegarder maintenant</button><button class="btn alt" id="svSlots">Changer d'emplacement</button></div><div id="svMsg"></div><div class="save-list">${[1,2,3].map(n=>{const v=n===SLOT?S:readSlot(n);return `<div class="${n===SLOT?'cur':''}"><b>Emplacement ${n}${n===SLOT?' (en cours)':''}</b><br>${v&&v.site?`${esc(v.name)} · ${RANKS[v.rank||0]} · ${esc(CHAPTERS[v.ch]||'')}<br>${(v.badges||[]).length}/8 badges · ${Object.keys(v.secrets||{}).length}/${NSEC} secrets · ${Object.keys(v.fiches||{}).length}/${FICHES.length} fiches · ${fmtDate(v.savedAt)}`:'Vide'}</div>`}).join('')}</div>`,
+    opt:()=>`<p>La partie est sauvegardée automatiquement dans ce navigateur.</p><div class="row"><button class="btn" id="sndT">${AUD.on?'Couper la musique':'Activer la musique'}</button><button class="btn alt" id="rst">Recommencer l'histoire</button></div><div id="rstc"></div>`
   };
   const show=k=>{b.querySelectorAll('.menu-tabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===k));mt.innerHTML=tabs[k]();
     if(k==='dex'){const g=mt.querySelector('#dexg');ANOM.forEach(a=>{const d=document.createElement('div');const got=S.dex[a.id];if(!got)d.className='unk';d.appendChild(monCanvas(got?a:{...a,col:'#999',sym:'?'},40));d.insertAdjacentHTML('beforeend',`<br><b>${got?a.name:'???'}</b><br>${got?esc(a.data):''}`);g.appendChild(d)})}
     if(k==='classeur')mt.querySelectorAll('[data-h]').forEach(x=>x.onclick=()=>{closePanel();goCourse(x.dataset.h)});
     if(k==='etapes')chapterList(mt.querySelector('#chl'),(ch,sid)=>{closePanel();jumpTo(ch,sid)});
     if(k==='avatar')mt.querySelector('#avEdit').onclick=()=>{closePanel();openAvatar()};
+    if(k==='save'){mt.querySelector('#svNow').onclick=()=>{save();mt.querySelector('#svMsg').innerHTML=saveOK?`<div class="fb ok">✔ Partie sauvegardée (emplacement ${SLOT}, ${fmtDate(S.savedAt)}).</div>`:'<div class="fb ko">✘ Le navigateur refuse la sauvegarde (navigation privée ou stockage bloqué).</div>';lastFlash=0;savedFlash()};mt.querySelector('#svSlots').onclick=()=>{save();closePanel();titleScreen()}}
     if(k==='opt')mt.querySelector('#sndT').onclick=e=>{setSound(!AUD.on);e.target.textContent=AUD.on?'Couper la musique':'Activer la musique'};
-    if(k==='opt')mt.querySelector('#rst').onclick=()=>{mt.querySelector('#rstc').innerHTML='<p><b>Toute ta progression sera effacée.</b></p><button class="btn" id="rstOk" style="background:var(--bad)">Oui, tout effacer</button>';mt.querySelector('#rstOk').onclick=()=>{S=DEF();save();closePanel();titleScreen()}}};
+    if(k==='opt')mt.querySelector('#rst').onclick=()=>{mt.querySelector('#rstc').innerHTML='<p>L\'histoire repart du début. Tes badges, secrets, fiches, ton Anomalidex et ton XP sont conservés.</p><button class="btn" id="rstOk">Recommencer l\'histoire</button>';mt.querySelector('#rstOk').onclick=()=>{restartStory();closePanel();boot()}}};
   b.querySelectorAll('.menu-tabs button').forEach(x=>x.onclick=()=>show(x.dataset.t));show('carnet');
   b.querySelector('#mClose').onclick=closePanel;
 }
 function titleScreen(){
-  busy=true;const sv=loadSave(),has=!!(sv&&sv.site);
+  busy=true;
   const ov=document.createElement('div');ov.className='title-screen';
+  const card=n=>{const v=readSlot(n);
+    if(v&&v.site)return `<div class="slot${n===SLOT?' cur':''}" data-n="${n}"><div class="slot-h"><canvas width="20" height="20" data-av="${n}"></canvas><div><b>${esc(v.name||'Alex')}</b><small>Emplacement ${n} · ${RANKS[v.rank||0]} · Nv ${Math.floor((v.xp||0)/90)+1}</small></div></div>
+      <small>${esc(SITES[v.site]?SITES[v.site].name:'')} · ${esc(CHAPTERS[v.ch]||'')}</small>
+      <span class="stats">${(v.badges||[]).length}/8 badges · ${Object.keys(v.secrets||{}).length}/${NSEC} secrets · ${Object.keys(v.fiches||{}).length}/${FICHES.length} fiches</span>
+      <small>Sauvegardé le ${fmtDate(v.savedAt)}</small>
+      <div class="acts"><button class="btn" data-a="cont">Continuer</button><button class="btn alt" data-a="chap">Choisir une étape</button><button class="btn alt" data-a="restart">Recommencer l'histoire</button><button class="btn danger" data-a="erase">Effacer</button></div></div>`;
+    return `<div class="slot empty" data-n="${n}"><b>Emplacement ${n}</b><small>Vide</small><label for="pn${n}" class="sr-only" style="font-size:12.5px;color:#b7bdd6">Ton prénom</label><input id="pn${n}" maxlength="14" value="" placeholder="Ton prénom"><div class="acts"><button class="btn" data-a="new">Nouvelle partie</button><button class="btn alt" data-a="newchap">Commencer à une étape</button></div></div>`};
   ov.innerHTML=`<div class="title-box"><div class="logo">Wattlings<small>Energy management par la donnée</small></div>
-  <canvas width="60" height="22" style="width:240px;image-rendering:pixelated" aria-hidden="true"></canvas>
   <p>Tu es gestionnaire de site et tu ne connais rien à l'énergie. Explore, trouve les compteurs, signe les mandats, dompte les anomalies… et deviens gestionnaire de patrimoine.</p>
-  <div class="ranks"><span>Gestionnaire de site</span><span>→ Energy Manager</span><span>→ Gestionnaire de patrimoine</span></div>
-  <label for="pname" style="font-family:var(--f-pix)">Ton prénom</label><input id="pname" maxlength="14" value="${esc((sv&&sv.name)||S.name||'Alex')}">
-  <div class="row" style="justify-content:center">${has?`<button class="btn" id="tCont">Continuer · ${esc(CHAPTERS[sv.ch]||'')}</button>`:''}<button class="btn${has?' alt':''}" id="tNew">Nouvelle partie</button><button class="btn alt" id="tChap">Choisir une étape</button></div>
-  <p style="font-size:13px">Le son est coupé par défaut. Active la musique avec le bouton ♪ en haut du jeu.</p></div>`;
+  <div class="slots">${[1,2,3].map(card).join('')}</div>
+  <p style="font-size:13px">Sauvegarde automatique dans ce navigateur, 3 emplacements. Le son est coupé par défaut : active-le avec le bouton ♪ en haut du jeu.</p></div>`;
   $('layer').appendChild(ov);updateMusic();
-  const c=ov.querySelector('canvas'),x=c.getContext('2d');R(x,0,0,60,22,'#131a2b');[0,1,2].forEach(r=>drawChar(x,4+r*20,3,'down',0,avPal(r,sv&&sv.av)));
-  const nm=()=>(ov.querySelector('#pname').value||'Alex').trim().slice(0,14)||'Alex';
+  ov.querySelectorAll('canvas[data-av]').forEach(c=>{const v=readSlot(+c.dataset.av);drawChar(c.getContext('2d'),2,3,'down',0,avPal(v.rank||0,v.av||AVDEF('h')))});
   const leave=()=>{ov.remove();busy=false};
-  ov.querySelector('#tNew').onclick=()=>{const n=nm();S=DEF();S.name=n;save();leave();openAvatar(()=>boot())};
-  if(has)ov.querySelector('#tCont').onclick=()=>{const n=nm();S=Object.assign(DEF(),sv);S.name=n;save();leave();if(!S.av)openAvatar(()=>boot());else boot()};
-  ov.querySelector('#tChap').onclick=()=>{const n=nm();S=Object.assign(DEF(),sv||{});S.name=n;save();leave();
-    const pick=()=>{const o2=openPanel('Choisir une étape'),b=o2.querySelector('.pbody'),inner=document.createElement('div');b.appendChild(inner);
-      chapterList(inner,(ch,sid)=>{closePanel();jumpTo(ch,sid)});
-      const cc=document.createElement('button');cc.className='btn alt';cc.textContent='Retour';cc.onclick=()=>{closePanel();titleScreen()};b.appendChild(cc)};
-    if(!S.av)openAvatar(pick);else pick()};
-  (ov.querySelector('#tCont')||ov.querySelector('#tNew')).focus();
+  const pick=()=>{const o2=openPanel('Choisir une étape'),b=o2.querySelector('.pbody'),inner=document.createElement('div');b.appendChild(inner);
+    chapterList(inner,(ch,sid)=>{closePanel();jumpTo(ch,sid)});
+    const cc=document.createElement('button');cc.className='btn alt';cc.textContent='Retour';cc.onclick=()=>{closePanel();titleScreen()};b.appendChild(cc)};
+  ov.querySelectorAll('.slot').forEach(el=>{const n=+el.dataset.n;
+    el.querySelectorAll('[data-a]').forEach(btn=>btn.onclick=()=>{const a=btn.dataset.a;
+      if(a==='new'||a==='newchap'){const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';setSlot(n);S=DEF();S.name=nm;save();leave();a==='new'?openAvatar(()=>boot()):openAvatar(pick);return}
+      if(a==='erase'){if(btn.dataset.ok){try{localStorage.removeItem(SLOT_KEY(n))}catch(e){}ov.remove();titleScreen()}else{btn.dataset.ok=1;btn.textContent='Confirmer : tout effacer'}return}
+      setSlot(n);S=Object.assign(DEF(),readSlot(n));
+      if(a==='cont'){leave();if(!S.av)openAvatar(()=>boot());else boot()}
+      if(a==='chap'){leave();pick()}
+      if(a==='restart'){if(btn.dataset.ok){restartStory();leave();boot()}else{btn.dataset.ok=1;btn.textContent='Confirmer (collection gardée)'}}
+    })});
+  const f=ov.querySelector('.slot.cur [data-a=cont]')||ov.querySelector('[data-a=cont]')||ov.querySelector('.slot input');if(f)f.focus();
 }
 
 /* ================= ENTRÉES ================= */
