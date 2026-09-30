@@ -85,8 +85,9 @@ canvas#screen{display:block;width:100%;height:auto;image-rendering:pixelated;ima
 .objective b{color:var(--amber);font-weight:600}
 .keys{font-size:12.5px;color:#9aa3c4;text-align:center}
 /* dialog */
-.dialog{position:absolute;left:2%;right:2%;bottom:3%;background:var(--paper);color:var(--text);border:4px double var(--ink);border-radius:6px;padding:10px 14px 12px;font-family:var(--f-pix);font-size:clamp(13px,2.6vw,18px);line-height:1.35;min-height:28%;box-shadow:0 3px 0 rgba(0,0,0,.35)}
-.dialog .spk{position:absolute;top:-14px;left:12px;background:var(--ink);color:var(--paper);font-size:.8em;padding:1px 8px;border-radius:3px}
+.dialog{position:absolute;left:2%;right:2%;bottom:3%;background:var(--paper);color:var(--text);border:4px double var(--ink);border-radius:6px;padding:10px 14px 12px;font-family:var(--f-pix);font-size:16px;line-height:1.3;height:30%;min-height:78px;max-height:260px;overflow-wrap:break-word;box-shadow:0 3px 0 rgba(0,0,0,.35)}
+.dialog .dtx{height:100%;overflow:hidden;padding-right:10px}
+.dialog .spk{font-size:13px!important;z-index:1;position:absolute;top:-14px;left:12px;background:var(--ink);color:var(--paper);font-size:.8em;padding:1px 8px;border-radius:3px}
 .dialog .more{position:absolute;right:10px;bottom:4px;animation:blink 1s steps(2) infinite;color:var(--flame)}
 @keyframes blink{50%{opacity:0}}
 .toast{position:fixed;z-index:60;top:calc(env(safe-area-inset-top,0px) + 12px);left:50%;transform:translateX(-50%);background:var(--amber);color:var(--ink);font-family:var(--f-pix);font-weight:700;padding:4px 12px;border-radius:4px;border:2px solid var(--ink);white-space:nowrap;font-size:clamp(12px,2.4vw,16px);pointer-events:none;animation:pop 1.7s forwards}
@@ -271,7 +272,7 @@ button,input,select{font:inherit}
 .qk-app.app canvas#screen{position:absolute;left:0;top:0}
 .qk-app.app .objective{font-size:13px;padding:4px 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .qk-app.app .keys{display:none}
-.qk-app.app .dialog{font-size:clamp(13px,2.2vmin + 6px,22px)}
+.qk-app.app .dialog{height:32%}
 @media (orientation:landscape) and (pointer:coarse){
   .qk-app.app .console{grid-template-rows:auto minmax(0,1fr) auto}
   .qk-app.app .qk-top{position:absolute;top:calc(env(safe-area-inset-top,0px) + 4px);right:calc(env(safe-area-inset-right,0px) + 8px);width:auto;padding:0;z-index:5}
@@ -279,7 +280,8 @@ button,input,select{font:inherit}
   .qk-app.app .qk-top button{font-size:12px;padding:2px 8px;background:rgba(19,26,43,.85)}
   .qk-app.app #qkFs{background:rgba(19,26,43,.85)}
   .qk-app.app .console{padding-top:4px}
-  .qk-app.app .hud{padding-right:min(46vw,330px)}
+  .qk-app.app .hud{padding-right:280px}
+  .qk-app.app .hud .rank{display:none}
   .qk-app.app .hud .xpbar,.qk-app.app .hud .badges{display:none}
   .qk-app.app .objective{-webkit-line-clamp:1}
   .qk-app.app .pad{position:absolute;left:10px;right:10px;bottom:36px;pointer-events:none;padding:0}
@@ -287,7 +289,7 @@ button,input,select{font:inherit}
   .qk-app.app .dpad{grid-template-columns:repeat(3,46px);grid-template-rows:repeat(3,46px)}
   .qk-app.app .ab button{width:56px;height:56px}
   .qk-app.app .ab{position:relative}
-  .qk-app.app .dialog{left:168px;right:150px;min-height:0}
+  .qk-app.app .dialog{left:168px;right:150px;height:40%;min-height:70px}
   .qk-app.app .ab .run{position:absolute;right:0;bottom:64px;width:auto;height:34px}
 }
 
@@ -936,9 +938,9 @@ function windStep(){
     else if(P.pushMsg==='gust'){P.pushMsg=null;toast('Une rafale te repousse !')}
     return true}
   if(!inCorridor()){if(P.x<48)WIND.told=false;
-    const m=MACHINE,d=Math.max(Math.abs(P.x-m.x-.5)-.5,Math.abs(P.y-m.y));if(d<=2.2&&!P.machineSeen){P.machineSeen=true;setTimeout(actMachine,60);return true}if(d>5)P.machineSeen=false;
+    
     return false}
-  const m=MACHINE,d=Math.max(Math.abs(P.x-m.x-.5)-.5,Math.abs(P.y-m.y));if(d<=2.2&&!P.machineSeen){P.machineSeen=true;setTimeout(actMachine,60);return true}if(d>5)P.machineSeen=false;
+  
   if(!WIND.told){WIND.told=true;toast('Le vent se lève…')}
   if(P.x>=55){pushBack(50,'big');return true}
   if(P.x>=52&&P.dir==='right'&&Math.random()<.4){pushBack(Math.max(50,P.x-2),'gust');return true}
@@ -995,11 +997,20 @@ function nextLine(){
   if(!dlg.q.length){dlg.open=false;if(dlg.el){dlg.el.remove();dlg.el=null}const cb=dlg.cb;dlg.cb=null;if(cb)setTimeout(cb,30);return}
   dlg.cur=dlg.q.shift();dlg.shown=0;
   if(!dlg.el){dlg.el=document.createElement('div');dlg.el.className='dialog';dlg.el.addEventListener('click',pressA);$('wrap').appendChild(dlg.el)}
-  const txt=dlg.cur.t.replace(/\{name\}/g,S.name);dlg.cur.full=txt;typeTick();
+  const txt=dlg.cur.t.replace(/\{name\}/g,S.name);dlg.cur.full=txt;fitDialog();typeTick();
 }
+/* taille du texte ajustée pour remplir la boîte de dialogue avec la réplique complète */
+function fitDialog(){
+  const el=dlg.el,c=dlg.cur;if(!el||!c)return;
+  el.innerHTML=(c.w?`<span class="spk">${esc(c.w)}</span>`:'')+`<div class="dtx">${esc(c.full)}</div>`+'<span class="more">▼</span>';
+  const t=el.querySelector('.dtx'),hMax=Math.min(32,Math.max(14,t.clientHeight*.3));let lo=10,hi=hMax;
+  for(let i=0;i<9;i++){const m=(lo+hi)/2;t.style.fontSize=m+'px';if(t.scrollHeight<=t.clientHeight+1&&t.scrollWidth<=t.clientWidth+1)lo=m;else hi=m}
+  dlg.fs=Math.floor(lo*2)/2;
+}
+addEventListener('resize',()=>{if(dlg.open&&dlg.el){fitDialog();typeTick()}});
 function typeTick(){
   if(!dlg.open||!dlg.el)return;const c=dlg.cur;dlg.shown=Math.min(c.full.length,dlg.shown+2);
-  dlg.el.innerHTML=(c.w?`<span class="spk">${esc(c.w)}</span>`:'')+esc(c.full.slice(0,dlg.shown))+(dlg.shown>=c.full.length?'<span class="more">▼</span>':'');
+  dlg.el.innerHTML=(c.w?`<span class="spk">${esc(c.w)}</span>`:'')+`<div class="dtx" style="font-size:${dlg.fs||16}px">${esc(c.full.slice(0,dlg.shown))}</div>`+(dlg.shown>=c.full.length?'<span class="more">▼</span>':'');
   if(dlg.shown<c.full.length){sfx('blip');setTimeout(typeTick,16)}
 }
 function pressA(){
