@@ -40,6 +40,9 @@ html.qk-lock{overflow:hidden}
 .qk-seg button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .nav a.qk-nav-p[aria-current=page]{background:var(--surface);border-color:var(--line);font-weight:700}
 
+.qk-privacy{margin:40px 0 72px;font-size:var(--t-xs);color:var(--muted);max-width:70ch}
+.qk-privacy button{font:inherit;color:var(--data-ink);background:none;border:0;text-decoration:underline;cursor:pointer;padding:0}
+
 </style>
 </head>
 <body>
@@ -358,12 +361,89 @@ button,input,select{font:inherit}
 </template>
 <div id="qk-host" hidden></div>
 <script>
+/* ==== SUIVI D'AUDIENCE : colle ici l'URL et la clé publishable de ton projet Supabase ==== */
+window.WATTLINGS_TRACKING={url:"https://vhcccjyyjxbtyokpuaas.supabase.co",key:"sb_publishable_lq1UM8yiJZka9FEy0CvU1A_2D5PSWLf"};
+</script>
+<script>
 /* ===== La Quête du Kilowatt : le jeu vit dans un shadow DOM pour ne pas se mélanger au cours ===== */
 const QK_HOST=document.getElementById('qk-host');
 const ROOT=QK_HOST.attachShadow({mode:'open'});
 ROOT.appendChild(document.getElementById('qk-tpl').content.cloneNode(true));
 const CH2HASH=['accueil','etape-1','etape-1-comprendre','etape-2','etape-3','etape-4','etape-5','etape-6','etape-7','etape-8','patrimoine','quiz-final'];
 const STEP_T=['','Cadrer','Collecter','Fiabiliser','Structurer','Analyser','Détecter','Agir','Mesurer'];
+/* ================= SUIVI D'AUDIENCE ANONYME (Supabase) =================
+   Aucun cookie, aucune donnée personnelle : un identifiant aléatoire (13 mois) par navigateur.
+   Ne fait rien tant que window.WATTLINGS_TRACKING n'est pas renseigné, en navigation « Ne pas me pister »,
+   après un clic sur « Ne pas me compter », ou hors d'un site web (fichier local, aperçu claude.ai). */
+const TRK=(function(){
+  const cfg=window.WATTLINGS_TRACKING||{},LS={vid:'wattlings-vid',opt:'wattlings-ne-pas-compter',last:'wattlings-last'};
+  const get=k=>{try{return localStorage.getItem(k)}catch(e){return null}},set=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+  const rnd=n=>{const a=new Uint8Array(n);(crypto||window.msCrypto).getRandomValues(a);return [...a].map(b=>(b%36).toString(36)).join('')};
+  const dnt=()=>navigator.doNotTrack==='1'||window.doNotTrack==='1'||navigator.globalPrivacyControl===true;
+  const host=location.hostname||'';
+  const webOK=/^https?:$/.test(location.protocol)&&!/claude|anthropic|localhost|127\.0\.0\.1/.test(host);
+  const optedOut=()=>get(LS.opt)==='1';
+  const active=()=>!!(cfg.url&&cfg.key)&&webOK&&!dnt()&&!optedOut();
+  function vid(){let v=null;try{v=JSON.parse(get(LS.vid)||'null')}catch(e){}
+    if(!v||!v.id||Date.now()-v.t>396*864e5){v={id:rnd(20),t:Date.now()};set(LS.vid,JSON.stringify(v))}return v.id}
+  let sid=null,first=false;
+  function session(){const now=Date.now(),last=+get(LS.last)||0;let s=null;try{s=sessionStorage.getItem('wattlings-sid')}catch(e){}
+    if(!s||now-last>30*6e4){s=rnd(14);first=true;try{sessionStorage.setItem('wattlings-sid',s)}catch(e){}}
+    set(LS.last,String(now));sid=s;return s}
+  const device=()=>{const w=Math.min(screen.width||innerWidth,innerWidth||9999),coarse=matchMedia('(pointer:coarse)').matches;return coarse?(w>=700?'tablet':'mobile'):(w<700?'mobile':'desktop')};
+  const page=()=>{const h=decodeURIComponent(location.hash.slice(1));return(h&&!/^g-/.test(h)?h:'accueil').slice(0,80)};
+  let q=[],timer=null;
+  function send(opts){if(!q.length||!active())return;const rows=q.splice(0,50);
+    try{fetch(cfg.url.replace(/\/$/,'')+'/rest/v1/events',{method:'POST',keepalive:!!(opts&&opts.beacon),
+      headers:{'apikey':cfg.key,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(rows)}).catch(()=>{})}catch(e){}}
+  function track(name,props){
+    if(!active())return;
+    const s=session(),row={vid:vid(),sid:s,name,page:page(),device:device(),lang:(navigator.language||'').slice(0,12),props:Object.assign({},props||{})};
+    if(first){first=false;row.props.first=true;try{const r=document.referrer&&new URL(document.referrer).hostname;row.ref=(r&&r!==host?r:'').slice(0,120)}catch(e){row.ref=''}}
+    for(const k in row.props){const v=row.props[k];if(typeof v==='string')row.props[k]=v.slice(0,120)}
+    q.push(row);clearTimeout(timer);timer=setTimeout(send,4000);if(q.length>=20)send();
+  }
+  addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'){readFlush();send({beacon:true})}});
+  addEventListener('pagehide',()=>{readFlush();send({beacon:true})});
+  /* ---- lien secret : https://…/#ne-pas-compter exclut définitivement ce navigateur ---- */
+  function optCheck(){if(location.hash==='#ne-pas-compter'){set(LS.opt,'1');history.replaceState(null,'',location.pathname+location.search+'#accueil');dispatchEvent(new HashChangeEvent('hashchange'));notice('Ce navigateur n’est plus compté dans les statistiques.')}}
+  function notice(t){const d=document.createElement('div');d.textContent=t;d.style.cssText='position:fixed;left:50%;top:16px;transform:translateX(-50%);z-index:2000;background:#0a1a33;color:#fff;padding:10px 16px;border-radius:10px;font:15px system-ui;box-shadow:0 6px 20px rgba(0,0,0,.3)';document.body.appendChild(d);setTimeout(()=>d.remove(),3500)}
+  /* ---- temps de lecture par page (temps visible uniquement) ---- */
+  let rp=page(),rt=0,rs=document.visibilityState==='visible'?Date.now():0;
+  function readFlush(){if(rs){rt+=Date.now()-rs;rs=document.visibilityState==='visible'?Date.now():0}const s=Math.round(rt/1000);if(s>=3&&rp!=='jeu')track('read_time',{p:rp,s});rt=0}
+  addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible')rs=Date.now();else if(rs){rt+=Date.now()-rs;rs=0}});
+  /* ---- cours : pages, onglets, démos, quiz, glossaire ---- */
+  let demoSeen=new Set();
+  function route(){optCheck();readFlush();rp=page();rs=document.visibilityState==='visible'?Date.now():0;demoSeen=new Set();if(!/^jeu/.test(rp))track('pageview')}
+  addEventListener('hashchange',route);
+  document.addEventListener('click',e=>{
+    const t=e.target.closest?e.target:null;if(!t)return;
+    const tab=t.closest('[data-niv]');if(tab){track('course_tab',{niv:tab.dataset.niv});return}
+    const term=t.closest('.terme[data-g]');if(term){track('glossary_open',{term:term.dataset.g});return}
+    const qb=t.closest('.quiz-choix button[data-c]');if(qb){const li=qb.closest('.quiz-q'),box=li&&li.closest('.quiz')&&li.closest('.quiz').parentElement,idx=li&&li.dataset.q,txt=(li&&li.querySelector('.quiz-enonce')||{}).textContent||'';
+      if(li&&!li.querySelector('.feedback'))setTimeout(()=>{const fb=box&&box.querySelector(`.quiz-q[data-q="${idx}"] .feedback`);if(fb)track('quiz_answer',{q:txt.replace(/^\d+/,'').trim().slice(0,100),ok:fb.classList.contains('ok')})},30);return}
+  },true);
+  const demoUse=e=>{const d=e.target.closest&&e.target.closest('section.demo');if(!d||d.classList.contains('quiz-bloc'))return;const h=(d.querySelector('h2')||{}).textContent||'démo';if(demoSeen.has(h))return;demoSeen.add(h);track('demo_use',{demo:h.trim().slice(0,90)})};
+  document.addEventListener('click',demoUse,true);document.addEventListener('input',demoUse,true);
+  /* ---- mention de confidentialité et interrupteur, en bas de chaque page du cours ---- */
+  function privacy(){if(!cfg.url||!webOK)return;const c=document.getElementById('contenu');if(!c||c.querySelector('.qk-privacy'))return;
+    const p=document.createElement('p');p.className='qk-privacy';
+    const render=()=>{p.innerHTML=optedOut()?'Mesure d’audience : ce navigateur n’est pas compté. <button type="button">Me compter à nouveau</button>':dnt()?'Mesure d’audience : désactivée par le réglage « Ne pas me pister » de ton navigateur.':'Mesure d’audience anonyme, sans cookie ni donnée personnelle, conservée 13 mois, réservée à l’auteur du site. <button type="button">Ne pas me compter</button>';
+      const b=p.querySelector('button');if(b)b.onclick=()=>{if(optedOut()){try{localStorage.removeItem(LS.opt)}catch(e){}}else{set(LS.opt,'1');q=[]}render()}};
+    render();c.appendChild(p)}
+  new MutationObserver(()=>privacy()).observe(document.documentElement,{childList:true,subtree:true});
+  optCheck();setTimeout(route,300);
+  return{track,active};
+})();
+function trk(name,props){try{TRK.track(name,props)}catch(e){}}
+/* suivi des chapitres du jeu : appelé à chaque mise à jour du bandeau */
+const TCH={last:null,t0:0,via:null};
+function trkChapter(){if(typeof S==='undefined'||!S.site||S.ch===TCH.last)return;
+  const now=Date.now();if(TCH.last!==null&&TCH.via!=='jump'&&S.ch>TCH.last)trk('chapter_end',{ch:TCH.last,site:S.site,s:Math.round((now-TCH.t0)/1000)});
+  trk('chapter_start',{ch:S.ch,site:S.site,via:TCH.via||(TCH.last===null?'reprise':'jeu')});TCH.last=S.ch;TCH.t0=now;TCH.via=null}
+const trkTxt=h=>String(h||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
+const panelTitle=()=>{try{return trkTxt(panelEl&&panelEl.querySelector('header span').textContent)}catch(e){return ''}};
+
 /* ================= FICHES SAVOIR : l'Essentiel du cours, éparpillé dans la ville ================= */
 const STEP_NAMES={0:'Le cycle',1:'Cadrer',2:'Collecter',3:'Fiabiliser',4:'Structurer',5:'Analyser',6:'Détecter',7:'Agir',8:'Mesurer',P:'Patrimoine'};
 const STEP_CH={0:0,1:1,2:3,3:4,4:5,5:6,6:7,7:8,8:9,P:10};
@@ -478,6 +558,7 @@ function srcAct(sid,fallback){return()=>{if(srcTry(sid))return;const s=SRC[sid];
   if(future&&s.who)idle.push({w:s.who,t:'Repasse me voir plus tard, j’aurai sûrement quelque chose pour toi.'});
   say(idle)}}
 function showFiche(f){
+  trk('fiche',{id:f.id,cle:!!f.req});
   S.fiches=S.fiches||{};S.fiches[f.id]=1;save();sfx('secret');
   const ov=openPanel('Nouvelle fiche savoir'),b=ov.querySelector('.pbody');
   const n=Object.keys(S.fiches).length;
@@ -938,9 +1019,9 @@ function windStep(){
     else if(P.pushMsg==='gust'){P.pushMsg=null;toast('Une rafale te repousse !')}
     return true}
   if(!inCorridor()){if(P.x<48)WIND.told=false;
-    
+
     return false}
-  
+
   if(!WIND.told){WIND.told=true;toast('Le vent se lève…')}
   if(P.x>=55){pushBack(50,'big');return true}
   if(P.x>=52&&P.dir==='right'&&Math.random()<.4){pushBack(Math.max(50,P.x-2),'gust');return true}
@@ -1024,6 +1105,7 @@ function pressA(){
 /* ================= HUD / XP ================= */
 const level=()=>Math.floor(S.xp/90)+1;
 function hud(){
+  trkChapter();
   S.maxCh=Math.max(S.maxCh||0,S.ch);updateMusic();
   $('hudName').textContent=S.name;$('hudRank').textContent=RANKS[S.rank];$('hudLvl').textContent='Nv '+level();
   $('hudXp').style.width=((S.xp%90)/90*100)+'%';
@@ -1033,7 +1115,7 @@ function hud(){
 let toastQ=[],toastOn=false;function toast(msg){toastQ.push(msg);if(!toastOn)nextToast()}
 function nextToast(){const msg=toastQ.shift();if(!msg){toastOn=false;return}toastOn=true;const t=document.createElement('div');t.className='toast';t.textContent=msg;ROOT.appendChild(t);setTimeout(()=>t.remove(),1700);setTimeout(nextToast,1750)}
 function gainXP(n){sfx('good');const before=level();S.xp+=n;save();hud();if(level()>before)setTimeout(()=>toast(`Niveau ${level()} !`),400);else toast(`+${n} XP`)}
-function badge(name){if(!S.badges.includes(name)){S.badges.push(name);S.xp+=60;save();hud();jingle('badge');toast(`Badge ${name} obtenu !`)}}
+function badge(name){if(!S.badges.includes(name)){trk('badge',{name});S.badges.push(name);S.xp+=60;save();hud();jingle('badge');toast(`Badge ${name} obtenu !`)}}
 function objectiveText(){
   const mr=missingReq();if(mr.length&&[1,2,3,4,5,6,7,8,9,10].includes(S.ch))return `Trouve ${mr.length} info${mr.length>1?'s':''} clé${mr.length>1?'s':''} (suis les flèches) : ${mr.map(f=>SRC[f.src].where).join(' ; ')}. `+objectiveText0();
   return objectiveText0();
@@ -1134,7 +1216,7 @@ function jingle(name,cb){
   AUD.cur=T;AUD.curName='#'+name;AUD.step=0;AUD.next=AUD.ctx.currentTime+.05;
 }
 function sndUI(){const b=ROOT.getElementById('sndBtn');if(b){b.textContent=AUD.on?'♪ Son':'♪ Muet';b.setAttribute('aria-pressed',AUD.on)}}
-function setSound(on){AUD.on=on;try{localStorage.setItem('wattlings-son',on?'on':'off')}catch(e){}if(on){audInit();if(AUD.ctx){AUD.ctx.resume();AUD.master.gain.setTargetAtTime(.5,AUD.ctx.currentTime,.05)}updateMusic()}else if(AUD.master){AUD.master.gain.setTargetAtTime(0,AUD.ctx.currentTime,.05);AUD.ctx.suspend()}sndUI()}
+function setSound(on){trk('setting',{k:'son',v:on});AUD.on=on;try{localStorage.setItem('wattlings-son',on?'on':'off')}catch(e){}if(on){audInit();if(AUD.ctx){AUD.ctx.resume();AUD.master.gain.setTargetAtTime(.5,AUD.ctx.currentTime,.05)}updateMusic()}else if(AUD.master){AUD.master.gain.setTargetAtTime(0,AUD.ctx.currentTime,.05);AUD.ctx.suspend()}sndUI()}
 let lastBlip=0;
 function sfx(n){
   const c=AUD.ctx;if(!c||!AUD.on)return;const t=c.currentTime+.01;
@@ -1168,7 +1250,7 @@ const SECRETS={
 const NSEC=Object.keys(SECRETS).length;
 function secret(id,lines,cb){
   const first=!S.secrets[id];
-  say(lines,()=>{if(first){S.secrets[id]=1;save();sfx('secret');gainXP(15);toast(`Secret trouvé ! ${Object.keys(S.secrets).length}/${NSEC}`)}if(cb)cb()});
+  say(lines,()=>{if(first){trk('secret',{id});S.secrets[id]=1;save();sfx('secret');gainXP(15);toast(`Secret trouvé ! ${Object.keys(S.secrets).length}/${NSEC}`)}if(cb)cb()});
 }
 const QUIPS=[
   "Petit conseil : ne dis jamais « c'est la faute du compteur » avant d'avoir vérifié l'unité.",
@@ -1241,7 +1323,7 @@ function openAvatar(onDone){
     b.querySelectorAll('[data-k]').forEach(x=>x.onclick=()=>{const k=x.dataset.k;let v=x.dataset.v;if(['skin','hair','top','bot'].includes(k))v=+v;
       if(k==='g'&&av.g!==v){const d=AVDEF(v);av.style=d.style;av.bt=d.bt}av[k]=v;sfx('select');draw()});
     b.querySelector('#avRnd').onclick=()=>{const r=n=>Math.floor(Math.random()*n);av.g=r(2)?'f':'h';av.skin=r(SKINS.length);av.hair=r(HAIRC.length);av.top=r(TOPS.length);av.bot=r(BOTS.length);av.style=Object.keys(STYLES)[r(6)];av.bt=r(2)?'jupe':'pantalon';sfx('select');draw()};
-    b.querySelector('#avOk').onclick=()=>{S.av=av;save();closePanel();if(onDone)onDone()};
+    b.querySelector('#avOk').onclick=()=>{trk('avatar',{g:av.g,style:av.style,bas:av.bt});S.av=av;save();closePanel();if(onDone)onDone()};
     anim();
   };
   let fr=0,raf=0;
@@ -1270,6 +1352,7 @@ function openChapterSelect(){
   const c=document.createElement('button');c.className='btn alt';c.textContent='Annuler';c.onclick=closePanel;b.appendChild(c);
 }
 function jumpTo(ch,sid){
+  TCH.via='jump';trk('jump',{ch,site:sid});
   const s=SITES[sid],keep={badges:(S.badges||[]).slice(),fiches:Object.assign({},S.fiches),dex:Object.assign({},S.dex),xp:S.xp||0,rank:S.rank||0};
   S.site=sid;S.ch=ch;S.notes={};S.flags={pmIntro:ch>=10?1:0};S.fiches={};FICHES.forEach(f=>{if(STEP_CH[f.st]<ch)S.fiches[f.id]=1});S.pm=ch>=11?6:0;S.derives={};S.dex={};
   if(ch>=2){S.notes.adresse=`${s.addr}, ${s.cp}`;S.notes.surface=s.surface;S.notes.activite=s.activite}
@@ -1474,7 +1557,7 @@ function openDashboard(){
     const m=M[S.pm],st=m.steps[si];
     ['tab','ind','bm','act'].forEach(k=>{if(st[k])DSH[k]=st[k]});renderDash(view);
     mp.innerHTML=head();const inner=document.createElement('div');mp.appendChild(inner);
-    st.f(inner,()=>{si++;if(si>=m.steps.length){si=0;S.pm++;save();hud();sfx('good');toast(`Mission « ${m.t} » terminée !`);gainXP(30)}step()});
+    st.f(inner,()=>{si++;if(si>=m.steps.length){si=0;S.pm++;trk('mission',{n:S.pm,titre:m.t});save();hud();sfx('good');toast(`Mission « ${m.t} » terminée !`);gainXP(30)}step()});
   };
   step();
 }
@@ -1510,7 +1593,7 @@ const choice=({title,ctx,gas,q,opts,keep})=>(el,next)=>{
   const box=el.querySelector('.opts'),fbz=el.querySelector('.fbz');
   (keep?opts:shuffle(opts)).forEach(o=>{const b=document.createElement('button');b.className='opt';b.innerHTML=o[0];box.appendChild(b);
     b.onclick=()=>{if(o[1]){b.classList.add('good');box.querySelectorAll('.opt').forEach(x=>x.disabled=true);fbz.innerHTML=`<div class="fb ok">✔ ${o[2]||'Exact !'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
-      else{tries++;b.classList.add('badc');b.disabled=true;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${o[2]||'Pas tout à fait.'} Réessaie.</div>`}}});
+      else{tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(q).slice(0,100),a:trkTxt(o[0]).slice(0,80)});b.classList.add('badc');b.disabled=true;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${o[2]||'Pas tout à fait.'} Réessaie.</div>`}}});
 };
 const multi=({title,ctx,gas,q,items,okMsg})=>(el,next)=>{
   let tries=0;
@@ -1520,7 +1603,7 @@ const multi=({title,ctx,gas,q,items,okMsg})=>(el,next)=>{
   const v=document.createElement('button');v.className='btn';v.textContent='Valider ▸';el.appendChild(v);
   v.onclick=()=>{let bad=0;rows.forEach((l,i)=>{const it=items[i],c=l.querySelector('input').checked,sm=l.querySelector('small');l.classList.remove('good','badc');sm.textContent='';
       const wrong=(it[1]===true&&!c)||(it[1]===false&&c);if(wrong){bad++;l.classList.add('badc');sm.textContent=it[2]||''}else if(c){l.classList.add('good');sm.textContent=it[2]||''}});
-    if(bad){tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${bad} case${bad>1?'s':''} à revoir (en rouge).</div>`}
+    if(bad){tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(q).slice(0,100),a:trkTxt(rows.filter(l=>l.classList.contains('badc')).map(l=>l.textContent.split('\n')[0]).join(' | ')).slice(0,80)});sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${bad} case${bad>1?'s':''} à revoir (en rouge).</div>`}
     else{v.remove();rows.forEach(l=>l.querySelector('input').disabled=true);fbz.innerHTML=`<div class="fb ok">✔ ${okMsg||'Parfait.'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}};
 };
 const form=({title,ctx,gas,fields,okMsg})=>(el,next)=>{
@@ -1531,7 +1614,7 @@ const form=({title,ctx,gas,fields,okMsg})=>(el,next)=>{
   const v=document.createElement('button');v.className='btn';v.textContent='Valider ▸';el.appendChild(v);
   v.onclick=()=>{let bad=0;sels.forEach((d,i)=>{const s=d.querySelector('select'),m=d.querySelector('.m'),o=fields[i].opts[s.value];s.style.borderColor='';m.textContent='';
       if(!o){bad++;s.style.borderColor='var(--bad)';m.textContent='Choisis une valeur.'}else if(!o[1]){bad++;s.style.borderColor='var(--bad)';m.textContent='✘ '+(o[2]||'Incorrect.')}else{s.style.borderColor='var(--ok)';m.textContent=o[2]?'✔ '+o[2]:'✔'}});
-    if(bad){tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${bad} champ${bad>1?'s':''} à corriger.</div>`}
+    if(bad){tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(title||'Formulaire').slice(0,100),a:trkTxt(sels.filter(d=>d.querySelector('.m').textContent.startsWith('✘')).map(d=>d.querySelector('label').textContent).join(' | ')).slice(0,80)});sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${bad} champ${bad>1?'s':''} à corriger.</div>`}
     else{v.remove();sels.forEach(d=>d.querySelector('select').disabled=true);fbz.innerHTML=`<div class="fb ok">✔ ${okMsg||'Formulaire valide.'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}};
 };
 const order=({title,ctx,q,items,okMsg})=>(el,next)=>{
@@ -1542,7 +1625,7 @@ const order=({title,ctx,q,items,okMsg})=>(el,next)=>{
     box.innerHTML='';shuffledItems.filter(x=>!seq.includes(x)).forEach(x=>{const b=document.createElement('button');b.className='opt';b.textContent=x;b.onclick=()=>{seq.push(x);draw();if(seq.length===items.length)check()};box.appendChild(b)})};
   const shuffledItems=shuffle(items);
   const check=()=>{if(seq.every((s,i)=>s===items[i])){fbz.innerHTML=`<div class="fb ok">✔ ${okMsg||'Bon ordre !'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
-    else{tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ Ce n'est pas le bon ordre.</div>`;const r=document.createElement('button');r.className='btn alt';r.textContent='Recommencer';r.onclick=()=>{seq=[];fbz.innerHTML='';draw()};fbz.appendChild(r)}};
+    else{tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(q).slice(0,100),a:trkTxt(seq.join(' > ')).slice(0,80)});sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ Ce n'est pas le bon ordre.</div>`;const r=document.createElement('button');r.className='btn alt';r.textContent='Recommencer';r.onclick=()=>{seq=[];fbz.innerHTML='';draw()};fbz.appendChild(r)}};
   draw();
 };
 const signature=(who,orgName)=>(el,next)=>{
@@ -1595,7 +1678,7 @@ function chooseSite(){
     const c=document.createElement('button');c.className='card';const cv2=document.createElement('canvas');cv2.width=(bd.w+2)*TS;cv2.height=(bd.h+1)*TS;const x=cv2.getContext('2d');
     R(x,0,0,cv2.width,cv2.height,'#7cc56a');drawBuilding(x,{...bd,x:1,y:.7,door:[bd.door[0]-bd.x+1,bd.door[1]-bd.y+.7]});
     c.appendChild(cv2);c.insertAdjacentHTML('beforeend',`<b>${s.name}</b><span><span class="tag">${fmt(s.surface)} m²</span> <span class="tag">${s.kva} kVA</span></span><small>${blurb[id]}</small>`);
-    c.onclick=()=>{S.site=id;S.ch=1;S.notes={};S.flags={};closePanel();rebuildMaps();save();hud();
+    c.onclick=()=>{trk('site_choice',{site:id});S.site=id;S.ch=1;S.notes={};S.flags={};closePanel();rebuildMaps();save();hud();
       say([{w:'Mme Joule',t:`${s.name}, bon choix ! Première étape de la démarche : cadrer. Avant de mesurer quoi que ce soit, on sait quoi suivre, où, et pourquoi.`},{w:'Mme Joule',t:`Va dehors. Trouve l'adresse sur la boîte aux lettres, et la surface sur la fiche technique affichée près de l'entrée. Suis la flèche orange.`}])};
     cards.appendChild(c)});
 }
@@ -1815,12 +1898,12 @@ function battle(a){
   moves.forEach(m=>{const b=document.createElement('button');b.textContent=m[0];mv.appendChild(b);b.onclick=()=>{if(over)return;
     if(m[1]){over=true;mv.querySelectorAll('button').forEach(x=>x.disabled=true);ebar.style.width='0%';mon.classList.add('hit');
       msg.innerHTML=`C'est super efficace ! ${m[2]}`;jingle('victory');setTimeout(()=>mon.classList.add('ko'),600);
-      const first=!S.dex[a.id];S.dex[a.id]=1;S.xp+=first?30:10;
+      trk('battle',{a:a.id,r:'win'});const first=!S.dex[a.id];S.dex[a.id]=1;S.xp+=first?30:10;
       setTimeout(()=>{msg.innerHTML=`<b>${a.name}</b> est corrigée${first?' et rejoint ton Anomalidex':''} ! +${first?30:10} XP`;const c=document.createElement('button');c.textContent='Continuer ▸';c.style.gridColumn='1/-1';mv.innerHTML='';mv.appendChild(c);c.focus();c.onclick=()=>end(afterCapture)},1300)}
-    else{b.disabled=true;cred-=34;mbar.style.width=Math.max(0,cred)+'%';mbar.style.background=cred<40?'var(--bad)':'var(--amber)';
+    else{trk('wrong_answer',{t:'Combat',q:a.name,a:m[0].slice(0,80)});b.disabled=true;cred-=34;mbar.style.width=Math.max(0,cred)+'%';mbar.style.background=cred<40?'var(--bad)':'var(--amber)';
       msg.innerHTML=`Ce n'est pas très efficace… ${m[2]}<br><b>${a.name}</b> sème le doute : ta crédibilité baisse !`;
-      if(cred<=0){over=true;mv.innerHTML='';setTimeout(()=>{msg.innerHTML='Ta crédibilité est à zéro ! Même le fournisseur ne te croit plus. Tu te replies au bureau pour relire tes notes.';const c=document.createElement('button');c.textContent='Retour au bureau ▸';c.style.gridColumn='1/-1';mv.appendChild(c);c.onclick=()=>end(()=>warp('office',5,6,'up'))},900)}}}});
-  const cb2=document.createElement('button');cb2.className='course-btn';cb2.textContent='Revoir le cours : Fiabiliser ↗';cb2.onclick=()=>goCourse('etape-3');const run=document.createElement('button');run.textContent='Fuir';run.onclick=()=>{if(!over){over=true;S.flees=(S.flees||0)+1;end(S.flees===3?()=>secret('fuite',["Tu fuis. Encore.","L'anomalie reste dans la base. Elle attendra le prochain audit, comme toutes les autres. Stratégie validée par 80 % des organisations."]):null)}};mv.appendChild(run);mv.appendChild(cb2);
+      if(cred<=0){trk('battle',{a:a.id,r:'lose'});over=true;mv.innerHTML='';setTimeout(()=>{msg.innerHTML='Ta crédibilité est à zéro ! Même le fournisseur ne te croit plus. Tu te replies au bureau pour relire tes notes.';const c=document.createElement('button');c.textContent='Retour au bureau ▸';c.style.gridColumn='1/-1';mv.appendChild(c);c.onclick=()=>end(()=>warp('office',5,6,'up'))},900)}}}});
+  const cb2=document.createElement('button');cb2.className='course-btn';cb2.textContent='Revoir le cours : Fiabiliser ↗';cb2.onclick=()=>goCourse('etape-3');const run=document.createElement('button');run.textContent='Fuir';run.onclick=()=>{if(!over){trk('battle',{a:a.id,r:'flee'});over=true;S.flees=(S.flees||0)+1;end(S.flees===3?()=>secret('fuite',["Tu fuis. Encore.","L'anomalie reste dans la base. Elle attendra le prochain audit, comme toutes les autres. Stratégie validée par 80 % des organisations."]):null)}};mv.appendChild(run);mv.appendChild(cb2);
   mv.querySelector('button').focus();
 }
 function afterCapture(){
@@ -1877,7 +1960,7 @@ function talonStep(el,next){
   r.oninput=draw;draw();
   el.querySelector('#tv').onclick=e=>{const v=+r.value;if(Math.abs(v-base)<=Math.max(1.5,base*.25)){e.target.remove();r.disabled=true;
       fbz.innerHTML=`<div class="fb ok">✔ Le talon est d'environ <b>${base} kW</b>. Il tourne 24 h/24 : ${s.id==='ecole'?'éclairage de sécurité, informatique, ventilation, veilles':s.id==='bureau'?'serveurs, ventilation, veilles':'froid (vitrines, chambre froide), veilles'}.</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
-    else{tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${v>base?'Trop haut : regarde les nuits et le week-end, pas les journées.':'Trop bas : même vide, le bâtiment consomme quelque chose.'}</div>`}};
+    else{tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt('Trouve le talon').slice(0,100),a:trkTxt((v>base?'trop haut ':'trop bas ')+v+' kW').slice(0,80)});sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${v>base?'Trop haut : regarde les nuits et le week-end, pas les journées.':'Trop bas : même vide, le bâtiment consomme quelque chose.'}</div>`}};
 }
 function gameAnalyse(){
   const s=site(),c=weekCurve(s.id),base=BASE[s.id],share=Math.round(c.reduce((a,p)=>a+Math.min(p,base),0)/c.reduce((a,p)=>a+p,0)*100/5)*5;
@@ -1933,8 +2016,8 @@ function planStep(el,next){
     tot.innerHTML=`Coût : <b class="num" style="color:${c>BUD?'var(--bad)':'inherit'}">${fmt(c)} €</b> / ${fmt(BUD)} € · Gain : <b class="num">${fmt(g)} €/an</b> · Retour global : <b class="num">${g?(c?String(Math.round(c/g*10)/10).replace('.',',')+' ans':'immédiat'):'—'}</b>`;return{c,g,sel}};
   box.onchange=calc;calc();
   el.querySelector('#pv').onclick=e=>{const {c,g,sel}=calc();const sob=sel.filter(a=>a.cat==='Sobriété').length;
-    if(c>BUD){tries++;sfx('bad');fbz.innerHTML='<div class="fb ko">✘ Budget dépassé. Les gros travaux attendront : commence par ce qui ne coûte presque rien.</div>';return}
-    if(g<GOAL){tries++;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ Seulement ${fmt(g)} €/an. Il manque ${fmt(GOAL-g)} €. As-tu pris toutes les actions de sobriété ?</div>`;return}
+    if(c>BUD){tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt('Plan d’action').slice(0,100),a:trkTxt('budget dépassé').slice(0,80)});sfx('bad');fbz.innerHTML='<div class="fb ko">✘ Budget dépassé. Les gros travaux attendront : commence par ce qui ne coûte presque rien.</div>';return}
+    if(g<GOAL){tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt('Plan d’action').slice(0,100),a:trkTxt('économies insuffisantes').slice(0,80)});sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ Seulement ${fmt(g)} €/an. Il manque ${fmt(GOAL-g)} €. As-tu pris toutes les actions de sobriété ?</div>`;return}
     e.target.remove();box.querySelectorAll('input').forEach(i=>i.disabled=true);
     fbz.innerHTML=`<div class="fb ok">✔ Plan validé : ${fmt(g)} €/an pour ${fmt(c)} €. ${sob===3?'Toute la sobriété est dedans : c\'est la base.':'Astuce : la sobriété, presque gratuite, passe toujours en premier.'} Isoler un bâtiment qu'on chauffe le week-end, c'est payer des travaux pour chauffer du vide.</div>`;gainXP(tries?5:20);contBtn(fbz,next)};
 }
@@ -1979,6 +2062,7 @@ function gameFinale(){
 /* ================= ÉVOLUTION, FIN, TITRE, MENU ================= */
 function evolve(rank,cb){
   if(S.rank>=rank){hud();if(cb)cb();return}
+  trk('evolve',{rank});
   busy=true;clearKeys();const old=S.rank;
   jingle('evo');const ov=document.createElement('div');ov.className='evo';ov.innerHTML=`<div class="t">Quoi ? ${esc(S.name)}, ${RANKS[old]}, évolue !</div><canvas width="20" height="20" aria-hidden="true"></canvas><div class="row" style="justify-content:center"></div>`;
   $('layer').appendChild(ov);const c=ov.querySelector('canvas'),x=c.getContext('2d'),t=ov.querySelector('.t');let n=0,start=performance.now();
@@ -1990,6 +2074,7 @@ function evolve(rank,cb){
     const b=document.createElement('button');b.className='btn';b.style.background='var(--amber)';b.style.color='var(--ink)';b.textContent='Continuer ▸';b.onclick=()=>{ov.remove();busy=false;hud();if(cb)cb()};ov.querySelector('.row').appendChild(b);b.focus()}})(start);
 }
 function endScreen(){
+  trk('game_end',{site:S.site,niveau:level()});
   const ov=openPanel('Quête terminée'),b=ov.querySelector('.pbody');
   b.innerHTML=`<h3>Diplôme de l'Energy Management par la donnée</h3><p><b>${esc(S.name)}</b>, ${RANKS[S.rank]}, niveau ${level()}.</p><p>Tu as parcouru les 8 étapes de la démarche sur ${esc(site().name)}, puis tu as pris en main un patrimoine entier.</p><div class="tbl"><table><tr><th>Étape</th><th>Ce que tu sais faire</th></tr>
   <tr><td>Cadrer</td><td>Périmètre, fiche patrimoine, PDL et PCE, plan de comptage</td></tr><tr><td>Collecter</td><td>Distributeur ≠ fournisseur, mandats, consentement</td></tr><tr><td>Fiabiliser</td><td>Doublons, trous, pics, index, bouclage, unités, heure</td></tr><tr><td>Structurer</td><td>Site → point → compteur → mesure, kW → kWh, m³ → kWh</td></tr><tr><td>Analyser</td><td>Talon, DJU, signature, puissance souscrite, ratios</td></tr><tr><td>Détecter</td><td>Dérives, baseline, faux positifs, coût d'une dérive</td></tr><tr><td>Agir</td><td>Sobriété → efficacité → production, temps de retour</td></tr><tr><td>Patrimoine</td><td>Pareto en MWh, € et CO₂, comparaison par activité, benchmark, gisements</td></tr><tr><td>Piloter</td><td>M&V corrigée des DJU, décret tertiaire, OPERAT, ISO 50001</td></tr></table></div><div class="row"><button class="btn" id="endStay">Continuer à explorer</button><button class="btn alt" id="endNew">Rejouer avec un autre site (collection conservée)</button></div>`;
@@ -2051,12 +2136,12 @@ function titleScreen(){
     const cc=document.createElement('button');cc.className='btn alt';cc.textContent='Retour';cc.onclick=()=>{closePanel();titleScreen()};b.appendChild(cc)};
   ov.querySelectorAll('.slot').forEach(el=>{const n=+el.dataset.n;
     el.querySelectorAll('[data-a]').forEach(btn=>btn.onclick=()=>{const a=btn.dataset.a;
-      if(a==='new'||a==='newchap'){const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';setSlot(n);S=DEF();S.name=nm;save();leave();a==='new'?openAvatar(()=>boot()):openAvatar(pick);return}
-      if(a==='erase'){if(btn.dataset.ok){try{localStorage.removeItem(SLOT_KEY(n))}catch(e){}ov.remove();titleScreen()}else{btn.dataset.ok=1;btn.textContent='Confirmer : tout effacer'}return}
+      if(a==='new'||a==='newchap'){trk('game_new',{slot:n,etape:a==='newchap'});const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';setSlot(n);S=DEF();S.name=nm;save();leave();a==='new'?openAvatar(()=>boot()):openAvatar(pick);return}
+      if(a==='erase'){if(btn.dataset.ok){trk('slot_erase',{slot:n});try{localStorage.removeItem(SLOT_KEY(n))}catch(e){}ov.remove();titleScreen()}else{btn.dataset.ok=1;btn.textContent='Confirmer : tout effacer'}return}
       setSlot(n);S=Object.assign(DEF(),readSlot(n));
-      if(a==='cont'){leave();if(!S.av)openAvatar(()=>boot());else boot()}
+      if(a==='cont'){trk('game_continue',{slot:n,ch:S.ch});leave();if(!S.av)openAvatar(()=>boot());else boot()}
       if(a==='chap'){leave();pick()}
-      if(a==='restart'){if(btn.dataset.ok){restartStory();leave();boot()}else{btn.dataset.ok=1;btn.textContent='Confirmer (collection gardée)'}}
+      if(a==='restart'){if(btn.dataset.ok){trk('game_restart',{slot:n});restartStory();leave();boot()}else{btn.dataset.ok=1;btn.textContent='Confirmer (collection gardée)'}}
     })});
   const f=ov.querySelector('.slot.cur [data-a=cont]')||ov.querySelector('[data-a=cont]')||ov.querySelector('.slot input');if(f)f.focus();
 }
@@ -2073,7 +2158,7 @@ addEventListener('keydown',e=>{
 });
 addEventListener('keyup',e=>{if(e.key==='Shift')P.runHeld=false;const k=KEYMAP[e.code]||KEYMAP[e.key];if(k)keys[k]=0});
 addEventListener('keydown',e=>{if(QK_HOST.hidden)return;const t=((e.composedPath&&e.composedPath()[0])||e.target).tagName||'';if(/INPUT|SELECT|TEXTAREA/.test(t))return;if(e.key==='Shift')P.runHeld=true;if(e.code==='KeyR'&&!e.repeat&&!busy){setRun(!P.runToggle)}});
-function setRun(on){P.runToggle=on;const b=ROOT.querySelector('.ab .run');if(b)b.setAttribute('aria-pressed',on);toast(on?'Course activée':'Marche')}
+function setRun(on){trk('setting',{k:'course',v:on});P.runToggle=on;const b=ROOT.querySelector('.ab .run');if(b)b.setAttribute('aria-pressed',on);toast(on?'Course activée':'Marche')}
 ROOT.querySelector('.ab .run').addEventListener('pointerdown',e=>{e.preventDefault();setRun(!P.runToggle)});
 addEventListener('blur',()=>{clearKeys();P.runHeld=false});
 ROOT.querySelectorAll('.dpad button').forEach(b=>{const k=b.dataset.k;
@@ -2101,12 +2186,13 @@ const GAME_DESC=['Choisis ton site','Explore l’extérieur : adresse, surface, 
 function courseHash(){return CH2HASH[S.ch]||'accueil'}
 function courseLabel(){const h=courseHash(),m=h.match(/^etape-(\d)/);return m?`Étape ${m[1]} · ${STEP_T[+m[1]]}`:h==='quiz-final'?'Quiz final':h==='patrimoine'?'Piloter un patrimoine':'Le cycle'}
 function goCourse(hash){
-  hash=hash||courseHash();QK_HOST.hidden=true;document.documentElement.classList.remove('qk-lock');clearKeys();
+  hash=hash||courseHash();trk('game_to_course',{target:hash,ch:S.ch});QK_HOST.hidden=true;document.documentElement.classList.remove('qk-lock');clearKeys();
   if(AUD.ctx)AUD.ctx.suspend();
   if(decodeURIComponent(location.hash.slice(1))===hash)window.scrollTo(0,0);else location.hash=hash;
   qkSync();
 }
 function openGame(ch){
+  trk('game_open',{from:ch==null?'bouton':'cours',ch:ch==null?null:ch});
   QK_HOST.hidden=false;setTimeout(fitScreen,30);document.documentElement.classList.add('qk-lock');QK_HOST.scrollTop=0;
   if(AUD.on){audInit();if(AUD.ctx)AUD.ctx.resume()}
   if(ch!==undefined&&ch!==null){
@@ -2242,6 +2328,7 @@ function setFsUI(on){
   requestAnimationFrame(()=>requestAnimationFrame(fitScreen));
 }
 async function enterFs(){
+  trk('setting',{k:'plein_ecran',v:true});
   setFsUI(true);
   const req=QK_HOST.requestFullscreen||QK_HOST.webkitRequestFullscreen;
   if(req){try{await req.call(QK_HOST,{navigationUI:'hide'})}catch(e){}}
