@@ -219,30 +219,57 @@ button,input,select{font:inherit}
 .qk-top b{color:var(--amber)}
 .qk-top-r{display:flex;gap:8px;flex-wrap:wrap}
 #qkFs{border-color:var(--amber);color:var(--amber)}
+.qk-top .sm{display:none}
+.hud button{white-space:nowrap}
+.qk-app.app .screen-wrap{position:relative}
+.qk-app.app .hud{flex-wrap:nowrap;overflow:hidden}
+.qk-app.app .hud .xpbar{min-width:40px}
+@media (max-width:560px){
+  .qk-top .lg{display:none}.qk-top .sm{display:inline}
+  .qk-top button{font-size:12.5px;padding:3px 9px}
+  .hud{gap:6px;padding:5px 8px}
+  .hud .who{font-size:13px}.hud .rank{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}.hud .lvl{font-size:12px;white-space:nowrap}
+  .hud .badges{display:none}
+  .hud button{font-size:12px;padding:2px 6px}
+  .objective{font-size:13px}
+  .dpad{grid-template-columns:repeat(3,clamp(40px,13vw,52px));grid-template-rows:repeat(3,clamp(40px,13vw,52px))}
+  .ab button{width:clamp(50px,15vw,62px);height:clamp(50px,15vw,62px)}
+  .ab{gap:8px}
+  .pad{padding:4px 2px}
+  .panel header{font-size:15px;padding:7px 10px}
+  .pbody{padding:12px;font-size:15px}
+  .overlay{padding:8px}
+}
+@media (max-height:560px){.overlay{padding-top:6px}.pbody{padding:10px 12px}}
+
 /* ---- mode plein écran / immersif ---- */
-.qk-app.fs{height:100vh;height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);overflow:hidden}
-.qk-app.fs .qk-top{max-width:none;width:100%;margin:0;padding:6px 10px}
-.qk-app.fs .qk-top button{font-size:13px;padding:3px 10px}
-.qk-app.fs .console{max-width:none;width:100%;flex:1;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:6px;padding:0 10px 8px;position:relative}
-.qk-app.fs .hud{padding:4px 8px}
-.qk-app.fs .screen-wrap{min-height:0;display:flex;align-items:center;justify-content:center;border-width:0;border-radius:0;box-shadow:none;background:#000}
-.qk-app.fs canvas#screen{width:auto;height:auto;max-width:100%;max-height:100%}
-.qk-app.fs .objective{font-size:13px;padding:4px 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.qk-app.fs .keys{display:none}
-.qk-app.fs .dialog{font-size:clamp(13px,2.2vmin + 6px,22px)}
+.qk-app.app{height:100vh;height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);overflow:hidden}
+.qk-app.app .qk-top{max-width:none;width:100%;margin:0;padding:6px 10px}
+.qk-app.app .qk-top button{font-size:13px;padding:3px 10px}
+.qk-app.app .console{max-width:none;width:100%;flex:1;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:6px;padding:0 10px 8px;position:relative}
+.qk-app.app .hud{padding:4px 8px}
+.qk-app.app .screen-wrap{min-height:0;display:flex;align-items:center;justify-content:center;border-width:0;border-radius:0;box-shadow:none;background:#000}
+.qk-app.app canvas#screen{position:absolute;left:0;top:0}
+.qk-app.app .objective{font-size:13px;padding:4px 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qk-app.app .keys{display:none}
+.qk-app.app .dialog{font-size:clamp(13px,2.2vmin + 6px,22px)}
 @media (orientation:landscape) and (pointer:coarse){
-  .qk-app.fs .console{grid-template-rows:auto minmax(0,1fr) auto}
-  .qk-app.fs .qk-top{position:absolute;top:calc(env(safe-area-inset-top,0px) + 4px);right:calc(env(safe-area-inset-right,0px) + 8px);width:auto;padding:0;z-index:5}
-  .qk-app.fs #qkBack,.qk-app.fs #qkCourse{display:none}
-  .qk-app.fs #qkFs{background:rgba(19,26,43,.85)}
-  .qk-app.fs .console{padding-top:4px}
-  .qk-app.fs .hud{padding-right:200px}
-  .qk-app.fs .hud .xpbar,.qk-app.fs .hud .badges{display:none}
-  .qk-app.fs .objective{-webkit-line-clamp:1}
-  .qk-app.fs .pad{position:absolute;left:10px;right:10px;bottom:36px;pointer-events:none;padding:0}
-  .qk-app.fs .pad .dpad,.qk-app.fs .pad .ab{pointer-events:auto;opacity:.78}
-  .qk-app.fs .dpad{grid-template-columns:repeat(3,46px);grid-template-rows:repeat(3,46px)}
-  .qk-app.fs .ab button{width:56px;height:56px}
+  .qk-app.app .console{grid-template-rows:auto minmax(0,1fr) auto}
+  .qk-app.app .qk-top{position:absolute;top:calc(env(safe-area-inset-top,0px) + 4px);right:calc(env(safe-area-inset-right,0px) + 8px);width:auto;padding:0;z-index:5}
+  .qk-app.app .qk-top .lg{display:none}.qk-app.app .qk-top .sm{display:inline}
+  .qk-app.app .qk-top button{font-size:12px;padding:2px 8px;background:rgba(19,26,43,.85)}
+  .qk-app.app #qkFs{background:rgba(19,26,43,.85)}
+  .qk-app.app .console{padding-top:4px}
+  .qk-app.app .hud{padding-right:min(46vw,330px)}
+  .qk-app.app .hud .xpbar,.qk-app.app .hud .badges{display:none}
+  .qk-app.app .objective{-webkit-line-clamp:1}
+  .qk-app.app .pad{position:absolute;left:10px;right:10px;bottom:36px;pointer-events:none;padding:0}
+  .qk-app.app .pad .dpad,.qk-app.app .pad .ab{pointer-events:auto;opacity:.78}
+  .qk-app.app .dpad{grid-template-columns:repeat(3,46px);grid-template-rows:repeat(3,46px)}
+  .qk-app.app .ab button{width:56px;height:56px}
+  .qk-app.app .ab{position:relative}
+  .qk-app.app .dialog{left:168px;right:150px;min-height:0}
+  .qk-app.app .ab .run{position:absolute;right:0;bottom:64px;width:auto;height:34px}
 }
 
 .panel header .hdr-r{display:flex;align-items:center;gap:10px}
@@ -280,7 +307,7 @@ button,input,select{font:inherit}
 .kpis div{background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:6px;text-align:center;font-size:13px}
 .kpis b{display:block;font-family:var(--f-pix);font-size:18px}
 </style>
-<div class="qk-app"><div class="qk-top"><button type="button" id="qkBack">← Retour au cours</button><span class="qk-top-r"><button type="button" id="qkCourse">Comprendre cette étape : <b id="qkStep">Le cycle</b></button><button type="button" id="qkFs" aria-pressed="false" title="Plein écran (touche F)">⛶ Plein écran</button></span></div>
+<div class="qk-app"><div class="qk-top"><button type="button" id="qkBack">←<span class="lg"> Retour au cours</span><span class="sm"> Cours</span></button><span class="qk-top-r"><button type="button" id="qkCourse"><span class="lg">Comprendre cette étape : </span><span class="sm">Cours : </span><b id="qkStep">Le cycle</b></button><button type="button" id="qkFs" aria-pressed="false" title="Plein écran (touche F)">⛶<span class="lg"> Plein écran</span></button></span></div>
 <div class="console" id="console">
   <div class="hud" role="status">
     <span class="who" id="hudName">—</span>
@@ -524,7 +551,7 @@ const elecChannel=s=>s.kva>36?'SGE':'Data Connect';
 const assujetti=s=>s.surface>=1000;
 
 /* ================= CARTES ================= */
-const TS=16,VW=15,VH=11;
+const TS=16;let VW=15,VH=11;
 const BLD=[
   {id:'office',x:4,y:3,w:6,h:5,door:[6,7],roof:'#5a6b8c',wall:'#e6e2d8'},
   {id:'ecole',x:14,y:3,w:9,h:6,door:[18,8]},
@@ -540,7 +567,7 @@ function genTown(){
   const W=72,H=32,g=grid(W,H,'.');
   for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(x<2||y<2||x>=W-2||y>=H-2)g[y][x]='T';
   // forêt de l'est, percée d'un couloir de 4 cases vers le champ d'éoliennes
-  rect(g,50,0,57,H-1,'T');rect(g,50,11,57,14,'.');rect(g,51,9,53,10,'.');rect(g,57,11,57,14,'w');
+  rect(g,50,0,57,H-1,'T');rect(g,50,11,57,14,'.');rect(g,57,11,57,14,'w');
   [[60,4],[66,8],[59,19],[68,23],[62,27],[64,2+1]].forEach(([x,y])=>g[y][x]='T');
   [[59,8],[61,12],[65,14],[67,18],[60,24],[63,21],[66,26],[62,6]].forEach(([x,y])=>g[y][x]='*');
   rect(g,3,12,51,13,'=');rect(g,39,8,39,11,'=');rect(g,46,8,46,11,'=');rect(g,42,14,42,28,'=');rect(g,35,21,49,21,'=');rect(g,38,20,38,20,'=');rect(g,46,20,46,20,'=');rect(g,37,27,37,27,'=');rect(g,46,27,46,27,'=');rect(g,34,28,49,28,'=');rect(g,34,28,34,29,'=');rect(g,28,29,34,29,'=');rect(g,16,28,22,28,'=');rect(g,22,28,22,29,'=');rect(g,22,29,23,29,'=');
@@ -726,7 +753,7 @@ function objsFor(id){
   if(id==='local')localDecor(o);
   if(id==='town'){for(let x=4;x<=11;x++){o.push({x,y:25,kind:'pv',solid:1,act:srcAct('installateur')});o.push({x,y:27,kind:'pv',solid:1,act:srcAct('installateur')})}o.push({x:40,y:24,kind:'stall',solid:1,act:srcAct('marchand')},{x:19,y:27,kind:'watermeter',solid:1,act:srcAct('plombier')})}
   savoirObjs(id,o);
-  if(id==='town'){o.push({x:51,y:9,kind:'machine',solid:1,act:actMachine},{x:52,y:9,kind:'none',solid:1,act:actMachine});[[60,7],[64,11],[67,15],[61,17],[65,22],[68,10],[60,27],[66,4]].forEach(([x,y])=>o.push({x,y,kind:'turbine',solid:1}))}
+  if(id==='town'){o.push({x:10,y:3,kind:'machine',solid:1,act:actMachine},{x:11,y:3,kind:'none',solid:1,act:actMachine});[[60,7],[64,11],[67,15],[61,17],[65,22],[68,10],[60,27],[66,4]].forEach(([x,y])=>o.push({x,y,kind:'turbine',solid:1}))}
   secretObjs(id,o);
   return o;
 }
@@ -874,14 +901,14 @@ function pushBack(to,big){
 function windStep(){
   if(P.pushed){P.pushed=false;
     if(P.pushMsg==='big'){P.pushMsg=null;const first=!S.secrets.vent;
-      const L=[{t:"Une bourrasque te soulève presque du sol et te renvoie en arrière !"},{t:"Impossible d'aller plus loin : le champ d'éoliennes, là-bas, brasse beaucoup trop de vent."},{w:S.name,t:first?"Au moins, elles produisent. Mais il faudra revenir quand elles seront un peu moins enthousiastes.":"Toujours autant de vent. Je n'insiste pas."}];
+      const L=[{t:"Une bourrasque te soulève presque du sol et te renvoie en arrière !"},{t:"Impossible d'aller plus loin : le champ d'éoliennes, là-bas, brasse beaucoup trop de vent."},{t:"Pour passer, il faudrait être beaucoup plus AGILE."},{w:S.name,t:first?"Au moins, elles produisent. Mais il faudra revenir quand elles seront un peu moins enthousiastes.":"Toujours autant de vent. Je n'insiste pas."}];
       first?secret('vent',L):say(L)}
     else if(P.pushMsg==='gust'){P.pushMsg=null;toast('Une rafale te repousse !')}
     return true}
   if(!inCorridor()){if(P.x<48)WIND.told=false;
-    const m=MACHINE,d=Math.max(Math.abs(P.x-m.x-.5)-.5,Math.abs(P.y-m.y));if(d<=3.2&&!P.machineSeen){P.machineSeen=true;setTimeout(actMachine,60);return true}if(d>5)P.machineSeen=false;
+    const m=MACHINE,d=Math.max(Math.abs(P.x-m.x-.5)-.5,Math.abs(P.y-m.y));if(d<=2.2&&!P.machineSeen){P.machineSeen=true;setTimeout(actMachine,60);return true}if(d>5)P.machineSeen=false;
     return false}
-  const m=MACHINE,d=Math.max(Math.abs(P.x-m.x-.5)-.5,Math.abs(P.y-m.y));if(d<=3.2&&!P.machineSeen){P.machineSeen=true;setTimeout(actMachine,60);return true}if(d>5)P.machineSeen=false;
+  const m=MACHINE,d=Math.max(Math.abs(P.x-m.x-.5)-.5,Math.abs(P.y-m.y));if(d<=2.2&&!P.machineSeen){P.machineSeen=true;setTimeout(actMachine,60);return true}if(d>5)P.machineSeen=false;
   if(!WIND.told){WIND.told=true;toast('Le vent se lève…')}
   if(P.x>=55){pushBack(50,'big');return true}
   if(P.x>=52&&P.dir==='right'&&Math.random()<.4){pushBack(Math.max(50,P.x-2),'gust');return true}
@@ -893,7 +920,7 @@ function drawWind(ox,oy){
   WIND.parts.forEach(w=>{w.x-=w.v;const X=Math.round(w.x-ox),Y=Math.round(w.y-oy+Math.sin(w.x/20)*2);if(X>-20&&X<cv.width+20){ctx.beginPath();ctx.moveTo(X,Y);ctx.lineTo(X+w.l,Y);ctx.stroke()}});
   WIND.parts=WIND.parts.filter(w=>w.x>(47*TS));
 }
-const MACHINE={x:51,y:9};
+const MACHINE={x:10,y:3};
 function actMachine(){
   secret('pspe',[{t:"Les vestiges d'une vieille machine grésillent faiblement. Un voyant jaune clignote, s'éteint, hésite, puis se rallume."},
     {t:"Sous la rouille, tu déchiffres d'étranges symboles gravés sur la plaque : P… S… P… E."},
@@ -906,8 +933,8 @@ function onStep(){
 }
 function render(){
   const m=MAPS[S.map],mc=mapCache[S.map],mw=mc.width,mh=mc.height;
-  let ox=P.px+8-VW*TS/2,oy=P.py+8-VH*TS/2;
-  ox=mw<VW*TS?(mw-VW*TS)/2:Math.max(0,Math.min(mw-VW*TS,ox));oy=mh<VH*TS?(mh-VH*TS)/2:Math.max(0,Math.min(mh-VH*TS,oy));
+  const vw=cv.width,vh=cv.height;let ox=P.px+8-vw/2,oy=P.py+8-vh/2;
+  ox=mw<vw?(mw-vw)/2:Math.max(0,Math.min(mw-vw,ox));oy=mh<vh?(mh-vh)/2:Math.max(0,Math.min(mh-vh,oy));
   ox=Math.round(ox);oy=Math.round(oy);
   R(ctx,0,0,cv.width,cv.height,'#0b1020');ctx.drawImage(mc,-ox,-oy);
   const objs=objsFor(S.map),pal=PAL[S.rank];
@@ -988,7 +1015,7 @@ function objectiveText0(){
 
 /* ================= MUSIQUE CHIPTUNE (compositions originales) ================= */
 const AUD={ctx:null,on:false,master:null,waves:{},noise:null,cur:null,curName:null,want:null,step:0,next:0,jingle:false};
-try{if(localStorage.getItem('qk-sound')==='1')AUD.on=true}catch(e){}
+try{if(localStorage.getItem('wattlings-son')==='on')AUD.on=true}catch(e){}
 const NI={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
 function nf(t){const m=/^([A-G])(#|b)?(\d)$/.exec(t);if(!m)return 0;const midi=12*(+m[3]+1)+NI[m[1]]+(m[2]==='#'?1:m[2]==='b'?-1:0);return 440*Math.pow(2,(midi-69)/12)}
 const tok=s=>s.replace(/\|/g,' ').trim().split(/\s+/);
@@ -1021,6 +1048,7 @@ const TRACKS={
   evo:mk(130,[['p50',.10,'C5 E5 G5 C6 D5 F5 A5 D6 E5 G5 B5 E6 F5 A5 C6 F6 G5 - B5 - D6 - G6 - - - - - - - . .'],['tri',.16,'C3 - - - D3 - - - E3 - - - F3 - - - G2 - - - G2 - - - C3 - - - - - . .']],'. . . . . . . . . . . . . . . . s . s . s . k . . . . . . . . .',true)
 };
 function audInit(){
+  if(!AUD.on)return;
   if(AUD.ctx){if(AUD.ctx.state==='suspended')AUD.ctx.resume();return}
   const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
   try{
@@ -1064,7 +1092,8 @@ function jingle(name,cb){
   AUD.jingle=true;const T=Object.assign({},TRACKS[name]);T.cb=()=>{AUD.jingle=false;AUD.curName=null;if(AUD.want)playTrack(AUD.want);if(cb)cb()};
   AUD.cur=T;AUD.curName='#'+name;AUD.step=0;AUD.next=AUD.ctx.currentTime+.05;
 }
-function setSound(on){AUD.on=on;try{localStorage.setItem('qk-sound',on?'1':'0')}catch(e){}if(AUD.master)AUD.master.gain.setTargetAtTime(on?.5:0,AUD.ctx.currentTime,.05);const b=ROOT.getElementById('sndBtn');if(b){b.textContent=on?'♪ Son':'♪ Muet';b.setAttribute('aria-pressed',on)}}
+function sndUI(){const b=ROOT.getElementById('sndBtn');if(b){b.textContent=AUD.on?'♪ Son':'♪ Muet';b.setAttribute('aria-pressed',AUD.on)}}
+function setSound(on){AUD.on=on;try{localStorage.setItem('wattlings-son',on?'on':'off')}catch(e){}if(on){audInit();if(AUD.ctx){AUD.ctx.resume();AUD.master.gain.setTargetAtTime(.5,AUD.ctx.currentTime,.05)}updateMusic()}else if(AUD.master){AUD.master.gain.setTargetAtTime(0,AUD.ctx.currentTime,.05);AUD.ctx.suspend()}sndUI()}
 let lastBlip=0;
 function sfx(n){
   const c=AUD.ctx;if(!c||!AUD.on)return;const t=c.currentTime+.01;
@@ -1087,7 +1116,7 @@ function musicFor(){
   return S.map==='town'?'town':'indoor';
 }
 function updateMusic(){playTrack(musicFor())}
-['pointerdown','keydown'].forEach(ev=>addEventListener(ev,()=>{if(QK_HOST.hidden)return;audInit();if(!AUD.cur&&!AUD.jingle)updateMusic()},{passive:true}));
+['pointerdown','keydown'].forEach(ev=>addEventListener(ev,()=>{if(QK_HOST.hidden||!AUD.on)return;audInit();if(!AUD.cur&&!AUD.jingle)updateMusic()},{passive:true}));
 
 /* ================= SECRETS & HUMOUR ================= */
 const SECRETS={
@@ -1949,7 +1978,7 @@ function openMenu(){
     if(k==='classeur')mt.querySelectorAll('[data-h]').forEach(x=>x.onclick=()=>{closePanel();goCourse(x.dataset.h)});
     if(k==='etapes')chapterList(mt.querySelector('#chl'),(ch,sid)=>{closePanel();jumpTo(ch,sid)});
     if(k==='avatar')mt.querySelector('#avEdit').onclick=()=>{closePanel();openAvatar()};
-    if(k==='opt')mt.querySelector('#sndT').onclick=e=>{audInit();setSound(!AUD.on);e.target.textContent=AUD.on?'Couper la musique':'Activer la musique'};
+    if(k==='opt')mt.querySelector('#sndT').onclick=e=>{setSound(!AUD.on);e.target.textContent=AUD.on?'Couper la musique':'Activer la musique'};
     if(k==='opt')mt.querySelector('#rst').onclick=()=>{mt.querySelector('#rstc').innerHTML='<p><b>Toute ta progression sera effacée.</b></p><button class="btn" id="rstOk" style="background:var(--bad)">Oui, tout effacer</button>';mt.querySelector('#rstOk').onclick=()=>{S=DEF();save();closePanel();titleScreen()}}};
   b.querySelectorAll('.menu-tabs button').forEach(x=>x.onclick=()=>show(x.dataset.t));show('carnet');
   b.querySelector('#mClose').onclick=closePanel;
@@ -2009,7 +2038,7 @@ function boot(){
 }
 rebuildMaps();hud();requestAnimationFrame(loop);titleScreen();
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{});
-$('sndBtn').onclick=()=>{audInit();setSound(!AUD.on)};setSound(AUD.on);
+$('sndBtn').onclick=()=>setSound(!AUD.on);sndUI();
 
 
 /* ================= PASSERELLES COURS ⇄ JEU ================= */
@@ -2024,8 +2053,8 @@ function goCourse(hash){
   qkSync();
 }
 function openGame(ch){
-  QK_HOST.hidden=false;document.documentElement.classList.add('qk-lock');QK_HOST.scrollTop=0;
-  audInit();if(AUD.ctx)AUD.ctx.resume();
+  QK_HOST.hidden=false;setTimeout(fitScreen,30);document.documentElement.classList.add('qk-lock');QK_HOST.scrollTop=0;
+  if(AUD.on){audInit();if(AUD.ctx)AUD.ctx.resume()}
   if(ch!==undefined&&ch!==null){
     ROOT.querySelectorAll('#layer > *').forEach(n=>n.remove());busy=false;dlg.q=[];dlg.cb=null;dlg.open=false;if(dlg.el){dlg.el.remove();dlg.el=null}
     const sv=loadSave();S=Object.assign(DEF(),sv||{});
@@ -2143,15 +2172,19 @@ function renderPatri(c){
 /* ---- plein écran : API native quand elle existe, sinon mode immersif (iPhone, vues d'application) ---- */
 const QK_APP=ROOT.querySelector('.qk-app'),FSB=$('qkFs');
 const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+const MOBILE=matchMedia('(pointer:coarse), (max-width:760px)');
 function fitScreen(){
-  const c=$('screen'),w=$('wrap');
-  if(!QK_APP.classList.contains('fs')){c.style.width='';c.style.height='';return}
-  const r=w.getBoundingClientRect();if(!r.width||!r.height)return;
-  const k=Math.min(r.width/c.width,r.height/c.height),kk=k>=2?Math.floor(k*4)/4:k;
-  c.style.width=Math.floor(c.width*kk)+'px';c.style.height=Math.floor(c.height*kk)+'px';
+  const app=QK_APP.classList.contains('fs')||MOBILE.matches;QK_APP.classList.toggle('app',app);
+  const c=$('screen'),w=$('wrap'),Wd=w.clientWidth,Ht=app?w.clientHeight:Math.round(Wd*11/15);
+  if(!Wd||!Ht)return;
+  let s=Math.min(Wd,Ht)/(TS*10.5);s=Math.max(1.5,Math.min(6,s));if(s>=2)s=Math.round(s*2)/2;
+  const cw=Math.ceil(Wd/s),ch=Math.ceil(Ht/s);
+  if(c.width!==cw||c.height!==ch){c.width=cw;c.height=ch;ctx.imageSmoothingEnabled=false}
+  c.style.width=Wd+'px';c.style.height=Ht+'px';
 }
+if(MOBILE.addEventListener)MOBILE.addEventListener('change',()=>setTimeout(fitScreen,50));
 function setFsUI(on){
-  QK_APP.classList.toggle('fs',on);FSB.setAttribute('aria-pressed',on);FSB.textContent=on?'✕ Quitter le plein écran':'⛶ Plein écran';
+  QK_APP.classList.toggle('fs',on);FSB.setAttribute('aria-pressed',on);FSB.innerHTML=on?'✕<span class="lg"> Quitter le plein écran</span>':'⛶<span class="lg"> Plein écran</span>';
   requestAnimationFrame(()=>requestAnimationFrame(fitScreen));
 }
 async function enterFs(){
