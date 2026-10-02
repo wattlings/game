@@ -138,7 +138,8 @@ td.n{text-align:right;white-space:nowrap}
         <div class="card"><h3>Glossaire : mots les plus ouverts</h3><div id="glossary"></div></div>
         <div class="card"><h3>Passerelles cours ⇄ jeu</h3><div id="bridges"></div></div>
       </div>
-      <div class="card" style="margin-top:12px"><h3>Réglages et découvertes</h3><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))"><div id="settings"></div><div id="secrets"></div></div></div>
+      <div class="card" style="margin-top:12px"><h3>Réglages</h3><div id="settings"></div></div>
+      <div class="card" style="margin-top:12px"><h3>Secrets trouvés</h3><p class="note" style="margin:0 0 6px" id="secNote"></p><div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))"><div><h4 style="margin:0 0 6px">Secrets</h4><div id="secrets"></div></div><div><h4 style="margin:0 0 6px">Clins d’œil aux jeux vidéo</h4><div id="eggs"></div></div></div></div>
     </section>
   </div>
 </main>
@@ -147,6 +148,8 @@ td.n{text-align:right;white-space:nowrap}
 const CFG=window.WATTLINGS_TRACKING||{};
 const CH=['Accueil · choix du site','Jeu 1 · Patrimoine','Jeu 2 · Plan de comptage','Jeu 3 · Collecte','Jeu 4 · Fiabiliser','Jeu 5 · Structurer','Jeu 6 · Analyser','Jeu 7 · Détecter','Jeu 8 · Agir','Jeu 9 · Piloter','Ch. 10 · Patrimoine (20 sites)','Épilogue'];
 const PAGE=p=>({accueil:'Accueil (le cycle)',ecole:'L’école',glossaire:'Glossaire','quiz-final':'Quiz final',patrimoine:'Piloter un patrimoine'}[p]||(/^etape-(\d)(?:-(\w+))?/.test(p||'')?p.replace(/^etape-(\d)(?:-(\w+))?$/,(m,n,l)=>'Étape '+n+(l?' · '+l:'')):p||'?'));
+const SECRETS={plante:'La plante verte',postit:'Le post-it',poubelle:'Les audits oubliés',etang:"L'étang",chat:'Le chat de la chaufferie',consultant:'Le consultant',commercial:'Le prix fixe',legendaire:'Le Compteur Légendaire',arbre:"L'arbre non déclaré",konami:'Le mode sobriété',prenom:'Un prénom prédestiné',carton:'Le carton de 2003',vent:'Le mur de vent',pspe:'La machine PSPE',mobilier:'Le mobilier bavard',joule:'Harceler Mme Joule',fuite:'La stratégie de fuite',panneau:'Le règlement du parc'};
+const EGGS={mgs:'Metal Gear Solid · le carton',wow:'World of Warcraft · KEK',aoe:'Age of Empires II · wololo',wc3:'Warcraft 3 · l’artisan',zelda:'Zelda · le gardien',crash:'Crash Bandicoot · la caisse',dofus:'Dofus · les tomates',adibou:'Adibou · le CD-ROM',sims:'Sims · la piscine',metroid:'Metroid · le conduit',castlevania:'Castlevania · le mur creux',smash:'Smash Bros · sans dégât',mario64:'Mario 64 · le tableau',spyro:'Spyro · le mouton',minecraft:'Minecraft · le bloc',wii:'Wii Sports · la dragonne'};
 const SITE={ecole:'École Jean-Jaurès',bureau:'Bureaux Le Carré',boulangerie:'Boulangerie du Moulin'};
 const $=id=>document.getElementById(id),fmt=n=>Number(n||0).toLocaleString('fr-FR'),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const pct=(a,b)=>b?Math.round(a/b*100)+' %':'—',dur=s=>s==null?'—':s<90?Math.round(s)+' s':Math.round(s/60)+' min';
@@ -187,7 +190,7 @@ function render(s,from,to){
   bars($('pages'),s.pages.slice(0,15),{lab:r=>PAGE(r.page),val:r=>r.views,sub:r=>`· ${fmt(r.visitors)} vis.`});
   bars($('refs'),s.refs,{lab:r=>r.ref,val:r=>r.visits});
   bars($('devices'),s.devices,{lab:r=>({mobile:'Mobile',tablet:'Tablette',desktop:'Ordinateur'}[r.device]||'Inconnu'),val:r=>r.visitors});
-  tiles($('gameTiles'),[[fmt(g.openers),'ont ouvert le jeu'],[fmt(g.players),'ont joué (au moins un chapitre)'],[fmt(g.finished),'ont obtenu le diplôme'],[pct(g.players,t.visitors),'des visiteurs ont joué'],[pct(g.finished,g.players),'des joueurs ont fini']]);
+  tiles($('gameTiles'),[[fmt(g.openers),'ont ouvert le jeu'],[fmt(g.players),'ont joué (au moins un chapitre)'],[fmt(g.finished),'ont obtenu le diplôme'],[pct(g.players,t.visitors),'des visiteurs ont joué'],[pct(g.finished,g.players),'des joueurs ont fini'],g.hades==null?['—','parties en mode Hadès (relance le script SQL de mise à jour)']:[fmt(g.hades),`parties en mode Hadès${g.new_games?' · '+pct(g.hades,g.new_games)+' des nouvelles parties':''}`]]);
   const fm=new Map(g.funnel.map(r=>[r.ch,r.players])),fr=CH.map((l,i)=>({ch:i,l,n:fm.get(i)||0})).filter(r=>r.n||r.ch<=10);
   const fmax=Math.max(1,...fr.map(r=>r.n));
   $('funnel').innerHTML=fr.some(r=>r.n)?`<div class="rows">${fr.map((r,i)=>{const prev=i?fr[i-1].n:null,drop=prev&&prev>r.n?Math.round((prev-r.n)/prev*100):0;return `<div class="row" title="${esc(r.l)} : ${r.n} joueurs"><span class="lab">${esc(r.l)}</span><span><span class="bar" style="display:block;width:${r.n/fmax*100}%"></span></span><span class="val">${fmt(r.n)}${drop?`<span class="drop">−${drop} %</span>`:''}</span></div>`}).join('')}</div>`:'<p class="empty">Aucun joueur sur la période.</p>';
@@ -205,7 +208,11 @@ function render(s,from,to){
   const br=[...c.to_game.map(r=>({l:'Cours → jeu'+(r.ch!=null?' · '+(CH[r.ch]||r.ch):' (bouton)'),n:r.n})),...c.to_course.map(r=>({l:'Jeu → '+PAGE(r.target),n:r.n}))].sort((a,b)=>b.n-a.n).slice(0,14);
   bars($('bridges'),br,{lab:r=>r.l,val:r=>r.n});
   bars($('settings'),g.settings.filter(r=>r.v==='true'||r.v===true).map(r=>({l:{son:'Musique activée',plein_ecran:'Plein écran',course:'Course activée'}[r.k]||r.k,n:r.n})),{lab:r=>r.l,val:r=>r.n,empty:'Aucun réglage modifié.'});
-  bars($('secrets'),g.secrets.slice(0,10),{lab:r=>'Secret : '+r.id,val:r=>r.n,cls:'e',sub:r=>'joueurs',empty:'Aucun secret trouvé.'});
+  const sm=new Map(g.secrets.map(r=>[r.id,r.n])),all=M=>Object.entries(M).map(([id,l])=>({l,n:sm.get(id)||0})).sort((a,b)=>b.n-a.n);
+  const other=g.secrets.filter(r=>!SECRETS[r.id]&&!EGGS[r.id]).map(r=>({l:r.id,n:r.n}));
+  $('secNote').textContent=`Nombre de joueurs ayant trouvé chaque secret (${Object.keys(SECRETS).length} secrets et ${Object.keys(EGGS).length} clins d’œil). Ceux à 0 n’ont encore été trouvés par personne sur la période.`;
+  bars($('secrets'),[...all(SECRETS),...other],{lab:r=>r.l,val:r=>r.n,cls:'e'});
+  bars($('eggs'),all(EGGS),{lab:r=>r.l,val:r=>r.n,cls:'e'});
 }
 async function exportCSV(){
   const btn=$('csv');btn.disabled=true;btn.textContent='Export…';
