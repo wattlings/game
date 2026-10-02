@@ -132,6 +132,7 @@ canvas#screen{display:block;width:100%;height:auto;image-rendering:pixelated;ima
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .field{display:grid;gap:4px;margin-bottom:10px}
 .field label{font-weight:700;font-size:14px}
+.field{min-width:0}.field select{width:100%;min-width:0;text-overflow:ellipsis}
 .field select,.field input{font:inherit;padding:7px 8px;border:2px solid #c9bb92;border-radius:5px;background:#fffaf0;color:var(--text);max-width:100%}
 .chk{display:flex;gap:10px;align-items:flex-start;background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:8px 10px;cursor:pointer}
 .chk input{margin-top:4px;width:18px;height:18px;accent-color:var(--ink)}
@@ -197,6 +198,9 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 .slot small{display:block;color:#b7bdd6;font-size:12.5px;line-height:1.35}
 .slot .stats{font-family:var(--f-pix);font-size:12.5px;color:var(--amber)}
 .slot .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.slot .hades{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;align-items:center;color:var(--on-desk);font-size:14px;cursor:pointer}
+.slot .hades input{width:18px;height:18px;margin:0;padding:0;accent-color:#c43d3d;grid-row:1/3}
+.slot .hades small{grid-column:2}
 .slot .acts .btn{font-size:13.5px;padding:6px 10px;margin:0}
 .slot .acts .btn.danger{background:transparent;color:#ff9a8a;border:2px solid #6b2a2a}
 .slot input{width:100%;font-size:15px;padding:6px 8px}
@@ -554,6 +558,7 @@ function srcTry(sid){
 function srcAct(sid,fallback){return()=>{if(srcTry(sid))return;const s=SRC[sid];
   const future=FICHES.find(f=>f.src===sid&&!fAvail(f));
   if(fallback)return fallback();
+  if(s.egg&&s.egg())return;
   const idle=(s.idle||['…']).map(t=>s.who?{w:s.who,t}:{t});
   if(future&&s.who)idle.push({w:s.who,t:'Repasse me voir plus tard, j’aurai sûrement quelque chose pour toi.'});
   say(idle)}}
@@ -604,7 +609,7 @@ function savoirTargets(){
 /* ---- bâtiments du quartier est et du sud ---- */
 const LOCALS={
   enedis:{name:'Agence Enedis',roof:'#2f6db5',wall:'#e8eef5'},grdf:{name:'Poste GRDF',roof:'#1c7a9a',wall:'#eef3f2'},voltco:{name:'Volt&Co Énergie',roof:'#c43d3d',wall:'#f3ece2'},
-  media:{name:'Médiathèque',roof:'#2f7d46',wall:'#efe9da'},cabinet:{name:'Cabinet médical',roof:'#8a5f36',wall:'#f5efe4'},pharma:{name:'Pharmacie',roof:'#2f8f4e',wall:'#f1f5ee'},maison:{name:'Maison Dupuis',roof:'#a0522d',wall:'#f3e2c4'}
+  media:{name:'Médiathèque',roof:'#2f7d46',wall:'#efe9da'},cabinet:{name:'Cabinet médical',roof:'#8a5f36',wall:'#f5efe4'},pharma:{name:'Pharmacie',roof:'#2f8f4e',wall:'#f1f5ee'},maison:{name:'Maison Dupuis',roof:'#a0522d',wall:'#f3e2c4'},villa:{name:'Villa avec piscine',roof:'#3f8f8a',wall:'#f4efe6'}
 };
 function genLocal(){const W=11,H=8,g=grid(W,H,'o');rect(g,0,0,W-1,1,'W');rect(g,0,0,0,H-1,'W');rect(g,W-1,0,W-1,H-1,'W');rect(g,0,H-1,W-1,H-1,'W');g[H-1][5]='E';return g}
 function localDecor(o){
@@ -612,7 +617,7 @@ function localDecor(o){
   if(k==='enedis'||k==='grdf'||k==='voltco'||k==='pharma')o.push({x:3,y:4,kind:'plant',solid:1},{x:9,y:5,kind:'chairs',solid:1});
   if(k==='media')o.push({x:3,y:5,kind:'readtable',solid:1},{x:4,y:5,kind:'readtable',solid:1},{x:1,y:2,kind:'shelf',solid:1});
   if(k==='cabinet')o.push({x:8,y:3,kind:'bed',solid:1},{x:1,y:5,kind:'plant',solid:1});
-  if(k==='maison')o.push({x:2,y:2,kind:'sofa',solid:1},{x:3,y:2,kind:'sofa',solid:1},{x:9,y:2,kind:'tv',solid:1,act:()=>say([{w:'Télé',t:"« … et le thermostat connecté qui ne se connectait qu’à la box du voisin. Retour à la météo. »"}])});
+  if(k==='maison')o.push({x:2,y:2,kind:'sofa',solid:1},{x:3,y:2,kind:'sofa',solid:1},{x:9,y:2,kind:'tv',solid:1,act:()=>eggWii()});
   if(k==='voltco')o.push({x:8,y:1,kind:'poster',act:()=>say([{t:"Affiche Volt&Co : « Prix fixe garanti* ». L’astérisque renvoie à une page 14 que personne n’a jamais trouvée."}])});
 }
 
@@ -621,7 +626,7 @@ function localDecor(o){
 const SAVE_KEY='quete-kilowatt-v1';
 const RANKS=['Gestionnaire de site','Energy Manager','Gestionnaire de patrimoine'];
 const BADGES=['Cadrer','Collecter','Fiabiliser','Structurer','Analyser','Détecter','Agir','Piloter'];
-const DEF=()=>({ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,secrets:{},maxCh:0,sobriete:false});
+const DEF=()=>({ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,secrets:{},maxCh:0,sobriete:false,hades:false,hadesN:0,wololo:false});
 let S=DEF();
 /* 3 emplacements de sauvegarde dans le navigateur */
 const SLOT_N=3,SLOT_KEY=n=>'wattlings-slot-'+n,ACTIVE_KEY='wattlings-active';
@@ -633,7 +638,7 @@ function save(){S.savedAt=Date.now();try{localStorage.setItem(SLOT_KEY(SLOT),JSO
 function loadSave(){return readSlot(SLOT)}
 try{if(!readSlot(1)){const old=localStorage.getItem(SAVE_KEY);if(old)localStorage.setItem(SLOT_KEY(1),old)}}catch(e){}
 const fmtDate=ts=>ts?new Date(ts).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
-function restartStory(){const k={name:S.name,av:S.av,secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees};S=Object.assign(DEF(),k);save()}
+function restartStory(){const k={name:S.name,av:S.av,secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees,hades:S.hades,hadesN:S.hadesN};S=Object.assign(DEF(),k);save()}
 let lastFlash=0;function savedFlash(){const el=typeof ROOT!=='undefined'&&ROOT.getElementById&&ROOT.getElementById('hudSaved');if(!el)return;const n=Date.now();if(n-lastFlash<2500)return;lastFlash=n;el.textContent=saveOK?'✓ Sauvegardé':'⚠ Sauvegarde impossible';el.classList.remove('on');void el.offsetWidth;el.classList.add('on')}
 const $=id=>ROOT.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -672,13 +677,15 @@ const BLD=[
   {id:'boulangerie',x:24,y:16,w:7,h:5,door:[27,20]},
   {id:'mairie',x:25,y:24,w:8,h:5,door:[28,28],roof:'#5b4a7a',wall:'#efe6d2'},
 ];
-BLD.push({id:'enedis',x:37,y:3,w:6,h:5,door:[39,7]},{id:'grdf',x:44,y:3,w:5,h:5,door:[46,7]},{id:'voltco',x:36,y:15,w:6,h:5,door:[38,19]},{id:'media',x:44,y:15,w:6,h:5,door:[46,19]},{id:'cabinet',x:35,y:23,w:5,h:4,door:[37,26]},{id:'pharma',x:44,y:23,w:5,h:4,door:[46,26]},{id:'maison',x:14,y:24,w:5,h:4,door:[16,27]});
+BLD.push({id:'enedis',x:37,y:3,w:6,h:5,door:[39,7]},{id:'grdf',x:44,y:3,w:5,h:5,door:[46,7]},{id:'voltco',x:36,y:15,w:6,h:5,door:[38,19]},{id:'media',x:44,y:15,w:6,h:5,door:[46,19]},{id:'cabinet',x:35,y:23,w:5,h:4,door:[37,26]},{id:'pharma',x:44,y:23,w:5,h:4,door:[46,26]},{id:'maison',x:14,y:24,w:5,h:4,door:[16,27]},{id:'villa',x:26,y:32,w:6,h:4,door:[29,35]});
 BLD.forEach(b=>{if(SITES[b.id]){b.roof=SITES[b.id].roof;b.wall=SITES[b.id].wall}if(typeof LOCALS!=='undefined'&&LOCALS[b.id]){b.roof=LOCALS[b.id].roof;b.wall=LOCALS[b.id].wall}});
 function grid(w,h,ch){return Array.from({length:h},()=>Array(w).fill(ch))}
 function rect(g,x0,y0,x1,y1,ch){for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)if(g[y]&&g[y][x]!==undefined)g[y][x]=ch}
+const POOL={x0:38,y0:33,x1:43,y1:36,told:false};
 function genTown(){
-  const W=72,H=32,g=grid(W,H,'.');
+  const W=72,H=41,g=grid(W,H,'.');
   for(let y=0;y<H;y++)for(let x=0;x<W;x++)if(x<2||y<2||x>=W-2||y>=H-2)g[y][x]='T';
+  rect(g,2,30,49,31,'T');rect(g,33,30,35,31,'.'); // haie du sud, ouverte vers le quartier de la villa
   // forêt de l'est, percée d'un couloir de 4 cases vers le champ d'éoliennes
   rect(g,50,0,57,H-1,'T');rect(g,50,11,57,14,'.');rect(g,57,11,57,14,'w');
   [[60,4],[66,8],[59,19],[68,23],[62,27],[64,2+1]].forEach(([x,y])=>g[y][x]='T');
@@ -692,6 +699,10 @@ function genTown(){
   rect(g,15,18,16,21,'~');rect(g,14,19,17,20,'~');
   [[11,5],[12,6],[3,9],[23,10],[33,14],[21,16],[22,17],[31,21],[32,22],[11,9],[24,23],[21,23]].forEach(([x,y])=>{if(g[y][x]==='.')g[y][x]='*'});
   [[12,3],[24,6],[2,12],[33,9],[21,19],[31,15],[32,15]].forEach(([x,y])=>g[y][x]='T');
+  // quartier sud : la villa et sa piscine (sans échelle)
+  rect(g,34,29,34,36,'=');rect(g,29,36,34,36,'=');rect(g,34,34,36,34,'=');rect(g,POOL.x0,POOL.y0,POOL.x1,POOL.y1,'p');
+  [[4,34],[11,37],[17,33],[22,36],[46,33],[48,37],[24,38],[6,38],[62,33],[67,36],[59,38]].forEach(([x,y])=>g[y][x]='T');
+  [[8,33],[14,36],[20,34],[32,33],[36,37],[45,36],[40,38],[65,31],[60,35]].forEach(([x,y])=>{if(g[y][x]==='.')g[y][x]='*'});
   BLD.forEach(b=>{rect(g,b.x,b.y,b.x+b.w-1,b.y+b.h-1,'B');g[b.door[1]][b.door[0]]='D'});
   return g;
 }
@@ -702,7 +713,7 @@ function genRdc(){const W=16,H=11,g=grid(W,H,'o');rect(g,0,0,W-1,1,'W');rect(g,0
 function genCave(){const W=12,H=9,g=grid(W,H,'c');rect(g,0,0,W-1,1,'W');rect(g,0,0,0,H-1,'W');rect(g,W-1,0,W-1,H-1,'W');rect(g,0,H-1,W-1,H-1,'W');g[2][1]='U';return g}
 function genMairie(){const W=14,H=10,g=grid(W,H,'o');rect(g,0,0,W-1,1,'W');rect(g,0,0,0,H-1,'W');rect(g,W-1,0,W-1,H-1,'W');rect(g,0,H-1,W-1,H-1,'W');g[H-1][6]='E';return g}
 const MAPS={local:{g:genLocal(),name:'Intérieur'},mairie:{g:genMairie(),name:'Hôtel de ville'},town:{g:genTown(),name:'Ampère-sur-Loire'},office:{g:genOffice(),name:'Ton bureau'},rdc:{g:genRdc(),name:'Rez-de-chaussée'},cave:{g:genCave(),name:'Cave'}};
-const SOLID=new Set(['T','W','~','f','B','w']);
+const SOLID=new Set(['T','W','~','f','B','w','p']);
 
 /* ================= DESSIN PIXEL ================= */
 const cv=$('screen'),ctx=cv.getContext('2d');ctx.imageSmoothingEnabled=false;
@@ -717,6 +728,8 @@ function drawTile(c,ch,x,y,mapId){
     case '=':R(c,X,Y,16,16,'#e3cf98');if(h>.3)R(c,X+(h*13|0),Y+(h*97%13|0),2,1,'#cdb57a');if(h>.7)R(c,X+4,Y+10,1,1,'#cdb57a');break;
     case 'T':grass();R(c,X+6,Y+11,4,5,'#6b4a2b');c.fillStyle='#2e7d4f';c.beginPath();c.arc(X+8,Y+7,7,0,7);c.fill();c.fillStyle='#3f9a5f';c.beginPath();c.arc(X+6,Y+5,3,0,7);c.fill();break;
     case '~':R(c,X,Y,16,16,'#4aa3d8');R(c,X+2+(h*4|0),Y+5,5,1,'#8fd0f0');R(c,X+8,Y+11,5,1,'#8fd0f0');break;
+    case 'p':{const G=MAPS[mapId].g,n=(dx,dy)=>G[y+dy]&&G[y+dy][x+dx]==='p',e='#ece6d4',s='#c9c0a6';R(c,X,Y,16,16,'#56c4e8');R(c,X+2+(h*6|0),Y+4,5,1,'#b8ecfa');R(c,X+8,Y+11,4,1,'#b8ecfa');if((x+y)%2)R(c,X+3,Y+8,3,1,'#8ad9f2');
+      if(!n(0,-1)){R(c,X,Y,16,4,e);R(c,X,Y+4,16,1,s)}if(!n(0,1)){R(c,X,Y+12,16,4,e);R(c,X,Y+11,16,1,'#3aa3c8')}if(!n(-1,0)){R(c,X,Y,4,16,e);R(c,X+4,Y,1,16,s)}if(!n(1,0)){R(c,X+12,Y,4,16,e);R(c,X+11,Y,1,16,s)}break}
     case 'f':grass();R(c,X,Y+5,16,2,'#a07845');R(c,X,Y+10,16,2,'#a07845');R(c,X+2,Y+3,3,11,'#8a6538');R(c,X+11,Y+3,3,11,'#8a6538');break;
     case 'o':{let a='#c89b62',b='#b3874f';if(mapId==='rdc'){[a,b]=site().floor}
       R(c,X,Y,16,16,a);if(mapId==='rdc'&&S.site==='boulangerie'){if((x+y)%2)R(c,X,Y,16,16,b)}else if(mapId==='rdc'&&S.site==='bureau'){if(h>.6)R(c,X+(h*12|0),Y+(h*71%12|0),2,2,b)}else{R(c,X,Y+7,16,1,b);R(c,X+((y%2)?4:11),Y,1,7,b);R(c,X+((y%2)?12:2),Y+8,1,8,b)}break}
@@ -749,6 +762,7 @@ function drawBuilding(c,b){
   if(b.id==='media'){R(c,ix+1,iy,5,5,'#f7f0dc');R(c,ix+6,iy,5,5,'#e8e4d6');R(c,ix+5,iy,1,5,'#1c2440')}
   if(b.id==='cabinet'){R(c,ix+3,iy,6,5,'#f7f0dc');R(c,ix+5,iy+1,2,3,'#c43d3d');R(c,ix+4,iy+2,4,1,'#c43d3d')}
   if(b.id==='pharma'){R(c,ix+5,iy,2,5,'#2fbf5e');R(c,ix+3,iy+2,6,1,'#2fbf5e')}
+  if(b.id==='villa'){R(c,ix+1,iy+1,10,3,'#56c4e8');R(c,ix+2,iy+2,3,1,'#fff');R(c,ix+7,iy+2,3,1,'#fff')}
   if(b.id===S.site){R(c,X+W-10,Y-6,2,10,'#1c2440');R(c,X+W-8,Y-6,7,5,'#f2a33a')}
 }
 const mapCache={};
@@ -767,9 +781,11 @@ const TOPS=['#7a8594','#c43d3d','#2f6db5','#2f9e7a','#e2a13a','#8a3b8f','#f7f0dc
 const BOTS=['#2f3a5c','#333338','#6b4a2b','#6d7896','#8a3b3b','#2f6d34','#c9b28a'];
 const STYLES={court:'Court',long:'Long',queue:'Queue-de-cheval',carre:'Carré',boucle:'Bouclé',chauve:'Crâne rasé'};
 const AVDEF=g=>g==='f'?{g:'f',skin:1,style:'long',hair:1,top:1,bot:0,bt:'jupe'}:{g:'h',skin:1,style:'court',hair:1,top:0,bot:0,bt:'pantalon'};
-function avPal(rank,av){av=av||S.av||AVDEF('h');
-  return{skin:SKINS[av.skin],hair:HAIRC[av.hair],style:av.style,shirt:TOPS[av.top],pants:BOTS[av.bot],skirt:av.bt==='jupe',
-    hat:rank===1?'#f2c12e':null,vest:rank===1,jacket:rank===2?'#262b4f':null,tie:rank===2?'#f2a33a':null,lash:av.g==='f'}}
+function avPal(rank,av){const me=!av;av=av||S.av||AVDEF('h');
+  const p={skin:SKINS[av.skin],hair:HAIRC[av.hair],style:av.style,shirt:TOPS[av.top],pants:BOTS[av.bot],skirt:av.bt==='jupe',
+    hat:rank===1?'#f2c12e':null,vest:rank===1,jacket:rank===2?'#262b4f':null,tie:rank===2?'#f2a33a':null,lash:av.g==='f'};
+  if(me&&S.wololo){const red=p.shirt!=='#c43d3d';p.shirt=red?'#c43d3d':'#2f6db5';p.pants=red?'#6e1f1f':'#1b3f6e';if(p.jacket)p.jacket=red?'#8f2222':'#1d4a82';if(p.hat)p.hat=p.shirt;p.vest=false}
+  return p}
 const PAL=[0,1,2].map(r=>new Proxy({}, {get:(_,k)=>avPal(r)[k]}));
 /* Jambes : ph = phase du cycle (0 debout, 1 pas A, 2 passage, 3 pas B), run = course */
 function drawLegs(c,x,y,dir,ph,p,run){
@@ -801,6 +817,7 @@ function drawChar(c,x,y,dir,frame,p,run){
   c.fillStyle='rgba(0,0,0,.22)';c.fillRect(x+3,y+14,10,2);
   if(dir==='up'&&(st==='long'))R(c,x+4,y+5-bob,8,5,hc);
   drawLegs(c,x,y,dir,ph,p,run);
+  if(p.robe){R(c,x+4,y+11,8,4,p.robe);R(c,x+3,y+14,10,1,shade(p.robe))}
   y-=bob;
   const sw=ph===1?1:ph===3?-1:0,sa=run?2:1;
   // tresse/cheveux longs derrière le corps (vue de dos)
@@ -835,14 +852,14 @@ function objsFor(id){
       o.push({x:d[0]+2,y:d[1]+1,kind:'mailbox',solid:1,act:()=>actMailbox(b.id)});
       o.push({x:d[0]-2,y:d[1]+1,kind:'panel',solid:1,act:()=>actPanel(b.id)});});
     o.push({x:16,y:14,kind:'sign',solid:1,act:()=>say([{t:"Ampère-sur-Loire (45) · Zone climatique H1 · Station météo de référence : Orléans-Bricy."},{t:"Plus bas : le Parc des Données, où vivent les données brutes sauvages."}])});
-    o.push({x:S.ch>=4&&!missingReq(4).length?10:8,y:S.ch>=4&&!missingReq(4).length?14:15,kind:'npc',solid:1,glow:FICHES.some(f=>f.src==='tech'&&fAvail(f)&&!fGot(f.id)),pal:{shirt:'#2aa198',pants:'#333',hair:'#222',hat:'#e2573b'},dir:'down',act:actTech});
-    o.push({x:21,y:14,kind:'npc',solid:1,glow:FICHES.some(f=>f.src==='agentEnedis'&&fAvail(f)&&!fGot(f.id)),pal:{shirt:'#4a78c9',pants:'#333',hair:'#a0602a'},dir:'left',act:srcAct('agentEnedis',()=>say([{w:'Agent Enedis',t:"Je pose et je relève les compteurs électriques : je suis le distributeur. La facture, c'est le fournisseur qui l'envoie. Deux métiers, deux entreprises !"},{w:'Agent Enedis',t:"Au-dessus de 36 kVA, les données passent par le SGE. En dessous, avec un Linky, par Data Connect."}]))});
-    o.push({x:12,y:11,kind:'npc',solid:1,pal:{shirt:'#e2573b',pants:'#333',hair:'#333',hat:'#1c6fb3'},dir:'down',act:()=>say([{w:'Releveur GRDF',t:"Un compteur gaz mesure un volume, en m³. Pour avoir des kWh, on multiplie par le coefficient de conversion : entre 10 et 11,5 kWh/m³ selon la commune et le mois."}])});
-    o.push({x:31,y:17,kind:'npc',solid:1,glow:FICHES.some(f=>f.src==='retraite'&&fAvail(f)&&!fGot(f.id)),pal:{shirt:'#b8864a',pants:'#5a3a22',hair:'#ddd'},dir:'left',act:srcAct('retraite',()=>say([{w:'Retraité',t:"De mon temps, on relevait les index à la main. Une fois j'ai lu 404 989 au lieu de 413 989... la consommation était négative !"}]))});
+    o.push({x:S.ch>=4&&!missingReq(4).length?10:8,y:S.ch>=4&&!missingReq(4).length?14:15,kind:'npc',solid:1,glow:FICHES.some(f=>f.src==='tech'&&fAvail(f)&&!fGot(f.id)),who:'Technicien',pal:{shirt:'#2aa198',pants:'#333',hair:'#222',hat:'#e2573b'},dir:'down',act:actTech});
+    o.push({x:21,y:14,kind:'npc',solid:1,glow:FICHES.some(f=>f.src==='agentEnedis'&&fAvail(f)&&!fGot(f.id)),who:'Agent Enedis',pal:{shirt:'#4a78c9',pants:'#333',hair:'#a0602a'},dir:'left',act:srcAct('agentEnedis',()=>say([{w:'Agent Enedis',t:"Je pose et je relève les compteurs électriques : je suis le distributeur. La facture, c'est le fournisseur qui l'envoie. Deux métiers, deux entreprises !"},{w:'Agent Enedis',t:"Au-dessus de 36 kVA, les données passent par le SGE. En dessous, avec un Linky, par Data Connect."}]))});
+    o.push({x:12,y:11,kind:'npc',solid:1,who:'Releveur GRDF',pal:{shirt:'#e2573b',pants:'#333',hair:'#333',hat:'#1c6fb3'},dir:'down',act:()=>say([{w:'Releveur GRDF',t:"Un compteur gaz mesure un volume, en m³. Pour avoir des kWh, on multiplie par le coefficient de conversion : entre 10 et 11,5 kWh/m³ selon la commune et le mois."}])});
+    o.push({x:31,y:17,kind:'npc',solid:1,glow:FICHES.some(f=>f.src==='retraite'&&fAvail(f)&&!fGot(f.id)),who:'Retraité',pal:{shirt:'#b8864a',pants:'#5a3a22',hair:'#ddd'},dir:'left',act:srcAct('retraite',()=>say([{w:'Retraité',t:"De mon temps, on relevait les index à la main. Une fois j'ai lu 404 989 au lieu de 413 989... la consommation était négative !"}]))});
   }
   if(id==='office'){
     o.push({x:2,y:2,kind:'pc',solid:1,act:actPC},{x:1,y:2,kind:'desk',solid:1,act:()=>secret('postit',["Un post-it collé sur le bureau : « Mot de passe du portail Enedis : NE PAS L'ÉCRIRE SUR UN POST-IT ».","Au dos : le mot de passe. Évidemment."])},{x:3,y:2,kind:'desk',solid:1,act:actPC});
-    o.push({x:8,y:4,kind:'npc',solid:1,pal:{shirt:'#8a3b8f',pants:'#2f3a5c',hair:'#9a9aa2',glasses:1},dir:'left',act:actJoule});
+    o.push({x:8,y:4,kind:'npc',solid:1,who:'Mme Joule',pal:{shirt:'#8a3b8f',pants:'#2f3a5c',hair:'#9a9aa2',glasses:1},dir:'left',act:actJoule});
     o.push({x:10,y:2,kind:'shelf',solid:1,act:actArchives},{x:9,y:2,kind:'shelf',solid:1,act:actArchives});
     o.push({x:6,y:1,kind:'mapwall',act:()=>say([{t:"Plan d'Ampère-sur-Loire. Trois sites y sont épinglés : l'école Jean-Jaurès, les bureaux Le Carré et la boulangerie du Moulin."}])});
     {const pl=()=>secret('plante',["Une plante verte. Consommation : 0 kWh. Production : de l'oxygène.","Meilleur ratio du bâtiment, et de loin. Elle n'a jamais réclamé la clim, contrairement à la direction."]);o.push({x:1,y:6,kind:'plant',solid:1,act:pl},{x:10,y:7,kind:'plant',solid:1,act:pl})}
@@ -854,7 +871,7 @@ function objsFor(id){
   }
   if(id==='mairie'){
     o.push({x:2,y:2,kind:'bigpc',solid:1,act:openDashboard},{x:3,y:2,kind:'bigpc2',solid:1,act:openDashboard},{x:1,y:2,kind:'desk',solid:1,act:openDashboard});
-    o.push({x:10,y:4,kind:'npc',solid:1,pal:{shirt:'#1c2440',pants:'#1c2440',hair:'#9a9aa2',tie:'#c43d3d'},dir:'left',act:actMaire});
+    o.push({x:10,y:4,kind:'npc',solid:1,who:'Maire',pal:{shirt:'#1c2440',pants:'#1c2440',hair:'#9a9aa2',tie:'#c43d3d'},dir:'left',act:actMaire});
     o.push({x:8,y:1,kind:'flag',act:()=>say([{t:"Un tableau d'affichage : « Plan pluriannuel d'investissement 2026-2032 ». Il reste une ligne vide, intitulée « Énergie (à compléter) »."}])},{x:1,y:7,kind:'plant',solid:1},{x:12,y:7,kind:'plant',solid:1},{x:12,y:2,kind:'shelf',solid:1});
   }
   if(id==='cave'){
@@ -864,10 +881,11 @@ function objsFor(id){
     if(S.ch===7)o.push({x:2,y:6,kind:'derive',did:'cave',solid:1,act:()=>actDerive('cave')});
   }
   if(id==='local')localDecor(o);
-  if(id==='town'){for(let x=4;x<=11;x++){o.push({x,y:25,kind:'pv',solid:1,act:srcAct('installateur')});o.push({x,y:27,kind:'pv',solid:1,act:srcAct('installateur')})}o.push({x:40,y:24,kind:'stall',solid:1,act:srcAct('marchand')},{x:19,y:27,kind:'watermeter',solid:1,act:srcAct('plombier')})}
+  if(id==='town'){for(let x=4;x<=11;x++){o.push({x,y:25,kind:'pv',solid:1,act:srcAct('installateur')});o.push({x,y:27,kind:'pv',solid:1,act:srcAct('installateur')})}o.push({x:40,y:24,kind:'stall',solid:1,act:()=>{if(!srcTry('marchand'))eggDofus()}},{x:19,y:27,kind:'watermeter',solid:1,act:srcAct('plombier')})}
   savoirObjs(id,o);
-  if(id==='town'){o.push({x:10,y:3,kind:'machine',solid:1,act:actMachine},{x:11,y:3,kind:'none',solid:1,act:actMachine});[[60,7],[64,11],[67,15],[61,17],[65,22],[68,10],[60,27],[66,4]].forEach(([x,y])=>o.push({x,y,kind:'turbine',solid:1}))}
+  if(id==='town'){o.push({x:10,y:3,kind:'machine',solid:1,act:actMachine},{x:11,y:3,kind:'none',solid:1,act:actMachine});[[60,7],[64,11],[67,15],[61,17],[65,22],[68,10],[60,27],[66,4],[64,32],[61,36],[68,34]].forEach(([x,y])=>o.push({x,y,kind:'turbine',solid:1}))}
   secretObjs(id,o);
+  eggObjs(id,o);
   return o;
 }
 function furniture(o){
@@ -878,6 +896,7 @@ function furniture(o){
 }
 function drawObj(c,o,ox,oy,t){
   const X=o.x*TS-ox,Y=o.y*TS-oy;
+  if(drawEgg(c,o,X,Y,t))return;
   switch(o.kind){
     case 'mailbox':R(c,X+7,Y+8,2,8,'#6b4a2b');R(c,X+3,Y+2,10,7,'#c43d3d');R(c,X+4,Y+3,8,2,'#e25f5f');R(c,X+11,Y+1,1,4,'#f2a33a');break;
     case 'panel':R(c,X+2,Y+12,2,4,'#555');R(c,X+12,Y+12,2,4,'#555');R(c,X+1,Y+2,14,10,'#1c2440');R(c,X+2,Y+3,12,8,'#f7f0dc');for(let i=0;i<3;i++)R(c,X+3,Y+4+i*2,i===0?7:10,1,'#5b6380');break;
@@ -959,7 +978,7 @@ function targets(){
 /* ================= BOUCLE DE JEU ================= */
 const P={x:5,y:6,px:5*TS,py:6*TS,dir:'up',moving:false,step:0,frame:0,dist:0,runHeld:false,runToggle:false,puffs:[]};
 const WALK_SPEED=60,RUN_SPEED=128; // pixels par seconde (1 case = 16 px)
-const isRunning=()=>P.runHeld||P.runToggle;
+const isRunning=()=>!BOX.on&&(P.runHeld||P.runToggle);
 const keys={up:0,down:0,left:0,right:0};
 let tick=0,busy=false; // busy = dialogue/modal/combat
 function blocked(){return busy||dlg.open}
@@ -969,14 +988,16 @@ function isSolid(x,y){const t=tileAt(x,y);if(t===undefined||SOLID.has(t))return 
 const DIRS={up:[0,-1],down:[0,1],left:[-1,0],right:[1,0]};
 function tryMove(d){
   P.dir=d;const [dx,dy]=DIRS[d],nx=P.x+dx,ny=P.y+dy,t=tileAt(nx,ny);
+  if(BOX.on&&(t==='D'||t==='E'||t==='S'||t==='U')){const n=performance.now();if(n-(tryMove.c||0)>2500){toast('Le carton ne passe pas la porte.');tryMove.c=n}return}
   if(t==='D'){enterDoor(nx,ny);return}
   if(t==='E'){exitBuilding();return}
   if(t==='S'){warp('cave',2,2,'down');return}
   if(t==='U'){warp('rdc',13,2,'left');return}
+  {const ob=objAt(nx,ny);if(ob&&ob.go){ob.go();return}}
   if(isSolid(nx,ny)){const n=performance.now();if(n-(tryMove.b||0)>260){sfx('bump');tryMove.b=n}return}
   P.x=nx;P.y=ny;P.moving=true;
 }
-function warp(map,x,y,dir){S.map=map;P.x=x;P.y=y;P.px=x*TS;P.py=y*TS;P.dir=dir;P.moving=false;S.x=x;S.y=y;S.dir=dir;save();fadeIn();sfx('door');updateMusic()}
+function warp(map,x,y,dir){BOX.on=false;BOX.guard=null;S.map=map;P.x=x;P.y=y;P.px=x*TS;P.py=y*TS;P.dir=dir;P.moving=false;S.x=x;S.y=y;S.dir=dir;save();fadeIn();sfx('door');updateMusic()}
 let fade=0;function fadeIn(){fade=1}
 function enterDoor(x,y){
   const b=BLD.find(b=>b.door[0]===x&&b.door[1]===y);if(!b)return;
@@ -991,6 +1012,7 @@ function enterDoor(x,y){
 function exitBuilding(){
   if(S.map==='office'){const d=BLD[0].door;warp('town',d[0],d[1]+1,'down')}
   else if(S.map==='mairie'){warp('town',28,29,'down')}
+  else if(S.map==='local'&&S.inside==='villaUp'){S.inside='villa';warp('local',9,2,'down')}
   else if(S.map==='local'){const b=BLD.find(b=>b.id===S.inside);warp('town',b.door[0],b.door[1]+1,'down')}
   else{const b=BLD.find(b=>b.id===S.site);warp('town',b.door[0],b.door[1]+1,'down')}
 }
@@ -1003,6 +1025,7 @@ function update(k){
   if(!P.moving&&!blocked()){for(const d of ['up','down','left','right'])if(keys[d]){tryMove(d);break}}
   if(!P.moving&&!Object.values(keys).some(Boolean)){P.frame=0;P.dist=0}
   P.puffs=P.puffs.filter(q=>(q.t+=k)<18);
+  updateGuard(k);
 }
 /* ================= LE COULOIR DU VENT ET LA VIEILLE MACHINE ================= */
 const WIND={parts:[],told:false};
@@ -1042,7 +1065,8 @@ function actMachine(){
 }
 function onStep(){
   if(S.map==='town'&&windStep())return;
-  if(S.map==='town'&&tileAt(P.x,P.y)===':'&&S.ch>=4&&Math.random()<.16){startEncounter()}
+  if(S.map==='town'&&poolStep())return;
+  if(S.map==='town'&&tileAt(P.x,P.y)===':'&&S.ch>=4&&!BOX.on&&Math.random()<.16){startEncounter()}
 }
 function render(){
   const m=MAPS[S.map],mc=mapCache[S.map],mw=mc.width,mh=mc.height;
@@ -1053,7 +1077,9 @@ function render(){
   const objs=objsFor(S.map),pal=PAL[S.rank];
   const ents=objs.map(o=>({y:o.y*TS,f:()=>drawObj(ctx,o,ox,oy,tick)}));
   P.puffs.forEach(q=>{const a=1-q.t/18;ctx.fillStyle=`rgba(230,222,200,${a*.8})`;const r=1+q.t/6;ctx.fillRect(Math.round(q.x-ox-r),Math.round(q.y-oy-r-q.t/5),Math.round(r*2),Math.round(r*2))});
-  ents.push({y:P.py+1,f:()=>drawChar(ctx,P.px-ox,P.py-oy-2,P.dir,P.moving?P.frame:0,pal,P.moving&&isRunning())});
+  ents.push({y:P.py+1,f:()=>BOX.on?drawBoxPlayer(ctx,P.px-ox,P.py-oy,P.moving,P.frame):drawChar(ctx,P.px-ox,P.py-oy-2,P.dir,P.moving?P.frame:0,pal,P.moving&&isRunning())});
+  if(BOX.guard)ents.push({y:BOX.guard.y+1,f:()=>drawGuard(ctx,ox,oy)});
+  if(S.map==='town')ents.push({y:POOL.y0*TS,f:()=>drawSwimmer(ctx,ox,oy,tick)});
   ents.sort((a,b)=>a.y-b.y).forEach(e=>e.f());
   // hautes herbes par-dessus les pieds
   if(S.map==='town'&&tileAt(P.x,P.y)===':'&&!P.moving){R(ctx,P.px-ox+2,P.py-oy+11,12,5,'#4f9a4a');R(ctx,P.px-ox+4,P.py-oy+10,1,4,'#6fbf5f');R(ctx,P.px-ox+10,P.py-oy+10,1,4,'#6fbf5f')}
@@ -1073,33 +1099,42 @@ let lastT=0;function loop(now){const k=lastT?Math.min(3,(now-lastT)/16.667):1;la
 
 /* ================= DIALOGUE ================= */
 const dlg={open:false,q:[],cur:null,shown:0,cb:null,el:null};
-function say(lines,cb){lines=lines.map(l=>typeof l==='string'?{t:l}:l);dlg.q=lines.slice();dlg.cb=cb||null;dlg.open=true;nextLine()}
+function say(lines,cb){
+  // les répliques consécutives d'un même personnage sont regroupées pour remplir l'encart
+  const m=[];lines.forEach(l=>{l=typeof l==='string'?{t:l}:l;const p=m[m.length-1];if(p&&p.w===l.w)p.t+=' '+l.t;else m.push({w:l.w,t:l.t})});
+  dlg.q=m;dlg.cb=cb||null;dlg.open=true;nextLine()}
 function nextLine(){
   if(!dlg.q.length){dlg.open=false;if(dlg.el){dlg.el.remove();dlg.el=null}const cb=dlg.cb;dlg.cb=null;if(cb)setTimeout(cb,30);return}
   dlg.cur=dlg.q.shift();dlg.shown=0;
   if(!dlg.el){dlg.el=document.createElement('div');dlg.el.className='dialog';dlg.el.addEventListener('click',pressA);$('wrap').appendChild(dlg.el)}
-  const txt=dlg.cur.t.replace(/\{name\}/g,S.name);dlg.cur.full=txt;fitDialog();typeTick();
+  dlg.cur.full=dlg.cur.t.replace(/\{name\}/g,S.name);paginate();typeTick();
 }
-/* taille du texte ajustée pour remplir la boîte de dialogue avec la réplique complète */
-function fitDialog(){
+/* Taille de texte fixe (calée sur l'encart, identique pour toutes les répliques) ; le texte est découpé en pages qui remplissent l'encart */
+const spkHTML=c=>c.w?`<span class="spk">${esc(c.w)}</span>`:'';
+function paginate(){
   const el=dlg.el,c=dlg.cur;if(!el||!c)return;
-  el.innerHTML=(c.w?`<span class="spk">${esc(c.w)}</span>`:'')+`<div class="dtx">${esc(c.full)}</div>`+'<span class="more">▼</span>';
-  const t=el.querySelector('.dtx'),hMax=Math.min(32,Math.max(14,t.clientHeight*.3));let lo=10,hi=hMax;
-  for(let i=0;i<9;i++){const m=(lo+hi)/2;t.style.fontSize=m+'px';if(t.scrollHeight<=t.clientHeight+1&&t.scrollWidth<=t.clientWidth+1)lo=m;else hi=m}
-  dlg.fs=Math.floor(lo*2)/2;
+  el.innerHTML=spkHTML(c)+'<div class="dtx"></div>';
+  const t=el.querySelector('.dtx'),h=t.clientHeight,target=Math.max(14,Math.min(20,$('wrap').clientWidth/38));let n0=Math.max(2,Math.round(h/(target*1.3))),n=h/(n0*1.3)>target+1?n0+1:n0;
+  dlg.fs=Math.floor(h/(n*1.3)*2)/2;t.style.fontSize=dlg.fs+'px';
+  const fits=txt=>{t.textContent=txt;return t.scrollHeight<=t.clientHeight+1};
+  if(fits(c.full))return;
+  const w=c.full.split(' ');let lo=1,hi=w.length-1;
+  while(lo<hi){const mid=Math.ceil((lo+hi)/2);if(fits(w.slice(0,mid).join(' ')))lo=mid;else hi=mid-1}
+  dlg.q.unshift({w:c.w,t:w.slice(lo).join(' '),cont:true});c.full=w.slice(0,lo).join(' ');
 }
-addEventListener('resize',()=>{if(dlg.open&&dlg.el){fitDialog();typeTick()}});
+addEventListener('resize',()=>{if(dlg.open&&dlg.el&&dlg.cur){while(dlg.q[0]&&dlg.q[0].cont)dlg.cur.full+=' '+dlg.q.shift().t;paginate();dlg.shown=dlg.cur.full.length;typeTick()}});
 function typeTick(){
   if(!dlg.open||!dlg.el)return;const c=dlg.cur;dlg.shown=Math.min(c.full.length,dlg.shown+2);
-  dlg.el.innerHTML=(c.w?`<span class="spk">${esc(c.w)}</span>`:'')+`<div class="dtx" style="font-size:${dlg.fs||16}px">${esc(c.full.slice(0,dlg.shown))}</div>`+(dlg.shown>=c.full.length?'<span class="more">▼</span>':'');
+  dlg.el.innerHTML=spkHTML(c)+`<div class="dtx" style="font-size:${dlg.fs||16}px">${esc(c.full.slice(0,dlg.shown))}</div>`+(dlg.shown>=c.full.length?'<span class="more">▼</span>':'');
   if(dlg.shown<c.full.length){sfx('blip');setTimeout(typeTick,16)}
 }
 function pressA(){
   if(busy)return;
   if(dlg.open){if(dlg.shown<dlg.cur.full.length){dlg.shown=dlg.cur.full.length;typeTick()}else nextLine();return}
   if(P.moving)return;
+  if(BOX.on){leaveBox(false);say([{t:"Tu sors du carton. Il retourne à sa place, l'air de rien."}]);return}
   const [dx,dy]=DIRS[P.dir],o=objAt(P.x+dx,P.y+dy);
-  if(o&&o.act){if(o.kind==='npc')o.dir={up:'down',down:'up',left:'right',right:'left'}[P.dir];o.act()}
+  if(o&&o.act){if(o.kind==='npc'){o.dir={up:'down',down:'up',left:'right',right:'left'}[P.dir];if(hadesBlock(o))return}o.act()}
 }
 
 /* ================= HUD / XP ================= */
@@ -1107,7 +1142,7 @@ const level=()=>Math.floor(S.xp/90)+1;
 function hud(){
   trkChapter();
   S.maxCh=Math.max(S.maxCh||0,S.ch);updateMusic();
-  $('hudName').textContent=S.name;$('hudRank').textContent=RANKS[S.rank];$('hudLvl').textContent='Nv '+level();
+  $('hudName').textContent=S.name;$('hudRank').textContent=RANKS[S.rank]+(S.hades?' · Hadès':'');$('hudLvl').textContent='Nv '+level();
   $('hudXp').style.width=((S.xp%90)/90*100)+'%';
   $('hudBadges').innerHTML=BADGES.map(b=>`<span class="${S.badges.includes(b)?'on':''}" title="Badge ${b}${S.badges.includes(b)?'':' (à gagner)'}"></span>`).join('');
   $('objective').innerHTML='<b>Objectif :</b> '+esc(objectiveText());if(typeof courseLabel==='function'){$('qkStep').textContent=courseLabel();qkSync()}
@@ -1247,7 +1282,11 @@ const SECRETS={
   commercial:'Le prix fixe',legendaire:'Le Compteur Légendaire',arbre:"L'arbre non déclaré",konami:'Le mode sobriété',prenom:'Un prénom prédestiné',
   carton:'Le carton de 2003',vent:'Le mur de vent',pspe:'La machine PSPE',mobilier:'Le mobilier bavard',joule:'Harceler Mme Joule',fuite:'La stratégie de fuite',panneau:'Le règlement du parc'
 };
-const NSEC=Object.keys(SECRETS).length;
+/* clins d'œil aux jeux vidéo (un par jeu) */
+const EGGS={mgs:'Le carton qui marche',wow:'Le voyageur laconique',aoe:'Le prêtre persuasif',wc3:'L’artisan dévoué',zelda:'Dangereux d’y aller seul',crash:'La caisse nerveuse',
+  dofus:'Le prix des tomates',adibou:'Le CD-ROM éducatif',sims:'La piscine sans échelle',metroid:'Le conduit trop étroit',castlevania:'Le mur creux',smash:'Sans une égratignure',
+  mario64:'Le tableau qui ondule',spyro:'Le mouton inquiet',minecraft:'Le bloc de bois',wii:'La dragonne'};
+const NSEC=Object.keys(SECRETS).length+Object.keys(EGGS).length;
 function secret(id,lines,cb){
   const first=!S.secrets[id];
   say(lines,()=>{if(first){trk('secret',{id});S.secrets[id]=1;save();sfx('secret');gainXP(15);toast(`Secret trouvé ! ${Object.keys(S.secrets).length}/${NSEC}`)}if(cb)cb()});
@@ -1284,8 +1323,8 @@ function secretObjs(id,o){
     o.push({x:10,y:7,kind:'bin',solid:1,act:()=>secret('poubelle',["Une poubelle pleine de rapports d'audit énergétique : 2009, 2014, 2019.","Les trois concluent : « isoler les combles ». Les combles attendent toujours. Ils sont très patients, les combles."])});
     [[15,18],[16,18],[15,21],[16,21],[14,19],[15,19],[16,19],[17,19],[14,20],[15,20],[16,20],[17,20]].forEach(([x,y])=>o.push({x,y,kind:'none',act:()=>secret('etang',["Tu contemples l'étang. Ton reflet te contemple.","Aucun de vous deux ne sait convertir des m³ en kWh sans le coefficient de conversion. Vous détournez le regard."])}));
     o.push({x:20,y:15,kind:'cat',solid:1,act:()=>secret('chat',[{w:'Chat',t:"Miaou."},{t:"Le chat passe ses journées dans la chaufferie. En juillet."},{t:"Il a repéré la chaudière qui tourne l'été bien avant ton logiciel de détection à 40 000 €. Il réclame une augmentation en croquettes."}])});
-    o.push({x:12,y:14,kind:'npc',solid:1,pal:{shirt:'#2c2c34',pants:'#2c2c34',hair:'#d9a441',tie:'#c43d3d'},dir:'down',act:()=>secret('consultant',[{w:'Consultant',t:"Bonjour ! Je vends une plateforme IA-blockchain-métavers de pilotage énergétique prédictif."},{w:'Consultant',t:"Pour 80 000 €, elle vous dira d'éteindre la lumière en partant. En PowerPoint, avec des dégradés."},{w:'Consultant',t:"Vous n'avez pas encore de compteurs fiables ? Aucun problème : notre IA invente les données manquantes. Avec assurance."},{t:"Il te laisse une plaquette imprimée en couleur, recto seul. Tu la ranges avec les audits."}])});
-    o.push({x:32,y:11,kind:'npc',solid:1,pal:{shirt:'#c43d3d',pants:'#333',hair:'#2b1d14'},dir:'left',act:()=>secret('commercial',[{w:'Commercial',t:"Contrat d'électricité à prix FIXE garanti trois ans !"},{w:'Commercial',t:"(Hors TURPE, accise, CTA, TVA, capacité, CEE, indexation, révision et cas de force majeure.)"},{w:'Commercial',t:"Mais le prix est fixe. Enfin, la police de caractères du prix est fixe."}])});
+    o.push({x:12,y:14,kind:'npc',solid:1,who:'Consultant',pal:{shirt:'#2c2c34',pants:'#2c2c34',hair:'#d9a441',tie:'#c43d3d'},dir:'down',act:()=>secret('consultant',[{w:'Consultant',t:"Bonjour ! Je vends une plateforme IA-blockchain-métavers de pilotage énergétique prédictif."},{w:'Consultant',t:"Pour 80 000 €, elle vous dira d'éteindre la lumière en partant. En PowerPoint, avec des dégradés."},{w:'Consultant',t:"Vous n'avez pas encore de compteurs fiables ? Aucun problème : notre IA invente les données manquantes. Avec assurance."},{t:"Il te laisse une plaquette imprimée en couleur, recto seul. Tu la ranges avec les audits."}])});
+    o.push({x:32,y:11,kind:'npc',solid:1,who:'Commercial',pal:{shirt:'#c43d3d',pants:'#333',hair:'#2b1d14'},dir:'left',act:()=>secret('commercial',[{w:'Commercial',t:"Contrat d'électricité à prix FIXE garanti trois ans !"},{w:'Commercial',t:"(Hors TURPE, accise, CTA, TVA, capacité, CEE, indexation, révision et cas de force majeure.)"},{w:'Commercial',t:"Mais le prix est fixe. Enfin, la police de caractères du prix est fixe."}])});
     o.push({x:33,y:23,kind:'legend',solid:1,act:()=>secret('legendaire',["Dans les buissons : un vieux compteur électromécanique à disque, couvert de mousse.","Son disque tourne à l'envers depuis 1987. Personne n'a jamais osé le relever.","Tu as trouvé le Compteur Légendaire ! Il n'a pas de PDL. Il est au-delà des PDL."])});
     o.push({x:12,y:3,kind:'none',act:()=>secret('arbre',["Cet arbre stocke du CO₂ gratuitement depuis soixante ans, sans subvention ni certificat d'économies d'énergie.","Il n'a jamais déclaré sur OPERAT. Personne n'a osé lui demander sa surface de plancher."])});
     o.push({x:7,y:14,kind:'sign',solid:1,act:()=>secret('panneau',["« PARC DES DONNÉES. Merci de ne pas nourrir les données brutes. »","« Interdiction d'extrapoler après 22 h. Les moyennes glissantes doivent être tenues en laisse. »"])});
@@ -1368,6 +1407,165 @@ function jumpTo(ch,sid){
   if(!ROOT.querySelector('.title-screen'))boot(true);
   const hint=JOULE_HINTS[ch];
   setTimeout(()=>say([{t:`Reprise : ${CHAPTERS[ch]} · ${s.name}.`},{t:"Un doute ? Le bouton « Comprendre cette étape », au-dessus du jeu, t'emmène à la bonne section du cours."},...(hint?hint.map(t=>({w:'Mme Joule',t})):[{t:objectiveText()}])]),350);
+}
+
+/* ================= CLINS D'ŒIL AUX JEUX VIDÉO & MODE HADÈS ================= */
+const egg=(id,lines,cb)=>secret(id,lines,cb);
+
+/* ---- Mode Hadès : il faut tout demander deux fois aux personnages ---- */
+const HADES_LINES=[
+  "Hmm ? Ah. C'est à moi que tu parles. Dommage.",
+  "Une question. Quelle audace, pour quelqu'un qui n'a manifestement pas réfléchi avant.",
+  "Tu vois cette tête ? C'est celle de quelqu'un qui s'en fiche.",
+  "J'ai connu des compteurs en panne plus pertinents que toi.",
+  "Tu as pensé à chercher tout seul ? Non. Bien sûr que non.",
+  "Je pourrais te répondre. Mais ce serait t'encourager.",
+  "C'est noté. Dans la corbeille, entre deux audits que personne n'a lus.",
+  "Encore toi. J'espérais une coupure de courant.",
+  "On m'a déjà posé une question aujourd'hui. Elle était meilleure.",
+  "Il paraît qu'il n'y a pas de question stupide. Tu viens de faire avancer la science.",
+  "C'est écrit dans le cours. Avec des images, même. Pour les gens comme toi.",
+  "Ton silence avait un excellent rendement. Tu viens de le dégrader.",
+  "Cinq ans d'études pour entendre ça. J'aurais dû faire dentiste : là, au moins, les gens se taisent.",
+  "Si la bêtise se facturait au kWh, tu serais mon plus gros client.",
+  "À chaque fois que tu ouvres la bouche, un kilowattheure meurt pour rien.",
+  "Tu consommes beaucoup d'attention pour ne rien produire. On appelle ça un talon.",
+  "Je classe les gens en deux catégories : les utiles, et toi.",
+  "Parle à ma main. Elle a un meilleur facteur de puissance que toi.",
+  "Tu es une dérive. Personne ne t'a encore détecté, voilà tout.",
+  "Je te répondrais bien, mais j'ai une vie intérieure à entretenir, et tu n'y figures pas."
+];
+const HAD={ok:null};
+function hadesBlock(o){
+  if(!S.hades||o.noHades)return false;
+  const key=S.map+':'+(S.inside||'')+':'+o.x+','+o.y;
+  if(HAD.ok===key){HAD.ok=null;return false}
+  const n=S.hadesN||0,L=HADES_LINES,line=n<L.length?L[n]:L[L.length-8+Math.floor(Math.random()*8)];
+  S.hadesN=n+1;HAD.ok=key;save();
+  const who=o.who||(o.sid&&SRC[o.sid]&&SRC[o.sid].who)||'…';
+  say([{w:who,t:line}]);return true;
+}
+
+/* ---- Metal Gear Solid : le carton ---- */
+const BOX={on:false,origin:[33,16],guard:null,since:0,lastMove:0};
+const GUARD_PAL={shirt:'#39426a',pants:'#1c2440',hair:'#2b1d14',hat:'#1c2440'};
+const GUARD_PATH=[[34,17],[34,22],[32,22],[32,17]];
+function enterBox(){
+  if(BOX.on)return;
+  egg('mgs',["Un grand carton vide, posé là sans raison apparente.","Tu te glisses dessous. Parfait : plus personne ne peut te voir. Tu peux même marcher avec. (A pour en sortir.)"],()=>{
+    BOX.on=true;BOX.since=tick;P.runToggle=false;
+    BOX.guard={x:34*TS,y:22*TS,i:1,dir:'up',state:'patrol',wait:0,frame:0};
+    toast('Quelqu’un approche…')});
+}
+function leaveBox(found){
+  BOX.on=false;BOX.guard=null;
+  if(found){P.x=BOX.origin[0];P.y=BOX.origin[1]+1;P.px=P.x*TS;P.py=P.y*TS;P.dir='up';P.moving=false;S.x=P.x;S.y=P.y;fadeIn()}
+}
+function updateGuard(k){
+  const g=BOX.guard;if(!g||!BOX.on)return;if(dlg.open||busy)return;
+  if(P.moving)BOX.lastMove=tick;
+  const gx=Math.round(g.x/TS),gy=Math.round(g.y/TS);
+  const step=(tx,ty,sp)=>{const dx=tx-g.x,dy=ty-g.y;if(Math.abs(dx)>0.5){g.x+=Math.sign(dx)*Math.min(sp,Math.abs(dx));g.dir=dx>0?'right':'left'}else if(Math.abs(dy)>0.5){g.y+=Math.sign(dy)*Math.min(sp,Math.abs(dy));g.dir=dy>0?'down':'up'}else return true;g.frame+=sp/4;return false};
+  if(g.state==='patrol'){
+    if(g.wait>0){g.wait-=k;if(g.wait<60&&g.wait>58)g.dir=['left','right','up','down'][Math.floor(Math.random()*4)]}
+    else{const [tx,ty]=GUARD_PATH[g.i];if(step(tx*TS,ty*TS,0.9*k)){g.i=(g.i+1)%GUARD_PATH.length;g.wait=90}}
+    // repérage : seulement si le carton BOUGE dans son champ de vision
+    const [dx,dy]=DIRS[g.dir],moving=tick-BOX.lastMove<12;
+    if(moving&&Math.abs(gx-P.x)+Math.abs(gy-P.y)<=1){g.state='alert';g.wait=45;sfx('bad')}
+    else if(moving)for(let n=1;n<=5;n++){const x=gx+dx*n,y=gy+dy*n;if(x===P.x&&y===P.y){g.state='alert';g.wait=45;sfx('bad');break}const t=tileAt(x,y);if(t===undefined||SOLID.has(t))break}
+    if(g.state==='patrol'&&tick-BOX.since>60*50){BOX.guard=null;say([{w:'Vigile',t:"Rien. Ce doit être mon imagination."},{t:"Le vigile s'éloigne. Tu restes seul avec ton carton et ta dignité."}])}
+  }else if(g.state==='alert'){g.wait-=k;g.dir=Math.abs(P.px-g.x)>Math.abs(P.py-g.y)?(P.px>g.x?'right':'left'):(P.py>g.y?'down':'up');if(g.wait<=0)g.state='chase'}
+  else if(g.state==='chase'){
+    const tx=P.px,ty=P.py;if(Math.abs(tx-g.x)+Math.abs(ty-g.y)<=TS+2||step(tx,ty,2.6*k)){g.state='caught';
+      say([{w:'Vigile',t:"Un carton qui marche. Tu croyais vraiment que ça passerait ?"},{t:"Tu es découvert ! Retour à la case départ, à côté du carton."}],()=>leaveBox(true))}
+  }
+}
+function drawBoxPlayer(c,x,y,moving,frame){
+  x=Math.round(x);y=Math.round(y);const b=moving&&frame%2?1:0;
+  c.fillStyle='rgba(0,0,0,.22)';c.fillRect(x+1,y+14,14,2);
+  if(moving){R(c,x+4,y+13,3,2,'#222');R(c,x+9,y+13,3,2,'#222')}
+  R(c,x+1,y+2-b,14,12,'#b08a5a');R(c,x+1,y+2-b,14,2,'#c9a26e');R(c,x+1,y+12-b,14,2,'#8f6d42');R(c,x+7,y+2-b,2,12,'#d9c08e');R(c,x+4,y+7-b,3,1,'#5a4326');R(c,x+10,y+7-b,3,1,'#5a4326');
+}
+function drawGuard(c,ox,oy){
+  const g=BOX.guard;if(!g)return;const X=g.x-ox,Y=g.y-oy-2;
+  drawChar(c,X,Y,g.dir,Math.floor(g.frame),GUARD_PAL,g.state==='chase');
+  if(g.state==='alert'||g.state==='chase'){R(c,Math.round(X)+5,Math.round(Y)-12,6,10,'#fff');R(c,Math.round(X)+7,Math.round(Y)-11,2,5,'#c43d3d');R(c,Math.round(X)+7,Math.round(Y)-5,2,2,'#c43d3d')}
+}
+
+/* ---- objets et personnages des clins d'œil ---- */
+const WC3={n:0},TREE={n:0};
+function eggObjs(id,o){
+  if(id==='town'){
+    if(!BOX.on)o.push({x:BOX.origin[0],y:BOX.origin[1],kind:'cbox',solid:1,act:enterBox});
+    o.push({x:17,y:17,kind:'npc',solid:1,noHades:1,who:'Voyageur',pal:{skin:'#6f9f4f',shirt:'#6b4a2b',pants:'#3a3028',hair:'#1c1c1c',style:'queue'},dir:'right',act:()=>egg('wow',[{w:'Voyageur',t:'KEK'}])});
+    o.push({x:35,y:10,kind:'npc',solid:1,noHades:1,who:'Prêtre',pal:{shirt:'#ece6d6',pants:'#ece6d6',robe:'#ece6d6',hair:'#9a9aa2',style:'chauve'},dir:'down',act:()=>{S.wololo=!S.wololo;save();egg('aoe',[{w:'Prêtre',t:'Wololo'}])}});
+    o.push({x:3,y:28,kind:'sheep',solid:1,act:()=>egg('spyro',[{w:'Mouton',t:'Bêêê.'},{t:"Il jette des regards inquiets vers le ciel, comme si un petit dragon violet pouvait surgir à tout moment pour lui foncer dessus."}])});
+    o.push({x:24,y:6,kind:'none',act:()=>{TREE.n++;if(TREE.n<4)return say([{t:["Tu frappes l'arbre à mains nues. Il ne se passe rien.","Tu frappes encore. Des fissures apparaissent. Étrange.","Encore un coup. Ça vient."][TREE.n-1]}]);TREE.n=0;
+      egg('minecraft',["Un bloc de bois parfaitement cubique tombe au sol.","Tu n'as pas d'établi. Tu le reposes, un peu déçu."])}});
+    // la piscine de la villa
+    for(let y=POOL.y0;y<=POOL.y1;y++)for(let x=POOL.x0;x<=POOL.x1;x++)o.push({x,y,kind:'none',act:poolSay});
+  }
+  if(id==='local'&&S.inside==='villa'){
+    const up=()=>{S.inside='villaUp';warp('local',5,6,'up');toast('À l’étage')};
+    o.push({x:9,y:1,kind:'stairup',act:up,go:up},{x:1,y:2,kind:'sofa',solid:1},{x:2,y:2,kind:'sofa',solid:1},{x:4,y:2,kind:'shelf',solid:1},{x:1,y:6,kind:'plant',solid:1},{x:6,y:5,kind:'readtable',solid:1},{x:7,y:5,kind:'readtable',solid:1});
+    o.push({x:3,y:4,kind:'npc',solid:1,noHades:1,who:'Habitante',pal:{shirt:'#e57399',pants:'#6d7896',hair:'#b8431f',style:'queue',lash:1},dir:'down',act:()=>say([{w:'Habitante',t:"Glarbo fenni wazoup ! Tiba dou vrenka somblé, yip narado frouli meshabou. Krimpa lo zavouni ?"},{t:"Tu ne comprends pas un mot. Elle désigne la piscine par la fenêtre, puis hausse les épaules."}])});
+    o.push({x:7,y:3,kind:'npc',solid:1,noHades:1,who:'Habitant',pal:{shirt:'#2f6db5',pants:'#c9b28a',hair:'#2b1d14'},dir:'left',act:()=>say([{w:'Habitant',t:"Oublaï ! Fretch nabito klou, grémi sportalou vinz. Habada tchoup, habada tchoup ! Mirglo."}])});
+    o.push({x:8,y:5,kind:'npc',solid:1,noHades:1,who:'Invité',pal:{shirt:'#2f9e7a',pants:'#2c2c34',hair:'#d9a441',style:'boucle'},dir:'left',act:()=>say([{w:'Invité',t:"Zib zib ? Arkélou fromba dinni, plou vachtaï ! Grenko mi sabloune, ooh, yébi sprou."}])});
+  }
+  if(id==='local'&&S.inside==='villaUp'){
+    const cc=()=>say([{t:"Quelque chose bouge sous la couette."},{w:'Couette',t:"Crac crac."}]);
+    o.push({x:5,y:7,kind:'stairdown'},{x:4,y:3,kind:'duvet',solid:1,act:cc},{x:5,y:3,kind:'none',solid:1,act:cc},{x:1,y:2,kind:'plant',solid:1},{x:8,y:2,kind:'shelf',solid:1},{x:9,y:6,kind:'plant',solid:1});
+  }
+  if(id==='cave'){
+    o.push({x:7,y:6,kind:'nitro',solid:1,act:()=>egg('crash',["Une caisse marquée « NITRO ». Elle tressaute toute seule.","Tu décides sagement de ne pas sauter dessus. Les autres caisses, elles, te donnent une envie irrépressible de tournoyer."])});
+    o.push({x:10,y:1,kind:'conduit',act:()=>egg('metroid',["Un conduit de ventilation, large comme un ballon.","Il faudrait pouvoir se rouler en boule pour passer. Tu n'as pas (encore) cet équipement. Au fond, quelque chose brille : une réserve d'énergie."])});
+    o.push({x:6,y:1,kind:'crack',act:()=>egg('castlevania',["Ce pan de mur sonne creux. Tu donnes un coup dedans.","Derrière les briques : un poulet rôti, encore tiède. Tu ne poses pas de questions."])});
+  }
+  if(id==='mairie')o.push({x:10,y:1,kind:'painting',act:()=>egg('mario64',["Un grand tableau, dont la surface ondule légèrement.","Tu prends ton élan et tu sautes dedans. Tu te cognes. Ce n'est pas ce genre de château."])});
+  if(id==='local'&&S.inside==='maison')o.push({x:1,y:5,kind:'oldpc',solid:1,act:()=>egg('adibou',["Un vieil ordinateur beige. Dans le lecteur, un CD-ROM éducatif pour les 4-7 ans.","Au menu : jardiner, cuisiner un gâteau, apprendre à lire. Pas un mot sur les kWh. Une lacune."])});
+}
+const eggDofus=()=>egg('dofus',["Sur l'étal, une ardoise : « Tomates : 3 kamas le kilo. »","En dessous, à la craie : « Dernier client : un guerrier très pressé, qui a foncé sans lire le mandat. »"]);
+const eggWii=()=>egg('wii',[{w:'Télé',t:"« … et le thermostat connecté qui ne se connectait qu’à la box du voisin. Retour à la météo. »"},{t:"Tu changes de chaîne. Une console blanche est branchée dessous."},{w:'Télé',t:"« Avant de jouer, attache bien la dragonne à ton poignet. »"},{t:"Une petite fissure en bas de l'écran suggère que quelqu'un ne l'a pas fait."},{w:'Télé',t:"« Ton âge sportif est de 67 ans. »"}]);
+function eggArtisan(){WC3.n++;if(WC3.n===1)return false;
+  if(WC3.n===2){egg('wc3',[{w:'Artisan',t:'Encore du travail ?'}]);return true}
+  say([{w:'Artisan',t:['Oui, chef ?','D’accord, d’accord…','Arrête de me tapoter l’épaule, je travaille !','Si tu continues, je te facture le déplacement.'][(WC3.n-3)%4]}]);return true}
+function eggGardien(){if(S.ch!==7)return false;egg('zelda',[{w:'Gardien de l’école',t:"Il est dangereux de partir seul. Prends ceci."},{t:"Il te tend une lampe torche. Les piles datent de 2019, mais c'est l'intention qui compte."}]);return true}
+SRC.artisan.egg=eggArtisan;SRC.gardien.egg=eggGardien;
+const eggSmash=cb=>egg('smash',["Victoire sans une égratignure : 0 % de dégâts.","Du ciel, une voix grave hurle « GAME ! ». Tu ressens l'envie soudaine de refaire exactement la même chose, très vite, sans objets, sur un terrain parfaitement plat."],cb);
+/* dessins des objets des clins d'œil */
+function drawEgg(c,o,X,Y,t){
+  switch(o.kind){
+    case 'cbox':c.fillStyle='rgba(0,0,0,.22)';c.fillRect(X+1,Y+14,14,2);R(c,X+1,Y+3,14,12,'#b08a5a');R(c,X+1,Y+3,14,2,'#c9a26e');R(c,X+1,Y+13,14,2,'#8f6d42');R(c,X+7,Y+3,2,12,'#d9c08e');R(c,X+4,Y+8,3,1,'#5a4326');R(c,X+10,Y+8,3,1,'#5a4326');return true;
+    case 'sheep':{const b=(t>>5)%2;c.fillStyle='rgba(0,0,0,.2)';c.fillRect(X+2,Y+14,12,2);R(c,X+4,Y+12,2,3,'#3a3530');R(c,X+10,Y+12,2,3,'#3a3530');R(c,X+2,Y+6,12,7,'#f4f1e8');R(c,X+3,Y+5,10,1,'#f4f1e8');R(c,X+3,Y+13,10,1,'#dcd8cc');R(c,X+11,Y+4+b,5,5,'#3a3530');R(c,X+13,Y+6+b,1,1,'#fff');R(c,X+10,Y+4+b,2,2,'#3a3530');return true}
+    case 'nitro':{const j=(t%90)<8?((t>>1)%2?-1:1):0;R(c,X+1+j,Y+2,14,13,'#8a6a3e');R(c,X+1+j,Y+2,14,1,'#b08a5a');R(c,X+1+j,Y+5,14,2,'#5d5048');R(c,X+1+j,Y+11,14,2,'#5d5048');R(c,X+3+j,Y+5,1,2,'#c9d3de');R(c,X+12+j,Y+5,1,2,'#c9d3de');R(c,X+3+j,Y+11,1,2,'#c9d3de');R(c,X+12+j,Y+11,1,2,'#c9d3de');return true}
+    case 'conduit':R(c,X+2,Y+3,12,10,'#6d7480');R(c,X+3,Y+4,10,8,'#15181f');for(let i=0;i<4;i++)R(c,X+3,Y+5+i*2,10,1,'#3a404a');if((t>>4)%5===0)R(c,X+10,Y+9,2,2,'#f2c12e');return true;
+    case 'crack':R(c,X+7,Y+2,1,3,'#3a3530');R(c,X+8,Y+4,1,3,'#3a3530');R(c,X+6,Y+6,2,1,'#3a3530');R(c,X+6,Y+7,1,3,'#3a3530');R(c,X+7,Y+9,1,3,'#3a3530');R(c,X+9,Y+6,2,1,'#3a3530');R(c,X+10,Y+7,1,2,'#3a3530');return true;
+    case 'painting':{R(c,X,Y+1,16,13,'#b8862f');R(c,X+1,Y+2,14,11,'#8f6420');for(let y=0;y<9;y++){const w=Math.round(Math.sin(t/14+y*.9)*1.2);R(c,X+2,Y+3+y,12,1,y<4?'#8ec9e8':y<6?'#5aa85a':'#3f8a4a');R(c,X+5+w,Y+3+y,3,1,y<4?'#b5def2':'#6fbf6f')}R(c,X+9,Y+4,2,2,'#fff6c0');return true}
+    case 'stairup':R(c,X,Y,16,16,'#3b3240');for(let i=0;i<4;i++)R(c,X+1+i,Y+1+i*4,14-i*2,3,'#b9a88a');return true;
+    case 'stairdown':R(c,X,Y,16,16,'#3b3240');for(let i=0;i<4;i++)R(c,X+1,Y+1+i*4,14,2,i%2?'#6d5d4d':'#86735f');return true;
+    case 'duvet':{R(c,X,Y-4,32,6,'#6b4a2b');R(c,X+1,Y+2,30,13,'#f4f1e8');R(c,X+3,Y+2,11,5,'#fff');R(c,X+18,Y+2,11,5,'#fff');R(c,X+1,Y+7,30,8,'#c0503a');R(c,X+1,Y+7,30,1,'#e8e4d6');R(c,X+1,Y+14,30,1,'#8f3327');
+      const bx=X+12+Math.round(Math.sin(t/9)*6),up=(t>>2)%2;R(c,bx,Y+6-up,9,4,'#c0503a');R(c,bx+1,Y+5-up,7,1,'#d1614b');R(c,bx+9,Y+8,2,2,'#a84433');return true}
+    case 'oldpc':R(c,X,Y+10,16,6,'#8a5f36');R(c,X+2,Y,12,10,'#d9cfb8');R(c,X+3,Y+1,10,7,'#22303a');R(c,X+4,Y+2,8,5,(t>>5)%2?'#3f8a6a':'#4a9a78');R(c,X+5,Y+3,2,2,'#f2c12e');R(c,X+9,Y+4,2,2,'#e2573b');R(c,X+10,Y+8,3,1,'#9a917c');R(c,X+3,Y+11,10,2,'#cfc5ae');return true;
+  }
+  return false;
+}
+
+/* ---- la piscine sans échelle ---- */
+const POOL_LINE=[{t:"On dirait que quelqu'un a retiré l'échelle, classique."}];
+function poolSay(){egg('sims',POOL_LINE)}
+function poolStep(){
+  const dx=Math.max(POOL.x0-P.x,0,P.x-POOL.x1),dy=Math.max(POOL.y0-P.y,0,P.y-POOL.y1),d=Math.max(dx,dy);
+  if(d>3)POOL.told=false;
+  if(d<=1&&!POOL.told){POOL.told=true;poolSay();return true}
+  return false;
+}
+function drawSwimmer(c,ox,oy,t){
+  const L=(POOL.x1-POOL.x0+1)*TS-30,per=L*2,u=(t*.45)%per,right=u<L,sx=POOL.x0*TS+8+(right?u:per-u),sy=(POOL.y0+POOL.y1+1)*TS/2-5;
+  const X=Math.round(sx-ox),Y=Math.round(sy-oy),st=(t>>3)%2,f=right?1:-1;
+  c.fillStyle='rgba(255,255,255,.55)';c.fillRect(X-f*6+(f>0?0:8),Y+7,6,1);c.fillRect(X-f*10+(f>0?0:8),Y+9,5,1);
+  R(c,X+2,Y+6,10,3,'#f1c7a1');R(c,X+(f>0?9:-1),Y+(st?4:7),6,2,'#f1c7a1');R(c,X+(f>0?-1:9),Y+(st?7:4),6,2,'#f1c7a1');
+  R(c,X+4,Y+1,6,6,'#f1c7a1');R(c,X+4,Y,6,3,'#5a3a22');R(c,X+(f>0?8:5),Y+4,1,1,'#222');
+  c.fillStyle='rgba(184,236,250,.9)';c.fillRect(X+1,Y+9,12,1);
 }
 
 /* ================= PATRIMOINE : 20 SITES D'AMPÈRE-SUR-LOIRE (fictifs) ================= */
@@ -1791,57 +1989,35 @@ function actPC(){
   if(S.ch===3)return gameCollecte();if(S.ch===6)return gameAnalyse();if(S.ch===8)return gameAgir();if(S.ch===9)return gamePiloter();
   say([{t:m[S.ch]||'Ton ordinateur.'}]);
 }
-function mandateSteps(org){
-  const s=site(),isE=org==='Enedis',gas=!isE,now=new Date(),d=n=>{const x=new Date(now);x.setFullYear(x.getFullYear()+n);return x.toLocaleDateString('fr-FR')},hier=new Date(now-864e5).toLocaleDateString('fr-FR');
-  const oth=Object.values(SITES).find(x=>x.id!==S.site);
-  return [
-    form({title:`Mandat ${org} · Informations obligatoires`,gas,ctx:`Portail tiers ${org}${isE?` · canal ${elecChannel(s)}`:' · API ADICT'}. Tu remplis la demande au nom du titulaire du contrat.`,fields:[
-      {label:'Titulaire du contrat (celui qui consent)',opts:[[s.titulaire,1],["Volt&Co Énergie (le fournisseur)",0,"Le fournisseur vend l'énergie : il n'est pas le titulaire qui consent."],[`${S.name} (gestionnaire)`,0,'Tu agis pour le titulaire, mais le consentement doit venir de lui.']]},
-      {label:'SIRET du titulaire',opts:[[s.siret,1,'14 chiffres : SIREN + NIC.'],[s.siret.slice(0,9),0,'9 chiffres : c\'est un SIREN, il manque le NIC de l\'établissement.'],[s.siret+'5',0,'15 chiffres : un de trop.']]},
-      {label:'Adresse du point',opts:[[`${s.addr}, ${s.cp}`,1],[`${oth.addr}, ${oth.cp}`,0,'Adresse d\'un autre site.']]},
-      {label:'Signataire',opts:[['Représentant légal du titulaire, ou personne habilitée',1],[`Un technicien ${org}`,0,`${org} reçoit le consentement, il ne le donne pas.`],["N'importe quel salarié du site",0,'Il faut une personne habilitée à engager le titulaire.']]}
-    ],okMsg:'Informations obligatoires complètes.'}),
-    multi({title:`Mandat ${org} · Données demandées`,gas,q:'Coche les données à récupérer (juste le nécessaire).',items:isE?[
-      [`Courbe de charge (pas de ${s.souscrit>36?10:30} min)`,true,'Indispensable pour analyser : elle montre quand on consomme.'],
-      ['Index et consommations journalières',true,'La référence du comptage, pour contrôler.'],
-      ['Données contractuelles (puissance souscrite, option tarifaire)',true,'Pour vérifier le contrat et la puissance.'],
-      ['Données techniques du compteur',null,'Utile, facultatif.'],
-      ["Factures d'électricité",false,"Les factures viennent du fournisseur, pas d'Enedis."],
-      ['Liste nominative des occupants',false,'Données personnelles sans rapport : on ne demande que le nécessaire.']]:[
-      ['Consommations quotidiennes (Gazpar)',true,'La consommation du jour J arrive le lendemain.'],
-      ['Données techniques : coefficient de conversion (PCS)',true,'Sans lui, impossible de passer des m³ aux kWh.'],
-      ['Consommations mensuelles publiées',null,'Utile pour recouper, facultatif.'],
-      ['Données contractuelles',null,'Utile, facultatif.'],
-      ['Courbe de charge au pas de 10 minutes',false,'Gazpar transmet un volume par jour, pas une courbe 10 min.'],
-      ['Factures de gaz',false,'Elles viennent du fournisseur, pas de GRDF.']],okMsg:'Chaque source a son usage : analyser, contrôler, chiffrer.'}),
-    form({title:`Mandat ${org} · Durée et historique`,gas,fields:[
-      {label:'Date de fin du consentement',opts:[[`${hier} (hier)`,0,'Un consentement déjà expiré ne donne accès à rien.'],[`${d(1)} (1 an)`,1,'Valide. Pense à le renouveler avant l\'échéance.'],[`${d(3)} (3 ans)`,1,'Valide : c\'est la durée maximale couramment admise.'],['Sans date de fin',0,'Un consentement est toujours limité dans le temps.']]},
-      {label:'Historique demandé',opts:[['Les 36 derniers mois',1,'Assez pour comparer plusieurs hivers.'],['Aucun historique',0,'Sans historique, pas de référence pour détecter les dérives.'],['Depuis 1950',0,'Aucune donnée n\'existe aussi loin.']]}
-    ],okMsg:'Durée et historique fixés.'}),
-    multi({title:`Mandat ${org} · Liste des points`,gas,q:'Coche uniquement les points couverts par ce mandat.',items:isE?[
-      [`<span class="mono">${s.pdl}</span> · ton PDL`,true,'Ton point électrique.'],
-      [`<span class="mono">${oth.pdl}</span>`,false,`PDL de ${oth.name} : son titulaire n'a pas consenti. Hors périmètre.`],
-      [`<span class="mono">${s.pdl.slice(0,12)+s.pdl[13]+s.pdl[12]}</span>`,false,'Presque ton PDL, mais deux chiffres sont inversés.'],
-      [`<span class="mono">${s.pce}</span>`,false,'C\'est un PCE gaz : il va dans le mandat GRDF.']]:[
-      [`<span class="mono">${s.pce}</span> · ton PCE`,true,'Ton point gaz.'],
-      [`<span class="mono">${oth.pce}</span>`,false,`PCE de ${oth.name} : hors périmètre.`],
-      [`<span class="mono">${s.pdl}</span>`,false,'C\'est un PDL électrique : mandat Enedis.']],okMsg:'Liste des points correcte.'}),
-    signature(s.titulaire,org)
-  ];
-}
 function gameCollecte(){
-  const s=site();
+  const s=site(),now=new Date(),d=n=>{const x=new Date(now);x.setFullYear(x.getFullYear()+n);return x.toLocaleDateString('fr-FR')},hier=new Date(now-864e5).toLocaleDateString('fr-FR');
+  const oth=Object.values(SITES).find(x=>x.id!==S.site),canal=elecChannel(s);
   runSteps('Jeu 3 · Collecte des données',[
     info(`<h3>D'où viennent les données ?</h3><p>La donnée d'énergie arrive par trois canaux :</p><div class="tbl"><table><tr><th>Source</th><th>Pas</th><th>Sert à</th></tr><tr><td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'10 min':'30 min'} (élec), 1 jour (gaz)</td><td>Analyser</td></tr><tr><td>Index</td><td>1 relevé par période</td><td>Contrôler</td></tr><tr><td>Facture</td><td>1 montant par période</td><td>Chiffrer le coût</td></tr></table></div><p>Avant de recevoir la moindre donnée de mesure, il faut le <b>consentement</b> du titulaire du contrat : ${esc(s.titulaire)}.</p>`),
     choice({q:'Qui te fournit les données de mesure de ton site ?',opts:[['Le distributeur : Enedis pour l\'électricité, GRDF pour le gaz',1,'Le distributeur pose et relève les compteurs. Le fournisseur, lui, vend l\'énergie et envoie la facture.'],['Le fournisseur qui envoie la facture',0,'Le fournisseur facture, il ne relève pas les compteurs.'],['La mairie',0,'Elle peut être titulaire du contrat, pas gestionnaire du réseau.']]}),
-    choice({ctx:`Ton site a souscrit <span class="num">${s.souscrit} kVA</span>.`,q:'Par quel canal Enedis passer ?',opts:[
-      ['Data Connect (API, compteur Linky ≤ 36 kVA)',s.souscrit<=36,s.souscrit<=36?'Le client donne son consentement sur son espace Enedis, pour une durée qu\'il choisit.':'Data Connect, c\'est pour les Linky jusqu\'à 36 kVA.'],
-      ['SGE (web services, segments C1 à C4, > 36 kVA)',s.souscrit>36,s.souscrit>36?'Consentement écrit du client, et une habilitation qui prend plusieurs mois.':'Le SGE, c\'est au-delà de 36 kVA.'],
-      ['Le site du fournisseur',0,'Le fournisseur n\'a pas les données de mesure fines.']]}),
-    ...mandateSteps('Enedis'),...mandateSteps('GRDF'),
+    form({title:'Mandat unique · Qui consent, et jusqu\'à quand ?',ctx:`Un seul mandat couvre les deux énergies.<br><b>Électricité</b> : Enedis, canal ${canal} (${s.souscrit>36?'plus de 36 kVA':'Linky, 36 kVA ou moins'}). <b>Gaz</b> : GRDF, API ADICT.<br>Repris de ton carnet : ${esc(s.addr)}, ${esc(s.cp)} · SIRET ${s.siret}.`,fields:[
+      {label:'Titulaire du contrat (celui qui consent)',opts:[[s.titulaire,1],["Volt&Co Énergie (le fournisseur)",0,"Le fournisseur vend l'énergie : il n'est pas le titulaire qui consent."],[`${S.name} (gestionnaire)`,0,'Tu agis pour le titulaire, mais le consentement doit venir de lui.']]},
+      {label:'Signataire',opts:[['Représentant légal du titulaire, ou personne habilitée',1],['Un technicien du distributeur',0,'Le distributeur reçoit le consentement, il ne le donne pas.'],["N'importe quel salarié du site",0,'Il faut une personne habilitée à engager le titulaire.']]},
+      {label:'Date de fin du consentement',opts:[[`${hier} (hier)`,0,'Un consentement déjà expiré ne donne accès à rien.'],[`${d(1)} (1 an)`,1,'Valide. Pense à le renouveler avant l\'échéance.'],[`${d(3)} (3 ans)`,1,'Valide : c\'est la durée maximale couramment admise.'],['Sans date de fin',0,'Un consentement est toujours limité dans le temps.']]}
+    ],okMsg:'Le titulaire consent, pour une durée limitée.'}),
+    multi({title:'Mandat unique · Données demandées',q:'Coche les données à récupérer, pour l\'électricité et pour le gaz (juste le nécessaire).',items:[
+      [`<span class="tag">Élec</span> Courbe de charge (pas de ${s.souscrit>36?10:30} min)`,true,'Indispensable pour analyser : elle montre quand on consomme.'],
+      ['<span class="tag">Élec</span> Index et données contractuelles (puissance souscrite)',true,'La référence du comptage, et de quoi vérifier le contrat.'],
+      ['<span class="tag">Gaz</span> Consommations quotidiennes (Gazpar)',true,'La consommation du jour J arrive le lendemain.'],
+      ['<span class="tag">Gaz</span> Coefficient de conversion (PCS)',true,'Sans lui, impossible de passer des m³ aux kWh.'],
+      ['<span class="tag">Gaz</span> Courbe de charge au pas de 10 minutes',false,'Gazpar transmet un volume par jour, pas une courbe 10 min.'],
+      ['Factures d\'électricité et de gaz',false,'Les factures viennent du fournisseur, pas des distributeurs.'],
+      ['Liste nominative des occupants',false,'Données personnelles sans rapport : on ne demande que le nécessaire.']],okMsg:'Chaque source a son usage : analyser, contrôler, chiffrer.'}),
+    multi({title:'Mandat unique · Points couverts',q:'Coche les deux points de ton site : son PDL et son PCE.',items:[
+      [`<span class="mono">${s.pdl}</span>`,true,'Ton point électrique (PDL).'],
+      [`<span class="mono">${s.pce}</span>`,true,'Ton point gaz (PCE).'],
+      [`<span class="mono">${oth.pdl}</span>`,false,`PDL de ${oth.name} : son titulaire n'a pas consenti. Hors périmètre.`],
+      [`<span class="mono">${s.pdl.slice(0,12)+s.pdl[13]+s.pdl[12]}</span>`,false,'Presque ton PDL, mais deux chiffres sont inversés.'],
+      [`<span class="mono">${oth.pce}</span>`,false,`PCE de ${oth.name} : hors périmètre.`]],okMsg:'Le mandat ne vaut que pour ces deux points.'}),
+    signature(s.titulaire,'Enedis + GRDF'),
     dataAnim,
     choice({q:"Le logiciel appelle l'API pour un PDL sans consentement valide. Que se passe-t-il ?",opts:[['Refus : sans consentement valide, pour ce point et à cette date, pas de données',1,'Même chose après l\'expiration du consentement : la collecte s\'arrête. Il faut surveiller les dates de fin.'],['L\'API renvoie les données, c\'est une formalité',0,'Le consentement est obligatoire.'],['L\'API renvoie des données estimées',0,'Elle ne renvoie rien.']]})
-  ],()=>{S.ch=4;badge('Collecter');save();hud();say([{w:'Mme Joule',t:"Mandats signés, données en route ! Badge Collecter obtenu."},{w:'Mme Joule',t:"Mais attention : les données brutes sont sauvages. Doublons, trous, pics absurdes… Elles t'attendent dans les hautes herbes du Parc des Données, au sud-ouest."},{w:'Mme Joule',t:"Corrige les 7 espèces d'anomalies. Règle d'or : on ne corrige jamais en silence, on garde la donnée brute."}])});
+  ],()=>{S.ch=4;badge('Collecter');save();hud();say([{w:'Mme Joule',t:"Mandat signé, données en route ! Badge Collecter obtenu."},{w:'Mme Joule',t:"Mais attention : les données brutes sont sauvages. Doublons, trous, pics absurdes… Elles t'attendent dans les hautes herbes du Parc des Données, au sud-ouest."},{w:'Mme Joule',t:"Corrige les 7 espèces d'anomalies. Règle d'or : on ne corrige jamais en silence, on garde la donnée brute."}])});
 }
 function dataAnim(el,next){
   const s=site();
@@ -1899,7 +2075,7 @@ function battle(a){
     if(m[1]){over=true;mv.querySelectorAll('button').forEach(x=>x.disabled=true);ebar.style.width='0%';mon.classList.add('hit');
       msg.innerHTML=`C'est super efficace ! ${m[2]}`;jingle('victory');setTimeout(()=>mon.classList.add('ko'),600);
       trk('battle',{a:a.id,r:'win'});const first=!S.dex[a.id];S.dex[a.id]=1;S.xp+=first?30:10;
-      setTimeout(()=>{msg.innerHTML=`<b>${a.name}</b> est corrigée${first?' et rejoint ton Anomalidex':''} ! +${first?30:10} XP`;const c=document.createElement('button');c.textContent='Continuer ▸';c.style.gridColumn='1/-1';mv.innerHTML='';mv.appendChild(c);c.focus();c.onclick=()=>end(afterCapture)},1300)}
+      setTimeout(()=>{msg.innerHTML=`<b>${a.name}</b> est corrigée${first?' et rejoint ton Anomalidex':''} ! +${first?30:10} XP`;const c=document.createElement('button');c.textContent='Continuer ▸';c.style.gridColumn='1/-1';mv.innerHTML='';mv.appendChild(c);c.focus();c.onclick=()=>end(cred>=100&&!S.secrets.smash?()=>eggSmash(afterCapture):afterCapture)},1300)}
     else{trk('wrong_answer',{t:'Combat',q:a.name,a:m[0].slice(0,80)});b.disabled=true;cred-=34;mbar.style.width=Math.max(0,cred)+'%';mbar.style.background=cred<40?'var(--bad)':'var(--amber)';
       msg.innerHTML=`Ce n'est pas très efficace… ${m[2]}<br><b>${a.name}</b> sème le doute : ta crédibilité baisse !`;
       if(cred<=0){trk('battle',{a:a.id,r:'lose'});over=true;mv.innerHTML='';setTimeout(()=>{msg.innerHTML='Ta crédibilité est à zéro ! Même le fournisseur ne te croit plus. Tu te replies au bureau pour relire tes notes.';const c=document.createElement('button');c.textContent='Retour au bureau ▸';c.style.gridColumn='1/-1';mv.appendChild(c);c.onclick=()=>end(()=>warp('office',5,6,'up'))},900)}}}});
@@ -2076,7 +2252,7 @@ function evolve(rank,cb){
 function endScreen(){
   trk('game_end',{site:S.site,niveau:level()});
   const ov=openPanel('Quête terminée'),b=ov.querySelector('.pbody');
-  b.innerHTML=`<h3>Diplôme de l'Energy Management par la donnée</h3><p><b>${esc(S.name)}</b>, ${RANKS[S.rank]}, niveau ${level()}.</p><p>Tu as parcouru les 8 étapes de la démarche sur ${esc(site().name)}, puis tu as pris en main un patrimoine entier.</p><div class="tbl"><table><tr><th>Étape</th><th>Ce que tu sais faire</th></tr>
+  b.innerHTML=`<h3>Diplôme de l'Energy Management par la donnée</h3><p><b>${esc(S.name)}</b>, ${RANKS[S.rank]}, niveau ${level()}${S.hades?' · <b>mention Hadès</b> (tout a été demandé deux fois, et obtenu quand même)':''}.</p><p>Tu as parcouru les 8 étapes de la démarche sur ${esc(site().name)}, puis tu as pris en main un patrimoine entier.</p><div class="tbl"><table><tr><th>Étape</th><th>Ce que tu sais faire</th></tr>
   <tr><td>Cadrer</td><td>Périmètre, fiche patrimoine, PDL et PCE, plan de comptage</td></tr><tr><td>Collecter</td><td>Distributeur ≠ fournisseur, mandats, consentement</td></tr><tr><td>Fiabiliser</td><td>Doublons, trous, pics, index, bouclage, unités, heure</td></tr><tr><td>Structurer</td><td>Site → point → compteur → mesure, kW → kWh, m³ → kWh</td></tr><tr><td>Analyser</td><td>Talon, DJU, signature, puissance souscrite, ratios</td></tr><tr><td>Détecter</td><td>Dérives, baseline, faux positifs, coût d'une dérive</td></tr><tr><td>Agir</td><td>Sobriété → efficacité → production, temps de retour</td></tr><tr><td>Patrimoine</td><td>Pareto en MWh, € et CO₂, comparaison par activité, benchmark, gisements</td></tr><tr><td>Piloter</td><td>M&V corrigée des DJU, décret tertiaire, OPERAT, ISO 50001</td></tr></table></div><div class="row"><button class="btn" id="endStay">Continuer à explorer</button><button class="btn alt" id="endNew">Rejouer avec un autre site (collection conservée)</button></div>`;
   b.querySelector('#endStay').onclick=closePanel;b.querySelector('#endNew').onclick=()=>{restartStory();closePanel();boot()};
 }
@@ -2097,10 +2273,10 @@ function openMenu(){
     badges:()=>`<p>Les 8 étapes de la démarche. Rang : <b>${RANKS[S.rank]}</b>, niveau ${level()} (${S.xp} XP).</p><div class="dex">${BADGES.map((x,i)=>`<div class="${S.badges.includes(x)?'':'unk'}"><b>${i+1}. ${x}</b><br>${S.badges.includes(x)?'Obtenu':'À gagner'}</div>`).join('')}</div><p style="margin-top:10px">Évolutions : Gestionnaire de site → Energy Manager (après Structurer) → Gestionnaire de patrimoine (après Piloter).</p>`,
     classeur:()=>`<p>${Object.keys(S.fiches||{}).length} / ${FICHES.length} fiches savoir. Les fiches <b>clés</b> débloquent les mini-jeux ; les autres rapportent de l'XP.</p>`+[0,1,2,3,4,5,6,7,8,'P'].map(st=>{const L=FICHES.filter(f=>f.st===st);return `<div class="cls"><div class="cls-h"><b>${st===0?'Le cycle':st==='P'?'Patrimoine':'Étape '+st+' · '+STEP_NAMES[st]}</b><span>${L.filter(f=>fGot(f.id)).length}/${L.length}</span><button type="button" class="course-link dark" data-h="${STEP_HASH(st)}">Cours ↗</button></div>${L.map(f=>fGot(f.id)?`<div class="fiche mini${f.req?' req':''}"><b>${esc(f.t)}</b><p>${esc(f.x)}</p></div>`:`<div class="fiche mini unk"><b>???${f.req?' · info clé':''}</b><p>${fAvail(f)?'Indice : '+esc(SRC[f.src].where):'Disponible à partir de cette étape du jeu.'}</p></div>`).join('')}</div>`}).join(''),
     dex:()=>`<p>${Object.keys(S.dex).length}/7 anomalies corrigées.</p><div class="dex" id="dexg"></div>`,
-    sec:()=>`<p>${Object.keys(S.secrets).length}/${NSEC} secrets trouvés. Explore, parle à tout le monde, examine tout (et pas seulement les compteurs).</p><div class="dex">${Object.entries(SECRETS).map(([k,v])=>`<div class="${S.secrets[k]?'':'unk'}">${S.secrets[k]?'<b>'+esc(v)+'</b>':'???'}</div>`).join('')}</div>`,
+    sec:()=>`<p>${Object.keys(S.secrets).length}/${NSEC} secrets trouvés. Explore, parle à tout le monde, examine tout (et pas seulement les compteurs).</p><div class="dex">${Object.entries(SECRETS).map(([k,v])=>`<div class="${S.secrets[k]?'':'unk'}">${S.secrets[k]?'<b>'+esc(v)+'</b>':'???'}</div>`).join('')}</div><h3 style="margin-top:14px">Clins d’œil aux jeux vidéo</h3><p>${Object.keys(EGGS).filter(k=>S.secrets[k]).length}/${Object.keys(EGGS).length} trouvés. Un par jeu : un carton, un prêtre, un mouton, un mur qui sonne creux…</p><div class="dex">${Object.entries(EGGS).map(([k,v])=>`<div class="${S.secrets[k]?'':'unk'}">${S.secrets[k]?'<b>'+esc(v)+'</b>':'???'}</div>`).join('')}</div>`,
     etapes:()=>`<div id="chl"></div>`,
     avatar:()=>`<p>Change de tête, de coiffure ou de tenue quand tu veux. Le casque et la veste arrivent avec les promotions.</p><button class="btn" id="avEdit">Modifier mon avatar</button>`,
-    save:()=>`<p>Emplacement <b>${SLOT}</b> · dernière sauvegarde : <b>${fmtDate(S.savedAt)}</b>.</p><p>Le jeu sauvegarde tout seul à chaque progrès, dans ce navigateur. Ta collection (badges, secrets, fiches, Anomalidex, XP) est conservée même si tu rejoues une étape.</p><div class="row"><button class="btn" id="svNow">Sauvegarder maintenant</button><button class="btn alt" id="svSlots">Changer d'emplacement</button></div><div id="svMsg"></div><div class="save-list">${[1,2,3].map(n=>{const v=n===SLOT?S:readSlot(n);return `<div class="${n===SLOT?'cur':''}"><b>Emplacement ${n}${n===SLOT?' (en cours)':''}</b><br>${v&&v.site?`${esc(v.name)} · ${RANKS[v.rank||0]} · ${esc(CHAPTERS[v.ch]||'')}<br>${(v.badges||[]).length}/8 badges · ${Object.keys(v.secrets||{}).length}/${NSEC} secrets · ${Object.keys(v.fiches||{}).length}/${FICHES.length} fiches · ${fmtDate(v.savedAt)}`:'Vide'}</div>`}).join('')}</div>`,
+    save:()=>`<p>Emplacement <b>${SLOT}</b>${S.hades?' · <b>mode Hadès</b>':''} · dernière sauvegarde : <b>${fmtDate(S.savedAt)}</b>.</p><p>Le jeu sauvegarde tout seul à chaque progrès, dans ce navigateur. Ta collection (badges, secrets, fiches, Anomalidex, XP) est conservée même si tu rejoues une étape.</p><div class="row"><button class="btn" id="svNow">Sauvegarder maintenant</button><button class="btn alt" id="svSlots">Changer d'emplacement</button></div><div id="svMsg"></div><div class="save-list">${[1,2,3].map(n=>{const v=n===SLOT?S:readSlot(n);return `<div class="${n===SLOT?'cur':''}"><b>Emplacement ${n}${n===SLOT?' (en cours)':''}</b><br>${v&&v.site?`${esc(v.name)} · ${RANKS[v.rank||0]} · ${esc(CHAPTERS[v.ch]||'')}<br>${(v.badges||[]).length}/8 badges · ${Object.keys(v.secrets||{}).length}/${NSEC} secrets · ${Object.keys(v.fiches||{}).length}/${FICHES.length} fiches · ${fmtDate(v.savedAt)}`:'Vide'}</div>`}).join('')}</div>`,
     opt:()=>`<p>La partie est sauvegardée automatiquement dans ce navigateur.</p><div class="row"><button class="btn" id="sndT">${AUD.on?'Couper la musique':'Activer la musique'}</button><button class="btn alt" id="rst">Recommencer l'histoire</button></div><div id="rstc"></div>`
   };
   const show=k=>{b.querySelectorAll('.menu-tabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===k));mt.innerHTML=tabs[k]();
@@ -2118,12 +2294,12 @@ function titleScreen(){
   busy=true;
   const ov=document.createElement('div');ov.className='title-screen';
   const card=n=>{const v=readSlot(n);
-    if(v&&v.site)return `<div class="slot${n===SLOT?' cur':''}" data-n="${n}"><div class="slot-h"><canvas width="20" height="20" data-av="${n}"></canvas><div><b>${esc(v.name||'Alex')}</b><small>Emplacement ${n} · ${RANKS[v.rank||0]} · Nv ${Math.floor((v.xp||0)/90)+1}</small></div></div>
+    if(v&&v.site)return `<div class="slot${n===SLOT?' cur':''}" data-n="${n}"><div class="slot-h"><canvas width="20" height="20" data-av="${n}"></canvas><div><b>${esc(v.name||'Alex')}</b><small>Emplacement ${n} · ${RANKS[v.rank||0]} · Nv ${Math.floor((v.xp||0)/90)+1}${v.hades?' · Hadès':''}</small></div></div>
       <small>${esc(SITES[v.site]?SITES[v.site].name:'')} · ${esc(CHAPTERS[v.ch]||'')}</small>
       <span class="stats">${(v.badges||[]).length}/8 badges · ${Object.keys(v.secrets||{}).length}/${NSEC} secrets · ${Object.keys(v.fiches||{}).length}/${FICHES.length} fiches</span>
       <small>Sauvegardé le ${fmtDate(v.savedAt)}</small>
       <div class="acts"><button class="btn" data-a="cont">Continuer</button><button class="btn alt" data-a="chap">Choisir une étape</button><button class="btn alt" data-a="restart">Recommencer l'histoire</button><button class="btn danger" data-a="erase">Effacer</button></div></div>`;
-    return `<div class="slot empty" data-n="${n}"><b>Emplacement ${n}</b><small>Vide</small><label for="pn${n}" class="sr-only" style="font-size:12.5px;color:#b7bdd6">Ton prénom</label><input id="pn${n}" maxlength="14" value="" placeholder="Ton prénom"><div class="acts"><button class="btn" data-a="new">Nouvelle partie</button><button class="btn alt" data-a="newchap">Commencer à une étape</button></div></div>`};
+    return `<div class="slot empty" data-n="${n}"><b>Emplacement ${n}</b><small>Vide</small><label for="pn${n}" class="sr-only" style="font-size:12.5px;color:#b7bdd6">Ton prénom</label><input id="pn${n}" maxlength="14" value="" placeholder="Ton prénom"><label class="hades"><input type="checkbox" data-hades> Mode Hadès <small>les personnages se font prier : il faut tout leur demander deux fois</small></label><div class="acts"><button class="btn" data-a="new">Nouvelle partie</button><button class="btn alt" data-a="newchap">Commencer à une étape</button></div></div>`};
   ov.innerHTML=`<div class="title-box"><div class="logo">Wattlings<small>Energy management par la donnée</small></div>
   <p>Tu es gestionnaire de site et tu ne connais rien à l'énergie. Explore, trouve les compteurs, signe les mandats, dompte les anomalies… et deviens gestionnaire de patrimoine.</p>
   <div class="slots">${[1,2,3].map(card).join('')}</div>
@@ -2136,7 +2312,7 @@ function titleScreen(){
     const cc=document.createElement('button');cc.className='btn alt';cc.textContent='Retour';cc.onclick=()=>{closePanel();titleScreen()};b.appendChild(cc)};
   ov.querySelectorAll('.slot').forEach(el=>{const n=+el.dataset.n;
     el.querySelectorAll('[data-a]').forEach(btn=>btn.onclick=()=>{const a=btn.dataset.a;
-      if(a==='new'||a==='newchap'){trk('game_new',{slot:n,etape:a==='newchap'});const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';setSlot(n);S=DEF();S.name=nm;save();leave();a==='new'?openAvatar(()=>boot()):openAvatar(pick);return}
+      if(a==='new'||a==='newchap'){const hd=!!el.querySelector('[data-hades]').checked;trk('game_new',{slot:n,etape:a==='newchap',hades:hd});const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';setSlot(n);S=DEF();S.name=nm;S.hades=hd;save();leave();a==='new'?openAvatar(()=>boot()):openAvatar(pick);return}
       if(a==='erase'){if(btn.dataset.ok){trk('slot_erase',{slot:n});try{localStorage.removeItem(SLOT_KEY(n))}catch(e){}ov.remove();titleScreen()}else{btn.dataset.ok=1;btn.textContent='Confirmer : tout effacer'}return}
       setSlot(n);S=Object.assign(DEF(),readSlot(n));
       if(a==='cont'){trk('game_continue',{slot:n,ch:S.ch});leave();if(!S.av)openAvatar(()=>boot());else boot()}
@@ -3019,5 +3195,6 @@ ${E(l.url)}
   </header>
   <main id="contenu" tabindex="-1"></main>
   <button class="fab" type="button" id="fab">${M("livre")}<span>Glossaire</span></button>`;function ra(){const e=Q.filter(a=>P.estFaite(a.num)),n=e.filter(a=>a.famille==="data").length,t=e.length-n;g("#progress .pd").style.width=`${n/8*100}%`,g("#progress .pe").style.width=`${t/8*100}%`,g("#progress-txt").textContent=`${e.length}/8 étapes`,g("#progress").setAttribute("aria-label",`Progression : ${e.length} étapes terminées sur 8`),g("#strip").innerHTML=Q.map(a=>`<a href="#etape-${a.num}" class="fam-${a.famille} ${P.estFaite(a.num)?"done":""}" data-num="${a.num}"><span class="pastille"><span>${a.num}</span></span>${E(a.titre)}</a>`).join(""),oa()}let ge=null,qe="";function oa(){document.querySelectorAll(".nav a, .steps-strip a").forEach(n=>n.removeAttribute("aria-current"));const e=qe.match(/^etape-(\d)/);e?document.querySelector(`.steps-strip a[data-num="${e[1]}"]`)?.setAttribute("aria-current","page"):document.querySelector(`.nav a[data-route="${qe||"accueil"}"]`)?.setAttribute("aria-current","page")}function la(){const e=decodeURIComponent(location.hash.slice(1))||"accueil";if(e.startsWith("g-"))return;const n=g("#contenu");typeof ge=="function"&&ge(),ge=null,n.className="";const t=e.match(/^etape-(\d)(?:-(essentiel|comprendre|approfondir))?$/);t&&Q.some(a=>a.num===+t[1])?(qe=e,ge=Cs(n,+t[1],t[2]),document.title=`${t[1]}. ${Q[+t[1]-1].titre} · Energy Management`):e==="ecole"?(qe=e,ge=Ss(n),document.title="L’école Jean-Jaurès · Energy Management"):e==="quiz-final"?(qe=e,ge=Ws(n),document.title="Quiz de synthèse · Energy Management"):e==="glossaire"?(qe=e,ge=Ds(n),document.title="Glossaire · Energy Management"):(qe="accueil",ge=As(n),document.title="L’Energy Management par la donnée"),oa(),window.scrollTo(0,0),document.activeElement&&document.activeElement!==document.body&&!n.contains(document.activeElement)&&n.focus({preventScroll:!0})}vt(P.get().theme||null);g("#btn-theme").addEventListener("click",()=>{const e=ia()==="dark"?"light":"dark";vt(e),P.set({theme:e})});matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change",()=>vt(document.documentElement.dataset.theme));g("#fab").addEventListener("click",()=>Bt());va();P.on(ra);window.addEventListener("hashchange",la);ra();la();</script>
+
 </body>
 </html>
