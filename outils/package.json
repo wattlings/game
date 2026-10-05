@@ -1,0 +1,20 @@
+{
+  "name": "wattlings-outils",
+  "private": true,
+  "type": "module",
+  "description": "Outils facultatifs : le site en ligne n'en a pas besoin.",
+  "scripts": {
+    "servir": "node serveur.mjs",
+    "fichier-unique": "node fichier-unique.mjs",
+    "verifier": "node verifier.mjs",
+    "comparer": "node migration/comparer.mjs"
+  },
+  "devDependencies": {
+    "pixelmatch": "^7.2.0",
+    "playwright": "1.56.0",
+    "pngjs": "^7.0.0"
+  },
+  "dependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

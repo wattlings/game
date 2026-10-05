@@ -1,0 +1,5 @@
+# outils : dépendances et fichiers produits
+outils/node_modules/
+outils/sortie/
+outils/migration/ecarts/
+.DS_Store

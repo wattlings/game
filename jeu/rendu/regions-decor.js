@@ -7,7 +7,6 @@
    Normandie : chaumière, pressoir à cidre, vaches normandes · Alsace : cigogne sur la médiathèque, puits fleuri, bretzels ·
    Bourgogne : coteaux de vigne, cabotte, tonneaux, escargots après la pluie · Bretagne : phare (allumé la nuit), menhirs, calvaire, goélands, crêpes ·
    Provence : champs de lavande, pétanque, fontaine, ruches · Savoie : bergerie, moutons, patou, marmottes, bassin. */
-const COWS=[{b:'#8a3b22',p:null,h:'#7a3018',horn:1},{b:'#f4f1e8',p:'#7a4a2a',h:'#7a4a2a'},{b:'#f1ead8',p:null,h:'#e6dcc6'},{b:'#9a4a2a',p:'#f4f1e8',h:'#f4f1e8',bell:1}];
 function drawRegDecor(c,o,X,Y,t){
   const h=wh(o.x,o.y,500);
   switch(o.kind){

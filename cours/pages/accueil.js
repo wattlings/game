@@ -13,6 +13,7 @@ import { anneeCivile, anneeDeReference, totalElec, totalGaz } from "../modele/si
 import { brancherRoue, roueDuCycle } from "../schemas/cycle.js";
 import { vignetteEcole } from "../schemas/vignette-ecole.js";
 
+/** Affiche la page d'accueil dans `conteneur`. */
 export function pageAccueil(conteneur) {
   const n = anneeDeReference();
   const t = anneeCivile(n);

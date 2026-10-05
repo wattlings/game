@@ -401,5 +401,6 @@ export const GLOSSAIRE = {
   },
 };
 
+/** Les clés des termes, par ordre alphabétique. */
 export const termesTries = () =>
   Object.keys(GLOSSAIRE).sort((e, n) => GLOSSAIRE[e].terme.localeCompare(GLOSSAIRE[n].terme, "fr"));

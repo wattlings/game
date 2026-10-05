@@ -11,7 +11,6 @@
    Le réglage « patine » du menu fixe le dosage sur cinq niveaux (voir b_season.js). */
 let WEAR=1;   // multiplicateur de dosage, fixé par seasonArt() d'après le réglage (5 niveaux)
 const wh=(x,y,i)=>{let n=Math.imul(x|0,73856093)^Math.imul(y|0,19349663)^Math.imul((i|0)+1,83492791);n=Math.imul(n^(n>>>15),2246822519);n=Math.imul(n^(n>>>13),3266489917);return((n^(n>>>16))>>>0)/4294967296};
-const LEAFC=['#d9903a','#b8642a','#e2c14a','#8a5a2b','#c9742f'];
 function wearPuddle(c,X,Y,w){R(c,X+1,Y,w-2,1,'#86a9be');R(c,X,Y+1,w,2,'#9dbfd3');R(c,X+1,Y+3,w-3,1,'#86a9be');R(c,X+2,Y+1,2,1,'#e6f3f9');R(c,X+w-3,Y+2,2,1,'#c6dde8')}
 function wearWeed(c,X,Y,v){R(c,X,Y+1,1,2,'#58a551');R(c,X+1,Y,1,3,v?'#6fbf62':'#4f9a4a');R(c,X+2,Y+1,1,2,'#58a551');if(v)R(c,X+1,Y-1,1,1,'#f7d84a')}
 function drawTile(c,ch,x,y,mapId){drawTileA(c,ch,x,y,mapId);if(WEAR&&mapId!=='town')wearInside(c,ch,x,y,mapId)}   // en ville, l'usure du sol est posée après les courbes (seasonGround)
@@ -96,7 +95,6 @@ function wearProp(c,ch,x,y,at){
   if(ch==='k'&&h<.5){R(c,X+5,Y+6,3,1,'#6f9a55');R(c,X+7,Y+7,2,1,'#86b05a')}
 }
 /* ---- bâtiments : chacun porte les marques de son âge et de ses habitants ---- */
-const CURT=['#e2573b','#f2c12e','#8a3b8f','#2f9e7a','#e9679a','#4a78c9','#f7f0dc'];
 function artWinV(c,x,y,w,h,wall,v){
   if(!WEAR||v>=.62){artWin(c,x,y,w,h,wall);return}
   if(v<.035*WEAR){   // fenêtre murée

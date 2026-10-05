@@ -38,6 +38,7 @@ function totauxParMois(jours) {
   }));
 }
 
+/** Affiche la page de l'école dans `conteneur`. */
 export function pageEcole(conteneur) {
   const n = magasin.get();
   conteneur.innerHTML = `

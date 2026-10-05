@@ -40,7 +40,6 @@ function hadesBlock(o){
 
 /* ---- Metal Gear Solid : le carton ---- */
 const BOX={on:false,origin:L.box,guard:null,since:0,lastMove:0};
-const GUARD_PAL={shirt:'#39426a',pants:'#1c2440',hair:'#2b1d14',hat:'#1c2440'};
 const GUARD_PATH=L.guard;
 function enterBox(){
   if(BOX.on)return;

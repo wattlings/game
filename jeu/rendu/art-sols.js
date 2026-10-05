@@ -2,7 +2,6 @@
    Rendu détaillé : sols (herbe, chemins, routes, eau, ponts, place, terre, fleurs). */
 
 /* ---- sols ---- */
-const GCOL=['#73bf65','#7cc56a','#86cc72'];
 function artGrassBase(c,X,Y,x,y,town){R(c,X,Y,16,16,GCOL[1])}
 function artGrass(c,X,Y,x,y,town){
   artGrassBase(c,X,Y,x,y,town);const h=thash(x,y),k=(h*4096)|0,T=[[2,3],[9,1],[5,9],[12,10],[1,12],[8,5]];

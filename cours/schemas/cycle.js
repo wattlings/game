@@ -28,6 +28,7 @@ function arcCycle(e, n, t = RAYON_CYCLE) {
   return `M${c.toFixed(1)},${o.toFixed(1)} A${t},${t} 0 ${n - e > 180 ? 1 : 0} 1 ${d.toFixed(1)},${u.toFixed(1)}`;
 }
 
+/** Le SVG de la roue des 8 étapes. */
 export function roueDuCycle() {
   const e = magasin.get().filtre || "tout";
   const n = ETAPES.map((o) => {
@@ -80,6 +81,7 @@ export function roueDuCycle() {
   </div>`;
 }
 
+/** Rend la roue interactive : survol, focus et clic sur une étape. */
 export function brancherRoue(conteneur) {
   const n = conteneur.querySelector("#cc-eyebrow");
   const t = conteneur.querySelector("#cc-q");

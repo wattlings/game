@@ -62,11 +62,14 @@ function qkRoute(h){
 }
 addEventListener('hashchange',()=>{if(location.hash.length>1)qkRoute()});
 
-/* ---- une seule fenêtre joue à la fois : si la partie est reprise ailleurs, cette fenêtre lui laisse la main ---- */
+/* ---- une seule fenêtre joue à la fois : si la partie est reprise ailleurs, cette fenêtre lui laisse la main,
+        puis recharge la partie sauvegardée la prochaine fois qu'on la regarde ---- */
+let qkAilleurs=false;
 addEventListener('storage',e=>{
   if(e.storageArea!==localStorage||e.key!==SLOT_KEY(SLOT)||e.newValue===null)return;
   if(PIP.isPop){window.close();return}
   if(PIP.win)pipToggle();
-  const again=()=>{if(!document.hidden)location.replace(location.pathname+location.search+'#reprendre')};
-  if(document.hidden)document.addEventListener('visibilitychange',again);else again();
+  if(qkAilleurs)return;qkAilleurs=true;
+  const reprendre=()=>{if(document.hidden)return;document.removeEventListener('visibilitychange',reprendre);qkAilleurs=false;qkRoute('reprendre')};
+  if(document.hidden)document.addEventListener('visibilitychange',reprendre);else reprendre();
 });

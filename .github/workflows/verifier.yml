@@ -1,0 +1,23 @@
+# Vérifie que le site fonctionne : chaque page du cours, chaque démo, chaque chapitre du jeu, les liens entre les deux.
+# À lancer à la main : onglet Actions → « Vérifier le site » → Run workflow.
+name: Vérifier le site
+
+on:
+  workflow_dispatch:
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer les outils
+        run: npm ci
+        working-directory: outils
+      - name: Installer le navigateur de test
+        run: npx playwright install --with-deps chromium
+        working-directory: outils
+      - name: Vérifier
+        run: node outils/verifier.mjs

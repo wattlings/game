@@ -16,7 +16,6 @@ const REG_STY={
 /* ce qui garde sa forme d'origine : terrasses techniques, verrières, toits que l'on a peints (parasol, panneaux solaires…) */
 const REG_KEEP={office:1,bureau:1,enedis:1,grdf:1,voltco:1,villa:1,boulangerie:1,arena2:1};
 const REG_OVR={media:{win:undefined,rt:'gable'},pharma:{rt:'gable'},arena6:{rt:'tile'},arena3:{rt:'tile'}};
-const ALS_COL=['#f0d27a','#e9a0a8','#9cc3dd','#b5d6a0','#e8b48a'],OCRES=['#e6bc84','#dba06a','#efd0a0','#e2ac7e'];
 function regStyle(b){
   const k=bldReg(b),RS=REG_STY[k],st0=BSTY[b.id]||{},ov=REG_OVR[b.id]||{},st=Object.assign({},st0,ov),keep=REG_KEEP[b.id],h=thash(b.x*7+3,b.y*13+b.w);
   let rt=st.rt||'tile';const flat=rt==='flat',mat=flat||keep?null:RS.roof==='flat'?null:RS.roof,geo=mat?(rt==='mansard'?'mansard':RS.geo||(rt==='gable'?'gable':'tile')):rt;

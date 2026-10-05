@@ -57,7 +57,6 @@ function arenaFloor(x,A){
   R(x,7*16,11*16,16,16,D);R(x,7*16+2,11*16+3,12,10,'#8a3b3b');R(x,7*16+3,11*16+4,10,8,'#a54a4a');
 }
 /* ---- obstacles (une case), par thème ---- */
-const A_COLS=['#c0503a','#4a78c9','#8a3b8f','#f2a33a','#2aa198','#7a8594'];
 function arenaBlock(c,t,X,Y,i,j,tk){
   const h=AHASH(i,j),side=j<4;
   switch(t){

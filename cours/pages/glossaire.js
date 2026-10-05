@@ -5,6 +5,7 @@ import { GLOSSAIRE, termesTries } from "../../commun/donnees/glossaire.js";
 import { un } from "../blocs/outils.js";
 import { ficheTerme } from "../coquille/glossaire.js";
 
+/** Affiche le glossaire en pleine page dans `conteneur`. */
 export function pageGlossaire(conteneur) {
   const n = termesTries();
   conteneur.innerHTML = `

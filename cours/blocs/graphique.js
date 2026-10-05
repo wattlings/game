@@ -21,6 +21,8 @@ function bornePropre(e) {
   return [1, 1.2, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10].find((a) => t <= a) * n;
 }
 
+/** Crée un graphique dans `conteneur`. Renvoie { maj(config), detruire() }.
+ * La configuration décrit l'axe x, l'axe y et les séries (courbes, aires, barres, points), plus zones, seuils et marqueurs éventuels. */
 export function graphique(conteneur, configInitiale) {
   let t = configInitiale;
   conteneur.classList.add("chart");

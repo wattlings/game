@@ -81,6 +81,8 @@ function puissanceElec(e, n, t, a, c) {
   return Math.max(0.5, Math.round(d * 100) / 100);
 }
 
+/** Fabrique l'année de l'école : pour chaque jour, sa température, sa courbe électrique (144 points) et son gaz.
+ * Le scénario peut activer des dérives (talon nocturne, chauffage le week-end ou l'été, dépassement). */
 export function simulerAnnee(scenario = {}) {
   const n = {
     ...SCENARIO_DEFAUT,
@@ -168,8 +170,10 @@ export function simulerAnnee(scenario = {}) {
   };
 }
 
+/** Électricité consommée dans la journée (kWh). */
 export const kwhElecDuJour = (jour) => jour.elec.reduce((n, t) => n + t, 0) / 6;
 
+/** Ce que consomme chaque usage sur l'année (talon, éclairage, chauffage…) : une estimation, comme dans la vraie vie. */
 export function repartitionUsages(annee, nbJours = 365) {
   const t = {
     talon: 0,
@@ -226,6 +230,7 @@ export function repartitionUsages(annee, nbJours = 365) {
 
 const cacheSimulations = new Map();
 
+/** L'année simulée pour un jeu de dérives donné (calculée une fois, puis gardée en mémoire). */
 function simulation(derives) {
   const n = Object.fromEntries(
     Object.entries(derives)
@@ -244,12 +249,16 @@ function simulation(derives) {
   return cacheSimulations.get(t);
 }
 
+/** L'année sans aucune dérive : la référence de toutes les démos. */
 export const anneeDeReference = () => simulation({});
 
+/** L'année avec les dérives activées par le lecteur sur la page École. */
 export const anneeAvecDerives = () => simulation(magasin.get().derives || {});
 
+/** Les défauts de données activés par le lecteur sur la page École. */
 export const anomaliesActives = () => magasin.get().anomalies || {};
 
+/** Regroupe des valeurs par paquets de `taille` (moyenne) : 10 min → 30 min, 1 h… */
 export function agreger(valeurs, taille) {
   const t = [];
   for (let a = 0; a < valeurs.length; a += taille) {
@@ -264,8 +273,11 @@ export function agreger(valeurs, taille) {
   return t;
 }
 
+/** Les 365 premiers jours de la simulation. */
 export const anneeCivile = (annee) => annee.jours.slice(0, JOURS_PAR_AN);
 
+/** Total d'électricité (kWh) d'une liste de jours. */
 export const totalElec = (jours) => jours.reduce((n, t) => n + kwhElecDuJour(t), 0);
 
+/** Total de gaz (kWh) d'une liste de jours. */
 export const totalGaz = (jours) => jours.reduce((n, t) => n + t.gazKwh, 0);

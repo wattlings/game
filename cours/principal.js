@@ -46,6 +46,7 @@ racine.innerHTML = `
   <main id="contenu" tabindex="-1"></main>
   <button class="fab" type="button" id="fab">${icone("livre")}<span>Glossaire</span></button>`;
 
+/** Met à jour la barre de progression et le bandeau des 8 étapes. */
 function majProgression() {
   const e = ETAPES.filter((a) => magasin.estFaite(a.num));
   const n = e.filter((a) => a.famille === "data").length;
@@ -65,6 +66,7 @@ let demonterPage = null;
 
 let routeCourante = "";
 
+/** Marque dans la navigation la page en cours. */
 function majNavigation() {
   document.querySelectorAll(".nav a, .steps-strip a").forEach((n) => n.removeAttribute("aria-current"));
   const e = routeCourante.match(/^etape-(\d)/);
@@ -77,6 +79,7 @@ function majNavigation() {
   }
 }
 
+/** Le routeur : lit l'adresse (#etape-3, #ecole…) et affiche la page correspondante. */
 function afficherRoute() {
   const e = decodeURIComponent(location.hash.slice(1)) || "accueil";
   if (e.startsWith("g-")) {

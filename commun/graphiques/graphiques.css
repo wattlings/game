@@ -1,5 +1,7 @@
 /* Styles des graphiques en barres du patrimoine (cours et jeu).
-   Les couleurs --pc-ink, --pc-muted, --pc-hover et --pc-paper sont fournies par la page qui affiche le graphique. */
+   Les couleurs --pc-ink, --pc-muted, --pc-hover et --pc-paper sont fournies par la page qui affiche le graphique.
+   Attention : la règle .chip ci-dessous s'applique aussi aux étiquettes .chip des démos du cours (cette feuille est chargée en dernier).
+   C'était déjà le cas dans la version d'origine : la modifier change donc aussi l'allure de ces étiquettes. */
 
 .pc {
   display: grid;

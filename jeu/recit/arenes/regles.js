@@ -1,4 +1,4 @@
-/* Wattlings · jeu/recit/arenes/_regles.js
+/* Wattlings · jeu/recit/arenes/regles.js
    Arènes : dimensions, chapitre de chaque arène, et le raccourci Q() pour écrire une question. */
 
 /* ================= ARÈNES : une par étape, trois dresseurs, un champion, un badge ================= */

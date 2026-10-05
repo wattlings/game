@@ -1,0 +1,25 @@
+# Assemble le site dans un seul fichier HTML, à télécharger (envoi par mail, usage hors ligne).
+# À lancer à la main : onglet Actions → « Fichier unique » → Run workflow.
+# Le fichier se récupère ensuite sur la page du lancement, rubrique Artifacts.
+name: Fichier unique
+
+on:
+  workflow_dispatch:
+
+jobs:
+  assembler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer l'outil d'assemblage
+        run: npm ci --omit=dev
+        working-directory: outils
+      - name: Assembler
+        run: node outils/fichier-unique.mjs wattlings.html
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wattlings
+          path: wattlings.html

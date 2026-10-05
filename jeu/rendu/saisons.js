@@ -10,9 +10,6 @@
    La patine (usure, traces de vie, nature qui déborde, défauts) se règle sur cinq niveaux, de « neuf » à « très marqué ». */
 const WEAR_K=[0,.5,1,1.6,2.4],WEAR_NAMES=['Neuf','Léger','Présent','Marqué','Très marqué'];
 const SEA={k:'',se:1,snow:false};
-const GSEASON=[['#7ccb68','#84d06f','#8fd67a','#5aad52','#a8e694'],['#73bf65','#7cc56a','#86cc72','#58a551','#9bdc88'],['#93b862','#9cbd66','#a8c56f','#7a9c4c','#c4d88a'],['#86aa74','#8eb07a','#98b884','#6c9160','#b2caa0']],
-  GSNOW=['#e3eaf1','#eef3f8','#f8fbfd','#cdd9e5','#ffffff'];
-const GT=['#58a551','#9bdc88'];
 const wearLvl=()=>Math.max(1,Math.min(5,PREF.wear|0||3));
 /* à appeler avant de repeindre la ville : fixe la patine, les teintes de l'herbe, et fait régénérer les arbres si la saison a changé */
 function seasonArt(){

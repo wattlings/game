@@ -39,6 +39,7 @@ function ouvrirBulle(bouton) {
   bulle.style.left = `${Math.min(Math.max(8, t.left + t.width / 2 - a / 2), window.innerWidth - a - 8)}px`;
 }
 
+/** Le HTML de la fiche d'un terme (définition, exemple, étapes liées). */
 export function ficheTerme(cle, terme) {
   const t = terme.etapes
     .map((a) => {
@@ -51,6 +52,7 @@ export function ficheTerme(cle, terme) {
 
 let focusAvantTiroir = null;
 
+/** Ouvre le tiroir du glossaire, éventuellement sur un terme précis. */
 export function ouvrirGlossaire(cleAOuvrir = null) {
   fermerBulle();
   if (un(".drawer")) {
@@ -135,6 +137,7 @@ export function ouvrirGlossaire(cleAOuvrir = null) {
   }
 }
 
+/** Branche le survol et le clic sur les termes soulignés. À appeler une fois au démarrage. */
 export function brancherGlossaire() {
   document.addEventListener("pointerover", (e) => {
     const n = e.target.closest?.(".terme");

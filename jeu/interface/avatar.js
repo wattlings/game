@@ -9,7 +9,6 @@
    Les anciennes sauvegardes (avatar à indices, tenue de rang imposée) restent lisibles : elles sont converties à la première retouche. */
 const HATS={'':'Aucun',cap:'Casquette',helmet:'Casque',straw:'Paille',beret:'Béret',toque:'Toque',bonnet:'Bonnet',coiffe:'Coiffe',noeud:'Nœud',plat:'Bob'};
 const PROPS={'':'Rien',tablet:'Tablette',clipboard:'Bloc-notes',plan:'Plan',book:'Livre',case:'Mallette',wrench:'Clé',broom:'Balai',lantern:'Lanterne',cane:'Canne',crook:'Houlette',rod:'Canne à pêche',net:'Épuisette',basket:'Panier',baguette:'Baguette',bretzel:'Bretzel',boule:'Boule',leash:'Laisse',umbrella:'Parapluie'};
-const CLOTH=['#f7f0dc','#ece6d6','#9a9aa2','#7a8594','#59627c','#2c2c34','#1c2440','#27325a','#2f6db5','#8ec9e8','#2aa198','#2f9e7a','#2f6d34','#f2c12e','#e2a13a','#e2573b','#c43d3d','#8a3b3b','#e57399','#8a3b8f','#6b4a2b','#8a5a2b','#c9b28a'];
 const AVF=CHF.filter(k=>k!=='umb');
 /* une tenue propre : seulement les champs renseignés */
 function avClean(p){const q={};AVF.forEach(k=>{const v=p[k];if(v!=null&&v!==false&&v!==''&&v!==0)q[k]=v});if(!q.skin)q.skin='#f1c7a1';if(!q.hat)delete q.hatType;else if(!q.hatType)q.hatType='plat';return q}

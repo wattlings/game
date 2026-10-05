@@ -40,6 +40,8 @@ let etat = {
 
 const abonnes = new Set();
 
+/** L'état du cours. get() le lit, set({…}) le modifie et l'enregistre, on(fn) prévient à chaque changement.
+ * marquer(etape, quoi) note une progression ; estFaite(etape) dit si l'Essentiel est lu et la démo manipulée. */
 export const magasin = {
   get: () => etat,
   persistant: () => stockageDisponible,

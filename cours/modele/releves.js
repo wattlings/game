@@ -62,6 +62,7 @@ const deuxChiffres = (e) => String(e).padStart(2, "0");
 
 export const heureDuPas = (pas) => `${deuxChiffres(Math.floor(pas / 6))}:${deuxChiffres((pas % 6) * 10)}`;
 
+/** Le poste horaire d'un pas de temps : HPH, HCH, HPB ou HCB. */
 export function posteHoraire(iso, pas, jourSemaine) {
   const a = +iso.slice(5, 7);
   const c = a >= 11 || a <= 3;
@@ -78,6 +79,7 @@ export const LIBELLES_POSTES = {
   HCB: "Heures creuses, saison basse",
 };
 
+/** La courbe de charge telle que le compteur la transmet, avec les défauts demandés (trous, doublons, valeurs aberrantes, changement d'heure). */
 export function courbeDeCharge(annee, debut, nbJours, defauts = {}) {
   const c = [];
   const o = annee.jours.findIndex((d) => d.iso === debut);
@@ -135,6 +137,7 @@ export function courbeDeCharge(annee, debut, nbJours, defauts = {}) {
   return c;
 }
 
+/** Les relevés journaliers de gaz (m³, coefficient de conversion, kWh). */
 export const relevesGaz = (annee, debut, nbJours) => {
   const a = annee.jours.findIndex((c) => c.iso === debut);
   return annee.jours.slice(a, a + nbJours).map((c) => ({
@@ -145,6 +148,7 @@ export const relevesGaz = (annee, debut, nbJours) => {
   }));
 };
 
+/** Les index relevés chaque 1er du mois (électricité par poste horaire, gaz), avec les défauts demandés. */
 export function indexMensuels(annee, defauts = {}) {
   const t = annee.jours;
   const a = {

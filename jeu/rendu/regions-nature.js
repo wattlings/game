@@ -13,7 +13,6 @@ const regAt=(x,y)=>{const z=ZONE[y]?ZONE[y][x]:-1;return z>=0?REG[z]:''};
 const bldReg=b=>{const z=zoneL(b.door[0],b.door[1]);return z>=0?REG[z]:'loire'};
 const hexMix=(a,b,t)=>{const p=hex3(a),q=hex3(b);return '#'+((1<<24)|(Math.round(p[0]+(q[0]-p[0])*t)<<16)|(Math.round(p[1]+(q[1]-p[1])*t)<<8)|Math.round(p[2]+(q[2]-p[2])*t)).toString(16).slice(1)};
 /* ---- l'herbe : plus sèche en Provence, plus grasse en Normandie, plus sombre en Bretagne… ---- */
-const REG_GRASS={auvergne:['#4f9a58',.24],nord:['#8fb47c',.22],normandie:['#45b84a',.3],alsace:['#86d46c',.14],bourgogne:['#a9c85c',.22],bretagne:['#38a468',.3],provence:['#d6c56c',.46],savoie:['#6fdc8c',.26]};
 const ZG=[];let ZG0=null;
 function regGrassInit(p){ZG0=p.slice();for(let z=0;z<REG.length;z++){const g=REG_GRASS[REG[z]];ZG[z]=g&&!SEA.snow?p.map(c=>hexMix(c,g[0],g[1])):p.slice()}}
 function zoneGrass(x,y){const z=ZONE[y]?ZONE[y][x]:-1,p=z>=0?ZG[z]:ZG0;if(!p)return;GCOL[0]=p[0];GCOL[1]=p[1];GCOL[2]=p[2];GT[0]=p[3];GT[1]=p[4]}
@@ -27,9 +26,6 @@ function artTreeKind(x,y){
   const h=thash(x,y);if(x>=WIND0||y<14&&h<.8)return 1;const n=vnoise(x/6+3,y/6+11),k=(h*31|0)%10;return n>.62?(k<7?1:0):n<.3?(k<4?2:0):k<1?3:k<2?2:0;
 }
 /* ---- les murets : la pierre du pays ---- */
-const REG_STONE={auvergne:['#5a5a64','#66666f','#4d4d56','#74747d','#8e8e96','#33333a'],nord:['#a4472f','#b3543a','#93402a','#bd6248','#e6ddd0','#5f2a1c'],bourgogne:['#d9c9a0','#e4d6b0','#cbb98c','#eee2c0','#f6eed6','#8a7a54'],
-  bretagne:['#9a968c','#aaa69c','#8a867c','#b8b4a8','#d5d1c6','#55524a'],provence:['#d2a56c','#deb47c','#c2955c','#e8c490','#f2d8ac','#7a5a30'],savoie:['#a8a395','#b9b4a6','#9a9588','#c4bfb0','#dcd8cc','#5f5b51']};
-const STONE0=['#a8a395','#b9b4a6','#9a9588','#c4bfb0','#dcd8cc','#5f5b51'];
 /* près d'un changement de région, le muret mêle les pierres des deux pays : [région, région voisine, part de pierres voisines] */
 function muretReg(x,y,at){
   const k=regAt(x,y);
@@ -47,7 +43,6 @@ function artMuret(c,x,y,at){
   if(!L0)R(c,X,Y+3,1,12,dk);if(!R0)R(c,X+15,Y+3,1,12,dk);
 }
 /* ---- fleurs et cultures : lavande, vigne, coquelicots, gentianes… ---- */
-const REG_FLOWERS={auvergne:['#f2c12e','#f7e36b','#f2a33a'],nord:['#e2483b','#e2483b','#f7d84a'],normandie:['#ffffff','#f7d84a','#ffffff'],alsace:['#e2483b','#e9679a','#ffffff'],bretagne:['#f2c12e','#a56ad6','#e9679a'],savoie:['#3f6fe0','#ffffff','#3f6fe0']};
 function artLavender(c,X,Y,x,y){
   artGrass(c,X,Y,x,y,false);const se=SEA.se,bloom=se===1,P1=bloom?'#8a6fe0':se===0?'#9fb08a':'#8f9a86',P2=bloom?'#a98bf0':se===0?'#b4c49c':'#a3ad98',P3=bloom?'#6a52c0':'#74826c';
   for(let r=0;r<2;r++){const yy=Y+2+r*8;R(c,X,yy+5,16,1,'rgba(60,50,30,.22)');for(let k=0;k<3;k++){const a=X+k*5+(r?1:0)+(k===2?0:0),w=5;R(c,a,yy+2,w,4,'#74826c');R(c,a,yy+1,w,2,P1);R(c,a+1,yy,w-2,1,P2);R(c,a+w-1,yy+2,1,3,P3);if(bloom&&wh(x*3+k,y*2+r,310)<.6)R(c,a+1+((wh(x+k,y+r,311)*2)|0),yy-1,1,1,P2)}}
@@ -68,8 +63,6 @@ function artMenhir(c,X,Y,x,y){const h=wh(x,y,360),w=6+((h*3)|0);R(c,X+3,Y+14,11,
   for(let j=0;j<14;j++){const ww=Math.max(3,Math.round(w*(.55+.45*Math.sin((j+2)/15*Math.PI)))),a=X+8-(ww>>1)+(j<4?1:0);R(c,a,Y+1+j,ww,1,'#9a968c');R(c,a,Y+1+j,1,1,'#c4c0b4');R(c,a+ww-1,Y+1+j,1,1,'#6f6b62');if(j%4===2)R(c,a+1+((wh(x+j,y,361)*(ww-2))|0),Y+1+j,2,1,'#b4b0a4')}
   R(c,X+6,Y+11,2,1,'#6f9a55');R(c,X+9,Y+6,1,1,'#c9b84e');R(c,X+5,Y+14,6,1,'#6f6b62')}
 /* ---- allées : la couleur du sol change avec le pays ---- */
-const REG_PATH={auvergne:['#c08a70','#a8765e','#8f6450','#d6a48a'],nord:['#b9b6ad','#a3a097','#8a877f','#cfccc4'],alsace:['#dcb0a0','#c89a8a','#b08272','#ecc8ba'],bourgogne:['#ece2c4','#d6caa6','#bfb38e','#f8f2dc'],
-  bretagne:['#dcd9cf','#c4c1b6','#aaa79c','#eeebe2'],provence:['#e2b676','#cfa062','#b98a50','#f0cc94'],savoie:['#cbbfa8','#b3a78f','#9a8e78','#ddd3bf']};
 /* ---- emblème de chaque quartier (10 × 9 points), pour les panneaux et la carte ---- */
 const EMB={
   loire:['..#....#..','.###..###.','.###..###.','.########.','.#.#..#.#.','.########.','.###..###.','.###..###.','..........'],

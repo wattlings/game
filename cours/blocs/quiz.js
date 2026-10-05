@@ -4,6 +4,7 @@
 import { icone } from "./icones.js";
 import { texteRiche, tous, un } from "./outils.js";
 
+/** Affiche un quiz dans `conteneur` et appelle `auScore(nombre de bonnes réponses)` quand il est terminé. */
 export function monterQuiz(conteneur, questions, auScore = () => {}) {
   const a = questions.map((d, u) => {
     const l = (u * 2 + 1) % d.choix.length;

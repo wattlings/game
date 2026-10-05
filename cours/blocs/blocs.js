@@ -26,6 +26,7 @@ const ENCADRES = {
   },
 };
 
+/** Le HTML d'un bloc de contenu, selon son type. */
 function rendreBloc(bloc, indice) {
   const t = bloc.titre ? `<h3>${texteRiche(bloc.titre)}</h3>` : "";
   switch (bloc.type) {
@@ -60,6 +61,8 @@ function rendreBloc(bloc, indice) {
   }
 }
 
+/** Affiche une suite de blocs dans `conteneur`, puis branche les démos, les exemples pas à pas et le quiz.
+ * Renvoie la fonction qui démonte le tout quand on quitte la page. */
 export function monterBlocs(conteneur, blocs, { num: t, quiz: a, toucher: c, marquerQuiz: o }) {
   conteneur.innerHTML = `<div class="stack" style="gap:28px">${blocs.map(rendreBloc).join("")}</div>`;
   const d = [];

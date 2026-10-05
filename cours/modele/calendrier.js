@@ -99,6 +99,7 @@ export const MOIS = [
   "décembre",
 ];
 
+/** La date ISO décalée de n jours. */
 export function ajouterJours(iso, jours) {
   const t = new Date(iso + "T12:00:00Z");
   t.setUTCDate(t.getUTCDate() + jours);
@@ -125,6 +126,7 @@ export function vacancesDu(iso) {
   return VACANCES.find((n) => iso >= n.debut && iso < n.reprise) || null;
 }
 
+/** Le type d'un jour pour l'école : classe, mercredi, weekend, vacances ou ferie. */
 export function typeDeJour(e, { mercrediMatin: n = true } = {}) {
   const t = jourDeSemaine(e);
   if (JOURS_FERIES[e]) {

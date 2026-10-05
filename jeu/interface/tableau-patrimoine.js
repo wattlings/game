@@ -2,7 +2,6 @@
    Le tableau de bord du patrimoine dans le jeu (les graphiques viennent de commun/graphiques/). */
 
 /* ---------- tableau de bord du jeu ---------- */
-const GC={e:'#00968a',g:'#d4502f',over:'#c2410c',under:'#1a73c9',bar:'#3a4a7a',ink:'#1c2440',muted:'#5b6380',warn:'#a35d00',good:'#2f7d46'};
 const DSH={tab:'pareto',ind:'mwh',act:'ens',bm:'ecart'};
 function renderDash(view){
   const t=DSH.tab;let h='';

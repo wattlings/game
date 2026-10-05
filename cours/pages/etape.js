@@ -36,6 +36,7 @@ const NIVEAUX = [
 const badgeFamille = (e, n = false) =>
   `<span class="badge ${e} ${n ? "plus" : ""}">${icone(FAMILLES[e].icone)}${n ? "+ " : ""}${FAMILLES[e].nom}</span>`;
 
+/** Affiche l'étape `num` dans `conteneur`, ouverte sur le niveau demandé. Renvoie la fonction qui démonte la page. */
 export function pageEtape(conteneur, num, niveauDemande) {
   const a = ETAPES.find((m) => m.num === num);
   const c = ETAPES.find((m) => m.num === num - 1);

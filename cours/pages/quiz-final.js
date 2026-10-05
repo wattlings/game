@@ -8,6 +8,7 @@ import { ETAPES } from "../contenu/index.js";
 import { QUESTIONS_QUIZ_FINAL } from "../contenu/quiz-final.js";
 import { magasin } from "../coquille/etat.js";
 
+/** Affiche le quiz de synthèse dans `conteneur`. */
 export function pageQuizFinal(conteneur) {
   const n = magasin.get().quizFinal;
   conteneur.innerHTML = `

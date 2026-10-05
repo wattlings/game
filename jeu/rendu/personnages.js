@@ -1,10 +1,6 @@
 /* Wattlings · jeu/rendu/personnages.js
    Dessin des personnages : couleurs de peau, cheveux, tenues, et le sprite en 4 directions. */
 
-const SKINS=['#f6d3b3','#f1c7a1','#e0ac7e','#c68a5c','#9a6440','#6b4128'];
-const HAIRC=['#2b1d14','#5a3a22','#8a5a2b','#d9a441','#b8431f','#9a9aa2','#ece6d6','#3a5fc0','#c94f8a'];
-const TOPS=['#7a8594','#c43d3d','#2f6db5','#2f9e7a','#e2a13a','#8a3b8f','#f7f0dc','#2c2c34','#e57399'];
-const BOTS=['#2f3a5c','#333338','#6b4a2b','#6d7896','#8a3b3b','#2f6d34','#c9b28a'];
 const STYLES={court:'Court',long:'Long',queue:'Queue-de-cheval',carre:'Carré',boucle:'Bouclé',chauve:'Crâne rasé'};
 const AVDEF=g=>g==='f'?{g:'f',skin:1,style:'long',hair:1,top:1,bot:0,bt:'jupe'}:{g:'h',skin:1,style:'court',hair:1,top:0,bot:0,bt:'pantalon'};
 function avPal(rank,av){const me=!av;av=av||S.av||AVDEF('h');

@@ -20,6 +20,7 @@ function periodesDeFacturation() {
 
 const arrondiCentime = (e) => Math.round(e * 100) / 100;
 
+/** Les 12 factures mensuelles d'électricité et de gaz, ligne par ligne, calculées avec les tarifs de commun/donnees/references.js. */
 export function factures(annee) {
   const n = periodesDeFacturation();
   const t = [];
