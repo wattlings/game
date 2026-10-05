@@ -229,6 +229,15 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 .swatches,.pills{display:flex;flex-wrap:wrap;gap:6px}
 .sw{width:28px;height:28px;border-radius:50%;border:3px solid #fffaf0;box-shadow:0 0 0 2px #c9bb92;cursor:pointer;padding:0}
 .sw.on{box-shadow:0 0 0 3px var(--ink)}
+.sw.none{background:linear-gradient(135deg,#fffaf0 44%,#c43d3d 46%,#c43d3d 54%,#fffaf0 56%)}
+.sw.pick{position:relative;display:inline-block;background:conic-gradient(#e2573b,#f2c12e,#2f9e7a,#2f6db5,#8a3b8f,#e2573b);overflow:hidden}
+.sw.pick input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;padding:0;border:0}
+.av-ctl .seg{margin-bottom:8px}.av-ctl .swatches{gap:5px}.av-ctl .sw{width:23px;height:23px;border-width:2px}.av-ctl .pills{margin-bottom:6px}
+.av-tpl{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px;margin:4px 0 8px}
+.av-tpl button{font:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:4px 3px 6px;cursor:pointer;color:var(--text);min-width:0}
+.av-tpl button:hover,.av-tpl button:focus-visible{border-color:var(--ink);outline:none}
+.av-tpl b{font-size:14px;line-height:1.15;text-align:center}.av-tpl small{font-size:12px;color:var(--muted);text-align:center;line-height:1.1}
+@media (min-width:561px){.av-prev{position:sticky;top:0}}
 .sw:focus-visible,.pill:focus-visible{outline:2px solid var(--flame);outline-offset:2px}
 .pill{font:inherit;font-size:15.5px;background:#fffaf0;border:2px solid #c9bb92;border-radius:999px;padding:4px 12px;cursor:pointer;color:var(--text)}
 .pill.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -967,7 +976,7 @@ function savoirTargets(){
 
 /* ---- bâtiments du quartier est et du sud ---- */
 const LOCALS={
-  enedis:{name:'Agence Enedis',roof:'#2f6db5',wall:'#e8eef5'},grdf:{name:'Poste GRDF',roof:'#1c7a9a',wall:'#eef3f2'},voltco:{name:'Volt&Co Énergie',roof:'#c43d3d',wall:'#f3ece2'},
+  enedis:{name:'Agence Enedis',roof:'#3f9e58',wall:'#e8eef5'},grdf:{name:'Poste GRDF',roof:'#e58a2e',wall:'#eef3f2'},voltco:{name:'Volt&Co Énergie',roof:'#c43d3d',wall:'#f3ece2'},
   media:{name:'Médiathèque',roof:'#2f7d46',wall:'#efe9da'},cabinet:{name:'Cabinet médical',roof:'#8a5f36',wall:'#f5efe4'},pharma:{name:'Pharmacie',roof:'#2f8f4e',wall:'#f1f5ee'},maison:{name:'Maison Dupuis',roof:'#a0522d',wall:'#f3e2c4'},villa:{name:'Villa avec piscine',roof:'#3f8f8a',wall:'#f4efe6'}
 };
 function genLocal(){const W=11,H=8,g=grid(W,H,'o');rect(g,0,0,W-1,1,'W');rect(g,0,0,0,H-1,'W');rect(g,W-1,0,W-1,H-1,'W');rect(g,0,H-1,W-1,H-1,'W');g[H-1][5]='E';return g}
@@ -985,7 +994,7 @@ function localDecor(o){
 const SAVE_KEY='quete-kilowatt-v1';
 const RANKS=['Gestionnaire de site','Energy Manager','Gestionnaire de patrimoine'];
 const BADGES=['Cadrer','Collecter','Fiabiliser','Structurer','Analyser','Détecter','Agir','Piloter'];
-const DEF=()=>({en:null,ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,secrets:{},maxCh:0,sobriete:false,hades:false,hadesN:0,wololo:false,arena:{},v:4});
+const DEF=()=>({en:null,ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,models:{},secrets:{},maxCh:0,sobriete:false,hades:false,hadesN:0,wololo:false,arena:{},v:4});
 let S=DEF();
 /* 3 emplacements de sauvegarde dans le navigateur */
 const SLOT_N=3,SLOT_KEY=n=>'wattlings-slot-'+n,ACTIVE_KEY='wattlings-active';
@@ -997,7 +1006,7 @@ function save(){S.savedAt=Date.now();try{localStorage.setItem(SLOT_KEY(SLOT),JSO
 function loadSave(){return readSlot(SLOT)}
 try{if(!readSlot(1)){const old=localStorage.getItem(SAVE_KEY);if(old)localStorage.setItem(SLOT_KEY(1),old)}}catch(e){}
 const fmtDate=ts=>ts?new Date(ts).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
-function restartStory(){const k={name:S.name,av:S.av,secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees,hades:S.hades,hadesN:S.hadesN};S=Object.assign(DEF(),k);save()}
+function restartStory(){const k={name:S.name,av:S.av,models:S.models||{},secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees,hades:S.hades,hadesN:S.hadesN};S=Object.assign(DEF(),k);save()}
 let lastFlash=0;function savedFlash(){const el=typeof ROOT!=='undefined'&&ROOT.getElementById&&ROOT.getElementById('hudSaved');if(!el)return;const n=Date.now();if(n-lastFlash<2500)return;lastFlash=n;if(!saveOK&&!savedFlash.warned){savedFlash.warned=1;toast('⚠ Sauvegarde impossible dans ce navigateur')}el.textContent=saveOK?'✓ Sauvegardé':'⚠ Sauvegarde impossible';el.classList.remove('on');void el.offsetWidth;el.classList.add('on')}
 const $=id=>ROOT.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -1189,7 +1198,7 @@ function drawTile0(c,ch,x,y,mapId){
 }
 /* ---- bâtiments : chacun a son architecture (toit, vitrage, détails) selon ce qu'il abrite ---- */
 const BSTY={arena1:{rt:'tile',nosign:1},arena2:{rt:'flat',nosign:1},arena3:{rt:'shed',nosign:1},arena4:{rt:'mansard',nosign:1},arena5:{rt:'gable',nosign:1},arena6:{rt:'flat',nosign:1},arena7:{rt:'tile',nosign:1},arena8:{rt:'mansard',nosign:1},
-
+ 
   office:{rt:'flat',sign:'EM',win:'strip'},ecole:{rt:'tile',sign:'ECOLE'},bureau:{rt:'flat',win:'glass',sign:'LE CARRE'},boulangerie:{rt:'gable',win:'shop',sign:'PAIN'},
   mairie:{rt:'mansard',sign:'MAIRIE'},gare:{rt:'tile',nosign:1},enedis:{rt:'flat',sign:'ENEDIS',band:'#2f6db5'},grdf:{rt:'flat',sign:'GRDF',band:'#f2c12e'},
   voltco:{rt:'flat',win:'shop',nosign:1},media:{rt:'shed',win:'glass',sign:'LIVRES'},cabinet:{rt:'gable'},pharma:{rt:'flat',win:'shop',band:'#2fbf5e'},maison:{rt:'gable',nosign:1,door:'#2f6db5'},villa:{rt:'flat',win:'bay',nosign:1}
@@ -1237,13 +1246,12 @@ const BPAINT={
     for(let tx=X;tx<X+W;tx+=TS){if(tx===dx)continue;R(c,tx+3,dy+8,5,3,'#d9a55a');R(c,tx+9,dy+7,4,4,'#c98a3a');R(c,tx+4,dy+9,3,1,'#f3d9a0')}},
   mairie:(c,{X,Y,W,H,rh,WY,dx,dy})=>{const cx=dx+8;for(let k=0;k<3;k++){const a=X+10+k*((W-32)/2);R(c,a,Y+8,10,10,'#efe6d2');R(c,a+2,Y+10,6,7,'#8ec9e8');R(c,a-1,Y+6,12,3,'#3d3254')}
     for(let i=0;i<12;i++)R(c,cx-24+i*2,WY-2-i,48-i*4,1,'#efe6d2');R(c,cx-25,WY-2,50,3,'#d9cfb8');c.fillStyle='#fff';c.beginPath();c.arc(cx,WY-8,4,0,7);c.fill();R(c,cx,WY-11,1,3,'#1c2440');R(c,cx,WY-8,2,1,'#1c2440');
-    [-22,-10,18,30].forEach(a=>{R(c,cx+a-4,WY+1,6,H-rh-4,'#fbf7ec');R(c,cx+a-5,WY+1,8,2,'#d9cfb8');R(c,cx+a-5,Y+H-5,8,2,'#d9cfb8');R(c,cx+a-1,WY+3,1,H-rh-8,'#e2dac6')});
     R(c,dx-4,Y+H-3,24,3,'#d9d2c0');R(c,dx-7,Y+H-1,30,2,'#c6beaa')},
   enedis:(c,{X,Y,W,H,rh,WY,dx,dy})=>{R(c,X+3,dy+1,26,15,'#8a93a3');for(let k=0;k<5;k++)R(c,X+3,dy+2+k*3,26,1,'#6d7480');R(c,X+W-22,Y+6,3,rh-8,'#59627c');R(c,X+W-27,Y+6,13,2,'#59627c');R(c,X+W-27,Y+11,13,2,'#59627c');
     const bx=X+W-14,by=WY+7;R(c,bx,by,5,3,'#f2c12e');R(c,bx-2,by+3,5,2,'#f2c12e');R(c,bx,by+5,3,3,'#f2c12e')},
   grdf:(c,{X,Y,W,H,rh,WY,dx,dy})=>{R(c,X+2,WY+9,W-4,2,'#e8d24a');R(c,X+4,WY+9,2,H-rh-12,'#e8d24a');R(c,X+W-7,WY+9,2,H-rh-12,'#e8d24a');R(c,X+2,WY+7,4,6,'#c43d3d');
     [[8,6],[20,9]].forEach(([a,b])=>{R(c,X+a,Y+b,7,rh-b-6,'#9aa0a8');R(c,X+a-1,Y+b-2,9,3,'#6d7480')});
-    const fx=X+W-18,fy=Y+8;R(c,fx,fy+3,7,7,'#e2573b');R(c,fx+1,fy,4,5,'#e2573b');R(c,fx+2,fy+5,3,4,'#f2c12e')},
+    const fx=X+W-18,fy=Y+8;R(c,fx-3,fy-2,13,14,'#1c2440');R(c,fx-2,fy-1,11,12,'#27325a');R(c,fx,fy+3,7,7,'#e2573b');R(c,fx+1,fy,4,5,'#e2573b');R(c,fx+2,fy+5,3,4,'#f2c12e')},
   voltco:(c,{X,Y,W,rh,WY,dx,dy})=>{const w=txt35w('VOLT CO',2),bx=Math.round(X+W/2-w/2)-5;R(c,bx,Y-9,w+10,17,'#1c2440');R(c,bx+1,Y-8,w+8,15,'#fff');R(c,bx+1,Y-8,w+8,2,'#c43d3d');R(c,bx+1,Y+5,w+8,2,'#c43d3d');txt35(c,'VOLT CO',bx+5,Y-4,'#c43d3d',2);
     R(c,bx+6,Y+8,2,6,'#59627c');R(c,bx+w+2,Y+8,2,6,'#59627c');
     for(let tx=X;tx<X+W;tx+=TS){if(tx===dx)continue;R(c,tx+4,dy+5,7,5,'#f2c12e');R(c,tx+5,dy+7,5,1,'#c43d3d')}},
@@ -1264,7 +1272,7 @@ function buildMapCanvas(id){
   const town=id==='town';if(town){seasonArt();SKR.artK=SKY.artKey;SKR.stK=''}
   // en ville, l'eau, les pistes et les allées ne sont plus dessinées case par case : on pose d'abord l'herbe, les courbes viennent ensuite
   for(let y=0;y<H;y++)for(let x=0;x<W;x++){const ch=m.g[y][x];if(town&&(ch==='b'||ch==='='||ch==='R'||ch==='~'||ch==='g')){zoneGrass(x,y);artGrass(x2,x*TS,y*TS,x,y,false)}else drawTile(x2,ch,x,y,id)}
-  if(town){curvePass(x2,m.g);curveDecor(x2,m.g);for(let y=0;y<H;y++)for(let x=0;x<WIND0;x++)seasonGround(x2,m.g[y][x],x,y)}
+  if(town){blendEdges(x2,m.g);blendGrass(x2);curvePass(x2,m.g);curveDecor(x2,m.g);for(let y=0;y<H;y++)for(let x=0;x<WIND0;x++)seasonGround(x2,m.g[y][x],x,y);blendGrass(x2)}      // fondus : avant les courbes, puis une seconde fois pour ce qui s'est posé dessus
   if(m.arena)arenaFloor(x2,m.arena);
   mapOver[id]=null;
   if(id==='town'){artInit();const o=mkc(W*TS,H*TS),xo=o.getContext('2d');
@@ -1283,7 +1291,7 @@ const BOTS=['#2f3a5c','#333338','#6b4a2b','#6d7896','#8a3b3b','#2f6d34','#c9b28a
 const STYLES={court:'Court',long:'Long',queue:'Queue-de-cheval',carre:'Carré',boucle:'Bouclé',chauve:'Crâne rasé'};
 const AVDEF=g=>g==='f'?{g:'f',skin:1,style:'long',hair:1,top:1,bot:0,bt:'jupe'}:{g:'h',skin:1,style:'court',hair:1,top:0,bot:0,bt:'pantalon'};
 function avPal(rank,av){const me=!av;av=av||S.av||AVDEF('h');
-  const p={skin:SKINS[av.skin],hair:HAIRC[av.hair],style:av.style,shirt:TOPS[av.top],pants:BOTS[av.bot],skirt:av.bt==='jupe',
+  const p=av.p?Object.assign({},av.p):{skin:SKINS[av.skin],hair:HAIRC[av.hair],style:av.style,shirt:TOPS[av.top],pants:BOTS[av.bot],skirt:av.bt==='jupe',
     hat:rank===1?'#f2c12e':null,vest:rank===1,jacket:rank===2?'#262b4f':null,tie:rank===2?'#f2a33a':null,lash:av.g==='f'};
   if(me&&S.wololo){const red=p.shirt!=='#c43d3d';p.shirt=red?'#c43d3d':'#2f6db5';p.pants=red?'#6e1f1f':'#1b3f6e';if(p.jacket)p.jacket=red?'#8f2222':'#1d4a82';if(p.hat)p.hat=p.shirt;p.vest=false}
   return p}
@@ -1363,8 +1371,11 @@ function drawChar0(c,x,y,dir,frame,p,run,fx){
     else{R(c,x+3,y,10,3,p.hat);R(c,x+4,y-1,8,1,p.hat);if(ht==='cap'){if(dir==='down')R(c,x+4,y+2,8,1,shade(p.hat));if(dir==='left')R(c,x+1,y+2,4,1,p.hat);if(dir==='right')R(c,x+11,y+2,4,1,p.hat)}}}
   if(p.glasses&&dir!=='up'){R(c,x+5,y+4,6,1,'#222')}
   // ce que le personnage tient à la main
-  if(p.prop==='umbrella'){const u=p.umb||'#c43d3d',hx=dir==='left'?x+2:x+13;R(c,hx,y-4,1,14,'#3a3a44');R(c,x+3,y-8,10,1,u);R(c,x+1,y-7,14,2,u);R(c,x,y-5,16,1,u);R(c,x+3,y-8,10,1,tint(u,.25));R(c,x+2,y-7,5,1,tint(u,.25));
-    for(let k=0;k<16;k+=4)R(c,x+k,y-4,1,1,tint(u,-.3));R(c,x+7,y-9,2,1,'#3a3a44');R(c,x,y-5,16,1,tint(u,-.18));R(c,hx,y+9,2,1,'#3a3a44')}
+  if(p.prop==='umbrella'){   // le parapluie est centré sur son manche, tenu dans la main : la toile déborde du côté de cette main
+    const u=p.umb||'#c43d3d',hx=dir==='left'||dir==='up'?x+3:x+12,hi=tint(u,.25),lo=tint(u,-.18),M='#3a3a44';
+    R(c,hx,y-4,1,13,M);R(c,hx,y+9,2,1,M);R(c,hx,y-9,1,1,M);
+    R(c,hx-4,y-8,9,1,hi);R(c,hx-6,y-7,13,2,u);R(c,hx-5,y-7,5,1,hi);R(c,hx-7,y-5,15,1,lo);
+    [-7,-4,3,6].forEach(k=>R(c,hx+k,y-4,k<0?2:2,1,tint(u,-.3)))}
   else if(p.prop&&dir!=='up'){const hx=dir==='left'?x+1:x+12,hy=y+9,pr=p.prop;
     if(pr==='clipboard'){R(c,hx-1,hy,4,5,'#f7f0dc');R(c,hx,hy+1,2,1,'#5b6380');R(c,hx,hy+3,2,1,'#5b6380')}
     else if(pr==='tablet'){R(c,hx-1,hy,4,4,'#1c2440');R(c,hx,hy+1,2,2,'#2aa198')}
@@ -1620,9 +1631,9 @@ function windStep(){
     else if(P.pushMsg==='gust'){P.pushMsg=null;toast('Une rafale te repousse !')}
     return true}
   if(!inCorridor()){if(P.x<WIND0-3)WIND.told=false;
-
+    
     return false}
-
+  
   if(!WIND.told){WIND.told=true;toast('Le vent se lève…')}
   if(P.x>=WIND0+4){pushBack(WIND0-1,'big');return true}
   if(P.x>=WIND0+2&&P.dir==='right'&&Math.random()<.4){pushBack(Math.max(WIND0-1,P.x-2),'gust');return true}
@@ -1718,7 +1729,7 @@ function pressA(){
   if(P.moving)return;
   if(BOX.on){leaveBox(false);say([{t:"Tu sors du carton. Il retourne à sa place, l'air de rien."}]);return}
   const [dx,dy]=DIRS[P.dir],o=objAt(P.x+dx,P.y+dy);
-  if(o&&o.act){if(o.kind==='npc'){o.dir={up:'down',down:'up',left:'right',right:'left'}[P.dir];if(hadesBlock(o))return}o.act()}
+  if(o&&o.act){if(o.kind==='npc'){o.dir={up:'down',down:'up',left:'right',right:'left'}[P.dir];if(hadesBlock(o))return;metNpc(o)}o.act()}
 }
 
 /* ================= HUD / XP ================= */
@@ -2311,13 +2322,19 @@ function regBorder(z,h,n){
 const REG_STONE={auvergne:['#5a5a64','#66666f','#4d4d56','#74747d','#8e8e96','#33333a'],nord:['#a4472f','#b3543a','#93402a','#bd6248','#e6ddd0','#5f2a1c'],bourgogne:['#d9c9a0','#e4d6b0','#cbb98c','#eee2c0','#f6eed6','#8a7a54'],
   bretagne:['#9a968c','#aaa69c','#8a867c','#b8b4a8','#d5d1c6','#55524a'],provence:['#d2a56c','#deb47c','#c2955c','#e8c490','#f2d8ac','#7a5a30'],savoie:['#a8a395','#b9b4a6','#9a9588','#c4bfb0','#dcd8cc','#5f5b51']};
 const STONE0=['#a8a395','#b9b4a6','#9a9588','#c4bfb0','#dcd8cc','#5f5b51'];
+/* près d'un changement de région, le muret mêle les pierres des deux pays : [région, région voisine, part de pierres voisines] */
+function muretReg(x,y,at){
+  const k=regAt(x,y);
+  for(const [i,j] of [[1,0],[-1,0],[0,1],[0,-1]])for(let d=1;d<=3;d++){if(at(i*d,j*d)!=='m')break;const k1=regAt(x+i*d,y+j*d);if(k1!==k)return [k,k1,[0,.45,.28,.12][d]]}
+  return [k,null,0];
+}
 function artMuret(c,x,y,at){
-  const X=x*TS,Y=y*TS,L0=at(-1,0)==='m',R0=at(1,0)==='m',U0=at(0,-1)==='m',D0=at(0,1)==='m',vert=(U0||D0)&&!(L0||R0),k=regAt(x,y),S=REG_STONE[k]||STONE0,brick=k==='nord',dk=S[5],cap=brick?S[4]:S[3],capHi=S[4];
-  if(vert){R(c,X+12,Y,2,16,'rgba(20,40,30,.25)');R(c,X+4,Y,8,16,tint(S[0],-.12));for(let j=0;j<(brick?4:2);j++){const hh=brick?4:8,o=brick?(j%2)*2:((x+y*2+j)%2)*3;R(c,X+4,Y+j*hh+(brick?0:o%8),8,hh-1,S[(wh(x,y,60+j)*4)|0]);if(brick)R(c,X+6+o,Y+j*hh,1,hh-1,S[4])}
+  const X=x*TS,Y=y*TS,L0=at(-1,0)==='m',R0=at(1,0)==='m',U0=at(0,-1)==='m',D0=at(0,1)==='m',vert=(U0||D0)&&!(L0||R0),[k,k2,mp]=muretReg(x,y,at),S=REG_STONE[k]||STONE0,S2=k2?REG_STONE[k2]||STONE0:S,pk=n=>mp&&wh(x*7+n,y*3+n,67)<mp?S2:S,brick=k==='nord',dk=S[5],cap=brick?S[4]:S[3],capHi=S[4];
+  if(vert){R(c,X+12,Y,2,16,'rgba(20,40,30,.25)');R(c,X+4,Y,8,16,tint(S[0],-.12));for(let j=0;j<(brick?4:2);j++){const hh=brick?4:8,o=brick?(j%2)*2:((x+y*2+j)%2)*3;R(c,X+4,Y+j*hh+(brick?0:o%8),8,hh-1,pk(j)[(wh(x,y,60+j)*4)|0]);if(brick)R(c,X+6+o,Y+j*hh,1,hh-1,S[4])}
     R(c,X+4,Y,1,16,capHi);R(c,X+11,Y,1,16,dk);if(!D0){R(c,X+4,Y+12,8,4,tint(S[0],-.2));R(c,X+4,Y+15,8,1,dk)}return}
   R(c,X,Y+15,16,1,'rgba(20,40,30,.28)');R(c,X,Y+5,16,10,tint(S[0],-.2));
-  if(brick){for(let r=0;r<3;r++){const ry=6+r*3,off=(r%2)*4;for(let sx=-off;sx<16;sx+=8){const a=Math.max(0,sx),w=Math.min(16,sx+7)-a;if(w>0)R(c,X+a,Y+ry,w,2,S[(wh(x*3+sx,y,62+r)*4)|0])}}}
-  else [[7,0],[11,3]].forEach(([ry,off],r)=>{for(let sx=-off;sx<16;sx+=6){const a=Math.max(0,sx),w=Math.min(16,sx+5)-a;if(w<=0)continue;const col=S[(wh(x*3+sx,y,62+r)*3)|0];R(c,X+a,Y+ry,w,3,col);R(c,X+a,Y+ry,w,1,tint(col,.2))}});
+  if(brick){for(let r=0;r<3;r++){const ry=6+r*3,off=(r%2)*4;for(let sx=-off;sx<16;sx+=8){const a=Math.max(0,sx),w=Math.min(16,sx+7)-a;if(w>0)R(c,X+a,Y+ry,w,2,pk(r*9+sx)[(wh(x*3+sx,y,62+r)*4)|0])}}}
+  else [[7,0],[11,3]].forEach(([ry,off],r)=>{for(let sx=-off;sx<16;sx+=6){const a=Math.max(0,sx),w=Math.min(16,sx+5)-a;if(w<=0)continue;const col=pk(r*9+sx)[(wh(x*3+sx,y,62+r)*3)|0];R(c,X+a,Y+ry,w,3,col);R(c,X+a,Y+ry,w,1,tint(col,.2))}});
   R(c,X,Y+3,16,3,cap);R(c,X,Y+3,16,1,capHi);R(c,X,Y+6,16,1,dk);R(c,X+((x%2)?5:11),Y+3,1,3,tint(cap,-.15));R(c,X,Y+14,16,1,dk);
   if(!L0)R(c,X,Y+3,1,12,dk);if(!R0)R(c,X+15,Y+3,1,12,dk);
 }
@@ -2441,6 +2458,56 @@ function regShutters(c,S,x,y,w,h){
   if(S.RS.box){R(c,x,y+h,w,2,'#6b4a2b');R(c,x,y+h,w,1,'#8a6538');if(SEA.se!==3&&!SEA.snow)for(let i=0;i<w;i+=2)R(c,x+i,y+h-1-(i%4?1:0),2,2,(i+x)%6<3?'#e2483b':(S.k==='savoie'?'#f7f0dc':'#e9679a'));else R(c,x+1,y+h-1,w-2,1,'#4f7a4a')}
 }
 
+/* ================= FONDUS : les jointures entre textures =================
+   Trois passes au pixel sur le sol de la ville, pour qu'aucune frontière ne soit une ligne droite :
+   - blendEdges : là où un sol posé (pavés, terre, quai, cultures) touche l'herbe, la limite ondule, l'herbe mord sur le sol et le sol s'égrène dans l'herbe ;
+   - blendGrass : d'une région à l'autre, la teinte de l'herbe ne change plus au cordeau : la limite serpente et les deux teintes se mêlent en tramé ;
+   - les berges, les allées et le bord des pistes sont adoucis dans curvePass (b_curve.js). */
+const BAYER=[0,8,2,10,12,4,14,6,3,11,1,9,15,7,13,5],hexI=h=>parseInt(h.slice(1),16);
+let ZEFF=null;const ZPIX={};
+/* quartier « effectif » : les cases sans quartier (berges, bords de piste) prennent celui du voisin le plus proche */
+function zoneEff(){
+  if(ZEFF)return ZEFF;ZEFF=[];
+  for(let y=0;y<TH;y++){const r=new Int8Array(TW);for(let x=0;x<TW;x++){let z=ZONE[y]&&ZONE[y][x]>=0?ZONE[y][x]:-1;
+    if(z<0&&x<WIND0){let bd=99;for(let j=-3;j<=3;j++)for(let i=-3;i<=3;i++){const q=ZONE[y+j]?ZONE[y+j][x+i]:-1;if(q>=0){const d=i*i+j*j;if(d<bd){bd=d;z=q}}}}r[x]=z}ZEFF.push(r)}
+  return ZEFF;
+}
+/* quartier vu depuis un pixel : la limite serpente (bruit lent) et se trame sur une case de large */
+function zonePix(px,py,Z){
+  const sx=px+.5+(vnoise(px/21+7.3,py/21+3.1)-.5)*22,sy=py+.5+(vnoise(px/21+31.7,py/21+17.9)-.5)*22,u=(sx-8)/16,v=(sy-8)/16,i0=Math.floor(u),j0=Math.floor(v);
+  const t1=(BAYER[(px&3)+((py&3)<<2)]+.5)/16*.55+thash(px*7+3,py*13+5)*.45,t2=(BAYER[((px+2)&3)+(((py+1)&3)<<2)]+.5)/16*.55+thash(px*5+11,py*3+7)*.45;
+  const x=i0+((u-i0)>t1?1:0),y=j0+((v-j0)>t2?1:0);return x<0||y<0||x>=TW||y>=TH?-2:Z[y][x];
+}
+function blendGrass(c){
+  if(SEA.snow||!ZG0)return;
+  const W=TW*TS,H=TH*TS,im=c.getImageData(0,0,W,H),D=im.data,Z=zoneEff(),P0=ZG0.map(hexI),PZ=ZG.map(p=>p.map(hexI)),pal=z=>z>=0?PZ[z]:P0;
+  for(let ty=0;ty<TH;ty++)for(let tx=0;tx<TW;tx++){
+    const z0=ZONE[ty]&&ZONE[ty][tx]>=0?ZONE[ty][tx]:-1,src=pal(z0);let mixed=Z[ty][tx]!==z0;
+    for(let j=-2;j<=2&&!mixed;j++)for(let i=-2;i<=2;i++){const x=tx+i,y=ty+j;if(x>=0&&y>=0&&x<TW&&y<TH&&Z[y][x]!==z0){mixed=true;break}}
+    if(!mixed)continue;
+    let M=ZPIX[ty*TW+tx];if(!M){M=ZPIX[ty*TW+tx]=new Int8Array(256);for(let j=0;j<16;j++)for(let i=0;i<16;i++){const t=zonePix(tx*16+i,ty*16+j,Z);M[j*16+i]=t===-2?z0:t}}      // la géométrie des quartiers ne change jamais : calculée une fois
+    for(let j=0;j<16;j++)for(let i=0;i<16;i++){const px=tx*16+i,py=ty*16+j,k=(py*W+px)*4,col=(D[k]<<16)|(D[k+1]<<8)|D[k+2];let q=0;while(q<5&&src[q]!==col)q++;if(q>4)continue;
+      const dst=pal(M[j*16+i]);if(dst===src)continue;const n=dst[q];D[k]=n>>16;D[k+1]=(n>>8)&255;D[k+2]=n&255}}
+  c.putImageData(im,0,0);
+}
+/* sols posés contre l'herbe : amplitude de l'ondulation, en pixels */
+const BLEND_AMP={',':2.2,d:3.8,q:1.1,c:3.2},BLEND_SOW={',':[.05,.2],d:[.3,.2],q:[0,.14],c:[.22,.2]};      // semis : part du sol qui s'égrène dans l'herbe, part d'herbe qui pousse sur le sol
+function blendEdges(c,g){
+  const W=TW*TS,H=TH*TS,im=c.getImageData(0,0,W,H),D=im.data,S0=new Uint8ClampedArray(D);
+  const hard=(x,y)=>{const t=g[y]&&g[y][x];return t===','||t==='d'||t==='q'?t:t==='*'&&x<WIND0&&regCrop(x,y)?'c':0};
+  const soft=t=>t==='.'||t==='*'||t==='T'||t==='u'||t==='k'||t==='h'||t==='f'||t==='P'||t==='m'||t===':';
+  const cp=(ax,ay,bx,by)=>{if(ax<0||ay<0||bx<0||by<0||ax>=W||bx>=W||ay>=H||by>=H)return;const a=(ay*W+ax)*4,b=(by*W+bx)*4;D[a]=S0[b];D[a+1]=S0[b+1];D[a+2]=S0[b+2]};
+  const put=(x,y,col)=>{if(x<0||y<0||x>=W||y>=H)return;const a=(y*W+x)*4;D[a]=col[0];D[a+1]=col[1];D[a+2]=col[2]};
+  for(let ty=1;ty<TH-1;ty++)for(let tx=1;tx<WIND0;tx++){const k=hard(tx,ty);if(!k)continue;const A=BLEND_AMP[k],n=Math.ceil(A+2),[sa,sb]=BLEND_SOW[k];
+    [[0,-1],[0,1],[-1,0],[1,0]].forEach(([dx,dy])=>{const nx=tx+dx,ny=ty+dy;if(!soft(g[ny][nx])||hard(nx,ny))return;zoneGrass(nx,ny);const G=[hex3(GCOL[1]),hex3(GT[0])];
+      const e=dx?(dx>0?tx*16+16:tx*16):(dy>0?ty*16+16:ty*16),sg=dx?dx:dy;      // e : position de la limite sur l'axe perpendiculaire ; sg : côté de l'herbe
+      for(let a=0;a<16;a++){const w=(dx?ty:tx)*16+a,o=(vnoise(w/5.1+e*.37,e*.61+3)-.5)*2*A+(thash(w*3+1,e*5+2)-.5)*1.4;      // o > 0 : le sol déborde sur l'herbe
+        for(let s=1;s<=n;s++){const pg=sg>0?e+s-1:e-s,ph=sg>0?e-s:e+s-1,gx=dx?pg:w,gy=dx?w:pg,hx=dx?ph:w,hy=dx?w:ph,r=thash(gx*11+s,gy*17+3),r2=thash(hx*13+5,hy*7+s);
+          if(s-.5<o||(s-.5<o+2.2&&r<sa))cp(gx,gy,hx,hy);
+          else if(o<.5-s||(o<.5-s+2.2&&r2<sb))put(hx,hy,G[r2<.07?1:0])}}})}
+  c.putImageData(im,0,0);
+}
+
 /* ================= COURBES : rivière, étang, pistes et allées dessinés au pixel =================
    La logique du jeu reste sur la grille (une case est praticable ou non), mais le dessin ne s'y limite plus :
    la rivière suit une vraie courbe, les pistes ont des virages en arc et des carrefours adoucis, les allées sont des rubans lisses.
@@ -2474,29 +2541,33 @@ function curvePass(c,g){
   // ---- eau : rivière puis étang ----
   const WB=hex3('#4f9fdc'),WL=hex3('#8fd0f4'),WD=hex3('#3f8ccb'),WS=hex3('#356f9f'),WF=hex3('#86c6ee'),EARTH=hex3(snow?'#cfd6dd':'#7a6a45'),LIP=hex3(snow?'#e3eaf0':'#4f9a4e'),WDEEP=hex3('#4794d4');
   const water=(px,py,d,maxd)=>{   // d : distance à la berge, positive dans l'eau
-    if(d<-2.4)return;const t=tl(px,py);
-    if(d<0){if(soft(t))set(px,py,d<-1.1?LIP:EARTH);return}
-    if(d<1.5){set(px,py,WS);return}
-    if(d<3&&vnoise(px/3.1,py/3.1)>.45){set(px,py,WF);return}
+    d+=(vnoise(px/6.1+2.3,py/6.1+5.7)-.5)*2.6;if(d<-5)return;const t=tl(px,py),h=thash(px*5+1,py*9+4);      // la berge ondule ; l'herbe s'assombrit en tramé en approchant de l'eau
+    if(d<0){if(!soft(t))return;if(d<-2.4){if(h<.55*(1+(d+2.4)/2.6))set(px,py,LIP)}else if(d<-1.1){if(h<.82)set(px,py,LIP)}else set(px,py,h<.24?LIP:EARTH);return}
+    if(d<1.3){set(px,py,h<.3?WF:WS);return}
+    if(d<4.6&&(vnoise(px/3.1,py/3.1)>.42+(d-1.3)*.1||h<.34*(1-(d-1.3)/3.3))){set(px,py,WF);return}      // hauts-fonds clairs, de plus en plus rares vers le large
     const n=vnoise(px/7+3,py/1.8);set(px,py,n>.74?WL:n<.19?WD:d>maxd*.55?WDEEP:WB)};
-  for(let py=2*TS;py<(TH-2)*TS;py++){const cx=riverCx(py),hw=riverHw(py),a=cx-hw,b=cx+hw;for(let px=Math.floor(a)-3;px<=Math.ceil(b)+3;px++)water(px,py,Math.min(px+.5-a,b-(px+.5)),hw)}
+  for(let py=2*TS;py<(TH-2)*TS;py++){const cx=riverCx(py),hw=riverHw(py),a=cx-hw,b=cx+hw;for(let px=Math.floor(a)-7;px<=Math.ceil(b)+7;px++)water(px,py,Math.min(px+.5-a,b-(px+.5)),hw)}
   {const P0=L.pondL,cx=(P0.x0+P0.x1+1)/2*TS,cy=(P0.y0+P0.y1+1)/2*TS,A=(P0.x1-P0.x0+1)/2*TS+3,B=(P0.y1-P0.y0+1)/2*TS+3;
     for(let py=Math.floor(cy-B-8);py<=cy+B+8;py++)for(let px=Math.floor(cx-A-8);px<=cx+A+8;px++){const dx=(px+.5-cx)/A,dy=(py+.5-cy)/B,th=Math.atan2(dy,dx),r=Math.sqrt(dx*dx+dy*dy),Rr=1+.07*Math.sin(3*th+1)+.05*Math.sin(5*th+.4);
       water(px,py,(Rr-r)*Math.min(A,B),Math.min(A,B)*.8)}}
   // ---- allées : rubans de sable, bord plus sombre, herbe qui mord ----
   const {roads,paths}=curveLines(),PB=hex3(snow?'#e9e6dc':'#e6d8ae'),PD=hex3(snow?'#d3d2cc':'#cdbb88'),PE=hex3(snow?'#bdbdb8':'#b9a672'),PL=hex3('#f6eed6');
   const RPATH=REG.map(k=>REG_PATH[k]?REG_PATH[k].map(hex3):null);
-  paths.forEach(S=>{const x0=Math.max(0,Math.floor(S.bb[0]-9)),y0=Math.max(0,Math.floor(S.bb[1]-9)),x1=Math.min(W-1,Math.ceil(S.bb[2]+9)),y1=Math.min(H-1,Math.ceil(S.bb[3]+9));
+  paths.forEach(S=>{const x0=Math.max(0,Math.floor(S.bb[0]-11)),y0=Math.max(0,Math.floor(S.bb[1]-11)),x1=Math.min(W-1,Math.ceil(S.bb[2]+11)),y1=Math.min(H-1,Math.ceil(S.bb[3]+11));
     for(let py=y0;py<=y1;py++)for(let px=x0;px<=x1;px++){let m=1e9;for(let j=0;j<S.length;j++){const r=segDist(px+.5,py+.5,S[j])[0];if(r<m)m=r}
-      const d=m-6.6;if(d>=0)continue;const t=tl(px,py);if(!(t==='='||t==='.'||t==='*'||t==='b'||t==='T'||t==='D'))continue;const h=thash(px*3+1,py*7+2);
+      const d=m-6.6+(vnoise(px/4.3+1.7,py/4.3+9.1)-.5)*2.6;if(d>=1.8)continue;const t=tl(px,py);if(!(t==='='||t==='.'||t==='*'||t==='b'||t==='T'||t==='D'))continue;const h=thash(px*3+1,py*7+2);
       const rp=snow?null:RPATH[(ZONE[py>>4]||[])[px>>4]],b0=rp?rp[0]:PB,d0=rp?rp[1]:PD,e0=rp?rp[2]:PE,l0=rp?rp[3]:PL;
-      if(d>-1.1){if(h<.16)continue;set(px,py,e0)}else if(d>-2.2)set(px,py,d0);else set(px,py,h<.035?d0:h>.975?l0:b0)}});
+      if(d>=0){if(h<.2*(1-d/1.8))set(px,py,d0);continue}      // quelques grains de sable dans l'herbe
+      if(d>-1.2){if(h<.42)continue;set(px,py,h>.82?e0:d0)}else if(d>-2.6)set(px,py,h<.45?d0:b0);else set(px,py,h<.035?d0:h>.975?l0:b0)}});
   // ---- pistes cyclables : chaussée, bordure de pierre éclairée d'un côté, ligne d'axe en pointillés ----
-  const AB=hex3(snow?'#d8cfc9':'#c98e6e'),AD=hex3(snow?'#c3b5ac':'#b87c5e'),AL=hex3(snow?'#f1f3f6':'#dba98b'),C1=hex3(snow?'#f6f8fa':'#f6eedc'),C2=hex3(snow?'#dfe5ea':'#d6cbb2'),C3=hex3(snow?'#b9c2cb':'#a39a84'),CJ=hex3('#bdb39b'),DASH=hex3('#fbf5e6');
+  const AB=hex3(snow?'#d8cfc9':'#c98e6e'),AD=hex3(snow?'#c3b5ac':'#b87c5e'),AL=hex3(snow?'#f1f3f6':'#dba98b'),C1=hex3(snow?'#f6f8fa':'#ebe1c9'),C2=hex3(snow?'#dfe5ea':'#d6cbb2'),C3=hex3(snow?'#b9c2cb':'#a39a84'),CJ=hex3('#bdb39b'),DASH=hex3('#fbf5e6');
+  const verge=t=>t==='.'||t==='*'||t==='T'||t==='u'||t==='k'||t==='h'||t==='f'||t==='P'||t==='m'||t==='=';
   const near=(x,y)=>{for(let j=-1;j<=1;j++)for(let i=-1;i<=1;i++){const t=g[y+j]&&g[y+j][x+i];if(t==='b'||t==='g')return true}return false};
   for(let ty=2;ty<TH-2;ty++)for(let tx=2;tx<WIND0;tx++){if(!near(tx,ty))continue;const t0=g[ty][tx];if(t0==='B'||t0==='D'||t0==='r'||t0==='q'||t0==='g')continue;
     const mx=tx*TS+8,my=ty*TS+8,cand=roads.map(G=>G.filter(s=>segDist(mx,my,s)[0]<44)).filter(G=>G.length);if(!cand.length)continue;
-    for(let j=0;j<16;j++)for(let i=0;i<16;i++){const px=tx*TS+i,py=ty*TS+j,r=roadAt(px+.5,py+.5,cand),d=r[0];if(d>=0)continue;
+    for(let j=0;j<16;j++)for(let i=0;i<16;i++){const px=tx*TS+i,py=ty*TS+j,r=roadAt(px+.5,py+.5,cand),d=r[0];
+      if(d>=0){if(d<2.8&&!snow&&verge(t0)&&thash(px*7+5,py*11+3)<.8*(1-d/2.8)){const k=(py*W+px)*4;D[k]=D[k]*.8+8;D[k+1]=D[k+1]*.83+4;D[k+2]=D[k+2]*.78}continue}      // l'accotement : l'herbe fonce en tramé au pied de la bordure
+      if(d>-1&&verge(t0)&&thash(px*3+7,py*5+1)<.1)continue;      // un brin d'herbe passe par-dessus la bordure
       if(d>-2){const gx=roadAt(px+1.5,py+.5,cand)[0]-roadAt(px-.5,py+.5,cand)[0],gy=roadAt(px+.5,py+1.5,cand)[0]-roadAt(px+.5,py-.5,cand)[0],lit=gx+gy<0;
         set(px,py,d>-1?(lit?C1:C3):((px*3+py*5)%11===0?CJ:C2));continue}
       if(d>-3){set(px,py,AD);continue}
@@ -2705,34 +2776,6 @@ onKey('keydown',e=>{if(QK_HOST.hidden)return;kbuf.push((e.key||'').toLowerCase()
     if(S.sobriete)secret('konami',["Code secret accepté. MODE SOBRIÉTÉ activé : l'écran passe en noir et blanc.","Économie estimée : 3 %. Personne ne l'a remarqué, comme la plupart des mesures de sobriété."]);else say(["Mode sobriété désactivé. Les couleurs reviennent, la facture aussi."])}});
 function applySobriete(){cv.style.filter=S.sobriete?'grayscale(1) contrast(1.1)':''}
 
-/* ================= AVATAR ================= */
-function openAvatar(onDone){
-  const av=Object.assign({},S.av||AVDEF('h'));busy=true;clearKeys();
-  const ov=openPanel('Ton avatar'),b=ov.querySelector('.pbody');
-  const sw=(key,list)=>`<div class="swatches" role="radiogroup">${list.map((c,i)=>`<button type="button" class="sw${av[key]===i?' on':''}" data-k="${key}" data-v="${i}" style="background:${c}" aria-label="Couleur ${i+1}"></button>`).join('')}</div>`;
-  const pills=(key,obj)=>`<div class="pills">${Object.entries(obj).map(([v,l])=>`<button type="button" class="pill${av[key]===v?' on':''}" data-k="${key}" data-v="${v}">${l}</button>`).join('')}</div>`;
-  const draw=()=>{
-    b.innerHTML=`<div class="av-grid"><div class="av-prev"><canvas id="avc" width="64" height="24" aria-label="Aperçu de l'avatar"></canvas><small>Rangs : gestionnaire de site, energy manager, gestionnaire de patrimoine</small></div><div class="av-ctl">
-      <div class="field"><label>Personnage</label>${pills('g',{h:'Homme',f:'Femme'})}</div>
-      <div class="field"><label>Peau</label>${sw('skin',SKINS)}</div>
-      <div class="field"><label>Coiffure</label>${pills('style',STYLES)}</div>
-      <div class="field"><label>Cheveux</label>${sw('hair',HAIRC)}</div>
-      <div class="field"><label>Haut</label>${sw('top',TOPS)}</div>
-      <div class="field"><label>Bas</label>${pills('bt',{pantalon:'Pantalon',jupe:'Jupe'})}${sw('bot',BOTS)}</div>
-    </div></div><div class="row"><button class="btn alt" type="button" id="avRnd">Au hasard</button><button class="btn" type="button" id="avOk">Valider mon avatar ▸</button></div>`;
-    b.querySelectorAll('[data-k]').forEach(x=>x.onclick=()=>{const k=x.dataset.k;let v=x.dataset.v;if(['skin','hair','top','bot'].includes(k))v=+v;
-      if(k==='g'&&av.g!==v){const d=AVDEF(v);av.style=d.style;av.bt=d.bt}av[k]=v;sfx('select');draw()});
-    b.querySelector('#avRnd').onclick=()=>{const r=n=>Math.floor(Math.random()*n);av.g=r(2)?'f':'h';av.skin=r(SKINS.length);av.hair=r(HAIRC.length);av.top=r(TOPS.length);av.bot=r(BOTS.length);av.style=Object.keys(STYLES)[r(6)];av.bt=r(2)?'jupe':'pantalon';sfx('select');draw()};
-    b.querySelector('#avOk').onclick=()=>{trk('avatar',{g:av.g,style:av.style,bas:av.bt});S.av=av;save();closePanel();if(onDone)onDone()};
-    anim();
-  };
-  let fr=0,raf=0;
-  const anim=()=>{qkCancelRAF(raf);const c=b.querySelector('#avc');if(!c)return;const x=c.getContext('2d');
-    (function loopA(){if(!ROOT.contains(c))return;fr++;x.clearRect(0,0,64,24);const dirs=['down','left','up','right'],d=dirs[Math.floor(fr/90)%4];
-      [0,1,2].forEach(r=>drawChar(x,2+r*21,5,d,Math.floor(fr/12),avPal(r,av)));raf=qkRAF(loopA)})()};
-  draw();
-}
-
 /* ================= CHOIX D'ÉTAPE ================= */
 const CHAPTERS=['Accueil · choix du site','Arène 1 · Cadrer : repérage du site','Arène 1 · Cadrer : compteurs et Arène du Cadastre','Arène 2 · Collecter (Arène des Flux)','Arène 3 · Fiabiliser (Arène du Tamis)','Arène 4 · Structurer (Arène des Archives)','Arène 5 · Analyser (Arène des Courbes)','Arène 6 · Détecter (ronde, puis Arène de la Nuit)','Arène 7 · Agir (Arène du Chantier)','Arène 8 · Mesurer (Arène de la Preuve)','Chapitre 10 · Gestionnaire de patrimoine','Épilogue · exploration libre'];
 const XPMIN=[0,0,60,200,380,620,900,1100,1250,1450,1720,1800];
@@ -2769,6 +2812,101 @@ function jumpTo(ch,sid){
   if(!ROOT.querySelector('.title-screen'))boot(true);
   const hint=JOULE_HINTS[ch];
   qkTimeout(()=>say([{t:`Reprise : ${CHAPTERS[ch]} · ${s.name}.`},{t:"Un doute ? Ouvre le menu (touche M) : tu y trouves ton objectif et le bouton « Comprendre cette étape », qui t'emmène à la bonne section du cours."},...(hint?hint.map(t=>({w:'Mme Joule',t})):[{t:objectiveText()}])]),350);
+}
+
+/* ================= AVATAR =================
+   L'avatar est une tenue complète (les mêmes champs que n'importe quel personnage du jeu) : S.av = {g, v:2, p:{…}}.
+   - Tout ce que porte un habitant peut se choisir à la main : chapeaux, lunettes, barbe, veste, blouse, tablier, salopette, objet en main…
+   - Des modèles : une tenue par région (disponibles tout de suite), les tenues de rang (proposées à chaque promotion, jamais imposées),
+     et la tenue de chaque personnage à qui on a parlé (S.models, une collection de plus).
+   Les anciennes sauvegardes (avatar à indices, tenue de rang imposée) restent lisibles : elles sont converties à la première retouche. */
+const HATS={'':'Aucun',cap:'Casquette',helmet:'Casque',straw:'Paille',beret:'Béret',toque:'Toque',bonnet:'Bonnet',coiffe:'Coiffe',noeud:'Nœud',plat:'Bob'};
+const PROPS={'':'Rien',tablet:'Tablette',clipboard:'Bloc-notes',plan:'Plan',book:'Livre',case:'Mallette',wrench:'Clé',broom:'Balai',lantern:'Lanterne',cane:'Canne',crook:'Houlette',rod:'Canne à pêche',net:'Épuisette',basket:'Panier',baguette:'Baguette',bretzel:'Bretzel',boule:'Boule',leash:'Laisse',umbrella:'Parapluie'};
+const CLOTH=['#f7f0dc','#ece6d6','#9a9aa2','#7a8594','#59627c','#2c2c34','#1c2440','#27325a','#2f6db5','#8ec9e8','#2aa198','#2f9e7a','#2f6d34','#f2c12e','#e2a13a','#e2573b','#c43d3d','#8a3b3b','#e57399','#8a3b8f','#6b4a2b','#8a5a2b','#c9b28a'];
+const AVF=CHF.filter(k=>k!=='umb');
+/* une tenue propre : seulement les champs renseignés */
+function avClean(p){const q={};AVF.forEach(k=>{const v=p[k];if(v!=null&&v!==false&&v!==''&&v!==0)q[k]=v});if(!q.skin)q.skin='#f1c7a1';if(!q.hat)delete q.hatType;else if(!q.hatType)q.hatType='plat';return q}
+/* la tenue portée aujourd'hui, quelle que soit l'ancienneté de la sauvegarde */
+const avLook=()=>avClean(S.av&&S.av.p?S.av.p:avPal(S.rank,S.av||AVDEF('h')));
+const avSet=(p,g)=>{S.av={g:g||(S.av&&S.av.g)||(p.lash?'f':'h'),v:2,p:avClean(p)}};
+/* tenues de rang : un casque et un gilet sur le terrain, une veste et une cravate au bureau */
+const RANK_FIT=[null,{n:'Tenue de terrain',d:'casque et gilet haute visibilité'},{n:'Tenue de bureau',d:'veste et cravate'}];
+function rankOutfit(p,rank){const q=Object.assign({},p);
+  if(rank===1){q.hat='#f2c12e';q.hatType='helmet';q.vest=1}
+  else if(rank===2){if(q.vest&&q.hat==='#f2c12e'){delete q.hat;delete q.hatType}delete q.vest;q.jacket='#262b4f';q.tie='#f2a33a'}
+  return avClean(q)}
+/* tenues des régions */
+const REG_MODELS=[
+  {r:'Val de Loire',n:'Batelier de Loire',p:{skin:'#e0ac7e',hair:'#5a3a22',shirt:'#f7f0dc',stripes:'#2f6db5',pants:'#27325a',hat:'#e3cf98',hatType:'straw',scarf:'#c43d3d',prop:'rod'}},
+  {r:'Val de Loire',n:'Châtelaine',p:{skin:'#f6d3b3',hair:'#d9a441',style:'long',bun:1,lash:1,shirt:'#4a78c9',pants:'#4a78c9',robe:'#4a78c9',scarf:'#f2c12e',prop:'book'}},
+  {r:'Auvergne',n:'Berger des puys',p:{skin:'#e0ac7e',hair:'#2b1d14',beard:'#2b1d14',shirt:'#ece6d6',pants:'#5a3a22',jacket:'#5a4a3a',hat:'#2c2c34',hatType:'beret',prop:'crook'}},
+  {r:'Auvergne',n:'Paysanne des volcans',p:{skin:'#f1c7a1',hair:'#5a3a22',bun:1,lash:1,shirt:'#8a3b3b',pants:'#2c2c34',skirt:1,apron:'#ece6d6',hat:'#1c1c24',hatType:'straw',prop:'basket'}},
+  {r:'Nord et Flandres',n:'Mineur',p:{skin:'#f1c7a1',hair:'#2b1d14',beard:'#2b1d14',shirt:'#59627c',pants:'#27325a',overall:'#27325a',hat:'#ece6d6',hatType:'helmet',scarf:'#c43d3d',prop:'lantern'}},
+  {r:'Nord et Flandres',n:'Dentellière',p:{skin:'#f6d3b3',hair:'#b8431f',bun:1,lash:1,glasses:1,shirt:'#8ec9e8',pants:'#2f3a5c',skirt:1,apron:'#f7f0dc',scarf:'#f7f0dc'}},
+  {r:'Normandie',n:'Fermière normande',p:{skin:'#f6d3b3',hair:'#d9a441',lash:1,shirt:'#c43d3d',pants:'#6b4a2b',skirt:1,apron:'#f7f0dc',hat:'#f7f0dc',hatType:'coiffe',prop:'basket'}},
+  {r:'Normandie',n:'Cidrier',p:{skin:'#e0ac7e',hair:'#8a5a2b',beard:'#8a5a2b',shirt:'#f7f0dc',pants:'#6b4a2b',apron:'#8a5a2b',hat:'#59627c',hatType:'cap',scarf:'#c43d3d'}},
+  {r:'Alsace',n:'Alsacienne',p:{skin:'#f1c7a1',hair:'#d9a441',style:'long',lash:1,shirt:'#f7f0dc',pants:'#c43d3d',skirt:1,apron:'#1c1c24',hat:'#1c1c24',hatType:'noeud',scarf:'#c43d3d'}},
+  {r:'Alsace',n:'Alsacien',p:{skin:'#f1c7a1',hair:'#8a5a2b',shirt:'#f7f0dc',pants:'#1c1c24',jacket:'#c43d3d',hat:'#1c1c24',hatType:'plat',prop:'bretzel'}},
+  {r:'Bourgogne',n:'Vigneronne',p:{skin:'#e0ac7e',hair:'#2b1d14',style:'queue',lash:1,shirt:'#7a8a4a',pants:'#5a3a22',apron:'#5a2a4a',hat:'#e3cf98',hatType:'straw',prop:'basket'}},
+  {r:'Bourgogne',n:'Chevalier du cellier',p:{skin:'#f1c7a1',hair:'#9a9aa2',beard:'#9a9aa2',shirt:'#8a3b3b',pants:'#8a3b3b',robe:'#8a3b3b',hat:'#f2c12e',hatType:'toque',scarf:'#f2c12e'}},
+  {r:'Bretagne',n:'Bigoudène',p:{skin:'#f6d3b3',hair:'#5a3a22',lash:1,shirt:'#1c1c24',pants:'#1c1c24',robe:'#1c1c24',apron:'#f7f0dc',hat:'#f7f0dc',hatType:'coiffe'}},
+  {r:'Bretagne',n:'Marin breton',p:{skin:'#e0ac7e',hair:'#b8431f',beard:'#b8431f',shirt:'#f7f0dc',stripes:'#27457a',pants:'#27325a',hat:'#c43d3d',hatType:'bonnet',prop:'net'}},
+  {r:'Provence',n:'Provençale',p:{skin:'#c68a5c',hair:'#2b1d14',style:'boucle',lash:1,shirt:'#f7f0dc',pants:'#7f8fd0',skirt:1,apron:'#f2c12e',hat:'#e3cf98',hatType:'straw',scarf:'#7f8fd0',prop:'basket'}},
+  {r:'Provence',n:'Bouliste',p:{skin:'#c68a5c',hair:'#9a9aa2',beard:'#9a9aa2',shirt:'#f7f0dc',pants:'#c9b28a',hat:'#f7f0dc',hatType:'cap',scarf:'#e2573b',prop:'boule'}},
+  {r:'Savoie',n:'Alpagiste',p:{skin:'#e0ac7e',hair:'#5a3a22',beard:'#5a3a22',shirt:'#8a5a2b',pants:'#3a3530',coat:'#6b4a2b',hat:'#2f6d34',hatType:'bonnet',prop:'crook'}},
+  {r:'Savoie',n:'Skieuse',p:{skin:'#f6d3b3',hair:'#d9a441',style:'queue',lash:1,glasses:1,shirt:'#2f6db5',pants:'#2c2c34',coat:'#e2573b',hat:'#f7f0dc',hatType:'bonnet',scarf:'#f2c12e'}}];
+/* collection : la tenue d'un personnage se débloque quand on lui parle */
+function metNpc(o){
+  if(!o||!o.pal||!o.who)return;S.models=S.models||{};if(S.models[o.who])return;const p={};AVF.forEach(k=>{const v=o.pal[k];if(v!=null&&v!==false&&v!=='')p[k]=v});
+  S.models[o.who]=avClean(p);trk('setting',{k:'avatar_modele',v:String(o.who).slice(0,40)});toast('Tenue débloquée : '+o.who+'.');
+}
+const avCanvas=(p,sc)=>{const c=document.createElement('canvas');c.width=20;c.height=24;c.style.width=(20*(sc||2))+'px';c.style.imageRendering='pixelated';drawChar(c.getContext('2d'),2,8,'down',0,p);return c};
+function openAvatar(onDone){
+  const g0=(S.av&&S.av.g)||'h';let p=avLook(),g=g0,tab='modeles',tpl='';busy=true;clearKeys();
+  const ov=openPanel('Ton avatar'),b=ov.querySelector('.pbody');
+  b.innerHTML=`<div class="av-grid"><div class="av-prev"><canvas id="avc" width="64" height="26" aria-label="Aperçu de l'avatar : face, profil, dos"></canvas><small>Face, profil, dos</small></div><div class="av-ctl"><div class="seg" role="group" aria-label="Rubriques" id="avTabs"></div><div id="avBody"></div></div></div>
+    <div class="row"><button class="btn alt" type="button" id="avRnd">Au hasard</button><button class="btn" type="button" id="avOk">Valider mon avatar ▸</button></div>`;
+  const body=b.querySelector('#avBody'),tabs=b.querySelector('#avTabs');
+  const sw=(key,list,none)=>{const cur=p[key]||'',custom=cur&&!list.includes(cur);
+    return `<div class="swatches" role="radiogroup">${none?`<button type="button" class="sw none${!cur?' on':''}" data-c="${key}" data-v="" aria-label="Aucun" title="Aucun"></button>`:''}${list.map(c=>`<button type="button" class="sw${cur===c?' on':''}" data-c="${key}" data-v="${c}" style="background:${c}" aria-label="Couleur ${c}"></button>`).join('')}<label class="sw pick${custom?' on':''}" style="${custom?'background:'+cur:''}" title="Autre couleur"><input type="color" data-pc="${key}" value="${custom?cur:'#888888'}" aria-label="Autre couleur"></label></div>`};
+  const pills=(key,obj,cur)=>`<div class="pills">${Object.entries(obj).map(([v,l])=>`<button type="button" class="pill${cur===v?' on':''}" data-k="${key}" data-v="${v}">${l}</button>`).join('')}</div>`;
+  const togs=L=>`<div class="pills">${L.map(([k,l])=>`<button type="button" class="pill${p[k]?' on':''}" data-t="${k}" aria-pressed="${p[k]?'true':'false'}">${l}</button>`).join('')}</div>`;
+  const F=(l,h)=>`<div class="field"><label>${l}</label>${h}</div>`;
+  const TAB={
+    modeles:()=>{const M=S.models||{},names=Object.keys(M),rk=[1,2].filter(r=>S.rank>=r);
+      return `<h4 class="segh">Tenues des régions</h4><div class="av-tpl">${REG_MODELS.map((m,i)=>`<button type="button" data-m="r${i}"><span data-cv="r${i}"></span><b>${esc(m.n)}</b><small>${esc(m.r)}</small></button>`).join('')}</div>
+        ${rk.length?`<h4 class="segh">Tenues de rang</h4><div class="av-tpl">${rk.map(r=>`<button type="button" data-m="k${r}"><span data-cv="k${r}"></span><b>${RANK_FIT[r].n}</b><small>${RANK_FIT[r].d}</small></button>`).join('')}</div><p class="dnote">Une tenue de rang se pose sur ta tenue actuelle : elle ne change ni ta tête ni tes couleurs.</p>`:''}
+        <h4 class="segh">Personnages rencontrés · ${names.length}</h4>${names.length?`<div class="av-tpl">${names.map((n,i)=>`<button type="button" data-m="c${i}"><span data-cv="c${i}"></span><b>${esc(n)}</b></button>`).join('')}</div>`:''}<p class="dnote">Parle aux habitants, aux dresseurs et aux champions : chacun te prête sa tenue.</p>`},
+    tete:()=>F('Personnage',pills('g',{h:'Homme',f:'Femme'},g))+F('Peau',sw('skin',SKINS))+F('Coiffure',pills('style',STYLES,p.style||'court')+togs([['bun','Chignon'],['glasses','Lunettes']]))+F('Cheveux',sw('hair',HAIRC))+F('Barbe',sw('beard',HAIRC,1))+F('Chapeau',pills('hatType',HATS,p.hat?p.hatType||'plat':'')+(p.hat?sw('hat',CLOTH):'')),
+    haut:()=>F('Haut',sw('shirt',CLOTH))+F('Rayures',sw('stripes',CLOTH,1))+F('Veste',sw('jacket',CLOTH,1))+F('Manteau ou blouse',sw('coat',CLOTH,1))+F('Cravate',sw('tie',CLOTH,1))+F('Foulard',sw('scarf',CLOTH,1))+F('Par-dessus',togs([['vest','Gilet haute visibilité'],['sash','Écharpe tricolore'],['stetho','Stéthoscope']])),
+    bas:()=>F('Bas',pills('bt',{pantalon:'Pantalon',jupe:'Jupe'},p.skirt?'jupe':'pantalon')+sw('pants',CLOTH))+F('Salopette',sw('overall',CLOTH,1))+F('Tablier',sw('apron',CLOTH,1))+F('Robe longue',sw('robe',CLOTH,1)),
+    objets:()=>F('En main',pills('prop',PROPS,p.prop||''))+F('Sacoche',sw('bag',CLOTH,1))};
+  const TN={modeles:'Modèles',tete:'Tête',haut:'Haut',bas:'Bas',objets:'Objets'};
+  const model=id=>{const k=id[0],i=+id.slice(1);return k==='r'?REG_MODELS[i].p:k==='k'?rankOutfit(p,i):(S.models||{})[Object.keys(S.models||{})[i]]};
+  const draw=()=>{
+    tabs.innerHTML=Object.entries(TN).map(([k,l])=>`<button type="button" data-tab="${k}" class="${tab===k?'on':''}">${l}</button>`).join('');
+    body.innerHTML=TAB[tab]();
+    tabs.querySelectorAll('[data-tab]').forEach(x=>x.onclick=()=>{tab=x.dataset.tab;sfx('select');draw()});
+    body.querySelectorAll('[data-cv]').forEach(s=>s.appendChild(avCanvas(model(s.dataset.cv))));
+    body.querySelectorAll('[data-m]').forEach(x=>x.onclick=()=>{const id=x.dataset.m,m=model(id);if(!m)return;p=avClean(m);if(id[0]!=='k')g=p.lash?'f':'h';tpl=id[0]==='r'?REG_MODELS[+id.slice(1)].n:id[0]==='k'?RANK_FIT[+id.slice(1)].n:Object.keys(S.models)[+id.slice(1)];sfx('select');draw()});
+    body.querySelectorAll('[data-c]').forEach(x=>x.onclick=()=>{const k=x.dataset.c,v=x.dataset.v;if(v)p[k]=v;else delete p[k];sfx('select');draw()});
+    body.querySelectorAll('[data-pc]').forEach(x=>{x.oninput=()=>{p[x.dataset.pc]=x.value;x.parentNode.style.background=x.value};x.onchange=()=>draw()});
+    body.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{const k=x.dataset.t;if(p[k])delete p[k];else p[k]=1;sfx('select');draw()});
+    body.querySelectorAll('[data-k]').forEach(x=>x.onclick=()=>{const k=x.dataset.k,v=x.dataset.v;
+      if(k==='g'){if(g!==v){g=v;if(v==='f'){p.lash=1;if(!p.style||p.style==='court')p.style='long'}else{delete p.lash;if(p.style==='long')p.style='court'}}}
+      else if(k==='bt'){if(v==='jupe')p.skirt=1;else delete p.skirt}
+      else if(k==='hatType'){if(!v){delete p.hat;delete p.hatType}else{p.hatType=v;if(!p.hat)p.hat=v==='helmet'?'#f2c12e':v==='straw'?'#e3cf98':v==='toque'||v==='coiffe'?'#f7f0dc':'#2c2c34'}}
+      else if(v)p[k]=v;else delete p[k];
+      sfx('select');draw()});
+  };
+  b.querySelector('#avRnd').onclick=()=>{const r=n=>Math.floor(Math.random()*n),pick=a=>a[r(a.length)],ch=x=>Math.random()<x;g=r(2)?'f':'h';
+    p={skin:pick(SKINS),hair:pick(HAIRC),style:pick(Object.keys(STYLES)),shirt:pick(CLOTH),pants:pick(BOTS)};if(g==='f')p.lash=1;if(ch(.4))p.skirt=1;if(ch(.3)){p.hatType=pick(Object.keys(HATS).slice(1));p.hat=pick(CLOTH)}if(ch(.2))p.glasses=1;if(g==='h'&&ch(.3))p.beard=p.hair;
+    if(ch(.25))p.jacket=pick(CLOTH);if(ch(.2))p.scarf=pick(CLOTH);if(ch(.15))p.apron=pick(CLOTH);if(ch(.12))p.stripes=pick(CLOTH);if(ch(.25))p.prop=pick(Object.keys(PROPS).slice(1));if(ch(.15))p.bag=pick(CLOTH);tpl='hasard';sfx('select');draw()};
+  b.querySelector('#avOk').onclick=()=>{qkCancelRAF(raf);avSet(p,g);trk('avatar',{g,style:p.style||'court',bas:p.skirt?'jupe':'pantalon',modele:tpl});save();closePanel();if(onDone)onDone()};
+  let fr=0,raf=0;const c=b.querySelector('#avc'),x=c.getContext('2d');
+  (function loopA(){if(!ROOT.contains(c))return;fr++;x.clearRect(0,0,64,26);const q=avClean(p),f=Math.floor(fr/12);
+    drawChar(x,2,9,'down',f,q);drawChar(x,23,9,Math.floor(fr/120)%2?'left':'right',f,q);drawChar(x,44,9,'up',f,q);raf=qkRAF(loopA)})();
+  draw();
 }
 
 /* ================= CLINS D'ŒIL AUX JEUX VIDÉO & MODE HADÈS ================= */
@@ -3091,12 +3229,11 @@ function badgeCanvas(n){
   if(n===8){r(7,0,2,16,'#c9a227');r(0,7,16,2,'#c9a227');r(4,2,8,12,'#c9a227');r(2,4,12,8,'#c9a227');r(5,5,6,6,'#fff3b8');r(6,6,4,4,'#c9a227');r(7,7,2,2,'#fff')}
   return BADGE_CV[n]=c;
 }
-/* façade : fronton, colonnes, emblème du badge */
+/* façade : bandeau et emblème du badge (plus de colonnes : elles cachaient les fenêtres) */
 function drawArenaFacade(c,b){
   const A=b.arena,X=b.x*TS,Y=b.y*TS,W=b.w*TS,rh=Math.ceil(b.h*.45)*TS,dx=b.door[0]*TS,dy=b.door[1]*TS;
   R(c,X-3,Y-3,W+6,5,shade(A.col));R(c,dx-10,Y+rh-24,36,22,shade(A.col));R(c,dx-9,Y+rh-23,34,20,'#1c2440');
   c.drawImage(badgeCanvas(A.id),dx,Y+rh-21);
-  [-1,1].forEach(s=>{const cx=dx+s*TS;R(c,cx+5,dy-8,6,24,'#f7f3ea');R(c,cx+6,dy-8,1,24,'#fff');R(c,cx+3,dy-10,10,3,'#d9cfb8');R(c,cx+3,dy+13,10,3,'#d9cfb8')});
 }
 
 /* ---- sols et murs ---- */
@@ -3318,11 +3455,18 @@ function riderPos(r,t){
 function riderEnts(ents,ox,oy,t){RIDERS.forEach(r=>{const p=riderPos(r,t);if(p.x-ox<-20||p.x-ox>cv.width+20||p.y-oy<-20||p.y-oy>cv.height+20)return;ents.push({y:p.y+1,f:()=>{const i=RIDERS.indexOf(r),sp=(t>>2)%2;ctx.fillStyle='rgba(20,40,30,.22)';ctx.fillRect(Math.round(p.x-ox)+2,Math.round(p.y-oy)+12,12,2);ctx.drawImage(fxSprite('cy'+i+p.dir+sp,28,30,g=>drawCyclist(g,6,8,p.dir,sp*4,r.pal)),Math.round(p.x-ox)-6,Math.round(p.y-oy)-10)}})})}
 
 /* ---- gare : façade, train à quai ---- */
+const STATION_BOARD=[8,9];      // colonnes du mur (depuis le bord gauche) qui portent le tableau des départs
 function drawStationFacade(c,b){
   const X=b.x*TS,Y=b.y*TS,W=b.w*TS,rh=Math.ceil(b.h*.45)*TS,dx=b.door[0]*TS,dy=b.door[1]*TS;
   R(c,dx-22,Y+rh-13,60,12,'#1c2440');R(c,dx-21,Y+rh-12,58,10,'#f7f0dc');['G','A','R','E'].forEach((ch,i)=>px35(c,ch,dx-13+i*9,Y+rh-11,'#1c2440',2));
   R(c,dx+3,Y+2,12,12,'#f7f0dc');R(c,dx+4,Y+1,10,14,'#f7f0dc');R(c,dx+8,Y+4,1,5,'#1c2440');R(c,dx+8,Y+8,4,1,'#1c2440');
   R(c,dx+2,dy+1,12,15,'#8a8f9a');for(let k=0;k<5;k++)R(c,dx+2,dy+2+k*3,12,1,'#6d7480');R(c,dx+4,dy+5,8,5,'#f7f0dc');R(c,dx+5,dy+7,6,1,'#c43d3d');
+  // tableau des départs, accroché au mur à droite de la porte (il remplace deux fenêtres du rez-de-chaussée)
+  const bx=X+STATION_BOARD[0]*TS+1,by=Y+(b.h-1)*TS+1,bw=STATION_BOARD.length*TS-2,bh=13;
+  if(b.wins)b.wins=b.wins.filter(w=>!(w[0]+w[2]>bx&&w[0]<bx+bw&&w[1]+w[3]>by&&w[1]<by+bh));
+  R(c,bx-1,by-1,bw+2,bh+2,'#0e1326');R(c,bx,by,bw,bh,'#1c2440');R(c,bx,by,bw,2,'#27325a');
+  for(let k=0;k<3;k++){R(c,bx+2,by+4+k*3,5,1,'#f2a33a');R(c,bx+9,by+4+k*3,9,1,'#59627c');R(c,bx+bw-8,by+4+k*3,5,1,'#f2a33a')}
+  R(c,bx+2,by-3,1,2,'#59627c');R(c,bx+bw-3,by-3,1,2,'#59627c');
 }
 function drawTrain(c,X,Y,t){
   const car=(x,w,loco)=>{R(c,x,Y-9,w,22,'#f1e6d0');R(c,x,Y-9,w,4,'#3a4050');R(c,x,Y+4,w,5,'#00968a');R(c,x,Y+9,w,4,'#2c2c34');
@@ -3433,7 +3577,7 @@ function decorBuild(id,o){
       T(x,y,'qsign',1,{n,col:Q.col,act:()=>say([{t:Q.step?`${Q.name} · ${Q.reg} · étape ${Q.step}. Ici : les informations de l'étape et l'${ARENAS[n-1].name}.`:`${Q.name} · ${Q.reg}. ${Q.sub}.`}])})});
     // gare : train à quai, tableau des départs
     D(L.train[0],L.train[1],'train',0);
-    T(60,10,'dboard',1,{act:()=>say([{t:"Tableau des départs. Toutes les lignes affichent « — »."},{t:"En bas, en petit : « Prochainement : d'autres villes, d'autres bâtiments, d'autres compteurs. »"}])});
+    {const g=BLD.find(b=>b.id==='gare'),a=()=>say([{t:"Tableau des départs. Toutes les lignes affichent « — »."},{t:"En bas, en petit : « Prochainement : d'autres villes, d'autres bâtiments, d'autres compteurs. »"}]);STATION_BOARD.forEach(k=>D(g.x+k,g.y+g.h-1,'none',0,{act:a}))}      // le tableau est accroché au mur de la gare
     T(53,11,'bench',1);T(59,11,'bench',1);
     // place de la Donnée : fontaine, pompe à vélo, bancs
     {const fa=()=>say([{t:"La fontaine de la place. Elle tourne en circuit fermé : un compteur d'eau, zéro fuite. Enfin, en principe."}]);const [fx,fy]=L.fountain;D(fx,fy,'fountain',1,{act:fa});D(fx+1,fy,'none',1,{act:fa});D(fx,fy+1,'none',1,{act:fa});D(fx+1,fy+1,'none',1,{act:fa})}
@@ -3455,7 +3599,7 @@ function decorBuild(id,o){
     const F=(x,y,kind,extra)=>{const p=LW(x,y);if(freeTile(p[0],p[1],o))D(p[0],p[1],kind,extra&&extra.solid===0?0:1,extra)};
     for(let x=24;x<=70;x+=6){F(x,21,'lamp');F(x+2,60,'lamp')}
     for(let y=27;y<=56;y+=6){F(17,y,'lamp');F(74,y+1,'lamp');F(58,y,'lamp');F(31,y+2,'lamp');F(55,y+3,'lamp')}
-    for(let y=12;y<=20;y+=4)F(58,y,'lamp');
+    for(let y=13;y<=20;y+=4)F(58,y,'lamp');      // pas en y=12 : le lampadaire cachait le chef de gare
     F(68,34,'slide',{act:()=>say([{t:"Le toboggan de l'école. Énergie potentielle en haut, énergie cinétique en bas. Aucun kWh facturé."}])});F(69,35,'swing');
     F(40,44,'picnic');F(41,46,'picnic');F(36,37,'picnic');F(22,33,'picnic');F(63,66,'picnic');F(77,43,'picnic');
     F(36,12,'statue',{act:()=>say([{t:"Un monument : trois barres dorées, de plus en plus hautes. Sur le socle : « Ce qui n'est pas mesuré n'est pas prouvé. »"}])});
@@ -5267,15 +5411,18 @@ function gameFinale(){
 function evolve(rank,cb){
   if(S.rank>=rank){hud();if(cb)cb();return}
   trk('evolve',{rank});
-  busy=true;clearKeys();const old=S.rank;
+  busy=true;clearKeys();const old=S.rank,cur=avLook(),fit=rankOutfit(cur,rank);
   jingle('evo');const ov=document.createElement('div');ov.className='evo';ov.innerHTML=`<div class="t">Quoi ? ${esc(S.name)}, ${RANKS[old]}, évolue !</div><canvas width="20" height="20" aria-hidden="true"></canvas><div class="row" style="justify-content:center"></div>`;
-  $('layer').appendChild(ov);const c=ov.querySelector('canvas'),x=c.getContext('2d'),t=ov.querySelector('.t');let n=0,start=performance.now();
+  $('layer').appendChild(ov);const c=ov.querySelector('canvas'),x=c.getContext('2d'),t=ov.querySelector('.t');let start=performance.now();
   const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const drawP=r=>{x.clearRect(0,0,20,20);drawChar(x,2,3,'down',0,PAL[r])};
-  (function anim(now){const el=now-start,period=Math.max(60,300-el/12);if(!reduce&&el<3200){drawP(Math.floor(el/period)%2?rank:old);qkRAF(anim)}else{
-    drawP(rank);S.rank=rank;const need=rank===1?9:19;if(level()<need+1)S.xp=need*90;save();hud();
-    t.innerHTML=`Félicitations ! Tu deviens <b style="color:var(--amber)">${RANKS[rank]}</b> !`;
-    const b=document.createElement('button');b.className='btn';b.style.background='var(--amber)';b.style.color='var(--ink)';b.textContent='Continuer ▸';b.onclick=()=>{ov.remove();busy=false;hud();if(cb)cb()};ov.querySelector('.row').appendChild(b);b.focus()}})(start);
+  const drawP=q=>{x.clearRect(0,0,20,20);drawChar(x,2,3,'down',0,q)};
+  (function anim(now){const el=now-start,period=Math.max(60,300-el/12);if(!reduce&&el<3200){drawP(Math.floor(el/period)%2?fit:cur);qkRAF(anim)}else{
+    drawP(fit);S.rank=rank;avSet(cur);const need=rank===1?9:19;if(level()<need+1)S.xp=need*90;save();hud();
+    t.innerHTML=`Félicitations ! Tu deviens <b style="color:var(--amber)">${RANKS[rank]}</b> !<small style="display:block;font-size:.7em;margin-top:6px">Ta tenue de rang t'attend : ${RANK_FIT[rank].d}. Tu pourras toujours changer d'avis dans le menu, rubrique Avatar.</small>`;
+    const row=ov.querySelector('.row'),done=wear=>{avSet(wear?fit:cur);trk('setting',{k:'tenue_rang',v:rank+(wear?':oui':':non')});save();ov.remove();busy=false;hud();if(cb)cb()};
+    const b=document.createElement('button');b.className='btn';b.style.background='var(--amber)';b.style.color='var(--ink)';b.textContent='Porter la tenue ▸';b.onclick=()=>done(true);
+    const k=document.createElement('button');k.className='btn alt';k.textContent='Garder ma tenue';k.onclick=()=>done(false);k.onmouseenter=k.onfocus=()=>drawP(cur);b.onmouseenter=b.onfocus=()=>drawP(fit);
+    row.appendChild(b);row.appendChild(k);b.focus()}})(start);
 }
 function endScreen(){
   trk('game_end',{site:S.site,niveau:level()});
@@ -5309,7 +5456,7 @@ function openMenu(tab0){
     dex:()=>`<p>${Object.keys(S.dex).length}/7 anomalies corrigées.</p><div class="dex" id="dexg"></div>`,
     sec:()=>`<p>${Object.keys(S.secrets).length}/${NSEC} secrets trouvés. Explore, parle à tout le monde, examine tout (et pas seulement les compteurs).</p><div class="dex">${Object.entries(SECRETS).map(([k,v])=>`<div class="${S.secrets[k]?'':'unk'}">${S.secrets[k]?'<b>'+esc(v)+'</b>':'???'}</div>`).join('')}</div><h3 style="margin-top:14px">Clins d’œil aux jeux vidéo</h3><p>${Object.keys(EGGS).filter(k=>S.secrets[k]).length}/${Object.keys(EGGS).length} trouvés. Un par jeu : un carton, un prêtre, un mouton, un mur qui sonne creux…</p><div class="dex">${Object.entries(EGGS).map(([k,v])=>`<div class="${S.secrets[k]?'':'unk'}">${S.secrets[k]?'<b>'+esc(v)+'</b>':'???'}</div>`).join('')}</div>`,
     etapes:()=>`<div id="chl"></div>`,
-    avatar:()=>`<p>Change de tête, de coiffure ou de tenue quand tu veux. Le casque et la veste arrivent avec les promotions.</p><button class="btn" id="avEdit">Modifier mon avatar</button>`,
+    avatar:()=>`<p>Change de tête, de coiffure ou de tenue quand tu veux : chapeaux, vestes, tabliers, objets en main… Tu y trouveras aussi une tenue par région, les tenues de rang, et celle de chaque personnage à qui tu as parlé (${Object.keys(S.models||{}).length} débloquée${Object.keys(S.models||{}).length>1?'s':''}).</p><button class="btn" id="avEdit">Modifier mon avatar</button>`,
     save:()=>`<p>Emplacement <b>${SLOT}</b>${S.hades?' · <b>mode Hadès</b>':''} · dernière sauvegarde : <b>${fmtDate(S.savedAt)}</b>.</p><p>Le jeu sauvegarde tout seul à chaque progrès, dans ce navigateur. Ta collection (badges, secrets, fiches, Anomalidex, XP) est conservée même si tu rejoues une étape.</p><div class="row"><button class="btn" id="svNow">Sauvegarder maintenant</button><button class="btn alt" id="svSlots">Changer d'emplacement</button></div><div id="svMsg"></div><div class="save-list">${[1,2,3].map(n=>{const v=n===SLOT?S:readSlot(n);return `<div class="${n===SLOT?'cur':''}"><b>Emplacement ${n}${n===SLOT?' (en cours)':''}</b><br>${v&&v.site?`${esc(v.name)} · ${RANKS[v.rank||0]} · ${esc(CHAPTERS[v.ch]||'')}<br>${(v.badges||[]).length}/8 badges · ${Object.keys(v.secrets||{}).length}/${NSEC} secrets · ${Object.keys(v.fiches||{}).length}/${FICHES.length} fiches · ${fmtDate(v.savedAt)}`:'Vide'}</div>`}).join('')}</div>`,
     opt:()=>`<h3>Options</h3><div class="optg"><button class="btn alt" id="sndT">${AUD.on?'♪ Couper la musique':'♪ Activer la musique'}</button>${PIP.win||PIP.isPop?'':`<button class="btn alt" id="oFs">${QK_APP.classList.contains('fs')?'✕ Quitter le plein écran':'⛶ Plein écran'}</button>`}${PIPB.hidden||PIP.isPop?'':`<button class="btn alt" id="oPip">${PIP.win?'↩ Remettre le jeu dans l’onglet':'⧉ Vignette flottante'}</button>`}<button class="btn alt" id="oBack">← Retour au cours</button></div>
       <p class="dnote">La partie est sauvegardée automatiquement dans ce navigateur (voir Sauvegarde).</p><div class="row"><button class="btn alt" id="rst">Recommencer l'histoire</button></div><div id="rstc"></div>`,
