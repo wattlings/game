@@ -1,0 +1,21 @@
+/* Wattlings · jeu/recit/arenes/arene-1.js
+   Arène 1 · Cadrer — Arène du Cadastre : couleurs, champion (Mme Périmètre), ses répliques, les trois dresseurs et leurs questions.
+   Une question : Q("question", "bonne réponse", "explication", "mauvaise réponse 1", "pourquoi", "mauvaise réponse 2", "pourquoi"). */
+
+const ARENE_1={id:1,badge:'Cadrer',name:'Arène du Cadastre',champ:'Mme Périmètre',theme:'cadastre',col:'#2f6db5',wall:'#eef3f8',b:L.arena[1],
+  cpal:{shirt:'#1c4f8f',pants:'#2c2c34',hair:'#ece6d6',style:'carre',tie:'#f2a33a',glasses:1},
+  cIntro:["Bienvenue à l'Arène du Cadastre. Ici, on ne mesure rien avant d'avoir décidé quoi mesurer.","Mes dresseurs t'ont laissé passer ? Voyons si ton site est aussi bien cadré que mes parcelles. Sors ta fiche patrimoine, puis ton plan de comptage."],
+  cWin:["Périmètre net, points de comptage identifiés : tu sais ce que tu suis, où, et pourquoi.","Voici le badge Cadrer."],
+  next:"Badge Cadrer ! Étape suivante : collecter. Trouve en ville comment arrivent les données, puis présente-toi à l'Arène des Flux.",
+  tr:[
+   {n:'Arpenteur Léo',pal:{shirt:'#e2a13a',pants:'#5b6380',hair:'#2b1d14',hat:'#e8e4d6'},intro:"Halte ! On ne traverse pas mon terrain sans savoir ce qu'on cherche.",lose:"Tu sais où tu mets les pieds. Passe.",qs:[
+    Q("Avant de mesurer quoi que ce soit, par quoi commence un energy manager ?","Décider quoi suivre, où, et dans quel but","Cadrer, c'est décider : sans objectif ni périmètre, on accumule des chiffres sans savoir quoi en faire.","Poser des capteurs partout","Mesurer sans but, c'est remplir des classeurs.","Commander un audit complet","L'audit vient après : il faut d'abord savoir ce qu'on veut suivre."),
+    Q("Un périmètre, c'est…","Ce qu'on choisit de suivre : un site, un bâtiment, parfois un usage","On délimite ce qu'on suit. Le reste, on l'ignore poliment.","La clôture du terrain","Rien à voir avec le grillage.","La liste de tous les bâtiments de la ville","Ça, c'est le patrimoine entier.")]},
+   {n:'Topographe Maëlle',pal:{shirt:'#2f6db5',pants:'#2c2c34',hair:'#8a5a2b',glasses:1},intro:"Un instant. Chez nous, chaque point a un identifiant. Tu connais les tiens ?",lose:"Tes identifiants sont en ordre. La championne est au fond.",qs:[
+    Q("Le compteur électrique de ton site est remplacé. Que devient son PDL ?","Il reste le même : il désigne le raccordement, pas l'appareil","Seul le numéro de série du compteur change.","Il change, comme le numéro du compteur","Le PDL identifie le point de raccordement.","Il est supprimé jusqu'à la prochaine facture","Le point de livraison ne disparaît pas."),
+    Q("Lequel de ces identifiants a le bon format pour un PDL ?","30001234567890","Un PDL compte exactement 14 chiffres.","3000123456789","Celui-ci n'a que 13 chiffres.","3000-1234-5678","Des tirets, et seulement 12 chiffres."),
+    Q("Le point de comptage du gaz s'identifie par…","Le PCE","PDL (ou PRM) pour l'électricité, PCE pour le gaz.","Le PDL","Le PDL, c'est pour l'électricité.","Le numéro de série du compteur","Le compteur se remplace ; le point, lui, reste.")]},
+   {n:'Stagiaire Hugo',pal:{shirt:'#f7f0dc',pants:'#6b4a2b',hair:'#b8431f',style:'queue'},intro:"Attends ! C'est mon premier duel. Sois indulgent. Enfin, non : réponds.",lose:"J'ai perdu, mais j'ai appris. C'est ça, un stage.",qs:[
+    Q("La mairie veut seulement prévoir son budget énergie de l'an prochain. Quelle source suffit en priorité ?","Les factures","Pour un budget, il faut des euros. La courbe fine sert à chercher des économies.","La courbe de charge au pas de 10 minutes","Trop fin pour un simple budget.","Un sous-compteur par usage","Bien trop lourd pour cet objectif."),
+    Q("Un écran affiche « Éclairage : 14 MWh/an » alors que le site n'a qu'un compteur électrique. C'est…","Une estimation","Sans sous-compteur sur l'éclairage, la valeur est calculée à partir d'hypothèses.","Une mesure directe","Aucun compteur ne mesure l'éclairage seul.","Impossible à afficher","On peut l'afficher, à condition de dire que c'est estimé."),
+    Q("Quel objectif peut justifier de suivre un bâtiment ?","Baisser la facture, respecter le décret tertiaire ou réduire le CO₂","Un objectif clair décide de ce qu'on mesure et à quelle finesse.","Remplir le serveur de données","Le serveur n'a rien demandé.","Occuper le stagiaire","Je proteste.")]}]};

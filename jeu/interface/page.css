@@ -1,0 +1,48 @@
+/* La page du jeu : l'hôte occupe toute la fenêtre, sur fond bleu nuit. */
+
+html.qk-lock {
+  overflow: hidden;
+}
+#qk-host {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow-y: auto;
+  background: #131a2b;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* quand le jeu est dans la vignette flottante, l'onglet ne montre plus que ce message */
+body {
+  margin: 0;
+  background: #131a2b;
+}
+#qk-ailleurs {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  text-align: center;
+  padding: 24px;
+  color: #e8e4d6;
+  font: 17px/1.5 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+}
+#qk-ailleurs[hidden] {
+  display: none;
+}
+#qk-ailleurs button {
+  font: inherit;
+  background: #2c365c;
+  color: #e8e4d6;
+  border: 2px solid #4a5588;
+  border-radius: 999px;
+  padding: 6px 14px;
+  cursor: pointer;
+}
+#qk-ailleurs button:hover,
+#qk-ailleurs button:focus-visible {
+  border-color: #f2a33a;
+  outline: none;
+}

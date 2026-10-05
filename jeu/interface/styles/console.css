@@ -1,0 +1,23 @@
+/* Wattlings · jeu/interface/styles/console.css
+   La console : bandeau du haut (nom, rang, XP, badges), écran de jeu, objectif, aide des touches. */
+*{box-sizing:border-box}
+.qk-app{min-height:100%;background:var(--desk);color:var(--on-desk);font-family:var(--f-body);
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:24px 24px;padding-inline:16px;padding-block:12px 24px}
+.console{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:8px}
+.hud{display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-family:var(--f-pix);background:var(--ink);border:3px solid #0b1020;border-radius:6px;padding:6px 10px;color:var(--on-desk)}
+.hud .who{font-weight:700;font-size:16.5px}
+.hud .rank{color:var(--amber);font-size:15.5px}
+.hud .lvl{font-size:15.5px}
+.xpbar{flex:1;min-width:90px;height:8px;background:#0b1020;border-radius:4px;overflow:hidden;border:1px solid #39426a}
+.xpbar i{display:block;height:100%;background:var(--amber);width:0;transition:width .4s}
+.hud button{font:inherit;font-size:14.5px;background:#2c365c;color:var(--on-desk);border:2px solid #4a5588;border-radius:4px;padding:3px 8px;cursor:pointer}
+.hud button:hover,.hud button:focus-visible{border-color:var(--amber);outline:none}
+.badges{display:flex;gap:3px}
+.badges span{width:14px;height:14px;border-radius:50%;background:#2c365c;border:1px solid #4a5588;display:inline-block}
+.badges span.on{background:var(--amber);border-color:#ffd48a;box-shadow:0 0 6px rgba(242,163,58,.6)}
+.screen-wrap{position:relative;border:6px solid #0b1020;border-radius:8px;background:#000;overflow:hidden;box-shadow:0 0 0 3px #2c365c,0 12px 30px rgba(0,0,0,.45)}
+canvas#screen{display:block;width:100%;height:auto;image-rendering:pixelated;image-rendering:crisp-edges}
+.objective{font-family:var(--f-pix);font-size:16.5px;background:#1a223a;border:2px dashed #3a4470;border-radius:6px;padding:6px 10px;color:var(--on-desk)}
+.objective b{color:var(--amber);font-weight:600}
+.keys{font-size:14px;color:#9aa3c4;text-align:center}

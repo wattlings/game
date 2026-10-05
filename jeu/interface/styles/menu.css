@@ -1,0 +1,24 @@
+/* Wattlings · jeu/interface/styles/menu.css
+   Menu (objectif, carnet, classeur, collection, options). */
+/* menu START */
+.pcard{display:flex;gap:12px;align-items:center;background:var(--ink);color:var(--on-desk);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-family:var(--f-pix)}
+.pcard canvas{width:56px;height:56px;image-rendering:pixelated;background:#7cc56a;border-radius:6px;border:2px solid #0b1020;flex:none}
+.pcard .pc-m{flex:1;min-width:0;display:grid;gap:5px}
+.pcard .pc-n{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.pcard .pc-n b{font-size:18.5px}
+.pcard .pc-n span{color:var(--amber);font-size:15.5px}
+.pcard .pc-x{display:flex;gap:8px;align-items:center;font-size:14.5px}
+.pcard .pc-x .xpbar{flex:1;min-width:60px}
+.pcard .pc-x small{color:#b7bdd6;white-space:nowrap}
+.pcard .badges span{width:13px;height:13px}
+.menu-tabs{display:grid;gap:6px;margin-bottom:12px}
+.menu-tabs .mgrp{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.menu-tabs .mg{font-family:var(--f-body);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);min-width:82px}
+.obj-box{background:#fffaf0;border:2px solid var(--amber);border-radius:8px;padding:10px 14px;box-shadow:inset 4px 0 0 var(--amber)}
+@media (max-width:560px){.menu-tabs .mg{min-width:100%}.pcard canvas{width:44px;height:44px}}
+.obj-box p{margin:0;font-size:18.5px}
+.obj-box+.dnote{margin-top:10px}
+.keys-t td:first-child{white-space:nowrap;font-family:var(--f-pix);font-weight:700}
+.optg{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:8px 0 14px}
+.optg .btn{margin:0;width:100%}
+.segh{font-family:var(--f-pix);font-size:17.5px;margin:12px 0 2px}

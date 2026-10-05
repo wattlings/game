@@ -1,0 +1,115 @@
+/* Bases : remise à zéro, titres, liens, utilitaires (.muted, .eyebrow, .sr…), accessibilité. */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+[hidden] {
+  display: none !important;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--f-body);
+  font-size: var(--t-m);
+  line-height: 1.55;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--f-display);
+  line-height: 1.12;
+  margin: 0;
+  text-wrap: balance;
+  letter-spacing: -0.01em;
+}
+h1 {
+  font-size: var(--t-3xl);
+  font-weight: 800;
+}
+h2 {
+  font-size: var(--t-xl);
+  font-weight: 800;
+}
+h3 {
+  font-size: var(--t-l);
+  font-weight: 700;
+}
+p {
+  margin: 0;
+}
+a {
+  color: var(--data-ink);
+}
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.num,
+.mono {
+  font-family: var(--f-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 0.92em;
+}
+svg[focusable="false"] {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+}
+.note svg,
+.feedback svg {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+}
+.sr {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+.muted {
+  color: var(--muted);
+}
+.eyebrow {
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  font-weight: 700;
+  color: var(--muted);
+}
+.skip {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  background: var(--surface);
+  padding: 8px 12px;
+  z-index: 100;
+  border-radius: var(--r-s);
+}
+.skip:focus {
+  top: 8px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

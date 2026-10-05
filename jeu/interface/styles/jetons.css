@@ -1,0 +1,20 @@
+/* Wattlings · jeu/interface/styles/jetons.css
+   Jetons visuels du jeu : couleurs de l'interface et polices. C'est ici qu'on change l'ambiance des menus et des panneaux. */
+
+/* Layout: one retro console — HUD strip, pixel screen, objective strip, touch pad — centred on a night-blue desk. Single committed dark look. */
+:host{
+  --desk:#131a2b;      /* page ground, deep grid blue */
+  --ink:#1c2440;       /* frames, dialog border */
+  --paper:#f7f0dc;     /* dialog + panels */
+  --paper-2:#ece2c4;
+  --text:#1c2440;
+  --muted:#5b6380;
+  --amber:#f2a33a;     /* XP, highlights */
+  --teal:#2aa198;      /* electricity */
+  --flame:#e2573b;     /* gas */
+  --ok:#2f8f4e; --bad:#c43d3d;
+  --on-desk:#e8e4d6;
+  --f-pix:"Unifont", "Courier New", monospace;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  color-scheme: dark;
+}

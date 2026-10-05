@@ -1,0 +1,45 @@
+/* Wattlings · jeu/interface/styles/titre.css
+   Écran titre, emplacements de sauvegarde, changement de rang. */
+/* title & evolution */
+.title-screen{position:fixed;inset:0;z-index:30;background:var(--desk);display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto}
+.title-box{max-width:760px;width:100%;text-align:center;display:flex;flex-direction:column;gap:14px;align-items:center}
+.logo{font-family:var(--f-pix);font-weight:700;font-size:clamp(34px,8vw,58px);line-height:1;color:var(--amber);text-shadow:3px 3px 0 var(--flame),6px 6px 0 #0b1020;letter-spacing:.02em;text-wrap:balance}
+.logo small{display:block;font-size:.34em;color:var(--on-desk);text-shadow:none;margin-top:10px;letter-spacing:.12em;text-transform:uppercase}
+.title-box p{color:#b7bdd6;max-width:48ch;margin:0}
+.title-box input{font-family:var(--f-pix);font-size:20px;padding:8px 10px;border-radius:6px;border:2px solid #4a5588;background:#0f1424;color:var(--on-desk);text-align:center;width:220px}
+.title-box .btn{background:var(--amber);color:var(--ink)}
+.hud .saved{font-size:13px;color:#8fd19e;opacity:0;white-space:nowrap}
+.hud .saved.on{animation:svf 2.4s ease forwards}
+@keyframes svf{0%{opacity:0}12%{opacity:1}75%{opacity:1}100%{opacity:0}}
+.slots{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%;text-align:left}
+@media (max-width:720px){.slots{grid-template-columns:1fr}}
+.slot{background:#1a223a;border:2px solid #3a4470;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.slot.cur{border-color:var(--amber)}
+.slot-h{display:flex;gap:10px;align-items:center}
+.slot-h canvas{width:44px;height:44px;image-rendering:pixelated;background:#7cc56a;border-radius:6px;border:2px solid #0b1020;flex:none}
+.slot b{font-family:var(--f-pix);font-size:17.5px;color:var(--on-desk)}
+.slot small{display:block;color:#b7bdd6;font-size:14px;line-height:1.35}
+.slot .stats{font-family:var(--f-pix);font-size:14px;color:var(--amber)}
+.slot .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.slot .hades{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;align-items:center;color:var(--on-desk);font-size:15.5px;cursor:pointer}
+.slot .hades input{width:18px;height:18px;margin:0;padding:0;accent-color:#c43d3d;grid-row:1/3}
+.slot .hades small{grid-column:2}
+.slot .acts .btn{font-size:15px;padding:6px 10px;margin:0}
+.slot .acts .btn.danger{background:transparent;color:#ff9a8a;border:2px solid #6b2a2a}
+.slot input{width:100%;font-size:16.5px;padding:6px 8px}
+.save-list{display:grid;gap:8px;margin:10px 0}
+.save-list div{background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:8px 10px;font-size:15.5px}
+.save-list div.cur{border-color:var(--amber)}
+.title-box .btn.alt{background:transparent;color:var(--on-desk);border-color:#4a5588}
+.ranks{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;font-family:var(--f-pix);font-size:14.5px;color:#9aa3c4}
+.ranks span{border:1px solid #39426a;border-radius:4px;padding:2px 8px}
+.evo{position:fixed;inset:0;z-index:40;background:#0b1020;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;color:var(--on-desk);font-family:var(--f-pix);text-align:center;padding:16px}
+.evo canvas{width:160px;image-rendering:pixelated}
+.evo .t{font-size:clamp(18px,4vw,26px);max-width:30ch}
+.menu-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.menu-tabs button{font-family:var(--f-pix);font-size:16.5px;background:#fffaf0;border:2px solid #c9bb92;border-radius:5px;padding:4px 10px;cursor:pointer;color:var(--text)}
+.menu-tabs button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.dex{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px}
+.dex div{background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:6px;text-align:center;font-size:15px}
+.dex canvas{width:64px;image-rendering:pixelated}
+.dex .unk{opacity:.45}

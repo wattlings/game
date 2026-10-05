@@ -1,0 +1,17 @@
+/* Mention de mesure d'audience en bas de page. */
+
+.qk-privacy {
+  margin: 40px 0 72px;
+  font-size: var(--t-xs);
+  color: var(--muted);
+  max-width: 70ch;
+}
+.qk-privacy button {
+  font: inherit;
+  color: var(--data-ink);
+  background: none;
+  border: 0;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}

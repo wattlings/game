@@ -1,0 +1,24 @@
+/* Wattlings · jeu/moteur/etat.js
+   L'état de la partie (S), les 3 emplacements de sauvegarde et quelques outils de base. */
+
+/* ================= ÉTAT & SAUVEGARDE ================= */
+const RANKS=['Gestionnaire de site','Energy Manager','Gestionnaire de patrimoine'];
+const BADGES=['Cadrer','Collecter','Fiabiliser','Structurer','Analyser','Détecter','Agir','Piloter'];
+const DEF=()=>({en:null,ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,models:{},secrets:{},maxCh:0,sobriete:false,hades:false,hadesN:0,wololo:false,arena:{},v:4});
+let S=DEF();
+/* 3 emplacements de sauvegarde dans le navigateur */
+let SLOT=1;try{SLOT=Math.min(SLOT_N,Math.max(1,+localStorage.getItem(ACTIVE_KEY)||1))}catch(e){}
+function readSlot(n){try{const r=localStorage.getItem(SLOT_KEY(n));return r?JSON.parse(r):null}catch(e){return null}}
+function setSlot(n){SLOT=n;try{localStorage.setItem(ACTIVE_KEY,String(n))}catch(e){}}
+let saveOK=true;
+function save(){S.savedAt=Date.now();try{localStorage.setItem(SLOT_KEY(SLOT),JSON.stringify(S));localStorage.setItem(ACTIVE_KEY,String(SLOT));saveOK=true}catch(e){saveOK=false}if(typeof savedFlash==='function')savedFlash()}
+function loadSave(){return readSlot(SLOT)}
+try{if(!readSlot(1)){const old=localStorage.getItem(SAVE_KEY);if(old)localStorage.setItem(SLOT_KEY(1),old)}}catch(e){}
+const fmtDate=ts=>ts?new Date(ts).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
+function restartStory(){const k={name:S.name,av:S.av,models:S.models||{},secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees,hades:S.hades,hadesN:S.hadesN};S=Object.assign(DEF(),k);save()}
+let lastFlash=0;function savedFlash(){const el=typeof ROOT!=='undefined'&&ROOT.getElementById&&ROOT.getElementById('hudSaved');if(!el)return;const n=Date.now();if(n-lastFlash<2500)return;lastFlash=n;if(!saveOK&&!savedFlash.warned){savedFlash.warned=1;toast('⚠ Sauvegarde impossible dans ce navigateur')}el.textContent=saveOK?'✓ Sauvegardé':'⚠ Sauvegarde impossible';el.classList.remove('on');void el.offsetWidth;el.classList.add('on')}
+const $=id=>ROOT.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Number(n).toLocaleString('fr-FR');
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const hash=(x,y)=>{let h=x*374761393+y*668265263;h=(h^(h>>13))*1274126177;return ((h^(h>>16))>>>0)/4294967295};

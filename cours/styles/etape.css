@@ -1,0 +1,288 @@
+/* Page d'étape : en-tête, onglets, Essentiel (phrase clé, schéma, analogie, à retenir), cadre de démo, pagination, termes. */
+
+.etape-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 16px 24px;
+  align-items: end;
+}
+.etape-head .titre {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.etape-head .num-big {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1rem;
+}
+.etape-head h1 {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.etape-head .question {
+  font-size: var(--t-l);
+  color: var(--muted);
+}
+.fam-data .accent-txt {
+  color: var(--data-ink);
+}
+.fam-energie .accent-txt {
+  color: var(--energie-ink);
+}
+.tabs {
+  display: flex;
+  gap: 4px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.tabs button {
+  background: none;
+  border: 0;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -1px;
+  font-weight: 700;
+  color: var(--muted);
+  display: inline-flex;
+  gap: 8px;
+  align-items: center;
+}
+.tabs button[aria-selected="true"] {
+  color: var(--ink);
+  border-bottom-color: currentColor;
+}
+.fam-data .tabs button[aria-selected="true"] {
+  border-bottom-color: var(--data);
+}
+.fam-energie .tabs button[aria-selected="true"] {
+  border-bottom-color: var(--energie);
+}
+.tabs .tick {
+  font-size: 0.8em;
+  color: var(--ok);
+}
+.tabs .soon {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 99px;
+  background: var(--surface-2);
+  color: var(--muted);
+}
+.essentiel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: stretch;
+}
+.phrase-cle {
+  font-family: var(--f-display);
+  font-size: clamp(1.35rem, 3vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.fam-data .phrase-cle {
+  color: var(--data-ink);
+}
+.fam-energie .phrase-cle {
+  color: var(--energie-ink);
+}
+.schema {
+  background: var(--surface-2);
+  border-radius: var(--r-l);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.schema svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.schema figcaption {
+  font-size: var(--t-xs);
+  color: var(--muted);
+}
+.analogie {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  border-left: 0;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-l);
+  padding: 18px;
+}
+.analogie .ico {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--surface-2);
+  display: grid;
+  place-items: center;
+}
+.analogie .ico svg {
+  width: 26px;
+  height: 26px;
+}
+.a-retenir {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.a-retenir li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr);
+  gap: 8px;
+}
+.a-retenir li:before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-top: 0.55em;
+  background: currentColor;
+  opacity: 0.5;
+}
+.fam-data .a-retenir li:before {
+  background: var(--data);
+  opacity: 1;
+}
+.fam-energie .a-retenir li:before {
+  background: var(--energie);
+  opacity: 1;
+}
+.demo {
+  border: 2px solid var(--line);
+  border-radius: var(--r-l);
+  background: var(--surface);
+  overflow: hidden;
+}
+.fam-data .demo {
+  border-color: color-mix(in srgb, var(--data) 45%, var(--line));
+}
+.fam-energie .demo {
+  border-color: color-mix(in srgb, var(--energie) 45%, var(--line));
+}
+.demo-head {
+  padding: 14px 18px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-2);
+}
+.demo-head h2 {
+  font-size: var(--t-l);
+}
+.demo-head .consigne {
+  flex-basis: 100%;
+  color: var(--muted);
+  font-size: var(--t-s);
+}
+.demo-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.demo-tag {
+  font-size: var(--t-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 8px;
+  border-radius: 6px;
+}
+.fam-data .demo-tag {
+  background: var(--data);
+  color: var(--on-data);
+}
+.fam-energie .demo-tag {
+  background: var(--energie);
+  color: var(--on-energie);
+}
+.placeholder-niveau {
+  border: 2px dashed var(--line);
+  border-radius: var(--r-l);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.placeholder-niveau ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+.pager {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.pager a {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-decoration: none;
+  color: var(--ink);
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  background: var(--surface);
+  min-width: 0;
+}
+.pager a:hover {
+  border-color: var(--ink);
+}
+.pager a.next {
+  text-align: right;
+  margin-left: auto;
+}
+.pager small {
+  color: var(--muted);
+  font-size: var(--t-xs);
+}
+.boucle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  border-radius: var(--r-l);
+  background: linear-gradient(90deg, var(--energie-soft), var(--data-soft));
+}
+.boucle svg {
+  width: 32px;
+  height: 32px;
+  flex: none;
+}
+.termes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.termes .terme {
+  background: var(--surface-2);
+  color: var(--ink);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: var(--t-xs);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+.termes .terme:hover {
+  background: var(--line);
+}

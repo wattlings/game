@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="fr" class="qk-lock" data-racine="../">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wattlings · L’Energy Management par la donnée</title>
+<link rel="stylesheet" href="../commun/styles/polices.css">
+<link rel="stylesheet" href="interface/page.css">
+</head>
+<body>
+<noscript>Le jeu a besoin de JavaScript.</noscript>
+
+<!-- L'interface du jeu. Elle est recopiée dans un « shadow DOM » : ses styles ne débordent pas, et elle peut
+     passer telle quelle dans la vignette flottante. L'ordre des feuilles de style compte. -->
+<template id="qk-tpl">
+<link rel="stylesheet" href="interface/styles/jetons.css">
+<link rel="stylesheet" href="interface/styles/console.css">
+<link rel="stylesheet" href="interface/styles/dialogue.css">
+<link rel="stylesheet" href="interface/styles/manette.css">
+<link rel="stylesheet" href="interface/styles/panneaux.css">
+<link rel="stylesheet" href="interface/styles/combat.css">
+<link rel="stylesheet" href="interface/styles/titre.css">
+<link rel="stylesheet" href="interface/styles/avatar.css">
+<link rel="stylesheet" href="interface/styles/barre-haut.css">
+<link rel="stylesheet" href="interface/styles/vignette.css">
+<link rel="stylesheet" href="interface/styles/plein-ecran.css">
+<link rel="stylesheet" href="interface/styles/ecran-maximal.css">
+<link rel="stylesheet" href="interface/styles/carte.css">
+<link rel="stylesheet" href="interface/styles/menu.css">
+<link rel="stylesheet" href="interface/styles/tableau-de-bord.css">
+<link rel="stylesheet" href="../commun/graphiques/graphiques.css">
+<div class="qk-app"><div class="qk-top"><button type="button" id="qkBack">←<span class="lg"> Retour au cours</span><span class="sm"> Cours</span></button><span class="qk-top-r"><button type="button" id="qkCourse"><span class="lg">Comprendre cette étape : </span><span class="sm">Cours : </span><b id="qkStep">Le cycle</b></button><button type="button" id="qkPip" aria-pressed="false" title="Détacher le jeu dans une petite fenêtre flottante">⧉<span class="lg"> Vignette</span></button><button type="button" id="qkFs" aria-pressed="false" title="Plein écran (touche F)">⛶<span class="lg"> Plein écran</span></button></span></div>
+<div class="console" id="console">
+  <div class="hud" role="status">
+    <span class="who" id="hudName">—</span>
+    <span class="rank" id="hudRank">Gestionnaire de site</span>
+    <span class="lvl" id="hudLvl">Nv 1</span>
+    <div class="xpbar" title="Expérience"><i id="hudXp"></i></div>
+    <div class="badges" id="hudBadges" aria-label="Badges"></div>
+    <button id="hudKwh" class="hud-kwh zero" type="button" title="kWh économisés depuis le début de la partie : ouvre le tableau de bord Énergie" hidden></button>
+    <button id="sndBtn" type="button" aria-pressed="true">♪ Son</button>
+    <span class="saved" id="hudSaved" aria-live="polite"></span>
+    <button id="menuBtn" type="button">Menu</button>
+  </div>
+  <div class="screen-wrap" id="wrap">
+    <canvas id="screen" width="240" height="176" aria-label="Écran de jeu"></canvas>
+    <div class="scr-btns"><button id="backBtn" class="start-btn" type="button" title="Quitter le jeu et revenir au cours">← Cours</button><button id="pipBtn" class="start-btn" type="button" aria-pressed="false" title="Détacher le jeu dans une petite fenêtre flottante">⧉ Vignette</button><button id="mapBtn" class="start-btn" type="button" title="Carte de la ville : quartiers, arènes, objectif (touche K)">CARTE</button><button id="startBtn" class="start-btn" type="button" title="Menu : objectif, carnet, options (touche M)">MENU</button></div>
+    <button id="kwhPill" class="hud-kwh kwh-pill zero" type="button" title="kWh économisés depuis le début de la partie : ouvre le tableau de bord Énergie" hidden></button>
+    <div id="objFlash" class="obj-flash" role="status" hidden></div>
+  </div>
+  <div class="objective" id="objective"><b>Objectif :</b> …</div>
+  <div class="keys">Flèches ou ZQSD/WASD pour marcher · Espace ou Entrée pour parler, lire, interagir · Maj (maintenue) ou R pour courir · Échap ou M pour le menu · F pour le plein écran</div>
+  <div class="pad" id="pad">
+    <div class="dpad">
+      <span></span><button data-k="up" aria-label="Haut">▲</button><span></span>
+      <button data-k="left" aria-label="Gauche">◀</button><span></span><button data-k="right" aria-label="Droite">▶</button>
+      <span></span><button data-k="down" aria-label="Bas">▼</button><span></span>
+    </div>
+    <div class="ab"><div class="pills"><button class="roll" data-b="roll" aria-label="Roulade avant">Roulade</button><button class="run" data-b="run" aria-pressed="false" aria-label="Courir">Courir</button></div><button class="b" data-b="menu" aria-label="Menu">Menu</button><button class="a" data-b="a" aria-label="Action">A</button></div>
+  </div>
+</div>
+<div id="layer"></div></div>
+</template>
+<div id="qk-host"></div>
+
+<!-- Affiché dans cet onglet quand le jeu est parti dans la vignette flottante -->
+<div id="qk-ailleurs" hidden>
+  <p><b>Le jeu est dans la vignette flottante.</b><br>Garde cet onglet ouvert : la vignette en dépend.</p>
+  <p><button type="button" id="qkAilleursCours">Ouvrir le cours ↗</button> <button type="button" id="qkAilleursRetour">↩ Remettre le jeu ici</button></p>
+</div>
+
+<!-- 1. Le socle commun (étapes, patrimoine, sauvegardes, suivi) -->
+<script type="module" src="socle.js"></script>
+
+<!-- 2. Le jeu. Ces fichiers partagent leurs noms et se chargent dans cet ordre : un fichier peut utiliser
+     ce que définissent ceux qui le précèdent. Pour ajouter un fichier, l'insérer ici à la bonne place.
+     moteur/demarrage.js reste le dernier. -->
+<script defer src="moteur/hote.js"></script>
+<script defer src="moteur/suivi.js"></script>
+<script defer src="monde/plan-ville.js"></script>
+<script defer src="monde/ciel.js"></script>
+<script defer src="recit/lieux-savoir.js"></script>
+<script defer src="recit/fiches-savoir.js"></script>
+<script defer src="moteur/savoir.js"></script>
+<script defer src="monde/locaux.js"></script>
+<script defer src="moteur/etat.js"></script>
+<script defer src="monde/sites.js"></script>
+<script defer src="monde/regions-terrain.js"></script>
+<script defer src="monde/cartes.js"></script>
+<script defer src="rendu/tuiles.js"></script>
+<script defer src="rendu/batiments.js"></script>
+<script defer src="rendu/cartes.js"></script>
+<script defer src="rendu/personnages.js"></script>
+<script defer src="monde/objets.js"></script>
+<script defer src="rendu/objets.js"></script>
+<script defer src="moteur/cibles.js"></script>
+<script defer src="moteur/deplacements.js"></script>
+<script defer src="monde/couloir-du-vent.js"></script>
+<script defer src="moteur/boucle.js"></script>
+<script defer src="moteur/dialogue.js"></script>
+<script defer src="interface/hud.js"></script>
+<script defer src="rendu/art-base.js"></script>
+<script defer src="rendu/art-vegetation.js"></script>
+<script defer src="rendu/art-sols.js"></script>
+<script defer src="rendu/art-elements.js"></script>
+<script defer src="rendu/art-interieurs.js"></script>
+<script defer src="rendu/art-sprites.js"></script>
+<script defer src="rendu/art-batiments.js"></script>
+<script defer src="rendu/usure.js"></script>
+<script defer src="rendu/saisons.js"></script>
+<script defer src="rendu/regions-nature.js"></script>
+<script defer src="rendu/regions-architecture.js"></script>
+<script defer src="rendu/fondus.js"></script>
+<script defer src="rendu/courbes.js"></script>
+<script defer src="audio/partitions.js"></script>
+<script defer src="audio/moteur.js"></script>
+<script defer src="recit/secrets.js"></script>
+<script defer src="interface/choix-etape.js"></script>
+<script defer src="interface/avatar.js"></script>
+<script defer src="recit/clins-d-oeil.js"></script>
+<script defer src="recit/arenes/_regles.js"></script>
+<script defer src="recit/arenes/arene-1.js"></script>
+<script defer src="recit/arenes/arene-2.js"></script>
+<script defer src="recit/arenes/arene-3.js"></script>
+<script defer src="recit/arenes/arene-4.js"></script>
+<script defer src="recit/arenes/arene-5.js"></script>
+<script defer src="recit/arenes/arene-6.js"></script>
+<script defer src="recit/arenes/arene-7.js"></script>
+<script defer src="recit/arenes/arene-8.js"></script>
+<script defer src="rendu/arenes.js"></script>
+<script defer src="epreuves/arenes.js"></script>
+<script defer src="rendu/decor-velos.js"></script>
+<script defer src="rendu/decor-gare.js"></script>
+<script defer src="rendu/decor-sprites.js"></script>
+<script defer src="monde/barrieres.js"></script>
+<script defer src="monde/decor.js"></script>
+<script defer src="recit/habitants.js"></script>
+<script defer src="monde/vie.js"></script>
+<script defer src="rendu/ciel.js"></script>
+<script defer src="recit/meteo.js"></script>
+<script defer src="rendu/regions-decor.js"></script>
+<script defer src="monde/regions-decor.js"></script>
+<script defer src="recit/habitants-regions.js"></script>
+<script defer src="rendu/regions-vie.js"></script>
+<script defer src="simulation/modele-energie.js"></script>
+<script defer src="simulation/partie.js"></script>
+<script defer src="simulation/evenements.js"></script>
+<script defer src="interface/tableau-de-bord.js"></script>
+<script defer src="epreuves/agir.js"></script>
+<script defer src="interface/carte.js"></script>
+<script defer src="interface/tableau-patrimoine.js"></script>
+<script defer src="epreuves/patrimoine.js"></script>
+<script defer src="moteur/panneaux.js"></script>
+<script defer src="recit/histoire.js"></script>
+<script defer src="epreuves/cadrer.js"></script>
+<script defer src="epreuves/collecter.js"></script>
+<script defer src="epreuves/fiabiliser.js"></script>
+<script defer src="epreuves/structurer.js"></script>
+<script defer src="epreuves/analyser.js"></script>
+<script defer src="epreuves/detecter.js"></script>
+<script defer src="epreuves/piloter.js"></script>
+<script defer src="epreuves/finale.js"></script>
+<script defer src="interface/evolution-fin.js"></script>
+<script defer src="interface/menu.js"></script>
+<script defer src="interface/titre.js"></script>
+<script defer src="moteur/entrees.js"></script>
+<script defer src="moteur/lancement.js"></script>
+<script defer src="interface/liens-cours.js"></script>
+<script defer src="interface/plein-ecran.js"></script>
+<script defer src="interface/vignette.js"></script>
+<script defer src="moteur/demarrage.js"></script>
+</body>
+</html>

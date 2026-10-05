@@ -1,0 +1,158 @@
+/* Styles des graphiques en barres du patrimoine (cours et jeu).
+   Les couleurs --pc-ink, --pc-muted, --pc-hover et --pc-paper sont fournies par la page qui affiche le graphique. */
+
+.pc {
+  display: grid;
+  gap: 3px;
+  font-variant-numeric: tabular-nums;
+  position: relative;
+}
+.pc-legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: var(--pc-muted);
+  margin-bottom: 6px;
+}
+.pc-legend i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  vertical-align: -2px;
+  margin-right: 5px;
+}
+.pc-legend .tick {
+  width: 2px;
+  height: 14px;
+  border-radius: 0;
+}
+.pc-legend .dia {
+  width: 9px;
+  height: 9px;
+  transform: rotate(45deg);
+  border-radius: 1px;
+  margin-right: 7px;
+}
+.pc-row {
+  display: grid;
+  grid-template-columns: minmax(0, 11.5em) minmax(0, 1fr) 5.6em 3.6em;
+  gap: 8px;
+  align-items: center;
+  font-size: 13.5px;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: var(--pc-ink);
+}
+.pc-row:hover,
+.pc-row:focus-visible {
+  background: var(--pc-hover);
+  outline: none;
+}
+.pc-l {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pc-l small {
+  color: var(--pc-muted);
+}
+.pc-track {
+  position: relative;
+  height: 14px;
+  display: flex;
+  gap: 2px;
+}
+.pc-track > i {
+  display: block;
+  height: 100%;
+}
+.pc-track > i:first-child {
+  border-radius: 0;
+}
+.pc-track > i:last-of-type {
+  border-radius: 0 4px 4px 0;
+}
+.pc-v {
+  text-align: right;
+}
+.pc-c {
+  text-align: right;
+  color: var(--pc-muted);
+  font-size: 12.5px;
+}
+.pc-head {
+  font-size: 12px;
+  color: var(--pc-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.pc-cut {
+  border-top: 2px dashed var(--pc-ink);
+  margin: 4px 0;
+  padding-top: 3px;
+  font-size: 12.5px;
+  color: var(--pc-ink);
+  font-weight: 700;
+}
+.pc-mark {
+  position: absolute;
+  top: -3px;
+  width: 2px;
+  height: 20px;
+  background: var(--pc-ink);
+}
+.pc-dia {
+  position: absolute;
+  top: 2px;
+  width: 10px;
+  height: 10px;
+  transform: translateX(-5px) rotate(45deg);
+  background: var(--pc-paper);
+  border: 2px solid var(--pc-ink);
+}
+.pc-mid {
+  position: absolute;
+  left: 50%;
+  top: -3px;
+  bottom: -3px;
+  width: 1px;
+  background: var(--pc-muted);
+}
+.chip {
+  display: inline-block;
+  font-size: 11.5px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  white-space: nowrap;
+}
+.pc-tip {
+  position: absolute;
+  z-index: 5;
+  pointer-events: none;
+  background: var(--pc-ink);
+  color: var(--pc-paper);
+  font-size: 12.5px;
+  line-height: 1.4;
+  padding: 6px 9px;
+  border-radius: 6px;
+  max-width: 260px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.pc-wc .pc-row {
+  grid-template-columns: minmax(0, 11.5em) minmax(0, 1fr) 3.4em 8.2em;
+}
+@media (max-width: 520px) {
+  .pc-wc .pc-row {
+    grid-template-columns: minmax(0, 7.5em) minmax(0, 1fr) 3em;
+  }
+  .pc-row {
+    grid-template-columns: minmax(0, 8.5em) minmax(0, 1fr) 5em;
+  }
+  .pc-c {
+    display: none;
+  }
+}

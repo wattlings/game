@@ -1,0 +1,64 @@
+/* Page « Piloter un patrimoine » : indicateurs et sélecteurs. */
+
+.qk-patri {
+  --pc-ink: var(--ink);
+  --pc-muted: var(--muted);
+  --pc-hover: var(--surface-2);
+  --pc-paper: var(--surface);
+}
+.qk-patri .kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 10px;
+}
+.qk-patri .kpi {
+  display: grid;
+  gap: 2px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  padding: 12px;
+}
+.qk-patri .kpi .v {
+  font-size: var(--t-xl);
+  font-weight: 700;
+}
+.qk-patri .kpi .l {
+  font-size: var(--t-xs);
+  color: var(--muted);
+}
+.qk-patri .kpi.energie .v {
+  color: var(--energie-ink);
+}
+.qk-patri .ico {
+  font-family: var(--f-display);
+  font-weight: 800;
+  font-size: 1.3rem;
+  display: grid;
+  place-items: center;
+}
+.qk-seg {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.qk-seg button {
+  font-size: var(--t-s);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 5px 12px;
+  cursor: pointer;
+  color: var(--ink);
+}
+.qk-seg button[aria-pressed="true"] {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+.nav a.qk-nav-p[aria-current="page"] {
+  background: var(--surface);
+  border-color: var(--line);
+  font-weight: 700;
+}

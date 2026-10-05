@@ -1,0 +1,34 @@
+/* Wattlings · jeu/interface/styles/plein-ecran.css
+   Plein écran et mode immersif. */
+/* ---- mode plein écran / immersif ---- */
+.qk-app.app{height:100vh;height:100dvh;display:flex;flex-direction:column;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);overflow:hidden}
+.qk-app.app .qk-top{max-width:none;width:100%;margin:0;padding:6px 10px}
+.qk-app.app .qk-top button{font-size:14.5px;padding:3px 10px}
+.qk-app.app .console{max-width:none;width:100%;flex:1;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto auto;gap:6px;padding:0 10px 8px;position:relative}
+.qk-app.app .hud{padding:4px 8px}
+.qk-app.app .screen-wrap{min-height:0;display:flex;align-items:center;justify-content:center;border-width:0;border-radius:0;box-shadow:none;background:#000}
+.qk-app.app canvas#screen{position:absolute;left:0;top:0}
+.qk-app.app .objective{font-size:14.5px;padding:4px 8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.qk-app.app .keys{display:none}
+.qk-app.app .dialog{height:32%}
+@media (orientation:landscape) and (pointer:coarse){
+  .qk-app.app .console{grid-template-rows:auto minmax(0,1fr) auto}
+  .qk-app.app .qk-top{position:absolute;top:calc(env(safe-area-inset-top,0px) + 4px);right:calc(env(safe-area-inset-right,0px) + 8px);width:auto;padding:0;z-index:5}
+  .qk-app.app .qk-top .lg{display:none}.qk-app.app .qk-top .sm{display:inline}
+  .qk-app.app .qk-top button{font-size:13px;padding:2px 8px;background:rgba(19,26,43,.85)}
+  .qk-app.app #qkFs{background:rgba(19,26,43,.85)}
+  .qk-app.app .console{padding-top:4px}
+  .qk-app.app .hud{padding-right:280px}
+  .qk-app.app .hud .rank{display:none}
+  .qk-app.app .hud .xpbar,.qk-app.app .hud .badges{display:none}
+  .qk-app.app .objective{-webkit-line-clamp:1}
+  .qk-app.app .pad{position:absolute;left:10px;right:10px;bottom:36px;pointer-events:none;padding:0}
+  .qk-app.app .pad .dpad,.qk-app.app .pad .ab{pointer-events:auto;opacity:.78}
+  .qk-app.app .dpad{grid-template-columns:repeat(3,46px);grid-template-rows:repeat(3,46px)}
+  .qk-app.app .ab button{width:56px;height:56px}
+  .qk-app.app .ab{position:relative}
+  .qk-app.app .dialog{left:168px;right:150px;height:40%;min-height:70px}
+  .qk-app.app .ab .pills{position:absolute;right:0;bottom:64px}
+  .qk-app.app .ab .pills{align-items:flex-end}
+  .qk-app.app .ab .run,.qk-app.app .ab .roll{height:34px;width:auto}
+}

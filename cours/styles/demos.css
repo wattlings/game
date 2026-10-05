@@ -1,0 +1,296 @@
+/* Démos de l'Essentiel : glisser-déposer, robinets, fiches, jauges, facture, contrôles, choix, plan d'action. */
+
+.dnd {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 14px;
+}
+.bac {
+  border: 2px dashed var(--line);
+  border-radius: var(--r-m);
+  padding: 12px;
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--surface);
+  cursor: pointer;
+}
+.bac.cible {
+  border-color: var(--ink);
+  background: var(--surface-2);
+}
+.bac.over {
+  border-style: solid;
+}
+.bac h3 {
+  font-size: var(--t-m);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.bac h3 svg {
+  width: 22px;
+  height: 22px;
+}
+.bac .contenu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.pioche {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px;
+  border-radius: var(--r-m);
+  background: var(--surface-2);
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  cursor: grab;
+  font-size: var(--t-s);
+}
+.chip[aria-pressed="true"] {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px var(--ink);
+}
+.chip.ok {
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+.chip.bad {
+  border-color: var(--bad);
+  background: var(--bad-soft);
+}
+.chip .k {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.robinets {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.robinet {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  text-align: left;
+  padding: 12px 14px;
+  border-radius: var(--r-m);
+  border: 2px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+}
+.robinet[aria-pressed="true"] {
+  border-color: var(--data);
+  background: var(--data-soft);
+}
+.robinet svg {
+  width: 28px;
+  height: 28px;
+  color: var(--data-ink);
+}
+.robinet b {
+  font-family: var(--f-display);
+  font-size: 1.05rem;
+}
+.robinet small {
+  color: var(--muted);
+  font-size: var(--t-xs);
+}
+.fiche {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.fiche div {
+  background: var(--surface-2);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: var(--t-s);
+  min-width: 0;
+}
+.fiche dt {
+  font-size: var(--t-xs);
+  color: var(--muted);
+}
+.fiche dd {
+  margin: 0;
+  font-weight: 700;
+}
+.jauge {
+  display: inline-flex;
+  gap: 2px;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+.jauge i {
+  width: 7px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.jauge i.on {
+  background: var(--data);
+}
+.facture {
+  border: 1px solid var(--line);
+  border-radius: var(--r-m);
+  background: var(--surface);
+  padding: 16px;
+  font-size: var(--t-s);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 640px;
+}
+.facture header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+  border-bottom: 2px solid var(--ink);
+  padding-bottom: 8px;
+}
+.facture .lignes {
+  display: flex;
+  flex-direction: column;
+}
+.facture .ligne {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  padding: 5px 0;
+  border-bottom: 1px dotted var(--line);
+}
+.facture .ligne small {
+  display: block;
+  color: var(--muted);
+  font-size: var(--t-xs);
+}
+.facture .tot {
+  font-weight: 700;
+  border-bottom: 0;
+}
+.facture .tampon {
+  align-self: flex-start;
+  border: 2px solid var(--warn);
+  color: var(--warn);
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: var(--t-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  transform: rotate(-3deg);
+}
+.pieges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.controles {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.controle {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--surface-2);
+  font-size: var(--t-s);
+  min-width: 0;
+}
+.controle .etat {
+  font-weight: 700;
+  margin-left: auto;
+  white-space: nowrap;
+}
+.choix {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 8px;
+}
+.choix button {
+  text-align: left;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: var(--t-s);
+}
+.choix button:hover {
+  border-color: var(--ink);
+}
+.choix button.ok {
+  border-color: var(--ok);
+  background: var(--ok-soft);
+}
+.choix button.bad {
+  border-color: var(--bad);
+  background: var(--bad-soft);
+}
+.score {
+  font-family: var(--f-display);
+  font-weight: 800;
+}
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.action {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 14px;
+  border: 1.5px solid var(--line);
+  border-radius: var(--r-m);
+  background: var(--surface);
+  cursor: pointer;
+}
+.action:has(input:checked) {
+  border-color: var(--energie);
+  background: var(--energie-soft);
+}
+.action input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--energie);
+}
+.action .meta {
+  font-size: var(--t-xs);
+  color: var(--muted);
+  text-align: right;
+  white-space: nowrap;
+}
+.famille-titre {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+  font-weight: 700;
+  font-size: var(--t-s);
+}
+.famille-titre .n {
+  font-family: var(--f-mono);
+  font-size: var(--t-xs);
+  color: var(--muted);
+}

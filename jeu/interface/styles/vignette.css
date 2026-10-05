@@ -1,0 +1,33 @@
+/* Wattlings · jeu/interface/styles/vignette.css
+   Vignette flottante. */
+/* ---- vignette flottante (fenêtre toujours au-dessus) ---- */
+.qk-app.pip .pad,.qk-app.pop .pad{display:none!important}
+.qk-app.pip #qkBack,.qk-app.pip #qkFs,.qk-app.pop #qkBack,.qk-app.pop #qkFs,.qk-app.pop #qkPip{display:none}
+.qk-app.pip .qk-top,.qk-app.pop .qk-top{padding:4px 6px;flex-wrap:nowrap}
+.qk-app.pip .qk-top-r,.qk-app.pop .qk-top-r{flex:1;justify-content:space-between;flex-wrap:nowrap;min-width:0}
+.qk-app.pip #qkCourse,.qk-app.pop #qkCourse{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.qk-app.pip #qkPip{border-color:var(--amber);color:var(--amber);white-space:nowrap}
+.qk-app.app.pip .objective,.qk-app.app.pop .objective{display:block;white-space:nowrap;text-overflow:ellipsis;overflow:hidden}
+.qk-app.pip .console,.qk-app.pop .console{padding:0 6px 6px;gap:4px}
+.qk-top .sm{display:none}
+.hud button{white-space:nowrap}
+.qk-app.app .screen-wrap{position:relative}
+.qk-app.app .hud{flex-wrap:nowrap;overflow:hidden}
+.qk-app.app .hud .xpbar{min-width:40px}
+@media (max-width:560px){
+  .qk-top .lg{display:none}.qk-top .sm{display:inline}
+  .qk-top button{font-size:14px;padding:3px 9px}
+  .hud{gap:6px;padding:5px 8px}
+  .hud .who{font-size:14.5px}.hud .rank{font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto}.hud .lvl{font-size:13px;white-space:nowrap}
+  .hud .badges{display:none}
+  .hud button{font-size:13px;padding:2px 6px}
+  .objective{font-size:14.5px}
+  .dpad{grid-template-columns:repeat(3,clamp(40px,13vw,52px));grid-template-rows:repeat(3,clamp(40px,13vw,52px))}
+  .ab button{width:clamp(50px,15vw,62px);height:clamp(50px,15vw,62px)}
+  .ab{gap:8px}
+  .pad{padding:4px 2px}
+  .panel header{font-size:16.5px;padding:7px 10px}
+  .pbody{padding:12px;font-size:16.5px}
+  .overlay{padding:8px}
+}
+@media (max-height:560px){.overlay{padding-top:6px}.pbody{padding:10px 12px}}

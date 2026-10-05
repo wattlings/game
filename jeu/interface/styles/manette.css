@@ -1,0 +1,14 @@
+/* Wattlings · jeu/interface/styles/manette.css
+   Manette tactile (croix directionnelle, boutons A, Menu, Courir, Roulade). */
+/* touch pad */
+.pad{display:none;justify-content:space-between;align-items:center;padding:6px 8px;user-select:none;-webkit-user-select:none;touch-action:none}
+.dpad{display:grid;grid-template-columns:repeat(3,52px);grid-template-rows:repeat(3,52px);gap:2px}
+.dpad button,.ab button{background:#2c365c;border:2px solid #4a5588;color:var(--on-desk);font-family:var(--f-pix);font-size:20px;border-radius:8px;touch-action:none}
+.dpad button:active,.ab button:active,.dpad button.held{background:#4a5588}
+.ab{display:flex;gap:12px;align-items:center}
+.ab button{width:62px;height:62px;border-radius:50%;font-weight:700}
+.ab .a{background:var(--flame);border-color:#ff9a80}
+.ab .pills{display:flex;flex-direction:column;gap:6px;align-self:flex-end}
+.ab .run,.ab .roll{white-space:nowrap;width:auto;height:36px;border-radius:18px;font-size:14.5px;padding:0 10px}
+.ab .run[aria-pressed=true]{background:var(--amber);color:var(--ink);border-color:#ffd48a}
+@media (pointer:coarse),(max-width:680px){.pad{display:flex}.keys{display:none}}

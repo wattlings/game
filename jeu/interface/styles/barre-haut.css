@@ -1,0 +1,11 @@
+/* Wattlings · jeu/interface/styles/barre-haut.css
+   Barre au-dessus de la console : retour au cours, vignette, plein écran. */
+
+[hidden]{display:none!important}
+button,input,select{font:inherit}
+.qk-top{max-width:760px;margin:0 auto 8px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.qk-top button{font-family:var(--f-body);font-size:15.5px;background:transparent;color:var(--on-desk);border:2px solid #3a4470;border-radius:999px;padding:5px 12px;cursor:pointer}
+.qk-top button:hover,.qk-top button:focus-visible{border-color:var(--amber);outline:none}
+.qk-top b{color:var(--amber)}
+.qk-top-r{display:flex;gap:8px;flex-wrap:wrap}
+#qkFs{border-color:var(--amber);color:var(--amber)}

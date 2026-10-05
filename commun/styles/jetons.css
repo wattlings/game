@@ -1,0 +1,95 @@
+/* Jetons visuels : couleurs, polices, tailles, rayons.
+   C'est ici qu'on change l'apparence générale du cours : thème clair d'abord, thème sombre ensuite (deux fois : réglage du système, puis choix manuel). */
+
+:root {
+  --data: #07387a;
+  --data-ink: #07387a;
+  --data-soft: #e3ebf7;
+  --energie: #ff5e11;
+  --energie-ink: #b23c00;
+  --energie-soft: #ffeadf;
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface-2: #eef2f8;
+  --ink: #0a1a33;
+  --muted: #4a5b76;
+  --line: #d6deea;
+  --grid: #e6ebf3;
+  --ok: #17803d;
+  --ok-soft: #e2f4e8;
+  --warn: #9a6100;
+  --warn-soft: #fff3d6;
+  --bad: #c0262d;
+  --bad-soft: #fde6e7;
+  --on-data: #ffffff;
+  --on-energie: #1a0a00;
+  --focus: #ff5e11;
+  --shadow: 0 1px 2px rgb(7 56 122 / 0.06), 0 8px 24px rgb(7 56 122 / 0.07);
+  --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --t-xs: 0.8125rem;
+  --t-s: 0.9375rem;
+  --t-m: 1.0625rem;
+  --t-l: 1.3rem;
+  --t-xl: 1.75rem;
+  --t-2xl: 2.4rem;
+  --t-3xl: clamp(2.2rem, 5vw, 3.4rem);
+  --r-s: 6px;
+  --r-m: 12px;
+  --r-l: 20px;
+  --w-page: 72rem;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --data: #5b8fe0;
+    --data-ink: #9dbcf3;
+    --data-soft: #13294a;
+    --energie: #ff6d26;
+    --energie-ink: #ff9a66;
+    --energie-soft: #3a1c0c;
+    --bg: #060f1c;
+    --surface: #0d1a2d;
+    --surface-2: #13233a;
+    --ink: #e8eef7;
+    --muted: #9eb0c9;
+    --line: #22354f;
+    --grid: #1a2b43;
+    --ok: #4cc47a;
+    --ok-soft: #0f2e1c;
+    --warn: #f0b64a;
+    --warn-soft: #33250a;
+    --bad: #ff6b70;
+    --bad-soft: #3a1316;
+    --on-data: #06111f;
+    --on-energie: #1a0a00;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.3);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --data: #5b8fe0;
+  --data-ink: #9dbcf3;
+  --data-soft: #13294a;
+  --energie: #ff6d26;
+  --energie-ink: #ff9a66;
+  --energie-soft: #3a1c0c;
+  --bg: #060f1c;
+  --surface: #0d1a2d;
+  --surface-2: #13233a;
+  --ink: #e8eef7;
+  --muted: #9eb0c9;
+  --line: #22354f;
+  --grid: #1a2b43;
+  --ok: #4cc47a;
+  --ok-soft: #0f2e1c;
+  --warn: #f0b64a;
+  --warn-soft: #33250a;
+  --bad: #ff6b70;
+  --bad-soft: #3a1316;
+  --on-data: #06111f;
+  --on-energie: #1a0a00;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px rgb(0 0 0 / 0.3);
+  color-scheme: dark;
+}

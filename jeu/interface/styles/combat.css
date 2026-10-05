@@ -1,0 +1,22 @@
+/* Wattlings · jeu/interface/styles/combat.css
+   Écran de combat contre les anomalies. */
+/* battle */
+.battle{position:fixed;inset:0;z-index:25;background:rgba(8,11,22,.85);display:flex;align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto}
+.arena{margin:auto 0;width:100%;max-width:680px;background:linear-gradient(#cfe8d0 0 55%,#a9d39a 55%);border:4px double var(--ink);border-radius:8px;overflow:hidden;color:var(--text)}
+.field2{position:relative;height:clamp(200px,42vw,280px)}
+.hpbox{position:absolute;background:var(--paper);border:3px solid var(--ink);border-radius:6px 6px 14px 6px;padding:6px 10px;font-family:var(--f-pix);min-width:190px;font-size:16.5px}
+.hpbox .bar{height:8px;background:#ddd;border:1px solid var(--ink);border-radius:4px;overflow:hidden;margin-top:4px}
+.hpbox .bar i{display:block;height:100%;background:var(--ok);transition:width .6s}
+.hpbox.enemy{top:12px;left:12px}.hpbox.me{right:12px;bottom:12px}
+.mon{position:absolute;right:8%;top:10%;width:clamp(96px,20vw,140px);image-rendering:pixelated}
+.hero{position:absolute;left:8%;bottom:4%;width:clamp(96px,20vw,130px);image-rendering:pixelated}
+.mon.hit{animation:shake .5s}
+@keyframes shake{25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-4px)}}
+.mon.ko{transition:opacity .8s,transform .8s;opacity:0;transform:translateY(20px) scale(.6)}
+.bmsg{background:var(--paper);border-top:4px double var(--ink);padding:10px 14px;font-family:var(--f-pix);font-size:17.5px;min-height:64px;line-height:1.35}
+.bdata{font-family:var(--f-body);font-size:16.5px;background:var(--paper-2);padding:6px 10px;border-radius:4px;margin-top:6px}
+.moves{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:0 12px 12px;background:var(--paper)}
+@media (max-width:520px){.moves{grid-template-columns:1fr}}
+.moves button{font-family:var(--f-body);font-size:16px;text-align:left;background:#fffaf0;border:2px solid var(--ink);border-radius:6px;padding:8px 10px;cursor:pointer;color:var(--text)}
+.moves button:hover,.moves button:focus-visible{background:#fff;outline:2px solid var(--amber)}
+.moves button:disabled{opacity:.45;cursor:default}

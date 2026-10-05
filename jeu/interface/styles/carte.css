@@ -1,0 +1,32 @@
+/* Wattlings · jeu/interface/styles/carte.css
+   Carte de la ville. */
+/* carte de la ville */
+.wmap{position:absolute;inset:0;z-index:8;background:#0b1020;font-family:var(--f-pix);color:var(--on-desk);overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none}
+.wmap canvas{position:absolute;left:0;top:0;width:100%;height:100%;cursor:crosshair;touch-action:none}
+.wm-top{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(19,26,43,.94);border-bottom:2px solid #3a4470}
+.wm-top b{font-size:17.5px;color:var(--amber);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.wm-btns{display:flex;gap:5px;flex:none}
+.wm-btns button{font-family:var(--f-pix);font-size:15.5px;background:#1c2440;color:var(--on-desk);border:2px solid #59627c;border-radius:999px;padding:3px 11px;cursor:pointer;min-width:34px;line-height:1.2}
+.wm-btns button:hover,.wm-btns button:focus-visible{border-color:var(--amber);color:var(--amber);outline:none}
+.wm-btns .wm-x{border-color:var(--amber);color:var(--amber)}
+.wm-bot{position:absolute;left:0;right:0;bottom:0;background:rgba(19,26,43,.94);border-top:2px solid #3a4470;padding:6px 10px 7px;pointer-events:none}
+.wm-info{min-height:68px;font-size:16.5px;line-height:1.3}
+.wm-info b{display:block;font-size:18.5px;color:#fff}
+.wm-info span{display:block;color:#cfd6ea}
+.wm-tags{display:flex;flex-wrap:wrap;gap:4px 6px;margin-top:3px}
+.wm-tags em{font-style:normal;font-size:15.5px;padding:0 7px;border-radius:4px;background:#39426a;color:#fff}
+.wm-tags em.go{background:var(--amber);color:#131a2b}.wm-tags em.ok{background:#2f9e4a}.wm-tags em.no{background:#59627c}.wm-tags em.me{background:#f7f0dc;color:#131a2b}
+.wm-leg{display:flex;flex-wrap:wrap;gap:2px 12px;margin-top:5px;padding-top:4px;border-top:1px solid #39426a;font-size:14.5px;color:#aab3cc}
+.wm-leg span{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.wm-leg i{display:inline-block;width:11px;height:11px;font-style:normal;flex:none}
+.wm-leg .lg-me{border-radius:50%;background:#f7f0dc;box-shadow:0 0 0 2px #131a2b,0 0 0 3px #fff}
+.wm-leg .lg-obj{width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:10px solid var(--amber)}
+.wm-leg .lg-inf{background:#fffaf0;border:2px solid var(--amber);color:#c43d3d;font-size:12px;line-height:9px;text-align:center;font-weight:700;width:13px;height:13px}
+.wm-leg .lg-ar{border-radius:50%;background:#131a2b;border:2px solid #c9a227}
+.wm-leg .lg-no{background:rgba(14,18,34,.9);border:2px solid #6d7896}
+.wm-leg .wm-hint{margin-left:auto;color:#8e97b3}
+@media (max-width:640px){.wm-top b{font-size:15.5px}.wm-btns button{font-size:14.5px;padding:3px 8px;min-width:30px}.wm-info{font-size:15.5px}.wm-info b{font-size:17.5px}.wm-leg .wm-hint{margin-left:0;width:100%;white-space:normal}}
+@media (max-width:430px){.wm-top b{display:none}.wm-btns{width:100%;justify-content:space-between}}
+@media (max-height:480px){.wm-leg{display:none}.wm-info{min-height:0}.wm-info b,.wm-info span{display:inline}.wm-info b::after{content:' · '}}
+@media (orientation:landscape) and (pointer:coarse){.qk-app.app.wm-open .pad{z-index:9}.wm-bot{padding-left:172px;padding-right:154px}}
+.qk-app.wm-open .scr-btns,.qk-app.wm-open .obj-flash{display:none}

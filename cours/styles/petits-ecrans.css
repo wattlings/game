@@ -1,0 +1,63 @@
+/* Adaptation aux petits écrans des règles précédentes (tablette puis téléphone). */
+
+@media (max-width: 900px) {
+  .hero,
+  .essentiel,
+  .ecole-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .ecole-card svg {
+    max-width: 220px;
+  }
+  .grid-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .fiche {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .controles,
+  .gloss-page {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 640px) {
+  :root {
+    --t-xl: 1.45rem;
+  }
+  .topbar {
+    position: static;
+  }
+  .nav a {
+    padding: 6px 8px;
+  }
+  main {
+    padding-top: 20px;
+  }
+  .grid-2,
+  .dnd,
+  .robinets,
+  .etape-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .card,
+  .demo-body {
+    padding: 16px;
+  }
+  .progress-bar {
+    width: 60px;
+  }
+  .brand small,
+  .fab span {
+    display: none;
+  }
+  .fab {
+    padding: 14px;
+  }
+  .action {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+  .action .meta {
+    grid-column: 2;
+    text-align: left;
+  }
+}

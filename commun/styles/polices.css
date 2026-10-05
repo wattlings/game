@@ -1,0 +1,45 @@
+/* Polices embarquées (fichiers dans polices/).
+   Bricolage Grotesque : titres · Atkinson Hyperlegible : texte · JetBrains Mono : chiffres · Unifont : police pixel du jeu. */
+
+@font-face {
+  font-family: Bricolage Grotesque;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("polices/bricolage-grotesque-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: Bricolage Grotesque;
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+  src: url("polices/bricolage-grotesque-800.woff2") format("woff2");
+}
+@font-face {
+  font-family: Atkinson Hyperlegible;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("polices/atkinson-hyperlegible-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: Atkinson Hyperlegible;
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+  src: url("polices/atkinson-hyperlegible-700.woff2") format("woff2");
+}
+@font-face {
+  font-family: JetBrains Mono;
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  src: url("polices/jetbrains-mono-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Unifont";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("polices/unifont-400.woff2") format("woff2");
+}
