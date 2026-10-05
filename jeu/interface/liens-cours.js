@@ -47,10 +47,14 @@ function qkSync(){
     const u=c.toDataURL('image/png');if(localStorage.getItem(CLE_AVATAR)!==u)localStorage.setItem(CLE_AVATAR,u)}catch(e){}
 }
 
-/* ---- ce que demande l'adresse de la page ---- */
-function qkRoute(){
-  const h=decodeURIComponent(location.hash.slice(1));
-  if(h)try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}   // l'adresse redevient neutre : recharger la page ne rejoue pas la demande
+/* ---- ce que demande l'adresse de la page : "chapitre-3", "reprendre" ou rien (écran titre, ou la partie telle qu'elle est) ---- */
+function qkRoute(h){
+  if(typeof h!=='string'){
+    const e=window.WATTLINGS_EMBARQUE;
+    if(e&&typeof e.demande==='string'){h=e.demande;e.demande=null}   // version « fichier unique » : la demande vient de la page du cours
+    else{h=decodeURIComponent(location.hash.slice(1));
+      if(h)try{history.replaceState(null,'',location.pathname+location.search)}catch(x){}}   // l'adresse redevient neutre : recharger la page ne rejoue pas la demande
+  }
   const m=h.match(/^chapitre-(\d{1,2})$/);
   if(m)openGame(Math.min(11,+m[1]));
   else if(h==='reprendre'||h==='vignette'){const sv=loadSave();openGame(sv&&sv.site?sv.ch:undefined)}
