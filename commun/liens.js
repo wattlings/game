@@ -25,6 +25,14 @@ function vientDuCours() {
   }
 }
 
+/** Va à la page du jeu. suite : "" (écran titre), "reprendre" ou "chapitre-3". */
+export function allerAuJeu(suite = "", { remplacer = false } = {}) {
+  const e = embarque();
+  if (e) return e.versJeu(suite);
+  if (remplacer) location.replace(adresseJeu(suite));
+  else location.assign(adresseJeu(suite));
+}
+
 export const LIENS = {
   adresseCours,
   adresseJeu,

@@ -112,3 +112,9 @@
   font-family: "Pixelify Sans", var(--f-body);
   color: var(--energie-ink);
 }
+
+/* les boutons « Jouer » sont des liens vers la page du jeu */
+a.qk-play,
+a.qk-fab {
+  text-decoration: none;
+}

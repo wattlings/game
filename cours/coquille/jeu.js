@@ -1,0 +1,162 @@
+/**
+ * Passerelles du cours vers le jeu : le bandeau « Mode jeu » en haut des pages et le bouton flottant « Jouer ».
+ * Le cours ne charge pas le jeu : ce sont de simples liens vers la page voisine jeu/.
+ * (Les classes commencent par « qk- », du premier nom du jeu : La Quête du Kilowatt.)
+ */
+import { CHAPITRES_JEU, ETAPES_DE_BASE, chapitresDeLEtape } from "../../commun/donnees/etapes.js";
+import { AVATAR_DEFAUT } from "../../commun/images/avatar-defaut.js";
+import { adresseJeu, allerAuJeu } from "../../commun/liens.js";
+import { CLE_AVATAR, lire, partieEnCours } from "../../commun/stockage.js";
+import { esc } from "../../commun/texte.js";
+
+/** L'avatar du joueur (ou celui par défaut tant qu'aucune partie n'existe), dessiné point par point. */
+function avatar() {
+  const c = document.createElement("canvas");
+  c.width = 20;
+  c.height = 20;
+  c.className = "qk-sprite";
+  c.setAttribute("aria-hidden", "true");
+  const image = new Image();
+  image.onload = () => c.getContext("2d").drawImage(image, 0, 0);
+  image.src = (partieEnCours() && lire(CLE_AVATAR)) || AVATAR_DEFAUT;
+  return c;
+}
+
+/** Un lien vers le jeu. suite : "" (écran titre), "reprendre" ou "chapitre-3". */
+function lienJeu(suite, classe) {
+  const a = document.createElement("a");
+  a.className = classe;
+  a.href = adresseJeu(suite);
+  a.dataset.jeu = suite;
+  return a;
+}
+
+/** Le bandeau « Mode jeu ». chapitres : les chapitres proposés, ou null pour un seul bouton « Lancer le jeu ». */
+function bandeau(surtitre, titre, texte, chapitres) {
+  const b = document.createElement("section");
+  b.className = "qk-band";
+  b.setAttribute("aria-label", "Le jeu");
+  b.appendChild(avatar());
+  const t = document.createElement("div");
+  t.className = "qk-band-txt";
+  t.innerHTML = `<span class="qk-eyebrow">${surtitre}</span><h3>${titre}</h3><p>${texte}</p>`;
+  b.appendChild(t);
+  const actions = document.createElement("div");
+  actions.className = "qk-band-act";
+  (chapitres || [null]).forEach((ch) => {
+    const lien = lienJeu(ch === null ? "" : "chapitre-" + ch, "qk-play");
+    lien.innerHTML =
+      ch === null
+        ? "▶ Lancer le jeu"
+        : `▶ ${esc(CHAPITRES_JEU[ch].titre)}<small>${esc(CHAPITRES_JEU[ch].resume)}</small>`;
+    actions.appendChild(lien);
+  });
+  b.appendChild(actions);
+  return b;
+}
+
+/** Met à jour le bouton flottant : « Jouer » ou « Reprendre le jeu », avec l'avatar du joueur. */
+function majBoutonJeu() {
+  const f = document.getElementById("qk-fab");
+  if (!f) return;
+  const partie = partieEnCours();
+  f.querySelector("span").textContent = partie ? "Reprendre le jeu" : "Jouer";
+  f.href = adresseJeu(partie ? "reprendre" : "");
+  f.dataset.jeu = partie ? "reprendre" : "";
+  f.querySelector("canvas").replaceWith(avatar());
+}
+
+let enAttente = false;
+
+/** Pose le bouton flottant et, selon la page affichée, le bandeau « Mode jeu ». */
+function poser() {
+  enAttente = false;
+  const c = document.getElementById("contenu");
+  if (!c) return;
+  if (!document.getElementById("qk-fab")) {
+    const f = lienJeu("", "qk-fab");
+    f.id = "qk-fab";
+    f.innerHTML = "<canvas></canvas><span>Jouer</span>";
+    document.body.appendChild(f);
+    majBoutonJeu();
+  }
+  if (c.querySelector(".qk-band")) return;
+  const h = decodeURIComponent(location.hash.slice(1)) || "accueil";
+  const m = h.match(/^etape-(\d)/);
+  if (m) {
+    const n = +m[1];
+    const chapitres = chapitresDeLEtape(n);
+    if (!chapitres.length) return;
+    const b = bandeau(
+      "Mode jeu · étape " + n,
+      `Pratique « ${ETAPES_DE_BASE[n - 1].titre} » dans Wattlings`,
+      chapitres.length > 1
+        ? "Cette étape se joue en deux temps : le repérage, puis l’arène. Le jeu reprend directement au bon endroit, avec ton avatar et ton site."
+        : "Le jeu reprend directement au bon endroit, avec ton avatar et ton site. Le bouton « ← Cours » du jeu te ramène ici à tout moment.",
+      chapitres,
+    );
+    if (n === 8)
+      b.querySelector(".qk-band-txt").insertAdjacentHTML(
+        "beforeend",
+        '<p><a href="#patrimoine">Et après ? Lire « Piloter un patrimoine » →</a></p>',
+      );
+    const tete = c.querySelector(".etape-head");
+    if (tete) tete.after(b);
+    else c.prepend(b);
+  } else if (h === "patrimoine") {
+    const tete = c.querySelector(".etape-head");
+    if (!tete) return;
+    tete.after(
+      bandeau(
+        "Mode jeu · chapitre 10",
+        "Pilote les 20 sites dans Wattlings",
+        "Six missions au PC patrimoine de l’hôtel de ville : périmètre, Pareto, coût et CO₂, activités, bâtiments similaires, priorités.",
+        [10],
+      ),
+    );
+  } else if (h === "accueil") {
+    c.prepend(
+      bandeau(
+        "Mode jeu",
+        "Wattlings",
+        "Le même parcours en 8 étapes, version RPG : explore la ville, réunis les informations, puis remporte les 8 arènes et leurs badges pour devenir gestionnaire de patrimoine.",
+        null,
+      ),
+    );
+  } else if (h === "ecole") {
+    c.prepend(
+      bandeau(
+        "Mode jeu",
+        "Visite l’école dans le jeu",
+        "Choisis l’école Jean-Jaurès au début du jeu : mêmes chiffres, mêmes compteurs, mêmes pièges.",
+        [0],
+      ),
+    );
+  }
+}
+
+/** Les anciens liens (#jeu, #jeu-3) menaient au jeu quand il vivait dans la page du cours : on y conduit toujours. */
+export function ancienLienVersJeu(route) {
+  const m = route.match(/^jeu(?:-(\d{1,2}|vignette))?$/);
+  if (!m) return false;
+  allerAuJeu(!m[1] ? "" : m[1] === "vignette" ? "vignette" : "chapitre-" + Math.min(11, +m[1]), { remplacer: true });
+  return true;
+}
+
+/** À appeler une fois au démarrage du cours. */
+export function brancherJeu() {
+  // les pages se redessinent souvent : le bandeau est reposé à chaque changement du contenu
+  new MutationObserver(() => {
+    if (!enAttente) {
+      enAttente = true;
+      requestAnimationFrame(poser);
+    }
+  }).observe(document.body, { childList: true, subtree: true });
+  // au retour du jeu, l'avatar et le libellé du bouton peuvent avoir changé
+  addEventListener("pageshow", majBoutonJeu);
+  addEventListener("storage", majBoutonJeu);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) majBoutonJeu();
+  });
+  poser();
+}

@@ -3,14 +3,18 @@
  */
 import { icone } from "./blocs/icones.js";
 import { echapper, un } from "./blocs/outils.js";
+import { adresseJeu } from "../commun/liens.js";
 import { ETAPES } from "./contenu/index.js";
 import { magasin } from "./coquille/etat.js";
 import { brancherGlossaire, ouvrirGlossaire } from "./coquille/glossaire.js";
+import { ancienLienVersJeu, brancherJeu } from "./coquille/jeu.js";
+import { brancherSuiviCours } from "./coquille/suivi-cours.js";
 import { appliquerTheme, themeActuel } from "./coquille/theme.js";
 import { pageAccueil } from "./pages/accueil.js";
 import { pageEcole } from "./pages/ecole.js";
 import { pageEtape } from "./pages/etape.js";
 import { pageGlossaire } from "./pages/glossaire.js";
+import { pagePatrimoine } from "./pages/patrimoine.js";
 import { pageQuizFinal } from "./pages/quiz-final.js";
 
 const racine = document.getElementById("app");
@@ -28,6 +32,8 @@ racine.innerHTML = `
         <a href="#ecole" data-route="ecole">${icone("ecole")}L’école</a>
         <a href="#glossaire" data-route="glossaire">${icone("livre")}Glossaire</a>
         <a href="#quiz-final" data-route="quiz-final">${icone("ok")}Quiz final</a>
+        <a href="#patrimoine" class="qk-nav-p" data-route="patrimoine">Patrimoine</a>
+        <a href="${adresseJeu()}" class="qk-nav" data-jeu="">Le jeu</a>
       </nav>
       <div class="progress" id="progress" title="Une étape est terminée quand son Essentiel est lu et sa démo manipulée">
         <span class="progress-bar" aria-hidden="true"><span class="pd"></span><span class="pe"></span></span>
@@ -76,6 +82,9 @@ function afficherRoute() {
   if (e.startsWith("g-")) {
     return;
   }
+  if (ancienLienVersJeu(e)) {
+    return;
+  }
   const n = un("#contenu");
   if (typeof demonterPage == "function") {
     demonterPage();
@@ -99,6 +108,10 @@ function afficherRoute() {
     routeCourante = e;
     demonterPage = pageGlossaire(n);
     document.title = "Glossaire · Energy Management";
+  } else if (e === "patrimoine") {
+    routeCourante = e;
+    demonterPage = pagePatrimoine(n);
+    document.title = "Piloter un patrimoine · Energy Management";
   } else {
     routeCourante = "accueil";
     demonterPage = pageAccueil(n);
@@ -137,8 +150,14 @@ brancherGlossaire();
 
 magasin.on(majProgression);
 
+// le suivi d'audience écoute les changements de page avant le routeur
+brancherSuiviCours();
+
 window.addEventListener("hashchange", afficherRoute);
 
 majProgression();
 
 afficherRoute();
+
+// bandeaux « Mode jeu » et bouton flottant « Jouer »
+brancherJeu();
