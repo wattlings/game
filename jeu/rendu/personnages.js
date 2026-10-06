@@ -84,8 +84,11 @@ function drawChar0(c,x,y,dir,frame,p,run,fx){
     else{R(c,x+3,y,10,3,p.hat);R(c,x+4,y-1,8,1,p.hat);if(ht==='cap'){if(dir==='down')R(c,x+4,y+2,8,1,shade(p.hat));if(dir==='left')R(c,x+1,y+2,4,1,p.hat);if(dir==='right')R(c,x+11,y+2,4,1,p.hat)}}}
   if(p.glasses&&dir!=='up'){R(c,x+5,y+4,6,1,'#222')}
   // ce que le personnage tient à la main
-  if(p.prop==='umbrella'){const u=p.umb||'#c43d3d',hx=dir==='left'?x+2:x+13;R(c,hx,y-4,1,14,'#3a3a44');R(c,x+3,y-8,10,1,u);R(c,x+1,y-7,14,2,u);R(c,x,y-5,16,1,u);R(c,x+3,y-8,10,1,tint(u,.25));R(c,x+2,y-7,5,1,tint(u,.25));
-    for(let k=0;k<16;k+=4)R(c,x+k,y-4,1,1,tint(u,-.3));R(c,x+7,y-9,2,1,'#3a3a44');R(c,x,y-5,16,1,tint(u,-.18));R(c,hx,y+9,2,1,'#3a3a44')}
+  if(p.prop==='umbrella'){   // le parapluie est centré sur son manche, tenu dans la main : la toile déborde du côté de cette main
+    const u=p.umb||'#c43d3d',hx=dir==='left'||dir==='up'?x+3:x+12,hi=tint(u,.25),lo=tint(u,-.18),M='#3a3a44';
+    R(c,hx,y-4,1,13,M);R(c,hx,y+9,2,1,M);R(c,hx,y-9,1,1,M);
+    R(c,hx-4,y-8,9,1,hi);R(c,hx-6,y-7,13,2,u);R(c,hx-5,y-7,5,1,hi);R(c,hx-7,y-5,15,1,lo);
+    [-7,-4,3,6].forEach(k=>R(c,hx+k,y-4,k<0?2:2,1,tint(u,-.3)))}
   else if(p.prop&&dir!=='up'){const hx=dir==='left'?x+1:x+12,hy=y+9,pr=p.prop;
     if(pr==='clipboard'){R(c,hx-1,hy,4,5,'#f7f0dc');R(c,hx,hy+1,2,1,'#5b6380');R(c,hx,hy+3,2,1,'#5b6380')}
     else if(pr==='tablet'){R(c,hx-1,hy,4,4,'#1c2440');R(c,hx,hy+1,2,2,'#2aa198')}

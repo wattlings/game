@@ -30,19 +30,19 @@ export async function connecter({ url, cle, email, mdp }) {
 /** Lire les événements, par paquets de 1 000. surProgres(n) est appelé à chaque paquet. */
 export async function charger({ url, cle, jeton, depuis, surProgres, plafond = 60000 }) {
   const base = racineDe(url) + "/rest/v1/events", H = { apikey: cle, Authorization: "Bearer " + jeton };
-  // l'ordre : par date si la colonne existe, sinon par numéro, sinon tel quel
-  const essais = ["created_at", "id", null];
+  // l'ordre : par date (la colonne s'appelle « ts » dans la table du projet ; « created_at » ailleurs), sinon par numéro, sinon tel quel
+  const essais = ["ts", "created_at", "id", null];
   for (const ordre of essais) {
     const lignes = [];
     let rate = false;
     for (let debut = 0; debut < plafond; debut += 1000) {
       const q = new URLSearchParams({ select: "*", limit: "1000", offset: String(debut) });
       if (ordre) q.set("order", ordre + ".asc");
-      if (ordre === "created_at" && depuis) q.set("created_at", "gte." + depuis.toISOString());
+      if ((ordre === "ts" || ordre === "created_at") && depuis) q.set(ordre, "gte." + depuis.toISOString());
       let r;
       try { r = await fetch(base + "?" + q, { headers: H }); } catch { throw new Error("La lecture s'est interrompue. Vérifie ta connexion et recommence."); }
       if (r.status === 400 && debut === 0 && ordre) { rate = true; break; } // cette colonne n'existe pas : on essaie autrement
-      if (r.status === 401 || r.status === 403) throw new Error("Lecture refusée. Il manque sans doute la règle de lecture sur la table « events » (voir « Première fois » plus bas).");
+      if (r.status === 401 || r.status === 403) throw new Error("Lecture refusée. Il manque sans doute la règle de lecture sur la table « events » (voir l'encadré plus bas).");
       if (!r.ok) throw new Error("Lecture impossible (" + r.status + ").");
       const L = await r.json();
       lignes.push(...L);
@@ -54,7 +54,7 @@ export async function charger({ url, cle, jeton, depuis, surProgres, plafond = 6
   return [];
 }
 
-const dateDe = (l) => { const d = l.created_at || l.ts || l.inserted_at || l.date || l.t; const x = d ? new Date(d) : null; return x && !isNaN(x) ? x : null; };
+const dateDe = (l) => { const d = l.ts || l.created_at || l.inserted_at || l.date || l.t; const x = d ? new Date(d) : null; return x && !isNaN(x) ? x : null; };
 const mediane = (L) => { if (!L.length) return null; const s = L.slice().sort((a, b) => a - b), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 
 /** Les chiffres : qui est arrivé où, ce qui a été trouvé, ce qui a été raté. */

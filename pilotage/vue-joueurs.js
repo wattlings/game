@@ -100,7 +100,7 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
 
     remplir(resultats,
       estExemple ? h("p", { class: "bandeau alerte" }, h("strong", null, "Données d'exemple, inventées."), " Elles montrent à quoi ressemblera cette page une fois le suivi branché. Aucun de ces chiffres n'est réel.") : null,
-      !A.evenements ? h("p", { class: "bandeau" }, "Aucun événement du jeu sur cette période." + (lignes.length ? " (" + nombre(lignes.length) + " événements lus, qui viennent tous du cours.)" : " La table est vide, ou la règle de lecture ne laisse rien passer : voir « Première fois » ci-dessous.")) : [
+      !A.evenements ? h("p", { class: "bandeau" }, "Aucun événement du jeu sur cette période." + (lignes.length ? " (" + nombre(lignes.length) + " événements lus, qui viennent tous du cours.)" : " La table est vide, ou la règle de lecture ne laisse rien passer : voir plus bas.")) : [
         h("div", { class: "tuiles" }, tuile(nombre(A.joueurs.size), "joueurs", A.premier ? "du " + jour(A.premier) + " au " + jour(A.dernier) : ""), tuile(nombre(departs), "ont commencé l'histoire"),
           tuile(nombre(arrives), "sont arrivés à l'épilogue", departs ? Math.round((100 * arrives) / departs) + " % de ceux qui ont commencé" : ""), tuile(nombre(A.nbErreurs), "mauvaises réponses", A.joueurs.size ? (A.nbErreurs / A.joueurs.size).toFixed(1).replace(".", ",") + " par joueur" : ""),
           tuile(nombre(A.passeports.size), "passeports des énergies")),
@@ -125,10 +125,10 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
         h("label", null, h("span", null, "Période"), cPeriode),
         h("div", { class: "connexion-actions" }, h("button", { class: "bouton plein", type: "submit" }, "Se connecter et lire"),
           h("button", { class: "bouton", type: "button", onclick: () => { lignes = exemple(P); estExemple = true; etatEl.textContent = ""; montrer(); } }, "Voir avec des données d'exemple"))),
-      h("p", { class: "muet" }, "Le mot de passe part uniquement vers ton projet Supabase et n'est gardé nulle part ; la connexion s'oublie quand tu fermes la page."),
+      h("p", { class: "muet" }, "Ce sont les identifiants de ta page de statistiques (", h("a", { href: "../stats.html" }, "stats.html"), ") : si tu t'y connectes déjà, il n'y a rien à préparer. Le mot de passe part uniquement vers ton projet Supabase et n'est gardé nulle part ; la connexion s'oublie quand tu fermes la page."),
       etatEl),
     resultats,
-    h("details", { class: "bloc-page premiere-fois" }, h("summary", null, "Première fois : préparer Supabase (cinq minutes, une seule fois)"),
+    h("details", { class: "bloc-page premiere-fois" }, h("summary", null, "Si la connexion ou la lecture est refusée : préparer Supabase (cinq minutes, une seule fois)"),
       h("ol", { class: "marche" },
         h("li", null, "Dans Supabase, ouvre ton projet, puis ", h("strong", null, "Authentication › Users › Add user › Create new user"), ". Mets ton adresse e-mail, choisis un mot de passe long, coche ", h("strong", null, "Auto Confirm User"), ". C'est le compte qui servira ici."),
         h("li", null, "Toujours dans Authentication, ouvre ", h("strong", null, "Sign In / Providers"), " et désactive ", h("strong", null, "Allow new users to sign up"), " : personne d'autre ne pourra créer de compte."),

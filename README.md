@@ -10,6 +10,7 @@ Le site tient en **deux pages** qui partagent un socle commun :
 | Le jeu | `jeu/index.html` | `jeu/` |
 | Ce qu'ils partagent | | `commun/` |
 | Le pilotage du jeu (page de travail, liée nulle part) | `pilotage/index.html` | `pilotage/` |
+| Les statistiques d'audience du cours et du jeu (page de travail, liée nulle part, protégée par mot de passe) | `stats.html` | un seul fichier, à la racine |
 
 Il n'y a **aucune compilation** : les fichiers du dépôt sont ceux que le navigateur charge. Modifier un fichier et l'enregistrer dans le dépôt, c'est publier.
 
@@ -121,7 +122,7 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Voir le parcours | Onglet « Le parcours » : une ligne par chapitre (puis par site de voyage, par quartier, par secret), une pastille par moment du jeu. Un clic sur une pastille montre tout ce qui s'y passe : répliques, questions avec bonnes et mauvaises réponses, retours, conditions. Le champ de recherche fouille tous les textes du jeu. |
 | Tester un endroit précis | Bouton « Tester » d'une ligne ou « Tester ici » d'une pastille : le jeu s'ouvre à cet endroit dans un nouvel onglet, en **mode essai**. Rien n'est enregistré : ni sauvegarde, ni suivi. Recharger l'onglet rend le jeu normal. |
 | Corriger un texte | Allumer « Modifier les textes », cliquer un texte, le réécrire. Puis onglet « Mes modifications » : télécharger l'archive, la décompresser, et glisser son dossier `jeu` dans GitHub (*Add file › Upload files*). Chaque fichier rendu est le fichier en ligne où seuls ces textes ont changé. |
-| Voir ce que font les joueurs | Onglet « Les joueurs » : se connecter avec un compte créé dans Supabase (la marche à suivre est dans l'onglet, sous « Première fois »). Les chiffres se posent ensuite sur les frises. Le bouton « Voir avec des données d'exemple » montre la page avec des chiffres inventés, signalés comme tels. |
+| Voir ce que font les joueurs | Onglet « Les joueurs » : se connecter avec un compte créé dans Supabase (c'est celui de `stats.html` ; la marche à suivre pour en créer un est dans l'onglet). Les chiffres se posent ensuite sur les frises. Le bouton « Voir avec des données d'exemple » montre la page avec des chiffres inventés, signalés comme tels. |
 
 La page ne recopie rien : elle lit les fichiers du jeu tels qu'ils sont en ligne (ceux que liste `jeu/index.html`), sans les exécuter. Un texte ajouté au jeu y apparaît donc tout seul.
 
@@ -139,7 +140,7 @@ Ce qui n'est rangé dans aucun chapitre reste visible dans « Mécanique et inte
 
 | Je veux… | J'ouvre… |
 |---|---|
-| Brancher la mesure d'audience (Supabase) | `commun/config.js` |
+| Brancher la mesure d'audience (Supabase) | `commun/config.js` : l'adresse du projet et sa clé « publishable » (publique par nature, jamais une autre clé). `stats.html` porte les mêmes, en tête de fichier |
 | Voir les clés de sauvegarde | `commun/stockage.js` (ne pas les renommer) |
 
 ## Les règles qui tiennent l'ensemble
