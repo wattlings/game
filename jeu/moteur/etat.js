@@ -15,7 +15,7 @@ function save(){S.savedAt=Date.now();try{localStorage.setItem(SLOT_KEY(SLOT),JSO
 function loadSave(){return readSlot(SLOT)}
 try{if(!readSlot(1)){const old=localStorage.getItem(SAVE_KEY);if(old)localStorage.setItem(SLOT_KEY(1),old)}}catch(e){}
 const fmtDate=ts=>ts?new Date(ts).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
-function restartStory(){const k={name:S.name,av:S.av,models:S.models||{},secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees,hades:S.hades,hadesN:S.hadesN};S=Object.assign(DEF(),k);save()}
+function restartStory(){const k={name:S.name,av:S.av,models:S.models||{},secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees,hades:S.hades,hadesN:S.hadesN,voy:S.voy};S=Object.assign(DEF(),k);save()}
 let lastFlash=0;function savedFlash(){const el=typeof ROOT!=='undefined'&&ROOT.getElementById&&ROOT.getElementById('hudSaved');if(!el)return;const n=Date.now();if(n-lastFlash<2500)return;lastFlash=n;if(!saveOK&&!savedFlash.warned){savedFlash.warned=1;toast('⚠ Sauvegarde impossible dans ce navigateur')}el.textContent=saveOK?'✓ Sauvegardé':'⚠ Sauvegarde impossible';el.classList.remove('on');void el.offsetWidth;el.classList.add('on')}
 const $=id=>ROOT.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));

@@ -2,6 +2,7 @@
    Le texte de l'objectif affiché sous l'écran, chapitre par chapitre. */
 
 function objectiveText(){
+  if(MAPS[S.map]&&MAPS[S.map].objectif)return MAPS[S.map].objectif();   // en voyage, l'objectif est celui du site visité
   const mr=missingReq();if(mr.length&&[1,2,3,4,5,6,7,8,9,10].includes(S.ch))return `Trouve ${mr.length} info${mr.length>1?'s':''} clé${mr.length>1?'s':''} (suis les flèches) : ${mr.map(f=>SRC[f.src].where).join(' ; ')}. `+objectiveText0();
   return objectiveText0();
 }
@@ -15,6 +16,6 @@ function objectiveText0(){
   if(S.ch===7&&d<4)return `Ronde de nuit dans ${s.short} : trouve les 4 dérives (${d}/4).`;
   if(A)return go(A);
   if(S.ch===10)return `Hôtel de ville, place de l'Énergie (de l'autre côté du Grand pont) : analyse les 20 sites sur le PC patrimoine (${Math.min(6,S.pm||0)}/6 missions).`;
-  if(S.ch>=11&&S.site){const p=enPct();if(p<.4)return `Fais baisser la consommation du parc de 40 % : ton tableau de bord Énergie s'ouvre d'un clic sur le compteur de kWh. Tu en es à −${(p*100).toFixed(1).replace('.',',')} %.`;return "Objectif atteint : −40 % sur le parc ! Tu peux rejouer avec un autre site depuis le menu."}
+  if(S.ch>=11&&S.site){const p=enPct(),v=voyObjectifVille();if(p<.4)return `Fais baisser la consommation du parc de 40 % : ton tableau de bord Énergie s'ouvre d'un clic sur le compteur de kWh. Tu en es à −${(p*100).toFixed(1).replace('.',',')} %.`+v;return "Objectif atteint : −40 % sur le parc ! Tu peux rejouer avec un autre site depuis le menu."+v}
   return "Quête terminée ! Rejoue avec un autre site depuis le menu.";
 }

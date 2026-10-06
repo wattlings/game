@@ -1,0 +1,67 @@
+/* Wattlings · jeu/interface/styles/voyages.css
+   Les voyages en train : tableau des départs, trajet, carnet de voyage, passeport, simulations des sites. */
+
+/* ---- tableau des départs ---- */
+.voy-departs{display:grid;gap:8px;margin:10px 0}
+.voy-ligne{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;background:var(--ink);color:var(--paper);border-radius:6px;padding:8px 12px}
+.voy-ligne .h{font-family:var(--f-pix);font-size:19px;color:var(--amber);min-width:74px}
+.voy-ligne .d b{font-family:var(--f-pix);font-size:19px;display:block}
+.voy-ligne .d small{font-size:14.5px;color:#c9cde0}
+.voy-ligne .btn{margin:0;background:var(--amber);color:var(--ink);font-size:16.5px;padding:7px 12px}
+.voy-ligne .btn:hover,.voy-ligne .btn:focus-visible{background:#ffc66b;outline:2px solid var(--paper)}
+.voy-ligne.ferme{background:#3a4263}
+.voy-ligne.ferme .h,.voy-ligne.ferme .d b{color:#9aa1bd}
+.voy-ligne .st{font-family:var(--f-pix);font-size:14.5px;color:#9aa1bd;border:1px dashed #6b7396;border-radius:4px;padding:2px 8px}
+@media (max-width:480px){.voy-ligne{grid-template-columns:1fr auto}.voy-ligne .h{grid-column:1/-1;min-width:0}}
+
+/* ---- le trajet : une fenêtre de train ---- */
+.voy-trajet{position:fixed;inset:0;z-index:25;background:rgba(8,11,22,.92);display:flex;align-items:center;justify-content:center;padding:16px}
+.voy-trajet-in{width:100%;max-width:720px;display:grid;gap:10px;justify-items:center}
+.voy-trajet-tete{display:flex;align-items:center;gap:12px;font-family:var(--f-pix);color:var(--on-desk);font-size:18.5px;width:100%}
+.voy-trajet-tete i{flex:1;height:0;border-top:2px dashed #5b6380}
+.voy-trajet-tete b{color:var(--amber);font-weight:400}
+.voy-trajet canvas{width:100%;height:auto;image-rendering:pixelated;border:4px solid var(--ink);border-radius:10px;outline:2px solid #39426a;background:#8fd0f0}
+.voy-annonce{min-height:4.4em;margin:0;color:var(--on-desk);font-size:17.5px;line-height:1.45;text-align:center;max-width:60ch;text-wrap:pretty}
+.voy-trajet .btn{background:#fffaf0;color:var(--ink);font-size:16.5px;margin:0}
+
+/* ---- carnet de voyage et tampon ---- */
+.voy-retiens{border-top:1px dashed #c9bb92;margin-top:8px!important;padding-top:8px;font-size:.95em}
+.fiche.mini .voy-retiens{margin-top:4px!important;padding-top:4px}
+.voy-tampon-box{display:flex;gap:16px;align-items:center;background:#fffaf0;border:2px solid var(--amber);border-radius:8px;padding:14px;margin-bottom:10px}
+.voy-tampon{width:96px;height:96px;flex:none}
+.voy-tampon.pose{animation:voy-pose .45s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes voy-pose{from{transform:scale(2.2) rotate(-18deg);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.voy-tampon.pose{animation:none}}
+
+/* ---- passeport (onglet du menu) ---- */
+.voy-pass{display:grid;grid-template-columns:repeat(auto-fill,minmax(116px,1fr));gap:8px;margin:10px 0 4px}
+.voy-visa{background:#fffaf0;border:2px dashed #c9bb92;border-radius:6px;padding:8px 6px;text-align:center;display:grid;justify-items:center;gap:2px}
+.voy-visa.pose{border-style:solid;border-color:var(--amber)}
+.voy-visa canvas{width:72px;height:72px}
+.voy-visa b{font-family:var(--f-pix);font-size:15.5px;line-height:1.15}
+.voy-visa small{font-size:13.5px;color:var(--muted);line-height:1.25}
+.voy-sources{margin-top:8px;font-size:15px}
+.voy-sources summary{cursor:pointer;color:var(--muted)}
+.voy-sources ul{margin:6px 0 0;padding-left:20px}
+.voy-sources a{color:var(--ink)}
+.voy-sources p{margin:6px 0 0;color:var(--muted)}
+
+/* ---- simulations : réglages, croquis, chiffres ---- */
+.voy-plus-tard{margin-right:4px}
+.voy-atelier{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:10px 0}
+.voy-croquis{width:240px;max-width:100%;height:auto;border:2px solid #c9bb92;border-radius:6px;flex:none}
+.voy-reglages{flex:1;min-width:230px;display:grid;gap:10px}
+.voy-curseur{display:grid;gap:2px}
+.voy-curseur span{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-size:16px}
+.voy-curseur output{font-family:var(--f-pix);font-size:16.5px;color:var(--ink);text-align:right}
+.voy-curseur input{accent-color:var(--amber);min-height:28px}
+.voy-chiffres{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:10px 0}
+.voy-chiffres div{background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:6px 10px;display:grid}
+.voy-chiffres b{font-size:22px;line-height:1.2}
+.voy-chiffres span{font-size:13.5px;color:var(--muted);line-height:1.25}
+.voy-chiffres .bon{border-color:var(--ok);background:#e3f4e6}
+.voy-bilan{margin:8px 0 0!important;font-size:16px}
+.pbody .ctx .chart{display:block}
+.voy-usages{display:grid;gap:8px;margin:10px 0}
+.voy-usage{background:#fffaf0;border:2px solid #c9bb92;border-left:6px solid var(--u,var(--ink));border-radius:6px;padding:8px 10px}
+.voy-usage small{display:block;color:var(--muted);font-size:14px;line-height:1.3;margin-top:2px}

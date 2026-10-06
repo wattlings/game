@@ -18,7 +18,7 @@ function decorBuild(id,o){
       T(x,y,'qsign',1,{n,col:Q.col,act:()=>say([{t:Q.step?`${Q.name} · ${Q.reg} · étape ${Q.step}. Ici : les informations de l'étape et l'${ARENAS[n-1].name}.`:`${Q.name} · ${Q.reg}. ${Q.sub}.`}])})});
     // gare : train à quai, tableau des départs
     D(L.train[0],L.train[1],'train',0);
-    {const g=BLD.find(b=>b.id==='gare'),a=()=>say([{t:"Tableau des départs. Toutes les lignes affichent « — »."},{t:"En bas, en petit : « Prochainement : d'autres villes, d'autres bâtiments, d'autres compteurs. »"}]);STATION_BOARD.forEach(k=>D(g.x+k,g.y+g.h-1,'none',0,{act:a}))}      // le tableau est accroché au mur de la gare
+    {const g=BLD.find(b=>b.id==='gare'),a=()=>voyOuvert()?gareTableauDehors():say([{t:"Tableau des départs. Toutes les lignes affichent « — »."},{t:"En bas, en petit : « Prochainement : d'autres villes, d'autres bâtiments, d'autres compteurs. »"}]);STATION_BOARD.forEach(k=>D(g.x+k,g.y+g.h-1,'none',0,{act:a}))}      // le tableau est accroché au mur de la gare
     T(53,11,'bench',1);T(59,11,'bench',1);
     // place de la Donnée : fontaine, pompe à vélo, bancs
     {const fa=()=>say([{t:"La fontaine de la place. Elle tourne en circuit fermé : un compteur d'eau, zéro fuite. Enfin, en principe."}]);const [fx,fy]=L.fountain;D(fx,fy,'fountain',1,{act:fa});D(fx+1,fy,'none',1,{act:fa});D(fx,fy+1,'none',1,{act:fa});D(fx+1,fy+1,'none',1,{act:fa})}

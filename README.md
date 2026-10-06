@@ -73,6 +73,20 @@ Chaque modification enregistrée sur la branche `main` est en ligne après une �
 | Une musique | `jeu/audio/partitions.js` |
 | Le menu, la carte, le tableau de bord, l'avatar | `jeu/interface/<écran>.js` |
 
+### Les voyages en train (après la fin du jeu)
+
+| Je veux changer… | J'ouvre… |
+|---|---|
+| Ce que disent les gens et les panneaux d'un site, ses informations à collecter, ses sources | `jeu/voyages/<site>/textes.js` |
+| Le plan d'un site, la place de chaque personnage et de chaque objet | `jeu/voyages/<site>/carte.js` |
+| Les simulations et le défi final d'un site (missions, seuils, messages) | `jeu/voyages/<site>/simulations.js` |
+| Un dessin d'un site (panneaux, onduleur, totem…) | `jeu/voyages/<site>/dessins.js` |
+| Les destinations annoncées « prochainement » | `jeu/voyages/prochainement.js` |
+| Le hall de la gare, le guichet, le tableau des départs, le trajet | `jeu/voyages/gare.js` |
+| Le passeport et ses tampons | `jeu/voyages/passeport.js` |
+| L'allure des sols (chemin, gravier, quai, grillage…) et des graphiques, pour tous les sites | `jeu/voyages/peinture.js`, `graphes.js` |
+| Les couleurs et la mise en page des écrans de voyage | `jeu/interface/styles/voyages.css` |
+
 ### Les réglages
 
 | Je veux… | J'ouvre… |
@@ -117,6 +131,7 @@ jeu/
   simulation/             kWh économisés, actions, événements
   moteur/                 boucle, déplacements, dialogues, sauvegarde, entrées
   interface/              menus, carte, tableau de bord, avatar, plein écran, vignette, styles
+  voyages/                la gare, le passeport, puis un dossier par destination (solaire/…)
   audio/                  moteur sonore, partitions
 outils/                   facultatif : serveur local, vérification, fichier unique
 ```
@@ -134,6 +149,25 @@ outils/                   facultatif : serveur local, vérification, fichier uni
 - **Une question d'arène** : dans `jeu/recit/arenes/arene-N.js`, une ligne `Q("question", "bonne réponse", "explication", "mauvaise 1", "pourquoi", "mauvaise 2", "pourquoi")`.
 - **Un fichier au jeu** : le créer, puis ajouter sa ligne `<script defer src="…">` dans `jeu/index.html`, après les fichiers dont il a besoin. `moteur/demarrage.js` reste le dernier.
 
+## Les voyages en train
+
+À l'épilogue (les 8 badges gagnés, le patrimoine pris en main), la gare d'Ampère-sur-Loire ouvre. Le guichet remet un **passeport des énergies** ; le tableau des départs mène à des sites de production. Sur place : on se promène, on examine, on parle aux gens, on manipule deux simulations, puis le responsable du site fait passer un défi et tamponne le passeport.
+
+Une destination est ouverte : la **centrale solaire de Saint-Photon** (`jeu/voyages/solaire/`). Quatre autres sont annoncées dans `jeu/voyages/prochainement.js` : parc éolien, centrale nucléaire, barrage, data center.
+
+Ce que les voyages enregistrent vit dans la sauvegarde du jeu, sous `voy` (passeport, informations notées, tampons) : les clés de sauvegarde n'ont pas changé, et une ancienne partie s'ouvre comme avant.
+
+### Ajouter une destination
+
+Prendre `jeu/voyages/solaire/` comme modèle : quatre fichiers, chacun son rôle.
+
+1. **`textes.js`** : `voyDeclarer('monsite', {…})` avec le nom, la gare, la région, les annonces du train, la liste des informations (`infos` : un titre, un texte, une phrase à retenir, `cle:1` pour celles qu'exige le défi, `ou` pour l'indice) et les sources des chiffres. Puis les répliques et les questions du défi.
+2. **`dessins.js`** : les dessins propres au site (`VOY.dessins.nom = (c, o, X, Y, t) => …`).
+3. **`simulations.js`** : ce qui se manipule, et le défi, qui se termine par `voyTamponner('monsite')`.
+4. **`carte.js`** : `voyCarte('monsite', {…})` avec le plan (une chaîne par rangée, un caractère par case), la légende (quel pinceau pour quel caractère), et `objets(o)` qui pose personnages et objets. `voySource(site, info, qui, répliques, ensuite)` fabrique un personnage ou un objet qui donne une information.
+
+Ensuite : retirer la destination de `prochainement.js`, ajouter les quatre fichiers dans `jeu/index.html` (dans l'ordre textes, dessins, simulations, carte, comme pour `solaire/`), donner une encre et un motif au tampon dans `passeport.js`, et lancer `node outils/verifier.mjs voyages` : la vérification prend le train, contrôle que tout ce qui s'examine est accessible à pied, examine tout et fait tamponner le passeport.
+
 ## Les outils (facultatifs)
 
 Le site en ligne n'en a pas besoin. Ils demandent [Node.js](https://nodejs.org) :
@@ -147,7 +181,7 @@ npx playwright install chromium     # une fois, pour la vérification
 | Commande | Effet |
 |---|---|
 | `node outils/serveur.mjs` | Affiche le site sur `http://localhost:8080`. Un double-clic sur `index.html` ne suffit pas : hors d'un serveur, le navigateur refuse de charger les fichiers un par un. |
-| `node outils/verifier.mjs` | Ouvre chaque page du cours, manipule chaque démo, joue chaque chapitre du jeu, fait l'aller-retour cours ↔ jeu, et signale toute erreur. À lancer avant de publier une modification. |
+| `node outils/verifier.mjs` | Ouvre chaque page du cours, manipule chaque démo, joue chaque chapitre du jeu, prend le train vers chaque destination, fait l'aller-retour cours ↔ jeu, et signale toute erreur. À lancer avant de publier une modification. |
 | `node outils/fichier-unique.mjs` | Assemble tout le site dans un seul fichier, `outils/sortie/wattlings.html`, à envoyer par mail ou à ouvrir hors ligne. |
 
 Sans rien installer : dans le dépôt GitHub, onglet **Actions**, lancer « Fichier unique » ou « Vérifier le site » (bouton *Run workflow*). Le fichier unique se télécharge ensuite depuis la page du lancement, rubrique *Artifacts*.
@@ -171,6 +205,8 @@ Le contenu, les démos et le jeu sont identiques. Ce qui diffère tient au passa
 Dans le fichier unique produit par `outils/fichier-unique.mjs`, le jeu s'ouvre par-dessus le cours comme dans la version d'origine, sans vignette flottante.
 
 `outils/migration/` contient la version 18 et l'outil qui a comparé les deux versions. Il peut être supprimé une fois la migration acceptée.
+
+Depuis, le jeu a gagné les voyages en train (voir plus haut) : c'est la seule différence de contenu avec la version 18, et elle n'apparaît qu'à l'épilogue.
 
 ## Limites connues
 

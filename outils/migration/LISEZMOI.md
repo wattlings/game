@@ -11,3 +11,5 @@ node outils/migration/comparer.mjs epreuves   # 25 épreuves et écrans du jeu
 ```
 
 La comparaison n'a de sens que tant que le contenu n'a pas changé : dès la première modification du cours ou du jeu, elle signalera cette modification comme un écart. Ce dossier peut alors être supprimé ; `outils/verifier.mjs` prend le relais.
+
+C'est le cas depuis l'ajout des voyages en train : les chapitres 1 à 10 restent identiques à la version 18, le chapitre 11 (l'épilogue) diffère, puisque la gare y ouvre.

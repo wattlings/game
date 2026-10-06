@@ -97,6 +97,7 @@ function wmBase(){
 /* ---- ouverture / fermeture ---- */
 function openMap(){
   if(WM.open||busy||dlg.open||AR.lock)return;
+  if(MAPS[S.map].voy){toast(MAPS[S.map].sansCarte||"La carte d'Ampère-sur-Loire s'arrête à la gare.");return}
   busy=true;clearKeys();WM.open=true;WM.k={};WM.q=[];WM.held=0;WM.last='';WM.ptr.clear();WM.drag=null;WM.pinch=null;
   if(!WM.sent){WM.sent=true;trk('setting',{k:'carte',v:true})}
   const el=document.createElement('div');el.className='wmap';el.setAttribute('role','dialog');el.setAttribute('aria-label','Carte de la ville');

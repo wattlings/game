@@ -54,7 +54,7 @@ function enterDoor(x,y){
   if(b.arena){enterArena(b.arena);return}
   if(b.id==='office'){warp('office',5,7,'up');return}
   if(LOCALS[b.id]){S.inside=b.id;warp('local',5,6,'up');toast(LOCALS[b.id].name);return}
-  if(b.id==='gare'){say([{t:"Gare d'Ampère-sur-Loire. Les portes sont closes. Une affiche : « Gare fermée. Réouverture prochaine. »"},{t:"Sous l'affiche, le tableau des départs est vide. Quelqu'un a écrit à la craie : « D'autres villes, bientôt. »"}]);return}
+  if(b.id==='gare'){if(voyOuvert()){gareEntrer();return}say([{t:"Gare d'Ampère-sur-Loire. Les portes sont closes. Une affiche : « Gare fermée. Réouverture prochaine. »"},{t:"Sous l'affiche, le tableau des départs est vide. Quelqu'un a écrit à la craie : « D'autres villes, bientôt. »"}]);return}
   if(b.id==='mairie'){if(S.ch>=10)warp('mairie',6,8,'up');else say([{t:"Hôtel de ville. Un panneau : « Le maire est en réunion. » Le panneau semble dater de 2019."},{t:"Tu reviendras quand tu géreras un patrimoine entier."}]);return}
   if(!S.site){say([{t:"Ce bâtiment n'est pas encore dans ton périmètre. Parle d'abord à Mme Joule, au bureau."}]);return}
   if(b.id!==S.site){say([{t:`${SITES[b.id].name} : ce n'est pas (encore) ton site. ${S.ch>=10?"Tu le gères maintenant depuis la vue patrimoine, au bureau.":"Un jour, peut-être..."}`}]);return}
@@ -62,6 +62,7 @@ function enterDoor(x,y){
   warp('rdc',7,9,'up');
 }
 function exitBuilding(){
+  if(MAPS[S.map].sortie){MAPS[S.map].sortie();return}   // cartes de voyage
   if(curArena()){const d=curArena().b.door;AR.lock=false;warp('town',d[0],d[1]+1,'down')}
   else if(S.map==='office'){const d=BLD[0].door;warp('town',d[0],d[1]+1,'down')}
   else if(S.map==='mairie'){const d=front('mairie');warp('town',d[0],d[1],'down')}

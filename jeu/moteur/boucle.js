@@ -22,6 +22,7 @@ function render(){
   if(S.map==='town'){riderEnts(ents,ox,oy,tick);lifeEnts(ents,ox,oy,tick)}
   ents.sort((a,b)=>a.y-b.y).forEach(e=>e.f());
   if(mapOver[S.map])ctx.drawImage(mapOver[S.map],-ox,-oy);
+  if(m.apres)m.apres(ctx,ox,oy,tick);   // cartes de voyage : lumière du jour, effets
   // hautes herbes par-dessus les pieds
   if(S.map==='town'&&tileAt(P.x,P.y)===':'&&!P.moving){R(ctx,P.px-ox+2,P.py-oy+11,12,5,'#4f9a4a');R(ctx,P.px-ox+4,P.py-oy+10,1,4,'#6fbf5f');R(ctx,P.px-ox+10,P.py-oy+10,1,4,'#6fbf5f')}
   if(town){lifeOver(ctx,ox,oy,tick);drawWind(ox,oy);skyOver(ctx,ox,oy,objs,tick)}

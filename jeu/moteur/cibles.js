@@ -3,6 +3,7 @@
 
 /* ================= CIBLES (flèche d'objectif) ================= */
 function targets(){
+  if(MAPS[S.map].cibles)return MAPS[S.map].cibles();   // cartes de voyage
   const ST=savoirTargets();if(ST)return ST;
   const s=S.site,m=S.map,T=[],b=BLD.find(x=>x.id===s),off=BLD[0];
   const toOffice=()=>{if(m==='town')T.push(off.door);else if(m!=='office')T.push(m==='cave'?[1,2]:[7,10])};
@@ -17,6 +18,7 @@ function targets(){
     case 5:if(S.flags.arch)toArena(A);else{toOffice();if(m==='office')T.push([10,2])}break;
     case 7:if(Object.keys(S.derives).length>=4){toArena(A);break}toSite();if(m==='rdc'&&(!S.derives.boiler||!S.derives.cave))T.push([14,2]);if(m==='cave'&&!S.derives.boiler)T.push([4,3]);break;
     case 3:case 4:case 6:case 8:case 9:toArena(A);break;
+    case 11:if(m==='town'&&voyOuvert()&&!(S.voy&&S.voy.pass))T.push(doorOf('gare'));break;   // épilogue : la gare a rouvert
     case 10:if(m==='town')T.push(doorOf('mairie'));else if(m==='mairie')T.push(S.pm>=6?[10,4]:[2,2]);else out();break;
   }
   return T;

@@ -71,6 +71,7 @@ function musicFor(){
   if(ROOT.querySelector('.title-screen'))return 'title';
   if(ROOT.querySelector('.battle'))return 'battle';
   if(S.ch===7||S.map==='cave')return 'night';
+  if(MAPS[S.map]&&MAPS[S.map].musique)return MAPS[S.map].musique;   // cartes de voyage
   return S.map==='town'?'town':'indoor';
 }
 function updateMusic(){playTrack(musicFor())}

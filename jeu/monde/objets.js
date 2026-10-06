@@ -46,6 +46,7 @@ function objsFor(id){
   eggObjs(id,o);
   if(MAPS[id]&&MAPS[id].arena)arenaObjs(MAPS[id].arena,o);
   lifeObjs(id,o);decorObjs(id,o);
+  if(MAPS[id]&&MAPS[id].objets)MAPS[id].objets(o);   // cartes de voyage : chacune fournit ses objets (jeu/voyages/)
   return o;
 }
 function furniture(o){

@@ -1,14 +1,16 @@
 // Vérifie que le site fonctionne après une modification : à lancer avant de publier.
 //
 //   node outils/verifier.mjs            → tout (environ 3 minutes)
-//   node outils/verifier.mjs cours      → seulement le cours   (ou : jeu, liens)
+//   node outils/verifier.mjs cours      → seulement le cours   (ou : jeu, voyages, liens)
 //
 // Ce que fait la vérification :
 //   cours : ouvre chaque page, manipule chaque démo, et relève toute erreur ;
 //   jeu   : lance chaque chapitre, joue 20 secondes au hasard, ouvre le menu et la carte, et relève toute erreur ;
+//   voyages : prend le train vers chaque destination ouverte, vérifie que tout ce qui s'examine est accessible à pied,
+//             examine tout, manipule les simulations, fait tamponner le passeport et rentre ;
 //   liens : fait l'aller-retour cours → jeu → cours et contrôle sauvegarde, reprise et anciennes adresses.
 import {
-  ROUTES_COURS, TOUCHES, agirCours, avancer, contenuCours, demarrer, ecouterErreurs, hasardEtHorlogeFixes, hasardFixe, nbCiblesCours, tirage, validerAvatar,
+  ROUTES_COURS, TOUCHES, agirCours, agirJeu, avancer, contenuCours, demarrer, ecouterErreurs, hasardEtHorlogeFixes, hasardFixe, nbCiblesCours, tirage, validerAvatar,
 } from "./essais.mjs";
 
 const quoi = process.argv[2] || "tout";
@@ -75,6 +77,89 @@ if (quoi === "tout" || quoi === "jeu") {
     verif(`chapitre ${chapitre} : aucune erreur`, erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }
+}
+
+// ---------------------------------------------------------------- voyages en train
+if (quoi === "tout" || quoi === "voyages") {
+  console.log("Voyages : la gare, le train, chaque destination ouverte");
+  const contexte = await navigateur.newContext({ viewport: { width: 1000, height: 760 } });
+  const page = await contexte.newPage();
+  await page.addInitScript(hasardFixe);
+  const erreurs = ecouterErreurs(page);
+  const dansLaPage = (f, ...a) => page.evaluate(f, ...a);
+  const finDialogue = async () => { for (let i = 0; i < 80 && (await dansLaPage(() => dlg.open)); i++) { await page.keyboard.press("Space"); await page.waitForTimeout(40); } };
+  const cliquer = (sel) => dansLaPage((s) => { const e = document.getElementById("qk-host").shadowRoot.querySelector(s); if (e) e.click(); return !!e; }, sel);
+  await page.goto(adresse + "jeu/#chapitre-11");
+  await page.waitForTimeout(1200);
+  await validerAvatar(page);
+  await page.waitForTimeout(900);
+  await finDialogue();
+  await dansLaPage(() => { if (panelEl) closePanel(); const b = BLD.find((b) => b.id === "gare"); enterDoor(b.door[0], b.door[1]); });
+  await page.waitForTimeout(700);
+  await finDialogue();
+  verif("à l'épilogue, la porte de la gare ouvre sur le hall", await dansLaPage(() => S.map === "gare"));
+  await dansLaPage(() => gareGuichet());
+  await finDialogue();
+  await page.waitForTimeout(200);
+  verif("le guichet remet le passeport", await dansLaPage(() => !!(S.voy && S.voy.pass)));
+  const destinations = await dansLaPage(() => VOY.ordre.filter((id) => VOY.sites[id].ouvert));
+  verif("au moins une destination est ouverte", destinations.length > 0);
+  const alea = tirage(99);
+  for (const id of destinations) {
+    await dansLaPage(() => gareDeparts());
+    await page.waitForTimeout(200);
+    verif(`${id} : le tableau des départs propose la ligne`, await cliquer(`[data-d="${id}"]`));
+    await page.waitForTimeout(400);
+    await page.keyboard.press("Enter");
+    await page.waitForTimeout(900);
+    await finDialogue();
+    verif(`${id} : le train arrive sur le site`, await dansLaPage((id) => S.map === VOY.sites[id].carte && !isSolid(P.x, P.y), id));
+    // tout ce qui s'examine doit avoir une case voisine accessible à pied depuis l'arrivée
+    const bilan = await dansLaPage(() => {
+      const g = MAPS[S.map].g, H = g.length, W = g[0].length, vu = new Set([P.x + "," + P.y]), file = [[P.x, P.y]];
+      while (file.length) { const [x, y] = file.pop(); [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([dx, dy]) => { const a = x + dx, b = y + dy, k = a + "," + b; if (a < 0 || b < 0 || a >= W || b >= H || vu.has(k) || isSolid(a, b)) return; vu.add(k); file.push([a, b]); }); }
+      const objets = objsFor(S.map).filter((o) => o.act), hors = objets.filter((o) => ![[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => vu.has(o.x + dx + "," + (o.y + dy))));
+      const sid = VOY.ordre.find((i) => VOY.sites[i].carte === S.map), cles = VOY.sites[sid].infos.filter((f) => f.cle).length;
+      return { objets: objets.map((o) => [o.x, o.y]), hors: hors.map((o) => o.kind + "@" + o.x + "," + o.y), cibles: targets().length, cles, infos: VOY.sites[sid].infos.length };
+    });
+    verif(`${id} : tout ce qui s'examine est accessible à pied`, bilan.hors.length === 0, bilan.hors.join(" "));
+    verif(`${id} : une flèche par information clé à trouver`, bilan.cibles === bilan.cles, `${bilan.cibles} flèches pour ${bilan.cles} infos clés`);
+    // examiner chaque objet, parler à chacun, manipuler ce qui s'ouvre
+    for (const [x, y] of bilan.objets) {
+      await dansLaPage(([x, y]) => { const o = objAt(x, y); if (o && o.act) o.act(); }, [x, y]);
+      await page.waitForTimeout(40);
+      await finDialogue();
+      await page.waitForTimeout(120);
+      for (let i = 0; i < 25 && (await dansLaPage(() => !!panelEl)); i++) { await dansLaPage(agirJeu, alea()); await page.waitForTimeout(30); await finDialogue(); }
+      if (await dansLaPage(() => !!panelEl)) { if (!(await cliquer(".voy-plus-tard"))) await dansLaPage(() => closePanel()); }
+      if (await dansLaPage(() => !!VOY.trajet)) { await page.keyboard.press("Enter"); await page.waitForTimeout(600); await finDialogue(); await dansLaPage((id) => { if (S.map !== VOY.sites[id].carte) { const a = VOY.sites[id].arrivee; warp(VOY.sites[id].carte, a[0], a[1], a[2]); } }, id); }
+      await finDialogue();
+    }
+    verif(`${id} : des informations sont notées en examinant le site`, await dansLaPage((id) => voyInfosVues(id).length >= 5, id));
+    // le tampon, puis le passeport
+    await dansLaPage((id) => { VOY.sites[id].infos.forEach((f) => { voyEtat().infos[id + "." + f.id] = 1; }); voyTamponner(id); }, id);
+    await page.waitForTimeout(300);
+    verif(`${id} : le tampon s'affiche`, await cliquer("#vOk"));
+    await finDialogue();
+    await dansLaPage(() => openMenu("passeport"));
+    await page.waitForTimeout(200);
+    const passeport = await dansLaPage((id) => { const r = document.getElementById("qk-host").shadowRoot; return { visas: r.querySelectorAll(".voy-visa").length, poses: r.querySelectorAll(".voy-visa.pose").length, fiches: r.querySelectorAll(".cls .fiche").length, attendu: VOY.ordre.filter((i) => VOY.sites[i].ouvert).reduce((n, i) => n + VOY.sites[i].infos.length, 0), sites: VOY.ordre.length }; }, id);
+    verif(`${id} : le passeport montre le tampon et les informations`, passeport.visas === passeport.sites && passeport.poses >= 1 && passeport.fiches === passeport.attendu, JSON.stringify(passeport));
+    await dansLaPage(() => closePanel());
+    await dansLaPage((id) => voyTrajet("retour", id), id);
+    await page.waitForTimeout(300);
+    await page.keyboard.press("Enter");
+    await page.waitForTimeout(900);
+    await finDialogue();
+    verif(`${id} : le train du retour ramène à la gare`, await dansLaPage(() => S.map === "gare" && !isSolid(P.x, P.y)));
+  }
+  await dansLaPage(() => MAPS.gare.sortie());
+  await page.waitForTimeout(500);
+  verif("la sortie de la gare ramène en ville", await dansLaPage(() => S.map === "town" && !isSolid(P.x, P.y)));
+  const sauvegarde = await dansLaPage(() => JSON.parse(localStorage.getItem("wattlings-slot-1") || "null"));
+  verif("le passeport est dans la sauvegarde", !!(sauvegarde && sauvegarde.voy && sauvegarde.voy.pass && Object.keys(sauvegarde.voy.tampons).length === destinations.length));
+  verif("voyages : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+  await contexte.close();
 }
 
 // ---------------------------------------------------------------- liens entre les deux pages

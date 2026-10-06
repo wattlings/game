@@ -6,6 +6,7 @@ function drawObj0(c,o,ox,oy,t){
   if(o.draw){o.draw(c,X,Y,t);return}
   if(drawEgg(c,o,X,Y,t))return;
   if(o.decor&&drawDecor(c,o,X,Y,t))return;
+  if(o.voy&&voyDessiner(c,o,X,Y,t))return;   // dessins des sites de voyage (jeu/voyages/)
   switch(o.kind){
     case 'mailbox':R(c,X+7,Y+8,2,8,'#6b4a2b');R(c,X+3,Y+2,10,7,'#c43d3d');R(c,X+4,Y+3,8,2,'#e25f5f');R(c,X+11,Y+1,1,4,'#f2a33a');break;
     case 'panel':R(c,X+2,Y+12,2,4,'#555');R(c,X+12,Y+12,2,4,'#555');R(c,X+1,Y+2,14,10,'#1c2440');R(c,X+2,Y+3,12,8,'#f7f0dc');for(let i=0;i<3;i++)R(c,X+3,Y+4+i*2,i===0?7:10,1,'#5b6380');break;
