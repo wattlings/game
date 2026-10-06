@@ -9,7 +9,22 @@ const EOL_TEINTES={herbe:['#5fae6a','#68b572','#74bd7c'],brin:['#3f8f52','#9bd8a
 /* ================= LA LANDE ================= */
 voyCarte('eolien',{
   nom:'Parc éolien de Port-Rafale',depart:[22,24],region:'bretagne',
-  sansCarte:"Pas de carte ici. La halte est au sud, le poste de livraison au bout du chemin, le ponton à l'ouest, le hameau à l'est.",
+  /* ---- pour la carte (touche K) : le nom des endroits du site. r : le rectangle [x0,y0,x1,y1] ; t, d : ce que dit l'encart ; e : l'étiquette écrite sur le plan ---- */
+  zones:[
+    {r:[16,23,30,24],t:"Halte de Port-Rafale",d:"Le train du retour attend à quai. Pas d'abri : ici, un abri, ça devient un cerf-volant.",e:"HALTE",ey:27},
+    {r:[0,25,39,26],t:"Voie ferrée",d:"La ligne d'Ampère-sur-Loire, par Le Mans et Rennes. Elle s'arrête ici : après, c'est l'océan."},
+    {r:[20,8,28,11],t:"Poste de livraison",d:"Mme Suroît, le transformateur, et la sortie vers le réseau à 20 000 volts.",e:"POSTE DE LIVRAISON"},
+    {r:[25,12,29,14],t:"Mât de mesure",d:"Il mesure le vent, tout là-haut. Mme Bourrasque en tire une année entière de données."},
+    {r:[13,8,17,12],t:"Éolienne n° 1",d:"M. Rafale y fait la démonstration : un curseur, du vent, une courbe de puissance.",e:"N° 1"},
+    {r:[19,2,22,5],t:"Le vieux moulin",d:"L'ancêtre. Il prenait déjà son énergie au vent, et lui aussi s'arrêtait quand il n'y en avait pas.",e:"MOULIN",ey:1},
+    {r:[32,10,38,14],t:"Le hameau",d:"La crêperie de Mme Le Goff, voisine du parc. Elle a un avis sur les éoliennes. Elle a aussi des galettes.",e:"HAMEAU"},
+    {r:[0,15,10,17],t:"Le ponton",d:"Le capitaine Noroît y embarque pour le poste électrique en mer : vingt minutes de traversée.",e:"PONTON"},
+    {r:[0,1,4,5],t:"Phare de Port-Rafale",d:"Il éclaire la mer depuis plus longtemps que les éoliennes ne la regardent."},
+    {r:[7,18,13,22],t:"La grève",d:"Yann, sa barque, ses casiers, et une pale d'éolienne posée là comme une baleine échouée.",e:"GRÈVE",ey:22},
+    {c:'~',t:"L'océan",d:"Les quarante éoliennes en mer sont à seize kilomètres, derrière l'horizon. La navette y va."},
+    {c:'s',t:"La plage",d:"Du sable, du vent, du sable dans le vent."},
+    {c:'=',t:"Chemin du parc",d:"De la halte au poste de livraison, du ponton au hameau : tout le parc tient sur ce chemin en croix."}],
+  ailleurs:["La lande","De la bruyère, du granit, douze éoliennes de 3 MW, et des moutons qui n'ont rien demandé."],
   /* ---- le plan : 40 cases sur 28 ----
      On marche sur : . lande   = chemin   g gravier   s sable   b ponton   q quai
      On bute contre : ~ mer   T arbre   u buisson   k rocher   W poste de livraison   B maison   R r voie */
@@ -82,9 +97,9 @@ voyCarte('eolien',{
     // le mât de mesure et Mme Bourrasque
     pose(27,13,'vMat',{glow:!vue('cube'),act:source('cube','mat')});
     const vent=voyAnimateur(sid,'charge','Mme Bourrasque',D.bourrasque[0],D.bourrasque[1],eolSimVent);
-    gens(26,14,'Mme Bourrasque','down',{skin:'#f6d3b3',shirt:'#8ec9e8',pants:'#3a4050',coat:'#2f9e7a',hair:'#d9a441',style:'queue',lash:1,scarf:'#f2c12e',prop:'tablet'},()=>{if(vue('charge'))voyParler([{w:'Mme Bourrasque',t:D.bourrasque[1][0]},{w:'Mme Bourrasque',t:"Tu veux revoir l'année de vent ? La tablette est à toi."}],()=>eolSimVent());else vent()},{glow:!vue('charge')});
+    gens(26,14,'Mme Bourrasque','down',{skin:'#f6d3b3',shirt:'#8ec9e8',pants:'#3a4050',coat:'#2f9e7a',hair:'#d9a441',style:'queue',lash:1,scarf:'#f2c12e',prop:'tablet'},()=>{if(vue('charge'))voyParler([{w:'Mme Bourrasque',t:D.bourrasque[1][0]},{w:'Mme Bourrasque',t:"Tu veux revoir l'année de vent ? La tablette est à toi."}],()=>eolSimVent());else vent()},{glow:!vue('charge'),info:'charge'});
     // le poste de livraison : Mme Suroît, Mme Origine, le transformateur
-    gens(25,10,'Mme Suroît','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#1c2440',coat:'#f2c12e',hair:'#3a2a1a',style:'carre',lash:1,hat:'#f2c12e',hatType:'bonnet',prop:'clipboard'},eolDefi,{still:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
+    gens(25,10,'Mme Suroît','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#1c2440',coat:'#f2c12e',hair:'#3a2a1a',style:'carre',lash:1,hat:'#f2c12e',hatType:'bonnet',prop:'clipboard'},eolDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
     gens(20,11,'Mme Origine','right',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#2f3a5c',jacket:'#8a3b8f',hair:'#1c1c22',style:'boucle',lash:1,glasses:1,prop:'clipboard'},source('verte','origine','Mme Origine'),{glow:!vue('verte')});
     pose(26,10,'vTransfo',{act:voyDire(null,["Le transformateur du parc de la lande : 20 000 volts en sortie, direction le réseau de distribution.","Il bourdonne à cinquante hertz. Le vent, lui, n'a jamais réussi à tenir une note."])});o.push({x:27,y:10,kind:'none',solid:1});
 
@@ -113,7 +128,12 @@ voyCarte('eolien',{
 /* ================= LE POSTE ÉLECTRIQUE EN MER ================= */
 voyCarte('eolienMer',{
   nom:'Port-Rafale · le poste en mer',depart:[12,13,'up'],
-  sansCarte:"Seize kilomètres de mer dans toutes les directions. La carte tient en un mot : bleu.",
+  /* ---- pour la carte (touche K) : où est le poste sur la carte du pays, comment on y va, et le nom de ses endroits ---- */
+  pays:[-5.45,48.25],cote:'haut',nomCourt:'Poste en mer',acces:"Le poste électrique du parc en mer. Aucun train ne s'arrête au milieu de l'eau : on y va en navette, depuis le ponton de Port-Rafale.",
+  zones:[
+    {r:[8,6,17,11],t:"Le pont du poste",d:"Un pont d'acier sur quatre jambes. Les câbles des quarante éoliennes y arrivent ; deux liaisons en repartent vers la côte.",e:"POSTE EN MER"},
+    {r:[11,12,13,14],t:"L'appontement",d:"La navette du capitaine Noroît y attend. Vingt minutes jusqu'au ponton de Port-Rafale."}],
+  ailleurs:["Le parc en mer","Quarante éoliennes de 8 MW, à seize kilomètres de la côte. D'ici, on n'en voit que sept, et c'est déjà beaucoup."],
   /* ---- le plan : 26 cases sur 18. ~ mer   b pont du poste (on y marche) ---- */
   plan:[
     '~~~~~~~~~~~~~~~~~~~~~~~~~~',

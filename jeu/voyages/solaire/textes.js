@@ -12,6 +12,8 @@ voyDeclarer('solaire',{
   theme:'Photovoltaïque',
   ouvert:true,
   carte:'solaire',
+  /* sur la carte du pays (touche K, puis dézoomer) : où est le site, et par où passe sa ligne depuis Ampère-sur-Loire */
+  pays:[5.95,44.0],rail:[[3.16,46.99],[4.85,45.75],[4.9,44.93],[4.8,43.95]],cote:'droite',
   arrivee:[22,26,'up'],
   accroche:"Douze mégawatts-crête, vingt-huit mille modules, deux cents brebis. Aucune ne sait ce qu'est un onduleur.",
   pret:"Infos clés réunies : Mme Zénith t'attend au poste de livraison !",

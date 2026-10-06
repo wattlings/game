@@ -45,7 +45,7 @@ function openMenu(tab0){
       <tr><td>${touch?'Croix':'Flèches · ZQSD / WASD'}</td><td>Marcher</td></tr>
       <tr><td>${touch?'A':'Espace · Entrée · E'}</td><td>Parler, lire, interagir, faire défiler un dialogue</td></tr>
       <tr><td>${touch?'Menu':'M'}</td><td>${touch?'Ouvrir ce menu':'Ouvrir et refermer ce menu'}</td></tr>
-      <tr><td>${touch?'CARTE':'K'}</td><td>Carte de la ville : quartiers, arènes, objectif. Dans la carte : ${touch?'touche un endroit pour savoir ce que c’est, glisse pour déplacer, + et − pour zoomer':'les flèches déplacent le curseur, Espace ou + et − zooment, K referme'}</td></tr>
+      <tr><td>${touch?'CARTE':'K'}</td><td>Carte de la ville : quartiers, arènes, objectif. Dans la carte : ${touch?'touche un endroit pour savoir ce que c’est, glisse pour déplacer, + et − pour zoomer':'les flèches déplacent le curseur, Espace ou + et − zooment, K referme'}${wmEtages()?'. Depuis que la gare a rouvert : dézoome encore pour voir tout le pays et ses lignes de train, puis zoome sur un site pour voir son plan':''}</td></tr>
       <tr><td>${touch?'Courir':'Maj (maintenue) · R'}</td><td>Courir</td></tr>
       <tr><td>${touch?'Roulade':'C'}</td><td>Roulade avant : trois cases d'une traite, plus vite qu'en courant</td></tr>
       ${touch?'':'<tr><td>F</td><td>Plein écran</td></tr>'}</table></div><p class="dnote">Le bouton MENU, en haut à droite de l'écran, ouvre aussi ce menu. À côté : « CARTE » ouvre la carte de la ville, « ← Cours » ramène au cours${touch?'':', « ⧉ Vignette » détache le jeu dans une petite fenêtre flottante'}.</p>`

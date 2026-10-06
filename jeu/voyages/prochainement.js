@@ -6,4 +6,6 @@
 /* Les cinq destinations prévues sont ouvertes : il n'y a plus rien à annoncer ici.
    Pour annoncer une future ligne (affiche dans le hall, ligne éteinte au tableau des départs, page vide dans le passeport) :
 
-   voyDeclarer('geothermie',{nom:'…',gare:'…',region:'…',theme:'…',ouvert:false,accroche:"…"}); */
+   voyDeclarer('geothermie',{nom:'…',gare:'…',region:'…',theme:'…',ouvert:false,accroche:"…"});
+
+   Avec pays:[longitude, latitude] et rail:[[longitude, latitude]…], la ligne apparaît aussi, en gris, sur la carte du pays (touche K, puis dézoomer). */

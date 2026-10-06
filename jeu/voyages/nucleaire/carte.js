@@ -5,7 +5,21 @@
 
 voyCarte('nucleaire',{
   nom:'Centrale nucléaire de Neutron-sur-Mer',depart:[21,26],
-  sansCarte:"Pas de carte : le plan du site est un document à diffusion restreinte. La halte est au sud, le portique au bout de la route, la digue tout au nord.",
+  /* ---- pour la carte (touche K) : le nom des endroits du site. r : le rectangle [x0,y0,x1,y1] ; t, d : ce que dit l'encart ; e : l'étiquette écrite sur le plan ---- */
+  zones:[
+    {r:[14,26,29,26],t:"Halte de Neutron-sur-Mer",d:"Le train du retour attend à quai. Il part à l'heure : ici, on aime les procédures.",e:"HALTE",ey:29},
+    {r:[0,27,41,28],t:"Voie ferrée",d:"La ligne d'Ampère-sur-Loire, par Paris et Amiens."},
+    {r:[4,22,17,25],t:"Centre d'information",d:"La maquette, la pastille, le fût, le simulateur de conduite. Ici on peut toucher : rien n'est branché.",e:"CENTRE D'INFORMATION",ey:21},
+    {r:[18,19,22,21],t:"Portique d'accès",d:"On entre sur le site par ici, badge en main. M. Sievert compte tout ce qui passe, y compris ce qu'on ne voit pas."},
+    {r:[7,7,18,12],t:"Bâtiments réacteurs",d:"Sous chaque dôme de béton, un réacteur. C'est là que naît la chaleur, et c'est la seule chose qu'on lui demande.",e:"RÉACTEURS"},
+    {r:[21,8,33,11],t:"Salle des machines",d:"La vapeur y fait tourner la turbine, la turbine fait tourner l'alternateur. C'est là que la chaleur devient électricité.",e:"SALLE DES MACHINES"},
+    {r:[29,12,35,13],t:"Départ vers le réseau",d:"Le transformateur, puis les pylônes : le courant quitte le site à très haute tension."},
+    {r:[36,6,38,7],t:"Station de pompage",d:"L'eau de mer entre ici pour refroidir le circuit. Elle repart un peu plus chaude, et c'est tout ce qu'elle emporte."},
+    {r:[0,3,41,5],t:"La digue",d:"Elle protège le site de la mer. Gaston y pêche, et il a des choses à dire sur l'eau tiède.",e:"DIGUE"},
+    {c:'~',t:"La mer",d:"La source froide de la centrale : sans elle, pas de condensation, donc pas de turbine."},
+    {r:[5,6,36,20],t:"Le site",d:"Derrière la clôture : du gravier, des routes internes, des caméras. On ne s'y promène pas, on y circule."},
+    {c:'=',t:"Chemin de la digue",d:"Il contourne la clôture par l'est, jusqu'à la station de pompage et à la mer."}],
+  ailleurs:["Les abords de la centrale","De l'herbe tondue de près, et des panneaux qui disent non."],
   /* ---- le plan : 42 cases sur 30 ----
      On marche sur : . herbe   = chemin   a route   g gravier   d dalles   s sable   b digue   q quai
      On bute contre : ~ mer   f clôture   P bâtiment réacteur   h salle des machines   w station de pompage   B centre d'information
@@ -102,7 +116,7 @@ voyCarte('nucleaire',{
     o.push({x:40,y:15,kind:'vPylone',voy:1,solid:1});
     gens(24,15,'M. Planning','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#59627c',hair:'#2b1d14',beard:'#2b1d14',glasses:1,tie:'#f2a33a',prop:'clipboard'},source('arret','planning','M. Planning'),{glow:!vue('arret')});
     pose(25,15,'vPlanning',{act:voyDire(null,["Le tableau de M. Planning : douze colonnes, des dizaines de cases, quatre couleurs. Une case rouge est entourée trois fois : « PAS JANVIER »."])});
-    gens(21,12,'Mme Isotope','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#6a3fa0',hair:'#9a9aa2',style:'carre',lash:1,glasses:1,scarf:'#f2c12e',prop:'clipboard'},nucDefi,{still:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
+    gens(21,12,'Mme Isotope','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#6a3fa0',hair:'#9a9aa2',style:'carre',lash:1,glasses:1,scarf:'#f2c12e',prop:'clipboard'},nucDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
 
     // ---- la digue : la station de pompage, Gaston
     o.push({x:37,y:7,kind:'none',solid:1,act:voyDire(null,D.pompe)});

@@ -5,7 +5,6 @@
 /* ================= LE HALL DE LA GARE ================= */
 voyCarte('gare',{
   nom:"Gare d'Ampère-sur-Loire",musique:'indoor',depart:[7,10],
-  sansCarte:"Tu es dans la gare. Pour la carte de la ville, il faut d'abord en sortir.",
   /* W mur · o parquet · E sortie vers la ville */
   plan:[
     'WWWWWWWWWWWWWWWW',

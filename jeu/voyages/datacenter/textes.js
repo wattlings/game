@@ -12,6 +12,8 @@ voyDeclarer('datacenter',{
   theme:'Data center',
   ouvert:true,
   carte:'datacenter',
+  /* sur la carte du pays (touche K, puis dézoomer) : où est le site, et par où passe sa ligne depuis Ampère-sur-Loire */
+  pays:[5.35,43.3],rail:[[3.16,46.99],[4.85,45.75],[4.9,44.93],[4.8,43.95]],cote:'gauche',
   arrivee:[21,24,'up'],
   accroche:"Des milliers de serveurs, un seul objectif : rester au frais. Vos photos de vacances y sont, et elles consomment.",
   pret:"Infos clés réunies : Mme Quatreneuf t'attend dans le hall !",

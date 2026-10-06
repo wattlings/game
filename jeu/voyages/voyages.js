@@ -36,7 +36,8 @@ function voyDeclarer(id,d){d.id=id;d.infos=(d.infos||[]).map(f=>Object.assign(f,
    d.legende : pour chaque caractère, le pinceau qui le dessine (voir voyages/peinture.js).
    Sont infranchissables les caractères de SOLID (monde/cartes.js) : T W ~ f B w p x h R r u k P m.
    d.objets(liste) ajoute personnages et objets ;
-   d.objectif() donne le texte d'objectif ; d.cibles() les flèches ; d.apres(c,ox,oy,t) la lumière. */
+   d.objectif() donne le texte d'objectif ; d.cibles() les flèches ; d.apres(c,ox,oy,t) la lumière ;
+   d.zones et d.ailleurs nomment les endroits du site sur la carte (touche K) : voir voyages/atlas.js. */
 function voyCarte(id,d){
   const g=d.plan.map(l=>l.split('')),w=g[0].length;
   g.forEach((l,i)=>{if(l.length!==w)throw new Error(`Carte « ${id} » : la rangée ${i+1} compte ${l.length} cases au lieu de ${w}.`)});
@@ -98,7 +99,8 @@ function voyDonnerInfo(sid,id,cb){
    qui : nom affiché (null pour un objet) ; lignes : ce qu'il dit la première fois ; ensuite : ce qu'il dit après. */
 function voySource(sid,id,qui,lignes,ensuite){
   const L=t=>qui?{w:qui,t:voyTypo(t)}:{t:voyTypo(t)};
-  return()=>{if(!voyInfoVue(sid,id))voyParler(lignes.map(L),()=>voyDonnerInfo(sid,id));else voyParler((ensuite||lignes.slice(-1)).map(L))};
+  const f=()=>{if(!voyInfoVue(sid,id))voyParler(lignes.map(L),()=>voyDonnerInfo(sid,id));else voyParler((ensuite||lignes.slice(-1)).map(L))};
+  f.info=id;return f;   // l'étiquette sert à la carte du site (voyages/atlas.js) : elle y montre où se trouve chaque information
 }
 /* une remarque sans information à la clé (les vannes) */
 const voyDire=(qui,lignes)=>()=>voyParler(lignes.map(t=>qui?{w:qui,t:voyTypo(t)}:{t:voyTypo(t)}));

@@ -114,6 +114,27 @@ if (quoi === "tout" || quoi === "voyages") {
     await page.waitForTimeout(900);
     await finDialogue();
     verif(`${id} : le train arrive sur le site`, await dansLaPage((id) => S.map === VOY.sites[id].carte && !isSolid(P.x, P.y), id));
+    // la carte (touche K) : sur un site, elle s'ouvre sur le plan du site, où chaque information a sa place
+    await page.keyboard.press("k");
+    await page.waitForTimeout(300);
+    verif(`${id} : la carte s'ouvre sur le plan du site`, await dansLaPage((id) => WM.open && WM.lieu === VOY.sites[id].carte, id));
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(150);
+    const plan = await dansLaPage((id) => {
+      const s = VOY.sites[id], cartes = s.cartes || [s.carte], vues = new Set(), defauts = [];
+      if (!s.pays) defauts.push("pas de position sur la carte du pays (pays:[longitude, latitude])");
+      cartes.forEach((c, i) => {
+        const m = MAPS[c], w = m.g[0].length, h = m.g.length;
+        if (i && !m.pays) defauts.push(`${c} : pas de position sur la carte du pays`);
+        if (!m.zones || !m.ailleurs) defauts.push(`${c} : zones ou ailleurs manquant`);
+        (m.zones || []).forEach((z) => { if (!z.t || !z.d || (!z.r && !z.c)) defauts.push(`${c} : zone incomplète (${z.t || "sans nom"})`); if (z.r && (z.r[0] < 0 || z.r[1] < 0 || z.r[2] >= w || z.r[3] >= h || z.r[0] > z.r[2] || z.r[1] > z.r[3])) defauts.push(`${c} : zone « ${z.t} » hors du plan`); });
+        atlasSources(c, id).forEach((x) => vues.add(x.f.id));
+      });
+      s.infos.forEach((f) => { if (!vues.has(f.id)) defauts.push(`information « ${f.id} » introuvable sur le plan`); });
+      if (!cartes.some((c) => atlasObjets(c).some((o) => o.chef))) defauts.push("pas de responsable du site (chef:1)");
+      return defauts;
+    }, id);
+    verif(`${id} : le plan nomme ses zones et situe chaque information`, plan.length === 0, plan.join(" ; "));
     // un site peut avoir plusieurs cartes (site.cartes) : on les visite toutes
     const cartes = await dansLaPage((id) => VOY.sites[id].cartes || [VOY.sites[id].carte], id);
     const allerSur = (carte) => dansLaPage(([id, carte]) => { const s = VOY.sites[id], p = carte === s.carte ? s.arrivee : MAPS[carte].depart; if (S.map !== carte || isSolid(P.x, P.y)) warp(carte, p[0], p[1], p[2] || "up"); }, [id, carte]);
@@ -168,6 +189,29 @@ if (quoi === "tout" || quoi === "voyages") {
   await dansLaPage(() => MAPS.gare.sortie());
   await page.waitForTimeout(500);
   verif("la sortie de la gare ramène en ville", await dansLaPage(() => S.map === "town" && !isSolid(P.x, P.y)));
+  // la carte à étages : la ville, puis le pays en dézoomant, puis le plan de chaque lieu en zoomant dessus
+  await page.keyboard.press("k");
+  await page.waitForTimeout(300);
+  verif("en ville, la carte s'ouvre sur la ville", await dansLaPage(() => WM.open && WM.lieu === "town"));
+  await page.keyboard.press("-");
+  await page.waitForTimeout(1100);
+  verif("dézoomer mène à la carte du pays", await dansLaPage(() => WM.lieu === "pays" && !WM.anim));
+  const lieux = await dansLaPage(() => atlasPlaces().filter((l) => !l.ferme).map((l) => l.id));
+  verif("la carte du pays montre la ville et tous les sites ouverts", lieux.includes("town") && destinations.every((id) => lieux.includes(id)), lieux.join(" "));
+  for (const lieu of lieux) {
+    await dansLaPage((lieu) => { const c = ATLAS_PAYS.caseDe(lieu); WM.cx = c[0]; WM.cy = c[1]; }, lieu);
+    await page.waitForTimeout(80);
+    await page.keyboard.press("+");
+    await page.waitForTimeout(1100);
+    const vu = await dansLaPage(() => ({ lieu: WM.lieu, anim: !!WM.anim, titre: WM.el.querySelector(".wm-top b").textContent, info: WM.el.querySelector(".wm-info b").textContent }));
+    verif(`carte : zoomer sur « ${lieu} » montre son plan`, vu.lieu === lieu && !vu.anim && !!vu.titre && !!vu.info, JSON.stringify(vu));
+    await page.keyboard.press("-");
+    await page.waitForTimeout(1100);
+    verif(`carte : dézoomer depuis « ${lieu} » revient au pays`, await dansLaPage(() => WM.lieu === "pays" && !WM.anim));
+  }
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(200);
+  verif("la carte se referme", await dansLaPage(() => !WM.open && !busy));
   const sauvegarde = await dansLaPage(() => JSON.parse(localStorage.getItem("wattlings-slot-1") || "null"));
   verif("le passeport est dans la sauvegarde", !!(sauvegarde && sauvegarde.voy && sauvegarde.voy.pass && Object.keys(sauvegarde.voy.tampons).length === destinations.length));
   verif("voyages : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));

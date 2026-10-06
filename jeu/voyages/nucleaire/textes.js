@@ -12,6 +12,8 @@ voyDeclarer('nucleaire',{
   theme:'Nucléaire',
   ouvert:true,
   carte:'nucleaire',
+  /* sur la carte du pays (touche K, puis dézoomer) : où est le site, et par où passe sa ligne depuis Ampère-sur-Loire */
+  pays:[2.15,50.98],rail:[[2.35,48.85],[2.3,49.9]],cote:'droite',
   arrivee:[21,26,'up'],
   accroche:"Deux réacteurs, une digue, et la plus grande bouilloire de la région. On ne touche à rien, surtout pas au bouton rouge. Il n'y a pas de bouton rouge.",
   pret:"Infos clés réunies : Mme Isotope t'attend au bout de l'allée des visiteurs !",

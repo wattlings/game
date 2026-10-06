@@ -87,5 +87,6 @@ function voyDefi(sid,d){
 /* quelqu'un qui fait manipuler avant de donner une information : il parle, lance l'atelier, et l'information est notée à la fin */
 function voyAnimateur(sid,id,qui,avant,apres,lancer){
   const L=t=>({w:qui,t:voyTypo(t)});
-  return()=>{if(voyInfoVue(sid,id))voyParler(apres.map(L));else voyParler(avant.map(L),()=>lancer(()=>voyDonnerInfo(sid,id)))};
+  const f=()=>{if(voyInfoVue(sid,id))voyParler(apres.map(L));else voyParler(avant.map(L),()=>lancer(()=>voyDonnerInfo(sid,id)))};
+  f.info=id;return f;   // pour la carte du site (voyages/atlas.js)
 }

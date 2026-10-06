@@ -12,6 +12,8 @@ voyDeclarer('barrage',{
   theme:'Hydraulique',
   ouvert:true,
   carte:'barrage',
+  /* sur la carte du pays (touche K, puis dézoomer) : où est le site, et par où passe sa ligne depuis Ampère-sur-Loire */
+  pays:[6.6,45.3],rail:[[3.16,46.99],[4.85,45.75],[5.9,45.57]],cote:'droite',
   arrivee:[19,28,'up'],
   accroche:"Un lac, un mur, une chute. La seule batterie de France qui se remplit quand il pleut.",
   pret:"Infos clés réunies : Mme Lachute t'attend devant l'usine !",

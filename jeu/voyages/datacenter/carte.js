@@ -6,7 +6,22 @@
 
 voyCarte('datacenter',{
   nom:'Data center du quai des Octets',depart:[21,24],region:'provence',musique:'indoor',
-  sansCarte:"Pas de carte : le plan du bâtiment est confidentiel. Le hall est droit devant, les salles de part et d'autre, le quai derrière.",
+  /* ---- pour la carte (touche K) : le nom des endroits du site. r : le rectangle [x0,y0,x1,y1] ; t, d : ce que dit l'encart ; e : l'étiquette écrite sur le plan ---- */
+  zones:[
+    {r:[13,24,30,24],t:"Halte du quai des Octets",d:"Le train du retour attend à quai, à deux pas du port.",e:"HALTE",ey:27},
+    {r:[0,25,39,26],t:"Voie ferrée",d:"La ligne d'Ampère-sur-Loire, par Lyon et Avignon. Terminus : la mer."},
+    {c:'~',t:"La Méditerranée",d:"Des câbles sous-marins y arrivent de trois continents. C'est pour eux que le data center est ici, pas pour la vue."},
+    {r:[0,3,39,4],t:"Le quai des Octets",d:"Des conteneurs, des bittes d'amarrage, et une trappe jaune sous laquelle passe une bonne part de l'internet.",e:"QUAI",ex:24},
+    {r:[5,5,18,5],t:"Le froid",d:"Conduites et échangeur : la chaleur des serveurs sort du bâtiment par ici. Mme Calorie aimerait qu'elle serve à quelqu'un."},
+    {r:[26,5,36,5],t:"Les groupes électrogènes",d:"Des moteurs diesel et trois jours de fioul. Ils ne tournent presque jamais : on les paie pour attendre."},
+    {r:[5,6,18,13],t:"Salle des serveurs",d:"Les baies, rangées en allées froides et allées chaudes. Mlle Octet y cherche les serveurs qui tournent pour rien.",e:"SALLE DES SERVEURS",ey:13},
+    {r:[5,14,18,19],t:"Salle de calcul",d:"Les baies les plus denses du bâtiment. M. Token y explique ce que consomme une question posée à une machine.",e:"SALLE DE CALCUL"},
+    {r:[19,6,25,20],t:"Le hall",d:"M. Badge, le mur d'écrans, un distributeur de boissons. Mme Quatreneuf y attend les visiteurs qui ont tout vu.",e:"HALL",ey:9},
+    {r:[26,6,35,12],t:"Salle de contrôle",d:"La courbe plate de M. Talon, et le pupitre de Mme Ratio : c'est ici qu'on compte ce que le bâtiment consomme en plus des serveurs.",e:"SALLE DE CONTRÔLE"},
+    {r:[26,13,35,19],t:"Local des batteries",d:"De quoi tenir une dizaine de minutes sans le réseau, le temps que les groupes électrogènes démarrent.",e:"BATTERIES",ey:18},
+    {r:[15,21,29,23],t:"Le parvis",d:"L'entrée du data center. Pas d'enseigne, pas de fenêtre : la discrétion fait partie du service."},
+    {r:[1,5,37,23],t:"L'enceinte",d:"Du bitume, des murs sans fenêtre, des caméras. Les données n'aiment pas les courants d'air."}],
+  ailleurs:["Les abords du port","Du soleil, des cailloux, et le bruit de fond des ventilateurs."],
   /* ---- le plan : 40 cases sur 28 ----
      On marche sur : . herbe   a bitume   b quai du port   q quai de la halte   o sol technique   c allée froide   e allée chaude
      On bute contre : ~ mer   W mur   x armoire de serveurs   h armoire de calcul   T arbre   u buisson   k rocher   R r voie */
@@ -77,7 +92,7 @@ voyCarte('datacenter',{
     o.push({x:21,y:6,kind:'vEcranMonde',voy:1,glow:!vue('monde'),act:source('monde','ecrans')},{x:22,y:6,kind:'none',act:source('monde','ecrans')});
     gens(23,18,'M. Badge','left',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#1c2440',hair:'#2b1d14',tie:'#3a4050',glasses:1},source('tier','badge','M. Badge'),{glow:!vue('tier')});
     gens(20,12,'M. Placard','right',{skin:'#f1c7a1',shirt:'#8ec9e8',pants:'#59627c',jacket:'#8a6a4a',hair:'#9a9aa2',glasses:1,tie:'#c0503a',bag:'#6b4a2b'},source('salle','placard','M. Placard'),{glow:!vue('salle')});
-    gens(20,15,'Mme Quatreneuf','right',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#3a4050',hair:'#1c1c22',style:'carre',lash:1,scarf:'#3be07a',prop:'tablet'},datDefi,{still:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
+    gens(20,15,'Mme Quatreneuf','right',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#3a4050',hair:'#1c1c22',style:'carre',lash:1,scarf:'#3be07a',prop:'tablet'},datDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
     decor(24,7,'vending',{act:voyDire(null,D.cafe)});o.push({x:19,y:7,kind:'plant',solid:1},{x:19,y:19,kind:'plant',solid:1},{x:24,y:19,kind:'plant',solid:1});
 
     // ---- la salle des serveurs : Mlle Octet, le thermostat, la sonde de l'allée chaude

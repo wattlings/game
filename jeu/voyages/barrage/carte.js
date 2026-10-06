@@ -5,7 +5,22 @@
 
 voyCarte('barrage',{
   nom:'Barrage de Val-Turbine',depart:[19,28],region:'savoie',
-  sansCarte:"Pas de carte : ici, on s'oriente à la pente. L'usine est en bas, le barrage en haut, le sentier entre les deux.",
+  /* ---- pour la carte (touche K) : le nom des endroits du site. r : le rectangle [x0,y0,x1,y1] ; t, d : ce que dit l'encart ; e : l'étiquette écrite sur le plan ---- */
+  zones:[
+    {r:[12,27,27,28],t:"Halte de Val-Turbine",d:"Le train du retour attend à quai, tout en bas de la vallée.",e:"HALTE",ey:31},
+    {r:[0,29,39,30],t:"Voie ferrée",d:"La ligne d'Ampère-sur-Loire, par Lyon et Chambéry. Les derniers kilomètres montent."},
+    {r:[6,1,34,6],t:"Le lac de retenue",d:"Le stock d'énergie du site : de l'eau, en hauteur, qui attend qu'on ait besoin d'elle.",e:"LAC DE RETENUE"},
+    {r:[3,7,36,8],t:"La crête du barrage",d:"On marche sur le mur. D'un côté le lac, de l'autre le vide. Mme Stock et M. Capteur y travaillent, sans regarder en bas.",e:"CRÊTE"},
+    {r:[5,9,10,17],t:"La conduite forcée",d:"Le tuyau qui descend l'eau du lac jusqu'aux turbines. Toute la hauteur de chute est là."},
+    {r:[8,9,32,14],t:"Le mur du barrage",d:"Neuf cent mille mètres cubes de béton en travers de la vallée. Il retient le lac depuis 1957.",e:"BARRAGE"},
+    {r:[8,18,18,23],t:"L'usine hydroélectrique",d:"Les turbines et les alternateurs. L'eau entre d'un côté, l'électricité sort de l'autre.",e:"USINE"},
+    {r:[17,19,29,24],t:"Le bassin aval",d:"L'eau turbinée y attend. La nuit, des pompes peuvent la remonter au lac : c'est ce qui fait du site une batterie.",e:"BASSIN AVAL"},
+    {r:[30,18,38,24],t:"L'alpage",d:"Le chalet du Père Anselme et ses vaches. Soixante-dix ans qu'il regarde le barrage, et il a un avis sur qui doit passer en premier."},
+    {r:[1,1,5,6],t:"Les sommets",d:"La neige d'aujourd'hui est l'électricité du printemps."},
+    {r:[35,1,38,6],t:"Les sommets",d:"La neige d'aujourd'hui est l'électricité du printemps."},
+    {c:'~',t:"Le torrent",d:"Il coule toujours un peu : le barrage n'a pas le droit de garder toute l'eau pour lui."},
+    {c:'=',t:"Le sentier",d:"Il monte de la halte à la crête du barrage, en longeant la conduite forcée. Compter vingt minutes, ou une marmotte."}],
+  ailleurs:["La vallée de Val-Turbine","Des sapins, des rochers, de la pente. La pente, ici, c'est la matière première."],
   /* ---- le plan : 40 cases sur 32 ----
      On marche sur : . alpage   = sentier   g gravier   b crête du barrage   j pont   n neige   q quai
      On bute contre : ~ eau   P mur du barrage   x conduite forcée   h usine   B chalet   T sapin   k rocher   u buisson   R r voie */
@@ -81,7 +96,7 @@ voyCarte('barrage',{
     const turbines=voyAnimateur(sid,'turbines','Mlle Pelton',D.pelton[0],D.pelton[1],barSimTurbines);
     gens(15,21,'Mlle Pelton','down',{skin:'#e0ac7e',shirt:'#f2a33a',pants:'#3a4050',overall:'#3a4050',hair:'#b8431f',style:'queue',lash:1,hat:'#f7f0dc',hatType:'helmet'},turbines,{glow:!vue('turbines')});
     pose(16,21,'vRoue',{act:voyDire(null,D.roue)});
-    gens(14,22,'Mme Lachute','down',{skin:'#f6d3b3',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#1f8f7a',hair:'#5a3a22',style:'carre',lash:1,hat:'#f7f0dc',hatType:'helmet',scarf:'#f2c12e',prop:'clipboard'},barDefi,{still:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
+    gens(14,22,'Mme Lachute','down',{skin:'#f6d3b3',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#1f8f7a',hair:'#5a3a22',style:'carre',lash:1,hat:'#f7f0dc',hatType:'helmet',scarf:'#f2c12e',prop:'clipboard'},barDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
 
     // ---- le bassin aval : Mme Reflux, M. Spot et son écran
     gens(20,22,'Mme Reflux','right',{skin:'#c68a5c',shirt:'#8ec9e8',pants:'#2f3a5c',coat:'#2f6db5',hair:'#1c1c22',style:'boucle',lash:1,hat:'#f2c12e',hatType:'helmet',prop:'tablet'},source('step','reflux','Mme Reflux'),{glow:!vue('step')});

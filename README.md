@@ -78,7 +78,9 @@ Chaque modification enregistrée sur la branche `main` est en ligne après une �
 | Je veux changer… | J'ouvre… |
 |---|---|
 | Ce que disent les gens et les panneaux d'un site, ses informations à collecter, ses sources | `jeu/voyages/<site>/textes.js` |
-| Le plan d'un site, la place de chaque personnage et de chaque objet | `jeu/voyages/<site>/carte.js` |
+| Le plan d'un site, la place de chaque personnage et de chaque objet, le nom de ses zones sur la carte | `jeu/voyages/<site>/carte.js` |
+| Où se trouve un site sur la carte du pays, par où passe sa ligne de train | `jeu/voyages/<site>/textes.js` (`pays`, `rail`, `cote`) |
+| La carte du pays (contours, fleuves, massifs, textes des régions) et ce que montrent les plans des sites | `jeu/voyages/atlas.js` |
 | Les simulations et le défi final d'un site (missions, seuils, messages) | `jeu/voyages/<site>/simulations.js` |
 | Un dessin d'un site (panneaux, onduleur, totem…) | `jeu/voyages/<site>/dessins.js` |
 | Annoncer une future destination (« prochainement ») | `jeu/voyages/prochainement.js` |
@@ -167,6 +169,8 @@ Cinq lignes sont ouvertes, une par dossier :
 
 Chaque site compte 14 informations à collecter, dont 6 « clés » exigées avant le défi. Les sites sont inventés ; leurs chiffres sont réels, et les sources de chaque site sont listées en bas de son fichier `textes.js` (le joueur les retrouve dans son passeport).
 
+**La carte (touche K) a trois étages** une fois la gare rouverte. Depuis la carte de la ville, dézoomer encore (touche −, molette, pincement, ou bouton « Pays ») mène à la carte du pays : la ville, les destinations, les lignes de train, les tampons obtenus. Zoomer sur un lieu (touche + ou Espace, molette, ou le toucher deux fois) ouvre son plan : les zones du site, les informations déjà notées (coche verte) et celles qui restent (« ! » pour les infos clés, « ? » pour les autres), l'objectif. Sur un site, la carte s'ouvre directement sur son plan. Avant l'épilogue, la carte reste celle de la ville, comme avant. La mécanique commune (zoom, curseur, passage d'un étage à l'autre) est dans `jeu/interface/carte.js` ; ce que montrent le pays et les sites est dans `jeu/voyages/atlas.js`.
+
 Ce que les voyages enregistrent vit dans la sauvegarde du jeu, sous `voy` (passeport, informations notées, tampons) : les clés de sauvegarde n'ont pas changé, et une ancienne partie s'ouvre comme avant.
 
 ### Ajouter une destination
@@ -177,8 +181,9 @@ Prendre un dossier existant comme modèle (`jeu/voyages/barrage/` est le plus si
 2. **`dessins.js`** : les dessins propres au site (`VOY.dessins.nom = (c, o, X, Y, t) => …`).
 3. **`simulations.js`** : ce qui se manipule. `voyAtelier(titre, {…})` fabrique un atelier à partir de ses réglages (curseurs, choix, cases), de son calcul, de son graphique et de ses missions ; `voyDefi('monsite', {…})` fabrique le défi final (questions, épreuve, tampon). Le mode d'emploi est en tête de `jeu/voyages/ateliers.js`.
 4. **`carte.js`** : `voyCarte('monsite', {…})` avec le plan (une chaîne par rangée, un caractère par case), la légende (quel pinceau pour quel caractère), et `objets(o)` qui pose personnages et objets. `voySource(site, info, qui, répliques, ensuite)` fabrique un personnage ou un objet qui donne une information.
+5. **Pour la carte** : dans `textes.js`, `pays:[longitude, latitude]` place le site sur la carte du pays, `rail:[[longitude, latitude], …]` donne les étapes de sa ligne depuis Ampère-sur-Loire, `cote` dit de quel côté écrire son nom. Dans `carte.js`, `zones` nomme les endroits du plan (un rectangle, un nom, une phrase, une étiquette facultative) et `ailleurs` dit quoi afficher partout ailleurs ; le responsable du site porte `chef:1`. Le mode d'emploi est en tête de `jeu/voyages/atlas.js`.
 
-Ensuite : ajouter les quatre fichiers dans `jeu/index.html` (`textes.js` avec les autres `textes.js`, dans l'ordre du tableau des départs ; les trois autres après ceux des sites existants), donner une encre et un motif au tampon dans `passeport.js`, un pictogramme dans `voyages/dessins.js`, et lancer `node outils/verifier.mjs voyages` : la vérification prend le train, contrôle que tout ce qui s'examine est accessible à pied, examine tout, manipule les ateliers et fait tamponner le passeport.
+Ensuite : ajouter les quatre fichiers dans `jeu/index.html` (`textes.js` avec les autres `textes.js`, dans l'ordre du tableau des départs ; les trois autres après ceux des sites existants), donner une encre et un motif au tampon dans `passeport.js`, un pictogramme dans `voyages/dessins.js`, et lancer `node outils/verifier.mjs voyages` : la vérification prend le train, contrôle que tout ce qui s'examine est accessible à pied, examine tout, manipule les ateliers, fait tamponner le passeport, puis ouvre la carte et contrôle que chaque site y figure, que son plan nomme ses zones et situe chacune de ses informations.
 
 Un site peut tenir sur plusieurs cartes (le parc éolien en a deux, reliées par un bateau) : déclarer `cartes:['a','b']` dans `textes.js`, et voir `eolEmbarquer` dans `jeu/voyages/eolien/carte.js`.
 

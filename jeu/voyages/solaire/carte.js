@@ -4,7 +4,18 @@
 
 voyCarte('solaire',{
   nom:'Centrale solaire de Saint-Photon',depart:[22,26],region:'provence',
-  sansCarte:"Pas de carte ici : le site tient en un chemin. Au sud la halte, au nord le poste de livraison, les champs de chaque côté.",
+  /* ---- pour la carte (touche K) : le nom des endroits du site. r : le rectangle [x0,y0,x1,y1] ; t, d : ce que dit l'encart ; e : l'étiquette écrite sur le plan ---- */
+  zones:[
+    {r:[20,1,23,2],t:"Poste de livraison",d:"La porte de sortie du site : toute la production passe par ici avant de rejoindre le réseau. Mme Zénith y monte la garde."},
+    {r:[18,3,26,9],t:"Zone technique",d:"Onduleurs, transformateur, supervision : c'est ici que le courant continu des modules devient celui du réseau.",e:"ZONE TECHNIQUE",ey:10},
+    {r:[2,3,17,18],t:"Champ ouest : panneaux fixes",d:"Des rangées plein sud, inclinées une fois pour toutes. Les brebis tondent dessous, sans préavis de grève.",e:"PANNEAUX FIXES"},
+    {r:[27,3,41,15],t:"Champ est : trackers",d:"Des rangées qui pivotent d'est en ouest pour suivre le soleil. Mlle Azimut tient le pupitre.",e:"TRACKERS"},
+    {r:[12,21,21,25],t:"Espace d'accueil",d:"La vitrine, la maquette, M. Crête et son module : tout ce qu'on peut toucher sans se faire gronder.",e:"ACCUEIL",ey:20},
+    {r:[13,26,31,28],t:"Halte de Saint-Photon-les-Cigales",d:"Le train du retour attend à quai. Le chef de halte aussi, mais lui, on le paie pour ça.",e:"HALTE",ey:29},
+    {r:[28,22,41,25],t:"Champ de lavande",d:"Le champ de M. Riverain. Lui aussi récolte du soleil, mais en flacons.",e:"LAVANDE",ey:26},
+    {r:[0,27,43,28],t:"Voie ferrée",d:"La ligne d'Ampère-sur-Loire. Elle passe par Lyon et Avignon, puis elle monte dans les collines."},
+    {c:'=',t:"Chemin du site",d:"Il relie la halte, les deux champs et la zone technique. On ne peut pas se perdre. Certains y arrivent quand même."}],
+  ailleurs:["La garrigue","Du thym, des cailloux, des cigales. Rendement électrique : nul. Rendement sonore : remarquable."],
   /* ---- le plan : 44 cases sur 30. Chaque caractère est une case ; la légende est juste en dessous ---- */
   plan:[
     'TTTTTTTTTTTTTTTTTTTTTkTTTTTTTTTTTTTTTTTTTTTT',
@@ -89,8 +100,8 @@ voyCarte('solaire',{
     const superviser=()=>{if(voyEtat().faits['solaire.courbes']&&vue('cloche'))voyParler([{w:'Mlle Cloche',t:D.cloche[1][0]},{t:solEnDirect()},{w:'Mlle Cloche',t:"Tu veux revoir les cinq courbes ? L'écran est à toi."}],()=>solSimCourbes());
       else voyParler(D.cloche[0].map(t=>({w:'Mlle Cloche',t})),()=>solSimCourbes(()=>voyDonnerInfo(sid,'cloche')))};
     pose(24,9,'vEcran',{act:superviser});o.push({x:25,y:9,kind:'none',solid:1,act:superviser});
-    gens(23,9,'Mlle Cloche','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#3a4050',jacket:'#2aa198',hair:'#5a3a22',style:'queue',lash:1,glasses:1,prop:'tablet'},superviser,{glow:!vue('cloche')});
-    gens(23,3,'Mme Zénith','down',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#c8502a',hair:'#1c1c22',style:'carre',lash:1,hat:'#f7f0dc',hatType:'helmet',scarf:'#f2c12e',prop:'clipboard'},solDefi,{still:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
+    gens(23,9,'Mlle Cloche','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#3a4050',jacket:'#2aa198',hair:'#5a3a22',style:'queue',lash:1,glasses:1,prop:'tablet'},superviser,{glow:!vue('cloche'),info:'cloche'});
+    gens(23,3,'Mme Zénith','down',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#c8502a',hair:'#1c1c22',style:'carre',lash:1,hat:'#f7f0dc',hatType:'helmet',scarf:'#f2c12e',prop:'clipboard'},solDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
     gens(24,15,'Dr Nuage','down',{skin:'#f6d3b3',shirt:'#8ec9e8',pants:'#59627c',coat:'#f7f0dc',hair:'#d9d9dc',style:'boucle',glasses:1,prop:'tablet'},source('variable','Dr Nuage'),{glow:!vue('variable')});
     pose(25,15,'vCiel',{act:voyDire(null,["Une caméra braquée vers le ciel. Elle photographie les nuages toutes les minutes pour deviner où ils seront dans un quart d'heure.","C'est le seul appareil du site payé à regarder en l'air."])});
 
@@ -106,7 +117,7 @@ voyCarte('solaire',{
     // ---- le champ est : les trackers, Mlle Azimut et son pupitre
     const g=MAPS.solaire.g;g.forEach((l,y)=>l.forEach((ch,x)=>{if(ch==='x')o.push({x,y,kind:'vTracker',voy:1,haut:g[y-1][x]!=='x',bas:g[y+1][x]!=='x'})}));
     const regler=()=>solSimOrientation(()=>voyDonnerInfo(sid,'tracker'));
-    gens(35,13,'Mlle Azimut','down',{skin:'#f1c7a1',shirt:'#f2c12e',pants:'#3a4050',hair:'#b8431f',style:'queue',lash:1,hat:'#f7f0dc',hatType:'helmet',vest:1},()=>{if(vue('tracker'))voyParler(D.azimut[1].map(t=>({w:'Mlle Azimut',t})));else voyParler(D.azimut[0].map(t=>({w:'Mlle Azimut',t})),regler)},{glow:!vue('tracker')});
+    gens(35,13,'Mlle Azimut','down',{skin:'#f1c7a1',shirt:'#f2c12e',pants:'#3a4050',hair:'#b8431f',style:'queue',lash:1,hat:'#f7f0dc',hatType:'helmet',vest:1},()=>{if(vue('tracker'))voyParler(D.azimut[1].map(t=>({w:'Mlle Azimut',t})));else voyParler(D.azimut[0].map(t=>({w:'Mlle Azimut',t})),regler)},{glow:!vue('tracker'),info:'tracker'});
     pose(36,13,'vPupitre',{act:()=>voyParler([{t:"Le pupitre des trackers : deux curseurs, une case à cocher. "+solTrackersEnDirect()}],regler)});
 
     // ---- au sud : la palette, M. Riverain, les ruches, la cigale

@@ -12,6 +12,8 @@ voyDeclarer('eolien',{
   theme:'Éolien',
   ouvert:true,
   carte:'eolien',cartes:['eolien','eolienMer'],
+  /* sur la carte du pays (touche K, puis dézoomer) : où est le site, et par où passe sa ligne depuis Ampère-sur-Loire */
+  pays:[-4.4,48.0],rail:[[0.2,48.0],[-1.68,48.1],[-3.0,47.95]],cote:'bas',
   arrivee:[22,24,'up'],
   accroche:"Douze éoliennes sur la lande, quarante en mer. Les goélands ont déposé un recours. Il est à l'étude.",
   pret:"Infos clés réunies : Mme Suroît t'attend devant le poste de livraison !",
