@@ -65,3 +65,7 @@
 .voy-usages{display:grid;gap:8px;margin:10px 0}
 .voy-usage{background:#fffaf0;border:2px solid #c9bb92;border-left:6px solid var(--u,var(--ink));border-radius:6px;padding:8px 10px}
 .voy-usage small{display:block;color:var(--muted);font-size:14px;line-height:1.3;margin-top:2px}
+.voy-reglages.seuls{margin:10px 0}
+.voy-choix{display:grid;gap:2px}
+.voy-choix b{font-size:16px}
+.voy-choix .seg{margin:2px 0 0}

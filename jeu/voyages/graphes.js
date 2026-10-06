@@ -7,7 +7,7 @@
      gradX:[[valeur,'texte'],…], gradY:[valeurs],   les graduations
      unite:'MW',                            écrit en haut de l'axe vertical
      zones:[{de,a,c}],                      des bandes verticales de fond (une plage horaire, par exemple)
-     series:[{p:[[x,y],…], c:'#couleur', genre:'aire'|'ligne'|'tirets'|'escalier'|'barres', nom:'Légende', l:largeur des barres, marches:1 pour une aire en escalier}],
+     series:[{p:[[x,y],…], c:'#couleur', genre:'aire'|'ligne'|'tirets'|'escalier'|'barres', nom:'Légende', l:largeur des barres, base:[…] pour empiler des barres sur d'autres, marches:1 pour une aire en escalier}],
      reperes:[{x,c,nom}]                    des traits verticaux
    }) */
 const VOY_ENCRE={texte:'#1c2440',discret:'#5b6380',grille:'#e3d9b8',repere:'#cdbf95',fond:'#fffaf0',soleil:'#f2a33a',soleilClair:'#f9d58f',prevu:'#5b6380',conso:'#2aa198',alerte:'#c43d3d',reseau:'#4a78c9'};
@@ -26,7 +26,7 @@ function voyGraphe(cv,o){
   // séries
   (o.series||[]).forEach(s=>{
     if(!s.p||!s.p.length)return;
-    if(s.genre==='barres'){const l=s.l||((W-mG-mD)/s.p.length*.62);s.p.forEach(([x,y])=>{c.fillStyle=s.c;c.fillRect(Math.round(px(x)-l/2),Math.round(py(y)),Math.round(l),Math.round(H-mB-py(y)))});return}
+    if(s.genre==='barres'){const l=s.l||((W-mG-mD)/s.p.length*.62);s.p.forEach(([x,y],i)=>{const b=s.base?s.base[i]:0;c.fillStyle=s.c;c.fillRect(Math.round(px(x)-l/2),Math.round(py(b+y)),Math.round(l),Math.round(py(b)-py(b+y)))});return}
     const chemin=()=>{c.beginPath();s.p.forEach(([x,y],i)=>{if((s.genre==='escalier'||s.marches)&&i){c.lineTo(px(x),py(s.p[i-1][1]))}i?c.lineTo(px(x),py(y)):c.moveTo(px(x),py(y))})};
     if(s.genre==='aire'){chemin();c.lineTo(px(s.p[s.p.length-1][0]),py(0));c.lineTo(px(s.p[0][0]),py(0));c.closePath();c.fillStyle=s.fond||s.c;c.globalAlpha=s.fond?1:.35;c.fill();c.globalAlpha=1}
     chemin();c.strokeStyle=s.c;c.lineWidth=s.e||3;c.lineJoin='round';c.setLineDash(s.genre==='tirets'?[8,6]:[]);c.stroke();c.setLineDash([]);

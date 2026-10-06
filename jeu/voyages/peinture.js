@@ -98,6 +98,11 @@ const VOYP={
     if(!w(at(-1,0))){R(c,X,Y,2,16,E[3]);R(c,X+2,Y,1,16,E[2])}
     if(!w(at(1,0))){R(c,X+14,Y,2,16,E[3]);R(c,X+13,Y,1,16,E[2])}
   },
+  /* ponton de bois : des planches en travers */
+  ponton(c,d,X,Y,x,y,at){
+    R(c,X,Y,16,16,'#a07845');for(let k=0;k<16;k+=4){R(c,X+k,Y,1,16,'#6b4a2b');R(c,X+k+1,Y,1,16,'#c9a26e');R(c,X+k+2,Y+((wh(x*4+k,y,950)*12)|0),1,2,'#8a6538')}
+    if(at(0,-1)==='~'){R(c,X,Y,16,2,'#6b4a2b')}if(at(0,1)==='~'){R(c,X,Y+14,16,2,'#553920');for(let k=2;k<16;k+=8)R(c,X+k,Y+16,2,5,'#553920')}
+  },
   /* sable : plage, grève */
   sable(c,d,X,Y,x,y){
     R(c,X,Y,16,16,'#ead9a6');for(let i=0;i<8;i++)R(c,X+((wh(x*3+i,y,942)*15)|0),Y+((wh(x,y*3+i,943)*15)|0),1,1,i%3?'#d9c58c':'#f6ecc8');
@@ -126,7 +131,7 @@ const VOYP={
   },
   /* bâtiment vu de face, peint d'un bloc à partir de sa case haut-gauche (toutes les cases voisines de même caractère).
      Dans la légende : {sol:'gravier', pose:'batiment', mur:'#…', toit:'#…', toitH:9, porte:[case, largeur en pixels, couleur], plaque:'PDL',
-                        fenetres:nombre, grilles:1, bande:'#…', danger:1} */
+                        fenetres:nombre (ou liste de positions en pixels), grilles:1, bande:'#…', danger:1} */
   batiment(c,d,X,Y,x,y,at,m,o){
     const moi=at(0,0);if(at(-1,0)===moi||at(0,-1)===moi)return;
     o=o||{};let w=0,h=0;while(at(w,0)===moi)w++;while(at(0,h)===moi)h++;const W=w*16,H=h*16,mur=o.mur||'#d9d5c8',toit=o.toit||'#8f8b80',tH=o.toitH||9;
@@ -136,7 +141,7 @@ const VOYP={
     if(o.bande)R(c,X,Y+tH+2,W,3,o.bande);
     R(c,X-2,Y,W+4,tH,toit);R(c,X-2,Y,W+4,2,tint(toit,.2));R(c,X-2,Y+tH-1,W+4,1,tint(toit,-.25));
     const bas=Y+H-2;
-    if(o.fenetres){const n=o.fenetres,pas=W/(n+1);for(let k=1;k<=n;k++){const a=Math.round(X+pas*k-4);R(c,a,Y+tH+7,8,7,'#1c2440');R(c,a+1,Y+tH+8,6,5,'#8ec9e8');R(c,a+1,Y+tH+8,6,1,'#c9ecfa');R(c,a+4,Y+tH+8,1,5,'#1c2440')}}
+    if(o.fenetres){const F=Array.isArray(o.fenetres)?o.fenetres:Array.from({length:o.fenetres},(v,k)=>Math.round(W/(o.fenetres+1)*(k+1)-4));for(const f of F){const a=X+f;R(c,a,Y+tH+7,8,7,'#1c2440');R(c,a+1,Y+tH+8,6,5,'#8ec9e8');R(c,a+1,Y+tH+8,6,1,'#c9ecfa');R(c,a+4,Y+tH+8,1,5,'#1c2440')}}
     if(o.porte){const [pc,pl,col]=o.porte,px=X+pc*16+Math.round((16-pl)/2),ph=Math.min(H-tH-4,18);R(c,px,bas-ph,pl,ph,col||'#4f6f58');R(c,px,bas-ph,pl,1,tint(col||'#4f6f58',.25));if(pl>12)R(c,px+(pl>>1)-1,bas-ph,2,ph,tint(col||'#4f6f58',-.25));R(c,px+pl-4,bas-(ph>>1),1,3,'#e8e4d6');
       if(o.plaque){const l=o.plaque.length*4+3;R(c,px+((pl-l)>>1),bas-ph-8,l,7,'#f2c12e');txt35(c,o.plaque,px+((pl-l)>>1)+2,bas-ph-7,'#1c2440',1)}}
     if(o.grilles)[X+5,X+W-13].forEach(a=>{R(c,a,Y+tH+5,8,6,'#8a8f9a');for(let j=0;j<3;j++)R(c,a+1,Y+tH+6+j*2,6,1,'#59627c')});

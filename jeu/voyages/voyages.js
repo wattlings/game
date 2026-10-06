@@ -52,6 +52,13 @@ function voyLumiere(c,ox,oy){
   if(SKY.dark>.35){const x=P.px-ox+8,y=P.py-oy+6,g=c.createRadialGradient(x,y,4,x,y,46);g.addColorStop(0,`rgba(255,226,170,${.22*SKY.dark})`);g.addColorStop(1,'rgba(255,226,170,0)');c.fillStyle=g;c.fillRect(x-46,y-46,92,92)}
 }
 
+/* ---- houle : quelques reflets qui passent sur les cases d'eau (~) visibles à l'écran ---- */
+function voyHoule(c,ox,oy,t){
+  const g=MAPS[S.map].g,x0=Math.max(0,ox>>4),y0=Math.max(0,oy>>4),x1=Math.min(g[0].length-1,(ox+cv.width)>>4),y1=Math.min(g.length-1,(oy+cv.height)>>4),k=t>>4;
+  c.fillStyle='rgba(255,255,255,.5)';
+  for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){if(g[y][x]!=='~')continue;const h=wh(x,y,k&63);if(h>.9)c.fillRect(x*16-ox+((h*97)&7)+2,y*16-oy+((h*53)&7)+3,4,1)}
+}
+
 /* ---- panneaux : les voyages n'ont pas de page de cours, le lien « Revoir le cours » est retiré ---- */
 function voyPanneau(titre){const ov=openPanel(titre),l=ov.querySelector('.course-link');if(l)l.remove();return ov}
 /* une suite d'étapes dans un panneau (comme runSteps). Avec plusTard:true, un bouton permet de refermer avant la fin : rien n'est validé. */
@@ -95,8 +102,9 @@ const voyDire=(qui,lignes)=>()=>say(lignes.map(t=>qui?{w:qui,t}:{t}));
 function voyCibles(sid,lieux,defi,passage){
   if(voyTampon(sid))return [];
   const M=voyClesManquantes(sid),ici=M.map(f=>lieux[f.id]).filter(Boolean);
-  if(passage&&(ici.length<M.length||(!M.length&&!defi)))ici.push(passage);
-  return ici.length?ici:defi?[defi]:[];
+  if(ici.length)return ici;                       // d'abord ce qui reste à trouver ici
+  if(M.length)return passage?[passage]:[];        // puis ce qui reste à trouver ailleurs
+  return defi?[defi]:passage?[passage]:[];        // enfin le responsable du site
 }
 
 /* ---- tampon : le défi final d'un site est gagné ---- */

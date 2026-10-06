@@ -1,7 +1,8 @@
 /* Wattlings · jeu/voyages/solaire/dessins.js
    Centrale solaire de Saint-Photon : les dessins.
    - ce qui est peint sur la carte, par-dessus le sol (SOLP : rangées de panneaux, poste de livraison, pied des trackers) ;
-   - les objets posés dessus (VOY.dessins : onduleurs, transformateur, totem, vitrine…).
+   - les objets posés dessus (VOY.dessins : onduleurs, totem, vitrine…). Ceux qui servent à plusieurs sites (transformateur, pupitre,
+     station météo, panneau « danger ») sont dans voyages/dessins.js.
    Un dessin d'objet reçoit (c, o, X, Y, t) : le coin haut-gauche de sa case en pixels, et le compteur d'images t. */
 
 /* ---- les bleus d'un module, du reflet au plus sombre ---- */
@@ -47,7 +48,7 @@ const SOLP={
 /* dessinés directement à l'écran, sans le contour automatique : les trackers (ils pivotent) */
 OFX_SKIP.vTracker=1;
 /* redessinés à chaque image : ce qui clignote ou tourne */
-OFX_ANIM.vEcran=1;OFX_ANIM.vMeteo=1;OFX_ANIM.vOnduleur=1;
+OFX_ANIM.vEcran=1;OFX_ANIM.vOnduleur=1;
 
 /* de quel côté penchent les trackers : -1 plein est (matin), 0 à plat (midi, ou la nuit), +1 plein ouest (soir) */
 const solPenche=()=>SKY.el<=1?0:Math.max(-1,Math.min(1,(SKY.az-180)/70));
@@ -70,14 +71,6 @@ Object.assign(VOY.dessins,{
     for(let j=0;j<4;j++)R(c,X+3,Y+2+j*2,10,1,'#a7b0bf');                                             // les ouïes de ventilation
     R(c,X+11,Y+11,2,2,SKY.pv>.02?((t+o.x*9>>4)%4?'#3be07a':'#1f8a48'):'#f2a33a');R(c,X+3,Y+10,5,4,'#f2c12e');R(c,X+5,Y+11,1,2,'#1c2440');
   },
-  /* le transformateur : la cuve, ses ailettes, trois isolateurs. Dessiné sur deux cases de large */
-  vTransfo(c,o,X,Y){
-    R(c,X-1,Y+13,35,3,'rgba(20,30,30,.3)');R(c,X,Y+11,32,4,'#b9b5a9');R(c,X,Y+11,32,1,'#d9d5c8');                // la dalle
-    R(c,X+3,Y-6,26,18,'#6d7a70');R(c,X+3,Y-6,26,1,'#93a096');R(c,X+28,Y-6,1,18,'#4c574f');
-    for(let k=0;k<6;k++){R(c,X+5+k*4,Y-3,2,13,'#566259');R(c,X+5+k*4,Y-3,1,13,'#7f8c82')}                         // les ailettes de refroidissement
-    [8,15,22].forEach(a=>{R(c,X+a,Y-14,3,8,'#8a5a3a');for(let j=0;j<3;j++)R(c,X+a-1,Y-13+j*3,5,1,'#b98d57');R(c,X+a+1,Y-16,1,2,'#c4c9cf')});
-    R(c,X+12,Y+2,9,7,'#f2c12e');R(c,X+12,Y+2,9,1,'#fff3a8');R(c,X+16,Y+4,1,3,'#1c2440');R(c,X+16,Y+8,1,1,'#1c2440');
-  },
   /* l'écran de supervision, sous son auvent : la cloche du jour, et un point qui avance avec l'heure */
   vEcran(c,o,X,Y,t){
     R(c,X-1,Y+14,35,2,'rgba(20,30,30,.28)');R(c,X+1,Y-2,2,17,'#59627c');R(c,X+29,Y-2,2,17,'#59627c');
@@ -87,11 +80,6 @@ Object.assign(VOY.dessins,{
     const k=Math.max(0,Math.min(23,Math.round((SKY.clock-6.3)/14.6*23))),h=Math.round(Math.pow(Math.sin(Math.PI*k/23),1.3)*11);
     if(SKY.el>0&&(t>>3)%2)R(c,X+3+k,Y+3-h,3,3,'#fff3a8');
     R(c,X+5,Y+8,22,5,'#8a93a3');R(c,X+5,Y+8,22,1,'#c4c9cf');for(let j=0;j<6;j++)R(c,X+7+j*3,Y+10,2,1,'#3a4050');   // le clavier
-  },
-  /* le pupitre des trackers : une manette, un petit écran */
-  vPupitre(c,o,X,Y){
-    R(c,X+1,Y+14,15,2,'rgba(20,30,30,.28)');R(c,X+6,Y+6,4,9,'#59627c');R(c,X+1,Y-2,14,9,'#d9dde3');R(c,X+1,Y-2,14,1,'#f4f6f8');R(c,X+1,Y+6,14,1,'#8a93a3');
-    R(c,X+3,Y,6,4,'#1c2440');R(c,X+4,Y+1,4,1,'#f2a33a');R(c,X+5,Y+2,2,1,'#f2a33a');R(c,X+11,Y+1,2,4,'#3a4050');R(c,X+10,Y-1,4,3,'#c43d3d');
   },
   /* le grand panneau du site, à la sortie du quai */
   vTotem(c,o,X,Y){
@@ -132,13 +120,6 @@ Object.assign(VOY.dessins,{
     R(c,X+1,Y-13,5,5,'#f2a33a');R(c,X+2,Y-14,3,7,'#f2a33a');R(c,X,Y-12,7,3,'#f2a33a');
     [[8,3,'#f2a33a'],[11,6,'#4a78c9'],[14,10,'#59627c']].forEach(([a,h,col])=>R(c,X+a,Y-4-h,2,h,col));R(c,X+7,Y-4,10,1,'#1c2440');R(c,X+1,Y-2,14,1,'#5b6380');
   },
-  /* la station météo : un mât, la coupole qui mesure le rayonnement, l'anémomètre qui tourne */
-  vMeteo(c,o,X,Y,t){
-    R(c,X+4,Y+14,9,2,'rgba(20,30,30,.28)');R(c,X+7,Y-14,2,29,'#8a8f9a');R(c,X+7,Y-14,1,29,'#c4c9cf');
-    const a=((SKR.turb*7)|0)%3;R(c,X+2+a,Y-16,4,2,'#c43d3d');R(c,X+10-a,Y-16,4,2,'#c43d3d');R(c,X+7,Y-17,2,3,'#3a4050');
-    R(c,X+9,Y-8,6,1,'#8a8f9a');R(c,X+12,Y-11,4,3,'rgba(190,225,245,.8)');R(c,X+13,Y-12,2,1,'#eaf6fd');R(c,X+12,Y-8,4,1,'#3a4050');     // le pyranomètre
-    R(c,X+1,Y-6,6,4,'#1f3d7c');R(c,X+1,Y-6,6,1,'#8fb6ee');R(c,X+4,Y+2,8,7,'#e8eef5');R(c,X+4,Y+2,8,1,'#fff');R(c,X+5,Y+4,6,2,'#1c2440');R(c,X+6,Y+4,3,1,(t>>4)%2?'#3be07a':'#f2a33a');
-  },
   /* la palette de vieux modules */
   vPalette(c,o,X,Y){
     R(c,X,Y+14,17,2,'rgba(20,30,30,.28)');R(c,X+1,Y+10,14,5,'#a07845');R(c,X+1,Y+12,14,1,'#6b4a2b');R(c,X+3,Y+13,2,2,'#6b4a2b');R(c,X+11,Y+13,2,2,'#6b4a2b');
@@ -150,8 +131,6 @@ Object.assign(VOY.dessins,{
     R(c,X+3,Y+14,11,2,'rgba(20,30,30,.28)');c.strokeStyle='#59627c';c.lineWidth=1;[[3,15],[8,15],[13,15]].forEach(([a,b])=>{c.beginPath();c.moveTo(X+8.5,Y+3);c.lineTo(X+a+.5,Y+b);c.stroke()});
     R(c,X+5,Y-1,7,5,'#e8eef5');R(c,X+5,Y-1,7,1,'#fff');R(c,X+6,Y-5,5,4,'rgba(150,200,235,.9)');R(c,X+7,Y-6,3,1,'#eaf6fd');R(c,X+7,Y-4,1,1,'#fff');
   },
-  /* le panneau « danger » accroché au grillage */
-  vDanger(c,o,X,Y){R(c,X+3,Y+3,10,9,'#f2c12e');R(c,X+3,Y+3,10,1,'#fff3a8');R(c,X+3,Y+11,10,1,'#c99a1c');R(c,X+7,Y+5,2,3,'#1c2440');R(c,X+7,Y+9,2,1,'#1c2440')},
   /* un lapin, à l'ombre */
   vLapin(c,o,X,Y){
     R(c,X+4,Y+14,9,1,'rgba(20,30,30,.24)');R(c,X+4,Y+9,8,5,'#b8a48a');R(c,X+10,Y+7,4,4,'#b8a48a');R(c,X+11,Y+3,1,4,'#b8a48a');R(c,X+13,Y+3,1,4,'#b8a48a');R(c,X+11,Y+4,1,2,'#e9b8a8');
