@@ -72,3 +72,4 @@
 .voy-chiffres .alerte{border-color:var(--bad);background:#f8e1dd}
 .btn.voy-rouge{background:var(--bad);color:#fff}
 .btn.voy-rouge:disabled{opacity:.5;cursor:default}
+.voy-reglages:has(.voy-choix){grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
