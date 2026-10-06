@@ -17,6 +17,19 @@ export const CLE_SON = "wattlings-son";
 /** Petite image de l'avatar, écrite par le jeu et affichée par le cours sur les boutons « Jouer ». */
 export const CLE_AVATAR = "wattlings-avatar";
 
+// ---- compte joueur (commun/compte.js) : ces deux clés n'existent que quand quelqu'un est connecté
+export const CLE_COMPTE = "wattlings-compte";
+export const CLE_COMPTE_SYNCHRO = "wattlings-compte-synchro";
+/** Ce qui suit le joueur d'un appareil à l'autre quand il est connecté à son compte. */
+export const CLES_SYNCHRONISEES = [
+  CLE_ETAT_COURS,
+  ...Array.from({ length: NB_EMPLACEMENTS }, (_, i) => cleEmplacement(i + 1)),
+  CLE_EMPLACEMENT_ACTIF,
+  CLE_PREFERENCES_JEU,
+  CLE_SON,
+  CLE_AVATAR,
+];
+
 // ---- suivi d'audience
 export const CLES_SUIVI = {
   visiteur: "wattlings-vid",

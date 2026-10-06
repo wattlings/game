@@ -143,3 +143,9 @@
   background: var(--energie);
   color: var(--on-energie);
 }
+.btn-compte span {
+  max-width: 14ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

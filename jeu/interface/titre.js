@@ -1,6 +1,9 @@
 /* Wattlings · jeu/interface/titre.js
    L'écran titre et les 3 emplacements de sauvegarde. */
 
+/* une connexion ou une déconnexion sans rechargement : l'écran titre se redessine */
+if(COMPTE.disponible)COMPTE.surChangement(()=>{const t=ROOT.querySelector('.title-screen');if(t){t.remove();titleScreen()}});
+
 function titleScreen(){
   busy=true;EN_ON=false;
   const ov=document.createElement('div');ov.className='title-screen';
@@ -14,9 +17,11 @@ function titleScreen(){
   ov.innerHTML=`<div class="title-box"><button type="button" class="title-back" id="tBack">← Retour au cours</button><div class="logo">Wattlings<small>Energy management par la donnée</small></div>
   <p>Tu es gestionnaire de site et tu ne connais rien à l'énergie. Explore la ville, réunis les informations, puis remporte les 8 arènes et leurs badges… pour devenir gestionnaire de patrimoine.</p>
   <div class="slots">${[1,2,3].map(card).join('')}</div>
-  <p style="font-size:13px">Sauvegarde automatique dans ce navigateur, 3 emplacements. Le son est coupé par défaut : active-le dans le menu → Options.</p></div>`;
+  <p style="font-size:13px">${COMPTE.disponible&&COMPTE.identifiant()?`Sauvegarde automatique sur ton compte <b>${esc(COMPTE.identifiant())}</b>, 3 emplacements.`:'Sauvegarde automatique dans ce navigateur, 3 emplacements.'} Le son est coupé par défaut : active-le dans le menu → Options.</p>
+  ${COMPTE.disponible?`<button type="button" class="title-back title-compte" id="tCompte">${COMPTE.identifiant()?'Mon compte':'Se connecter pour retrouver tes parties sur tous tes appareils'}</button>`:''}</div>`;
   $('layer').appendChild(ov);updateMusic();
-  ov.querySelector('#tBack').onclick=()=>$('qkBack').click();if(PIP.isPop)ov.querySelector('#tBack').hidden=true;
+  ov.querySelector('#tBack').onclick=()=>$('qkBack').click();
+  const tc=ov.querySelector('#tCompte');if(tc){tc.onclick=()=>COMPTE.ouvrir(ROOT);if(PIP.isPop)tc.hidden=true}if(PIP.isPop)ov.querySelector('#tBack').hidden=true;
   ov.querySelectorAll('canvas[data-av]').forEach(c=>{const v=readSlot(+c.dataset.av);drawChar(c.getContext('2d'),2,3,'down',0,avPal(v.rank||0,v.av||AVDEF('h')))});
   const leave=()=>{ov.remove();busy=false};
   const pick=()=>{const o2=openPanel('Choisir une étape'),b=o2.querySelector('.pbody'),inner=document.createElement('div');b.appendChild(inner);

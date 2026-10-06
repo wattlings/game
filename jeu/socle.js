@@ -5,6 +5,9 @@
  * leur fournit ce qui vient de commun/ sous les noms qu'ils utilisent déjà. C'est le seul endroit où le jeu
  * touche au socle : pour savoir d'où vient un nom, chercher ici.
  */
+// en premier : le compte joueur note ce qui a changé dans le navigateur avant que le jeu ne lise ses sauvegardes
+import { comptesDisponibles, compteActuel, reglerCompte, surChangementDeCompte } from "../commun/compte.js";
+import { ouvrirFenetreCompte } from "../commun/fenetre-compte.js";
 import { CHAPITRES_JEU, ETAPES_DE_BASE, chapitresDeLEtape } from "../commun/donnees/etapes.js";
 import { ECOLE } from "../commun/donnees/ecole.js";
 import * as patrimoine from "../commun/donnees/patrimoine.js";
@@ -26,6 +29,19 @@ import { reglerSuivi, suiviActif, suivre } from "../commun/suivi.js";
 reglerSuivi({ page: () => "jeu" });
 const TRK = { track: suivre, active: suiviActif };
 
+// ---- compte joueur : si une partie a avancé sur un autre appareil, la page se recharge pour la reprendre,
+//      sauf en mode essai (moteur/essai.js), qu'un rechargement ferait perdre
+reglerCompte({
+  cles: [...Array.from({ length: NB_EMPLACEMENTS }, (_, i) => cleEmplacement(i + 1)), CLE_EMPLACEMENT_ACTIF, CLE_PREFERENCES_JEU, CLE_SON],
+  peutRecharger: () => !/^#essai-/.test(location.hash) && !(typeof ESSAI !== "undefined" && ESSAI),
+});
+const COMPTE = {
+  disponible: comptesDisponibles(),
+  identifiant: compteActuel,
+  surChangement: surChangementDeCompte,
+  ouvrir: (parent) => ouvrirFenetreCompte({ parent }),
+};
+
 // ---- étapes du cycle et chapitres du jeu
 const STEP_T = ["", ...ETAPES_DE_BASE.map((e) => e.titre)]; // STEP_T[3] = "Fiabiliser"
 const STEP_NAMES = { 0: "Le cycle", P: "Patrimoine" };
@@ -40,6 +56,7 @@ const CH2HASH = CHAPITRES_JEU.map((c) => c.page); // page du cours de chaque cha
 
 Object.assign(globalThis, {
   TRK,
+  COMPTE,
   LIENS,
   ECOLE,
   STEP_T,

@@ -142,6 +142,8 @@ Ce qui n'est rangé dans aucun chapitre reste visible dans « Mécanique et inte
 |---|---|
 | Brancher la mesure d'audience (Supabase) | `commun/config.js` : l'adresse du projet et sa clé « publishable » (publique par nature, jamais une autre clé). `stats.html` porte les mêmes, en tête de fichier |
 | Voir les clés de sauvegarde | `commun/stockage.js` (ne pas les renommer) |
+| Changer ce qui suit le joueur d'un appareil à l'autre | `commun/stockage.js` (`CLES_SYNCHRONISEES`) |
+| Changer la fenêtre « Mon compte » | `commun/fenetre-compte.js` (textes et styles), `commun/compte.js` (messages d'erreur, synchronisation) |
 
 ## Les règles qui tiennent l'ensemble
 
@@ -160,6 +162,8 @@ commun/
   styles/                 jetons visuels du cours, polices
   stockage.js             clés de sauvegarde
   suivi.js, config.js     mesure d'audience
+  compte.js               comptes joueurs : synchronisation avec Supabase
+  fenetre-compte.js       la fenêtre « Mon compte », commune au cours et au jeu
   liens.js                adresses entre les deux pages
 cours/
   principal.js            point d'entrée : barre du haut, navigation, routeur
@@ -258,6 +262,27 @@ Sans rien installer : dans le dépôt GitHub, onglet **Actions**, lancer « Fich
 Tout est enregistré dans le navigateur du visiteur, sous des clés inchangées depuis la version d'origine : la progression du cours (`ems-pedagogie-v1`) et les trois emplacements du jeu (`wattlings-slot-1` à `3`).
 
 Une sauvegarde est attachée à l'adresse du site. Si le site change d'adresse, les visiteurs repartent de zéro sur la nouvelle.
+
+## Comptes joueurs
+
+Un visiteur peut se créer un compte (un identifiant et un mot de passe, sans adresse e-mail) pour retrouver sa progression du cours et ses parties du jeu sur n'importe quel appareil ou navigateur. Le bouton « Se connecter » est en haut du cours et sous les emplacements de l'écran titre du jeu. Sans compte, rien ne change : tout reste dans le navigateur.
+
+**Comment ça marche.** Le cours et le jeu enregistrent toujours dans le navigateur. Quand quelqu'un est connecté, `commun/compte.js` recopie les clés de `CLES_SYNCHRONISEES` (cours, trois emplacements, réglages du jeu, avatar) vers le projet Supabase de `commun/config.js` : dès qu'il y a du nouveau (vérifié toutes les 20 secondes) et quand on quitte la page. Dans l'autre sens, il ramène ce qui a été fait ailleurs à l'ouverture de la page, quand on y revient et chaque minute, et recharge la page si ce qu'elle affiche a changé. Pour chaque clé, la version la plus récente l'emporte. Le mode essai du pilotage n'est jamais rechargé.
+
+- **À la connexion**, ce que le navigateur contenait déjà rejoint le compte : une partie du jeu garde la version la plus récente des deux ; pour le cours et les réglages, le compte l'emporte s'il a déjà quelque chose.
+- **À la déconnexion**, les derniers changements partent, puis tout ce qui suit le compte est retiré du navigateur, pour que la personne suivante sur cet appareil ne le retrouve pas. Sans connexion à Internet, la fenêtre prévient avant de rien perdre.
+- **Sécurité.** Les mots de passe sont gardés chiffrés (bcrypt) ; après 5 erreurs de suite, le compte refuse toute connexion pendant 5 minutes. Le site n'accède jamais aux tables : seules quatre fonctions `wattlings_*` sont ouvertes à la clé publique. Ces comptes sont indépendants de « Authentication » de Supabase (celui de `stats.html` et du pilotage), dont les inscriptions restent fermées.
+
+**Installer (une fois).** Dans Supabase : **SQL Editor → New query**, coller tout `outils/supabase/comptes-joueurs.sql`, puis **Run**. Le script peut être relancé sans risque. Tant qu'il n'est pas installé, la fenêtre répond « Les comptes ne sont pas encore installés sur ce site ».
+
+**Mot de passe oublié.** Il n'y a pas d'adresse e-mail, donc pas d'envoi possible : dans **SQL Editor**, remplacer l'identifiant et le nouveau mot de passe, puis lancer :
+
+```sql
+update public.joueurs set mot_de_passe = extensions.crypt('nouveau-mot-de-passe', extensions.gen_salt('bf', 10)), echecs = 0, bloque_jusqua = null
+ where identifiant = 'identifiant';
+```
+
+Les comptes sont dans **Table Editor → joueurs** (la sauvegarde de chacun est dans la colonne `donnees`). Supprimer une ligne supprime le compte et sa sauvegarde.
 
 ## Ce qui a changé par rapport au fichier unique d'origine (version 18)
 

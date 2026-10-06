@@ -1,6 +1,10 @@
 /**
  * Point d'entrée du cours : barre du haut, navigation, progression et routeur (une adresse #… = une page).
  */
+// en premier : le compte joueur note ce qui a changé dans le navigateur avant que le cours ne le lise
+import { comptesDisponibles, compteActuel, reglerCompte, surChangementDeCompte } from "../commun/compte.js";
+import { ouvrirFenetreCompte } from "../commun/fenetre-compte.js";
+import { CLE_AVATAR, CLE_ETAT_COURS } from "../commun/stockage.js";
 import { icone } from "./blocs/icones.js";
 import { echapper, un } from "./blocs/outils.js";
 import { adresseJeu } from "../commun/liens.js";
@@ -42,6 +46,7 @@ racine.innerHTML = `
         <span id="progress-txt"></span>
       </div>
       <button class="icon-btn" id="btn-theme" type="button"></button>
+      <button class="icon-btn btn-compte" id="btn-compte" type="button" hidden></button>
     </div>
     <nav class="steps-strip" aria-label="Les 8 étapes" id="strip"></nav>
   </header>
@@ -152,6 +157,19 @@ un("#btn-theme").addEventListener("click", () => {
 matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () =>
   appliquerTheme(document.documentElement.dataset.theme),
 );
+
+// compte joueur : retrouver sa progression sur tous ses appareils (commun/compte.js)
+reglerCompte({ cles: [CLE_ETAT_COURS, CLE_AVATAR] });
+function majBoutonCompte() {
+  const b = un("#btn-compte");
+  const id = compteActuel();
+  b.hidden = !comptesDisponibles();
+  b.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><span>${echapper(id || "Se connecter")}</span>`;
+  b.title = id ? "Mon compte : " + id : "Se connecter pour retrouver sa progression sur tous ses appareils";
+}
+majBoutonCompte();
+surChangementDeCompte(majBoutonCompte);
+un("#btn-compte").addEventListener("click", () => ouvrirFenetreCompte());
 
 un("#fab").addEventListener("click", () => ouvrirGlossaire());
 
