@@ -9,6 +9,7 @@ Le site tient en **deux pages** qui partagent un socle commun :
 | Le cours | `index.html` | `cours/` |
 | Le jeu | `jeu/index.html` | `jeu/` |
 | Ce qu'ils partagent | | `commun/` |
+| Le pilotage du jeu (page de travail, liée nulle part) | `pilotage/index.html` | `pilotage/` |
 
 Il n'y a **aucune compilation** : les fichiers du dépôt sont ceux que le navigateur charge. Modifier un fichier et l'enregistrer dans le dépôt, c'est publier.
 
@@ -111,6 +112,29 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Le fonctionnement des ateliers à curseurs et du défi final, pour tous les sites | `jeu/voyages/ateliers.js` |
 | Les couleurs et la mise en page des écrans de voyage | `jeu/interface/styles/voyages.css` |
 
+### Le pilotage du jeu
+
+`pilotage/` est une page de travail : tout le parcours du jeu sur une seule page, pour le lire, le tester, le corriger et voir ce qu'en font les joueurs. Son adresse est celle du site suivie de `pilotage/`. Aucune autre page n'y mène et elle demande aux moteurs de recherche de l'ignorer, mais **ce n'est pas un secret** : quiconque connaît l'adresse peut la lire, et elle montre toutes les réponses.
+
+| Je veux… | Je fais… |
+|---|---|
+| Voir le parcours | Onglet « Le parcours » : une ligne par chapitre (puis par site de voyage, par quartier, par secret), une pastille par moment du jeu. Un clic sur une pastille montre tout ce qui s'y passe : répliques, questions avec bonnes et mauvaises réponses, retours, conditions. Le champ de recherche fouille tous les textes du jeu. |
+| Tester un endroit précis | Bouton « Tester » d'une ligne ou « Tester ici » d'une pastille : le jeu s'ouvre à cet endroit dans un nouvel onglet, en **mode essai**. Rien n'est enregistré : ni sauvegarde, ni suivi. Recharger l'onglet rend le jeu normal. |
+| Corriger un texte | Allumer « Modifier les textes », cliquer un texte, le réécrire. Puis onglet « Mes modifications » : télécharger l'archive, la décompresser, et glisser son dossier `jeu` dans GitHub (*Add file › Upload files*). Chaque fichier rendu est le fichier en ligne où seuls ces textes ont changé. |
+| Voir ce que font les joueurs | Onglet « Les joueurs » : se connecter avec un compte créé dans Supabase (la marche à suivre est dans l'onglet, sous « Première fois »). Les chiffres se posent ensuite sur les frises. Le bouton « Voir avec des données d'exemple » montre la page avec des chiffres inventés, signalés comme tels. |
+
+La page ne recopie rien : elle lit les fichiers du jeu tels qu'ils sont en ligne (ceux que liste `jeu/index.html`), sans les exécuter. Un texte ajouté au jeu y apparaît donc tout seul.
+
+| Je veux changer… | J'ouvre… |
+|---|---|
+| Ranger une nouvelle scène du jeu dans son chapitre, renommer une pastille | `pilotage/parcours.js` (`SCENES` : le nom de la fonction du jeu, puis son titre ; `NOMS` pour le reste) |
+| Faire reconnaître une nouvelle façon d'afficher du texte dans le jeu | `pilotage/lecture.js` (`APPELS`) |
+| L'allure des pastilles, d'un bloc du détail | `pilotage/rendu.js`, `pilotage/styles.css` |
+| Les chiffres de l'onglet « Les joueurs » | `pilotage/suivi.js` (lecture et comptage), `pilotage/vue-joueurs.js` (affichage) |
+| Les endroits où « Tester » sait ouvrir le jeu | `jeu/moteur/essai.js` |
+
+Ce qui n'est rangé dans aucun chapitre reste visible dans « Mécanique et interface » : rien ne disparaît. Les mots qui servent aussi de repère au jeu (un nom de badge, d'étape, de jour) s'affichent en gris et ne se modifient pas depuis la page : les changer à un seul endroit casserait les parties en cours ; ils se changent dans les fichiers, partout à la fois. Les modifications en attente vivent dans le navigateur (clé `pilotage-modifs-v1`), pas sur le site.
+
 ### Les réglages
 
 | Je veux… | J'ouvre… |
@@ -153,10 +177,12 @@ jeu/
   rendu/                  dessins pixel, palettes
   epreuves/               les mini-jeux de chaque étape, les arènes
   simulation/             kWh économisés, actions, événements
-  moteur/                 boucle, déplacements, dialogues, sauvegarde, entrées
+  moteur/                 boucle, déplacements, dialogues, sauvegarde, entrées, mode essai
   interface/              menus, carte, tableau de bord, avatar, plein écran, vignette, styles
   voyages/                la gare, le passeport, puis un dossier par destination (solaire/…)
   audio/                  moteur sonore, partitions
+pilotage/                 page de travail : le parcours du jeu, les essais, la modification des textes, le suivi des joueurs
+  tiers/                  acorn (licence MIT), qui sert à lire les fichiers du jeu sans les exécuter
 outils/                   facultatif : serveur local, vérification, fichier unique
 ```
 
@@ -220,9 +246,9 @@ npx playwright install chromium     # une fois, pour la vérification
 | Commande | Effet |
 |---|---|
 | `node outils/serveur.mjs` | Affiche le site sur `http://localhost:8080`. Un double-clic sur `index.html` ne suffit pas : hors d'un serveur, le navigateur refuse de charger les fichiers un par un. |
-| `node outils/verifier.mjs` | Ouvre chaque page du cours, manipule chaque démo, joue chaque chapitre du jeu, prend le train vers chaque destination, fait l'aller-retour cours ↔ jeu, et signale toute erreur. À lancer avant de publier une modification. |
+| `node outils/verifier.mjs` | Ouvre chaque page du cours, manipule chaque démo, joue chaque chapitre du jeu, prend le train vers chaque destination, fait l'aller-retour cours ↔ jeu, ouvre la page de pilotage (chaque pastille, une modification, des essais), et signale toute erreur. À lancer avant de publier une modification. |
 | `node outils/sources.mjs` | Contrôle les sources (voir « Les sources »). Avec `relecture` : le tableau de relecture ; avec `liens` : le test des liens. |
-| `node outils/fichier-unique.mjs` | Assemble tout le site dans un seul fichier, `outils/sortie/wattlings.html`, à envoyer par mail ou à ouvrir hors ligne. |
+| `node outils/fichier-unique.mjs` | Assemble tout le site dans un seul fichier, `outils/sortie/wattlings.html`, à envoyer par mail ou à ouvrir hors ligne. La page de pilotage n'en fait pas partie : elle a besoin des fichiers du jeu, un par un. |
 
 Sans rien installer : dans le dépôt GitHub, onglet **Actions**, lancer « Fichier unique » ou « Vérifier le site » (bouton *Run workflow*). Le fichier unique se télécharge ensuite depuis la page du lancement, rubrique *Artifacts*.
 

@@ -11,7 +11,9 @@ let SLOT=1;try{SLOT=Math.min(SLOT_N,Math.max(1,+localStorage.getItem(ACTIVE_KEY)
 function readSlot(n){try{const r=localStorage.getItem(SLOT_KEY(n));return r?JSON.parse(r):null}catch(e){return null}}
 function setSlot(n){SLOT=n;try{localStorage.setItem(ACTIVE_KEY,String(n))}catch(e){}}
 let saveOK=true;
-function save(){S.savedAt=Date.now();try{localStorage.setItem(SLOT_KEY(SLOT),JSON.stringify(S));localStorage.setItem(ACTIVE_KEY,String(SLOT));saveOK=true}catch(e){saveOK=false}if(typeof savedFlash==='function')savedFlash()}
+/* en mode essai (moteur/essai.js), rien n'est enregistré */
+let ESSAI=false;
+function save(){if(ESSAI)return;S.savedAt=Date.now();try{localStorage.setItem(SLOT_KEY(SLOT),JSON.stringify(S));localStorage.setItem(ACTIVE_KEY,String(SLOT));saveOK=true}catch(e){saveOK=false}if(typeof savedFlash==='function')savedFlash()}
 function loadSave(){return readSlot(SLOT)}
 try{if(!readSlot(1)){const old=localStorage.getItem(SAVE_KEY);if(old)localStorage.setItem(SLOT_KEY(1),old)}}catch(e){}
 const fmtDate=ts=>ts?new Date(ts).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';

@@ -5,7 +5,8 @@
    Le jeu est une page à part (jeu/) ; le cours est la page voisine.
    - « ← Cours » quitte le jeu : la partie est sauvegardée, on revient au cours dans le même onglet.
    - « Revoir le cours ↗ » ouvre le cours dans un autre onglet : la partie reste ouverte ici, telle quelle.
-   Adresses comprises par la page du jeu : jeu/#chapitre-3 (jouer ce chapitre), jeu/#reprendre (continuer la partie). */
+   Adresses comprises par la page du jeu : jeu/#chapitre-3 (jouer ce chapitre), jeu/#reprendre (continuer la partie),
+   jeu/#essai-… (mode essai de la page de pilotage, voir moteur/essai.js). */
 function courseHash(){return CH2HASH[S.ch]||'accueil'}
 function courseLabel(){const h=courseHash(),m=h.match(/^etape-(\d)/);return m?`Étape ${m[1]} · ${STEP_T[+m[1]]}`:h==='quiz-final'?'Quiz final':h==='patrimoine'?'Piloter un patrimoine':'Le cycle'}
 /* la partie est écrite dès que la fenêtre passe à l'arrière-plan ou se ferme : au retour, elle reprend au même endroit */
@@ -57,6 +58,7 @@ function qkRoute(h){
   }
   const m=h.match(/^chapitre-(\d{1,2})$/);
   if(m)openGame(Math.min(11,+m[1]));
+  else if(/^essai-/.test(h))essaiLancer(h.slice(6));   // page de pilotage : ouvrir le jeu à un endroit précis, sans rien enregistrer (moteur/essai.js)
   else if(h==='reprendre'||h==='vignette'){const sv=loadSave();openGame(sv&&sv.site?sv.ch:undefined)}
   else openGame();
 }

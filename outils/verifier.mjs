@@ -1,7 +1,7 @@
 // Vérifie que le site fonctionne après une modification : à lancer avant de publier.
 //
 //   node outils/verifier.mjs            → tout (environ 3 minutes)
-//   node outils/verifier.mjs cours      → seulement le cours   (ou : jeu, voyages, liens, sources)
+//   node outils/verifier.mjs cours      → seulement le cours   (ou : jeu, voyages, liens, sources, pilotage)
 //
 // Ce que fait la vérification :
 //   cours : ouvre chaque page, manipule chaque démo, et relève toute erreur ;
@@ -10,6 +10,7 @@
 //             examine tout, manipule les simulations, fait tamponner le passeport et rentre ;
 //   liens : fait l'aller-retour cours → jeu → cours et contrôle sauvegarde, reprise et anciennes adresses ;
 //   sources : contrôle que chaque source citée existe, et que chaque fait relevé a la sienne (voir outils/sources.mjs).
+//   pilotage : ouvre la page de pilotage, chaque pastille, modifie un texte, et lance des essais dans le jeu.
 import {
   ROUTES_COURS, TOUCHES, agirCours, agirJeu, avancer, contenuCours, demarrer, ecouterErreurs, hasardEtHorlogeFixes, hasardFixe, nbCiblesCours, tirage, validerAvatar,
 } from "./essais.mjs";
@@ -303,6 +304,94 @@ if (quoi === "tout" || quoi === "sources") {
   verif("sources · jeu : l'onglet Sources du menu liste des références", jeu.onglet.blocs >= 1 && jeu.onglet.liens.length >= 10 && jeu.onglet.liens.every((u) => /^https:/.test(u)), JSON.stringify({ blocs: jeu.onglet.blocs, liens: jeu.onglet.liens.length }));
   verif("sources · jeu : une fiche savoir référencée montre son volet Sources", jeu.fiche >= 1, String(jeu.fiche));
   verif("sources : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+  await contexte.close();
+}
+
+// ---------------------------------------------------------------- page de pilotage
+if (quoi === "tout" || quoi === "pilotage") {
+  console.log("Pilotage : la page lit le jeu, montre chaque pastille, modifie un texte, lance un essai");
+  const contexte = await navigateur.newContext({ viewport: { width: 1300, height: 900 } });
+  const page = await contexte.newPage();
+  const erreurs = ecouterErreurs(page);
+  await page.goto(adresse + "pilotage/");
+  const pret = await page.waitForFunction(() => window.PILOTAGE, null, { timeout: 20000 }).then(() => true, () => false);
+  verif("pilotage : la page démarre", pret);
+  if (pret) {
+    const bilan = await page.evaluate(() => {
+      const { P, edition, ouvrir, noeuds } = PILOTAGE, sec = (id) => P.sections.find((s) => s.id === id);
+      const chapitres = sec("histoire").rangs.filter((r) => r.suivi), sites = sec("voyages").rangs.filter((r) => r.suivi);
+      // chaque pastille s'ouvre et montre quelque chose
+      const muettes = [];
+      for (const id of noeuds.keys()) { try { if (!ouvrir(id, { defiler: false, adresse: false }) || document.querySelector(".detail").textContent.trim().length < 20) muettes.push(id); } catch (e) { muettes.push(id + " (" + e.message + ")"); } }
+      // chaque texte, réécrit tel quel, redonne un fichier que le jeu sait lire
+      const vus = new Set(), fragiles = [];
+      for (const { n } of noeuds.values()) for (const T of n.textes) { const k = T.f + ":" + T.a; if (vus.has(k)) continue; vus.add(k); const e = edition.controler(T); if (e) fragiles.push(k + " " + e); }
+      // une modification : un seul fichier rendu, lisible, et rien d'autre n'y a bougé
+      const x = noeuds.get("arene-2-dresseur-0").n, T = x.textes.find((t) => !t.calc && String(t.v).length > 30), avant = edition.nombre;
+      const pose = edition.poser(T, String(T.v) + " (essai « d'apostrophe »)"), F = edition.fichiersModifies();
+      const refus = edition.poser(x.textes.find((t) => t !== T && !t.calc), "   ");
+      const calc = [...noeuds.values()].flatMap((y) => y.n.textes).find((t) => t.calc && t.exprs.length), refusCalc = calc ? edition.poser(calc, String(calc.v).replace("${" + calc.exprs[0] + "}", "${autreChose}")) : { erreur: "pas de texte calculé" };
+      const rendu = F[0] || {}, source = P && F.length === 1 ? rendu.contenu : "";
+      edition.retirer(T.f + ":" + T.a);
+      ouvrir("donnees-BADGES", { defiler: false, adresse: false });
+      const badges = { verrous: document.querySelectorAll(".detail .tx-verrou").length, libres: document.querySelectorAll(".detail .tx").length };
+      const essais = [...new Set([...noeuds.values()].map((y) => y.n.essai).concat(P.sections.flatMap((s) => s.rangs.map((r) => r.essai))).filter(Boolean))];
+      return { stats: P.stats, chapitres: chapitres.map((r) => r.noeuds.length), arenes: chapitres.map((r) => r.noeuds.filter((n) => n.genre === "dresseur").length + "/" + r.noeuds.filter((n) => n.genre === "champion").length).filter((t) => t !== "0/0"),
+        sites: sites.map((r) => r.noeuds.filter((n) => n.genre === "fiche").length + "/" + r.noeuds.filter((n) => n.genre === "champion").length), fiches: chapitres.reduce((s, r) => s + r.noeuds.filter((n) => n.genre === "fiche").length, 0),
+        muettes, fragiles, pose, nbFichiers: F.length, erreurFichier: rendu.erreur || null, chemin: rendu.chemin, ajout: source.includes("(essai « d\\'apostrophe »)") || source.includes('(essai « d\'apostrophe »)'), refus: !!refus.erreur, refusCalc: !!refusCalc.erreur, reste: edition.nombre - avant, essais, badges };
+    });
+    verif("pilotage : tous les fichiers du jeu sont lus", bilan.stats.fichiers >= 120 && bilan.stats.illisibles.length === 0, JSON.stringify(bilan.stats));
+    verif("pilotage : 12 chapitres, chacun avec ses pastilles", bilan.chapitres.length === 12 && bilan.chapitres.every((n) => n >= 3), bilan.chapitres.join(","));
+    verif("pilotage : 8 arènes, 3 dresseurs et 1 champion chacune", bilan.arenes.length === 8 && bilan.arenes.every((t) => t === "3/1"), bilan.arenes.join(" "));
+    verif("pilotage : 5 sites, leurs informations et leur défi", bilan.sites.length === 5 && bilan.sites.every((t) => +t.split("/")[0] >= 10 && t.endsWith("/1")), bilan.sites.join(" "));
+    verif("pilotage : les fiches savoir sont toutes là", bilan.fiches >= 40, String(bilan.fiches));
+    verif("pilotage : chaque pastille s'ouvre et montre son contenu", bilan.muettes.length === 0, bilan.muettes.slice(0, 5).join(" | "));
+    verif("pilotage : chaque texte se réécrit sans abîmer son fichier", bilan.fragiles.length === 0, bilan.fragiles.length + " : " + bilan.fragiles.slice(0, 3).join(" | "));
+    verif("pilotage : une modification rend un seul fichier, lisible", bilan.pose.ok && bilan.nbFichiers === 1 && !bilan.erreurFichier && bilan.ajout, JSON.stringify({ pose: bilan.pose, n: bilan.nbFichiers, e: bilan.erreurFichier, ajout: bilan.ajout }));
+    verif("pilotage : un texte vide, ou un morceau calculé changé, est refusé", bilan.refus && bilan.refusCalc && bilan.reste === 0, JSON.stringify({ vide: bilan.refus, calc: bilan.refusCalc, reste: bilan.reste }));
+    verif("pilotage : les noms de badges, repères du jeu et des sauvegardes, ne sont pas modifiables", bilan.badges.verrous === 8 && bilan.badges.libres === 0, JSON.stringify(bilan.badges));
+    // l'onglet « Les joueurs » avec les données d'exemple
+    await page.click('.onglet[data-vue="joueurs"]');
+    await page.click(".connexion-actions .bouton:not(.plein)");
+    await page.waitForTimeout(400);
+    const joueurs = await page.evaluate(() => ({ barres: document.querySelectorAll(".graphe button.barre-ligne").length, tuiles: document.querySelectorAll(".resultats .tuile").length, etiquettes: [...document.querySelectorAll("[data-suivi]")].filter((e) => e.textContent).length, mention: /inventées/.test(document.querySelector(".resultats").textContent) }));
+    verif("pilotage : l'onglet des joueurs s'affiche avec des données d'exemple, signalées comme telles", joueurs.barres === 12 && joueurs.tuiles >= 4 && joueurs.etiquettes > 50 && joueurs.mention, JSON.stringify(joueurs));
+    verif("pilotage : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+
+    // côté jeu : chaque bouton « Tester » mène quelque part, et le mode essai ne touche ni à la sauvegarde ni au suivi
+    const jeu = await contexte.newPage();
+    const erreursJeu = ecouterErreurs(jeu);
+    await jeu.goto(adresse + "jeu/#chapitre-3");
+    await jeu.waitForTimeout(1500);
+    await validerAvatar(jeu);
+    await jeu.waitForTimeout(800);
+    const inconnus = await jeu.evaluate((essais) => essais.filter((e) => {
+      const m = e.match(/^(chapitre|fiche|arene|dresseur|champion|epreuve|voyage|info|defi|sim)-([\w.]{1,40})$/); if (!m) return true;
+      const [, g, a] = m, [x, y] = a.split(".");
+      return !(g === "chapitre" ? +a >= 0 && +a <= 11 : g === "fiche" ? FICHES.some((f) => f.id === a) : g === "arene" || g === "champion" || g === "epreuve" ? !!ARENAS[+a - 1] : g === "dresseur" ? !!(ARENAS[+x - 1] && ARENAS[+x - 1].tr[+y])
+        : g === "voyage" || g === "defi" ? !!VOY.sites[a] : g === "info" ? !!(VOY.sites[x] && VOY.sites[x].infos.some((f) => f.id === y)) : typeof window[a] === "function");
+    }), bilan.essais);
+    verif("pilotage : chaque bouton « Tester » désigne un endroit qui existe dans le jeu", bilan.essais.length > 150 && inconnus.length === 0, bilan.essais.length + " essais ; inconnus : " + inconnus.slice(0, 5).join(", "));
+    // les sauvegardes sont relevées depuis la page de pilotage (même site), une fois la vraie partie quittée : elle s'enregistre en partant
+    const sauvegardes = () => page.evaluate(() => JSON.stringify(Object.entries(localStorage).filter(([k]) => /^wattlings|^quete|^ems/.test(k)).sort()));
+    await jeu.goto("about:blank");
+    const sauvegarde = await sauvegardes();
+    for (const essai of ["dresseur-2.1", "fiche-s2r1", "champion-4", "info-solaire.module", "defi-barrage", "sim-datSimPue"]) {
+      await jeu.goto("about:blank"); // comme un clic sur « Tester » : le jeu s'ouvre dans un onglet neuf
+      await jeu.goto(adresse + "jeu/#essai-" + essai);
+      await jeu.waitForTimeout(2600);
+      const e = await jeu.evaluate(() => ({ essai: ESSAI, nom: S.name, quelqueChose: !!(panelEl || dlg.open || document.getElementById("qk-host").shadowRoot.querySelector("#layer > *")), tag: !!document.getElementById("qk-host").shadowRoot.querySelector(".essai-tag") }));
+      verif(`pilotage · essai ${essai} : le jeu s'ouvre à cet endroit, en mode essai`, e.essai === true && e.nom === "Essai" && e.quelqueChose && e.tag, JSON.stringify(e));
+    }
+    await jeu.goto("about:blank");
+    verif("pilotage : les essais n'ont pas touché aux sauvegardes", (await sauvegardes()) === sauvegarde);
+    await jeu.goto(adresse + "jeu/#essai-chapitre-5");
+    await jeu.waitForTimeout(1200);
+    await jeu.reload();
+    await jeu.waitForTimeout(1200);
+    verif("pilotage : après un essai, recharger la page rend le jeu normal", (await jeu.evaluate(() => ESSAI)) === false);
+    verif("pilotage · jeu : aucune erreur", erreursJeu.length === 0, erreursJeu.slice(0, 3).join(" | "));
+  }
   await contexte.close();
 }
 

@@ -1,7 +1,8 @@
 /* Wattlings · jeu/moteur/suivi.js
    Suivi d'audience côté jeu : événements de chapitres. Le moteur de suivi lui-même est dans commun/suivi.js. */
 
-function trk(name,props){try{TRK.track(name,props)}catch(e){}}
+function trk(name,props){if(typeof ESSAI!=='undefined'&&ESSAI)return;   // en mode essai (moteur/essai.js), rien n'est compté
+  try{TRK.track(name,props)}catch(e){}}
 /* suivi des chapitres du jeu : appelé à chaque mise à jour du bandeau */
 const TCH={last:null,t0:0,via:null};
 function trkChapter(){if(typeof S==='undefined'||!S.site||S.ch===TCH.last)return;
