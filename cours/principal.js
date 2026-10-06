@@ -16,6 +16,7 @@ import { pageEtape } from "./pages/etape.js";
 import { pageGlossaire } from "./pages/glossaire.js";
 import { pagePatrimoine } from "./pages/patrimoine.js";
 import { pageQuizFinal } from "./pages/quiz-final.js";
+import { pageSources } from "./pages/sources.js";
 
 const racine = document.getElementById("app");
 
@@ -32,6 +33,7 @@ racine.innerHTML = `
         <a href="#ecole" data-route="ecole">${icone("ecole")}L’école</a>
         <a href="#glossaire" data-route="glossaire">${icone("livre")}Glossaire</a>
         <a href="#quiz-final" data-route="quiz-final">${icone("ok")}Quiz final</a>
+        <a href="#sources" data-route="sources">Sources</a>
         <a href="#patrimoine" class="qk-nav-p" data-route="patrimoine">Patrimoine</a>
         <a href="${adresseJeu()}" class="qk-nav" data-jeu="">Le jeu</a>
       </nav>
@@ -111,6 +113,10 @@ function afficherRoute() {
     routeCourante = e;
     demonterPage = pageGlossaire(n);
     document.title = "Glossaire · Energy Management";
+  } else if (e === "sources") {
+    routeCourante = e;
+    demonterPage = pageSources(n);
+    document.title = "Sources · Energy Management";
   } else if (e === "patrimoine") {
     routeCourante = e;
     demonterPage = pagePatrimoine(n);

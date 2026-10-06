@@ -1,5 +1,8 @@
 // Compare le site découpé à la version 18 d'origine (version-18.html, dans ce dossier).
 // A servi à prouver que la migration ne change rien ; ne reste valable que tant que le contenu n'a pas évolué.
+// Depuis le référencement des sources (octobre 2026), le contenu a évolué exprès : textes corrigés, onglet Sources dans le menu
+// du jeu, page Sources dans le cours. Cette comparaison signale donc des écarts partout, et ce n'est plus une alerte.
+// Pour vérifier le site, utiliser outils/verifier.mjs.
 //
 //   node outils/migration/comparer.mjs            → tout (environ 30 minutes)
 //   node outils/migration/comparer.mjs cours      → le cours, page par page, démos manipulées (contenu affiché identique)

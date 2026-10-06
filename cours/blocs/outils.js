@@ -2,6 +2,7 @@
  * Petits outils d'affichage : sélection d'éléments, échappement, texte enrichi, formats de nombres.
  */
 import { GLOSSAIRE } from "../../commun/donnees/glossaire.js";
+import { appelsDeNote } from "./notes.js";
 
 /** Le premier élément qui correspond au sélecteur (dans la page, ou dans `parent`). */
 export const un = (selecteur, parent = document) => parent.querySelector(selecteur);
@@ -23,7 +24,8 @@ export const echapper = (texte) =>
       })[n],
   );
 
-/** Met en forme un texte du contenu : {{terme}} devient un lien vers le glossaire, **gras** devient du gras. */
+/** Met en forme un texte du contenu : {{terme}} devient un lien vers le glossaire, **gras** devient du gras,
+ * [[cle]] devient un appel de note vers une source (voir notes.js). */
 export function texteRiche(texte) {
   return echapper(texte)
     .replace(/\{\{([a-z0-9-]+)(?:\|([^}]+))?\}\}/g, (n, t, a) => {
@@ -35,7 +37,8 @@ export function texteRiche(texte) {
         return a || t;
       }
     })
-    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/\s*\[\[([a-z0-9, -]+)\]\]/g, (n, t) => appelsDeNote(t.split(",")));
 }
 
 const formatNombre = (decimales) =>

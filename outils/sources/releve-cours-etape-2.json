@@ -1,0 +1,4558 @@
+[
+ {
+  "id": "ce2-001",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "phrase",
+  "texte": "La donnée d’énergie arrive par trois canaux : le télérelevé, les index et les factures. Même énergie, trois formes différentes.",
+  "affirmation": "Le cours distingue trois canaux de données : télérelevé, index, factures.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-002",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "retenir › 1 (électricité)",
+  "texte": "une {{courbe-de-charge}} au {{pas-de-temps}} de 10 min pour l’électricité",
+  "affirmation": "Le télérelevé électrique fournit une courbe de charge au pas de 10 minutes.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "Le {{telereleve}} est fin et rapide : une {{courbe-de-charge}} au {{pas-de-temps}} de 5 ou 10 min pour un site de plus de 36 kVA comme l’école (30 min pour un compteur Linky), un volume par jour pour le gaz ({{gazpar}}).",
+  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
+    "relu": true,
+    "page": "p. 5"
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes",
+    "relu": false,
+    "page": "§ 4.1.2"
+   }
+  ]
+ },
+ {
+  "id": "ce2-003",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "retenir › 1 (gaz)",
+  "texte": "un volume par jour pour le gaz ({{gazpar}})",
+  "affirmation": "Le compteur Gazpar donne un volume de gaz par jour.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "GRDF publie des données « quotidiennes » ; le compteur transmet deux fois par jour.",
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "consommations semestrielles, mensuelles, quotidiennes...), ainsi qu'aux données techniques du compteur et aux données contractuelles",
+    "relu": true
+   },
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Le compteur de gaz naturel Gazpar transmet les données deux fois par jour, en moins d'une seconde, par onde radio",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-004",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "retenir › 2",
+  "texte": "L’{{index}} est le compteur qui tourne : on soustrait deux relevés pour obtenir une consommation.",
+  "affirmation": "La consommation d’une période est la différence entre deux index.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d'énergie facturée",
+    "relu": false
+   },
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les index totalisateurs permettent de comptabiliser l'énergie durant l'intégralité de la période de fonctionnement du compteur",
+    "relu": false,
+    "page": "§ 1.3.2.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-005",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "retenir › 3",
+  "texte": "La facture donne le coût en euros, avec du retard et sur des périodes qui ne suivent pas les mois.",
+  "affirmation": "La facture arrive plus tard que la mesure et ses périodes ne coïncident pas avec les mois civils.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Vrai pour l’école fictive (facturation du 14 au 13) ; ce n’est pas une règle générale.",
+  "sources": []
+ },
+ {
+  "id": "ce2-006",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "analogie",
+  "texte": "L’appli bancaire te montre chaque dépense en temps réel (télérelevé). Le relevé de fin de mois donne le solde (index). La facture du magasin dit exactement ce que tu as payé et pourquoi (facture).",
+  "affirmation": "Analogie entre les trois sources et le suivi d’un budget.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "L’analogie dit « en temps réel » alors que le télérelevé arrive au mieux le lendemain : nuance à garder en tête.",
+  "sources": []
+ },
+ {
+  "id": "ce2-007",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "legendeSchema",
+  "texte": "Trois sources, trois rythmes, un seul logiciel qui les reçoit.",
+  "affirmation": "Légende du schéma.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-008",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "demo collecter › titre",
+  "texte": "Ouvre les trois robinets de données",
+  "affirmation": "Titre imagé de la démo.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-009",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.comprendre › Qui envoie quoi ? › §1",
+  "texte": "Les données de mesure viennent du {{distributeur}} (Enedis pour l’électricité, GRDF pour le gaz), qui pose et relève les compteurs.",
+  "affirmation": "Les données de mesure viennent du gestionnaire de réseau de distribution (Enedis, GRDF), qui pose et relève les compteurs.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Enedis couvre 95 % du territoire et GRDF la majorité des communes desservies en gaz ; ailleurs, ce sont des entreprises locales de distribution. L’article L. 322-8 du code de l’énergie (missions du distributeur) n’a pas pu être lu sur Légifrance (erreur 403).",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Ce sont les gestionnaires de réseaux de distribution d'électricité et de gaz, également appelés « distributeurs »",
+    "relu": false
+   },
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Linky est le compteur d'électricité communicant installé par le gestionnaire de réseaux Enedis sur 95% du territoire.",
+    "relu": false
+   },
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Gazpar est le compteur de gaz naturel communicant installé par le gestionnaire de réseaux GRDF",
+    "relu": false
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "de fourniture, de pose et d'entretien des dispositifs de comptage",
+    "relu": false,
+    "page": "p. 6 (composante de comptage)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-010",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.comprendre › Qui envoie quoi ? › §1",
+  "texte": "La facture vient du {{fournisseur}}, qui vend l’énergie.",
+  "affirmation": "La facture vient du fournisseur, qui vend l’énergie.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Les fournisseurs achètent l'électricité ou le gaz aux producteurs et les revendent aux consommateurs.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-011",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.comprendre › Qui envoie quoi ? › §1",
+  "texte": "Ce ne sont pas les mêmes entreprises, et pas les mêmes canaux.",
+  "affirmation": "Fournisseur et distributeur sont des entreprises distinctes.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Le gestionnaire de réseau de distribution est le même pour tous les fournisseurs.",
+    "relu": false
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "monopole régulé par la Commission de régulation de l'énergie",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-012",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.comprendre › Qui envoie quoi ? › §2",
+  "texte": "Avant de recevoir la moindre donnée de mesure, le logiciel a besoin d’un {{consentement}} du titulaire du contrat : ici, la mairie.",
+  "affirmation": "Un tiers ne peut recevoir les données de mesure d’un client qu’avec l’accord exprès de ce client (le titulaire du contrat).",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Pour un client personne morale (la mairie), les documents Enedis parlent d'« autorisation expresse » (article R. 111-27 du code de l’énergie, cité par Enedis) ; le mot « consentement » est réservé aux personnes physiques (RGPD). Le terme du cours reste compréhensible, mais l’article du code n’a pas pu être lu sur Légifrance (accès refusé, erreur 403).",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les GRD sont autorisés à communiquer à un fournisseur ou à un tiers les informations relatives à un client dès lors que ce dernier l'a expressément autorisé",
+    "relu": true,
+    "page": "p. 3 (citation de l'article R. 111-27 du code de l'énergie)"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Le Tiers Autorisé doit disposer de l'autorisation expresse préalable du client",
+    "relu": true,
+    "page": "art. 3.1"
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-013",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.comprendre › encadré « Message clé n° 1 »",
+  "texte": "Le **télérelevé** sert à **analyser** : fin, rapide, il montre quand on consomme.",
+  "affirmation": "Usage attribué au télérelevé : analyser.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-014",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.comprendre › encadré « Message clé n° 1 »",
+  "texte": "L’**index** sert à **contrôler** : c’est le totalisateur du compteur, la référence du comptage.",
+  "affirmation": "Usage attribué à l’index : contrôler ; l’index est le totalisateur du compteur.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les index totalisateurs permettent de comptabiliser l'énergie durant l'intégralité de la période de fonctionnement du compteur",
+    "relu": false,
+    "page": "§ 1.3.2.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-015",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.comprendre › encadré « Message clé n° 1 »",
+  "texte": "La **facture** sert à **chiffrer le coût** : c’est la référence financière, mais elle arrive tard et sur des périodes décalées.",
+  "affirmation": "Usage attribué à la facture : chiffrer le coût.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-016",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §1",
+  "texte": "**Jusqu’à 36 kVA (segment C5, compteur {{linky}})**",
+  "affirmation": "Le segment C5 regroupe les points raccordés en basse tension jusqu’à 36 kVA, équipés du compteur Linky.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "point de connexion raccordé en BT ≤ 36 kVA et auquel est associé un contrat unique",
+    "relu": true
+   },
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les Points de Référence Mesure (PRM) Linky sont les compteurs utilisés pour les segments C5/P4.",
+    "relu": false,
+    "page": "§ 1.2.3"
+   }
+  ]
+ },
+ {
+  "id": "ce2-017",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §1",
+  "texte": "la {{courbe-de-charge}} est au pas de 30 minutes",
+  "affirmation": "Pour un compteur Linky, la courbe de charge collectée est au pas de 30 minutes.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Précisions lues chez Enedis : sans activation de la collecte, le compteur n’enregistre qu’au pas de 60 minutes ; pour les sites relevés en courbe de charge pour les mécanismes de marché, le pas passe de 30 à 15 minutes.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes",
+    "relu": false,
+    "page": "§ 4.1.2"
+   },
+   {
+    "cle": "enedis-donnees-personnelles",
+    "passage": "Collecte de la courbe de charge restituant la puissance appelée toutes les demi-heures",
+    "relu": false
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Par défaut, sans activation de la collecte, le compteur enregistre la courbe de charge au pas 60'",
+    "relu": true,
+    "page": "§ 4"
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "passe de 30' à 15'",
+    "relu": true,
+    "page": "§ 4 (pas d'enregistrement des courbes de charge des sites relevés en courbe de charge pour les mécanismes de marché)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-018",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §1",
+  "texte": "son enregistrement fin se fait avec l’accord du client",
+  "affirmation": "La collecte de la courbe de charge fine d’un compteur Linky suppose l’accord du client.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cnil-linky-gazpar",
+    "passage": "ne sont collectées qu'avec l'accord de l'usager",
+    "relu": false
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Le GRD recueille le consentement du client quand celui-ci est une personne physique pour la collecte et la transmission de la courbe de charge",
+    "relu": true,
+    "page": "§ 3.3"
+   },
+   {
+    "cle": "cnil-deliberation-2012-404",
+    "passage": "la courbe de charge ne puisse être collectée qu'avec le consentement exprès des personnes concernées",
+    "relu": false,
+    "page": "p. 4-5"
+   }
+  ]
+ },
+ {
+  "id": "ce2-019",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §1",
+  "texte": "Les tiers y accèdent par {{data-connect}}, une API où le client donne son consentement sur son espace Enedis",
+  "affirmation": "Les tiers accèdent aux données Linky par Data Connect, le client donnant son consentement dans son compte Enedis.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "service permettant, d'une part, à un Utilisateur de consentir à ce qu'Enedis mette ses données à disposition du service du Bénéficiaire",
+    "relu": true,
+    "page": "art. 1"
+   },
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "recueilli sur le site Internet d'Enedis, dans le compte personnel Enedis de l'Utilisateur",
+    "relu": false,
+    "page": "préambule"
+   },
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "dont la puissance souscrite est inférieure ou égale à 36 kVA et dont le point de connexion est équipé d'un Compteur Communicant",
+    "relu": false,
+    "page": "art. 1 (définition d'« Utilisateur »)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-020",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §1",
+  "avant": "pour une durée qu’il choisit (jusqu’à 3 ans d’après la documentation publique consultée)",
+  "texte": "pour une durée demandée par le tiers et limitée à 3 ans",
+  "affirmation": "Le consentement Data Connect est donné pour une durée de 3 ans au maximum.",
+  "type": "regle",
+  "verdict": "corrige",
+  "correction": "pour une durée demandée par le tiers et limitée à 3 ans (contrat type Data Connect d’Enedis, article 3.2)",
+  "note": "Le plafond de 3 ans est confirmé. En revanche la durée n’est pas choisie librement par le client : c’est le tiers qui la demande, le client accepte ou refuse. La formule « d’après la documentation publique consultée » peut être remplacée par la référence.",
+  "sources": [
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "demander un consentement pour une durée maximale de trois années",
+    "relu": true,
+    "page": "art. 3.2"
+   },
+   {
+    "cle": "consometers-data-connect",
+    "passage": "Durée pendant laquelle l'application souhaite accéder aux données du client, au format ISO 8601, ne peut excéder 3 ans",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-021",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §2",
+  "texte": "**Au-delà de 36 kVA (segments C1 à C4, comme l’école)**",
+  "affirmation": "Les segments C1 à C4 couvrent les points au-delà de 36 kVA (C4 : basse tension > 36 kVA ; C2-C3 : HTA ; C1 : contrat CARD).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "C1 est défini par son contrat (CARD), pas par un seuil de puissance ; le segment C3 est signalé comme obsolète depuis 2023 dans le guide Enedis.",
+  "sources": [
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "point de connexion raccordé en BT > 36 kVA et auquel est associé un contrat unique",
+    "relu": true
+   },
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "point de connexion raccordé en HTA, auquel est associé un contrat unique et pour lequel la reconstitution des flux est assurée via la courbe de charge mesurée",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-022",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §2",
+  "avant": "les compteurs professionnels sont télérelevés et mesurent une courbe de charge plus fine (10 minutes pour l’école)",
+  "texte": "Enedis la relève au pas de 5 minutes depuis fin 2025 ; on en reconstitue des pas de 10 ou 15 minutes (10 minutes pour l’école)",
+  "affirmation": "Les compteurs des sites de plus de 36 kVA sont télérelevés et mesurent une courbe de charge au pas de 10 minutes.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "les compteurs professionnels sont télérelevés et mesurent une courbe de charge plus fine : 5 minutes en règle générale depuis la reprogrammation menée par Enedis, 10 minutes sur les quelques compteurs restants (c’est le cas retenu pour l’école)",
+  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
+    "relu": true,
+    "page": "p. 5"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les courbes au pas 5' permettent de reconstituer des mesures au pas 10' ou 15'",
+    "relu": true,
+    "page": "p. 5"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le GRD s'assure notamment du caractère opérationnel des fonctionnalités de téléprogrammation et de télérelevé.",
+    "relu": false,
+    "page": "p. 3, note 1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-023",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §2",
+  "texte": "Les tiers y accèdent par le {{sge|SGE}} d’Enedis (système de gestion des échanges, en web services)",
+  "affirmation": "Les tiers accèdent aux données des sites de plus de 36 kVA par le SGE d’Enedis (système de gestion des échanges), en web services.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Le contrat type parle de « Plateforme d’échanges nommée SGE », accessible par portail web et par web services ; elle n’est pas réservée aux sites de plus de 36 kVA.",
+  "sources": [
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Enedis met à disposition de l'Utilisateur l'accès à sa Plateforme d'échanges nommée ci-après « SGE »",
+    "relu": true,
+    "page": "annexe 1, préambule"
+   },
+   {
+    "cle": "enedis-sge-fournisseur",
+    "passage": "Système de Gestion des Echanges (SGE)",
+    "relu": false
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "L'accès au Web Service, se fait par un mécanisme d'Authentification, basé sur un échange de Certificats",
+    "relu": false,
+    "page": "annexe 1"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Enedis offre un accès à sa plateforme d'échanges de données (portail web et API) sous réserve de signature d'un contrat Enedis-Tiers.",
+    "relu": true,
+    "page": "p. 7, note 3"
+   }
+  ]
+ },
+ {
+  "id": "ce2-024",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §2",
+  "avant": "avec un consentement écrit du client",
+  "texte": "avec une autorisation expresse du client, de forme libre mais conservée et limitée dans le temps",
+  "affirmation": "L’accès d’un tiers par le SGE exige un consentement écrit du client.",
+  "type": "regle",
+  "verdict": "corrige",
+  "correction": "avec une autorisation expresse du client (de forme libre, mais conservée sur un support durable et assortie d’une durée de validité)",
+  "note": "Enedis n’impose pas l’écrit : l’autorisation peut être recueillie par oral, par écrit ou par un parcours numérique, sur support durable. Le contrat type ajoute qu’une autorisation sans durée de validité n’est pas valable.",
+  "sources": [
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Le Tiers Autorisé doit disposer de l'autorisation expresse préalable du client",
+    "relu": true,
+    "page": "art. 3.1"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "La forme de cette autorisation est néanmoins libre.",
+    "relu": true,
+    "page": "art. 3.2"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "L'autorisation du client peut être recueillie sous plusieurs formes : par oral, par écrit ou via un parcours digital. Le support doit être durable",
+    "relu": true,
+    "page": "p. 9"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "s'engage à enregistrer et conserver sur un support durable les autorisations",
+    "relu": false,
+    "page": "art. 3"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "À défaut de précision sur la durée de validité de l'autorisation, les parties conviennent que cette-dernière n'est pas valable.",
+    "relu": true,
+    "page": "art. 3.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-025",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Électricité : accès aux données Enedis › §2",
+  "avant": "et une habilitation qui prend plusieurs mois",
+  "texte": "La mise en place prend de plusieurs semaines à plusieurs mois",
+  "affirmation": "L’habilitation d’un tiers au SGE prend plusieurs mois.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "et une mise en place (contrat, référencement, certificats, homologation) qui prend de plusieurs semaines à plusieurs mois",
+  "note": "Le contrat type d’Enedis parle de « plusieurs semaines » ; « plusieurs mois » ne vient que du retour d’expérience des Consometers (source secondaire).",
+  "sources": [
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "La mise en place opérationnelle du contrat peut nécessiter un délai de plusieurs semaines après réception par Enedis de l'annexe 2 dûment complétée.",
+    "relu": true,
+    "page": "art. 3.2"
+   },
+   {
+    "cle": "consometers-sge-tiers",
+    "passage": "L'accès à SGE Tiers est assez complexe (compter plusieurs mois)",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-026",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Changement récent chez Enedis »",
+  "texte": "Data Connect a basculé vers une nouvelle version le 28 septembre 2026",
+  "affirmation": "Enedis a basculé Data Connect vers une nouvelle version le 28 septembre 2026.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Aucune source officielle lisible : le portail datahub.enedis.fr refuse la lecture automatique (robots.txt). L’information ne repose que sur deux projets open source concordants ; la date précise du 28 septembre ne figure que dans le premier, le second (qui reproduit un courriel du support API d’Enedis) dit « dans le courant de septembre 2026 ». Garder la mention « à confirmer » tant qu’une personne n’a pas ouvert la documentation Enedis.",
+  "sources": [
+   {
+    "cle": "github-bascule-data-connect",
+    "passage": "Enedis a basculé DataConnect le 28/09/2026",
+    "relu": false
+   },
+   {
+    "cle": "github-eddie-data-connect",
+    "passage": "Die Umstellung wird im Laufe des Septembers 2026 erfolgen.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-027",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Changement récent chez Enedis »",
+  "texte": "nouvelle adresse d’autorisation (v2) et nouvelles API de mesure et de contrat",
+  "affirmation": "La nouvelle version change l’adresse d’autorisation (v2) et les API de mesure et de contrat.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Aucune source officielle lisible : le portail datahub.enedis.fr refuse la lecture automatique (robots.txt). L’information ne repose que sur deux projets open source concordants ; la date précise du 28 septembre ne figure que dans le premier, le second (qui reproduit un courriel du support API d’Enedis) dit « dans le courant de septembre 2026 ». Garder la mention « à confirmer » tant qu’une personne n’a pas ouvert la documentation Enedis.",
+  "sources": [
+   {
+    "cle": "github-bascule-data-connect",
+    "passage": "/data/proxy traduit les chemins v5 vers les nouvelles API",
+    "relu": false
+   },
+   {
+    "cle": "github-eddie-data-connect",
+    "passage": "https://mon-compte-particulier.enedis.fr/dataconnect/v2/oauth2/authorize",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-028",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Changement récent chez Enedis »",
+  "texte": "les anciennes API v5 doivent être arrêtées environ deux semaines plus tard",
+  "affirmation": "Les anciennes API v5 sont arrêtées environ deux semaines après la bascule.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Aucune source officielle lisible : le portail datahub.enedis.fr refuse la lecture automatique (robots.txt). L’information ne repose que sur deux projets open source concordants ; la date précise du 28 septembre ne figure que dans le premier, le second (qui reproduit un courriel du support API d’Enedis) dit « dans le courant de septembre 2026 ». Garder la mention « à confirmer » tant qu’une personne n’a pas ouvert la documentation Enedis.",
+  "sources": [
+   {
+    "cle": "github-bascule-data-connect",
+    "passage": "les API de données v5 seront arrêtées environ deux semaines après",
+    "relu": false
+   },
+   {
+    "cle": "github-eddie-data-connect",
+    "passage": "Anschließend haben Sie zwei Wochen Zeit, die erforderlichen Änderungen vorzunehmen.",
+    "relu": false
+   },
+   {
+    "cle": "github-eddie-data-connect",
+    "passage": "Nach Ablauf dieser Frist werden die bisherigen APIs nicht mehr verfügbar sein.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-029",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Changement récent chez Enedis »",
+  "texte": "Information issue de projets open source : **à confirmer dans la documentation officielle Enedis** avant tout",
+  "affirmation": "Avertissement du cours sur l’origine de l’information.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Avertissement à conserver : la source officielle n’a pas pu être lue.",
+  "sources": []
+ },
+ {
+  "id": "ce2-030",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Gaz : accès aux données GRDF › §1",
+  "texte": "GRDF met à disposition les données par l’API {{adict}} : consommations quotidiennes, mensuelles et semestrielles, données techniques du compteur et données contractuelles, avec le consentement du client.",
+  "affirmation": "L’API GRDF ADICT donne accès, avec le consentement du client, aux consommations quotidiennes, mensuelles et semestrielles, aux données techniques du compteur et aux données contractuelles.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "consommations semestrielles, mensuelles, quotidiennes...), ainsi qu'aux données techniques du compteur et aux données contractuelles",
+    "relu": true
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
+    "relu": true
+   },
+   {
+    "cle": "datagouv-grdf-adict",
+    "passage": "consommations semestrielles, mensuelles, quotidiennes...), ainsi qu'aux données techniques du compteur et aux données contractuelles",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-031",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Gaz : accès aux données GRDF › §1",
+  "texte": "Le compteur {{gazpar}} transmet chaque jour",
+  "affirmation": "Le compteur Gazpar transmet ses données chaque jour.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Plus précisément deux fois par jour. Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Le compteur de gaz naturel Gazpar transmet les données deux fois par jour, en moins d'une seconde, par onde radio",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-032",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Gaz : accès aux données GRDF › §1",
+  "avant": "la consommation d’un jour J est disponible le lendemain environ",
+  "texte": "la consommation d’un jour J est disponible avec un décalage de 1 à 3 jours",
+  "affirmation": "La consommation de gaz d’un jour J est disponible à J+1 environ.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "la consommation d’un jour J est disponible avec un décalage de 1 à 3 jours",
+  "note": "GRDF annonce un décalage de 1 à 3 jours. Le guide GRDF de janvier 2026 détaille : J+3 pour les compteurs à relève mensuelle « 1M » (environ 11 millions de points), J+2 pour « MM », J+1 à partir de 15 h pour les seuls compteurs à relève journalière « JJ » (environ 5 000 points).",
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de consommation sont généralement mises à jour avec un décalage de 1 à 3 jours",
+    "relu": true
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Données quotidiennes A J+3",
+    "relu": true,
+    "page": "p. 38 (tableau des fréquences de relève, ligne « 1M », environ 11 millions de PCE)"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "A J+1 À partir de 15h",
+    "relu": false,
+    "page": "p. 38 (même tableau, ligne « JJ », environ 5 000 PCE)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-033",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Gaz : accès aux données GRDF › §2",
+  "texte": "Le compteur mesure un **volume** (m³). La consommation en énergie s’obtient avec le {{coef-conversion}} : **kWh = m³ × coefficient**.",
+  "affirmation": "Le compteur de gaz mesure un volume en m³, converti en kWh par le coefficient de conversion.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur",
+    "relu": false
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Pour passer de l'un à l'autre, votre gestionnaire de réseau utilise un coefficient de conversion gaz.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-034",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Gaz : accès aux données GRDF › §2",
+  "texte": "Ce coefficient combine le {{pcs}} du gaz livré et une correction liée aux conditions de livraison (altitude, pression, température).",
+  "affirmation": "Le coefficient de conversion est le produit du PCS et d’un coefficient de correction pression-température-altitude.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "coeff_conversion = coeff_pta * valeur_pcs",
+    "relu": false,
+    "page": "p. 41"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Coefficient décrivant les conditions de température, pression et altitude au moment du relevé",
+    "relu": false,
+    "page": "p. 40"
+   }
+  ]
+ },
+ {
+  "id": "ce2-035",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Gaz : accès aux données GRDF › §2",
+  "avant": "Il vaut en général entre 10 et 11,5 kWh/m³",
+  "texte": "entre 9 et 12,5 kWh/m³",
+  "affirmation": "Le coefficient de conversion vaut en général entre 10 et 11,5 kWh/m³.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Il varie selon le lieu et la période, entre 9 et 12,5 kWh/m³",
+  "note": "Aucune source lue ne donne la plage 10 à 11,5. Le médiateur national de l’énergie donne 9 à 12,5 kWh/m³ ; GRDF donne 10,3 à 12,4 kWh/m³ pour le gaz H livré à 21 mbar à moins de 200 m d’altitude (et environ 9 à 10,2 pour le gaz B). La borne haute du cours est donc trop basse. La valeur 11,2 utilisée pour l’école reste plausible.",
+  "sources": [
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "varie selon le lieu et le temps entre 9 et 12,5 kWh/m3",
+    "relu": true
+   },
+   {
+    "cle": "grdf-coefficients-thermiques",
+    "passage": "Clients alimentés à la pression de 21 mbar - Gaz H - Moins de 200 mètres d'altitude : entre 10,3 et 12,4 kWh/m3",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-036",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › Gaz : accès aux données GRDF › §2",
+  "texte": "Il change selon la commune et le mois",
+  "affirmation": "Le coefficient de conversion dépend de la commune (altitude) et est recalculé chaque mois.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Calcul mensuel pour les compteurs communicants ; après chaque relevé pour les compteurs relevés tous les six mois.",
+  "sources": [
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "L'altitude de la commune dans laquelle est situé votre logement",
+    "relu": false
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Le coefficient de conversion gaz est calculé une fois par mois pour les compteurs communicants",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-037",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › démo casIndex › consigne",
+  "texte": "Quatre cas réels de relevés.",
+  "affirmation": "Les quatre cas de la démo sont présentés comme « réels ».",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Les chiffres sont ceux de l’école fictive : « quatre cas typiques » serait plus juste que « quatre cas réels ».",
+  "sources": []
+ },
+ {
+  "id": "ce2-038",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Taux relevés en septembre 2026 » › ligne 1",
+  "avant": "Accise sur l’électricité : 26,35 €/MWh pour les activités économiques au 1er août 2026 (catégorie exacte de l’école à vérifier).",
+  "texte": "Accise sur l’électricité au 1er août 2026 : 26,35 €/MWh au-delà de 36 kVA (catégories « PME » et « haute puissance »), 30,62 €/MWh pour les ménages et les sites jusqu’à 36 kVA",
+  "affirmation": "L’accise sur l’électricité est de 26,35 €/MWh pour les activités économiques au 1er août 2026.",
+  "type": "regle",
+  "verdict": "corrige",
+  "correction": "Accise sur l’électricité au 1er août 2026 : 26,35 €/MWh pour la catégorie « PME » (puissance de plus de 36 kVA et jusqu’à 250 kVA) et pour la haute puissance ; 30,62 €/MWh pour les ménages et assimilés, dont les activités économiques jusqu’à 36 kVA (catégorie exacte de l’école à vérifier).",
+  "note": "Le montant est exact, mais « pour les activités économiques » est trop large : une activité économique jusqu’à 36 kVA paie 30,62 €/MWh. La catégorie de l’école (60 kVA, service public communal) dépend de la définition de l’article L. 312-24 du code des impositions sur les biens et services, que je n’ai pas pu lire sur Légifrance (erreur 403) : la réserve du cours doit rester.",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Petites et moyennes entreprises (36 kVA < puissance ≤ 250 kVA) […] 01/08/2026 – 31/01/2027 […] 26,35",
+    "relu": true,
+    "page": "p. 12-13 (tableau « Tarif applicable sur l'électricité en €/MWh »)"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Ménages (puissance ≤ 250 kVA) et assimilés (activités économiques avec puissance ≤ 36 kVA) […] 01/08/2026 – 31/01/2027 […] 30,62",
+    "relu": true,
+    "page": "p. 12-13 (même tableau)"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "La loi de finances pour 2026 a prévu, dans son article 71, de réduire les tarifs normaux d'accises sur l'électricité de 0,5 €/MWh à compter du 1er août 2026.",
+    "relu": false,
+    "page": "p. 12-13"
+   }
+  ]
+ },
+ {
+  "id": "ce2-039",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Taux relevés en septembre 2026 » › ligne 1",
+  "texte": "Accise sur le gaz naturel : 16,66 €/MWh à la même date",
+  "affirmation": "L’accise sur le gaz naturel combustible est de 16,66 €/MWh au 1er août 2026.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Tarif normal de l'accise sur le gaz naturel combustible, tenant compte de l'injection de biogaz dans le réseau (en €/MWh) […] 08/26 – 01/27 […] 16,66",
+    "relu": true,
+    "page": "p. 17 (tableau)"
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "Depuis le 1er août 2026, cette taxe s'élève à 0,01666 €/kWh",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-040",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Taux relevés en septembre 2026 » › ligne 2",
+  "texte": "CTA : 15 % de la part fixe du TURPE depuis le 1er février 2026",
+  "affirmation": "La CTA électricité (réseau de distribution) vaut 15 % de la part fixe du TURPE depuis le 1er février 2026.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Taux fixé par l’arrêté du 28 janvier 2026 (non lu sur Légifrance, cité par la CNIEG et la CRE). 5 % pour les sites raccordés au réseau de transport.",
+  "sources": [
+   {
+    "cle": "cnieg-cta-2026",
+    "passage": "le taux CTA distribution électricité passe de 21,93 % à 15 % ;",
+    "relu": true
+   },
+   {
+    "cle": "cnieg-cta-note",
+    "passage": "L'arrêté du 28 janvier 2026 fixe ces taux pour la période à compter du 1er février 2026.",
+    "relu": false,
+    "page": "p. 4"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "depuis le 1er février 2026, son montant équivaut à 15 % de la partie fixe du tarif d'acheminement",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-041",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Taux relevés en septembre 2026 » › ligne 2",
+  "texte": "(21,93 % avant)",
+  "affirmation": "Le taux de CTA distribution électricité était de 21,93 % avant le 1er février 2026.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cnieg-cta-2026",
+    "passage": "le taux CTA distribution électricité passe de 21,93 % à 15 % ;",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-042",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Taux relevés en septembre 2026 » › ligne 2",
+  "avant": "20,80 % de la part fixe de l’acheminement gaz",
+  "texte": "pour le gaz, 20,80 % de la part fixe de distribution, plus une quote-part liée au transport",
+  "affirmation": "La CTA gaz vaut 20,80 % de la part fixe de l’acheminement gaz.",
+  "type": "regle",
+  "verdict": "corrige",
+  "correction": "20,80 % de la part fixe du tarif de distribution de gaz, plus une quote-part liée au transport (4,71 % multiplié par un coefficient fixé par arrêté)",
+  "note": "20,80 % est le taux de la part distribution, inchangé en 2026. S’y ajoute une part transport : la formule complète est CTA = quote-part distribution × (20,80 % + coefficient × 4,71 %).",
+  "sources": [
+   {
+    "cle": "cnieg-cta-note",
+    "passage": "Prestation de distribution de gaz naturel 20,80%",
+    "relu": true,
+    "page": "p. 4"
+   },
+   {
+    "cle": "cnieg-cta-note",
+    "passage": "Prestation de transport de gaz naturel 4,71%",
+    "relu": false,
+    "page": "p. 4"
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "CTA = [Quote-part distribution] × (20,80 % + [Coefficient] × 4,71 %)",
+    "relu": false
+   },
+   {
+    "cle": "cre-avis-cta-2026",
+    "passage": "Les taux pour les prestations de transport et de distribution de gaz ne sont pas modifiés",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-043",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Taux relevés en septembre 2026 » › ligne 2",
+  "texte": "TVA : 20 % sur tous les postes.",
+  "affirmation": "La TVA est de 20 % sur l’ensemble de la facture d’électricité et de gaz.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Depuis le 1er août 2025, le taux normal s’applique aussi à l’abonnement (fin du taux réduit de 5,5 %).",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "depuis le 1er août 2025, le taux normal de TVA s'applique sur toute la facture, quelle que soit la puissance souscrite",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Le taux de TVA sur la consommation de gaz naturel est le taux normal, soit 20%.",
+    "relu": false,
+    "page": "p. 6"
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "depuis le 1er août 2025, la TVA qui s'applique sur vos factures d'électricité s'élève à 20 % sur l'abonnement, la consommation et les autres taxes",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-044",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Taux relevés en septembre 2026 » › ligne 2",
+  "texte": "TURPE 7 : +3,04 % en moyenne au 1er août 2026.",
+  "affirmation": "Le TURPE 7 HTA-BT augmente de 3,04 % au 1er août 2026.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Chiffre du tarif de distribution (HTA-BT), celui qui concerne l’école.",
+  "sources": [
+   {
+    "cle": "cre-deliberation-2026-105",
+    "passage": "Ainsi, le tarif TURPE 7 HTA-BT d'Enedis évolue au 1er août 2026 de +3,04 %",
+    "relu": false
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Ainsi, au 1er août 2026, le TURPE HTA-BT évolue de 3,04 % selon la délibération n° 2026-105 du 21 mai 2026 de la CRE.",
+    "relu": true,
+    "page": "p. 3"
+   }
+  ]
+ },
+ {
+  "id": "ce2-045",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « Taux relevés en septembre 2026 » › ligne 3",
+  "texte": "Les prix de fourniture et d’acheminement de l’école restent **fictifs**.",
+  "affirmation": "Les prix de fourniture et d’acheminement de l’école sont inventés.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-046",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Finesse / Télérelevé",
+  "texte": "10 min (élec), 1 jour (gaz)",
+  "affirmation": "Finesse du télérelevé : 10 minutes en électricité.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "5 ou 10 min (élec, au-delà de 36 kVA), 1 jour (gaz)",
+  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
+    "relu": true,
+    "page": "p. 5"
+   }
+  ]
+ },
+ {
+  "id": "ce2-047",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Finesse / Télérelevé (gaz)",
+  "texte": "10 min (élec), 1 jour (gaz)",
+  "affirmation": "Finesse du télérelevé : 1 jour en gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "consommations semestrielles, mensuelles, quotidiennes...), ainsi qu'aux données techniques du compteur et aux données contractuelles",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-048",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Finesse / Index",
+  "texte": "1 relevé par mois et par cadran",
+  "affirmation": "L’école a un relevé d’index par mois et par cadran.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Choix du cas d’école. Pour les compteurs communicants de plus de 36 kVA, Enedis sait aussi transmettre des index quotidiens.",
+  "sources": []
+ },
+ {
+  "id": "ce2-049",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Finesse / Facture",
+  "texte": "1 montant par période de facturation",
+  "affirmation": "Une facture porte un montant par période de facturation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-050",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Délai / Télérelevé",
+  "avant": "[\"Délai\", \"Le lendemain\"",
+  "texte": "Le lendemain (élec), 1 à 3 jours (gaz)",
+  "affirmation": "Les données de télérelevé sont disponibles le lendemain.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Le lendemain (élec), 1 à 3 jours (gaz)",
+  "note": "Électricité : Enedis relève et envoie en J+1 les index quotidiens des compteurs de plus de 36 kVA, et propose une transmission quotidienne de la courbe de charge (le délai exact de la courbe n’est pas écrit dans les documents lus). Gaz : décalage de 1 à 3 jours selon GRDF.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "Les index quotidiens correspondant à la consommation du jour J sont relevés en J + 1 (proche de minuit), datés de J + 1 et envoyés en J + 1",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "transmettre au demandeur à une fréquence quotidienne, hebdomadaire ou mensuelle la courbe de charge",
+    "relu": false,
+    "page": "§ 4.2.7"
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de consommation sont généralement mises à jour avec un décalage de 1 à 3 jours",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-051",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Délai / Index",
+  "texte": "\"Quelques jours\"",
+  "affirmation": "Les index sont disponibles en quelques jours.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Ordre de grandeur propre au cas d’école, sans source trouvée. Proposition : écrire « quelques jours (cas de l’école) », ou retirer.",
+  "sources": []
+ },
+ {
+  "id": "ce2-052",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Délai / Facture",
+  "texte": "\"2 à 6 semaines\"",
+  "affirmation": "La facture arrive 2 à 6 semaines après la période.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Ordre de grandeur propre au cas d’école, sans source trouvée. Proposition : écrire « plusieurs semaines (cas de l’école) ».",
+  "sources": []
+ },
+ {
+  "id": "ce2-053",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Unité / Télérelevé",
+  "texte": "kW (puissance moyenne), m³ et kWh",
+  "affirmation": "La courbe de charge est une suite de puissances moyennes ; le gaz est donné en m³ et en kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Enedis publie les points de courbe en watts (W), pas en kW : le piège W/kW cité plus bas est donc bien réel.",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "correspond à la puissance moyenne constatée sur un pas de temps précis",
+    "relu": true,
+    "page": "§ 1.3.1"
+   },
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "En puissance active, dont l'unité est le Watt (W)",
+    "relu": true,
+    "page": "§ 1.3.1"
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "La quantité d'énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-054",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Unité / Index",
+  "texte": "kWh (élec), m³ (gaz)",
+  "affirmation": "Les index sont en kWh pour l’électricité et en m³ pour le gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Dans les flux Enedis, l’énergie active des index est exprimée en Wh ; l’affichage du compteur et la facture sont en kWh.",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Energie Active Wattheure (Wh)",
+    "relu": false,
+    "page": "§ 4.3.1.3"
+   },
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-055",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Unité / Facture",
+  "texte": "\"kWh et €\"",
+  "affirmation": "La facture est exprimée en kWh et en euros.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "La quantité d'énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-056",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Fiabilité / Télérelevé",
+  "texte": "Trous et doublons possibles",
+  "affirmation": "Une courbe de charge peut comporter des trous et des doublons.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Les trous sont attestés par Enedis (points « estimés » pour combler un trou de mesures). Les doublons ne sont étayés par aucune source lue : à présenter comme un cas d’expérience.",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Point de courbe issu d'une estimation automatique d'Enedis pour combler un \"trou\" de mesures",
+    "relu": false,
+    "page": "§ 3.3.1.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-057",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Fiabilité / Index",
+  "texte": "Référence du comptage, parfois estimé",
+  "affirmation": "Un index peut être estimé.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Côté gaz, GRDF distingue les relevés mesurés et les estimations ; côté fournisseur, des factures intermédiaires reposent sur des estimations.",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Cas de relevé provisoire d'un compteur JJ quand l'index n'a pas pu être télérelevé",
+    "relu": false,
+    "page": "p. 40"
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Mon fournisseur peut établir des factures intermédiaires à partir de ses propres estimations",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-058",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Fiabilité / Facture",
+  "texte": "Référence financière, parfois estimée puis régularisée",
+  "affirmation": "Une facture peut reposer sur une estimation, corrigée ensuite par une régularisation.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Mon fournisseur peut établir des factures intermédiaires à partir de ses propres estimations",
+    "relu": false
+   },
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "Une régularisation intervient ensuite, en fonction de ma consommation réelle.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-059",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Pièges / Télérelevé",
+  "texte": "Changement d’heure, unités (W ou kW)",
+  "affirmation": "Le changement d’heure et l’unité (W ou kW) sont des pièges de la courbe de charge.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Puissance reconstituée Dans le cas des changements d'heure",
+    "relu": false,
+    "page": "§ 3.3.1.1"
+   },
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "En puissance active, dont l'unité est le Watt (W)",
+    "relu": true,
+    "page": "§ 1.3.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-060",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Pièges / Index",
+  "texte": "{{bouclage}}, changement de compteur, index qui recule",
+  "affirmation": "Pièges des index retenus par le cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-061",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Pièges / Facture",
+  "texte": "Périodes décalées, {{regularisation}}",
+  "affirmation": "Pièges des factures retenus par le cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-062",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Usage",
+  "texte": "[\"Usage\", \"Analyser\", \"Contrôler\", \"Chiffrer le coût\"]",
+  "affirmation": "Usage attribué à chaque source.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-063",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « RGPD »",
+  "texte": "La courbe de charge d’un **logement** révèle la vie de ses occupants (heures de lever, absences)",
+  "affirmation": "La courbe de charge d’un logement révèle des informations sur la vie privée (heures de lever, absences).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cnil-linky-courbe-de-charge",
+    "passage": "permet de déduire de nombreuses informations relatives à la vie privée des abonnés (heures de lever et de coucher, périodes d'absence",
+    "relu": true
+   },
+   {
+    "cle": "cnil-deliberation-2012-404",
+    "passage": "permet notamment d'identifier les heures de lever et de coucher, les heures ou périodes d'absence",
+    "relu": false,
+    "page": "p. 2"
+   }
+  ]
+ },
+ {
+  "id": "ce2-064",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « RGPD »",
+  "texte": "c’est une donnée personnelle, d’où le consentement explicite et limité dans le temps",
+  "affirmation": "La courbe de charge d’un logement est une donnée personnelle ; sa collecte et sa transmission supposent un consentement exprès, limité dans le temps.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "« Limité dans le temps » : 3 ans au plus pour Data Connect.",
+  "sources": [
+   {
+    "cle": "cnil-donnee-personnelle",
+    "passage": "Une donnée personnelle est toute information se rapportant à une personne physique identifiée ou identifiable.",
+    "relu": false
+   },
+   {
+    "cle": "cnil-deliberation-2012-404",
+    "passage": "la courbe de charge ne puisse être collectée qu'avec le consentement exprès des personnes concernées",
+    "relu": false,
+    "page": "p. 4-5"
+   },
+   {
+    "cle": "cnil-linky-gazpar",
+    "passage": "ne peut intervenir qu'avec l'accord de l'abonné",
+    "relu": false
+   },
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "demander un consentement pour une durée maximale de trois années",
+    "relu": true,
+    "page": "art. 3.2"
+   }
+  ]
+ },
+ {
+  "id": "ce2-065",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré « RGPD »",
+  "texte": "Pour un bâtiment tertiaire comme l’école, l’enjeu personnel est plus faible, mais l’accès reste encadré par le consentement du titulaire.",
+  "affirmation": "Pour un client non résidentiel, l’accès d’un tiers aux données reste soumis à l’accord du titulaire.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Précision utile : le RGPD ne protège que les personnes physiques ; pour une personne morale (la mairie), l’accès repose sur une « autorisation expresse » prévue par le code de l’énergie, pas sur le RGPD.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "l'autorisation expresse des clients concernés a été recueillie : pour les personnes morales quel que soit le type de données",
+    "relu": false,
+    "page": "§ 3.4"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les GRD sont autorisés à communiquer à un fournisseur ou à un tiers les informations relatives à un client dès lors que ce dernier l'a expressément autorisé",
+    "relu": true,
+    "page": "p. 3 (citation de l'article R. 111-27 du code de l'énergie)"
+   },
+   {
+    "cle": "cnil-donnee-personnelle",
+    "passage": "Une donnée personnelle est toute information se rapportant à une personne physique identifiée ou identifiable.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-066",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "niveaux.approfondir › encadré qa",
+  "texte": "Cas utiles : consentement expiré pendant une collecte, consentement révoqué, PDL hors du périmètre consenti, API qui répond en W au lieu de kW, index gaz en m³ sans coefficient, facture estimée suivie d’une régularisation négative.",
+  "affirmation": "Liste de cas de test proposée par le cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-067",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "quiz › question 1",
+  "texte": "La mesure vient du gestionnaire de réseau de distribution, qui pose et relève les compteurs. Le fournisseur facture.",
+  "affirmation": "La courbe de charge vient du distributeur (Enedis), qui pose et relève les compteurs ; le fournisseur facture.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Ce sont les gestionnaires de réseaux de distribution d'électricité et de gaz, également appelés « distributeurs »",
+    "relu": false
+   },
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Linky est le compteur d'électricité communicant installé par le gestionnaire de réseaux Enedis sur 95% du territoire.",
+    "relu": false
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Les fournisseurs achètent l'électricité ou le gaz aux producteurs et les revendent aux consommateurs.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-068",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "quiz › question 2",
+  "texte": "Sans consentement valide du titulaire, pour ce point et à cette date, le tiers n’a pas accès aux données.",
+  "affirmation": "Sans accord valide du titulaire pour le point et la période concernés, le tiers n’a pas accès aux données.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Pour un client personne morale (la mairie), les documents Enedis parlent d'« autorisation expresse » (article R. 111-27 du code de l’énergie, cité par Enedis) ; le mot « consentement » est réservé aux personnes physiques (RGPD). Le terme du cours reste compréhensible, mais l’article du code n’a pas pu être lu sur Légifrance (accès refusé, erreur 403).",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les GRD sont autorisés à communiquer à un fournisseur ou à un tiers les informations relatives à un client dès lors que ce dernier l'a expressément autorisé",
+    "relu": true,
+    "page": "p. 3 (citation de l'article R. 111-27 du code de l'énergie)"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Le Tiers Autorisé doit disposer de l'autorisation expresse préalable du client",
+    "relu": true,
+    "page": "art. 3.1"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "À défaut de précision sur la durée de validité de l'autorisation, les parties conviennent que cette-dernière n'est pas valable.",
+    "relu": true,
+    "page": "art. 3.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-069",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "quiz › question 3 (énoncé)",
+  "texte": "Index au 1er mars : 99 850 m³. Index au 1er avril : 00 420 m³ (compteur à 5 chiffres). Consommation ?",
+  "affirmation": "Relevés inventés d’un compteur gaz à 5 chiffres.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-070",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "quiz › question 3 (explication)",
+  "texte": "Le compteur a bouclé : (100 000 − 99 850) + 420 = 570 m³.",
+  "affirmation": "(100 000 − 99 850) + 420 = 570.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié.",
+  "sources": []
+ },
+ {
+  "id": "ce2-071",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "quiz › question 4 (énoncé)",
+  "texte": "En janvier, l’école consomme 4 000 m³ de gaz avec un coefficient de 11,2 kWh/m³. Combien de kWh ?",
+  "affirmation": "Données inventées pour l’école (4 000 m³, coefficient 11,2).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "11,2 kWh/m³ est dans la plage publiée par GRDF pour le gaz H.",
+  "sources": []
+ },
+ {
+  "id": "ce2-072",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "quiz › question 4 (explication)",
+  "texte": "kWh = m³ × coefficient = 4 000 × 11,2 = 44 800 kWh.",
+  "affirmation": "4 000 × 11,2 = 44 800.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié.",
+  "sources": []
+ },
+ {
+  "id": "ce2-073",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "quiz › question 5",
+  "texte": "L’abonnement (et la part fixe de l’acheminement, donc la CTA) ne dépend pas des kWh consommés.",
+  "affirmation": "L’abonnement, la part fixe de l’acheminement et la CTA ne dépendent pas des kWh consommés.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-elements-facture",
+    "passage": "Quelle que soit la quantité d'énergie consommée le montant de l'abonnement est le même.",
+    "relu": false
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-074",
+  "fichier": "cours/contenu/etape-2.js",
+  "repere": "quiz › question 6",
+  "texte": "La période de facturation de l’école va du 14 au 13 : elle ne coïncide pas avec le mois civil. On aligne les périodes avant de comparer.",
+  "affirmation": "La période de facturation de l’école va du 14 au 13.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-075",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.tele.fiche › Fréquence (électricité)",
+  "texte": "Fréquence: \"10 min (élec), 1 jour (gaz)\"",
+  "affirmation": "Fréquence du télérelevé : 10 minutes en électricité.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "5 ou 10 min (élec), 1 jour (gaz)",
+  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
+    "relu": true,
+    "page": "p. 5"
+   }
+  ]
+ },
+ {
+  "id": "ce2-076",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.tele.fiche › Fréquence (gaz)",
+  "texte": "Fréquence: \"10 min (élec), 1 jour (gaz)\"",
+  "affirmation": "Fréquence du télérelevé : 1 jour en gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "consommations semestrielles, mensuelles, quotidiennes...), ainsi qu'aux données techniques du compteur et aux données contractuelles",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-077",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.tele.fiche › Délai",
+  "avant": "Délai: \"le lendemain\"",
+  "texte": "Délai: \"le lendemain (élec), 1 à 3 jours (gaz)\"",
+  "affirmation": "Les données de télérelevé sont disponibles le lendemain.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "le lendemain (élec), 1 à 3 jours (gaz)",
+  "note": "Même correction que dans le tableau comparatif.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "Les index quotidiens correspondant à la consommation du jour J sont relevés en J + 1 (proche de minuit), datés de J + 1 et envoyés en J + 1",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de consommation sont généralement mises à jour avec un décalage de 1 à 3 jours",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-078",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.*.fiche › jauges Finesse et Fiabilité",
+  "texte": "Finesse: 5,",
+  "affirmation": "Notes de finesse et de fiabilité sur 5 attribuées à chaque source.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Appréciation du cours (télérelevé 5 et 3, index 2 et 4, facture 1 et 4).",
+  "sources": []
+ },
+ {
+  "id": "ce2-079",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.tele.usage",
+  "texte": "Analyser : voir quand et comment on consomme.",
+  "affirmation": "Usage du télérelevé.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-080",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.index.fiche › Fréquence",
+  "texte": "Fréquence: \"1 relevé par mois\"",
+  "affirmation": "L’école a un relevé d’index par mois.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-081",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.index.fiche › Délai",
+  "texte": "Délai: \"quelques jours\"",
+  "affirmation": "Les index sont disponibles en quelques jours.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Même remarque que dans le tableau comparatif : ordre de grandeur du cas d’école, sans source.",
+  "sources": []
+ },
+ {
+  "id": "ce2-082",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.index.usage",
+  "texte": "Contrôler : c’est la référence du comptage, qui recoupe le reste.",
+  "affirmation": "Usage de l’index.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-083",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.facture.fiche › Fréquence",
+  "texte": "Fréquence: \"1 par période\"",
+  "affirmation": "Une facture par période de facturation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-084",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.facture.fiche › Délai",
+  "texte": "Délai: \"2 à 6 semaines\"",
+  "affirmation": "La facture arrive 2 à 6 semaines après la période.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Même remarque que dans le tableau comparatif : ordre de grandeur du cas d’école, sans source.",
+  "sources": []
+ },
+ {
+  "id": "ce2-085",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "SOURCES.facture.usage",
+  "texte": "Chiffrer : c’est la référence financière, ce qu’on paie vraiment.",
+  "affirmation": "Usage de la facture.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-086",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Télérelevé › texte électricité (calcul)",
+  "texte": "points (7 × 144)",
+  "affirmation": "Une semaine au pas de 10 minutes compte 7 × 144 = 1 008 points.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié (144 points par jour à 10 minutes). Au pas de 5 minutes, ce serait 7 × 288.",
+  "sources": []
+ },
+ {
+  "id": "ce2-087",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Télérelevé › texte électricité (définition)",
+  "texte": "Chaque point est une {{puissance}} moyenne sur 10 minutes, en {{kw}}.",
+  "affirmation": "Chaque point de la courbe de charge est une puissance moyenne sur le pas de temps.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Définition conforme à celle d’Enedis. Le pas de 10 minutes est celui de l’école fictive (pas nominal Enedis : 5 minutes) ; Enedis exprime les points en W.",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "correspond à la puissance moyenne constatée sur un pas de temps précis",
+    "relu": true,
+    "page": "§ 1.3.1"
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Ensemble de valeurs moyennes horodatées de la puissance active soutirée sur des périodes d'intégration consécutives et de même durée",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-088",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Télérelevé › lignes brutes › note (fait)",
+  "texte": "L’API peut livrer des watts (W)",
+  "affirmation": "Les données de courbe de charge peuvent être livrées en watts.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "En puissance active, dont l'unité est le Watt (W)",
+    "relu": true,
+    "page": "§ 1.3.1"
+   },
+   {
+    "cle": "consometers-data-connect",
+    "passage": "\"unit\": \"W\"",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-089",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Télérelevé › lignes brutes › note (calcul)",
+  "texte": "23 400 W = 23,4 kW",
+  "affirmation": "23 400 W = 23,4 kW.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié.",
+  "sources": []
+ },
+ {
+  "id": "ce2-090",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Télérelevé › lignes brutes › note (renvoi)",
+  "texte": "Vérifier l’unité fait partie de l’étape Fiabiliser.",
+  "affirmation": "Renvoi vers l’étape 3.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-091",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Télérelevé › texte gaz",
+  "texte": "**Gaz** ({{gazpar}}) : une seule valeur par jour, en m³, convertie en kWh avec le {{coef-conversion}}.",
+  "affirmation": "Le gaz est mesuré par une valeur par jour en m³, convertie en kWh par le coefficient de conversion.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "consommations semestrielles, mensuelles, quotidiennes...), ainsi qu'aux données techniques du compteur et aux données contractuelles",
+    "relu": true
+   },
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-092",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Index › alerte « recule »",
+  "texte": "Un index électrique <b>recule</b> : la différence est négative. C’est impossible physiquement, donc c’est une erreur de relevé ou de saisie.",
+  "affirmation": "Un index de consommation ne peut pas reculer ; une différence négative signale une erreur.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les index totalisateurs permettent de comptabiliser l'énergie durant l'intégralité de la période de fonctionnement du compteur",
+    "relu": false,
+    "page": "§ 1.3.2.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-093",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Index › alerte « changé »",
+  "texte": "Le compteur gaz a été <b>changé</b> le 15 janvier : il faut raccorder l’index de dépose de l’ancien et l’index de pose du nouveau.",
+  "affirmation": "Scénario de l’école : changement de compteur gaz le 15 janvier.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-094",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Index › alerte « bouclé »",
+  "texte": "L’index gaz a <b>bouclé</b> : après 99 999 m³ il repart à 0. La vraie consommation est (100 000 − début) + fin.",
+  "affirmation": "Scénario de l’école : bouclage d’un compteur gaz à 5 chiffres.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-095",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Index › alerte « estimé »",
+  "texte": "Un relevé gaz est <b>estimé</b> : la consommation de ce mois sera corrigée au relevé suivant.",
+  "affirmation": "Scénario de l’école : relevé gaz estimé puis corrigé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-096",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Index › introduction",
+  "texte": "Chaque mois, on relève le totalisateur ({{index}}) de chaque {{cadran}}. **Consommation = index de fin − index de début.**",
+  "affirmation": "Consommation = index de fin − index de début, pour chaque cadran.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d'énergie facturée",
+    "relu": false
+   },
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Chaque classe temporelle correspond à un cadran (affiché directement sur le compteur Linky)",
+    "relu": false,
+    "page": "§ 1.3.2.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-097",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Facture › en-tête (PDL)",
+  "texte": "Électricité · PDL 30001234567890",
+  "affirmation": "Identifiant PDL inventé pour l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Le format est réaliste : un PDL (ou PRM) est bien une suite de 14 chiffres.",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-098",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Facture › en-tête (PCE)",
+  "texte": "Gaz naturel · PCE 21456789012345",
+  "affirmation": "Identifiant PCE inventé pour l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Le format est réaliste : un PCE compte 14 chiffres, ou « GI » suivi de 6 chiffres.",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "p. 39"
+   }
+  ]
+ },
+ {
+  "id": "ce2-099",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Facture › ligne TVA",
+  "texte": "<span>TVA 20 %</span>",
+  "affirmation": "La TVA de la facture est de 20 %.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "depuis le 1er août 2025, le taux normal de TVA s'applique sur toute la facture, quelle que soit la puissance souscrite",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Le taux de TVA sur la consommation de gaz naturel est le taux normal, soit 20%.",
+    "relu": false,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-100",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Facture › note",
+  "texte": "Montants fictifs. La période de facturation va du 14 au 13 : elle ne coïncide pas avec le mois civil.",
+  "affirmation": "Montants et période de facturation de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-101",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Facture › texte (facture estimée)",
+  "texte": "Cette facture est une {{facture-estimee}} : le fournisseur n’avait pas de relevé réel. La suivante contiendra une {{regularisation}}.",
+  "affirmation": "Scénario de l’école : facture estimée suivie d’une régularisation.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Le mécanisme (estimation puis régularisation) est réel.",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Mon fournisseur peut établir des factures intermédiaires à partir de ses propres estimations",
+    "relu": false
+   },
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "Une régularisation intervient ensuite, en fonction de ma consommation réelle.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-102",
+  "fichier": "cours/demos/collecter.js",
+  "repere": "vue Facture › texte (trois familles)",
+  "texte": "Les lignes se regroupent en trois familles : {{abonnement}} et {{fourniture}} (le fournisseur), {{acheminement}} (les réseaux), taxes ({{accise}}, {{cta}}, {{tva}}).",
+  "affirmation": "Une facture d’énergie se décompose en fourniture, acheminement et taxes (accise, CTA, TVA).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-prix-pro",
+    "passage": "La fourniture d'énergie proprement dite, l'acheminement, c'est-à-dire l'utilisation des réseaux et les taxes et contributions.",
+    "relu": false
+   },
+   {
+    "cle": "mne-elements-facture",
+    "passage": "CTA, accise et TVA sont les 3 taxes et contributions appliquées sur mes factures d'énergie.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-103",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "formulaire › Qui ? (titulaire)",
+  "texte": "Mairie (fictive), qui a les contrats de l’école",
+  "affirmation": "La mairie fictive est titulaire des contrats.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-104",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "formulaire › Qui ? (tiers)",
+  "texte": "l’éditeur du logiciel d’energy management",
+  "affirmation": "Le tiers autorisé est l’éditeur du logiciel.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-105",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "formulaire › structure (points, données, durée)",
+  "texte": "<fieldset><legend>Sur quels points ?</legend>",
+  "affirmation": "Un consentement précise les points concernés, les données et la durée.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Structure cohérente avec les exigences lues : périmètre de données défini avec le client (GRDF), durée de validité obligatoire (contrat type Enedis).",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Vous avez défini ensemble le périmètre de données qu'il souhaite partager avec vous",
+    "relu": false,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "À défaut de précision sur la durée de validité de l'autorisation, les parties conviennent que cette-dernière n'est pas valable.",
+    "relu": true,
+    "page": "art. 3.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-106",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "formulaire › Pour combien de temps ?",
+  "texte": "<option value=\"12\">1 an</option><option value=\"24\">2 ans</option><option value=\"36\" selected>3 ans</option>",
+  "affirmation": "Durées proposées dans le formulaire simulé : 1, 2 ou 3 ans.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Le plafond de 3 ans est celui de Data Connect (compteurs jusqu’à 36 kVA). Pour un site comme l’école (SGE) ou pour GRDF, aucun plafond chiffré n’a été lu : seule une durée de validité est exigée.",
+  "sources": [
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "demander un consentement pour une durée maximale de trois années",
+    "relu": true,
+    "page": "art. 3.2"
+   }
+  ]
+ },
+ {
+  "id": "ce2-107",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "formulaire › case d'accord",
+  "texte": "J’autorise ce tiers à accéder à ces données pour cette durée.",
+  "affirmation": "Texte de la case d’accord simulée.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-108",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "bouton Révoquer / message d'API",
+  "texte": "Consentement révoqué par le titulaire.",
+  "affirmation": "Le titulaire peut retirer son accord, ce qui coupe l’accès du tiers.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le client peut interrompre à tout moment la transmission récurrente de sa courbe de charge à un fournisseur ou à un tiers sur simple demande au GRD",
+    "relu": false,
+    "page": "p. 8"
+   },
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "la révocation du consentement de mise à disposition de ses Données au service du Bénéficiaire",
+    "relu": false,
+    "page": "annexe 3, § 3.3.3"
+   }
+  ]
+ },
+ {
+  "id": "ce2-109",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "API simulée › messages de refus",
+  "texte": "Aucun consentement pour ce point.",
+  "affirmation": "Réponses 403 de l’API simulée (absence, expiration, périmètre, type de données).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "API inventée pour la démo ; les vraies API (Enedis, GRDF) ont leurs propres codes et messages.",
+  "sources": []
+ },
+ {
+  "id": "ce2-110",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "API simulée › réponse courbe",
+  "texte": "\"pas\": \"PT10M\", \"unite\": \"W\"",
+  "affirmation": "Réponse simulée : courbe au pas de 10 minutes, en W.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Paramètre de l’école fictive. À rapprocher de la correction sur le pas de temps : le pas nominal d’Enedis au-delà de 36 kVA est de 5 minutes ; 10 minutes reste possible sur quelques compteurs.",
+  "sources": []
+ },
+ {
+  "id": "ce2-111",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "API simulée › réponse consommations gaz",
+  "texte": "\"volume_m3\": 6.8, \"coefficient\": 11.24, \"energie_kwh\": 76",
+  "affirmation": "Réponse simulée : 6,8 m³ × 11,24 = 76 kWh.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Arithmétique cohérente (6,8 × 11,24 = 76,4, arrondi à 76).",
+  "sources": []
+ },
+ {
+  "id": "ce2-112",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "API simulée › réponse contrat",
+  "texte": "\"segment\": \"C4\", \"puissance_souscrite_kva\": 60, \"postes\": [\"HPH\", \"HCH\", \"HPB\", \"HCB\"]",
+  "affirmation": "Réponse simulée : école en C4, 60 kVA, quatre postes horosaisonniers.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent avec les définitions réelles : C4 = basse tension > 36 kVA ; quatre classes temporelles en BT > 36 kVA.",
+  "sources": [
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "point de connexion raccordé en BT > 36 kVA et auquel est associé un contrat unique",
+    "relu": true
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Heures Pleines saison Haute (HPH), Heures Creuses saison Haute (HCH), Heures Pleines saison Basse (HPB), Heures Creuses saison Basse (HCB)",
+    "relu": false,
+    "page": "p. 15"
+   }
+  ]
+ },
+ {
+  "id": "ce2-113",
+  "fichier": "cours/demos/consentement.js",
+  "repere": "console › message initial",
+  "texte": "API simulée. Appuie sur un bouton pour appeler l’API.",
+  "affirmation": "L’API de la démo est simulée.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-114",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "boutons de période",
+  "texte": "14 janv. → 13 févr. (facture)",
+  "affirmation": "Période de facturation de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-115",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "interrupteur Trous de données",
+  "texte": "Supprime la journée du 3 février dans la courbe",
+  "affirmation": "Anomalie simulée.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-116",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "interrupteur Index estimé",
+  "texte": "Le relevé gaz du 1er février est estimé",
+  "affirmation": "Anomalie simulée.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-117",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "note Index (période facture)",
+  "texte": "Pas de relevé d’index le 14 : impossible de comparer directement sur cette période.",
+  "affirmation": "Dans le cas d’école, les index sont relevés le 1er du mois.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-118",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "note Facture (mois civil)",
+  "texte": "au prorata des jours de deux factures (13 j + 18 j)",
+  "affirmation": "Janvier = 13 jours de la facture précédente + 18 jours de la suivante.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié (13 + 18 = 31).",
+  "sources": []
+ },
+ {
+  "id": "ce2-119",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "message (mois civil)",
+  "texte": "Index et télérelevé couvrent exactement le mois : ils doivent concorder. La facture, elle, ne couvre pas le mois civil : on l’a répartie au prorata des jours, ce qui crée un écart.",
+  "affirmation": "Méthode de recoupement des trois sources sur un mois civil.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-120",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "message (période facture)",
+  "texte": "Sur la période de la facture, on compare directement télérelevé et facture. Il n’y a pas d’index à ces dates : les relevés mensuels tombent le 1er.",
+  "affirmation": "Méthode de recoupement sur la période de facturation de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-121",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "message (trou)",
+  "texte": "La journée du 3 février manque dans la courbe : sa somme est trop basse par rapport à la facture. C’est le recoupement qui permet de le repérer.",
+  "affirmation": "Scénario : un trou dans la courbe se repère par recoupement.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-122",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "message (facture estimée)",
+  "texte": "La facture gaz de cette période est **estimée** : elle sous-estime la réalité d’environ 30 %. La suivante contiendra une régularisation.",
+  "affirmation": "Scénario : facture gaz estimée 30 % trop bas.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-123",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "message (index estimé)",
+  "texte": "Le relevé d’index du 1er février est **estimé** : la différence d’index est fausse jusqu’au relevé réel suivant.",
+  "affirmation": "Scénario : index estimé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-124",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "barre Télérelevé › note (électricité)",
+  "texte": "somme de la courbe de charge (kW × 1/6 h)",
+  "affirmation": "Énergie = somme des puissances × 1/6 h au pas de 10 minutes.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Exact pour un pas de 10 minutes (1/6 h) ; ce serait 1/12 h au pas de 5 minutes.",
+  "sources": []
+ },
+ {
+  "id": "ce2-125",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "barre Télérelevé › note (gaz)",
+  "texte": "somme des consommations journalières Gazpar",
+  "affirmation": "Le total gaz est la somme des consommations journalières.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-126",
+  "fichier": "cours/demos/trois-voies.js",
+  "repere": "message clé n° 2",
+  "texte": "Message clé n° 2 : trois sources, une même vérité.",
+  "affirmation": "Message pédagogique.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-127",
+  "fichier": "cours/demos/cas-index.js",
+  "repere": "cas 1 › explication (méthode)",
+  "texte": "Il faut additionner les différences de tous les cadrans",
+  "affirmation": "La consommation d’un compteur multi-cadrans est la somme des différences de tous les cadrans.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Chaque classe temporelle correspond à un cadran (affiché directement sur le compteur Linky)",
+    "relu": false,
+    "page": "§ 1.3.2.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-128",
+  "fichier": "cours/demos/cas-index.js",
+  "repere": "cas 1 › explication (saison)",
+  "texte": "En janvier (saison haute), HPB et HCB ne bougent pas.",
+  "affirmation": "Janvier est en saison haute : les cadrans de saison basse ne tournent pas.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Actuellement, la saison haute est constituée des mois de novembre inclus à mars inclus.",
+    "relu": true,
+    "page": "p. 22"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Heures Pleines saison Haute (HPH), Heures Creuses saison Haute (HCH), Heures Pleines saison Basse (HPB), Heures Creuses saison Basse (HCB)",
+    "relu": false,
+    "page": "p. 15"
+   }
+  ]
+ },
+ {
+  "id": "ce2-129",
+  "fichier": "cours/demos/cas-index.js",
+  "repere": "cas 2 › explication",
+  "texte": "Le compteur est passé par 99 999 puis 00 000 : (100 000 − 99 850) + 420 = 570 m³.",
+  "affirmation": "(100 000 − 99 850) + 420 = 570 ; calcul naïf 420 − 99 850 = −99 430.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calculs vérifiés.",
+  "sources": []
+ },
+ {
+  "id": "ce2-130",
+  "fichier": "cours/demos/cas-index.js",
+  "repere": "cas 3 › explication",
+  "texte": "On additionne ce que chaque compteur a mesuré : (50 100 − 48 454) + (1 950 − 0) = 1 646 + 1 950 = 3 596 m³.",
+  "affirmation": "1 646 + 1 950 = 3 596 ; calcul naïf 1 950 − 48 454 = −46 504.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calculs vérifiés.",
+  "sources": []
+ },
+ {
+  "id": "ce2-131",
+  "fichier": "cours/demos/cas-index.js",
+  "repere": "cas 4 › explication (calcul)",
+  "texte": "Seuls les relevés réels comptent : 55 602 − 48 454 = 7 148 m³.",
+  "affirmation": "55 602 − 48 454 = 7 148 ; calcul naïf 50 850 − 48 454 = 2 396.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calculs vérifiés.",
+  "sources": []
+ },
+ {
+  "id": "ce2-132",
+  "fichier": "cours/demos/cas-index.js",
+  "repere": "cas 4 › explication (suite)",
+  "texte": "Janvier seul avait été estimé à 2 396 m³ ; sa vraie valeur (3 852 m³) n’est connue qu’après coup, donc un bilan de janvier peut changer.",
+  "affirmation": "Valeur réelle de janvier dans le cas d’école : 3 852 m³.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "3 852 m³ vient du modèle de l’école et ne se déduit pas des relevés affichés (il suppose 3 296 m³ en février).",
+  "sources": []
+ },
+ {
+  "id": "ce2-133",
+  "fichier": "cours/demos/cas-index.js",
+  "repere": "retour › calcul naïf négatif",
+  "texte": "une consommation négative, qui aurait dû déclencher une alerte.",
+  "affirmation": "Une consommation négative doit déclencher une alerte.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-134",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.abonnement",
+  "texte": "Le droit d’être client, indépendamment de la consommation.",
+  "affirmation": "L’abonnement est dû quelle que soit la consommation ; il revient au fournisseur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-elements-facture",
+    "passage": "Quelle que soit la quantité d'énergie consommée le montant de l'abonnement est le même.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-135",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.fourniture",
+  "texte": "L’énergie elle-même : chaque kWh consommé, au prix du contrat (différent selon le poste horosaisonnier pour l’électricité).",
+  "affirmation": "La fourniture est proportionnelle aux kWh consommés, au prix du contrat.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Le prix différencié par poste est celui du contrat fictif de l’école. Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-prix-pro",
+    "passage": "La facture est composée d'une part fixe, l'abonnement, et d'une part variable, proportionnelle à la quantité d'énergie consommée.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-136",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.acheminement › quoi (tarifs)",
+  "texte": "Le transport de l’énergie par les réseaux jusqu’à l’école : TURPE pour l’électricité, ATRD et transport pour le gaz.",
+  "affirmation": "L’acheminement correspond au TURPE en électricité, à l’ATRD (distribution) et au tarif de transport en gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La page de la CRE sur l’ATRT7 date de 2020 : elle atteste le nom du tarif de transport, pas son niveau actuel.",
+  "sources": [
+   {
+    "cle": "enedis-facturation-acheminement",
+    "passage": "vise à couvrir les coûts de développement, de maintenance et d'exploitation supportés par les gestionnaires de réseaux",
+    "relu": false
+   },
+   {
+    "cle": "cre-atrd7",
+    "passage": "la CRE fixe le tarif d'utilisation des réseaux de distribution de gaz naturel",
+    "relu": false
+   },
+   {
+    "cle": "cre-tarifs-gaz",
+    "passage": "Le nouveau tarif ATRT7 s'appliquera à compter du 1er avril 2020, pour une durée de quatre ans, aux réseaux de transport de gaz naturel de GRTgaz et Teréga.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-137",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.acheminement › quoi (structure)",
+  "texte": "Une part dépend de la puissance souscrite, une autre des kWh.",
+  "affirmation": "Le tarif d’acheminement électrique comprend une part liée à la puissance souscrite et une part liée à l’énergie.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La composante de soutirage combine un coefficient appliqué à la puissance souscrite (€/kVA) et un coefficient appliqué à l’énergie soutirée (c€/kWh).",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": false,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Coefficient pondérateur de la puissance (bi)",
+    "relu": false,
+    "page": "p. 15-16 (grille BT > 36 kVA, à côté du coefficient pondérateur de l'énergie)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-138",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.acheminement › qui",
+  "texte": "Le distributeur (Enedis ou GRDF) et le transporteur, via le fournisseur.",
+  "affirmation": "Le fournisseur encaisse l’acheminement et le reverse aux gestionnaires de réseaux.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-facturation-acheminement",
+    "passage": "le fournisseur reverse le montant de l'acheminement à Enedis",
+    "relu": false
+   },
+   {
+    "cle": "cre-tarif-acces",
+    "passage": "facturée par le gestionnaire de réseau aux fournisseurs, ces derniers refacturant les montants correspondants à leurs clients",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-139",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.depassement",
+  "texte": "La pénalité quand la puissance appelée dépasse la puissance souscrite (calcul simplifié ici).",
+  "affirmation": "Au-delà de 36 kVA, un dépassement de la puissance souscrite est facturé (composante mensuelle des dépassements).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Tarif réel en basse tension > 36 kVA au 1er août 2026 : 12,79 € par heure de dépassement ; le cours utilise 12,4 (valeur fictive).",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l'utilisateur au-delà de sa puissance souscrite.",
+    "relu": false,
+    "page": "p. 7"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "CMDPS = 12,79 x h (€)",
+    "relu": false,
+    "page": "p. 16"
+   }
+  ]
+ },
+ {
+  "id": "ce2-140",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.regularisation",
+  "texte": "Le rattrapage de l’écart entre la consommation estimée sur la facture précédente et la consommation réelle.",
+  "affirmation": "Une régularisation corrige l’écart entre consommation estimée et consommation réelle.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "Une régularisation intervient ensuite, en fonction de ma consommation réelle.",
+    "relu": false
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Mon fournisseur peut établir des factures intermédiaires à partir de ses propres estimations",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-141",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.accise › électricité",
+  "avant": "26,35 €/MWh pour l’électricité",
+  "texte": "26,35 €/MWh pour l’électricité d’un site de plus de 36 kVA comme l’école (30,62 €/MWh jusqu’à 36 kVA)",
+  "affirmation": "L’accise sur l’électricité est de 26,35 €/MWh au 1er août 2026.",
+  "type": "regle",
+  "verdict": "corrige",
+  "correction": "Une taxe sur chaque MWh consommé (au 1er août 2026 : 26,35 €/MWh pour l’électricité d’un site de plus de 36 kVA comme l’école, et 16,66 €/MWh pour le gaz).",
+  "note": "Montant exact pour la catégorie « PME » (plus de 36 kVA et jusqu’à 250 kVA) et la haute puissance ; les ménages et les sites jusqu’à 36 kVA paient 30,62 €/MWh. À préciser pour ne pas laisser croire à un taux unique.",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Petites et moyennes entreprises (36 kVA < puissance ≤ 250 kVA) […] 01/08/2026 – 31/01/2027 […] 26,35",
+    "relu": true,
+    "page": "p. 12-13 (tableau « Tarif applicable sur l'électricité en €/MWh »)"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Ménages (puissance ≤ 250 kVA) et assimilés (activités économiques avec puissance ≤ 36 kVA) […] 01/08/2026 – 31/01/2027 […] 30,62",
+    "relu": true,
+    "page": "p. 12-13 (même tableau)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-142",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.accise › gaz",
+  "texte": "16,66 €/MWh pour le gaz",
+  "affirmation": "L’accise sur le gaz naturel est de 16,66 €/MWh au 1er août 2026.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Tarif normal de l'accise sur le gaz naturel combustible, tenant compte de l'injection de biogaz dans le réseau (en €/MWh) […] 08/26 – 01/27 […] 16,66",
+    "relu": true,
+    "page": "p. 17 (tableau)"
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "Depuis le 1er août 2026, cette taxe s'élève à 0,01666 €/kWh",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-143",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.accise › qui",
+  "avant": "qui: \"L’État.\"",
+  "texte": "L’État. Pour l’électricité, une part majorée revient aux communes et aux départements.",
+  "affirmation": "L’accise est proportionnelle aux MWh consommés et revient à l’État.",
+  "type": "regle",
+  "verdict": "corrige",
+  "correction": "Qui reçoit l’argent : l’État (pour l’électricité, une part majorée revient aussi aux communes et aux départements).",
+  "note": "La ligne « qui » de l’accise dit seulement « L’État. ». Depuis l’intégration des anciennes taxes locales (départementale en 2022, communale en 2023), des majorations de l’accise sur l’électricité sont affectées aux collectivités.",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Ces majorations de l'accise sur l'électricité sont affectées aux collectivités territoriales correspondantes en fonction des quantités d'électricité qui ont été consommées sur leurs territoires",
+    "relu": false,
+    "page": "p. 11"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Fraction perçue sur l'électricité : Il s'agit de la nouvelle dénomination de la TICFE",
+    "relu": false,
+    "page": "p. 4"
+   }
+  ]
+ },
+ {
+  "id": "ce2-144",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.cta › quoi (définition)",
+  "texte": "Contribution tarifaire d’acheminement : un pourcentage de la part fixe de l’acheminement",
+  "affirmation": "La CTA est un pourcentage de la part fixe du tarif d’acheminement.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-145",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.cta › quoi (électricité)",
+  "texte": "15 % pour l’électricité depuis février 2026",
+  "affirmation": "CTA électricité : 15 % depuis le 1er février 2026.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cnieg-cta-2026",
+    "passage": "le taux CTA distribution électricité passe de 21,93 % à 15 % ;",
+    "relu": true
+   },
+   {
+    "cle": "cnieg-cta-note",
+    "passage": "L'arrêté du 28 janvier 2026 fixe ces taux pour la période à compter du 1er février 2026.",
+    "relu": false,
+    "page": "p. 4"
+   }
+  ]
+ },
+ {
+  "id": "ce2-146",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.cta › quoi (gaz)",
+  "avant": "20,80 % pour le gaz)",
+  "texte": "pour le gaz, 20,80 % de la part fixe de distribution, plus une quote-part liée au transport",
+  "affirmation": "CTA gaz : 20,80 %.",
+  "type": "regle",
+  "verdict": "corrige",
+  "correction": "(15 % pour l’électricité depuis février 2026 ; pour le gaz, 20,80 % de la part fixe de distribution, plus une quote-part liée au transport)",
+  "note": "20,80 % est exact pour la part distribution ; la formule complète ajoute coefficient × 4,71 % au titre du transport.",
+  "sources": [
+   {
+    "cle": "cnieg-cta-note",
+    "passage": "Prestation de distribution de gaz naturel 20,80%",
+    "relu": true,
+    "page": "p. 4"
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "CTA = [Quote-part distribution] × (20,80 % + [Coefficient] × 4,71 %)",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-147",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.cta › qui",
+  "texte": "La caisse de retraite des industries électriques et gazières.",
+  "affirmation": "La CTA est affectée à la Caisse nationale des industries électriques et gazières (CNIEG).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Le produit de cette contribution est affecté à la Caisse nationale des industries électriques et gazières",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-148",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.tva › quoi",
+  "texte": "La TVA, à 20 % sur l’ensemble de la facture.",
+  "affirmation": "La TVA est de 20 % sur l’ensemble de la facture.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "depuis le 1er août 2025, le taux normal de TVA s'applique sur toute la facture, quelle que soit la puissance souscrite",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Le taux de TVA sur la consommation de gaz naturel est le taux normal, soit 20%.",
+    "relu": false,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-149",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "LIGNES.tva › qui (seconde occurrence de « L'État. »)",
+  "texte": "qui: \"L’État.\"",
+  "affirmation": "La TVA est collectée par le vendeur et reversée à l’État.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La ligne « qui » de la TVA dit « L’État. ». Page ministérielle ancienne (non mise à jour), suffisante pour ce principe.",
+  "sources": [
+   {
+    "cle": "minefi-tva",
+    "passage": "C'est le vendeur du produit ou du service qui collecte la TVA auprès de ses clients et qui est ensuite chargé de la reverser à l'État.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-150",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "message final",
+  "texte": "moins de 10 %, car l’{{abonnement}}, la part fixe de l’{{acheminement}} et la {{cta}} ne dépendent pas des kWh.",
+  "affirmation": "Une baisse de 10 % des kWh réduit la facture de moins de 10 %, car l’abonnement, la part fixe de l’acheminement et la CTA sont indépendants des kWh.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Les montants affichés sont calculés sur la facture fictive.",
+  "sources": [
+   {
+    "cle": "mne-elements-facture",
+    "passage": "Quelle que soit la quantité d'énergie consommée le montant de l'abonnement est le même.",
+    "relu": false
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-151",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "panneau › Si l'école consomme 10 % de moins",
+  "texte": "elle ne bouge pas.",
+  "affirmation": "Simulation d’une baisse de 10 % sur chaque ligne de la facture fictive.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-152",
+  "fichier": "cours/demos/anatomie-facture.js",
+  "repere": "facture › tampon",
+  "texte": "Consommation estimée",
+  "affirmation": "Facture fictive marquée comme estimée.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-153",
+  "fichier": "commun/donnees/references.js",
+  "repere": "NOTE_TARIFS",
+  "texte": "Taxes vérifiées en septembre 2026 (accise au 1er août 2026, CTA au 1er février 2026) ; prix de fourniture et d’acheminement fictifs",
+  "affirmation": "Note du cours sur la date de vérification des taxes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent avec les vérifications ci-dessous.",
+  "sources": []
+ },
+ {
+  "id": "ce2-154",
+  "fichier": "commun/donnees/references.js",
+  "repere": "TARIF_ELEC › prix fictifs",
+  "texte": "abonnementMois: 18,",
+  "affirmation": "Abonnement, prix de fourniture, TURPE et pénalité de dépassement de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Valeurs inventées (60 kVA, cos φ 0,93, prix par poste, TURPE, pénalité 12,4). Pour mémoire, la composante réelle de dépassement en BT > 36 kVA est de 12,79 €/h au 1er août 2026.",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "CMDPS = 12,79 x h (€)",
+    "relu": false,
+    "page": "p. 16"
+   }
+  ]
+ },
+ {
+  "id": "ce2-155",
+  "fichier": "commun/donnees/references.js",
+  "repere": "TARIF_ELEC.acciseMWh",
+  "texte": "acciseMWh: 26.35,",
+  "affirmation": "Accise électricité utilisée pour l’école : 26,35 €/MWh.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Tarif de la catégorie « PME » (plus de 36 kVA et jusqu’à 250 kVA) au 1er août 2026 ; la catégorie fiscale d’une école communale reste à vérifier (30,62 €/MWh si elle relève des « ménages et assimilés »).",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Petites et moyennes entreprises (36 kVA < puissance ≤ 250 kVA) […] 01/08/2026 – 31/01/2027 […] 26,35",
+    "relu": true,
+    "page": "p. 12-13 (tableau « Tarif applicable sur l'électricité en €/MWh »)"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Ménages (puissance ≤ 250 kVA) et assimilés (activités économiques avec puissance ≤ 36 kVA) […] 01/08/2026 – 31/01/2027 […] 30,62",
+    "relu": true,
+    "page": "p. 12-13 (même tableau)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-156",
+  "fichier": "commun/donnees/references.js",
+  "repere": "TARIF_ELEC.ctaTaux",
+  "texte": "ctaTaux: 0.15,",
+  "affirmation": "CTA électricité : 15 %.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cnieg-cta-2026",
+    "passage": "le taux CTA distribution électricité passe de 21,93 % à 15 % ;",
+    "relu": true
+   },
+   {
+    "cle": "cnieg-cta-note",
+    "passage": "L'arrêté du 28 janvier 2026 fixe ces taux pour la période à compter du 1er février 2026.",
+    "relu": false,
+    "page": "p. 4"
+   }
+  ]
+ },
+ {
+  "id": "ce2-157",
+  "fichier": "commun/donnees/references.js",
+  "repere": "TARIF_ELEC.tva",
+  "texte": "tva: 0.2,",
+  "affirmation": "TVA : 20 %.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "depuis le 1er août 2025, le taux normal de TVA s'applique sur toute la facture, quelle que soit la puissance souscrite",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-158",
+  "fichier": "commun/donnees/references.js",
+  "repere": "TARIF_GAZ › prix fictifs",
+  "texte": "abonnementMois: 22,",
+  "affirmation": "Abonnement, fourniture, distribution et transport du gaz de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-159",
+  "fichier": "commun/donnees/references.js",
+  "repere": "TARIF_GAZ.acciseKwh",
+  "texte": "acciseKwh: 0.01666,",
+  "affirmation": "Accise gaz : 0,01666 €/kWh, soit 16,66 €/MWh.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Tarif normal de l'accise sur le gaz naturel combustible, tenant compte de l'injection de biogaz dans le réseau (en €/MWh) […] 08/26 – 01/27 […] 16,66",
+    "relu": true,
+    "page": "p. 17 (tableau)"
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "Depuis le 1er août 2026, cette taxe s'élève à 0,01666 €/kWh",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-160",
+  "fichier": "commun/donnees/references.js",
+  "repere": "TARIF_GAZ.ctaTaux",
+  "texte": "ctaTaux: 0.208,",
+  "affirmation": "CTA gaz : 20,80 %.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Taux de la part distribution. Le modèle ne compte pas la quote-part transport (coefficient × 4,71 %) : simplification à signaler.",
+  "sources": [
+   {
+    "cle": "cnieg-cta-note",
+    "passage": "Prestation de distribution de gaz naturel 20,80%",
+    "relu": true,
+    "page": "p. 4"
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "CTA = [Quote-part distribution] × (20,80 % + [Coefficient] × 4,71 %)",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-161",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › puissance › def",
+  "texte": "La vitesse à laquelle un appareil consomme de l'énergie à un instant donné. Elle se mesure en watts (W) ou kilowatts (kW).",
+  "affirmation": "Définition de la puissance.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-162",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › puissance › ex",
+  "texte": "À midi, avec la cuisine et toutes les classes allumées, l’école appelle environ 50 kW.",
+  "affirmation": "Puissance de l’école à midi.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-163",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › energie › def",
+  "texte": "La quantité totale consommée sur une durée. C'est la puissance multipliée par le temps, en kilowattheures (kWh).",
+  "affirmation": "Définition de l’énergie.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-164",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › energie › ex",
+  "texte": "Sur une année scolaire, l’école consomme environ 86 000 kWh d’électricité.",
+  "affirmation": "Consommation annuelle de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-165",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kw › def",
+  "texte": "Kilowatt : 1 000 watts. Unité de puissance, comme les km/h pour une voiture.",
+  "affirmation": "Définition du kW.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-166",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kw › ex",
+  "texte": "Le talon nocturne de l’école est d’environ 6 kW.",
+  "affirmation": "Talon de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-167",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kwh › def",
+  "texte": "Kilowattheure : l’énergie consommée par une puissance de 1 kW pendant 1 heure. C’est l’unité qu’on paie, comme les km parcourus.",
+  "affirmation": "Définition du kWh.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-168",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kwh › ex",
+  "texte": "Un radiateur de 2 kW allumé 3 heures consomme 6 kWh.",
+  "affirmation": "2 kW × 3 h = 6 kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié.",
+  "sources": []
+ },
+ {
+  "id": "ce2-169",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › courbe-de-charge › def",
+  "texte": "La suite des puissances moyennes mesurées à intervalle régulier. Elle montre comment la consommation évolue dans la journée.",
+  "affirmation": "Définition de la courbe de charge.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Ensemble de valeurs moyennes horodatées de la puissance active soutirée sur des périodes d'intégration consécutives et de même durée",
+    "relu": false
+   },
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "correspond à la puissance moyenne constatée sur un pas de temps précis",
+    "relu": true,
+    "page": "§ 1.3.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-170",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › courbe-de-charge › ex",
+  "texte": "Au pas de 10 minutes, la courbe de l’école compte 144 points par jour.",
+  "affirmation": "24 h × 6 points par heure = 144 points.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié. Paramètre de l’école fictive. À rapprocher de la correction sur le pas de temps : le pas nominal d’Enedis au-delà de 36 kVA est de 5 minutes ; 10 minutes reste possible sur quelques compteurs.",
+  "sources": []
+ },
+ {
+  "id": "ce2-171",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pas-de-temps › def",
+  "texte": "La durée entre deux mesures successives (10 min, 30 min, 1 h, 1 jour…). Plus il est court, plus la donnée est fine.",
+  "affirmation": "Définition du pas de temps.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "On peut ajouter 5 min à la liste d’exemples (pas nominal Enedis au-delà de 36 kVA).",
+  "sources": []
+ },
+ {
+  "id": "ce2-172",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pas-de-temps › ex",
+  "texte": "Le compteur électrique de l’école mesure au pas de 10 min, le gaz au pas journalier.",
+  "affirmation": "Pas de temps de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Paramètre de l’école fictive. À rapprocher de la correction sur le pas de temps : le pas nominal d’Enedis au-delà de 36 kVA est de 5 minutes ; 10 minutes reste possible sur quelques compteurs.",
+  "sources": []
+ },
+ {
+  "id": "ce2-173",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › index › def",
+  "texte": "Le totalisateur du compteur, qui ne fait qu’augmenter. La consommation d’une période est l’index de fin moins l’index de début.",
+  "affirmation": "Définition de l’index.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les index totalisateurs permettent de comptabiliser l'énergie durant l'intégralité de la période de fonctionnement du compteur",
+    "relu": false,
+    "page": "§ 1.3.2.1"
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d'énergie facturée",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-174",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › index › ex",
+  "texte": "Index gaz au 1er nov. : 41 940 m³ ; au 1er déc. : 44 867 m³ ; consommation : 2 927 m³.",
+  "affirmation": "44 867 − 41 940 = 2 927.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié ; relevés fictifs.",
+  "sources": []
+ },
+ {
+  "id": "ce2-175",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › cadran › def",
+  "texte": "Un index séparé pour une plage horaire ou une saison. Un compteur multi-cadrans a plusieurs index ; la consommation totale est leur somme.",
+  "affirmation": "Définition du cadran.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Chaque classe temporelle correspond à un cadran (affiché directement sur le compteur Linky)",
+    "relu": false,
+    "page": "§ 1.3.2.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-176",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › cadran › ex",
+  "texte": "L’école a 4 postes : HPH, HCH, HPB, HCB.",
+  "affirmation": "Les quatre postes de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Conforme aux quatre classes temporelles du TURPE en basse tension > 36 kVA.",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Heures Pleines saison Haute (HPH), Heures Creuses saison Haute (HCH), Heures Pleines saison Basse (HPB), Heures Creuses saison Basse (HCB)",
+    "relu": false,
+    "page": "p. 15"
+   }
+  ]
+ },
+ {
+  "id": "ce2-177",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › hp-hc › def",
+  "texte": "Des plages horaires où le kWh est plus cher (pleines) ou moins cher (creuses). Combinées aux saisons haute (hiver) et basse, elles donnent les postes horosaisonniers.",
+  "affirmation": "Heures pleines et creuses, combinées aux saisons haute et basse, forment les postes horosaisonniers.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Heures Pleines saison Haute (HPH), Heures Creuses saison Haute (HCH), Heures Pleines saison Basse (HPB), Heures Creuses saison Basse (HCB)",
+    "relu": false,
+    "page": "p. 15"
+   }
+  ]
+ },
+ {
+  "id": "ce2-178",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › hp-hc › ex (heures)",
+  "texte": "Pour l’école (simplifié) : heures pleines de 6 h à 22 h du lundi au samedi",
+  "affirmation": "Heures pleines de l’école : 6 h à 22 h du lundi au samedi.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Simplification assumée : en réalité les plages sont fixées localement par le distributeur.",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les plages temporelles sont fixées localement par le gestionnaire de réseau public de distribution d'électricité.",
+    "relu": false,
+    "page": "p. 22"
+   }
+  ]
+ },
+ {
+  "id": "ce2-179",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › hp-hc › ex (saison)",
+  "texte": "saison haute de novembre à mars",
+  "affirmation": "La saison haute va de novembre à mars.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Actuellement, la saison haute est constituée des mois de novembre inclus à mars inclus.",
+    "relu": true,
+    "page": "p. 22"
+   }
+  ]
+ },
+ {
+  "id": "ce2-180",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › bouclage › def",
+  "texte": "Quand l’index atteint sa valeur maximale, il repart à zéro, comme le compteur kilométrique d’une vieille voiture. Un calcul naïf donne alors une consommation négative.",
+  "affirmation": "Définition du bouclage.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-181",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › bouclage › ex",
+  "texte": "Le compteur gaz a 5 chiffres : après 99 999 m³, il affiche 00 000.",
+  "affirmation": "Compteur gaz à 5 chiffres de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-182",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › distributeur › def (rôle)",
+  "texte": "L’entreprise qui gère les câbles ou les tuyaux jusqu’au bâtiment, pose les compteurs et fournit les données de mesure.",
+  "affirmation": "Le gestionnaire de réseau de distribution achemine l’énergie, pose et relève les compteurs.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "l'acheminement de l'énergie, son entretien et la relève des compteurs",
+    "relu": false
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "de fourniture, de pose et d'entretien des dispositifs de comptage",
+    "relu": false,
+    "page": "p. 6 (composante de comptage)"
+   },
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Linky est le compteur d'électricité communicant installé par le gestionnaire de réseaux Enedis sur 95% du territoire.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-183",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › distributeur › def (unicité)",
+  "texte": "Il est unique pour une zone donnée.",
+  "affirmation": "Le distributeur est en monopole sur sa zone.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "monopole régulé par la Commission de régulation de l'énergie",
+    "relu": false
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Le gestionnaire de réseau de distribution est le même pour tous les fournisseurs.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-184",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › distributeur › ex",
+  "texte": "Pour l’école : Enedis (électricité) et GRDF (gaz).",
+  "affirmation": "Distributeurs de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-185",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › fournisseur › def (rôle)",
+  "texte": "L’entreprise qui vend l’énergie et envoie la facture.",
+  "affirmation": "Le fournisseur vend l’énergie et facture.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Les fournisseurs achètent l'électricité ou le gaz aux producteurs et les revendent aux consommateurs.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-186",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › fournisseur › def (changement)",
+  "texte": "On peut en changer sans changer de compteur ni de distributeur.",
+  "affirmation": "Changer de fournisseur ne change ni le compteur ni le distributeur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-changer-fournisseur",
+    "passage": "Je n'ai pas besoin de changer le compteur lorsque je change de fournisseur.",
+    "relu": false
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Le gestionnaire de réseau de distribution est le même pour tous les fournisseurs.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-187",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › fournisseur › ex",
+  "texte": "L’école reçoit ses factures d’un fournisseur choisi par la mairie, pas d’Enedis.",
+  "affirmation": "Fournisseur de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-188",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › telereleve › def",
+  "texte": "Une mesure transmise automatiquement à distance par le compteur, sans passage d’un technicien.",
+  "affirmation": "Définition du télérelevé.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-linky-facilite",
+    "passage": "Le relevé du compteur Linky s'effectue à distance et sans rendez-vous.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-189",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › telereleve › ex",
+  "texte": "Le compteur électrique de l’école envoie sa courbe de charge tous les jours.",
+  "affirmation": "Rythme de transmission de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Réaliste : Enedis propose une transmission quotidienne de la courbe de charge.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "transmettre au demandeur à une fréquence quotidienne, hebdomadaire ou mensuelle la courbe de charge",
+    "relu": false,
+    "page": "§ 4.2.7"
+   }
+  ]
+ },
+ {
+  "id": "ce2-190",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › linky › def",
+  "texte": "Le compteur électrique communicant d’Enedis pour les raccordements jusqu’à 36 kVA (logements, petits commerces).",
+  "affirmation": "Linky est le compteur communicant d’Enedis pour les points jusqu’à 36 kVA.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les Points de Référence Mesure (PRM) Linky sont les compteurs utilisés pour les segments C5/P4.",
+    "relu": false,
+    "page": "§ 1.2.3"
+   },
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "point de connexion raccordé en BT ≤ 36 kVA et auquel est associé un contrat unique",
+    "relu": true
+   },
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Linky est le compteur d'électricité communicant installé par le gestionnaire de réseaux Enedis sur 95% du territoire.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-191",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › linky › ex",
+  "texte": "L’école, à 60 kVA, n’a pas de Linky mais un compteur professionnel télérelevé.",
+  "affirmation": "Compteur de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent : au-delà de 36 kVA, Enedis installe d’autres compteurs (ICE, PME-PMI, Saphir).",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Sur les autres segments C1-C4/P1-P3, plusieurs types de compteurs peuvent être installés (ICE2Q, ICE4Q, PME-PMI, SAPHIR, ...).",
+    "relu": false,
+    "page": "§ 1.2.3"
+   }
+  ]
+ },
+ {
+  "id": "ce2-192",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › c4 › def (périmètre)",
+  "texte": "Les raccordements électriques en basse tension au-delà de 36 kVA : bâtiments tertiaires moyens, PME.",
+  "affirmation": "Le segment C4 regroupe les points en basse tension > 36 kVA.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "point de connexion raccordé en BT > 36 kVA et auquel est associé un contrat unique",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-193",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › c4 › def (compteurs)",
+  "texte": "Leurs compteurs sont télérelevés et mesurent une courbe de charge fine.",
+  "affirmation": "Les compteurs du segment C4 sont télérelevés et mesurent une courbe de charge fine.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Pas nominal de 5 minutes.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le GRD s'assure notamment du caractère opérationnel des fonctionnalités de téléprogrammation et de télérelevé.",
+    "relu": false,
+    "page": "p. 3, note 1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-194",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › c4 › ex",
+  "texte": "L’école est en C4 avec 60 kVA et 4 postes horosaisonniers.",
+  "affirmation": "Segment de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-195",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › gazpar › def (nature)",
+  "texte": "Le compteur de gaz communicant de GRDF.",
+  "affirmation": "Gazpar est le compteur de gaz communicant de GRDF.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Gazpar est le compteur de gaz naturel communicant installé par le gestionnaire de réseaux GRDF",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-196",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › gazpar › def (transmission)",
+  "texte": "Il transmet chaque jour son index, d’où l’on déduit une consommation journalière.",
+  "affirmation": "Gazpar transmet chaque jour ses données, ce qui donne une consommation journalière.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Deux fois par jour selon le médiateur national de l’énergie.",
+  "sources": [
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Le compteur de gaz naturel Gazpar transmet les données deux fois par jour, en moins d'une seconde, par onde radio",
+    "relu": true
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "consommations semestrielles, mensuelles, quotidiennes...), ainsi qu'aux données techniques du compteur et aux données contractuelles",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-197",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › gazpar › ex",
+  "avant": "Le Gazpar de l’école remonte la consommation de la veille chaque matin.",
+  "texte": "Le Gazpar de l’école transmet ses données chaque jour ; la consommation d’un jour est visible 1 à 3 jours plus tard.",
+  "affirmation": "La consommation de gaz de la veille est disponible chaque matin.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Le Gazpar de l’école transmet ses données chaque jour ; la consommation d’un jour est visible 1 à 3 jours plus tard.",
+  "note": "Exemple du cas d’école, mais il affirme un délai (J+1 au matin) que GRDF ne garantit pas. Réserve : je n’ai pas vérifié qu’un site consommant 4 000 m³ par mois peut être équipé d’un Gazpar plutôt que d’un compteur industriel télérelevé.",
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de consommation sont généralement mises à jour avec un décalage de 1 à 3 jours",
+    "relu": true
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Données quotidiennes A J+3",
+    "relu": true,
+    "page": "p. 38 (tableau des fréquences de relève, ligne « 1M », environ 11 millions de PCE)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-198",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pcs › def",
+  "texte": "Pouvoir Calorifique Supérieur : l’énergie contenue dans un m³ de gaz, en kWh, en comptant la chaleur récupérable de la vapeur d’eau.",
+  "affirmation": "Le PCS est l’énergie contenue dans un m³ de gaz, chaleur de condensation de la vapeur d’eau comprise.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-pcs",
+    "passage": "Quantité d'énergie (exprimée en kWh) contenue dans un mètre cube (m3) de gaz.",
+    "relu": false
+   },
+   {
+    "cle": "sdes-chiffres-cles-2025",
+    "passage": "le pouvoir calorifique supérieur (PCS) donne le dégagement maximal théorique de chaleur pendant la combustion, y compris la chaleur de condensation de la vapeur d'eau",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-199",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pcs › ex",
+  "texte": "Le gaz livré à l’école contient environ 11,2 kWh par m³.",
+  "affirmation": "PCS du gaz de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Dans la plage du gaz H publiée par GRDF.",
+  "sources": [
+   {
+    "cle": "grdf-prescriptions-techniques",
+    "passage": "10,7 à 12,8 kWh/m3 (n)",
+    "relu": false,
+    "page": "p. 10 (PCS du gaz H)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-200",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › coef-conversion › def (rôle)",
+  "texte": "Le nombre de kWh par m³ appliqué pour convertir le volume de gaz en énergie.",
+  "affirmation": "Le coefficient de conversion convertit les m³ en kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur",
+    "relu": false
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Pour passer de l'un à l'autre, votre gestionnaire de réseau utilise un coefficient de conversion gaz.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-201",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › coef-conversion › def (facteurs)",
+  "texte": "Il dépend du PCS et des conditions de livraison (altitude, pression), et varie selon la commune et le mois.",
+  "affirmation": "Le coefficient dépend du PCS, de l’altitude et de la pression, et varie selon la commune et le mois.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "coeff_conversion = coeff_pta * valeur_pcs",
+    "relu": false,
+    "page": "p. 41"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Coefficient décrivant les conditions de température, pression et altitude au moment du relevé",
+    "relu": false,
+    "page": "p. 40"
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "L'altitude de la commune dans laquelle est situé votre logement",
+    "relu": false
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Le coefficient de conversion gaz est calculé une fois par mois pour les compteurs communicants",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-202",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › coef-conversion › ex",
+  "texte": "En janvier, 4 000 m³ × 11,2 = 44 800 kWh.",
+  "affirmation": "4 000 × 11,2 = 44 800.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié.",
+  "sources": []
+ },
+ {
+  "id": "ce2-203",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › consentement › def",
+  "texte": "L’accord du titulaire du contrat qui autorise un tiers à accéder à ses données de consommation, pour une durée et un périmètre donnés.",
+  "affirmation": "Définition du consentement : accord du titulaire, pour une durée et un périmètre.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Pour un client personne morale (la mairie), les documents Enedis parlent d'« autorisation expresse » (article R. 111-27 du code de l’énergie, cité par Enedis) ; le mot « consentement » est réservé aux personnes physiques (RGPD). Le terme du cours reste compréhensible, mais l’article du code n’a pas pu être lu sur Légifrance (accès refusé, erreur 403).",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les GRD sont autorisés à communiquer à un fournisseur ou à un tiers les informations relatives à un client dès lors que ce dernier l'a expressément autorisé",
+    "relu": true,
+    "page": "p. 3 (citation de l'article R. 111-27 du code de l'énergie)"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "À défaut de précision sur la durée de validité de l'autorisation, les parties conviennent que cette-dernière n'est pas valable.",
+    "relu": true,
+    "page": "art. 3.1"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Vous avez défini ensemble le périmètre de données qu'il souhaite partager avec vous",
+    "relu": false,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-204",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › consentement › ex",
+  "texte": "La mairie signe un consentement pour que l’EMS récupère la courbe de charge de l’école.",
+  "affirmation": "Consentement de la mairie.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-205",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › tiers-autorise › def",
+  "texte": "Une entreprise habilitée à récupérer les données d’un client auprès du distributeur, grâce au consentement de ce client.",
+  "affirmation": "Définition du tiers autorisé.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Partie au présent contrat, qui garantit à Enedis avoir été habilitée par des utilisateurs du réseau public de distribution géré par Enedis",
+    "relu": false,
+    "page": "définitions (« Tiers Autorisé »)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-206",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › tiers-autorise › ex",
+  "texte": "L’éditeur de l’EMS est le tiers autorisé pour les compteurs de l’école.",
+  "affirmation": "Tiers autorisé de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-207",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › rgpd › def (texte)",
+  "texte": "Le règlement européen sur la protection des données personnelles.",
+  "affirmation": "Le RGPD est le règlement européen qui encadre le traitement des données personnelles.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cnil-rgpd",
+    "passage": "encadre le traitement des données personnelles sur le territoire de l'Union européenne",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-208",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › rgpd › def (courbe)",
+  "texte": "Une courbe de charge de logement révèle la vie des occupants : c’est une donnée personnelle.",
+  "affirmation": "La courbe de charge d’un logement est une donnée personnelle qui révèle la vie privée.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cnil-linky-courbe-de-charge",
+    "passage": "permet de déduire de nombreuses informations relatives à la vie privée des abonnés (heures de lever et de coucher, périodes d'absence",
+    "relu": true
+   },
+   {
+    "cle": "cnil-donnee-personnelle",
+    "passage": "Une donnée personnelle est toute information se rapportant à une personne physique identifiée ou identifiable.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-209",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › rgpd › ex",
+  "texte": "Les données d’un bâtiment tertiaire comme l’école sont moins sensibles, mais l’accès reste encadré par le consentement.",
+  "affirmation": "Pour un bâtiment tertiaire, l’accès aux données reste soumis à l’accord du titulaire.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Pour une personne morale, il s’agit d’une « autorisation expresse » (code de l’énergie) et non d’un consentement au sens du RGPD.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "l'autorisation expresse des clients concernés a été recueillie : pour les personnes morales quel que soit le type de données",
+    "relu": false,
+    "page": "§ 3.4"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les GRD sont autorisés à communiquer à un fournisseur ou à un tiers les informations relatives à un client dès lors que ce dernier l'a expressément autorisé",
+    "relu": true,
+    "page": "p. 3 (citation de l'article R. 111-27 du code de l'énergie)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-210",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › turpe › def",
+  "texte": "Tarif d’Utilisation des Réseaux Publics d’Électricité. Fixé par la CRE, il rémunère les réseaux et apparaît dans la ligne « acheminement ».",
+  "affirmation": "Le TURPE, fixé par la CRE, couvre les coûts des gestionnaires de réseaux.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Le Code de l'énergie donne à la Commission de Régulation de l'Energie (CRE) la compétence pour fixer les tarifs d'utilisation des réseaux publics d'électricité (TURPE)",
+    "relu": true,
+    "page": "p. 3"
+   },
+   {
+    "cle": "enedis-facturation-acheminement",
+    "passage": "vise à couvrir les coûts de développement, de maintenance et d'exploitation supportés par les gestionnaires de réseaux",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-211",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › turpe › ex",
+  "texte": "Sur la facture de l’école, le TURPE a une part fixe (liée aux 60 kVA) et une part par kWh.",
+  "affirmation": "Structure du TURPE de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-212",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › accise › def",
+  "texte": "Une taxe proportionnelle à la quantité d’énergie consommée (en €/MWh). Elle existe pour l’électricité et pour le gaz naturel, et son taux change régulièrement (à vérifier chaque année).",
+  "affirmation": "L’accise est une taxe en €/MWh sur l’électricité et le gaz naturel, dont le tarif change régulièrement.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "En 2026 les tarifs ont changé au 1er février puis au 1er août : « à vérifier deux fois par an » serait plus prudent que « chaque année ».",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Fraction perçue sur l'électricité : Il s'agit de la nouvelle dénomination de la TICFE",
+    "relu": false,
+    "page": "p. 4"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Fraction perçue sur les gaz naturels : il s'agit de la nouvelle dénomination de la TICGN",
+    "relu": false,
+    "page": "p. 4"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "La loi de finances pour 2026 a prévu, dans son article 71, de réduire les tarifs normaux d'accises sur l'électricité de 0,5 €/MWh à compter du 1er août 2026.",
+    "relu": false,
+    "page": "p. 12-13"
+   }
+  ]
+ },
+ {
+  "id": "ce2-213",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › accise › ex",
+  "texte": "Pour l’école, la ligne « accise » est proportionnelle aux kWh du mois.",
+  "affirmation": "Accise de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-214",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › cta › def",
+  "texte": "Contribution Tarifaire d’Acheminement : un pourcentage de la part fixe de l’acheminement, qui finance les retraites des agents des industries électriques et gazières.",
+  "affirmation": "La CTA est un pourcentage de la part fixe de l’acheminement, affecté à la caisse de retraite des industries électriques et gazières.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Le produit de cette contribution est affecté à la Caisse nationale des industries électriques et gazières",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-215",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › cta › ex",
+  "texte": "Sur la facture de l’école, la CTA ne bouge pas quand la consommation baisse.",
+  "affirmation": "CTA de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-216",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › tva › def",
+  "texte": "La taxe sur la valeur ajoutée, appliquée à la fin de la facture. Pour un professionnel, elle est de 20 % sur tous les postes.",
+  "affirmation": "La TVA est de 20 % sur tous les postes de la facture d’énergie.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Depuis le 1er août 2025, c’est vrai pour tous les clients, pas seulement les professionnels : « Pour un professionnel » peut être retiré.",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "depuis le 1er août 2025, le taux normal de TVA s'applique sur toute la facture, quelle que soit la puissance souscrite",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Le taux de TVA sur la consommation de gaz naturel est le taux normal, soit 20%.",
+    "relu": false,
+    "page": "p. 6"
+   }
+  ]
+ },
+ {
+  "id": "ce2-217",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › tva › ex",
+  "texte": "Pour une facture de 1 500 € HT, l’école paie 1 800 € TTC.",
+  "affirmation": "1 500 × 1,20 = 1 800.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié.",
+  "sources": []
+ },
+ {
+  "id": "ce2-218",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › abonnement › def",
+  "texte": "La part fixe de la facture, payée même sans rien consommer.",
+  "affirmation": "L’abonnement est une part fixe, indépendante de la consommation.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source publique (médiateur national de l’énergie), mais pas la source d’origine.",
+  "sources": [
+   {
+    "cle": "mne-elements-facture",
+    "passage": "Quelle que soit la quantité d'énergie consommée le montant de l'abonnement est le même.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-219",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › abonnement › ex",
+  "texte": "En août, école fermée, l’abonnement est dû quand même.",
+  "affirmation": "Abonnement de l’école en août.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-220",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › fourniture › def",
+  "texte": "La part de la facture qui paie l’énergie elle-même, au prix fixé avec le fournisseur, pour chaque kWh consommé.",
+  "affirmation": "Définition de la fourniture.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-prix-pro",
+    "passage": "La fourniture d'énergie proprement dite, l'acheminement, c'est-à-dire l'utilisation des réseaux et les taxes et contributions.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-221",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › fourniture › ex",
+  "texte": "En janvier, la fourniture est la plus grosse ligne de la facture de gaz.",
+  "affirmation": "Facture de gaz de l’école en janvier.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-222",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › acheminement › def",
+  "texte": "La part de la facture qui paie le transport de l’énergie par les réseaux jusqu’au bâtiment (TURPE pour l’électricité, tarifs de distribution et de transport pour le gaz).",
+  "affirmation": "L’acheminement paie l’utilisation des réseaux : TURPE en électricité, tarifs de distribution et de transport en gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-prix-pro",
+    "passage": "La fourniture d'énergie proprement dite, l'acheminement, c'est-à-dire l'utilisation des réseaux et les taxes et contributions.",
+    "relu": false
+   },
+   {
+    "cle": "enedis-facturation-acheminement",
+    "passage": "vise à couvrir les coûts de développement, de maintenance et d'exploitation supportés par les gestionnaires de réseaux",
+    "relu": false
+   },
+   {
+    "cle": "cre-atrd7",
+    "passage": "la CRE fixe le tarif d'utilisation des réseaux de distribution de gaz naturel",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-223",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › acheminement › ex",
+  "texte": "L’acheminement est reversé à Enedis et GRDF via le fournisseur.",
+  "affirmation": "Le fournisseur reverse l’acheminement aux gestionnaires de réseaux.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Lu pour l’électricité (Enedis, CRE) ; le même principe de contrat unique vaut pour le gaz.",
+  "sources": [
+   {
+    "cle": "enedis-facturation-acheminement",
+    "passage": "le fournisseur reverse le montant de l'acheminement à Enedis",
+    "relu": false
+   },
+   {
+    "cle": "cre-tarif-acces",
+    "passage": "facturée par le gestionnaire de réseau aux fournisseurs, ces derniers refacturant les montants correspondants à leurs clients",
+    "relu": false
+   },
+   {
+    "cle": "mne-contrat-unique",
+    "passage": "Contrat souscrit par un consommateur avec un fournisseur portant à la fois sur la fourniture et la distribution d'énergie.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-224",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › facture-estimee › def",
+  "texte": "Une facture calculée sur une consommation supposée, faute de relevé réel.",
+  "affirmation": "Définition de la facture estimée.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Mon fournisseur peut établir des factures intermédiaires à partir de ses propres estimations",
+    "relu": false
+   },
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "seules 2 sont basées sur des relevés réels. Les 4 autres reposent sur des estimations.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-225",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › facture-estimee › ex",
+  "texte": "La facture de gaz de janvier-février de l’école est estimée trop bas de 30 %.",
+  "affirmation": "Facture estimée de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-226",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › regularisation › def",
+  "texte": "La correction, sur une facture suivante, de l’écart entre ce qui a été estimé et ce qui a été réellement consommé.",
+  "affirmation": "Définition de la régularisation.",
+  "type": "methode",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "Une régularisation intervient ensuite, en fonction de ma consommation réelle.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-227",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › regularisation › ex",
+  "texte": "La facture de février-mars rattrape les 13 000 kWh sous-estimés.",
+  "affirmation": "Régularisation de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ce2-228",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › data-connect › def (service)",
+  "texte": "L’API d’Enedis qui permet à un tiers autorisé de récupérer les données d’un compteur Linky (≤ 36 kVA), avec le consentement du client.",
+  "affirmation": "Data Connect permet à un tiers de récupérer les données d’un compteur communicant jusqu’à 36 kVA, avec le consentement du client.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "service permettant, d'une part, à un Utilisateur de consentir à ce qu'Enedis mette ses données à disposition du service du Bénéficiaire",
+    "relu": true,
+    "page": "art. 1"
+   },
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "dont la puissance souscrite est inférieure ou égale à 36 kVA et dont le point de connexion est équipé d'un Compteur Communicant",
+    "relu": false,
+    "page": "art. 1 (définition d'« Utilisateur »)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-229",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › data-connect › def (bascule)",
+  "texte": "Une nouvelle version a été mise en service le 28 septembre 2026 (à vérifier).",
+  "affirmation": "Une nouvelle version de Data Connect a été mise en service le 28 septembre 2026.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Aucune source officielle lisible : le portail datahub.enedis.fr refuse la lecture automatique (robots.txt). L’information ne repose que sur deux projets open source concordants ; la date précise du 28 septembre ne figure que dans le premier, le second (qui reproduit un courriel du support API d’Enedis) dit « dans le courant de septembre 2026 ». Garder la mention « à confirmer » tant qu’une personne n’a pas ouvert la documentation Enedis.",
+  "sources": [
+   {
+    "cle": "github-bascule-data-connect",
+    "passage": "Enedis a basculé DataConnect le 28/09/2026",
+    "relu": false
+   },
+   {
+    "cle": "github-eddie-data-connect",
+    "passage": "Die Umstellung wird im Laufe des Septembers 2026 erfolgen.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-230",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › data-connect › ex",
+  "texte": "Elle ne s’applique pas à l’école, raccordée en C4 au-delà de 36 kVA.",
+  "affirmation": "Data Connect ne couvre pas les points de plus de 36 kVA.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "dont la puissance souscrite est inférieure ou égale à 36 kVA et dont le point de connexion est équipé d'un Compteur Communicant",
+    "relu": false,
+    "page": "art. 1 (définition d'« Utilisateur »)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-231",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › sge › def",
+  "texte": "Le système de gestion des échanges d’Enedis : portail et web services qui donnent accès aux données des compteurs, notamment au-delà de 36 kVA, pour des tiers habilités avec le consentement du client.",
+  "affirmation": "Le SGE est la plateforme d’échanges d’Enedis (portail et web services), ouverte aux tiers habilités par le client.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Enedis met à disposition de l'Utilisateur l'accès à sa Plateforme d'échanges nommée ci-après « SGE »",
+    "relu": true,
+    "page": "annexe 1, préambule"
+   },
+   {
+    "cle": "enedis-sge-fournisseur",
+    "passage": "Système de Gestion des Echanges (SGE)",
+    "relu": false
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "L'accès au Web Service, se fait par un mécanisme d'Authentification, basé sur un échange de Certificats",
+    "relu": false,
+    "page": "annexe 1"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Le Tiers Autorisé doit disposer de l'autorisation expresse préalable du client",
+    "relu": true,
+    "page": "art. 3.1"
+   }
+  ]
+ },
+ {
+  "id": "ce2-232",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › sge › ex",
+  "texte": "C’est par ce canal qu’un EMS récupérerait la courbe au pas de 10 min de l’école.",
+  "affirmation": "Canal d’accès de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Paramètre de l’école fictive. À rapprocher de la correction sur le pas de temps : le pas nominal d’Enedis au-delà de 36 kVA est de 5 minutes ; 10 minutes reste possible sur quelques compteurs.",
+  "sources": []
+ },
+ {
+  "id": "ce2-233",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › adict › def",
+  "texte": "L’API de GRDF qui donne accès, avec le consentement du client, aux consommations de gaz (quotidiennes, mensuelles, semestrielles) et aux données du compteur et du contrat.",
+  "affirmation": "GRDF ADICT donne accès, avec le consentement du client, aux consommations quotidiennes, mensuelles et semestrielles et aux données techniques et contractuelles.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "consommations semestrielles, mensuelles, quotidiennes...), ainsi qu'aux données techniques du compteur et aux données contractuelles",
+    "relu": true
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce2-234",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › adict › ex",
+  "avant": "L’EMS y récupère chaque jour la consommation Gazpar de la veille.",
+  "texte": "L’EMS y récupère chaque jour les dernières consommations Gazpar publiées, avec 1 à 3 jours de décalage.",
+  "affirmation": "La consommation de la veille est disponible chaque jour par ADICT.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "L’EMS y récupère chaque jour les dernières consommations Gazpar publiées, avec 1 à 3 jours de décalage.",
+  "note": "Exemple du cas d’école, mais il affirme un délai J+1 que GRDF ne garantit pas.",
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de consommation sont généralement mises à jour avec un décalage de 1 à 3 jours",
+    "relu": true
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Données quotidiennes A J+3",
+    "relu": true,
+    "page": "p. 38 (tableau des fréquences de relève, ligne « 1M », environ 11 millions de PCE)"
+   }
+  ]
+ },
+ {
+  "id": "ce2-235",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pdl › def (hors étape 2, identifiant affiché dans la démo Collecter)",
+  "texte": "Point De Livraison : l’identifiant à 14 chiffres d’un raccordement électrique chez Enedis. Il est aussi appelé PRM (Point de Référence Mesure).",
+  "affirmation": "Le PDL, aussi appelé PRM, est un identifiant à 14 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": false
+   },
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky.",
+    "relu": false
+   }
+  ]
+ },
+ {
+  "id": "ce2-236",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pce › def (hors étape 2, identifiant affiché dans la démo Collecter)",
+  "texte": "Point de Comptage et d’Estimation : l’identifiant d’un point de livraison de gaz chez GRDF, en général 14 chiffres.",
+  "affirmation": "Le PCE est un identifiant de 14 chiffres en général.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "GRDF précise l’autre forme : « GI » suivi de 6 chiffres.",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "p. 39"
+   }
+  ]
+ }
+]

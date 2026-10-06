@@ -1,0 +1,3411 @@
+[
+ {
+  "id": "vs-001",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "déclaration › accroche",
+  "info": "productible",
+  "texte": "Douze mégawatts-crête, vingt-huit mille modules, deux cents brebis.",
+  "affirmation": "Le site fictif fait 12 MWc avec 28 000 modules (et 200 brebis).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent : 28 000 × 430 Wc = 12,04 MWc.",
+  "sources": []
+ },
+ {
+  "id": "vs-002",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "déclaration › bravo",
+  "texte": "Tu sais lire une cloche, distinguer un kWc d'un kWh et déplacer une consommation vers midi.",
+  "affirmation": "Résumé des acquis visés par le site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-003",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "déclaration › annonces[1]",
+  "texte": "la ligne électrique suit la voie. Depuis ce matin, c'est elle qui nous tire. D'où vient son courant ?",
+  "affirmation": "Le train (fictif) est à traction électrique, alimenté par une ligne qui longe la voie.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-004",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "déclaration › annonces[2]",
+  "texte": "Le personnel de bord vous rappelle que la clim consomme, et que vous le savez mieux que personne.",
+  "affirmation": "La climatisation consomme de l'électricité (clin d'œil au cours).",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-005",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "déclaration › annoncesRetour[1]",
+  "info": "batiment",
+  "texte": "Là-bas, les bâtiments consomment. Vous venez de voir d'où ça peut venir à midi.",
+  "affirmation": "Rappel pédagogique : la consommation des bâtiments peut être couverte par le solaire à midi.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-006",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info effet › x",
+  "info": "effet",
+  "texte": "Un grain de lumière, un photon, frappe une cellule en silicium et y bouscule un électron.",
+  "affirmation": "Effet photovoltaïque : un photon absorbé par le silicium de la cellule libère un électron.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cea-cellules-pv",
+    "passage": "Chaque photon (particule de lumière) pénétrant le matériau perd son énergie en créant des paires électrons-trous.",
+    "relu": null
+   },
+   {
+    "cle": "cea-cellules-pv",
+    "passage": "le silicium est largement utilisé pour ses propriétés photovoltaïques",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-007",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info effet › x",
+  "info": "effet",
+  "texte": "Des milliards d'électrons bousculés dans le même sens, c'est un courant.",
+  "affirmation": "Le déplacement orienté des électrons libérés crée un courant électrique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cea-cellules-pv",
+    "passage": "Chaque photon (particule de lumière) pénétrant le matériau perd son énergie en créant des paires électrons-trous.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "L'effet photovoltaïque désigne la propriété de certains semi-conducteurs qui génèrent un courant électrique quand ils sont exposés à la lumière du soleil.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-008",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info effet › x",
+  "info": "effet",
+  "texte": "Aucune pièce ne bouge, rien ne brûle : la cellule fournit du courant continu tant qu'elle est éclairée.",
+  "affirmation": "La cellule convertit la lumière en courant continu, sans pièce mobile ni combustion, tant qu'elle est éclairée.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "L'effet photovoltaïque désigne la propriété de certains semi-conducteurs qui génèrent un courant électrique quand ils sont exposés à la lumière du soleil.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "L'électricité produite par l'effet photovoltaïque au niveau des modules étant en courant continu",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-009",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info effet › retiens",
+  "info": "effet",
+  "texte": "Lumière → courant continu, directement. Ni turbine, ni vapeur.",
+  "affirmation": "Conversion directe de la lumière en électricité (courant continu), sans cycle thermique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "L'effet photovoltaïque désigne la propriété de certains semi-conducteurs qui génèrent un courant électrique quand ils sont exposés à la lumière du soleil.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-010",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info module › x",
+  "info": "module",
+  "texte": "Un module de cette centrale mesure 1,95 m²",
+  "affirmation": "Un module de 430 Wc actuel mesure environ 1,95 m².",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Fiche produit d'un distributeur reprenant les caractéristiques du fabricant (le PDF de la fiche technique LONGi n'a pas pu être lu). 1,722 m × 1,134 m = 1,953 m². Remplacer si possible par la fiche technique officielle du fabricant.",
+  "sources": [
+   {
+    "cle": "solartraders-module-430",
+    "passage": "LR5-54HTH-430M : puissance nominale 430 W ; dimensions 1722 × 1134 × 30 mm ; rendement du module 22,02 % ; coefficient de température Pmax −0,29 %/°C ; 108 cellules",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-011",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info module › x",
+  "info": "module",
+  "texte": "et affiche 430 watts-crête (Wc)",
+  "affirmation": "Un module courant du marché affiche 430 Wc.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Fiche produit d'un distributeur reprenant les caractéristiques du fabricant (le PDF de la fiche technique LONGi n'a pas pu être lu). 1,722 m × 1,134 m = 1,953 m². Remplacer si possible par la fiche technique officielle du fabricant.",
+  "sources": [
+   {
+    "cle": "solartraders-module-430",
+    "passage": "LR5-54HTH-430M : puissance nominale 430 W ; dimensions 1722 × 1134 × 30 mm ; rendement du module 22,02 % ; coefficient de température Pmax −0,29 %/°C ; 108 cellules",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-012",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info module › x",
+  "info": "module",
+  "texte": "La puissance crête est celle qu'il fournit en laboratoire : 1 000 W de soleil par m²",
+  "affirmation": "La puissance crête est mesurée sous un éclairement de 1 000 W/m² (conditions standard de test).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "pveducation-noct",
+    "passage": "A PV module will be typically rated at 25 °C under 1 kW/m2.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-013",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info module › x",
+  "info": "module",
+  "texte": "cellules à 25 °C",
+  "affirmation": "Les conditions standard de test fixent la température des cellules à 25 °C.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "pveducation-noct",
+    "passage": "A PV module will be typically rated at 25 °C under 1 kW/m2.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-014",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info module › x",
+  "info": "module",
+  "texte": "Dehors, il s'en approche parfois et l'atteint rarement.",
+  "affirmation": "En conditions réelles, un module atteint rarement sa puissance crête.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "pveducation-noct",
+    "passage": "when operating in the field, they typically operate at higher temperatures and at somewhat lower insolation conditions",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-015",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info module › x",
+  "info": "module",
+  "texte": "Son rendement : environ 22 % de la lumière reçue devient de l'électricité.",
+  "affirmation": "Le rendement d'un module de 430 Wc est d'environ 22 %.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "22 % correspond à la moyenne actuelle des modules au silicium cristallin (Fraunhofer ISE : 22,7 % fin 2024).",
+  "sources": [
+   {
+    "cle": "solartraders-module-430",
+    "passage": "LR5-54HTH-430M : puissance nominale 430 W ; dimensions 1722 × 1134 × 30 mm ; rendement du module 22,02 % ; coefficient de température Pmax −0,29 %/°C ; 108 cellules",
+    "relu": null
+   },
+   {
+    "cle": "fraunhofer-pv-report",
+    "passage": "Total weighted average efficiency of crystalline Silicon (c-Si) wafer-based modules is 22.7% in Q4-2024",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-016",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info module › x",
+  "info": "module",
+  "texte": "Un module de cette centrale mesure 1,95 m² et affiche 430 watts-crête (Wc).",
+  "affirmation": "Cohérence : 1,95 m² × 1 000 W/m² × 22 % ≈ 429 W.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "1,953 m² × 1 000 W/m² × 22,02 % = 430 W : cohérent.",
+  "sources": []
+ },
+ {
+  "id": "vs-017",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info module › retiens",
+  "info": "module",
+  "texte": "Le kWc est une puissance de référence, pas une promesse de production.",
+  "affirmation": "Le kWc est une puissance normalisée de référence, pas une production.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-018",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info productible › x",
+  "info": "productible",
+  "texte": "Ici, chaque kWc installé produit environ 1 450 kWh par an.",
+  "affirmation": "En Provence (arrière-pays), le productible d'une installation fixe bien orientée est d'environ 1 450 kWh/kWc/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Ordre de grandeur confirmé, valeur prudente (atlas : 1 577). PVGIS (source affichée dans le passeport) n'a pas pu être interrogé depuis cet environnement (API et outil bloqués). Contrôle fait avec le Global Solar Atlas (Banque mondiale/Solargis), qui donne des valeurs supérieures d'environ 8 % (hypothèses de pertes plus faibles) ; les rapports entre lieux sont identiques (Provence/Lille : 1,45 dans le jeu, 1,46 dans l'atlas). Refaire la requête PVGIS à la main pour afficher la valeur exacte.",
+  "sources": [
+   {
+    "cle": "gsa-saint-photon",
+    "passage": "Requête loc=44.0,5.95 : PVOUT_csi = 1 576,8 kWh/kWc/an ; inclinaison optimale OPTA = 38° ; mensuel : déc. 88,1 ; juin 155,2 ; juil. 167,4 kWh/kWc",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-019",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info productible › x",
+  "info": "productible",
+  "texte": "À Ampère-sur-Loire, ce serait plutôt 1 070",
+  "affirmation": "Sur la Loire moyenne (ville fictive, entre Nevers et Orléans), le productible est d'environ 1 070 kWh/kWc/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Ville fictive : contrôle fait à Nevers (coordonnées de départ de la ligne dans le jeu) et à Orléans. Valeur du jeu prudente (atlas : 1 165 à 1 208). PVGIS (source affichée dans le passeport) n'a pas pu être interrogé depuis cet environnement (API et outil bloqués). Contrôle fait avec le Global Solar Atlas (Banque mondiale/Solargis), qui donne des valeurs supérieures d'environ 8 % (hypothèses de pertes plus faibles) ; les rapports entre lieux sont identiques (Provence/Lille : 1,45 dans le jeu, 1,46 dans l'atlas). Refaire la requête PVGIS à la main pour afficher la valeur exacte.",
+  "sources": [
+   {
+    "cle": "gsa-nevers",
+    "passage": "Requête loc=46.99,3.16 : PVOUT_csi = 1 208,0 kWh/kWc/an ; OPTA = 35° ; mensuel : déc. 43,2 ; juin 138,5",
+    "relu": null
+   },
+   {
+    "cle": "gsa-orleans",
+    "passage": "Requête loc=47.90,1.90 : PVOUT_csi = 1 165,0 kWh/kWc/an ; OPTA = 36° ; mensuel : déc. 41,5 ; juin 134,4",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-020",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info productible › x",
+  "info": "productible",
+  "texte": "à Lille, autour de 1 000",
+  "affirmation": "À Lille, le productible est d'environ 1 000 kWh/kWc/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Valeur du jeu prudente (atlas : 1 078). PVGIS (source affichée dans le passeport) n'a pas pu être interrogé depuis cet environnement (API et outil bloqués). Contrôle fait avec le Global Solar Atlas (Banque mondiale/Solargis), qui donne des valeurs supérieures d'environ 8 % (hypothèses de pertes plus faibles) ; les rapports entre lieux sont identiques (Provence/Lille : 1,45 dans le jeu, 1,46 dans l'atlas). Refaire la requête PVGIS à la main pour afficher la valeur exacte.",
+  "sources": [
+   {
+    "cle": "gsa-lille",
+    "passage": "Requête loc=50.63,3.06 : PVOUT_csi = 1 078,4 kWh/kWc/an ; OPTA = 36° ; mensuel : déc. 34,3 ; juin 128,3",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-021",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info productible › x",
+  "info": "productible",
+  "texte": "La centrale : 12 MWc, 28 000 modules, environ 17 GWh par an.",
+  "affirmation": "Le site fictif : 12 MWc, 28 000 modules, environ 17 GWh/an.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent : 28 000 × 430 Wc = 12,04 MWc ; 12 MWc × 1 450 kWh/kWc = 17,4 GWh. Nuance : 12 MW est aussi le plafond habituel d'un raccordement en HTA (le document Enedis lu évoque des dispositions particulières au-delà de « 12 MW de production »).",
+  "sources": []
+ },
+ {
+  "id": "vs-022",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info productible › x",
+  "info": "productible",
+  "texte": "C'est comme si elle tournait à pleine puissance 1 450 heures sur les 8 760 de l'année : un facteur de charge de 16,6 %.",
+  "affirmation": "1 450 h / 8 760 h = 16,6 % de facteur de charge.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "1 450 / 8 760 = 16,55 %, arrondi à 16,6 % : exact. Pour situer : le facteur de charge moyen du parc solaire français a été de 13,6 % en 2025 (RTE, chapitre Production).",
+  "sources": []
+ },
+ {
+  "id": "vs-023",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info productible › retiens",
+  "info": "productible",
+  "texte": "Production annuelle = puissance crête × productible du lieu.",
+  "affirmation": "Méthode de calcul : production annuelle = kWc × kWh/kWc du lieu.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-024",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info chaleur › x",
+  "info": "chaleur",
+  "texte": "Un module perd environ 0,3 % de puissance par degré au-dessus de 25 °C.",
+  "affirmation": "Coefficient de température de la puissance d'un module actuel : environ −0,3 %/°C.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "−0,29 %/°C pour ce module de 430 Wc ; les modules plus anciens sont plutôt à −0,35 / −0,40 %/°C. Fiche produit d'un distributeur reprenant les caractéristiques du fabricant (le PDF de la fiche technique LONGi n'a pas pu être lu). 1,722 m × 1,134 m = 1,953 m². Remplacer si possible par la fiche technique officielle du fabricant.",
+  "sources": [
+   {
+    "cle": "solartraders-module-430",
+    "passage": "LR5-54HTH-430M : puissance nominale 430 W ; dimensions 1722 × 1134 × 30 mm ; rendement du module 22,02 % ; coefficient de température Pmax −0,29 %/°C ; 108 cellules",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-025",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info chaleur › x",
+  "info": "chaleur",
+  "texte": "En plein été, ses cellules montent à 65 °C",
+  "affirmation": "En plein été, la température des cellules d'un module atteint environ 65 °C.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Avec la formule de PVEducation et un module typique (NOCT 48 °C) : 35 °C d'air et 850 W/m² donnent 35 + 28 × 850/800 ≈ 65 °C ; à 1 000 W/m², 70 °C. La formule a été restituée par l'outil de lecture (la page l'affiche en image) : à relire.",
+  "sources": [
+   {
+    "cle": "pveducation-noct",
+    "passage": "T_cell = T_air + (NOCT - 20) × (S/800)",
+    "relu": null,
+    "doute": true
+   },
+   {
+    "cle": "pveducation-noct",
+    "passage": "The best module operated at a NOCT of 33°C, the worst at 58°C and the typical module at 48°C respectively.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-026",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info chaleur › x",
+  "info": "chaleur",
+  "texte": "12 % de moins que sur l'étiquette",
+  "affirmation": "(65 − 25) × 0,3 % = 12 % de puissance en moins.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "(65 − 25) × 0,3 % = 12 % : exact.",
+  "sources": []
+ },
+ {
+  "id": "vs-027",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info chaleur › x",
+  "info": "chaleur",
+  "texte": "Les meilleures heures de l'année tombent souvent au printemps, par temps clair, frais et un peu venté.",
+  "affirmation": "Les puissances instantanées les plus élevées s'observent souvent au printemps (ciel clair, air frais, vent).",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Conséquence logique du coefficient de température (un module froid et bien éclairé donne plus), mais aucune source lue n'affirme que les meilleures heures tombent « souvent au printemps ». Proposition : « Les meilleures heures tombent par temps clair, frais et un peu venté : plus souvent au printemps qu'en pleine canicule. », ou appuyer la phrase sur les données de supervision d'un exploitant.",
+  "sources": []
+ },
+ {
+  "id": "vs-028",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info chaleur › retiens",
+  "info": "chaleur",
+  "texte": "Le photovoltaïque aime la lumière, pas la canicule.",
+  "affirmation": "La chaleur dégrade la puissance d'un module (formule mnémotechnique).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-029",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info onduleur › x",
+  "info": "onduleur",
+  "texte": "Les modules produisent du courant continu ; le réseau est en alternatif, à 50 hertz.",
+  "affirmation": "Le réseau électrique fonctionne en courant alternatif à 50 Hz ; les modules produisent du continu.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "le réseau interne de l'installation de production intègre systématiquement un ou plusieurs onduleurs, afin de convertir cette électricité en courant alternatif",
+    "relu": null
+   },
+   {
+    "cle": "cre-services-systeme",
+    "passage": "la fréquence du réseau baisse par rapport à sa valeur de référence de 50 Hz",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-030",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info onduleur › x",
+  "info": "onduleur",
+  "texte": "L'onduleur fait la conversion, avec environ 98 % de rendement.",
+  "affirmation": "Le rendement d'un onduleur photovoltaïque actuel est d'environ 98 %.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Fiche produit d'un distributeur reprenant les caractéristiques du fabricant (onduleur de centrale de 350 kW). Les onduleurs actuels dépassent 98 % ; à remplacer si possible par la fiche technique officielle d'un fabricant.",
+  "sources": [
+   {
+    "cle": "krannich-onduleur-350",
+    "passage": "SG350HX-V114 : Max. efficiency 99,02 % ; European efficiency 98,80 % ; nominal AC voltage 800 V ; 50/60 Hz ; 12 MPPT",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-031",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info onduleur › x",
+  "info": "onduleur",
+  "texte": "Il cherche aussi en permanence le meilleur point de fonctionnement des modules",
+  "affirmation": "L'onduleur recherche en permanence le point de puissance maximale (MPPT).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La fiche annonce 12 « MPPT » (suiveurs du point de puissance maximale) : la fonction existe bien dans l'onduleur. Fiche produit d'un distributeur reprenant les caractéristiques du fabricant (onduleur de centrale de 350 kW). Les onduleurs actuels dépassent 98 % ; à remplacer si possible par la fiche technique officielle d'un fabricant.",
+  "sources": [
+   {
+    "cle": "krannich-onduleur-350",
+    "passage": "SG350HX-V114 : Max. efficiency 99,02 % ; European efficiency 98,80 % ; nominal AC voltage 800 V ; 50/60 Hz ; 12 MPPT",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-032",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info onduleur › x",
+  "info": "onduleur",
+  "texte": "et se coupe tout seul si le réseau disparaît",
+  "affirmation": "L'installation doit se découpler automatiquement du réseau en cas d'absence de tension réseau (protection de découplage).",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Nuance : pour une centrale raccordée en HTA, la protection de découplage est un relais installé au poste de livraison, en plus des protections internes des onduleurs ; pour les petites installations, elle est intégrée à l'onduleur. L'outil de lecture signale que ce document est remplacé par la note Enedis-NMO-RES_025E (15/09/2025).",
+  "sources": [
+   {
+    "cle": "enedis-protections-decouplage",
+    "passage": "doit être équipée d'une fonction de protection de découplage destinée à les séparer du Réseau Public de Distribution en cas de défauts sur celui-ci",
+    "relu": null
+   },
+   {
+    "cle": "enedis-protections-decouplage",
+    "passage": "Cette protection doit permettre de détecter les situations de : marche en réseau séparé sans défaut, défauts HTA à la terre, défauts entre phases",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-033",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info onduleur › x",
+  "info": "onduleur",
+  "texte": "Il y en a six ici : quand l'un tombe, un sixième de la production s'éteint.",
+  "affirmation": "Le site fictif compte six onduleurs ; la perte de l'un coupe un sixième de la production.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent : six onduleurs pour 12 MWc, soit 2 MWc de modules chacun ; la perte de l'un retire bien un sixième (5/6 dans simulations.js).",
+  "sources": []
+ },
+ {
+  "id": "vs-034",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info onduleur › retiens",
+  "info": "onduleur",
+  "texte": "Pas d'onduleur, pas d'injection. C'est aussi lui qui surveille le mieux la production.",
+  "affirmation": "L'onduleur est indispensable à l'injection et sert de point de suivi de la production.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-035",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info reseau › x",
+  "info": "reseau",
+  "texte": "En sortie d'onduleur, le courant est à quelques centaines de volts.",
+  "affirmation": "La tension alternative en sortie d'un onduleur de centrale est de quelques centaines de volts (basse tension).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "800 V pour l'onduleur consulté ; les onduleurs centraux sortent entre 400 et 800 V environ. Fiche produit d'un distributeur reprenant les caractéristiques du fabricant (onduleur de centrale de 350 kW). Les onduleurs actuels dépassent 98 % ; à remplacer si possible par la fiche technique officielle d'un fabricant.",
+  "sources": [
+   {
+    "cle": "krannich-onduleur-350",
+    "passage": "SG350HX-V114 : Max. efficiency 99,02 % ; European efficiency 98,80 % ; nominal AC voltage 800 V ; 50/60 Hz ; 12 MPPT",
+    "relu": null
+   },
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "un transformateur dont le rôle est d'élever la tension de sortie des onduleurs à la tension de raccordement (HTA, généralement 20 kV)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-036",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info reseau › x",
+  "info": "reseau",
+  "texte": "Un transformateur l'élève à 20 000 volts, la tension du réseau de distribution",
+  "affirmation": "Le réseau public de distribution HTA est exploité à 20 000 V ; un transformateur élève la tension de la centrale à ce niveau.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "un transformateur dont le rôle est d'élever la tension de sortie des onduleurs à la tension de raccordement (HTA, généralement 20 kV)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-037",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info reseau › x",
+  "info": "reseau",
+  "texte": "puis le poste de livraison le remet au gestionnaire de réseau",
+  "affirmation": "Le poste de livraison est l'interface entre l'installation de production et le réseau public de distribution.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Notion standard (poste de livraison HTA, norme NF C 13-100), mentionnée dans les documents Enedis lus (« Protection générale de poste de livraison NF C 13-100 ») sans définition citable. À étayer avec le modèle de convention de raccordement HTA d'Enedis (non lu).",
+  "sources": []
+ },
+ {
+  "id": "vs-038",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info reseau › x",
+  "info": "reseau",
+  "texte": "C'est là que se trouve le compteur de production : une courbe de charge au pas de 10 minutes, exactement comme pour un bâtiment, mais dans l'autre sens.",
+  "affirmation": "Le compteur du producteur (au poste de livraison) enregistre une courbe de charge au pas de 10 minutes.",
+  "type": "regle",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "C'est là que se trouve le compteur de production : une courbe de charge au pas de 5 minutes, exactement comme pour un bâtiment, mais dans l'autre sens.",
+  "note": "Pour les sites HTA et BT > 36 kVA, Enedis enregistre et publie les courbes au pas nominal de 5 minutes depuis le 8 décembre 2025 (soutirage et injection) ; quelques compteurs restent au pas 10 minutes. Le pas 10 minutes était exact jusqu'en 2025.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, depuis le 8 décembre 2025",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-039",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info reseau › retiens",
+  "info": "reseau",
+  "texte": "Un producteur a lui aussi un point de livraison, un compteur et une courbe de charge.",
+  "affirmation": "Un site de production a un point de livraison, un dispositif de comptage et une courbe de charge (injection).",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "courbe de charge active et réactive pour le soutirage et l'injection",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-040",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info tracker › x",
+  "info": "tracker",
+  "texte": "Un tracker fait pivoter les modules d'est en ouest au fil de la journée.",
+  "affirmation": "Un suiveur à un axe fait pivoter les modules d'est en ouest pour suivre le soleil.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La fiche IEA-PVPS décrit le suivi de la course du soleil par un tracker à un axe (SAT) ; elle ne dit pas en toutes lettres « d'est en ouest » (axe nord-sud), ce qui est la configuration habituelle.",
+  "sources": [
+   {
+    "cle": "iea-pvps-trackers",
+    "passage": "As shading between panels starts to occur, the tracking angle no longer follows the sun's path but, instead, adjusts backward (decreases) to prevent shading.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-041",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info tracker › x",
+  "info": "tracker",
+  "texte": "Gain : environ 20 % de production en plus",
+  "affirmation": "Un tracker un axe apporte environ 20 % de production annuelle en plus par rapport à une structure fixe.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "iea-pvps-trackers",
+    "passage": "SAT systems can increase annual yields by ~20% over fixed-tilt systems.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-042",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info tracker › x",
+  "info": "tracker",
+  "texte": "et surtout une courbe plus large, le matin et le soir",
+  "affirmation": "Avec un tracker, le profil journalier est plus large (plus de production le matin et le soir).",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Effet connu et visible dans le simulateur, mais aucune source lue ne le dit explicitement (la fiche IEA-PVPS ne donne que le gain annuel). Proposition : garder, et appuyer par une simulation PVGIS horaire (« suivi à un axe ») faite à la main, PVGIS étant inaccessible depuis cet environnement.",
+  "sources": []
+ },
+ {
+  "id": "vs-043",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info tracker › x",
+  "info": "tracker",
+  "texte": "Prix à payer : un moteur, des pièces qui bougent, de l'entretien, et plus d'espace entre les rangées.",
+  "affirmation": "Les trackers ajoutent des pièces mobiles, de la maintenance et demandent plus d'espace entre rangées.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La source appuie « plus d'espace entre les rangées » (taux de couverture du sol plus faible avec trackers). Moteur, pièces mobiles et entretien découlent de la définition d'un tracker : pas de citation chiffrée lue.",
+  "sources": [
+   {
+    "cle": "lbnl-surface-pv",
+    "passage": "Power density (fixed-tilt): 0.35 MWDC/acre (2.8 acres/MWDC) ; (tracking): 0.24 MWDC/acre (4.2 acres/MWDC)",
+    "relu": null
+   },
+   {
+    "cle": "lbnl-surface-pv",
+    "passage": "~0.40-0.50 GCR for fixed-tilt versus ~0.25-0.40 GCR for tracking",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-044",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info tracker › retiens",
+  "info": "tracker",
+  "texte": "Orientation et inclinaison décident de la quantité produite, et de l'heure à laquelle on la produit.",
+  "affirmation": "L'orientation et l'inclinaison déterminent la quantité et le profil horaire de production.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-045",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info cloche › x",
+  "info": "cloche",
+  "texte": "La production d'une journée dessine une cloche : zéro la nuit, un sommet en début d'après-midi, plus large en juin qu'en décembre.",
+  "affirmation": "Le profil journalier de production est une cloche, nulle la nuit, maximale en début d'après-midi (heure légale), plus large en juin qu'en décembre.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "RTE décrit le pic (fin de matinée à début d'après-midi, heure légale). « Plus large en juin qu'en décembre » découle de la durée du jour (non citée).",
+  "sources": [
+   {
+    "cle": "rte-be2025-production",
+    "passage": "Du fait du profil horaire de la production solaire, présentant un pic en fin de matinée jusqu'au début de l'après-midi",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-046",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info cloche › x",
+  "info": "cloche",
+  "texte": "Un nuage y creuse une dent. Un plateau au sommet signale un écrêtage ; une marche brutale, une panne ; une cloche plus basse que prévu, des modules sales.",
+  "affirmation": "Signatures de lecture d'une courbe de production : dent = nuage, plateau = écrêtage, marche = panne, courbe abaissée = encrassement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-047",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info cloche › retiens",
+  "info": "cloche",
+  "texte": "On compare toujours la production mesurée à la production attendue pour la météo du jour.",
+  "affirmation": "Méthode : comparer le mesuré à l'attendu pour la météo du jour.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-048",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info variable › x",
+  "info": "variable",
+  "texte": "Le solaire ne produit pas à la demande : il suit le soleil et les nuages.",
+  "affirmation": "La production solaire n'est pas pilotable : elle dépend de l'ensoleillement.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-production",
+    "passage": "Du fait du profil horaire de la production solaire, présentant un pic en fin de matinée jusqu'au début de l'après-midi",
+    "relu": null
+   },
+   {
+    "cle": "cre-services-systeme",
+    "passage": "assurer à tout instant l'équilibre entre la production et la consommation d'électricité",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-049",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info variable › x",
+  "info": "variable",
+  "texte": "En revanche il se prévoit bien, la veille, à quelques pour cent près à l'échelle d'une région.",
+  "affirmation": "La production solaire se prévoit la veille pour le lendemain avec une erreur de quelques pour cent à l'échelle d'une région.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Erreur quadratique moyenne de la prévision à 24 h : 3,6 % de la puissance installée à l'échelle de l'Italie, 5,5 % à l'échelle d'une zone de marché. Citation raccourcie (coupe signalée par […]).",
+  "sources": [
+   {
+    "cle": "iea-pvps-prevision",
+    "passage": "the RMSE decreases with the root of the area under control […] from almost 5.5% of the installed capacity on average over market zones down to 3.6% over Italy",
+    "relu": null,
+    "doute": true
+   }
+  ]
+ },
+ {
+  "id": "vs-050",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info variable › x",
+  "info": "variable",
+  "texte": "Entre décembre et juin, la production mensuelle varie du simple au triple.",
+  "affirmation": "La production solaire mensuelle est environ trois fois plus élevée en juin qu'en décembre.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "À l'échelle du pays : rapport d'environ 3,5 entre juin et janvier 2025 (valeurs lues par l'outil sur un graphique du Panorama, à relire ; le parc a aussi grossi dans l'année). Par lieu (Global Solar Atlas, inclinaison optimale) : 3,2 à Orléans, 3,7 à Lille, mais seulement 1,8 à Saint-Photon. « Du simple au triple » vaut donc pour la France, pas pour la Provence.",
+  "sources": [
+   {
+    "cle": "panorama-enr-2025",
+    "passage": "Production solaire et facteurs de charge mensuels (graphique, p. 33) : environ 4 900 GWh en juin 2025 contre environ 1 400 GWh en janvier 2025",
+    "relu": null,
+    "doute": true
+   },
+   {
+    "cle": "gsa-orleans",
+    "passage": "Requête loc=47.90,1.90 : PVOUT_csi = 1 165,0 kWh/kWc/an ; OPTA = 36° ; mensuel : déc. 41,5 ; juin 134,4",
+    "relu": null
+   },
+   {
+    "cle": "gsa-lille",
+    "passage": "Requête loc=50.63,3.06 : PVOUT_csi = 1 078,4 kWh/kWc/an ; OPTA = 36° ; mensuel : déc. 34,3 ; juin 128,3",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-051",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info variable › x",
+  "info": "variable",
+  "texte": "Le réseau compense avec ce qui se pilote : barrages, centrales, stockage, et consommateurs qui acceptent de décaler leurs usages.",
+  "affirmation": "La variabilité du solaire est compensée par les moyens pilotables : hydraulique, centrales, stockage, flexibilité de la demande.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-production",
+    "passage": "capacités hydrauliques pilotables",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-production",
+    "passage": "Au 31 décembre 2025, le parc total de batteries en service en France s'élevait à 1,6 GW",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-consommation",
+    "passage": "L'adaptation du profil de consommation au profil de production, ou « flexibilité de la demande », est un des leviers existants",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-052",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info variable › retiens",
+  "info": "variable",
+  "texte": "Variable ne veut pas dire imprévisible.",
+  "affirmation": "Distinction pédagogique entre variabilité et imprévisibilité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-053",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info surface › x",
+  "info": "surface",
+  "texte": "Au sol, il faut compter 1 à 1,5 hectare par MWc.",
+  "affirmation": "Une centrale photovoltaïque au sol occupe 1 à 1,5 ha par MWc.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Médianes américaines 2019 : 2,8 acres/MWc en fixe (1,13 ha) et 4,2 acres/MWc avec trackers (1,70 ha). La fourchette « 1 à 1,5 ha » vaut pour le fixe ; avec trackers on approche 2 ha. Aucune source française primaire n'a pu être lue (pages photovoltaique.info illisibles par l'outil). Proposition : « 1 à 2 hectares par MWc ».",
+  "sources": [
+   {
+    "cle": "lbnl-surface-pv",
+    "passage": "Power density (fixed-tilt): 0.35 MWDC/acre (2.8 acres/MWDC) ; (tracking): 0.24 MWDC/acre (4.2 acres/MWDC)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-054",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info surface › x",
+  "info": "surface",
+  "texte": "Cette centrale occupe 14 hectares",
+  "affirmation": "Le site fictif occupe 14 hectares pour 12 MWc.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent : 14 ha / 12 MWc = 1,17 ha/MWc. Les 28 000 modules couvrent 5,5 ha (28 000 × 1,95 m²), soit 39 % du terrain : taux de couverture réaliste.",
+  "sources": []
+ },
+ {
+  "id": "vs-055",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info surface › x",
+  "info": "surface",
+  "texte": "une vingtaine de terrains de football",
+  "affirmation": "14 ha ≈ 20 terrains de football (105 m × 68 m = 0,714 ha).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Un terrain de 105 m × 68 m fait 0,714 ha ; 14 / 0,714 = 19,6 : exact.",
+  "sources": []
+ },
+ {
+  "id": "vs-056",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info surface › x",
+  "info": "surface",
+  "texte": "sur une ancienne carrière dont personne ne voulait",
+  "affirmation": "Le site fictif est implanté sur une ancienne carrière (terrain dégradé).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-057",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info surface › x",
+  "info": "surface",
+  "texte": "L'herbe pousse sous les modules : deux cents brebis la tondent, sans carburant et sans préavis de grève.",
+  "affirmation": "La végétation sous les modules est entretenue par pâturage ovin (200 brebis sur le site fictif).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Cohérence du chiffre fictif : 200 brebis sur 14 ha font 14 brebis/ha, chargement élevé (l'étude INRAE porte sur 24 brebis pour 6 ha, soit 4/ha). Tenable seulement en pâturage tournant de quelques semaines ; sinon écrire « une soixantaine de brebis ».",
+  "sources": [
+   {
+    "cle": "inrae-paturage-pv",
+    "passage": "La quantité et la qualité du fourrage sont plus élevées à l'ombre des panneaux",
+    "relu": null
+   },
+   {
+    "cle": "reussir-patre-moutons",
+    "passage": "Des prestations d'écopâturage avec des éleveurs",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-058",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info surface › retiens",
+  "info": "surface",
+  "texte": "Environ 1 hectare par MWc : l'ordre de grandeur à garder en tête.",
+  "affirmation": "Ordre de grandeur : environ 1 ha par MWc au sol.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Médianes américaines 2019 : 2,8 acres/MWc en fixe (1,13 ha) et 4,2 acres/MWc avec trackers (1,70 ha). La fourchette « 1 à 1,5 ha » vaut pour le fixe ; avec trackers on approche 2 ha. Aucune source française primaire n'a pu être lue (pages photovoltaique.info illisibles par l'outil). Proposition : « 1 à 2 hectares par MWc ».",
+  "sources": [
+   {
+    "cle": "lbnl-surface-pv",
+    "passage": "Power density (fixed-tilt): 0.35 MWDC/acre (2.8 acres/MWDC) ; (tracking): 0.24 MWDC/acre (4.2 acres/MWDC)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-059",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "Fabrication comprise, l'électricité solaire produite en France émet entre 20 et 30 g de CO₂e par kWh.",
+  "affirmation": "En analyse de cycle de vie, l'électricité photovoltaïque produite en France émet 20 à 30 g CO2e/kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La valeur encore inscrite dans la Base Empreinte au moment du communiqué est 43 gCO₂eq/kWh.",
+  "sources": [
+   {
+    "cle": "ademe-empreinte-pv-2026",
+    "passage": "les nouvelles données situent désormais l'empreinte carbone entre 20 et 30 gCO₂eq/kWh, soit une réduction de près de moitié",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-060",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "Une centrale à gaz dépasse 400 g.",
+  "affirmation": "Une centrale électrique au gaz émet plus de 400 g CO2e/kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ademe-empreinte-pv-2026",
+    "passage": "la production d'électricité à partir de charbon émet 1 060 gCO₂eq/kWh et 420 gCO₂eq/kWh à partir de gaz",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-061",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "Un module vit une trentaine d'années",
+  "affirmation": "La durée de vie d'un module photovoltaïque est d'environ 30 ans.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Valeur de référence des analyses de cycle de vie (IEA-PVPS). Fraunhofer ISE retient 25 ans dans ses calculs, le CEA écrit « > 20 ans ».",
+  "sources": [
+   {
+    "cle": "iea-pvps-acv",
+    "passage": "30 years for mature module technologies (e.g., glass-glass or glass-Tedlar backsheet)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-062",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "et perd environ 0,5 % de puissance par an",
+  "affirmation": "Un module perd environ 0,5 % de puissance par an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "NREL : médiane de près de 2 000 mesures de terrain. Fraunhofer ISE retient 0,7 %/an comme hypothèse prudente dans ses calculs de temps de retour énergétique : « environ 0,5 % » reste le bon ordre de grandeur.",
+  "sources": [
+   {
+    "cle": "nrel-degradation",
+    "passage": "the median value of 0·5%/year",
+    "relu": null
+   },
+   {
+    "cle": "fraunhofer-pv-report",
+    "passage": "Degradation rate (average p.a.) 0.70%",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-063",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "En fin de vie, il est collecté puis valorisé à plus de 90 %",
+  "affirmation": "En France, les modules en fin de vie sont collectés (éco-organisme Soren) et valorisés à plus de 90 %.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "soren-rapport-2025",
+    "passage": "taux de valorisation dépassant les 90 %",
+    "relu": null
+   },
+   {
+    "cle": "soren-rapport-2025",
+    "passage": "près de 13 760 tonnes de panneaux photovoltaïques collectées",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-064",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "verre, aluminium, cuivre",
+  "affirmation": "Les matières récupérées sont notamment le verre, l'aluminium et le cuivre.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "soren-rapport-2025",
+    "passage": "Verre, aluminium, cuivre, fractions minérales : des matières qui retournent",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-065",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info carbone › retiens",
+  "info": "carbone",
+  "texte": "Le solaire émet à la fabrication, presque rien ensuite : tout se joue sur sa durée de vie.",
+  "affirmation": "L'essentiel de l'empreinte carbone du photovoltaïque vient de la fabrication ; l'exploitation n'émet presque rien.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "L'empreinte de 20 à 30 g est une moyenne sur la durée de vie d'émissions concentrées à la fabrication (temps de retour énergétique d'environ un an). La phrase n'est pas citée telle quelle dans le communiqué ADEME.",
+  "sources": [
+   {
+    "cle": "fraunhofer-pv-report",
+    "passage": "PV systems manufactured in Europe and installed in Northern Europe require approximately 1.1 years to pay back the energy input",
+    "relu": null
+   },
+   {
+    "cle": "ademe-empreinte-pv-2026",
+    "passage": "les nouvelles données situent désormais l'empreinte carbone entre 20 et 30 gCO₂eq/kWh, soit une réduction de près de moitié",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-066",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info batiment › x",
+  "info": "batiment",
+  "texte": "Autoconsommation : la part de ma production que je consomme sur place.",
+  "affirmation": "Taux d'autoconsommation = part de la production consommée sur place.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Définitions données par l'exemple sur la page du ministère. L'article L315-1 du code de l'énergie définit l'opération d'autoconsommation individuelle, pas les deux taux ; Légifrance n'a pas pu être consulté.",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "Sa maison pourra donc consommer entièrement la production locale : son taux d'autoconsommation atteindra 100 %.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-067",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info batiment › x",
+  "info": "batiment",
+  "texte": "Autoproduction : la part de ma consommation couverte par mes panneaux.",
+  "affirmation": "Taux d'autoproduction = part de la consommation couverte par la production locale.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Définitions données par l'exemple sur la page du ministère. L'article L315-1 du code de l'énergie définit l'opération d'autoconsommation individuelle, pas les deux taux ; Légifrance n'a pas pu être consulté.",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "dans la mesure où la taille de l'installation ne permettra pas de produire à hauteur de la consommation totale de la maison, le taux d'autoproduction sera très faible",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-068",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info batiment › x",
+  "info": "batiment",
+  "texte": "Une petite installation est presque entièrement autoconsommée, mais couvre peu ; une grande couvre davantage, mais déborde à midi.",
+  "affirmation": "Plus l'installation est petite, plus le taux d'autoconsommation est élevé et le taux d'autoproduction faible, et inversement.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "Sa maison pourra donc consommer entièrement la production locale : son taux d'autoconsommation atteindra 100 %.",
+    "relu": null
+   },
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "dans la mesure où la taille de l'installation ne permettra pas de produire à hauteur de la consommation totale de la maison, le taux d'autoproduction sera très faible",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-069",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info batiment › x",
+  "info": "batiment",
+  "texte": "Le levier le moins cher : déplacer vers le milieu de journée ce qui peut l'être.",
+  "affirmation": "Déplacer les usages vers les heures de production est le levier le moins coûteux pour augmenter l'autoconsommation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-070",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info batiment › retiens",
+  "info": "batiment",
+  "texte": "Autoconsommation = part de la production. Autoproduction = part de la consommation.",
+  "affirmation": "Rappel des deux définitions.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Définitions données par l'exemple sur la page du ministère. L'article L315-1 du code de l'énergie définit l'opération d'autoconsommation individuelle, pas les deux taux ; Légifrance n'a pas pu être consulté.",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "Sa maison pourra donc consommer entièrement la production locale : son taux d'autoconsommation atteindra 100 %.",
+    "relu": null
+   },
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "dans la mesure où la taille de l'installation ne permettra pas de produire à hauteur de la consommation totale de la maison, le taux d'autoproduction sera très faible",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-071",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info midi › x",
+  "info": "midi",
+  "texte": "Les jours de grand soleil et de faible demande, il y a trop d'électricité au même moment",
+  "affirmation": "Les prix négatifs apparaissent quand une forte production (solaire notamment) coïncide avec une faible demande.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "the mid-day plateau has become a trough, as a result of lower consumption levels combined with the growth of solar generation in France and Europe",
+    "relu": null
+   },
+   {
+    "cle": "cre-prix-negatifs",
+    "passage": "en début d'après-midi (près de la moitié des occurrences entre début 2023 et mi-2024 surviennent entre 12h et 16h)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-072",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info midi › x",
+  "info": "midi",
+  "texte": "en 2025, le prix de gros a été négatif pendant 513 heures en France",
+  "affirmation": "En 2025, le prix spot de l'électricité en France a été négatif pendant 513 heures.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "The hourly spot price was negative for 513 hours in 2025, a higher number of occurrences than the previous year (352 in 2024)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-073",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info midi › x",
+  "info": "midi",
+  "texte": "Les grandes centrales doivent alors réduire leur production.",
+  "affirmation": "Lors des heures de prix négatifs, les grandes installations (solaires, éoliennes) réduisent ou arrêtent leur production.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Nuance : ce sont les installations sous complément de rémunération (les grandes) qui s'arrêtent, par incitation contractuelle ; celles sous obligation d'achat (les petites) continuent de produire (CRE).",
+  "sources": [
+   {
+    "cle": "rte-be2025-synthese",
+    "passage": "The modulation of solar and wind farms during periods of negative spot prices doubled by volume in 2025 compared with the previous year, reaching around 3 TWh",
+    "relu": null
+   },
+   {
+    "cle": "cre-prix-negatifs",
+    "passage": "ceux sous complément de rémunération (CR) sont contractuellement incités à s'arrêter, sous peine de perdre le bénéfice du CR et de la prime pour prix négatifs",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-074",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info midi › x",
+  "info": "midi",
+  "texte": "Pour un bâtiment, c'est un signal : consommer à ces heures-là soulage le réseau et, avec le bon contrat, la facture.",
+  "affirmation": "Consommer aux heures d'abondance solaire aide le système et peut réduire la facture avec une offre adaptée (heures creuses méridiennes, offre dynamique).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cre-heures-creuses",
+    "passage": "la période entre 11h et 17h est aujourd'hui plus propice qu'avant pour consommer l'électricité, en particulier en été",
+    "relu": null
+   },
+   {
+    "cle": "cre-heures-creuses",
+    "passage": "faire des économies s'ils consomment pendant les heures creuses",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-consommation",
+    "passage": "pour tirer pleinement parti de l'abondance de production décarbonée, notamment en milieu de journée",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-075",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info midi › retiens",
+  "info": "midi",
+  "texte": "L'électricité la moins chère de la journée est de plus en plus souvent celle de midi.",
+  "affirmation": "Les prix de gros les plus bas de la journée se situent de plus en plus souvent en milieu de journée.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Vrai surtout d'avril à août ; en hiver, le creux de prix reste plutôt nocturne.",
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "the mid-day plateau has become a trough, as a result of lower consumption levels combined with the growth of solar generation in France and Europe",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "negative prices mainly occurred in the middle of the day between April and August",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-076",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "Fin 2025, la France comptait 30,4 GW de solaire installés",
+  "affirmation": "Puissance solaire installée en France fin 2025 : 30,4 GW.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-production",
+    "passage": "À la fin d'année 2025, la puissance cumulée des installations de production d'électricité solaire sur le territoire français métropolitain s'élève à 30,4 GW.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-077",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "plus que tous ses barrages réunis (25,7 GW)",
+  "affirmation": "Puissance hydraulique installée en France fin 2025 : 25,7 GW, inférieure au solaire.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Hydraulique 25,7 GW / +0,0 GW",
+    "relu": null
+   },
+   {
+    "cle": "panorama-enr-2025",
+    "passage": "Avec une capacité raccordée de plus de 25,7 GW au 31 décembre 2025, la filière hydraulique est désormais la troisième en France du point de vue des capacités installées",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-078",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "Production 2025 : 32,9 TWh",
+  "affirmation": "Production solaire en France en 2025 : 32,9 TWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-production",
+    "passage": "Sur l'année 2025, la production solaire française s'est établie à 32,9 TWh",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-079",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "soit 6 % de l'électricité du pays",
+  "affirmation": "Le solaire a représenté 6 % de la production d'électricité française en 2025.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "32,9 / 547,5 = 6,0 % de la production. RTE donne aussi 7,5 % de la consommation : préciser « de la production d'électricité » évite l'ambiguïté.",
+  "sources": [
+   {
+    "cle": "rte-be2025-production",
+    "passage": "Sur l'année 2025, la production solaire française s'est établie à 32,9 TWh",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-production",
+    "passage": "La production d'électricité en France métropolitaine a atteint 547,5 TWh en 2025.",
+    "relu": null
+   },
+   {
+    "cle": "edf-solaire-chiffres",
+    "passage": "Cela représente, 6 % de la production française d'électricité",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-080",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "Les barrages, avec moins de puissance, ont produit presque deux fois plus : 62,4 TWh.",
+  "affirmation": "Production hydraulique en France en 2025 : 62,4 TWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-synthese",
+    "passage": "remained at a level in line with historical averages in 2025 (62.4 TWh)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-081",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "ont produit presque deux fois plus",
+  "affirmation": "62,4 / 32,9 = 1,9 : presque deux fois plus.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "62,4 / 32,9 = 1,90 : « presque deux fois plus » est exact.",
+  "sources": []
+ },
+ {
+  "id": "vs-082",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "info france › retiens",
+  "info": "france",
+  "texte": "Puissance installée et énergie produite ne se comparent pas : entre les deux, il y a le nombre d'heures.",
+  "affirmation": "Méthode : énergie = puissance × durée de fonctionnement équivalente.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-089",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.totem[0][0]",
+  "info": "productible",
+  "texte": "« Centrale solaire de Saint-Photon · 12 MWc · 28 000 modules · 14 hectares · environ 17 GWh par an ».",
+  "affirmation": "Fiche du site fictif : 12 MWc, 28 000 modules, 14 ha, environ 17 GWh/an.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent (voir info productible) : 14 ha pour 12 MWc font 1,17 ha/MWc, dans la fourchette annoncée de 1 à 1,5.",
+  "sources": []
+ },
+ {
+  "id": "vs-090",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.totem[0][1]",
+  "info": "productible",
+  "avant": "« Soit la consommation domestique d'environ 8 000 habitants. Les 8 000 habitants ne sont pas fournis. »",
+  "texte": "« Soit la consommation domestique d'environ 7 000 habitants. Les 7 000 habitants ne sont pas fournis. »",
+  "affirmation": "17 GWh/an correspondent à la consommation électrique domestique d'environ 8 000 habitants.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "« Soit la consommation domestique d'environ 7 000 habitants. Les 7 000 habitants ne sont pas fournis. »",
+  "note": "39 % de 451 TWh = 176 TWh pour 69,1 millions d'habitants, soit environ 2 550 kWh par habitant et par an ; 17,4 GWh couvrent alors 6 800 habitants. Si les 39 % s'appliquent à la consommation hors pertes de réseau (environ 415 TWh), on obtient 7 400. Dans les deux cas, 8 000 est un peu généreux. Le chiffre de 39 % vient d'EDF citant RTE : la page RTE « Consommation » ne le donne pas en clair.",
+  "sources": [
+   {
+    "cle": "edf-consommation-chiffres",
+    "passage": "Le secteur résidentiel occupe plus d'un tiers (39 %) de la consommation électrique française",
+    "relu": null
+   },
+   {
+    "cle": "edf-consommation-chiffres",
+    "passage": "En 2025, la consommation d'électricité en mode corrigé (des aléas climatiques et des effets calendaires) atteint 451 TWh.",
+    "relu": null
+   },
+   {
+    "cle": "insee-bilan-demographique-2025",
+    "passage": "Au 1er janvier 2026, la population en France est estimée à 69,1 millions d'habitants",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-091",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.totem[1]",
+  "info": "productible",
+  "texte": "Le panneau du site : 12 MWc, 28 000 modules, 14 hectares, environ 17 GWh par an.",
+  "affirmation": "Rappel de la fiche du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-092",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.cellule[0][0]",
+  "info": "effet",
+  "texte": "un schéma : un photon arrive, un électron s'en va",
+  "affirmation": "Effet photovoltaïque : un photon libère un électron.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cea-cellules-pv",
+    "passage": "Chaque photon (particule de lumière) pénétrant le matériau perd son énergie en créant des paires électrons-trous.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-093",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.cellule[1]",
+  "info": "effet",
+  "texte": "Un photon, un électron, du courant continu. La physique la plus rentable du site tient dans dix centimètres.",
+  "affirmation": "Une cellule photovoltaïque mesure une dizaine de centimètres.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "L'effet (photon, électron, courant continu) est sourcé ailleurs (CEA). La taille « dix centimètres » n'a pas de source lue : le module de 430 Wc pris en référence compte 108 demi-cellules, et les cellules actuelles mesurent plutôt 18 cm de côté (9 cm une fois coupées en deux, ce que montre justement la vitrine). Proposition : garder si la vitrine montre bien une demi-cellule, sinon écrire « tient dans une vingtaine de centimètres ».",
+  "sources": []
+ },
+ {
+  "id": "vs-094",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.maquette[0][0]",
+  "info": "batiment",
+  "texte": "deux curseurs marqués « autoconsommation » et « autoproduction »",
+  "affirmation": "Les deux taux sont à distinguer (rappel pédagogique).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-095",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.affiche[1]",
+  "info": "france",
+  "texte": "Il a ses raisons : il produit deux fois plus.",
+  "affirmation": "L'hydraulique a produit (presque) deux fois plus que le solaire en 2025.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "62,4 / 32,9 = 1,9 : « presque deux fois plus » (formulation de l'info) est plus exact que « deux fois plus ».",
+  "sources": [
+   {
+    "cle": "rte-be2025-synthese",
+    "passage": "remained at a level in line with historical averages in 2025 (62.4 TWh)",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-production",
+    "passage": "Sur l'année 2025, la production solaire française s'est établie à 32,9 TWh",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-096",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.crete[0][0]",
+  "info": "module",
+  "texte": "C'est moi qui visse les modules. Vingt-huit mille. J'ai compté.",
+  "affirmation": "Le site fictif compte 28 000 modules.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-097",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.crete[0][1]",
+  "info": "module",
+  "texte": "Regarde l'étiquette au dos : 430 Wc. Les gens lisent ça comme une promesse. C'est une note obtenue en labo, un jour de printemps, sans vent et sans pigeon.",
+  "affirmation": "La puissance crête (430 Wc) est une valeur mesurée en laboratoire dans des conditions normalisées.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "pveducation-noct",
+    "passage": "A PV module will be typically rated at 25 °C under 1 kW/m2.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-098",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.crete[1]",
+  "info": "chaleur",
+  "texte": "Un module qui donne sa puissance crête en plein mois d'août ? Je cherche encore.",
+  "affirmation": "En plein été, la chaleur empêche un module d'atteindre sa puissance crête.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "pveducation-noct",
+    "passage": "when operating in the field, they typically operate at higher temperatures and at somewhat lower insolation conditions",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-099",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.crete[1]",
+  "info": "chaleur",
+  "texte": "Par contre, en avril, par mistral, ils se surpassent.",
+  "affirmation": "Les meilleures puissances s'observent au printemps, par temps frais et venté.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Même affirmation que l'info chaleur (meilleures puissances au printemps, par temps frais et venté) : plausible, non sourcée. Le vent refroidit bien les modules (la norme NOCT fixe 1 m/s de vent), mais « ils se surpassent en avril » reste à étayer.",
+  "sources": []
+ },
+ {
+  "id": "vs-100",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.sinus[0][0]",
+  "info": "onduleur",
+  "texte": "Mes onduleurs prennent du continu et rendent de l'alternatif, cinquante fois par seconde",
+  "affirmation": "L'onduleur convertit le continu en alternatif à 50 Hz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "le réseau interne de l'installation de production intègre systématiquement un ou plusieurs onduleurs, afin de convertir cette électricité en courant alternatif",
+    "relu": null
+   },
+   {
+    "cle": "cre-services-systeme",
+    "passage": "la fréquence du réseau baisse par rapport à sa valeur de référence de 50 Hz",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-101",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.sinus[0][1]",
+  "info": "onduleur",
+  "texte": "Six armoires. Si l'une s'arrête, un sixième du champ produit pour rien.",
+  "affirmation": "Six onduleurs sur le site fictif ; l'arrêt de l'un fait perdre un sixième de la production.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-102",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.sinus[1]",
+  "info": "onduleur",
+  "texte": "Quatre-vingt-dix-huit pour cent de rendement. Les deux pour cent qui manquent, c'est la chaleur que tu sens sur la porte.",
+  "affirmation": "Rendement d'onduleur d'environ 98 % ; les pertes sont dissipées en chaleur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Rendement européen 98,8 % pour l'onduleur consulté. Les pertes de conversion sont bien dissipées en chaleur (physique élémentaire, non citée). Fiche produit d'un distributeur reprenant les caractéristiques du fabricant (onduleur de centrale de 350 kW). Les onduleurs actuels dépassent 98 % ; à remplacer si possible par la fiche technique officielle d'un fabricant.",
+  "sources": [
+   {
+    "cle": "krannich-onduleur-350",
+    "passage": "SG350HX-V114 : Max. efficiency 99,02 % ; European efficiency 98,80 % ; nominal AC voltage 800 V ; 50/60 Hz ; 12 MPPT",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-103",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.azimut[0][0]",
+  "info": "tracker",
+  "texte": "Mes panneaux regardent le soleil toute la journée",
+  "affirmation": "Les trackers orientent les modules vers le soleil toute la journée.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La fiche IEA-PVPS décrit le suivi de la course du soleil par un tracker à un axe (SAT) ; elle ne dit pas en toutes lettres « d'est en ouest » (axe nord-sud), ce qui est la configuration habituelle.",
+  "sources": [
+   {
+    "cle": "iea-pvps-trackers",
+    "passage": "As shading between panels starts to occur, the tracking angle no longer follows the sun's path but, instead, adjusts backward (decreases) to prevent shading.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-104",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.azimut[1]",
+  "info": "tracker",
+  "texte": "Un tracker, c'est vingt pour cent de production en plus et un moteur à graisser.",
+  "affirmation": "Un tracker apporte environ 20 % de production en plus, au prix d'une maintenance mécanique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "iea-pvps-trackers",
+    "passage": "SAT systems can increase annual yields by ~20% over fixed-tilt systems.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-105",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.cloche[1]",
+  "info": "cloche",
+  "texte": "Une bonne courbe, c'est une courbe qui ressemble à la météo. Une mauvaise courbe, c'est une courbe qui ressemble à autre chose.",
+  "affirmation": "Méthode : une courbe de production saine suit la météo.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-106",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.nuage[0][0]",
+  "info": "variable",
+  "avant": "Je dis ce soir ce que la centrale produira demain. Je me trompe de quelques pour cent.",
+  "texte": "Je dis ce soir ce que la région produira demain. Je me trompe de quelques pour cent ; sur une seule centrale, un peu plus.",
+  "affirmation": "La prévision de production du lendemain pour une centrale est juste à quelques pour cent près.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Dr Nuage, prévision. Je dis ce soir ce que la région produira demain. Je me trompe de quelques pour cent ; sur une seule centrale, un peu plus. La météo de la télé se trompe de pull.",
+  "note": "« Quelques pour cent » vaut pour une région ou un pays (3,6 à 5,5 % de la puissance installée selon l'IEA-PVPS) ; l'erreur augmente quand la zone rétrécit, et elle est plus forte pour une centrale isolée. L'info « variable » le dit bien (« à l'échelle d'une région ») ; la réplique, non.",
+  "sources": [
+   {
+    "cle": "iea-pvps-prevision",
+    "passage": "the RMSE decreases with the root of the area under control […] from almost 5.5% of the installed capacity on average over market zones down to 3.6% over Italy",
+    "relu": null,
+    "doute": true
+   }
+  ]
+ },
+ {
+  "id": "vs-107",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.nuage[0][1]",
+  "info": "variable",
+  "texte": "C'est variable. Ce n'est pas pareil : la marée aussi est variable, et personne ne s'en étonne.",
+  "affirmation": "Analogie : variable n'est pas imprévisible (comme la marée).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-108",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.nuage[1]",
+  "info": "cloche",
+  "texte": "Tu verras les dents sur la courbe. Chaque nuage signe son passage.",
+  "affirmation": "Un passage nuageux se lit comme une dent sur la courbe de production.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-109",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.capteur[0][0]",
+  "info": "chaleur",
+  "texte": "une petite coupole de verre qui mesure le rayonnement en watts par mètre carré",
+  "affirmation": "Un pyranomètre (coupole de verre) mesure l'éclairement solaire en W/m².",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Plage de mesure indiquée : 0 à 1 500 W/m².",
+  "sources": [
+   {
+    "cle": "kippzonen-pyranometre",
+    "passage": "routine global solar radiation measurement",
+    "relu": null
+   },
+   {
+    "cle": "kippzonen-pyranometre",
+    "passage": "double glass dome construction",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-110",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.capteur[0][1]",
+  "info": "chaleur",
+  "texte": "L'écran affiche la température des modules. Elle est nettement plus élevée que la tienne. Ils ne se plaignent pas, mais ils produisent moins.",
+  "affirmation": "Les modules au soleil sont nettement plus chauds que l'air ambiant, et produisent moins quand ils chauffent.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "NOCT : température des cellules pour 20 °C d'air et 800 W/m². Un module typique est donc 28 °C plus chaud que l'air.",
+  "sources": [
+   {
+    "cle": "pveducation-noct",
+    "passage": "The best module operated at a NOCT of 33°C, the worst at 58°C and the typical module at 48°C respectively.",
+    "relu": null
+   },
+   {
+    "cle": "solartraders-module-430",
+    "passage": "LR5-54HTH-430M : puissance nominale 430 W ; dimensions 1722 × 1134 × 30 mm ; rendement du module 22,02 % ; coefficient de température Pmax −0,29 %/°C ; 108 cellules",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-111",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.capteur[1]",
+  "info": "chaleur",
+  "texte": "Le thermomètre des modules grimpe plus vite que celui de l'air.",
+  "affirmation": "La température des modules dépasse nettement celle de l'air au soleil.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "pveducation-noct",
+    "passage": "The best module operated at a NOCT of 33°C, the worst at 58°C and the typical module at 48°C respectively.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-112",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.berger[0][0]",
+  "info": "surface",
+  "texte": "Deux cents brebis sous les panneaux. Elles ont de l'ombre, de l'herbe",
+  "affirmation": "Le site fictif accueille 200 brebis, qui trouvent ombre et herbe sous les panneaux.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Chargement fictif élevé : 14 brebis/ha (voir info surface).",
+  "sources": []
+ },
+ {
+  "id": "vs-113",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.berger[0][1]",
+  "info": "surface",
+  "texte": "L'exploitant me paie pour qu'elles broutent. Avant, il payait un tracteur.",
+  "affirmation": "Le pâturage ovin remplace l'entretien mécanique de la végétation et peut faire l'objet d'une prestation rémunérée par l'exploitant.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Source de presse agricole (témoignages d'éleveurs) ; le guide de l'Institut de l'élevage (idele.fr) n'a pas pu être ouvert. La rémunération n'est pas systématique : certains contrats sont une simple mise à disposition gratuite du terrain.",
+  "sources": [
+   {
+    "cle": "reussir-patre-moutons",
+    "passage": "Pas question de pâturer gratuitement, même en écopâturage. On leur apporte une prestation, ça a de la valeur",
+    "relu": null
+   },
+   {
+    "cle": "reussir-patre-moutons",
+    "passage": "À défaut de moutons, l'autre solution est la fauche mécanique avec un girobroyeur. Mais c'est un peu plus coûteux",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-114",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.berger[1]",
+  "info": "surface",
+  "texte": "en août, elles se battent pour être dessous",
+  "affirmation": "Les panneaux fournissent de l'ombre aux brebis par forte chaleur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "inrae-paturage-pv",
+    "passage": "Elles cherchent l'ombre sous les panneaux pendant les périodes chaudes et ensoleillées",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-115",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.palette[0][0]",
+  "info": "carbone",
+  "texte": "Sur l'un d'eux, un autocollant de 2009 : 180 Wc.",
+  "affirmation": "Un module posé en 2009 affichait de l'ordre de 180 Wc.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Accessoire fictif plausible (les modules courants de 2009 faisaient 170 à 230 Wc), mais aucune fiche technique d'époque n'a été lue. Fraunhofer ISE indique seulement que le rendement des modules commerciaux est passé « d'environ 17 % à un peu moins de 25 % » en dix ans. Proposition : garder.",
+  "sources": []
+ },
+ {
+  "id": "vs-116",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.palette[0][1]",
+  "info": "carbone",
+  "avant": "Seize ans de service, toujours fonctionnel, deux fois moins puissant que les neufs.",
+  "texte": "Dix-sept ans de service, toujours fonctionnel, plus de deux fois moins puissant que les neufs.",
+  "affirmation": "Module fictif : 16 ans de service (2009 → 2025), 180 Wc contre 430 Wc pour un neuf.",
+  "type": "fictif",
+  "verdict": "corrige",
+  "correction": "Dix-sept ans de service, toujours fonctionnel, plus de deux fois moins puissant que les neufs.",
+  "note": "Incohérence mineure : un autocollant de 2009 et « seize ans de service » mènent en 2025, alors que la visite se joue en 2026 (dix-sept ans). Et 180 Wc contre 430 Wc, c'est 2,4 fois moins, pas deux fois.",
+  "sources": []
+ },
+ {
+  "id": "vs-117",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.palette[1]",
+  "info": "carbone",
+  "texte": "Verre, aluminium, cuivre : presque tout repart. Il reste le silicium, et la nostalgie.",
+  "affirmation": "Le verre, l'aluminium et le cuivre des modules sont recyclés ; le silicium ne le serait pas.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "« Il reste le silicium » est une pirouette : le rapport Soren ne dit pas que le silicium n'est pas récupéré (il cite des « fractions minérales »). À ne pas lire comme un fait.",
+  "sources": [
+   {
+    "cle": "soren-rapport-2025",
+    "passage": "Verre, aluminium, cuivre, fractions minérales : des matières qui retournent",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-118",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.transfo[0][0]",
+  "info": "reseau",
+  "texte": "Une plaque : « 20 000 V · Danger de mort ».",
+  "affirmation": "Le transformateur élève la tension à 20 000 V (réseau HTA).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "un transformateur dont le rôle est d'élever la tension de sortie des onduleurs à la tension de raccordement (HTA, généralement 20 kV)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-119",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.transfo[0][1]",
+  "info": "reseau",
+  "texte": "Le compteur tourne à l'envers de tous ceux que tu as relevés jusqu'ici : il compte ce qui sort.",
+  "affirmation": "Le compteur du poste de livraison d'un producteur mesure l'énergie injectée sur le réseau.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Le compteur d'un site de production mesure l'injection (et le soutirage des auxiliaires).",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "courbe de charge active et réactive pour le soutirage et l'injection",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-120",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.transfo[1]",
+  "info": "reseau",
+  "avant": "Le transformateur bourdonne à cinquante hertz.",
+  "texte": "Le transformateur bourdonne à cent hertz : deux fois la fréquence du réseau.",
+  "affirmation": "Le bourdonnement d'un transformateur est à 50 Hz.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Le transformateur bourdonne à cent hertz : deux fois la fréquence du réseau. C'est la note du réseau, une octave plus haut. Toute l'Europe chante la même.",
+  "note": "Le bourdonnement d'un transformateur vient de la magnétostriction du noyau, qui vibre deux fois par période : 100 Hz sur un réseau à 50 Hz. Source de vulgarisation d'un fabricant, à défaut de source académique lue.",
+  "sources": [
+   {
+    "cle": "rex-transformateur-bourdonnement",
+    "passage": "On a 50 hertz system, the corresponding component is around 100 hertz.",
+    "relu": null
+   },
+   {
+    "cle": "rex-transformateur-bourdonnement",
+    "passage": "Fundamental core-vibration frequency ≈ 2 × electrical frequency",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-121",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.transfo[1]",
+  "info": "reseau",
+  "texte": "C'est la note du réseau, une octave plus haut. Toute l'Europe chante la même.",
+  "affirmation": "La fréquence du réseau électrique est de 50 Hz dans toute l'Europe (réseau interconnecté synchrone).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Vrai pour le réseau européen interconnecté (Europe continentale) ; les îles Britanniques et les pays nordiques forment d'autres zones synchrones, également à 50 Hz.",
+  "sources": [
+   {
+    "cle": "rte-interconnexions",
+    "passage": "305 000 kilometres of power lines operating at the same frequency (50 Hz), more than 400 interconnections linking nearly 600 million European citizens.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-122",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.riverain[0][0]",
+  "info": "midi",
+  "texte": "à midi, quand il y en a trop, on paie des gens pour ne plus en produire",
+  "affirmation": "Lors des heures de prix négatifs, des producteurs sont rémunérés (ou indemnisés) pour arrêter leur production.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cre-prix-negatifs",
+    "passage": "elles perçoivent une compensation au-delà d'un certain nombre d'heures à prix négatifs dans l'année (« prime pour prix négatif »). Le versement de cette prime est conditionné à la non-production",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-123",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.riverain[0][1]",
+  "info": "midi",
+  "texte": "Mon neveu fait tourner son lave-linge à midi depuis qu'il a un contrat qui change de prix selon l'heure.",
+  "affirmation": "Il existe des offres dont le prix varie selon l'heure (heures creuses en journée, tarification dynamique).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La source couvre les heures creuses de l'après-midi (11 millions de clients concernés). Les offres à tarification dynamique, indexées heure par heure sur le marché, existent aussi mais n'ont pas été sourcées ici.",
+  "sources": [
+   {
+    "cle": "cre-heures-creuses",
+    "passage": "déplacer une partie des heures mal placées (7h-11h ou 17h-23h) vers des créneaux où l'énergie est abondante et peu chère, principalement l'après-midi (11h-17h)",
+    "relu": null
+   },
+   {
+    "cle": "cre-heures-creuses",
+    "passage": "Les nouvelles plages d'heures creuses seront progressivement attribuées à compter du 1er novembre 2025 et jusqu'à fin 2027",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-124",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.cigale",
+  "info": "midi",
+  "texte": "Une cigale. Puissance sonore : 90 décibels. Consommation électrique : nulle. Facteur de charge : 100 % de juin à août.",
+  "affirmation": "Blague : le chant d'une cigale atteindrait 90 dB.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Chiffre de la blague non vérifié (les cigales dépassent couramment 80 à 90 dB à courte distance).",
+  "sources": []
+ },
+ {
+  "id": "vs-125",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.zenithApres[1]",
+  "info": "france",
+  "avant": "Un réacteur nucléaire produit entre 6 et 9 TWh par an, selon sa taille.",
+  "texte": "Un réacteur nucléaire produit entre 5 et 9 TWh par an, selon sa taille.",
+  "affirmation": "Un réacteur nucléaire français produit entre 6 et 9 TWh par an selon sa puissance.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Un réacteur nucléaire produit entre 5 et 9 TWh par an, selon sa taille.",
+  "note": "Gravelines 2025 : 32,27 TWh pour 6 réacteurs de 900 MW, soit 5,4 TWh chacun ; Chooz : 16 TWh pour 2 réacteurs de 1 450 MW, soit 8 TWh chacun. Le bas de la fourchette est donc sous 6 TWh.",
+  "sources": [
+   {
+    "cle": "edf-gravelines",
+    "passage": "6 réacteurs à eau pressurisée de 900 MWe",
+    "relu": null
+   },
+   {
+    "cle": "edf-gravelines",
+    "passage": "En 2025, elle a produit 32,27 TWh d'électricité faible en CO2",
+    "relu": null
+   },
+   {
+    "cle": "edf-chooz",
+    "passage": "les deux unités de production de la centrale de Chooz ont généré 16 TWh d'électricité faiblement émettrice en CO₂",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-126",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "SOL.dit.zenithApres[1]",
+  "info": "france",
+  "texte": "Ma centrale, 17 GWh. Il en faudrait environ quatre cents comme la mienne pour en égaler un seul.",
+  "affirmation": "7 TWh / 17,4 GWh ≈ 400 centrales comme Saint-Photon pour un réacteur.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "373,0 TWh pour 57 réacteurs (nombre repris des notes antérieures, non revérifié ici) font 6,5 TWh en moyenne ; 6,5 TWh / 17,4 GWh ≈ 375 : « environ quatre cents » est juste. Avec la fourchette corrigée (5,4 à 8 TWh) : 310 à 460 centrales.",
+  "sources": [
+   {
+    "cle": "rte-be2025-production",
+    "passage": "La production nucléaire française totale...s'est établie à 373,0 TWh",
+    "relu": null,
+    "doute": true
+   }
+  ]
+ },
+ {
+  "id": "vs-127",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 1",
+  "info": "productible",
+  "texte": "100 kWc × 1 450 kWh par kWc. La puissance crête ne dit rien sans le productible du lieu.",
+  "affirmation": "100 kWc × 1 450 kWh/kWc = 145 000 kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "100 × 1 450 = 145 000 : exact.",
+  "sources": []
+ },
+ {
+  "id": "vs-128",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 1 › mauvaise réponse 1",
+  "info": "productible",
+  "texte": "Ce serait 100 kW pendant 8 760 heures : il faudrait du soleil la nuit.",
+  "affirmation": "100 kW × 8 760 h = 876 000 kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "100 × 8 760 = 876 000 : exact.",
+  "sources": []
+ },
+ {
+  "id": "vs-129",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 1 › mauvaise réponse 2",
+  "info": "productible",
+  "texte": "Presque : c'est ce qu'elle donnerait à Lille.",
+  "affirmation": "À Lille, 100 kWc produisent environ 100 000 kWh/an (1 000 kWh/kWc).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Même affirmation que l'info productible (1 000 kWh/kWc à Lille).",
+  "sources": [
+   {
+    "cle": "gsa-lille",
+    "passage": "Requête loc=50.63,3.06 : PVOUT_csi = 1 078,4 kWh/kWc/an ; OPTA = 36° ; mensuel : déc. 34,3 ; juin 128,3",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-130",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 2",
+  "info": "chaleur",
+  "avant": "Environ 0,3 % de perte par degré au-dessus de 25 °C : à 65 °C, le compte y est.",
+  "texte": "Environ 0,3 % de perte par degré au-dessus de 25 °C : à 65 °C, cela fait déjà 12 %. L'onduleur, les câbles et la poussière font le reste.",
+  "affirmation": "−0,3 %/°C × 40 °C = −12 % : avec les autres pertes, la centrale plafonne vers 85 % de sa puissance crête.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Environ 0,3 % de perte par degré au-dessus de 25 °C : à 65 °C, cela fait déjà 12 %. L'onduleur, les câbles et la poussière font le reste.",
+  "note": "Incohérence arithmétique : 40 °C × 0,3 % = 12 %, soit 88 % de la puissance crête, alors que la question annonce 85 %. « Le compte y est » n'est vrai qu'en ajoutant les autres pertes. Autre option : écrire « plafonne à 88 % » dans la question.",
+  "sources": [
+   {
+    "cle": "solartraders-module-430",
+    "passage": "LR5-54HTH-430M : puissance nominale 430 W ; dimensions 1722 × 1134 × 30 mm ; rendement du module 22,02 % ; coefficient de température Pmax −0,29 %/°C ; 108 cellules",
+    "relu": null
+   },
+   {
+    "cle": "pveducation-noct",
+    "passage": "The best module operated at a NOCT of 33°C, the worst at 58°C and the typical module at 48°C respectively.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-131",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 2",
+  "info": "chaleur",
+  "texte": "Mi-août, 38 °C, ciel parfaitement bleu. La centrale plafonne à 85 % de sa puissance crête.",
+  "affirmation": "Situation fictive : 85 % de la puissance crête par forte chaleur (12 % de pertes thermiques + autres pertes).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Voir la ligne suivante : 12 % de pertes thermiques donnent 88 %, pas 85 % ; il faut ajouter les autres pertes ou corriger le chiffre.",
+  "sources": []
+ },
+ {
+  "id": "vs-132",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 2 › mauvaise réponse 1",
+  "info": "chaleur",
+  "texte": "Plus de lumière, c'est plus de courant. C'est la chaleur qui coûte.",
+  "affirmation": "Le courant produit augmente avec l'éclairement ; c'est la température qui dégrade la puissance.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Chaque photon absorbé crée une paire électron-trou : plus d'éclairement, plus de courant. La baisse de puissance vient de la température (coefficient de −0,29 %/°C, voir info chaleur).",
+  "sources": [
+   {
+    "cle": "cea-cellules-pv",
+    "passage": "Chaque photon (particule de lumière) pénétrant le matériau perd son énergie en créant des paires électrons-trous.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-133",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 3",
+  "info": "cloche",
+  "texte": "Une marche nette, d'une fraction ronde : c'est un équipement qui s'arrête, pas la météo.",
+  "affirmation": "Méthode de lecture : une marche nette d'une fraction ronde signale l'arrêt d'un équipement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-134",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 3 › mauvaise réponse 1",
+  "info": "cloche",
+  "texte": "Un nuage creuse une dent, puis s'en va. Il ne retire pas un sixième pile.",
+  "affirmation": "Méthode de lecture : un nuage creuse une dent passagère.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-135",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 4",
+  "info": "batiment",
+  "texte": "L'autoconsommation, c'est la part de la production consommée sur place : 100 − 70.",
+  "affirmation": "Taux d'autoconsommation = part de la production consommée sur place ; 100 % − 70 % injectés = 30 %.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "100 % − 70 % injectés = 30 % autoconsommés : conforme à la définition.",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "Sa maison pourra donc consommer entièrement la production locale : son taux d'autoconsommation atteindra 100 %.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-136",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 4",
+  "info": "batiment",
+  "texte": "Ton école a 36 kWc en toiture. En juillet, elle consomme peu et injecte 70 % de sa production sur le réseau.",
+  "affirmation": "École fictive : 36 kWc en toiture, 70 % de la production injectée en juillet.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent avec l'épreuve « Midi pile » (36 kWc).",
+  "sources": []
+ },
+ {
+  "id": "vs-137",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 4 › mauvaise réponse 2",
+  "info": "batiment",
+  "texte": "La courbe de charge suffit : production moins injection.",
+  "affirmation": "Méthode : autoconsommé = production − injection, lisible sur les courbes de charge.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-138",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 5",
+  "info": "france",
+  "texte": "Fin 2025, la France a plus de puissance solaire installée que de puissance hydraulique.",
+  "affirmation": "Fin 2025, la puissance solaire installée (30,4 GW) dépasse la puissance hydraulique (25,7 GW).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-production",
+    "passage": "À la fin d'année 2025, la puissance cumulée des installations de production d'électricité solaire sur le territoire français métropolitain s'élève à 30,4 GW.",
+    "relu": null
+   },
+   {
+    "cle": "panorama-enr-2025",
+    "passage": "Avec une capacité raccordée de plus de 25,7 GW au 31 décembre 2025, la filière hydraulique est désormais la troisième en France du point de vue des capacités installées",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-139",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 5",
+  "info": "france",
+  "texte": "62,4 TWh contre 32,9 : l'eau tourne bien plus d'heures par an que le soleil ne brille.",
+  "affirmation": "En 2025 : 62,4 TWh d'hydraulique contre 32,9 TWh de solaire.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-synthese",
+    "passage": "remained at a level in line with historical averages in 2025 (62.4 TWh)",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-production",
+    "passage": "Sur l'année 2025, la production solaire française s'est établie à 32,9 TWh",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-140",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 6",
+  "info": "batiment",
+  "texte": "Chauffe-eau, recharge, lavage : zéro investissement, juste une programmation.",
+  "affirmation": "Déplacer des usages (chauffe-eau, recharge, lavage) vers midi ne demande pas d'investissement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-141",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 6 › mauvaise réponse 1",
+  "info": "batiment",
+  "texte": "Efficace, mais c'est le levier le plus cher. On commence par déplacer.",
+  "affirmation": "La batterie est le levier le plus coûteux pour augmenter l'autoconsommation.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Aucune source lue ne compare le coût des leviers (le cahier des charges ADEME « étude d'autoconsommation » est bloqué par robots.txt). Proposition : « Efficace, mais c'est un investissement de plus. On commence par déplacer : ça ne coûte rien. »",
+  "sources": []
+ },
+ {
+  "id": "vs-142",
+  "fichier": "jeu/voyages/solaire/textes.js",
+  "repere": "question 6 › mauvaise réponse 2",
+  "info": "batiment",
+  "texte": "On couvre un peu plus, et on déborde beaucoup plus à midi.",
+  "affirmation": "Doubler la puissance augmente un peu l'autoproduction et beaucoup le surplus injecté.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-143",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Incline et oriente › série de référence",
+  "info": "tracker",
+  "texte": "nom:'35°, plein sud'",
+  "affirmation": "Le simulateur prend 35° plein sud comme meilleur réglage fixe à Saint-Photon, calé à 1 450 kWh/kWc/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "L'atlas donne 38° d'inclinaison optimale au point du site ; 35° est dans le plateau du maximum (le modèle du jeu donne 99,5 % à 40°). Le calage à 1 450 kWh/kWc est prudent (atlas : 1 577).",
+  "sources": [
+   {
+    "cle": "gsa-saint-photon",
+    "passage": "Requête loc=44.0,5.95 : PVOUT_csi = 1 576,8 kWh/kWc/an ; inclinaison optimale OPTA = 38° ; mensuel : déc. 88,1 ; juin 155,2 ; juil. 167,4 kWh/kWc",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-144",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Incline et oriente › chiffres « décembre · juin »",
+  "info": "variable",
+  "texte": "'décembre · juin'",
+  "affirmation": "Le simulateur affiche, à 35° plein sud, environ 52 kWh/kWc en décembre et 174 en juin (rapport 3,4).",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Simulateur solaire à recaler",
+  "correction": "Recaler le modèle (tableau beauTemps et part de diffus de SOL_MODELE) pour que le réglage de référence donne environ 85-90 kWh/kWc en décembre et 155-165 en juin, au lieu de 52 et 174 : en Provence, l'écart décembre/juin d'un plan incliné à 35-38° est d'un facteur 1,8 à 1,9, pas 3,4.",
+  "note": "Le simulateur présente ses chiffres mensuels comme ceux du site : il sous-estime décembre d'environ 40 % (52 contre 88 kWh/kWc) et surestime juin (174 contre 155). Le total annuel reste bon. Conséquence : la mission 2 (« décembre ») garde son sens, mais ses valeurs affichées sont trop basses. PVGIS non interrogeable d'ici : contrôle fait avec le Global Solar Atlas.",
+  "sources": [
+   {
+    "cle": "gsa-saint-photon",
+    "passage": "Requête loc=44.0,5.95 : PVOUT_csi = 1 576,8 kWh/kWc/an ; inclinaison optimale OPTA = 38° ; mensuel : déc. 88,1 ; juin 155,2 ; juil. 167,4 kWh/kWc",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-145",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Incline et oriente › réglage tracker",
+  "info": "tracker",
+  "texte": "Tracker : les panneaux suivent le soleil d'est en ouest",
+  "affirmation": "Un tracker fait suivre le soleil d'est en ouest aux panneaux.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La fiche IEA-PVPS décrit le suivi de la course du soleil par un tracker à un axe (SAT) ; elle ne dit pas en toutes lettres « d'est en ouest » (axe nord-sud), ce qui est la configuration habituelle.",
+  "sources": [
+   {
+    "cle": "iea-pvps-trackers",
+    "passage": "As shading between panels starts to occur, the tracking angle no longer follows the sun's path but, instead, adjusts backward (decreases) to prevent shading.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-146",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 1 › bravo",
+  "info": "tracker",
+  "texte": "Plein sud, entre 30 et 40° : la règle en France.",
+  "affirmation": "En France, la production annuelle d'un plan fixe est maximale plein sud avec une inclinaison de 30 à 40°.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Inclinaison optimale donnée par l'atlas : 38° en Provence, 35° à Nevers, 36° à Orléans et à Lille. « Entre 30 et 40° » est juste pour la métropole.",
+  "sources": [
+   {
+    "cle": "gsa-saint-photon",
+    "passage": "Requête loc=44.0,5.95 : PVOUT_csi = 1 576,8 kWh/kWc/an ; inclinaison optimale OPTA = 38° ; mensuel : déc. 88,1 ; juin 155,2 ; juil. 167,4 kWh/kWc",
+    "relu": null
+   },
+   {
+    "cle": "gsa-nevers",
+    "passage": "Requête loc=46.99,3.16 : PVOUT_csi = 1 208,0 kWh/kWc/an ; OPTA = 35° ; mensuel : déc. 43,2 ; juin 138,5",
+    "relu": null
+   },
+   {
+    "cle": "gsa-orleans",
+    "passage": "Requête loc=47.90,1.90 : PVOUT_csi = 1 165,0 kWh/kWc/an ; OPTA = 36° ; mensuel : déc. 41,5 ; juin 134,4",
+    "relu": null
+   },
+   {
+    "cle": "gsa-lille",
+    "passage": "Requête loc=50.63,3.06 : PVOUT_csi = 1 078,4 kWh/kWc/an ; OPTA = 36° ; mensuel : déc. 34,3 ; juin 128,3",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-147",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 1 › bravo",
+  "info": "tracker",
+  "texte": "à 20° ou à 45°, on ne perd que 2 à 3 %",
+  "affirmation": "À 20° ou 45° d'inclinaison (plein sud), on ne perd que 2 à 3 % de production annuelle.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Sortie du modèle du jeu, cohérente avec les abaques usuels, mais non vérifiable ici : PVGIS (API et outil) est inaccessible et les pages de photovoltaique.info sont illisibles par l'outil de lecture. À vérifier à la main dans PVGIS avant de l'afficher comme un fait. Valeurs du modèle : 98,0 % à 20° et 98,4 % à 45°.",
+  "sources": []
+ },
+ {
+  "id": "vs-148",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 1 › indice",
+  "info": "tracker",
+  "texte": "Regarde la boussole : à midi, le soleil est au sud.",
+  "affirmation": "À midi solaire, le soleil est au sud (hémisphère nord, latitudes tempérées).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-149",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 1 › indice",
+  "info": "tracker",
+  "texte": "Trop à plat : tu attrapes bien le soleil d'été, tu rates celui d'hiver. Redresse un peu.",
+  "affirmation": "Un plan peu incliné favorise l'été, un plan très incliné favorise l'hiver ; l'été pèse plus lourd dans le total annuel.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "L'atlas confirme que l'été pèse plus lourd que l'hiver (635 contre 394 kWh/kWc sur quatre mois). L'effet de l'inclinaison sur le partage été/hiver est de la géométrie, non citée.",
+  "sources": [
+   {
+    "cle": "gsa-saint-photon",
+    "passage": "Requête loc=44.0,5.95, PVOUT_csi mensuel : mai 151,0 ; juin 155,2 ; juil. 167,4 ; août 161,4 contre nov. 93,9 ; déc. 88,1 ; janv. 99,1 ; fév. 113,2 kWh/kWc",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-150",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 2 › bravo",
+  "info": "tracker",
+  "texte": "Entre 60 et 70° : en décembre, à midi",
+  "affirmation": "La production de décembre est maximale pour une inclinaison de 60 à 70° (plein sud) en Provence.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Sortie du modèle du jeu, cohérente avec les abaques usuels, mais non vérifiable ici : PVGIS (API et outil) est inaccessible et les pages de photovoltaique.info sont illisibles par l'outil de lecture. À vérifier à la main dans PVGIS avant de l'afficher comme un fait. Géométriquement, un soleil à 23° de hauteur frappe de face un plan incliné à 67°.",
+  "sources": []
+ },
+ {
+  "id": "vs-151",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 2 › bravo",
+  "info": "tracker",
+  "texte": "le soleil ne monte qu'à 23° au-dessus de l'horizon",
+  "affirmation": "Au solstice d'hiver à 43,8° N, la hauteur du soleil à midi est 90 − 43,8 − 23,4 ≈ 23°.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "90° − 43,8° − 23,44° = 22,8° : exact au solstice d'hiver.",
+  "sources": []
+ },
+ {
+  "id": "vs-152",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 2 › bravo",
+  "info": "tracker",
+  "texte": "Prix à payer : 8 à 15 % de moins sur l'année.",
+  "affirmation": "Incliner à 60-70° coûte 8 à 15 % de production annuelle par rapport à l'optimum.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Sortie du modèle du jeu, cohérente avec les abaques usuels, mais non vérifiable ici : PVGIS (API et outil) est inaccessible et les pages de photovoltaique.info sont illisibles par l'outil de lecture. À vérifier à la main dans PVGIS avant de l'afficher comme un fait. Valeurs du modèle : 91,7 % à 60° et 84,5 % à 70°.",
+  "sources": []
+ },
+ {
+  "id": "vs-153",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 2 › consigne",
+  "info": "tracker",
+  "texte": "Un refuge de montagne chauffé à l'électricité, fermé tout l'été.",
+  "affirmation": "Cas d'étude fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-154",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 3 › consigne",
+  "info": "tracker",
+  "texte": "Fais tomber le pic d'une belle journée de juin à 10 h 30 au soleil, ou avant, sans perdre plus de 12 % sur l'année.",
+  "affirmation": "Cas d'étude fictif (objectif de jeu).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-155",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 3 › bravo",
+  "info": "tracker",
+  "texte": "Tournés vers l'est-sud-est, les panneaux produisent quand l'école consomme. On y laisse une dizaine de pour cent",
+  "affirmation": "Une orientation est-sud-est avance le pic de production vers le matin et coûte une dizaine de pour cent de production annuelle.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Sortie du modèle du jeu, cohérente avec les abaques usuels, mais non vérifiable ici : PVGIS (API et outil) est inaccessible et les pages de photovoltaique.info sont illisibles par l'outil de lecture. À vérifier à la main dans PVGIS avant de l'afficher comme un fait. Valeur du modèle : 90,2 % à 35° d'inclinaison et 60° vers l'est, pic à 10 h 30 solaire.",
+  "sources": []
+ },
+ {
+  "id": "vs-156",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Mission 3 › bravo",
+  "info": "midi",
+  "texte": "il est consommé sur place au lieu d'être bradé à midi, quand tout le monde en a trop",
+  "affirmation": "À midi, l'abondance de production solaire fait baisser la valeur de l'électricité injectée.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "the mid-day plateau has become a trough, as a result of lower consumption levels combined with the growth of solar generation in France and Europe",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-157",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Essai libre › constat",
+  "info": "tracker",
+  "texte": "% de plus que le meilleur réglage fixe.",
+  "affirmation": "Le simulateur annonce environ 19 % de plus avec un tracker (1 730 contre 1 450 kWh/kWc).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Le modèle du jeu donne +19 % (1 730 contre 1 450 kWh/kWc), conforme aux « ~20 % » de l'IEA-PVPS.",
+  "sources": [
+   {
+    "cle": "iea-pvps-trackers",
+    "passage": "SAT systems can increase annual yields by ~20% over fixed-tilt systems.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-158",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Essai libre › constat",
+  "info": "tracker",
+  "texte": "Et la cloche de juin est devenue un plateau : on produit fort dès 8 h et jusqu'à 18 h.",
+  "affirmation": "Avec un tracker, le profil d'une journée claire de juin s'élargit en plateau, avec une production élevée de 8 h à 18 h (heure solaire).",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Même remarque que l'info tracker : le plateau de 8 h à 18 h est une sortie du modèle du jeu (0,79 kW/kWc à 8 h, 0,49 à 18 h, heure solaire, soit une courbe non symétrique autour de midi : 18 h correspond à 6 h du matin, pas à 8 h). Proposition : « on produit fort dès 8 h et jusqu'à 16 h » (symétrique), ou vérifier avec PVGIS.",
+  "sources": []
+ },
+ {
+  "id": "vs-159",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › SOL_DIAGS.nuages",
+  "info": "cloche",
+  "texte": "des nuages creusent des dents irrégulières, et la courbe remonte entre deux passages",
+  "affirmation": "Signature de lecture : nuages = dents irrégulières.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-160",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › SOL_DIAGS.ecretage",
+  "info": "cloche",
+  "texte": "un écrêtage rabote le sommet bien à plat, et laisse le reste intact",
+  "affirmation": "Signature de lecture : écrêtage = sommet plat.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-161",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › SOL_DIAGS.panne",
+  "info": "cloche",
+  "texte": "une panne fait une marche nette, puis la courbe suit l'attendu, une fraction en dessous",
+  "affirmation": "Signature de lecture : panne d'onduleur = marche nette.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-162",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › SOL_DIAGS.ombre",
+  "info": "cloche",
+  "texte": "une ombre mange toujours les mêmes heures, et rend la main ensuite",
+  "affirmation": "Signature de lecture : ombre portée = mêmes heures chaque jour.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-163",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › SOL_DIAGS.sale",
+  "info": "cloche",
+  "texte": "la saleté retire quelques pour cent à toute heure, sans rien changer à la forme",
+  "affirmation": "L'encrassement des modules réduit la production de quelques pour cent, à toute heure.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "iea-pvps-salissures",
+    "passage": "soiling is estimated to cause a loss of annual PV energy production of 3-5%, corresponding to an economic loss on the order of 3-5 billion euros",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-164",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › Mardi",
+  "info": "cloche",
+  "texte": "Des dents irrégulières, et la courbe qui retrouve l'attendu entre deux : chaque nuage signe son passage. Rien à réparer.",
+  "affirmation": "Lecture de courbe : passages nuageux.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-165",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › Mercredi",
+  "info": "cloche",
+  "texte": "À 11 h 10, un sixième de la production disparaît d'un coup et ne revient pas : un onduleur sur six s'est arrêté.",
+  "affirmation": "Scénario fictif : arrêt d'un onduleur sur six.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-166",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › Mercredi",
+  "info": "cloche",
+  "texte": "chaque heure de soleil perdue ne se rattrape pas",
+  "affirmation": "Méthode : une production solaire perdue ne se rattrape pas (pas de stock).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-167",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › Jeudi",
+  "info": "cloche",
+  "texte": "c'est une ombre portée, ici la colline à l'est. Elle revient chaque jour à la même heure",
+  "affirmation": "Scénario fictif : ombre portée d'une colline le matin.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-168",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › Samedi",
+  "info": "cloche",
+  "texte": "Même forme, 9 % plus bas, du matin au soir : les modules sont sales. Lundi, il a plu du sable du Sahara.",
+  "affirmation": "Un dépôt de poussières sahariennes peut faire perdre de l'ordre de 9 % de production jusqu'au prochain lavage.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "L'IEA-PVPS donne 3 à 5 % de pertes annuelles moyennes dans le monde. Une perte de 9 % après un épisode de poussières sahariennes est plausible mais n'a pas de source lue. Proposition : garder comme scénario, ou ramener à « 5 % plus bas » pour rester dans la fourchette sourcée.",
+  "sources": [
+   {
+    "cle": "iea-pvps-salissures",
+    "passage": "soiling is estimated to cause a loss of annual PV energy production of 3-5%, corresponding to an economic loss on the order of 3-5 billion euros",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-169",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › Samedi",
+  "info": "cloche",
+  "texte": "Soit on attend une vraie pluie, soit on nettoie : on compare le prix du lavage à celui des kWh perdus.",
+  "affirmation": "Méthode : arbitrer le nettoyage en comparant son coût aux pertes de production.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-170",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › Dimanche",
+  "info": "midi",
+  "texte": "Un sommet raboté bien à plat, à 8 MW : la centrale a reçu la consigne de plafonner. Dimanche, grand soleil, peu de consommation : les prix étaient négatifs.",
+  "affirmation": "Lors d'un épisode de prix négatifs (dimanche ensoleillé, faible consommation), la centrale reçoit une consigne de plafonnement à 8 MW.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Simulateur solaire à recaler",
+  "correction": "Un sommet raboté bien à plat, à 8 MW : la centrale a reçu la consigne de plafonner. Dimanche, grand soleil, peu de consommation : il y avait trop d'électricité sur le réseau.",
+  "note": "Imprécis : quand le prix devient négatif, une centrale sous complément de rémunération s'arrête complètement (la prime est conditionnée à la non-production) ; la courbe montre alors un trou jusqu'à zéro, pas un plateau aux deux tiers. Un plateau à 8 MW correspond plutôt à une limitation de puissance demandée par le réseau ou à la saturation des onduleurs. Soit on garde le plateau en retirant la mention des prix négatifs (correction proposée), soit on ajoute une sixième courbe « arrêt pour prix négatif ». À noter aussi : en 2025, la moitié des heures négatives sont tombées en semaine.",
+  "sources": [
+   {
+    "cle": "cre-prix-negatifs",
+    "passage": "ceux sous complément de rémunération (CR) sont contractuellement incités à s'arrêter, sous peine de perdre le bénéfice du CR et de la prime pour prix négatifs",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "renewable energy sources that benefit from the premium scheme have an economic incentive to stop generating",
+    "relu": null
+   },
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "51% of hours with negative prices were recorded on weekdays in 2025, compared with 32% in 2024",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-171",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › Dimanche",
+  "info": "midi",
+  "texte": "Les modules pouvaient faire mieux, on leur a demandé de ne pas le faire.",
+  "affirmation": "L'écrêtage est une limitation volontaire de la production disponible.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-172",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › introduction",
+  "info": "reseau",
+  "texte": "l'écran montre deux courbes au pas de 10 minutes",
+  "affirmation": "Les courbes de production (attendu et mesuré au compteur) sont au pas de 10 minutes.",
+  "type": "regle",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "l'écran montre deux courbes au pas de 5 minutes",
+  "note": "Même correction que l'info « reseau ». Dans simulations.js, le calcul avance par pas de 1/6 d'heure (t+=1/6, eA+=a/6) : passer à 1/12 si l'on veut que le tracé corresponde au texte. Variante sans toucher au code : « deux courbes au pas de 10 minutes (le compteur, lui, enregistre toutes les 5 minutes) ».",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-173",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › introduction",
+  "info": "reseau",
+  "texte": "ce que le compteur du poste de livraison a vraiment vu passer",
+  "affirmation": "La production mesurée est celle du compteur du poste de livraison.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-174",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › introduction",
+  "info": "cloche",
+  "texte": "Cinq journées de mai, toutes ensoleillées sur le papier.",
+  "affirmation": "Scénario fictif : attendu par ciel clair en mai, pic à 10,2 MW (85 % de 12 MWc), environ 88 MWh/jour.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent : pic attendu de 10,2 MW (85 % de 12 MWc), 88 MWh sur la journée, soit 7,4 kWh/kWc par ciel clair en mai.",
+  "sources": []
+ },
+ {
+  "id": "vs-175",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › bilan",
+  "info": "cloche",
+  "texte": "comparer le mesuré à un attendu, jamais à rien",
+  "affirmation": "Méthode de Mlle Cloche : comparer à un attendu, regarder la forme de l'écart, puis chercher la cause.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-176",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Qu'est-ce qui cloche › bilan",
+  "info": "cloche",
+  "texte": "Une courbe de production se lit comme la courbe de charge d'un bâtiment.",
+  "affirmation": "Analogie pédagogique entre courbe de production et courbe de charge.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-177",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Midi pile › usages",
+  "info": "batiment",
+  "texte": "Programmé la nuit depuis l'époque des heures creuses. L'eau reste chaude toute la journée : il peut tourner quand on veut.",
+  "affirmation": "Un chauffe-eau à accumulation peut être déplacé de la nuit (heures creuses historiques) vers la journée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-178",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Midi pile › usages",
+  "info": "batiment",
+  "texte": "Départ différé réglé à 18 h en 2011, personne ne sait pourquoi.",
+  "affirmation": "Scénario fictif (lave-vaisselle, voiture de service).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-179",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Midi pile › consigne",
+  "info": "batiment",
+  "texte": "36 kWc sur le toit, un jeudi de mai, grand soleil.",
+  "affirmation": "École fictive : 36 kWc, pic de 28 kW un jour clair de mai (78 % de la puissance crête), environ 225 kWh produits.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent : pic de 28 kW pour 36 kWc (78 %), 225 kWh produits (6,3 kWh/kWc) ; l'autoconsommation passe de 52 % à 75 % au mieux, l'objectif de 70 % est atteignable.",
+  "sources": []
+ },
+ {
+  "id": "vs-180",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Midi pile › consigne",
+  "info": "cloche",
+  "texte": "Et retiens que midi pile, au soleil, c'est 13 h 40 à ta montre.",
+  "affirmation": "En été, à la longitude du site (≈ 6° E), le midi solaire tombe vers 13 h 40 à l'heure légale.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "À 5,95° E, le midi solaire tombe à 11 h 36 UTC, soit 13 h 36 à l'heure d'été, à quelques minutes près selon la date (équation du temps : 13 h 33 mi-mai, 13 h 42 fin juillet). « 13 h 40 » est un bon arrondi ; le code place le pic à 13 h 37.",
+  "sources": []
+ },
+ {
+  "id": "vs-181",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Midi pile › bravo",
+  "info": "batiment",
+  "texte": "C'est là, et seulement là, qu'on commence à parler de batterie.",
+  "affirmation": "Méthode : on déplace d'abord les usages, la batterie ne vient qu'ensuite pour le surplus restant.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-182",
+  "fichier": "jeu/voyages/solaire/simulations.js",
+  "repere": "Midi pile › indice",
+  "info": "batiment",
+  "texte": "Glisse les appareils sous la cloche, entre 12 h et 18 h, sans tous les empiler au même moment.",
+  "affirmation": "Conseil de jeu : placer les usages sous la courbe de production sans les superposer.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-183",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "zones › Poste de livraison",
+  "info": "reseau",
+  "texte": "La porte de sortie du site : toute la production passe par ici avant de rejoindre le réseau.",
+  "affirmation": "Toute la production d'une centrale transite par le poste de livraison avant le réseau public.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Notion standard (poste de livraison HTA, norme NF C 13-100), mentionnée dans les documents Enedis lus (« Protection générale de poste de livraison NF C 13-100 ») sans définition citable. À étayer avec le modèle de convention de raccordement HTA d'Enedis (non lu).",
+  "sources": []
+ },
+ {
+  "id": "vs-184",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "zones › Zone technique",
+  "info": "onduleur",
+  "texte": "c'est ici que le courant continu des modules devient celui du réseau",
+  "affirmation": "Onduleurs et transformateur convertissent le courant continu des modules en courant alternatif du réseau.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "le réseau interne de l'installation de production intègre systématiquement un ou plusieurs onduleurs, afin de convertir cette électricité en courant alternatif",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-185",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "zones › Champ ouest",
+  "info": "tracker",
+  "texte": "Des rangées plein sud, inclinées une fois pour toutes.",
+  "affirmation": "Le champ ouest du site fictif est en structures fixes orientées plein sud.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-186",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "zones › Champ est",
+  "info": "tracker",
+  "texte": "Des rangées qui pivotent d'est en ouest pour suivre le soleil.",
+  "affirmation": "Les trackers pivotent d'est en ouest pour suivre le soleil.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La fiche IEA-PVPS décrit le suivi de la course du soleil par un tracker à un axe (SAT) ; elle ne dit pas en toutes lettres « d'est en ouest » (axe nord-sud), ce qui est la configuration habituelle.",
+  "sources": [
+   {
+    "cle": "iea-pvps-trackers",
+    "passage": "As shading between panels starts to occur, the tracking angle no longer follows the sun's path but, instead, adjusts backward (decreases) to prevent shading.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-187",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "zones › Voie ferrée",
+  "texte": "La ligne d'Ampère-sur-Loire. Elle passe par Lyon et Avignon, puis elle monte dans les collines.",
+  "affirmation": "Ligne ferroviaire fictive (tracé cohérent avec les coordonnées de la carte du pays).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Cohérent avec les coordonnées de la carte du pays : Nevers, Lyon, Valence, Avignon.",
+  "sources": []
+ },
+ {
+  "id": "vs-188",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "ailleurs",
+  "texte": "Du thym, des cailloux, des cigales. Rendement électrique : nul. Rendement sonore : remarquable.",
+  "affirmation": "Blague sur la garrigue.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-189",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "objet vCiel (caméra de ciel)",
+  "info": "variable",
+  "texte": "Une caméra braquée vers le ciel. Elle photographie les nuages toutes les minutes pour deviner où ils seront dans un quart d'heure.",
+  "affirmation": "Une caméra de ciel (sky imager) photographie le ciel à intervalle court pour prévoir le déplacement des nuages à très court terme (un quart d'heure).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "L'horizon de prévision (1 à 20 minutes) est confirmé. La cadence « toutes les minutes » n'est pas donnée dans le résumé lu (les caméras de ciel prennent en pratique une image toutes les 30 secondes à une minute).",
+  "sources": [
+   {
+    "cle": "utrecht-cameras-ciel",
+    "passage": "a time forecast ranging from 1 to 20 min",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-190",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "objet bergerie",
+  "info": "surface",
+  "texte": "« Tonte de l'herbe : 14 hectares. Tondeuses : 200. Carburant : l'herbe. »",
+  "affirmation": "Site fictif : 200 brebis pour 14 hectares.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Chargement fictif élevé : 200 brebis sur 14 ha font 14 brebis/ha, contre 4/ha dans l'étude INRAE lue. Voir info surface.",
+  "sources": []
+ },
+ {
+  "id": "vs-191",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "objet mouton (répliques paires)",
+  "info": "surface",
+  "texte": "L'exploitant appelle ça de l'« éco-pâturage ».",
+  "affirmation": "L'entretien d'une centrale photovoltaïque par des brebis s'appelle l'éco-pâturage.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "reussir-patre-moutons",
+    "passage": "Des prestations d'écopâturage avec des éleveurs",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "vs-192",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "objet mouton (répliques paires)",
+  "info": "surface",
+  "texte": "Elle tond sous les panneaux huit heures par jour, sans contrat ni préavis.",
+  "affirmation": "Une brebis pâture environ huit heures par jour.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Ordre de grandeur usuel du temps de pâturage d'une brebis, mais aucune source lue. Proposition : garder « toute la journée » ou sourcer auprès de l'Institut de l'élevage.",
+  "sources": []
+ },
+ {
+  "id": "vs-193",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "objet mouton (répliques impaires)",
+  "info": "module",
+  "texte": "Elle broute à l'ombre d'un module à 430 Wc.",
+  "affirmation": "Rappel fictif : modules de 430 Wc.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-194",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "objet ruche",
+  "info": "surface",
+  "texte": "Les abeilles butinent la lavande de M. Riverain et le thym sous les panneaux. Elles produisent toute la journée, sans onduleur.",
+  "affirmation": "Blague sur les ruches du site.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-195",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "solEnDirect",
+  "info": "cloche",
+  "texte": "Production en ce moment : 0 MW. Il fait nuit.",
+  "affirmation": "La production est nulle la nuit.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-196",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "solEnDirect",
+  "info": "productible",
+  "texte": "% de la puissance crête.",
+  "affirmation": "Affichage : production instantanée = fraction de la puissance crête × 12 MW.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Affichage calculé (fraction de la puissance crête × 12 MW) : cohérent.",
+  "sources": []
+ },
+ {
+  "id": "vs-197",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "solEnDirect",
+  "info": "cloche",
+  "texte": "Le soleil est bas sur l'horizon : on est sur un bord de la cloche.",
+  "affirmation": "Lecture de courbe : soleil bas = bord de la cloche.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "vs-198",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "solTrackersEnDirect",
+  "info": "tracker",
+  "texte": "Il fait nuit : les panneaux sont rangés à plat, en attendant le lever du soleil.",
+  "affirmation": "La nuit, les trackers sont en position de repos à plat.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "La position de repos nocturne dépend du fabricant (à plat ou légèrement inclinée) ; aucune source lue. Proposition prudente : « Il fait nuit : les panneaux sont au repos, en attendant le lever du soleil. »",
+  "sources": []
+ },
+ {
+  "id": "vs-199",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "solTrackersEnDirect",
+  "info": "tracker",
+  "texte": "Le soleil est au plus haut : les panneaux sont presque à plat.",
+  "affirmation": "Au midi solaire, un tracker à axe horizontal nord-sud est presque à l'horizontale.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Géométrie : avec un axe horizontal nord-sud, le soleil est dans le plan de l'axe à midi solaire, l'angle de rotation est donc nul.",
+  "sources": []
+ },
+ {
+  "id": "vs-200",
+  "fichier": "jeu/voyages/solaire/carte.js",
+  "repere": "solTrackersEnDirect",
+  "info": "tracker",
+  "texte": "C'est le matin : toutes les rangées penchent vers l'est.",
+  "affirmation": "Le matin, un tracker un axe est incliné vers l'est ; l'après-midi vers l'ouest.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La fiche IEA-PVPS décrit le suivi de la course du soleil par un tracker à un axe (SAT) ; elle ne dit pas en toutes lettres « d'est en ouest » (axe nord-sud), ce qui est la configuration habituelle. Nuance : tôt le matin et tard le soir, le « backtracking » ramène les rangées vers l'horizontale pour éviter qu'elles se fassent de l'ombre.",
+  "sources": [
+   {
+    "cle": "iea-pvps-trackers",
+    "passage": "As shading between panels starts to occur, the tracking angle no longer follows the sun's path but, instead, adjusts backward (decreases) to prevent shading.",
+    "relu": null
+   }
+  ]
+ }
+]

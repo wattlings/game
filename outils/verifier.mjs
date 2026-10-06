@@ -1,17 +1,19 @@
 // Vérifie que le site fonctionne après une modification : à lancer avant de publier.
 //
 //   node outils/verifier.mjs            → tout (environ 3 minutes)
-//   node outils/verifier.mjs cours      → seulement le cours   (ou : jeu, voyages, liens)
+//   node outils/verifier.mjs cours      → seulement le cours   (ou : jeu, voyages, liens, sources)
 //
 // Ce que fait la vérification :
 //   cours : ouvre chaque page, manipule chaque démo, et relève toute erreur ;
 //   jeu   : lance chaque chapitre, joue 20 secondes au hasard, ouvre le menu et la carte, et relève toute erreur ;
 //   voyages : prend le train vers chaque destination ouverte, vérifie que tout ce qui s'examine est accessible à pied,
 //             examine tout, manipule les simulations, fait tamponner le passeport et rentre ;
-//   liens : fait l'aller-retour cours → jeu → cours et contrôle sauvegarde, reprise et anciennes adresses.
+//   liens : fait l'aller-retour cours → jeu → cours et contrôle sauvegarde, reprise et anciennes adresses ;
+//   sources : contrôle que chaque source citée existe, et que chaque fait relevé a la sienne (voir outils/sources.mjs).
 import {
   ROUTES_COURS, TOUCHES, agirCours, agirJeu, avancer, contenuCours, demarrer, ecouterErreurs, hasardEtHorlogeFixes, hasardFixe, nbCiblesCours, tirage, validerAvatar,
 } from "./essais.mjs";
+import { controler } from "./sources.mjs";
 
 const quoi = process.argv[2] || "tout";
 const { adresse, navigateur, fermer } = await demarrer();
@@ -263,6 +265,44 @@ if (quoi === "tout" || quoi === "liens") {
   await page.waitForSelector(".qk-patri");
   verif("la page Patrimoine s'affiche avec ses graphiques", await dansLaPage(() => document.querySelectorAll(".pc-row").length > 20));
   verif("liens : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+  await contexte.close();
+}
+
+// ---------------------------------------------------------------- sources
+if (quoi === "tout" || quoi === "sources") {
+  console.log("Sources : le registre, les citations, les relevés");
+  const r = await controler();
+  r.verifs.forEach(([nom, ok, detail]) => verif("sources · " + nom, ok, detail));
+  // dans le cours : les appels de note de l'étape 2 mènent à une source, et la page Sources les réunit
+  const contexte = await navigateur.newContext({ viewport: { width: 1200, height: 900 } });
+  const page = await contexte.newPage();
+  const erreurs = ecouterErreurs(page);
+  await page.goto(adresse + "#etape-2-approfondir");
+  await page.waitForSelector("[data-notes] li");
+  const notes = await page.evaluate(() => ({ appels: [...document.querySelectorAll(".notes .appel")].map((a) => a.href), liste: document.querySelectorAll("[data-notes] li").length, brut: document.body.innerText.includes("[[") }));
+  verif("sources · cours : l'étape 2 affiche ses appels de note et la liste de ses sources", notes.appels.length > 20 && notes.liste > 10 && notes.appels.every((u) => /^https:/.test(u)) && !notes.brut, JSON.stringify({ appels: notes.appels.length, liste: notes.liste, brut: notes.brut }));
+  await page.goto(adresse + "#sources");
+  await page.waitForSelector(".page-sources li");
+  verif("sources · cours : la page Sources liste les références citées", (await page.locator(".page-sources li").count()) > 20);
+  // dans le jeu : l'onglet Sources du menu, et le volet Sources d'une fiche
+  await page.goto(adresse + "jeu/#chapitre-3");
+  await page.waitForTimeout(1500);
+  await validerAvatar(page);
+  await page.waitForTimeout(800);
+  const jeu = await page.evaluate(() => {
+    dlg.q = []; if (dlg.open) nextLine(); if (panelEl) closePanel();
+    S.fiches = S.fiches || {}; S.fiches.s2r1 = 1;
+    openMenu("sources");
+    const r = document.getElementById("qk-host").shadowRoot, onglet = { blocs: r.querySelectorAll("#mt .cls").length, liens: [...r.querySelectorAll("#mt .refs-l a")].map((a) => a.href) };
+    openMenu("classeur"); // le menu est déjà ouvert : on change d'onglet à la main
+    r.querySelector('.menu-tabs [data-t="classeur"]').click();
+    const fiche = r.querySelectorAll("#mt .fiche .refs a").length;
+    closePanel();
+    return { onglet, fiche };
+  });
+  verif("sources · jeu : l'onglet Sources du menu liste des références", jeu.onglet.blocs >= 1 && jeu.onglet.liens.length >= 10 && jeu.onglet.liens.every((u) => /^https:/.test(u)), JSON.stringify({ blocs: jeu.onglet.blocs, liens: jeu.onglet.liens.length }));
+  verif("sources · jeu : une fiche savoir référencée montre son volet Sources", jeu.fiche >= 1, String(jeu.fiche));
+  verif("sources : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
   await contexte.close();
 }
 

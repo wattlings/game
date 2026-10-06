@@ -41,13 +41,13 @@ const LIGNES = {
   },
   accise: {
     famille: "taxes",
-    quoi: "Une taxe sur chaque MWh consommé (26,35 €/MWh pour l’électricité et 16,66 €/MWh pour le gaz au 1er août 2026).",
-    qui: "L’État.",
+    quoi: "Une taxe sur chaque MWh consommé. Au 1er août 2026 : 26,35 €/MWh pour l’électricité d’un site de plus de 36 kVA comme l’école (30,62 €/MWh jusqu’à 36 kVA), et 16,66 €/MWh pour le gaz.",
+    qui: "L’État. Pour l’électricité, une part majorée revient aux communes et aux départements.",
     fixe: "Variable (par MWh)",
   },
   cta: {
     famille: "taxes",
-    quoi: "Contribution tarifaire d’acheminement : un pourcentage de la part fixe de l’acheminement (15 % pour l’électricité depuis février 2026, 20,80 % pour le gaz).",
+    quoi: "Contribution tarifaire d’acheminement : un pourcentage de la part fixe de l’acheminement (15 % pour l’électricité depuis février 2026 ; pour le gaz, 20,80 % de la part fixe de distribution, plus une quote-part liée au transport).",
     qui: "La caisse de retraite des industries électriques et gazières.",
     fixe: "Fixe (suit la part fixe)",
   },

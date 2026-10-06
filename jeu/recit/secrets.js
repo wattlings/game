@@ -39,7 +39,7 @@ function nameEgg(){
     enedis:"{name} ? C'est donc toi qui ne réponds jamais à mes demandes d'habilitation SGE ?",grdf:"{name} ? Tu viens relever le compteur ? Il est à la cave, derrière les cartons de 2003.",
     volt:"{name} ! Tes parents étaient électriciens, ou juste optimistes ?",ampere:"{name} ! Tes parents étaient électriciens, ou juste optimistes ?",kelvin:"{name}… Tu vas nous refroidir l'ambiance, toi.",
     pikachu:"Ce prénom appartient à des avocats bien plus puissants que 60 kVA. Je vais t'appeler « le stagiaire ».",linky:"{name} ? On t'a posé un jour sans prévenir, toi aussi ?",
-    gazpar:"{name} ? Tu envoies tes nouvelles une fois par jour, avec 24 h de retard. Je note."};
+    gazpar:"{name} ? Tu donnes de tes nouvelles tous les jours, et elles mettent un à trois jours à arriver. Je note."};
   return map[n]?{w:J,t:map[n]}:null;
 }
 let PONDT=null;function pondTiles(){if(!PONDT){PONDT=[];MAPS.town.g.forEach((r,y)=>r.forEach((t,x)=>{if(t==='~')PONDT.push([x,y])}))}return PONDT}

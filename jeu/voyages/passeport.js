@@ -34,9 +34,10 @@ function passeportHTML(){
     return `<div class="voy-visa${t?' pose':''}"><canvas width="48" height="48" data-s="${id}"></canvas><b>${esc(s.gare)}</b><small>${esc(s.theme)} · ${esc(s.region)}</small><small>${t?'Tamponné le '+new Date(t).toLocaleDateString('fr-FR'):s.ouvert?`${n} / ${s.infos.length} informations`:'Ligne à venir'}</small></div>`};
   const page=id=>{const s=VOY.sites[id],vues=voyInfosVues(id);
     return `<div class="cls"><div class="cls-h"><b>${esc(s.nom)}</b><span>${vues.length}/${s.infos.length}</span></div>
-      ${s.infos.map(f=>voyInfoVue(id,f.id)?`<div class="fiche mini${f.cle?' req':''}"><b>${esc(f.t)}</b><p>${esc(f.x)}</p>${f.retiens?`<p class="voy-retiens"><b>À retenir :</b> ${esc(f.retiens)}</p>`:''}</div>`
+      ${s.infos.map(f=>voyInfoVue(id,f.id)?`<div class="fiche mini${f.cle?' req':''}"><b>${esc(f.t)}</b><p>${esc(f.x)}</p>${f.retiens?`<p class="voy-retiens"><b>À retenir :</b> ${esc(f.retiens)}</p>`:''}${refsHTML(f.refs)}</div>`
         :`<div class="fiche mini unk"><b>???${f.cle?' · info clé':''}</b><p>${f.ou?'Indice : '+esc(f.ou):'À trouver sur place.'}</p></div>`).join('')}
-      ${s.sources&&vues.length?`<details class="voy-sources"><summary>D'où viennent les chiffres</summary><p>Le site est inventé ; ses ordres de grandeur sont réels.</p><ul>${s.sources.map(([l,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)} ↗</a></li>`).join('')}</ul></details>`:''}</div>`};
+      ${vues.length&&refsSite(id).length?`<details class="voy-sources"><summary>Toutes les sources de ce site (${refsSite(id).length})</summary><p>Le site est inventé ; ses ordres de grandeur sont réels. Chaque information porte ses propres sources ; les voici réunies, avec celles de ce que disent les habitants.</p>${refsListe(refsSite(id))}</details>`
+        :s.sources&&vues.length?`<details class="voy-sources"><summary>D'où viennent les chiffres</summary><p>Le site est inventé ; ses ordres de grandeur sont réels.</p><ul>${s.sources.map(([l,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)} ↗</a></li>`).join('')}</ul></details>`:''}</div>`};
   return `<p>Passeport des énergies de <b>${esc(S.name)}</b> : ${nT} / ${N} tampon${nT>1?'s':''}. Un tampon se gagne sur place, en relevant le défi du responsable du site. Les trains partent de la gare d'Ampère-sur-Loire.</p>
     <div class="voy-pass">${VOY.ordre.map(visa).join('')}</div>${VOY.ordre.filter(id=>VOY.sites[id].ouvert).map(page).join('')}`;
 }

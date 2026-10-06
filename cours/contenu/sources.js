@@ -1,6 +1,21 @@
 /**
- * Sources citées en bas des niveaux « Approfondir » : une liste pour la partie Data (étapes 1 à 4), une pour la partie Énergie (étapes 5 à 8).
+ * Les sources du cours.
+ *
+ * Le registre de toutes les références est dans commun/donnees/sources.js ; un texte du cours cite une source avec [[cle]].
+ * Ici :
+ *  - SOURCES_DEMOS : les sources de chaque démo (ses textes sont écrits dans son fichier, la liste s'affiche sous la démo) ;
+ *  - sourcesData et sourcesEnergie : les anciennes listes de liens en bas du niveau « Approfondir », gardées pour les étapes
+ *    qui ne sont pas encore référencées information par information (l'étape 2 l'est : elle n'utilise plus sourcesData).
  */
+
+/** Pour chaque démo (son identifiant dans demos/index.js) : les clés des sources de ce qu'elle affirme. */
+export const SOURCES_DEMOS = {
+  collecter: ["enedis-nmo-cf-015e", "enedis-guide-flux-r6x", "grdf-adict-faq", "mne-coefficient-conversion", "mne-elements-facture", "ministere-guide-fiscalite-2026"],
+  consentement: ["enedis-nmo-cf-015e", "enedis-contrat-data-connect"],
+  casIndex: ["enedis-turpe7-brochure"],
+  anatomieFacture: ["ministere-guide-fiscalite-2026", "enedis-turpe7-brochure", "cnieg-cta-note", "mne-elements-facture", "mne-prix-pro", "enedis-facturation-acheminement", "cre-atrd7", "minefi-tva"],
+};
+
 export const sourcesData = {
   type: "sources",
   date: "septembre 2026",

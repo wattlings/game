@@ -3,7 +3,8 @@
  */
 import { FAMILLES } from "../../commun/donnees/etapes.js";
 import { GLOSSAIRE } from "../../commun/donnees/glossaire.js";
-import { monterBlocs } from "../blocs/blocs.js";
+import { monterBlocs, sourcesDeLaDemo } from "../blocs/blocs.js";
+import { majNotes, ouvrirNotes } from "../blocs/notes.js";
 import { icone } from "../blocs/icones.js";
 import { echapper, texteRiche, tous, un } from "../blocs/outils.js";
 import { ETAPES } from "../contenu/index.js";
@@ -45,6 +46,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
     .concat(Object.keys(GLOSSAIRE).filter((m) => GLOSSAIRE[m].etapes.includes(num)))
     .filter((m, f, h) => h.indexOf(m) === f);
   conteneur.className = `fam-${a.famille}`;
+  ouvrirNotes(); // les appels de note de la page repartent de 1
   conteneur.innerHTML = `
   <div class="stack" style="gap:24px">
     <header class="etape-head">
@@ -85,6 +87,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
           <p class="consigne">${echapper(a.demo.consigne)}</p>
         </div>
         <div class="demo-body" id="demo-zone"></div>
+        ${sourcesDeLaDemo(a.demo.id)}
       </section>
 
       <div class="stack" style="gap:8px">
@@ -114,6 +117,8 @@ export function pageEtape(conteneur, num, niveauDemande) {
       .join("")}
 
     ${num === 8 ? `<a class="boucle" href="#etape-1" style="text-decoration:none;color:var(--ink)">${icone("boucle")}<span><b>La boucle recommence.</b> Les résultats mesurés servent à recadrer : nouveaux objectifs, nouveau périmètre. Retour à l’étape 1, Cadrer.</span></a><a class="aller-plus-loin" href="#quiz-final" style="text-decoration:none;color:var(--ink)">${icone("ok")}<span><b>Tu as fait le tour du cycle ?</b> Teste-toi avec le quiz de synthèse : 12 questions sur les 8 étapes.</span></a>` : ""}
+
+    <section class="bloc sources" data-notes hidden></section>
 
     <nav class="pager" aria-label="Étapes voisines">
       ${c ? `<a href="#etape-${c.num}"><small>← Étape précédente</small><b>${c.num}. ${echapper(c.titre)}</b></a>` : '<a href="#accueil"><small>← Retour</small><b>Le cycle</b></a>'}
@@ -157,6 +162,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
             }),
         }),
       );
+      majNotes(conteneur); // le niveau qu'on vient d'ouvrir peut citer de nouvelles sources
     }
   };
   const s = [];
@@ -180,6 +186,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
   );
   l(niveauDemande && NIVEAUX.some((m) => m.id === niveauDemande) ? niveauDemande : "essentiel");
   magasin.marquer(num, "essentiel");
+  majNotes(conteneur);
   const r = un("#demo-zone", conteneur);
   const i = DEMOS[a.demo.id];
   let p = null;

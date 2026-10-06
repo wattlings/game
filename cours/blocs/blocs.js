@@ -2,8 +2,10 @@
  * L'affichage des blocs de contenu d'un niveau : texte, encadré, exemple pas à pas, tableau, schéma, démo, quiz, sources.
  */
 import { icone } from "./icones.js";
+import { appelsDeNote } from "./notes.js";
 import { echapper, texteRiche, tous, un } from "./outils.js";
 import { monterQuiz } from "./quiz.js";
+import { SOURCES_DEMOS } from "../contenu/sources.js";
 import { DEMOS } from "../demos/index.js";
 import { SCHEMAS } from "../schemas/index.js";
 
@@ -25,6 +27,12 @@ const ENCADRES = {
     titre: "À vérifier régulièrement",
   },
 };
+
+/** La ligne « Sources de cette démo », avec ses appels de note ("" si la démo n'en déclare pas dans contenu/sources.js). */
+export function sourcesDeLaDemo(id) {
+  const cles = SOURCES_DEMOS[id];
+  return cles?.length ? `<p class="demo-sources muted">Sources de cette démo${appelsDeNote(cles)}</p>` : "";
+}
 
 /** Le HTML d'un bloc de contenu, selon son type. */
 function rendreBloc(bloc, indice) {
@@ -49,7 +57,7 @@ function rendreBloc(bloc, indice) {
         ${bloc.conclusion ? `<p class="feedback ok conclusion" hidden>${icone("ok")}<span>${texteRiche(bloc.conclusion)}</span></p>` : ""}
       </section>`;
     case "demo":
-      return `<section class="demo" aria-labelledby="demo-${bloc.id}-t"><div class="demo-head"><span class="demo-tag">Démo</span><h2 id="demo-${bloc.id}-t">${echapper(bloc.titre)}</h2>${bloc.consigne ? `<p class="consigne">${echapper(bloc.consigne)}</p>` : ""}</div><div class="demo-body" data-demo="${bloc.id}"></div></section>`;
+      return `<section class="demo" aria-labelledby="demo-${bloc.id}-t"><div class="demo-head"><span class="demo-tag">Démo</span><h2 id="demo-${bloc.id}-t">${echapper(bloc.titre)}</h2>${bloc.consigne ? `<p class="consigne">${echapper(bloc.consigne)}</p>` : ""}</div><div class="demo-body" data-demo="${bloc.id}"></div>${sourcesDeLaDemo(bloc.id)}</section>`;
     case "schema":
       return `<figure class="schema" style="margin:0">${SCHEMAS[bloc.id]()}${bloc.legende ? `<figcaption>${echapper(bloc.legende)}</figcaption>` : ""}</figure>`;
     case "quiz":

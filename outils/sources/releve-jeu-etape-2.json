@@ -1,0 +1,1893 @@
+[
+ {
+  "id": "ja2-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r2 › x",
+  "texte": "Chaque énergie arrive par un point de comptage qui a un identifiant unique : le PDL (ou PRM) pour l’électricité, le PCE pour le gaz.",
+  "affirmation": "Chaque point de comptage a un identifiant unique : PDL (ou PRM) en électricité, PCE en gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Fiche de l'étape 1, donnée par l'agent Enedis du quartier ; relue ici parce que l'étape 2 s'appuie dessus.",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky",
+    "relu": null
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r2 › say (2e réplique)",
+  "texte": "Chez nous il s’appelle PDL, ou PRM : 14 chiffres. Chez GRDF, c’est le PCE.",
+  "affirmation": "Le PDL/PRM compte 14 chiffres ; l'équivalent gaz est le PCE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La fiche ne donne pas le nombre de chiffres du PCE : selon GRDF, 14 chiffres, ou « GI » suivi de 6 chiffres. Si on veut l'ajouter : « Chez GRDF, c'est le PCE : 14 chiffres, ou GI + 6 chiffres. »",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "une suite de 14 chiffres qui identifie le logement sur le réseau électrique",
+    "relu": null
+   },
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky",
+    "relu": null
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-003",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r2 › say (1re réplique)",
+  "texte": "Un compteur, ça se change. Le point où l’énergie entre dans le bâtiment, lui, reste : c’est le point de comptage.",
+  "affirmation": "Le point de comptage désigne le point de livraison, indépendant de l'appareil posé.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Définition pédagogique. Le jeu la reprend à l'étape 1 (numéro de série du compteur ≠ identifiant du point).",
+  "sources": []
+ },
+ {
+  "id": "ja2-004",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2p › x",
+  "texte": "La donnée d’énergie arrive par trois canaux : le télérelevé, les index et les factures. Même énergie, trois formes différentes.",
+  "affirmation": "Le cours range les données d'énergie en trois canaux : télérelevé, index, factures.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Découpage propre au cours (aucun texte officiel ne parle de « trois canaux »).",
+  "sources": []
+ },
+ {
+  "id": "ja2-005",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2p › say",
+  "texte": "Il n’y a pas « la » donnée : il y en a trois sortes.",
+  "affirmation": "Même découpage en trois sortes de données.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": null,
+  "sources": []
+ },
+ {
+  "id": "ja2-006",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r1 › x",
+  "texte": "Le télérelevé est fin et rapide : une courbe de charge au pas de 10 min pour l’électricité, un volume par jour pour le gaz (Gazpar).",
+  "affirmation": "La courbe de charge électrique télérelevée est au pas de 10 minutes ; Gazpar donne un volume par jour.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "Le télérelevé est fin et rapide : une courbe de charge au pas de 30 min avec un Linky (36 kVA ou moins), de 5 min au-delà de 36 kVA, et un volume par jour pour le gaz (Gazpar).",
+  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min (réductible à 15 min, voire 10 min selon les services souscrits). Au-delà de 36 kVA : Enedis a reprogrammé la relève des courbes de charge au pas 5 min (note Enedis en vigueur au 03/07/2026 ; « depuis le 8 décembre 2025 ») ; le pas 10 min n'est plus qu'une restitution reconstituée. Le « 10 min » était exact pour les compteurs > 36 kVA avant cette réforme. La partie gaz (une valeur par jour) est confirmée. Variante plus légère si l'on veut garder le chiffre 10 : « …de 30 min avec un Linky, plus fine au-delà de 36 kVA (5 min, restituable à 10 min)… ».",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les courbes au pas 5' permettent de reconstituer des mesures au pas 10' ou 15' selon la nature des publications.",
+    "relu": null
+   },
+   {
+    "cle": "cre-compteurs-evolues",
+    "passage": "Le compteur évolué permet d'accéder simplement à des données fines (par exemple la courbe de charge jusqu'à un pas de 30 minutes)",
+    "relu": null
+   },
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-007",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r1 › quiz › question et bonne réponse",
+  "avant": "Combien de relevés par jour le compteur Gazpar transmet-il ?",
+  "texte": "Que donne le compteur Gazpar pour chaque journée ?",
+  "affirmation": "Gazpar transmet un relevé par jour : la consommation de la veille.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Question : « Quelle donnée le compteur Gazpar envoie-t-il chaque jour ? » Bonne réponse : « La consommation de la veille : une valeur par jour ».",
+  "note": "La donnée est bien quotidienne (une consommation par jour), mais GRDF écrit que le compteur « transmet deux fois par jour » les données de la veille : la question « combien de relevés par jour » avec la réponse « Un » prête à confusion.",
+  "sources": [
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   },
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "transmet les données deux fois par jour, en moins d'une seconde, par onde radio",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-008",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r1 › quiz › explication de la bonne réponse",
+  "avant": "Chaque matin, la consommation du jour précédent.",
+  "texte": "Une consommation par jour, visible un à trois jours plus tard.",
+  "affirmation": "La consommation gaz d'un jour est disponible dès le lendemain matin.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Une valeur par jour : la consommation de la veille, disponible un à trois jours plus tard.",
+  "note": "Le compteur émet deux fois par jour la consommation de la veille vers un concentrateur ; côté mise à disposition, GRDF annonce un décalage de 1 à 3 jours (guide GRDF du 28/01/2026 : J+3 pour les PCE « 1M », c'est-à-dire les Gazpar ; J+2 pour les « MM » ; J+1 à partir de 15 h pour les « JJ »).",
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de consommation sont généralement mises à jour avec un décalage de 1 à 3 jours, c'est-à-dire J+1 ou J+3 après la date de consommation effective",
+    "relu": null
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "tableau du catalogue de données, ligne des PCE « 1M » : « ~11 millions de PCE » ; « Données quotidiennes » ; « A J+3 »",
+    "relu": null
+   },
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-009",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r1 › quiz › mauvaise réponse 1",
+  "texte": "Ça, c’est la courbe électrique au pas de 10 min.",
+  "affirmation": "144 points par jour correspondent à la courbe de charge électrique au pas de 10 minutes.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "Réponse : « 48, comme un Linky » ; explication : « Ça, c’est la courbe électrique d’un Linky au pas de 30 min. »",
+  "note": "144 = 6 × 24 reste juste comme calcul, mais le pas de 10 min n'est plus le pas de relève d'aucun segment : 30 min pour un Linky (48 points), 5 min au-delà de 36 kVA (288 points). Autre option : garder « 144 » et écrire « Ça, c’est une courbe électrique restituée au pas de 10 min. »",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les courbes au pas 5' permettent de reconstituer des mesures au pas 10' ou 15' selon la nature des publications.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-010",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r1 › quiz › mauvaise réponse 2",
+  "texte": "Gazpar est plus bavard que ça.",
+  "affirmation": "Gazpar fournit davantage qu'un relevé par mois (des données quotidiennes).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Nuance : les données « publiées » (celles qui servent à la facturation) restent mensuelles pour un Gazpar ; les données quotidiennes sont dites « informatives ».",
+  "sources": [
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "des données de consommation de gaz à différents degrés de précision (consommations semestrielles, mensuelles, quotidiennes...)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-011",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r2 › x",
+  "texte": "L’index est le compteur qui tourne : on soustrait deux relevés pour obtenir une consommation.",
+  "affirmation": "Une consommation s'obtient par différence entre deux index.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d'énergie facturée sur la période.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-012",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r2 › say",
+  "texte": "De mon temps, on lisait l’index sur le compteur, et on soustrayait deux relevés. Ça marche toujours, tu sais.",
+  "affirmation": "La consommation se calcule en soustrayant deux relevés d'index, et c'est toujours vrai.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d'énergie facturée sur la période.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-013",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r3 › x",
+  "texte": "La facture donne le coût en euros, avec du retard et sur des périodes qui ne suivent pas les mois.",
+  "affirmation": "La facture arrive après la consommation et porte sur des périodes qui ne coïncident pas avec les mois civils.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": "La facture donne le coût en euros, après coup, et sur des périodes de facturation qui ne coïncident pas toujours avec les mois civils.",
+  "note": "Aucune source lue ne dit que les périodes de facturation « ne suivent pas les mois » : c'est fréquent, pas général (certains contrats facturent au mois civil). Les fiches du médiateur lues confirment seulement que la facture se calcule entre un index de début et un index de fin de période, et qu'elle peut reposer sur des estimations. Formulation prudente proposée.",
+  "sources": []
+ },
+ {
+  "id": "ja2-014",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2r3 › say",
+  "texte": "Du 14 au 13 du mois suivant, parce que la vie n’est pas un calendrier.",
+  "affirmation": "Les factures de Volt&Co vont du 14 au 13 du mois suivant.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Dates inventées pour le fournisseur fictif Volt&Co.",
+  "sources": []
+ },
+ {
+  "id": "ja2-015",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s2a › x et say",
+  "texte": "L’appli bancaire montre chaque dépense en temps réel (télérelevé). Le relevé de fin de mois donne le solde (index). La facture du magasin dit ce que tu as payé et pourquoi (facture).",
+  "affirmation": "Analogie : appli bancaire = télérelevé, relevé de fin de mois = index, facture du magasin = facture.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Analogie. À noter : « en temps réel » force le trait, le télérelevé arrive avec un décalage (courbe remontée quotidiennement côté Enedis, 1 à 3 jours côté GRDF). Le ticket du distributeur de billets reprend la même formule (« Temps réel, relevé mensuel, facture »).",
+  "sources": []
+ },
+ {
+  "id": "ja2-016",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.conseillere › idle (Conseillère Enedis)",
+  "texte": "Pour une réclamation, prenez un ticket. Pour une donnée, prenez un mandat.",
+  "affirmation": "Pour obtenir les données d'un client, un tiers doit avoir son autorisation (« mandat »).",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Enedis parle d'« autorisation expresse » (personne morale) ou de « consentement » (personne physique) ; « mandat » est le mot d'usage du métier.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "doit préalablement avoir obtenu le consentement du dit client quand celui-ci est une personne physique, ou d'une autorisation expresse, quand le client est une personne morale",
+    "relu": null
+   },
+   {
+    "cle": "enedis-acces-donnees",
+    "passage": "Les données contractuelles et de mesure de la consommation d'électricité sont soumises au recueil préalable de l'autorisation expresse du client final",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-017",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.techGRDF › idle (Technicienne GRDF)",
+  "texte": "Le gaz, c’est simple : ça arrive en m³, ça se facture en kWh, et entre les deux il y a un coefficient que tout le monde oublie.",
+  "affirmation": "Le gaz est mesuré en m³, facturé en kWh, la conversion se fait par un coefficient.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Les compteurs de gaz mesurent les volumes de gaz livrés sur place, exprimés en mètres-cubes (m3).",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "votre fournisseur vous facture l'énergie consommée, exprimée en kWh",
+    "relu": null
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Pour le gaz, la consommation se mesure en m3. Elle est convertie en kWh grâce à un coefficient de conversion.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-018",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.convGRDF › idle (affiche de conversion, poste GRDF)",
+  "texte": "1 m³ de gaz ≈ 11 kWh. Environ. Selon la commune. Et le mois. Et l’humeur du PCS.",
+  "affirmation": "1 m³ de gaz vaut environ 11 kWh ; la valeur dépend de la commune, du mois et du PCS.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Ordre de grandeur correct pour le gaz H (valeur par défaut GRDF : 11,2 kWh/m³). L'affiche sert la fiche s4r3 (étape 4) mais elle est au poste GRDF du quartier.",
+  "sources": [
+   {
+    "cle": "grdf-coefficients-thermiques",
+    "passage": "Clients alimentés à la pression de 21 mbar (*) - Gaz H : 11,2 kWh/m3",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "L'altitude de la commune dans laquelle est situé votre logement",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Le coefficient de conversion gaz est calculé une fois par mois pour les compteurs communicants et après chaque relevé pour les compteurs relevés tous les 6 mois.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-019",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.conseiller › who / where",
+  "texte": "le conseiller de Volt&Co, le fournisseur (Cité des Beffrois)",
+  "affirmation": "Volt&Co est le fournisseur d'énergie de la ville.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Fournisseur inventé.",
+  "sources": []
+ },
+ {
+  "id": "ja2-020",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.conseillere, SRC.techGRDF › where",
+  "texte": "la conseillère de l’agence Enedis (Cité des Beffrois)",
+  "affirmation": "Il existe une agence Enedis et un poste GRDF à la Cité des Beffrois.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Lieux inventés, mais portant le nom de deux entreprises réelles (Enedis, GRDF) : les personnages parlent en leur nom, d'où l'intérêt de sourcer chacune de leurs répliques.",
+  "sources": []
+ },
+ {
+  "id": "ja2-021",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "champion M. Relève › cIntro",
+  "texte": "Personne ne touche à mes données sans mandat. Remplis-le, signe-le, et on verra si elles coulent.",
+  "affirmation": "Aucun tiers n'accède aux données de mesure sans l'autorisation du client.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "doit préalablement avoir obtenu le consentement du dit client quand celui-ci est une personne physique, ou d'une autorisation expresse, quand le client est une personne morale",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-022",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "champion M. Relève › cWin",
+  "texte": "Un conseil : surveille la date de fin du consentement.",
+  "affirmation": "Le consentement a une date de fin.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le justificatif est daté et consenti pour une période limitée, clairement indiquée au client.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-contrat",
+    "passage": "ou pour une durée de plus d'un (1) an, GRDF considérera que le Tiers Autorisé a un Droit d'accès aux Données valable pour une période d'un (1) an.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-023",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveur Sami › question 1 (question, bonne réponse, mauvaise réponse 1)",
+  "texte": "Par quels canaux la donnée d'énergie arrive-t-elle ?",
+  "affirmation": "Trois canaux (télérelevé, index, factures) ; le compteur produit plusieurs données par des chemins différents.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Découpage du cours (voir fiche s2p).",
+  "sources": []
+ },
+ {
+  "id": "ja2-024",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveur Sami › question 1 › mauvaise réponse 2",
+  "texte": "Le courrier, le téléphone et le fax",
+  "affirmation": "« Presque. En 1987. »",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Humour ; aucune affirmation à sourcer.",
+  "sources": []
+ },
+ {
+  "id": "ja2-025",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveur Sami › question 2 › énoncé",
+  "texte": "Index gaz au 1er mars : 99 850 m³. Au 1er avril : 00 420 m³ (compteur à 5 chiffres). Consommation ?",
+  "affirmation": "Relevés d'index de l'exercice.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Relevés inventés pour l'exercice.",
+  "sources": []
+ },
+ {
+  "id": "ja2-026",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveur Sami › question 2 › réponses",
+  "texte": "Le compteur a bouclé : (100 000 − 99 850) + 420 = 570 m³.",
+  "affirmation": "Passage à zéro d'un compteur à 5 chiffres : (100 000 − 99 850) + 420 = 570 m³ ; la soustraction brute donnerait −99 430 m³.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié : 150 + 420 = 570 ; 420 − 99 850 = −99 430.",
+  "sources": []
+ },
+ {
+  "id": "ja2-027",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveuse Inès › intro",
+  "texte": "Le gaz, ça se compte en m³ et ça se paie en kWh.",
+  "affirmation": "Le gaz est mesuré en m³ et facturé en kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Les compteurs de gaz mesurent les volumes de gaz livrés sur place, exprimés en mètres-cubes (m3).",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "votre fournisseur vous facture l'énergie consommée, exprimée en kWh",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-028",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveuse Inès › question 1 › énoncé",
+  "texte": "ton site consomme 4 000 m³ de gaz avec un coefficient de 11,2 kWh/m³",
+  "affirmation": "Un coefficient de conversion de 11,2 kWh/m³ est une valeur réaliste.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Le volume (4 000 m³) est inventé ; 11,2 kWh/m³ est la valeur par défaut que GRDF indique pour le gaz H livré à 21 mbar.",
+  "sources": [
+   {
+    "cle": "grdf-coefficients-thermiques",
+    "passage": "Clients alimentés à la pression de 21 mbar (*) - Gaz H : 11,2 kWh/m3",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficients-thermiques",
+    "passage": "Le coefficient thermique représente la quantité d'énergie (exprimée en kWh) contenue dans un m3 de gaz.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-029",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveuse Inès › question 1 › réponses",
+  "texte": "kWh = m³ × coefficient = 4 000 × 11,2.",
+  "affirmation": "4 000 m³ × 11,2 kWh/m³ = 44 800 kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul vérifié (4 000 × 11,2 = 44 800 ; 4 000 ÷ 11,2 ≈ 357). La règle « kWh = m³ × coefficient » est celle des sources citées à la ligne précédente.",
+  "sources": []
+ },
+ {
+  "id": "ja2-030",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveuse Inès › question 2",
+  "texte": "Au pas de 10 minutes, combien de points compte une journée de courbe de charge électrique ?",
+  "affirmation": "Au pas de 10 minutes, une journée compte 6 × 24 = 144 points.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Calcul juste (24 = un point par heure ; 1 440 = un point par minute). Mais l'énoncé laisse entendre que 10 min est le pas des courbes de charge : aujourd'hui 30 min pour un Linky (48 points) et 5 min au-delà de 36 kVA (288 points). Proposition : « Au pas de 30 minutes… » → 48 (mauvaises réponses 24 et 1 440 inchangées), ou « Au pas de 5 minutes… » → 288.",
+  "sources": []
+ },
+ {
+  "id": "ja2-031",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveuse Inès › question 3 › bonne réponse",
+  "texte": "L'index est le compteur qui tourne : la différence entre deux relevés donne la consommation.",
+  "affirmation": "Une consommation s'obtient par différence entre deux index.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d'énergie facturée sur la période.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-032",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Releveuse Inès › question 3 › mauvaises réponses",
+  "texte": "L'index n'est pas une consommation.",
+  "affirmation": "Additionner deux index ou multiplier un index par un prix n'a pas de sens.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Raisonnement pédagogique.",
+  "sources": []
+ },
+ {
+  "id": "ja2-033",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Comptable Rose › question 1 › bonne réponse",
+  "texte": "L'abonnement (et la part fixe de l'acheminement) ne dépend pas des kWh.",
+  "affirmation": "L'abonnement et la part fixe du tarif d'acheminement ne dépendent pas de la quantité de kWh consommée.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La part fixe de l'acheminement dépend de la puissance souscrite et du contrat, pas des kWh. Le document TURPE lu est celui du TURPE 6 (tarifs au 1er février 2025) : à remplacer par son équivalent TURPE 7 quand il sera accessible.",
+  "sources": [
+   {
+    "cle": "mne-elements-facture",
+    "passage": "Quelle que soit la quantité d'énergie consommée le montant de l'abonnement est le même.",
+    "relu": null
+   },
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "son montant équivaut à 15 % de la partie fixe du tarif d'acheminement, défini par le gestionnaire de réseau",
+    "relu": null
+   },
+   {
+    "cle": "enedis-turpe6-essentiel",
+    "passage": "Cette composante est facturée, pour chaque point de connexion et chaque contrat d'accès, sous la forme d'un terme fixe",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-034",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Comptable Rose › question 1 › mauvaise réponse 1",
+  "texte": "Elle est proportionnelle aux kWh.",
+  "affirmation": "La ligne « fourniture » de la facture est proportionnelle aux kWh consommés.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Vrai pour la part variable (prix du kWh × consommation). Nuance de vocabulaire : dans les fiches du médiateur, la « fourniture » couvre aussi une partie de l'abonnement ; ici la question l'oppose à l'abonnement, donc le sens est clair.",
+  "sources": [
+   {
+    "cle": "mne-prix",
+    "passage": "une part fixe, correspondant à l'abonnement, et une part variable, liée à ma consommation réelle d'énergie.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-035",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Comptable Rose › question 1 › mauvaise réponse 2",
+  "texte": "Elle aussi suit les kWh.",
+  "affirmation": "L'accise sur l'électricité est proportionnelle aux kWh consommés.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Le montant cité est celui lu le 6 octobre 2026 ; il change régulièrement, seul le principe (un tarif par kWh) est utile ici.",
+  "sources": [
+   {
+    "cle": "mne-taxes-facture",
+    "passage": "Cette taxe s'élève à 0,03062 €/kWh depuis le 1er août 2026",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-036",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Comptable Rose › question 2 › bonne réponse",
+  "texte": "La facture va souvent du 14 au 13 : elle ne suit pas le mois civil.",
+  "affirmation": "Une facture d'énergie couvre souvent une période à cheval sur deux mois civils.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": "La période d'une facture ne suit pas toujours le mois civil : elle peut aller, par exemple, du 14 au 13.",
+  "note": "Les dates « du 14 au 13 » sont fictives (Volt&Co). Le « souvent » n'est appuyé par aucune source lue. Le conseil de méthode (aligner les périodes avant de comparer) relève du cours.",
+  "sources": []
+ },
+ {
+  "id": "ja2-037",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Comptable Rose › question 2 › mauvaises réponses",
+  "texte": "Avant d'accuser le compteur, on aligne les périodes.",
+  "affirmation": "Avant de soupçonner le compteur ou la facture, on vérifie que les périodes comparées sont les mêmes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Conseil de méthode.",
+  "sources": []
+ },
+ {
+  "id": "ja2-038",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Comptable Rose › question 3 › bonne réponse",
+  "texte": "Avec du retard, et sur des périodes qui ne suivent pas les mois.",
+  "affirmation": "La facture donne le coût en euros, avec du retard et sur des périodes qui ne suivent pas les mois.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": "Après coup, et sur des périodes qui ne coïncident pas toujours avec les mois.",
+  "note": "Même affirmation que la fiche s2r3 : généralisation non sourcée (voir cette ligne).",
+  "sources": []
+ },
+ {
+  "id": "ja2-039",
+  "fichier": "jeu/recit/arenes/arene-2.js",
+  "repere": "Comptable Rose › question 3 › mauvaise réponse 1",
+  "texte": "Ça, c'est la courbe de charge.",
+  "affirmation": "La courbe de charge donne la puissance « à chaque instant ».",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Raccourci pédagogique : la courbe de charge donne une puissance moyenne par pas de temps (30 min, 5 min…), pas une puissance instantanée.",
+  "sources": []
+ },
+ {
+  "id": "ja2-040",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › écran d'information › tableau, ligne Télérelevé",
+  "texte": "<td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'10 min':'30 min'} (élec), 1 jour (gaz)</td>",
+  "affirmation": "Courbe de charge électrique : pas de 10 min au-delà de 36 kVA, 30 min jusqu'à 36 kVA ; gaz : 1 valeur par jour.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "<td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'5 min':'30 min'} (élec), 1 jour (gaz)</td>",
+  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min (réductible à 15 min, voire 10 min selon les services souscrits). Au-delà de 36 kVA : Enedis a reprogrammé la relève des courbes de charge au pas 5 min (note Enedis en vigueur au 03/07/2026 ; « depuis le 8 décembre 2025 ») ; le pas 10 min n'est plus qu'une restitution reconstituée. Le « 10 min » était exact pour les compteurs > 36 kVA avant cette réforme. Les branches « 30 min » (Linky) et « 1 jour » (gaz) sont confirmées ; seule la branche « 10 min » est à revoir (école et bureaux).",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes, au format « flux de données ».",
+    "relu": null
+   },
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-041",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › écran d'information › tableau, lignes Index et Facture",
+  "texte": "<td>Index</td><td>1 relevé par période</td><td>Contrôler</td>",
+  "affirmation": "L'index sert à contrôler (un relevé par période), la facture à chiffrer le coût (un montant par période), le télérelevé à analyser.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Grille de lecture du cours. À savoir : un Linky fournit aussi un index quotidien.",
+  "sources": []
+ },
+ {
+  "id": "ja2-042",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › écran d'information › dernière phrase",
+  "texte": "Avant de recevoir la moindre donnée de mesure, il faut le <b>consentement</b> du titulaire du contrat",
+  "affirmation": "Un tiers ne peut recevoir les données de mesure qu'avec le consentement du titulaire du contrat.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Vocabulaire officiel : « consentement » pour une personne physique, « autorisation expresse » pour une personne morale (mairie, SCI, SARL : les trois titulaires du jeu).",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "doit préalablement avoir obtenu le consentement du dit client quand celui-ci est une personne physique, ou d'une autorisation expresse, quand le client est une personne morale",
+    "relu": null
+   },
+   {
+    "cle": "enedis-acces-donnees",
+    "passage": "Les données contractuelles et de mesure de la consommation d'électricité sont soumises au recueil préalable de l'autorisation expresse du client final",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-043",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › question « Qui te fournit les données de mesure » › bonne réponse",
+  "texte": "Le distributeur pose et relève les compteurs. Le fournisseur, lui, vend l",
+  "affirmation": "Le distributeur (Enedis en électricité, GRDF en gaz) pose et relève les compteurs et fournit les données de mesure ; le fournisseur vend l'énergie et facture.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Enedis et GRDF couvrent chacun environ 95 % du territoire ; ailleurs, ce sont des entreprises locales de distribution. Le document TURPE lu (pose, relève) est celui du TURPE 6.",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Ce sont les gestionnaires de réseaux de distribution d'électricité et de gaz, également appelés « distributeurs », qui relèvent une à deux fois par an mes compteurs.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-turpe6-essentiel",
+    "passage": "La composante annuelle de comptage couvre les coûts de fourniture, de pose et d'entretien des dispositifs de comptage, les coûts de contrôle, de relève et de transmission de données de facturation",
+    "relu": null
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Les fournisseurs achètent l'électricité ou le gaz aux producteurs et les revendent aux consommateurs.",
+    "relu": null
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "me facture l'électricité ou le gaz consommés.",
+    "relu": null
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "ENEDIS (95 % du territoire), ou entreprises locales",
+    "relu": null
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "GRDF (95 % du territoire), ou entreprises locales.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-044",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › question « Qui te fournit les données de mesure » › mauvaise réponse 1",
+  "texte": "Le fournisseur facture, il ne relève pas les compteurs.",
+  "affirmation": "Le fournisseur facture ; il ne relève pas les compteurs.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Ce sont les gestionnaires de réseaux de distribution d'électricité et de gaz, également appelés « distributeurs », qui relèvent une à deux fois par an mes compteurs.",
+    "relu": null
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "me facture l'électricité ou le gaz consommés.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-045",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › question « Qui te fournit les données de mesure » › mauvaise réponse 2",
+  "texte": "Elle peut être titulaire du contrat, pas gestionnaire du réseau.",
+  "affirmation": "La mairie peut être titulaire d'un contrat mais ne gère pas le réseau.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Nuance : les collectivités sont propriétaires des réseaux et en confient la gestion aux distributeurs ; quelques communes ont leur propre entreprise locale de distribution.",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Les collectivités locales : propriétaires des réseaux, elles confient leur gestion aux distributeurs.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-046",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire « Mandat unique » › contexte",
+  "texte": "Un seul mandat couvre les deux énergies.",
+  "affirmation": "Un mandat unique vaut pour l'électricité (Enedis) et le gaz (GRDF).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Simplification du jeu. Dans les documents lus, chaque distributeur a son propre circuit : modèle d'autorisation Enedis d'un côté, formulaire de consentement GRDF ADICT de l'autre. Un même document signé par le client peut viser les deux, mais il faut le déclarer à chacun. À dire au joueur si l'on veut être exact.",
+  "sources": []
+ },
+ {
+  "id": "ja2-047",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire « Mandat unique » › contexte, canal électricité",
+  "texte": "Enedis, canal ${canal} (${s.souscrit>36?'plus de 36 kVA':'Linky, 36 kVA ou moins'})",
+  "affirmation": "Les données Enedis passent par le SGE au-delà de 36 kVA et par Data Connect pour un Linky (36 kVA ou moins).",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Canal Enedis : SGE ou Data Connect selon la puissance (à vérifier dans la documentation Enedis réservée aux inscrits)",
+  "correction": "Enedis, via le SGE (${s.souscrit>36?'plus de 36 kVA':'Linky, 36 kVA ou moins'})",
+  "note": "Enedis présente le SGE comme le canal des tiers pour tous les clients (particuliers, professionnels, entreprises) et Data Connect comme le parcours de partage proposé aux clients particuliers équipés d'un Linky. La frontière « 36 kVA » sépare bien Linky et compteurs plus gros, mais pas SGE et Data Connect : une SARL (la boulangerie) relève du SGE. Réserve : la documentation détaillée (datahub-enedis.fr) refuse les robots, je n'ai pas pu vérifier si Data Connect accepte aussi les petits professionnels.",
+  "sources": [
+   {
+    "cle": "enedis-acces-donnees",
+    "passage": "Accédez en toute autonomie aux données techniques et de mesures de consommation électrique des clients particuliers, professionnels et entreprises, avec leur consentement.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-acces-donnees",
+    "passage": "Proposez à vos clients particuliers consommateurs et producteurs d'électricité équipés d'un compteur Linky de partager leurs données avec vous.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "puissance souscrite inférieure ou égale à 36 kVA équipé d'un compteur électrique communicant",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-048",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire « Mandat unique » › contexte, canal gaz",
+  "texte": "<b>Gaz</b> : GRDF, API ADICT.",
+  "affirmation": "GRDF met les données de consommation à disposition des tiers par l'API GRDF ADICT.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Le service donne accès - sous réserve de consentement du client - à des données de consommation de gaz à différents degrés de précision",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-contrat",
+    "passage": "l'accord préalable, explicite, éclairé et univoque du Client au bénéfice du Bénéficiaire à la transmission et/ou au partage de ses Données sur un périmètre défini par PCE",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-049",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire « Mandat unique » › contexte, données du carnet",
+  "texte": "Repris de ton carnet : ${esc(s.addr)}, ${esc(s.cp)} · SIRET ${s.siret}.",
+  "affirmation": "Adresse, SIRET, PDL et PCE des trois sites.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Données inventées (monde/sites.js). Les formats sont réalistes : PDL à 14 chiffres, PCE en « GI » + 6 chiffres (format reconnu par GRDF). Non vérifié : si un PCE en « GI » peut correspondre à un site équipé d'un Gazpar.",
+  "sources": []
+ },
+ {
+  "id": "ja2-050",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Titulaire du contrat » › mauvaise réponse 1",
+  "texte": "Volt&Co Énergie (le fournisseur)",
+  "affirmation": "Volt&Co Énergie est le fournisseur du site.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Fournisseur inventé.",
+  "sources": []
+ },
+ {
+  "id": "ja2-051",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Titulaire du contrat »",
+  "texte": "il n'est pas le titulaire qui consent.",
+  "affirmation": "C'est le titulaire du contrat qui consent ; ni le fournisseur ni le gestionnaire qui agit pour lui ne peuvent consentir à sa place.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-consentement",
+    "passage": "Signature du titulaire du contrat de fourniture + cachet le cas échéant",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Conformément à l'article R111-27 du code de l'énergie un tiers souhaitant accéder aux données contractuelles et de consommation d'un client doit préalablement avoir obtenu l'autorisation du client.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-052",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Signataire » › bonne réponse",
+  "texte": "Représentant légal du titulaire, ou personne habilitée",
+  "affirmation": "Pour une personne morale, l'autorisation est signée par son représentant légal ou une personne habilitée.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Les modèles lus demandent bien un signataire qui représente le titulaire ; l'expression exacte « représentant légal ou personne habilitée » n'y figure pas mot pour mot.",
+  "sources": [
+   {
+    "cle": "enedis-modele-autorisation",
+    "passage": "Représenté par (signataire du présent document)",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-consentement",
+    "passage": "Signature du titulaire du contrat de fourniture + cachet le cas échéant",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-053",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Signataire » › mauvaise réponse 1",
+  "texte": "Le distributeur reçoit le consentement, il ne le donne pas.",
+  "affirmation": "Le distributeur ne donne pas le consentement : il vient du client.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Nuance : dans la procédure Enedis, c'est le tiers qui recueille et conserve la preuve du consentement ; le distributeur reçoit une déclaration et peut contrôler. « Reçoit le consentement » est donc un raccourci.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "En cas de contrôle, le fournisseur ou le tiers doit produire, dans un délai défini dans la procédure de contrôle concertée, les éléments permettant de prouver que",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Conformément à l'article R111-27 du code de l'énergie un tiers souhaitant accéder aux données contractuelles et de consommation d'un client doit préalablement avoir obtenu l'autorisation du client.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-054",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Signataire » › mauvaise réponse 2",
+  "texte": "Il faut une personne habilitée à engager le titulaire.",
+  "affirmation": "Un salarié quelconque ne peut pas signer : il faut une personne habilitée à engager le titulaire.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Même réserve que pour la bonne réponse : les modèles exigent un signataire représentant le titulaire.",
+  "sources": [
+   {
+    "cle": "enedis-modele-autorisation",
+    "passage": "Représenté par (signataire du présent document)",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-consentement",
+    "passage": "Signature du titulaire du contrat de fourniture + cachet le cas échéant",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-055",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Date de fin » › réponse « hier »",
+  "texte": "Un consentement déjà expiré ne donne accès à rien.",
+  "affirmation": "Un consentement expiré ne donne plus accès aux données.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le justificatif est daté et consenti pour une période limitée, clairement indiquée au client.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-contrat",
+    "passage": "ou pour une durée de plus d'un (1) an, GRDF considérera que le Tiers Autorisé a un Droit d'accès aux Données valable pour une période d'un (1) an.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-056",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Date de fin » › réponse « 1 an »",
+  "texte": "Valide. Pense à le renouveler avant l",
+  "affirmation": "Un consentement d'un an est valide et doit être renouvelé à l'échéance.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-adict-contrat",
+    "passage": "ou pour une durée de plus d'un (1) an, GRDF considérera que le Tiers Autorisé a un Droit d'accès aux Données valable pour une période d'un (1) an.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le justificatif est daté et consenti pour une période limitée, clairement indiquée au client.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-057",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Date de fin » › réponse « 3 ans »",
+  "avant": "est la durée maximale couramment admise.",
+  "texte": "Valide côté Enedis, où trois ans est le maximum. Côté GRDF, l\\'accès est ramené à un an : à renouveler chaque année.",
+  "affirmation": "Trois ans est la durée maximale couramment admise pour un consentement.",
+  "type": "regle",
+  "verdict": "corrige",
+  "correction": "Valide côté Enedis : un abonnement de données dure 36 mois au plus, renouvelable. Côté GRDF, au-delà d'un an, le droit d'accès est ramené à un an : à renouveler chaque année.",
+  "note": "Vrai pour Enedis (36 mois maximum par abonnement, sites ≤ 36 kVA). Faux pour le gaz : le contrat GRDF ADICT (version mai 2024) ramène à un an tout consentement plus long. Comme le jeu fait signer un mandat unique pour les deux énergies, la réponse « 3 ans » ne peut pas être présentée comme valide sans cette précision.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L'abonnement est valable pour une période maximale de 36 mois renouvelable et peut être résilié à tout moment.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-contrat",
+    "passage": "ou pour une durée de plus d'un (1) an, GRDF considérera que le Tiers Autorisé a un Droit d'accès aux Données valable pour une période d'un (1) an.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-058",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › formulaire › champ « Date de fin » › réponse « Sans date de fin »",
+  "texte": "Un consentement est toujours limité dans le temps.",
+  "affirmation": "Un consentement doit toujours porter une durée limitée.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Nuance : sans durée indiquée, le consentement n'est pas nul. Enedis le considère valable pour la durée du contrat ou du service, GRDF pour un an. Il reste donc borné dans le temps.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le justificatif est daté et consenti pour une période limitée, clairement indiquée au client.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "A défaut de mention d'une période de validité, le GRD considère que l'autorisation ou le consentement est valable pour la durée du contrat ou du service",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-contrat",
+    "passage": "ou pour une durée de plus d'un (1) an, GRDF considérera que le Tiers Autorisé a un Droit d'accès aux Données valable pour une période d'un (1) an.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-059",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Données demandées » › courbe de charge électrique",
+  "texte": "Courbe de charge (pas de ${s.souscrit>36?10:30} min)",
+  "affirmation": "La courbe de charge est au pas de 10 min au-delà de 36 kVA et de 30 min jusqu'à 36 kVA.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
+  "correction": "Courbe de charge (pas de ${s.souscrit>36?5:30} min)",
+  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min (réductible à 15 min, voire 10 min selon les services souscrits). Au-delà de 36 kVA : Enedis a reprogrammé la relève des courbes de charge au pas 5 min (note Enedis en vigueur au 03/07/2026 ; « depuis le 8 décembre 2025 ») ; le pas 10 min n'est plus qu'une restitution reconstituée. Le « 10 min » était exact pour les compteurs > 36 kVA avant cette réforme.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes, au format « flux de données ».",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-060",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Données demandées » › courbe de charge, explication",
+  "texte": "Indispensable pour analyser : elle montre quand on consomme.",
+  "affirmation": "La courbe de charge montre quand on consomme.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Définition d'usage du cours.",
+  "sources": []
+ },
+ {
+  "id": "ja2-061",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Données demandées » › index et données contractuelles",
+  "texte": "Index et données contractuelles (puissance souscrite)",
+  "affirmation": "Enedis met à disposition, avec l'accord du client, les index et les données contractuelles dont la puissance souscrite.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-mes-donnees",
+    "passage": "Données techniques et contractuelles (type de compteur, puissance souscrite, option tarifaire…)",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Historique des index quotidiens par classe temporelle",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-062",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Données demandées » › consommations quotidiennes Gazpar",
+  "avant": "La consommation du jour J arrive le lendemain.",
+  "texte": "La consommation du jour J arrive un à trois jours plus tard.",
+  "affirmation": "Avec Gazpar, la consommation d'un jour est disponible le lendemain.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "La consommation du jour J arrive un à trois jours plus tard.",
+  "note": "Le compteur émet deux fois par jour la consommation de la veille vers un concentrateur ; côté mise à disposition, GRDF annonce un décalage de 1 à 3 jours (guide GRDF du 28/01/2026 : J+3 pour les PCE « 1M », c'est-à-dire les Gazpar ; J+2 pour les « MM » ; J+1 à partir de 15 h pour les « JJ »).",
+  "sources": [
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de consommation sont généralement mises à jour avec un décalage de 1 à 3 jours, c'est-à-dire J+1 ou J+3 après la date de consommation effective",
+    "relu": null
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "tableau du catalogue de données, ligne des PCE « 1M » : « ~11 millions de PCE » ; « Données quotidiennes » ; « A J+3 »",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-063",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Données demandées » › coefficient de conversion",
+  "texte": "Sans lui, impossible de passer des m³ aux kWh.",
+  "affirmation": "Le coefficient de conversion fait partie des données GRDF et permet de passer des m³ aux kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "GRDF fournit aussi directement l'énergie en kWh. Le coefficient combine le PCS et une correction de pression, température et altitude : l'intitulé « Coefficient de conversion (PCS) » est un raccourci acceptable.",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "champs du catalogue de données : « Index brut de releve (debut) », « Volume brut consomme (m³) », « Coefficient de conversion », « Energie consommee (kWh) »",
+    "relu": null
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Pour le gaz, la consommation se mesure en m3. Elle est convertie en kWh grâce à un coefficient de conversion.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-064",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Données demandées » › courbe gaz 10 minutes (à ne pas cocher)",
+  "texte": "Gazpar transmet un volume par jour, pas une courbe 10 min.",
+  "affirmation": "Gazpar ne fournit pas de courbe de charge à 10 minutes, seulement une valeur par jour.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "« Un volume par jour » : le compteur émet deux fois par jour, mais la donnée est une consommation quotidienne.",
+  "sources": [
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "des données de consommation de gaz à différents degrés de précision (consommations semestrielles, mensuelles, quotidiennes...)",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-065",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Données demandées » › factures (à ne pas cocher)",
+  "texte": "Les factures viennent du fournisseur, pas des distributeurs.",
+  "affirmation": "Les factures sont émises par le fournisseur, pas par le distributeur.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "me facture l'électricité ou le gaz consommés.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-066",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Données demandées » › liste des occupants (à ne pas cocher)",
+  "texte": "Données personnelles sans rapport : on ne demande que le nécessaire.",
+  "affirmation": "On ne collecte que les données nécessaires à la finalité (minimisation).",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "cnil-minimisation",
+    "passage": "les données à caractère personnel doivent être adéquates, pertinentes et limitées à ce qui est nécessaire au regard des finalités pour lesquelles elles sont traitées.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-067",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › « Points couverts »",
+  "texte": "Le mandat ne vaut que pour ces deux points.",
+  "affirmation": "Le consentement ne vaut que pour les points (PDL, PCE) qu'il désigne ; un point dont le titulaire n'a pas consenti est hors périmètre.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Les numéros proposés (PDL voisin, PDL aux deux chiffres inversés) sont fictifs.",
+  "sources": [
+   {
+    "cle": "grdf-adict-contrat",
+    "passage": "l'accord préalable, explicite, éclairé et univoque du Client au bénéfice du Bénéficiaire à la transmission et/ou au partage de ses Données sur un périmètre défini par PCE",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "doit préalablement avoir obtenu le consentement du dit client quand celui-ci est une personne physique, ou d'une autorisation expresse, quand le client est une personne morale",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-068",
+  "fichier": "jeu/moteur/panneaux.js",
+  "repere": "signature() › texte et confirmation (appelée par l'épreuve avec « Enedis + GRDF »)",
+  "texte": "Le consentement est enregistré : il vaut pour ces points, ces données et jusqu'à la date de fin choisie.",
+  "affirmation": "Le consentement porte sur des points, des données et une durée déterminés.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Le libellé « Mandat Enedis + GRDF » relève de la simplification « mandat unique » (voir cette ligne).",
+  "sources": [
+   {
+    "cle": "grdf-adict-contrat",
+    "passage": "l'accord préalable, explicite, éclairé et univoque du Client au bénéfice du Bénéficiaire à la transmission et/ou au partage de ses Données sur un périmètre défini par PCE",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le justificatif est daté et consenti pour une période limitée, clairement indiquée au client.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-069",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "dataAnim › phrase d'introduction",
+  "texte": "Les compteurs remontent leurs mesures au distributeur, qui les transmet à ton logiciel grâce au mandat.",
+  "affirmation": "Les compteurs envoient leurs mesures au distributeur, qui les transmet au tiers autorisé.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Conformément à l'article R111-27 du code de l'énergie un tiers souhaitant accéder aux données contractuelles et de consommation d'un client doit préalablement avoir obtenu l'autorisation du client.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-070",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "dataAnim › compteurs de l'animation",
+  "texte": "Courbe de charge : ${fmt(pts)} points reçus · Gazpar : ${days} jours reçus",
+  "affirmation": "Nombre de points et de jours reçus pendant l'animation.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Valeurs d'animation. Détail : chaque paquet ajoute 48 points (une journée au pas de 30 min) quel que soit le site, y compris ceux de plus de 36 kVA.",
+  "sources": []
+ },
+ {
+  "id": "ja2-071",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › dernière question › bonne réponse",
+  "texte": "Refus : sans consentement valide, pour ce point et à cette date, pas de données",
+  "affirmation": "Sans consentement valide pour le point et la période, le distributeur ne fournit pas les données ; la collecte s'arrête à l'expiration.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "La règle est confirmée. Le comportement technique exact des API (code de refus) n'a pas pu être lu : voir la ligne suivante.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "doit préalablement avoir obtenu le consentement du dit client quand celui-ci est une personne physique, ou d'une autorisation expresse, quand le client est une personne morale",
+    "relu": null
+   },
+   {
+    "cle": "enedis-acces-donnees",
+    "passage": "Les données contractuelles et de mesure de la consommation d'électricité sont soumises au recueil préalable de l'autorisation expresse du client final",
+    "relu": null
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Le justificatif est daté et consenti pour une période limitée, clairement indiquée au client.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-072",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › dernière question › mauvaise réponse 1",
+  "texte": "Le consentement est obligatoire.",
+  "affirmation": "Le consentement du client est obligatoire, ce n'est pas une formalité.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "doit préalablement avoir obtenu le consentement du dit client quand celui-ci est une personne physique, ou d'une autorisation expresse, quand le client est une personne morale",
+    "relu": null
+   },
+   {
+    "cle": "cnil-linky-gazpar",
+    "passage": "ne peut intervenir qu'avec l'accord de l'abonné",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-073",
+  "fichier": "jeu/epreuves/collecter.js",
+  "repere": "gameCollecte › dernière question › mauvaise réponse 2",
+  "texte": "Elle ne renvoie rien.",
+  "affirmation": "Sans consentement valide, l'API ne renvoie aucune donnée (pas même estimée).",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Conséquence logique de la règle, mais je n'ai lu aucune documentation technique décrivant la réponse des API : datahub-enedis.fr interdit les robots, et la documentation de l'API GRDF ADICT n'est proposée qu'en téléchargements. Proposition : garder la phrase et la sourcer à la main avec la documentation d'erreurs de Data Connect / SGE et de GRDF ADICT.",
+  "sources": []
+ },
+ {
+  "id": "ja2-074",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "panneau de la ville › 1re ligne",
+  "texte": "Ampère-sur-Loire (45)",
+  "affirmation": "La ville s'appelle Ampère-sur-Loire, dans le Loiret.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Ville inventée (le département 45, lui, existe).",
+  "sources": []
+ },
+ {
+  "id": "ja2-075",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "panneau de la ville › 1re ligne (suite)",
+  "texte": "Zone climatique H1 · Station météo de référence : Orléans-Bricy.",
+  "affirmation": "Le Loiret est en zone climatique H1 et sa station météo de référence est Orléans-Bricy.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "correction": null,
+  "note": "Hors étape 2, relevé parce que le panneau était cité. Les pages qui portent le classement n'ont pas pu être ouvertes (Légifrance : erreur 403 sur l'annexe ; ecologie.gouv.fr : robots.txt illisible). À sourcer avec l'annexe III de l'arrêté du 10 avril 2020 (colonne « Zclim ») ; « station de référence » n'est pas une notion que j'ai vue définie : écrire plutôt « station météo la plus proche » si l'on ne trouve pas de texte.",
+  "sources": []
+ },
+ {
+  "id": "ja2-076",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "Agent Enedis › 1re réplique",
+  "texte": "Je pose et je relève les compteurs électriques : je suis le distributeur. La facture, c'est le fournisseur qui l'envoie. Deux métiers, deux entreprises !",
+  "affirmation": "Le distributeur pose et relève les compteurs ; le fournisseur envoie la facture ; ce sont deux entreprises distinctes.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Le document TURPE lu (pose, relève) est celui du TURPE 6.",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Ce sont les gestionnaires de réseaux de distribution d'électricité et de gaz, également appelés « distributeurs », qui relèvent une à deux fois par an mes compteurs.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-turpe6-essentiel",
+    "passage": "La composante annuelle de comptage couvre les coûts de fourniture, de pose et d'entretien des dispositifs de comptage, les coûts de contrôle, de relève et de transmission de données de facturation",
+    "relu": null
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "me facture l'électricité ou le gaz consommés.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-077",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "Agent Enedis › 2e réplique",
+  "texte": "Au-dessus de 36 kVA, les données passent par le SGE. En dessous, avec un Linky, par Data Connect.",
+  "affirmation": "Le canal d'accès aux données dépend de la puissance : SGE au-dessus de 36 kVA, Data Connect en dessous.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Canal Enedis : SGE ou Data Connect selon la puissance (à vérifier dans la documentation Enedis réservée aux inscrits)",
+  "correction": "Pour les tiers, les données passent par le SGE, quel que soit le site. Avec un Linky, un particulier peut aussi partager les siennes par Data Connect.",
+  "note": "Voir la ligne « canal électricité » de l'épreuve : selon Enedis, le SGE sert pour les particuliers, les professionnels et les entreprises ; Data Connect vise les clients particuliers équipés d'un Linky. Même réserve (datahub-enedis.fr non lisible).",
+  "sources": [
+   {
+    "cle": "enedis-acces-donnees",
+    "passage": "Accédez en toute autonomie aux données techniques et de mesures de consommation électrique des clients particuliers, professionnels et entreprises, avec leur consentement.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-acces-donnees",
+    "passage": "Proposez à vos clients particuliers consommateurs et producteurs d'électricité équipés d'un compteur Linky de partager leurs données avec vous.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-078",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "Releveur GRDF › réplique (1re phrase)",
+  "texte": "Un compteur gaz mesure un volume, en m³.",
+  "affirmation": "Un compteur de gaz mesure un volume en m³.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Les compteurs de gaz mesurent les volumes de gaz livrés sur place, exprimés en mètres-cubes (m3).",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-079",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "Releveur GRDF › réplique (2e phrase)",
+  "avant": "entre 10 et 11,5 kWh/m³ selon la commune et le mois.",
+  "texte": "entre 9 et 12,5 kWh/m³ selon la commune et le mois.",
+  "affirmation": "Le coefficient de conversion vaut entre 10 et 11,5 kWh/m³ selon la commune et le mois.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Pour avoir des kWh, on multiplie par le coefficient de conversion : entre 9 et 12,5 kWh/m³ selon le lieu et la période, le plus souvent autour de 11.",
+  "note": "La fourchette du jeu est trop étroite : le médiateur donne 9 à 12,5 ; GRDF donne 10,3 à 12,4 pour le gaz H sous 200 m d'altitude et descend à 9,0 pour le gaz B. « Selon la commune et le mois » est confirmé (altitude de la commune, calcul mensuel pour les compteurs communicants).",
+  "sources": [
+   {
+    "cle": "mne-lire-index",
+    "passage": "Le gestionnaire du réseau de distribution détermine la valeur du coefficient qui varie selon le lieu et le temps entre 9 et 12,5 kWh/m3.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficients-thermiques",
+    "passage": "Moins de 200 mètres d'altitude : entre 10,3 et 12,4 kWh/m3",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "L'altitude de la commune dans laquelle est situé votre logement",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Le coefficient de conversion gaz est calculé une fois par mois pour les compteurs communicants et après chaque relevé pour les compteurs relevés tous les 6 mois.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-080",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "Retraité › réplique",
+  "texte": "Une fois j'ai lu 404 989 au lieu de 413 989... la consommation était négative !",
+  "affirmation": "Anecdote d'un index mal lu donnant une consommation négative.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Anecdote inventée ; elle illustre la soustraction d'index.",
+  "sources": []
+ },
+ {
+  "id": "ja2-081",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "Factrice › 1re réplique",
+  "texte": "Je distribue les factures d'énergie. Elles arrivent toujours après la consommation, et jamais le jour qu'on croit.",
+  "affirmation": "Les factures arrivent toujours après la consommation.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Humour, mais porte la même idée que la fiche s2r3 (« avec du retard »), elle-même sans source. « Toujours » est trop fort : l'abonnement, par exemple, est souvent facturé d'avance.",
+  "sources": []
+ },
+ {
+  "id": "ja2-082",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "Technicienne réseau › 1re réplique",
+  "texte": "Un compteur communicant, c'est un relevé sans se déplacer.",
+  "affirmation": "Un compteur communicant est relevé à distance, sans déplacement d'un technicien.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-compteurs-communicants",
+    "passage": "Je ne suis plus obligé(e) d'être présent(e) pour qu'un technicien passe relever le compteur",
+    "relu": null
+   },
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Le relevé est effectué automatiquement. Vous n'avez plus besoin de vous rendre disponible pour accueillir le technicien.",
+    "relu": null
+   },
+   {
+    "cle": "enedis-linky",
+    "passage": "Fini le rendez-vous à prendre avec le technicien pour le relevé du compteur, vos données mensuelles de consommation sont transmises automatiquement",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-083",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "Technicienne réseau › 2e réplique",
+  "texte": "Distributeur d'un côté, fournisseur de l'autre. On me confond tous les jours.",
+  "affirmation": "Distributeur et fournisseur sont deux acteurs distincts.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": null,
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Ce sont les gestionnaires de réseaux de distribution d'électricité et de gaz, également appelés « distributeurs », qui relèvent une à deux fois par an mes compteurs.",
+    "relu": null
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Les fournisseurs achètent l'électricité ou le gaz aux producteurs et les revendent aux consommateurs.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-084",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "Jardinier › 1re réplique",
+  "texte": "je relève le compteur d'eau tous les lundis : un index, une soustraction, et je vois tout de suite s'il y a une fuite.",
+  "affirmation": "Le suivi par index (une soustraction entre deux relevés) vaut aussi pour l'eau.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Illustration de la méthode de l'index.",
+  "sources": []
+ },
+ {
+  "id": "ja2-085",
+  "fichier": "jeu/recit/habitants-regions.js",
+  "repere": "Friturier › 1re réplique",
+  "texte": "Une facture, c'est deux parts : l'abonnement et la consommation.",
+  "affirmation": "Une facture d'énergie comporte une part fixe (abonnement) et une part variable (consommation).",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "S'y ajoutent les taxes et contributions (accise, CTA, TVA).",
+  "sources": [
+   {
+    "cle": "mne-prix",
+    "passage": "une part fixe, correspondant à l'abonnement, et une part variable, liée à ma consommation réelle d'énergie.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-086",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "prénom « Gazpar » › réplique de Mme Joule",
+  "avant": "Tu envoies tes nouvelles une fois par jour, avec 24 h de retard.",
+  "texte": "Tu donnes de tes nouvelles tous les jours, et elles mettent un à trois jours à arriver.",
+  "affirmation": "Gazpar transmet une fois par jour, avec 24 h de retard.",
+  "type": "fait",
+  "verdict": "corrige",
+  "correction": "Tu donnes de tes nouvelles une fois par jour, et elles mettent un à trois jours à arriver.",
+  "note": "Clin d'œil, mais il affirme deux faits. Le compteur émet deux fois par jour la consommation de la veille vers un concentrateur ; côté mise à disposition, GRDF annonce un décalage de 1 à 3 jours (guide GRDF du 28/01/2026 : J+3 pour les PCE « 1M », c'est-à-dire les Gazpar ; J+2 pour les « MM » ; J+1 à partir de 15 h pour les « JJ »).",
+  "sources": [
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de consommation sont généralement mises à jour avec un décalage de 1 à 3 jours, c'est-à-dire J+1 ou J+3 après la date de consommation effective",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-087",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "prénom « Linky » › réplique de Mme Joule",
+  "texte": "On t'a posé un jour sans prévenir, toi aussi ?",
+  "affirmation": "Les compteurs Linky auraient été posés sans prévenir.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Humour, mais peut être pris pour un fait. Non vérifié ; si on veut l'éviter : « On t'a posé un beau matin, toi aussi ? »",
+  "sources": []
+ },
+ {
+  "id": "ja2-088",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "Commercial › 2e réplique",
+  "texte": "(Hors TURPE, accise, CTA, TVA, capacité, CEE, indexation, révision et cas de force majeure.)",
+  "affirmation": "Un prix « fixe » de fourniture n'inclut pas l'acheminement, les taxes ni divers mécanismes.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Humour. Accise, CTA et TVA sont bien les taxes et contributions d'une facture (fiche du médiateur lue) ; TURPE = tarif d'acheminement. Capacité et CEE non vérifiés ici (hors étape 2).",
+  "sources": []
+ },
+ {
+  "id": "ja2-089",
+  "fichier": "jeu/interface/carte.js",
+  "repere": "WM_BLD.enedis (légende de la carte)",
+  "texte": "Le distributeur d’électricité : compteurs, courbes de charge, dépassements.",
+  "affirmation": "Enedis est le distributeur d'électricité.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Environ 95 % du territoire ; ailleurs, des entreprises locales.",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "ENEDIS (95 % du territoire), ou entreprises locales",
+    "relu": null
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Ce sont les gestionnaires de réseaux de distribution d'électricité et de gaz, également appelés « distributeurs », qui relèvent une à deux fois par an mes compteurs.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-090",
+  "fichier": "jeu/interface/carte.js",
+  "repere": "WM_BLD.grdf (légende de la carte)",
+  "texte": "Le distributeur de gaz : compteurs, volumes en m³ et conversion en kWh.",
+  "affirmation": "GRDF est le distributeur de gaz ; il mesure des volumes en m³ et les convertit en kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "Environ 95 % du territoire ; ailleurs, des entreprises locales.",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "GRDF (95 % du territoire), ou entreprises locales.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Les compteurs de gaz mesurent les volumes de gaz livrés sur place, exprimés en mètres-cubes (m3).",
+    "relu": null
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Pour le gaz, la consommation se mesure en m3. Elle est convertie en kWh grâce à un coefficient de conversion.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-091",
+  "fichier": "jeu/interface/carte.js",
+  "repere": "WM_BLD.voltco (légende de la carte)",
+  "texte": "voltco:['Volt&Co Énergie','Un fournisseur : contrats et factures.']",
+  "affirmation": "Volt&Co Énergie est un fournisseur.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Fournisseur inventé. Le rôle décrit (contrats et factures) est conforme à la définition du fournisseur.",
+  "sources": []
+ },
+ {
+  "id": "ja2-092",
+  "fichier": "jeu/monde/locaux.js",
+  "repere": "LOCALS.voltco et affiche Volt&Co",
+  "texte": "voltco:{name:'Volt&Co Énergie'",
+  "affirmation": "Le bâtiment Volt&Co Énergie et son affiche « Prix fixe garanti* ».",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Enseigne et affiche inventées.",
+  "sources": []
+ },
+ {
+  "id": "ja2-093",
+  "fichier": "jeu/interface/evolution-fin.js",
+  "repere": "tableau récapitulatif de fin › ligne Collecter",
+  "texte": "<td>Collecter</td><td>Distributeur ≠ fournisseur, mandats, consentement</td>",
+  "affirmation": "Résumé de l'étape 2 : distributeur ≠ fournisseur, mandats, consentement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "correction": null,
+  "note": "Récapitulatif ; chaque notion est sourcée aux lignes correspondantes.",
+  "sources": []
+ },
+ {
+  "id": "ja2-094",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[3] › 1re phrase",
+  "texte": "Les données de mesure appartiennent au titulaire du contrat.",
+  "affirmation": "Les données de mesure appartiennent au titulaire du contrat.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "GRDF l'écrit en ces termes (« au consommateur »). Le code de l'énergie est plus prudent : l'utilisateur a « la libre disposition » de ses données, il ne parle pas de propriété. Formulation la plus sûre : « Le titulaire du contrat a la libre disposition de ses données de mesure. »",
+  "sources": [
+   {
+    "cle": "legifrance-r341-5",
+    "passage": "Chaque utilisateur des réseaux publics d'électricité a la libre disposition des données relatives à sa production ou à sa consommation enregistrées par les dispositifs de comptage.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "ces dernières n'appartiennent pas à GRDF mais au consommateur.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja2-095",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[3] › 2e phrase",
+  "texte": "Sans son consentement signé, pas de données.",
+  "affirmation": "Sans le consentement du titulaire, un tiers n'obtient pas les données.",
+  "type": "regle",
+  "verdict": "confirme",
+  "correction": null,
+  "note": "« Signé » est une simplification : la note Enedis lue admet un recueil par écrit, par oral ou par un parcours en ligne, à condition de pouvoir le prouver.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "doit préalablement avoir obtenu le consentement du dit client quand celui-ci est une personne physique, ou d'une autorisation expresse, quand le client est une personne morale",
+    "relu": null
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
+    "relu": null
+   },
+   {
+    "cle": "enedis-mes-donnees",
+    "passage": "Vous pouvez également autoriser expressément un tiers",
+    "relu": null
+   }
+  ]
+ }
+]

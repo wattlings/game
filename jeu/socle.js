@@ -8,6 +8,7 @@
 import { CHAPITRES_JEU, ETAPES_DE_BASE, chapitresDeLEtape } from "../commun/donnees/etapes.js";
 import { ECOLE } from "../commun/donnees/ecole.js";
 import * as patrimoine from "../commun/donnees/patrimoine.js";
+import { SOURCES, libelleSource, sourcesVuesLe } from "../commun/donnees/sources.js";
 import * as graphiques from "../commun/graphiques/barres.js";
 import { LIENS } from "../commun/liens.js";
 import {
@@ -47,6 +48,10 @@ Object.assign(globalThis, {
   STEP_HASH,
   CHAPTERS,
   CH2HASH,
+  // sources : le registre des références, commun au cours et au jeu (affiché par interface/sources.js)
+  SOURCES,
+  libelleSource,
+  sourcesVuesLe,
   // sauvegardes
   SAVE_KEY: CLE_ANCIENNE_SAUVEGARDE,
   SLOT_N: NB_EMPLACEMENTS,

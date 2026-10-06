@@ -39,6 +39,26 @@ Chaque modification enregistrée sur la branche `main` est en ligne après une �
 | Une palette du jeu (peaux, vêtements, herbe des saisons, pierre et fleurs des régions) | `jeu/rendu/palettes.js` |
 | Un dessin du jeu (un bâtiment, un personnage, un décor) | le fichier concerné dans `jeu/rendu/` |
 
+### Les sources
+
+Chaque fait et chaque règle enseignés renvoient à une source qui a été ouverte et lue. Le référencement avance périmètre par périmètre : sont traités l'étape 2 du cours, l'étape 2 du jeu (fiches, arène, épreuve, habitants) et la centrale solaire.
+
+| Je veux… | J'ouvre… |
+|---|---|
+| Ajouter ou corriger une référence (titre, éditeur, date, lien) | `commun/donnees/sources.js` : le registre, commun au cours et au jeu. Chaque source y figure une seule fois, sous une clé. |
+| Citer une source dans un texte du cours | Écrire `[[cle]]` (ou `[[cle-1,cle-2]]`) juste après l'information : cela affiche un appel de note numéroté, et la liste se construit seule en bas de la page. |
+| Donner ses sources à une démo du cours | `cours/contenu/sources.js` (`SOURCES_DEMOS`) |
+| Donner ses sources à un terme du glossaire | `commun/donnees/glossaire.js` : `src: ["cle"]` sur le terme |
+| Donner ses sources à une fiche savoir, une arène | `refs:['cle']` dans `jeu/recit/fiches-savoir.js`, `jeu/recit/arenes/arene-N.js` |
+| Référencer ce que disent les habitants et l'épreuve d'une étape | `jeu/recit/references.js` |
+| Donner ses sources à une information de voyage, à un site | `refs:['cle']` dans `jeu/voyages/<site>/textes.js` |
+| Changer l'allure des notes, de la page Sources, de l'onglet Sources du jeu | `cours/blocs/notes.js`, `cours/pages/sources.js`, `cours/styles/niveaux.css` ; `jeu/interface/sources.js`, `jeu/interface/styles/tableau-de-bord.css` |
+| Voir la preuve : pour chaque information, son type, son verdict et le passage lu dans la source | `outils/sources/releve-*.json` (les relevés), ou le tableau de relecture ci-dessous |
+
+Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inventé pour l'exemple (l'école, la ville, les sites visités), la méthode du cours, les calculs, les vannes. Les relevés les classent « sans objet ».
+
+`node outils/sources.mjs` contrôle l'ensemble en quelques secondes (clé citée absente du registre, relevé qui parle d'un texte disparu, fait sans source, source affichée nulle part). `node outils/sources.mjs relecture` fabrique `outils/sortie/sources-relecture.html`, le tableau de toutes les informations relevées, à filtrer par verdict. `node outils/sources.mjs liens` ouvre chaque lien du registre et signale ceux qui ne répondent plus : à lancer de temps en temps, et avant chaque rentrée pour les taux (accise, CTA, TURPE) qui changent tous les ans.
+
 ### Le contenu du cours
 
 | Je veux changer… | J'ouvre… |
@@ -201,6 +221,7 @@ npx playwright install chromium     # une fois, pour la vérification
 |---|---|
 | `node outils/serveur.mjs` | Affiche le site sur `http://localhost:8080`. Un double-clic sur `index.html` ne suffit pas : hors d'un serveur, le navigateur refuse de charger les fichiers un par un. |
 | `node outils/verifier.mjs` | Ouvre chaque page du cours, manipule chaque démo, joue chaque chapitre du jeu, prend le train vers chaque destination, fait l'aller-retour cours ↔ jeu, et signale toute erreur. À lancer avant de publier une modification. |
+| `node outils/sources.mjs` | Contrôle les sources (voir « Les sources »). Avec `relecture` : le tableau de relecture ; avec `liens` : le test des liens. |
 | `node outils/fichier-unique.mjs` | Assemble tout le site dans un seul fichier, `outils/sortie/wattlings.html`, à envoyer par mail ou à ouvrir hors ligne. |
 
 Sans rien installer : dans le dépôt GitHub, onglet **Actions**, lancer « Fichier unique » ou « Vérifier le site » (bouton *Run workflow*). Le fichier unique se télécharge ensuite depuis la page du lancement, rubrique *Artifacts*.
@@ -225,7 +246,7 @@ Dans le fichier unique produit par `outils/fichier-unique.mjs`, le jeu s'ouvre p
 
 `outils/migration/` contient la version 18 et l'outil qui a comparé les deux versions. Il peut être supprimé une fois la migration acceptée.
 
-Depuis, le jeu a gagné les voyages en train (voir plus haut) : c'est la seule différence de contenu avec la version 18, et elle n'apparaît qu'à l'épilogue. Les chapitres 1 à 10 se jouent exactement comme avant.
+Depuis, le jeu a gagné les voyages en train (voir plus haut), puis le référencement des sources a commencé : textes corrigés à l'étape 2, page Sources dans le cours, onglet Sources dans le menu du jeu. Le contenu n'est donc plus identique à la version 18, et `outils/migration/comparer.mjs` signale ces écarts : ce n'est plus une alerte. La vérification du site, c'est `outils/verifier.mjs`.
 
 ## Limites connues
 

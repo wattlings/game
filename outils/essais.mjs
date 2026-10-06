@@ -61,7 +61,7 @@ export function tirage(graine) {
   return () => { g = (g * 1103515245 + 12345) >>> 0; return g / 4294967296; };
 }
 
-export const ROUTES_COURS = ["accueil", "ecole", "glossaire", "quiz-final", "patrimoine", ...[1, 2, 3, 4, 5, 6, 7, 8].flatMap((i) => [`etape-${i}-essentiel`, `etape-${i}-comprendre`, `etape-${i}-approfondir`])];
+export const ROUTES_COURS = ["accueil", "ecole", "glossaire", "quiz-final", "sources", "patrimoine", ...[1, 2, 3, 4, 5, 6, 7, 8].flatMap((i) => [`etape-${i}-essentiel`, `etape-${i}-comprendre`, `etape-${i}-approfondir`])];
 
 /** Dans la page du cours : le contenu affiché, sans les passerelles vers le jeu ni la mention de suivi. */
 export const contenuCours = () => {

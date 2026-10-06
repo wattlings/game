@@ -15,12 +15,12 @@ function gameCollecte(done){
     form({title:'Mandat unique · Qui consent, et jusqu\'à quand ?',ctx:`Un seul mandat couvre les deux énergies.<br><b>Électricité</b> : Enedis, canal ${canal} (${s.souscrit>36?'plus de 36 kVA':'Linky, 36 kVA ou moins'}). <b>Gaz</b> : GRDF, API ADICT.<br>Repris de ton carnet : ${esc(s.addr)}, ${esc(s.cp)} · SIRET ${s.siret}.`,fields:[
       {label:'Titulaire du contrat (celui qui consent)',opts:[[s.titulaire,1],["Volt&Co Énergie (le fournisseur)",0,"Le fournisseur vend l'énergie : il n'est pas le titulaire qui consent."],[`${S.name} (gestionnaire)`,0,'Tu agis pour le titulaire, mais le consentement doit venir de lui.']]},
       {label:'Signataire',opts:[['Représentant légal du titulaire, ou personne habilitée',1],['Un technicien du distributeur',0,'Le distributeur reçoit le consentement, il ne le donne pas.'],["N'importe quel salarié du site",0,'Il faut une personne habilitée à engager le titulaire.']]},
-      {label:'Date de fin du consentement',opts:[[`${hier} (hier)`,0,'Un consentement déjà expiré ne donne accès à rien.'],[`${d(1)} (1 an)`,1,'Valide. Pense à le renouveler avant l\'échéance.'],[`${d(3)} (3 ans)`,1,'Valide : c\'est la durée maximale couramment admise.'],['Sans date de fin',0,'Un consentement est toujours limité dans le temps.']]}
+      {label:'Date de fin du consentement',opts:[[`${hier} (hier)`,0,'Un consentement déjà expiré ne donne accès à rien.'],[`${d(1)} (1 an)`,1,'Valide. Pense à le renouveler avant l\'échéance.'],[`${d(3)} (3 ans)`,1,'Valide côté Enedis, où trois ans est le maximum. Côté GRDF, l\'accès est ramené à un an : à renouveler chaque année.'],['Sans date de fin',0,'Un consentement est toujours limité dans le temps.']]}
     ],okMsg:'Le titulaire consent, pour une durée limitée.'}),
     multi({title:'Mandat unique · Données demandées',q:'Coche les données à récupérer, pour l\'électricité et pour le gaz (juste le nécessaire).',items:[
       [`<span class="tag">Élec</span> Courbe de charge (pas de ${s.souscrit>36?10:30} min)`,true,'Indispensable pour analyser : elle montre quand on consomme.'],
       ['<span class="tag">Élec</span> Index et données contractuelles (puissance souscrite)',true,'La référence du comptage, et de quoi vérifier le contrat.'],
-      ['<span class="tag">Gaz</span> Consommations quotidiennes (Gazpar)',true,'La consommation du jour J arrive le lendemain.'],
+      ['<span class="tag">Gaz</span> Consommations quotidiennes (Gazpar)',true,'La consommation du jour J arrive un à trois jours plus tard.'],
       ['<span class="tag">Gaz</span> Coefficient de conversion (PCS)',true,'Sans lui, impossible de passer des m³ aux kWh.'],
       ['<span class="tag">Gaz</span> Courbe de charge au pas de 10 minutes',false,'Gazpar transmet un volume par jour, pas une courbe 10 min.'],
       ['Factures d\'électricité et de gaz',false,'Les factures viennent du fournisseur, pas des distributeurs.'],

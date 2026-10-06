@@ -76,7 +76,7 @@ function actGas(){
       ['<span class="mono">41 940 m³</span>',0,'C\'est l\'index : le totalisateur du compteur, en m³.'],
       [`<span class="mono">${s.gazSerie}</span>`,0,'C\'est le numéro de série du Gazpar : l\'appareil, pas le point.']]})),
     choice({gas:1,q:'Que mesure ce compteur gaz ?',opts:[
-      ['Un volume en m³, converti en kWh avec un coefficient de conversion',1,'kWh = m³ × coefficient (en général entre 10 et 11,5 kWh/m³, variable selon la commune et le mois).'],
+      ['Un volume en m³, converti en kWh avec un coefficient de conversion',1,'kWh = m³ × coefficient (entre 9 et 12,5 kWh/m³, variable selon la commune et le mois).'],
       ['Directement des kWh',0,'Le compteur mesure un volume.'],
       ['Une puissance en kW',0,'Gazpar transmet un volume par jour.']]}),
     choice({gas:1,ctx:'En janvier : <span class="num">4 000 m³</span>, coefficient <span class="num">11,2 kWh/m³</span>.',q:'Combien de kWh ?',opts:[['44 800 kWh',1,'4 000 × 11,2 = 44 800 kWh.'],['4 000 kWh',0,'Il faut convertir les m³.'],['357 kWh',0,'On multiplie, on ne divise pas.']]})

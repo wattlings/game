@@ -26,7 +26,7 @@ function showFiche(f){
   S.fiches=S.fiches||{};S.fiches[f.id]=1;save();sfx('secret');
   const ov=openPanel('Nouvelle fiche savoir'),b=ov.querySelector('.pbody');
   const n=Object.keys(S.fiches).length;
-  b.innerHTML=`<div class="fiche${f.req?' req':''}"><div class="fiche-top"><span class="tag">${f.st===0?'Le cycle':f.st==='P'?'Patrimoine':'Étape '+f.st+' · '+STEP_NAMES[f.st]}</span>${f.req?'<span class="tag key">Info clé</span>':''}<span class="fiche-k">${f.k==='phrase'?'L’essentiel':f.k==='analogie'?'Analogie':'À retenir'}</span></div><h3>${esc(f.t)}</h3><p>${esc(f.x)}</p></div><p class="dnote">Classeur : ${n} / ${FICHES.length} fiches.</p><div class="row"><button class="btn" id="fOk">Ranger dans le classeur ▸</button><button class="btn alt" id="fCourse">Lire dans le cours ↗</button></div>`;
+  b.innerHTML=`<div class="fiche${f.req?' req':''}"><div class="fiche-top"><span class="tag">${f.st===0?'Le cycle':f.st==='P'?'Patrimoine':'Étape '+f.st+' · '+STEP_NAMES[f.st]}</span>${f.req?'<span class="tag key">Info clé</span>':''}<span class="fiche-k">${f.k==='phrase'?'L’essentiel':f.k==='analogie'?'Analogie':'À retenir'}</span></div><h3>${esc(f.t)}</h3><p>${esc(f.x)}</p>${refsHTML(f.refs,true)}</div><p class="dnote">Classeur : ${n} / ${FICHES.length} fiches.</p><div class="row"><button class="btn" id="fOk">Ranger dans le classeur ▸</button><button class="btn alt" id="fCourse">Lire dans le cours ↗</button></div>`;
   b.querySelector('#fOk').onclick=()=>{closePanel();gainXP(f.req?15:10);hud();pendingCheck()};b.querySelector('#fOk').focus();
   b.querySelector('#fCourse').onclick=()=>{closePanel();gainXP(f.req?15:10);goCourse(STEP_HASH(f.st))};
 }

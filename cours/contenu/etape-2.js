@@ -3,9 +3,10 @@
  * - en tête : l'Essentiel (question, phrase clé, à retenir, analogie, schéma, démo)
  * - niveaux.comprendre et niveaux.approfondir : la suite de blocs affichés dans chaque onglet
  * - quiz : le mini-quiz en fin d'Approfondir
+ * Les sources : [[cle]] après une information cite une source du registre (commun/donnees/sources.js) ;
+ * la liste numérotée s'affiche toute seule en bas de la page.
  */
 import { etapeDeBase } from "../../commun/donnees/etapes.js";
-import { sourcesData } from "./sources.js";
 
 export default {
   ...etapeDeBase(2),
@@ -13,8 +14,8 @@ export default {
   phrase:
     "La donnée d’énergie arrive par trois canaux : le télérelevé, les index et les factures. Même énergie, trois formes différentes.",
   retenir: [
-    "Le {{telereleve}} est fin et rapide : une {{courbe-de-charge}} au {{pas-de-temps}} de 10 min pour l’électricité, un volume par jour pour le gaz ({{gazpar}}).",
-    "L’{{index}} est le compteur qui tourne : on soustrait deux relevés pour obtenir une consommation.",
+    "Le {{telereleve}} est fin et rapide : une {{courbe-de-charge}} au {{pas-de-temps}} de 10 min pour l’électricité, un volume par jour pour le gaz ({{gazpar}})[[grdf-adict-faq,mne-compteurs-communicants]].",
+    "L’{{index}} est le compteur qui tourne : on soustrait deux relevés pour obtenir une consommation[[mne-releve-compteur]].",
     "La facture donne le coût en euros, avec du retard et sur des périodes qui ne suivent pas les mois.",
   ],
   analogie: {
@@ -49,8 +50,8 @@ export default {
         type: "texte",
         titre: "Qui envoie quoi ?",
         paragraphes: [
-          "Les données de mesure viennent du {{distributeur}} (Enedis pour l’électricité, GRDF pour le gaz), qui pose et relève les compteurs. La facture vient du {{fournisseur}}, qui vend l’énergie. Ce ne sont pas les mêmes entreprises, et pas les mêmes canaux.",
-          "Avant de recevoir la moindre donnée de mesure, le logiciel a besoin d’un {{consentement}} du titulaire du contrat : ici, la mairie.",
+          "Les données de mesure viennent du {{distributeur}} (Enedis pour l’électricité, GRDF pour le gaz), qui pose et relève les compteurs[[mne-releve-compteur,mne-compteurs-communicants]]. La facture vient du {{fournisseur}}, qui vend l’énergie[[mne-acteurs-marche]]. Ce ne sont pas les mêmes entreprises, et pas les mêmes canaux.",
+          "Avant de recevoir la moindre donnée de mesure, le logiciel a besoin d’un {{consentement}} du titulaire du contrat[[enedis-nmo-cf-015e,grdf-adict-faq]] : ici, la mairie.",
         ],
       },
       {
@@ -83,8 +84,8 @@ export default {
         type: "texte",
         titre: "Électricité : accès aux données Enedis",
         paragraphes: [
-          "**Jusqu’à 36 kVA (segment C5, compteur {{linky}})** : la {{courbe-de-charge}} est au pas de 30 minutes ; son enregistrement fin se fait avec l’accord du client. Les tiers y accèdent par {{data-connect}}, une API où le client donne son consentement sur son espace Enedis, pour une durée qu’il choisit (jusqu’à 3 ans d’après la documentation publique consultée).",
-          "**Au-delà de 36 kVA (segments C1 à C4, comme l’école)** : les compteurs professionnels sont télérelevés et mesurent une courbe de charge plus fine (10 minutes pour l’école). Les tiers y accèdent par le {{sge|SGE}} d’Enedis (système de gestion des échanges, en web services), avec un consentement écrit du client et une habilitation qui prend plusieurs mois.",
+          "**Jusqu’à 36 kVA (segment C5, compteur {{linky}})**[[enedis-segments-c1-c5]] : la {{courbe-de-charge}} est au pas de 30 minutes ; son enregistrement fin se fait avec l’accord du client[[enedis-nmo-cf-016e,cnil-linky-gazpar]]. Les tiers y accèdent par {{data-connect}}, une API où le client donne son consentement sur son espace Enedis, pour une durée demandée par le tiers et limitée à 3 ans[[enedis-contrat-data-connect]].",
+          "**Au-delà de 36 kVA (segments C1 à C4, comme l’école)**[[enedis-segments-c1-c5]] : les compteurs professionnels sont télérelevés et mesurent une courbe de charge plus fine. Enedis la relève au pas de 5 minutes depuis fin 2025 ; on en reconstitue des pas de 10 ou 15 minutes[[enedis-nmo-cf-015e]] (10 minutes pour l’école). Les tiers y accèdent par le {{sge|SGE}} d’Enedis (système de gestion des échanges, en web services), avec une autorisation expresse du client, de forme libre mais conservée et limitée dans le temps[[enedis-contrat-sge,enedis-nmo-cf-015e]]. La mise en place prend de plusieurs semaines à plusieurs mois[[enedis-contrat-sge,consometers-sge-tiers]].",
         ],
       },
       {
@@ -92,14 +93,14 @@ export default {
         ton: "verifier",
         titre: "Changement récent chez Enedis",
         texte:
-          "Data Connect a basculé vers une nouvelle version le 28 septembre 2026 : nouvelle adresse d’autorisation (v2) et nouvelles API de mesure et de contrat ; les anciennes API v5 doivent être arrêtées environ deux semaines plus tard. Information issue d’un projet open source : **à confirmer dans la documentation officielle Enedis** avant tout développement.",
+          "Data Connect a basculé vers une nouvelle version le 28 septembre 2026 : nouvelle adresse d’autorisation (v2) et nouvelles API de mesure et de contrat ; les anciennes API v5 doivent être arrêtées environ deux semaines plus tard[[github-bascule-data-connect,github-eddie-data-connect]]. Information issue de projets open source : **à confirmer dans la documentation officielle Enedis** avant tout développement.",
       },
       {
         type: "texte",
         titre: "Gaz : accès aux données GRDF",
         paragraphes: [
-          "GRDF met à disposition les données par l’API {{adict}} : consommations quotidiennes, mensuelles et semestrielles, données techniques du compteur et données contractuelles, avec le consentement du client. Le compteur {{gazpar}} transmet chaque jour : la consommation d’un jour J est disponible le lendemain environ.",
-          "Le compteur mesure un **volume** (m³). La consommation en énergie s’obtient avec le {{coef-conversion}} : **kWh = m³ × coefficient**. Ce coefficient combine le {{pcs}} du gaz livré et une correction liée aux conditions de livraison (altitude, pression, température). Il vaut en général entre 10 et 11,5 kWh/m³ et change selon la commune et le mois.",
+          "GRDF met à disposition les données par l’API {{adict}} : consommations quotidiennes, mensuelles et semestrielles, données techniques du compteur et données contractuelles, avec le consentement du client[[grdf-adict-faq,datagouv-grdf-adict]]. Le compteur {{gazpar}} transmet chaque jour[[mne-compteurs-communicants]] : la consommation d’un jour J est disponible avec un décalage de 1 à 3 jours[[grdf-adict-faq]].",
+          "Le compteur mesure un **volume** (m³). La consommation en énergie s’obtient avec le {{coef-conversion}} : **kWh = m³ × coefficient**[[mne-coefficient-conversion]]. Ce coefficient combine le {{pcs}} du gaz livré et une correction liée aux conditions de livraison (altitude, pression, température)[[grdf-guide-donnees-2026]]. Il change selon la commune et le mois[[grdf-coefficient-conversion]], entre 9 et 12,5 kWh/m³[[mne-coefficient-conversion]].",
         ],
       },
       {
@@ -121,8 +122,8 @@ export default {
         ton: "verifier",
         titre: "Taux relevés en septembre 2026",
         texte: [
-          "Accise sur l’électricité : 26,35 €/MWh pour les activités économiques au 1er août 2026 (catégorie exacte de l’école à vérifier). Accise sur le gaz naturel : 16,66 €/MWh au 1er août 2026.",
-          "CTA : 15 % de la part fixe du TURPE depuis le 1er février 2026 (21,93 % avant) ; 20,80 % de la part fixe de l’acheminement gaz. TVA : 20 % sur tous les postes. TURPE 7 : +3,04 % en moyenne au 1er août 2026.",
+          "Accise sur l’électricité au 1er août 2026 : 26,35 €/MWh au-delà de 36 kVA (catégories « PME » et « haute puissance »), 30,62 €/MWh pour les ménages et les sites jusqu’à 36 kVA[[ministere-guide-fiscalite-2026]]. La catégorie exacte de l’école reste à vérifier. Accise sur le gaz naturel : 16,66 €/MWh à la même date[[ministere-guide-fiscalite-2026]].",
+          "CTA : 15 % de la part fixe du TURPE depuis le 1er février 2026 (21,93 % avant)[[cnieg-cta-2026]] ; pour le gaz, 20,80 % de la part fixe de distribution, plus une quote-part liée au transport[[cnieg-cta-note,mne-taxes-facture]]. TVA : 20 % sur tous les postes[[mne-taxes-facture]]. TURPE 7 : +3,04 % en moyenne au 1er août 2026[[cre-deliberation-2026-105]].",
           "Les prix de fourniture et d’acheminement de l’école restent **fictifs**.",
         ],
       },
@@ -137,17 +138,17 @@ export default {
             "1 relevé par mois et par cadran",
             "1 montant par période de facturation",
           ],
-          ["Délai", "Le lendemain", "Quelques jours", "2 à 6 semaines"],
-          ["Unité", "kW (puissance moyenne), m³ et kWh", "kWh (élec), m³ (gaz)", "kWh et €"],
+          ["Délai", "Le lendemain (élec), 1 à 3 jours (gaz)[[enedis-nmo-cf-077e,grdf-adict-faq]]", "Quelques jours", "2 à 6 semaines"],
+          ["Unité", "kW (puissance moyenne), m³ et kWh[[enedis-guide-flux-r6x]]", "kWh (élec), m³ (gaz)", "kWh et €"],
           [
             "Fiabilité",
-            "Trous et doublons possibles",
-            "Référence du comptage, parfois estimé",
-            "Référence financière, parfois estimée puis régularisée",
+            "Trous et doublons possibles[[enedis-guide-flux-r6x]]",
+            "Référence du comptage, parfois estimé[[mne-releve-compteur]]",
+            "Référence financière, parfois estimée puis régularisée[[mne-frequence-facturation]]",
           ],
           [
             "Pièges",
-            "Changement d’heure, unités (W ou kW)",
+            "Changement d’heure, unités (W ou kW)[[enedis-guide-flux-r6x]]",
             "{{bouclage}}, changement de compteur, index qui recule",
             "Périodes décalées, {{regularisation}}",
           ],
@@ -159,7 +160,7 @@ export default {
         ton: "info",
         titre: "RGPD",
         texte:
-          "La courbe de charge d’un **logement** révèle la vie de ses occupants (heures de lever, absences) : c’est une donnée personnelle, d’où le consentement explicite et limité dans le temps. Pour un bâtiment tertiaire comme l’école, l’enjeu personnel est plus faible, mais l’accès reste encadré par le consentement du titulaire.",
+          "La courbe de charge d’un **logement** révèle la vie de ses occupants (heures de lever, absences)[[cnil-linky-courbe-de-charge]] : c’est une donnée personnelle, d’où le consentement explicite et limité dans le temps[[cnil-deliberation-2012-404,cnil-donnee-personnelle]]. Pour un bâtiment tertiaire comme l’école, l’enjeu personnel est plus faible, mais l’accès reste encadré par le consentement du titulaire[[enedis-nmo-cf-015e]].",
       },
       {
         type: "encadre",
@@ -167,7 +168,6 @@ export default {
         texte:
           "Cas utiles : consentement expiré pendant une collecte, consentement révoqué, PDL hors du périmètre consenti, API qui répond en W au lieu de kW, index gaz en m³ sans coefficient, facture estimée suivie d’une régularisation négative.",
       },
-      sourcesData,
     ],
   },
   quiz: [

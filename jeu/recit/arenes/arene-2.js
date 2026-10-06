@@ -3,6 +3,8 @@
    Une question : Q("question", "bonne réponse", "explication", "mauvaise réponse 1", "pourquoi", "mauvaise réponse 2", "pourquoi"). */
 
 const ARENE_2={id:2,badge:'Collecter',name:'Arène des Flux',champ:'M. Relève',theme:'flux',col:'#00968a',wall:'#eef3f2',b:L.arena[2],
+  /* les références de ce qu'affirment les questions (registre commun/donnees/sources.js) : listées dans le menu, onglet Sources */
+  refs:['enedis-nmo-cf-015e','grdf-adict-faq','grdf-coefficient-conversion','mne-releve-compteur','mne-elements-facture','mne-taxes-facture','mne-prix'],
   cpal:{shirt:'#0d5f58',pants:'#1c2440',hair:'#2b1d14',hat:'#f2c12e'},
   cIntro:["Arène des Flux. À gauche l'électricité, à droite le gaz, et au milieu : le consentement.","Personne ne touche à mes données sans mandat. Remplis-le, signe-le, et on verra si elles coulent."],
   cWin:["Mandat en règle, données en route. Le badge Collecter est à toi.","Un conseil : surveille la date de fin du consentement. Les données, elles, ne préviennent pas."],

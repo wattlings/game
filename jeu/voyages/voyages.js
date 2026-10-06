@@ -28,7 +28,8 @@ function voyParler(lignes,cb){say(lignes.map(l=>typeof l==='string'?voyTypo(l):O
 const voyTypoTout=o=>typeof o==='string'?voyTypo(o):Array.isArray(o)?o.map(voyTypoTout):o;
 
 /* ---- déclarer une destination ----
-   d : { nom, gare, region, theme, ouvert, accroche, carte, arrivee:[x,y,direction], annonces:[…], paysage:{…}, infos:[{id,cle,t,x}], pret } */
+   d : { nom, gare, region, theme, ouvert, accroche, carte, arrivee:[x,y,direction], annonces:[…], paysage:{…}, infos:[{id,cle,t,x,refs}], pret, refs }
+   refs : les références (clés du registre commun/donnees/sources.js) ; sur une information, celles de ce qu'elle affirme ; sur le site, celles du reste. */
 function voyDeclarer(id,d){d.id=id;d.infos=(d.infos||[]).map(f=>Object.assign(f,{t:voyTypo(f.t),x:voyTypo(f.x),retiens:voyTypo(f.retiens)}));['annonces','annoncesRetour'].forEach(k=>{if(d[k])d[k]=d[k].map(voyTypo)});['accroche','pret','bravo'].forEach(k=>{d[k]=voyTypo(d[k])});VOY.sites[id]=d;VOY.ordre.push(id)}
 
 /* ---- déclarer une carte de voyage ----
@@ -90,7 +91,7 @@ function voyDonnerInfo(sid,id,cb){
   if(!f||voyInfoVue(sid,id)){if(cb)cb();return}
   voyEtat().infos[sid+'.'+id]=1;save();sfx('secret');trk('voyage_info',{site:sid,id,cle:!!f.cle});
   const ov=voyPanneau('Carnet de voyage'),b=ov.querySelector('.pbody'),n=voyInfosVues(sid).length;
-  b.innerHTML=`<div class="fiche${f.cle?' req':''}"><div class="fiche-top"><span class="tag">${esc(site.nom)}</span>${f.cle?'<span class="tag key">Info clé</span>':''}<span class="fiche-k">${esc(site.theme)}</span></div><h3>${esc(f.t)}</h3><p>${esc(f.x)}</p>${f.retiens?`<p class="voy-retiens"><b>À retenir :</b> ${esc(f.retiens)}</p>`:''}</div><p class="dnote">Passeport : ${n} / ${site.infos.length} informations sur ce site.</p><div class="row"><button class="btn" id="vOk">Noter dans le passeport ▸</button></div>`;
+  b.innerHTML=`<div class="fiche${f.cle?' req':''}"><div class="fiche-top"><span class="tag">${esc(site.nom)}</span>${f.cle?'<span class="tag key">Info clé</span>':''}<span class="fiche-k">${esc(site.theme)}</span></div><h3>${esc(f.t)}</h3><p>${esc(f.x)}</p>${f.retiens?`<p class="voy-retiens"><b>À retenir :</b> ${esc(f.retiens)}</p>`:''}${refsHTML(f.refs,true)}</div><p class="dnote">Passeport : ${n} / ${site.infos.length} informations sur ce site.</p><div class="row"><button class="btn" id="vOk">Noter dans le passeport ▸</button></div>`;
   const ok=b.querySelector('#vOk');
   ok.onclick=()=>{closePanel();gainXP(f.cle?15:10);hud();if(f.cle&&!voyClesManquantes(sid).length&&!voyTampon(sid)&&site.pret)toast(site.pret);if(cb)cb()};ok.focus();
 }

@@ -2,6 +2,7 @@
  * Le glossaire à l'écran : bulle au survol d'un terme et tiroir latéral.
  */
 import { GLOSSAIRE, termesTries } from "../../commun/donnees/glossaire.js";
+import { SOURCES, libelleSource } from "../../commun/donnees/sources.js";
 import { icone } from "../blocs/icones.js";
 import { echapper, tous, un } from "../blocs/outils.js";
 import { ETAPES } from "../contenu/index.js";
@@ -47,7 +48,12 @@ export function ficheTerme(cle, terme) {
       return `<a class="badge ${c.famille}" href="#etape-${a}">${a}. ${echapper(c.titre)}</a>`;
     })
     .join("");
-  return `<article class="entree" id="g-${cle}"><h3>${echapper(terme.terme)}</h3><p>${echapper(terme.def)}</p><p class="ex">${echapper(terme.ex)}</p><div class="liens">${t}</div></article>`;
+  // les sources de la définition (src:[clés du registre commun/donnees/sources.js]) : un lien par source, au nom de son éditeur
+  const s = (terme.src || [])
+    .filter((a) => SOURCES[a])
+    .map((a) => `<a href="${echapper(SOURCES[a].url)}" target="_blank" rel="noopener" title="${echapper(libelleSource(a))}">${echapper(SOURCES[a].ed)} ↗</a>`)
+    .join(" · ");
+  return `<article class="entree" id="g-${cle}"><h3>${echapper(terme.terme)}</h3><p>${echapper(terme.def)}</p><p class="ex">${echapper(terme.ex)}</p>${s ? `<p class="src">Source${terme.src.length > 1 ? "s" : ""} : ${s}</p>` : ""}<div class="liens">${t}</div></article>`;
 }
 
 let focusAvantTiroir = null;
@@ -106,7 +112,7 @@ export function ouvrirGlossaire(cleAOuvrir = null) {
   n.addEventListener("click", d);
   un(".close", t).addEventListener("click", d);
   t.addEventListener("click", (u) => {
-    if (u.target.closest("a")) {
+    if (u.target.closest("a:not([target])")) {
       d();
     }
   });
