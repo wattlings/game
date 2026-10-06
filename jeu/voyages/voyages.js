@@ -89,11 +89,14 @@ function voySource(sid,id,qui,lignes,ensuite){
 /* une remarque sans information à la clé (les vannes) */
 const voyDire=(qui,lignes)=>()=>say(lignes.map(t=>qui?{w:qui,t}:{t}));
 
-/* ---- flèches d'objectif d'un site : vers les informations clés manquantes, puis vers le défi final ---- */
-function voyCibles(sid,lieux,defi){
+/* ---- flèches d'objectif d'un site : vers les informations clés manquantes, puis vers le défi final ----
+   lieux : où se trouve chaque information clé sur CETTE carte ; passage : sur un site à plusieurs cartes, la case qui mène
+   aux informations clés situées ailleurs ; defi : le responsable du site (null s'il est sur une autre carte). */
+function voyCibles(sid,lieux,defi,passage){
   if(voyTampon(sid))return [];
-  const m=voyClesManquantes(sid).map(f=>lieux[f.id]).filter(Boolean);
-  return m.length?m:[defi];
+  const M=voyClesManquantes(sid),ici=M.map(f=>lieux[f.id]).filter(Boolean);
+  if(passage&&(ici.length<M.length||(!M.length&&!defi)))ici.push(passage);
+  return ici.length?ici:defi?[defi]:[];
 }
 
 /* ---- tampon : le défi final d'un site est gagné ---- */

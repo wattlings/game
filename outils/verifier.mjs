@@ -114,27 +114,39 @@ if (quoi === "tout" || quoi === "voyages") {
     await page.waitForTimeout(900);
     await finDialogue();
     verif(`${id} : le train arrive sur le site`, await dansLaPage((id) => S.map === VOY.sites[id].carte && !isSolid(P.x, P.y), id));
-    // tout ce qui s'examine doit avoir une case voisine accessible à pied depuis l'arrivée
-    const bilan = await dansLaPage(() => {
-      const g = MAPS[S.map].g, H = g.length, W = g[0].length, vu = new Set([P.x + "," + P.y]), file = [[P.x, P.y]];
-      while (file.length) { const [x, y] = file.pop(); [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([dx, dy]) => { const a = x + dx, b = y + dy, k = a + "," + b; if (a < 0 || b < 0 || a >= W || b >= H || vu.has(k) || isSolid(a, b)) return; vu.add(k); file.push([a, b]); }); }
-      const objets = objsFor(S.map).filter((o) => o.act), hors = objets.filter((o) => ![[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => vu.has(o.x + dx + "," + (o.y + dy))));
-      const sid = VOY.ordre.find((i) => VOY.sites[i].carte === S.map), cles = VOY.sites[sid].infos.filter((f) => f.cle).length;
-      return { objets: objets.map((o) => [o.x, o.y]), hors: hors.map((o) => o.kind + "@" + o.x + "," + o.y), cibles: targets().length, cles, infos: VOY.sites[sid].infos.length };
-    });
-    verif(`${id} : tout ce qui s'examine est accessible à pied`, bilan.hors.length === 0, bilan.hors.join(" "));
-    verif(`${id} : une flèche par information clé à trouver`, bilan.cibles === bilan.cles, `${bilan.cibles} flèches pour ${bilan.cles} infos clés`);
-    // examiner chaque objet, parler à chacun, manipuler ce qui s'ouvre
-    for (const [x, y] of bilan.objets) {
-      await dansLaPage(([x, y]) => { const o = objAt(x, y); if (o && o.act) o.act(); }, [x, y]);
-      await page.waitForTimeout(40);
+    // un site peut avoir plusieurs cartes (site.cartes) : on les visite toutes
+    const cartes = await dansLaPage((id) => VOY.sites[id].cartes || [VOY.sites[id].carte], id);
+    const allerSur = (carte) => dansLaPage(([id, carte]) => { const s = VOY.sites[id], p = carte === s.carte ? s.arrivee : MAPS[carte].depart; if (S.map !== carte || isSolid(P.x, P.y)) warp(carte, p[0], p[1], p[2] || "up"); }, [id, carte]);
+    const finTrajet = async () => { if (await dansLaPage(() => !!VOY.trajet)) { await page.keyboard.press("Enter"); await page.waitForTimeout(600); await finDialogue(); } };
+    for (const carte of cartes) {
+      await allerSur(carte);
+      await page.waitForTimeout(300);
       await finDialogue();
-      await page.waitForTimeout(120);
-      for (let i = 0; i < 25 && (await dansLaPage(() => !!panelEl)); i++) { await dansLaPage(agirJeu, alea()); await page.waitForTimeout(30); await finDialogue(); }
-      if (await dansLaPage(() => !!panelEl)) { if (!(await cliquer(".voy-plus-tard"))) await dansLaPage(() => closePanel()); }
-      if (await dansLaPage(() => !!VOY.trajet)) { await page.keyboard.press("Enter"); await page.waitForTimeout(600); await finDialogue(); await dansLaPage((id) => { if (S.map !== VOY.sites[id].carte) { const a = VOY.sites[id].arrivee; warp(VOY.sites[id].carte, a[0], a[1], a[2]); } }, id); }
-      await finDialogue();
+      // tout ce qui s'examine doit avoir une case voisine accessible à pied depuis le point d'arrivée de la carte
+      const bilan = await dansLaPage((id) => {
+        const g = MAPS[S.map].g, H = g.length, W = g[0].length, vu = new Set([P.x + "," + P.y]), file = [[P.x, P.y]];
+        while (file.length) { const [x, y] = file.pop(); [[1, 0], [-1, 0], [0, 1], [0, -1]].forEach(([dx, dy]) => { const a = x + dx, b = y + dy, k = a + "," + b; if (a < 0 || b < 0 || a >= W || b >= H || vu.has(k) || isSolid(a, b)) return; vu.add(k); file.push([a, b]); }); }
+        const objets = objsFor(S.map).filter((o) => o.act), hors = objets.filter((o) => ![[1, 0], [-1, 0], [0, 1], [0, -1]].some(([dx, dy]) => vu.has(o.x + dx + "," + (o.y + dy))));
+        const cles = VOY.sites[id].infos.filter((f) => f.cle).length, fleches = targets();
+        return { objets: objets.map((o) => [o.x, o.y]), hors: hors.map((o) => o.kind + "@" + o.x + "," + o.y), cibles: fleches.length, flechesHors: fleches.filter(([x, y]) => !objets.some((o) => o.x === x && o.y === y)).map((p) => p.join(",")), cles };
+      }, id);
+      verif(`${id} (${carte}) : tout ce qui s'examine est accessible à pied`, bilan.hors.length === 0, bilan.hors.join(" "));
+      verif(`${id} (${carte}) : les flèches pointent vers quelque chose qui s'examine`, bilan.cibles >= 1 && bilan.cibles <= bilan.cles + 1 && bilan.flechesHors.length === 0, `${bilan.cibles} flèches, hors cible : ${bilan.flechesHors.join(" ")}`);
+      // examiner chaque objet, parler à chacun, manipuler ce qui s'ouvre
+      for (const [x, y] of bilan.objets) {
+        await dansLaPage(([x, y]) => { const o = objAt(x, y); if (o && o.act) o.act(); }, [x, y]);
+        await page.waitForTimeout(40);
+        await finDialogue();
+        await page.waitForTimeout(120);
+        for (let i = 0; i < 25 && (await dansLaPage(() => !!panelEl)); i++) { await dansLaPage(agirJeu, alea()); await page.waitForTimeout(30); await finDialogue(); }
+        if (await dansLaPage(() => !!panelEl)) { if (!(await cliquer(".voy-plus-tard"))) await dansLaPage(() => closePanel()); }
+        await finTrajet();
+        await finDialogue();
+        await allerSur(carte);
+        await finDialogue();
+      }
     }
+    await allerSur(cartes[0]);
     verif(`${id} : des informations sont notées en examinant le site`, await dansLaPage((id) => voyInfosVues(id).length >= 5, id));
     // le tampon, puis le passeport
     await dansLaPage((id) => { VOY.sites[id].infos.forEach((f) => { voyEtat().infos[id + "." + f.id] = 1; }); voyTamponner(id); }, id);

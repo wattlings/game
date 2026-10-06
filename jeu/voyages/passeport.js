@@ -9,7 +9,7 @@ const PASSEPORT_ENCRE={solaire:'#c8502a',eolien:'#2f6db5',nucleaire:'#6a3fa0',ba
 const PASSEPORT_MOTIF={
   solaire(c,e){c.fillStyle=e;c.beginPath();c.arc(24,24,6,0,7);c.fill();for(let k=0;k<8;k++){const a=k*Math.PI/4;c.save();c.translate(24,24);c.rotate(a);c.fillRect(-1,-13,2,5);c.restore()}},
   eolien(c,e){R(c,23,22,2,14,e);R(c,20,35,8,2,e);c.strokeStyle=e;c.lineWidth=2;c.lineCap='round';for(let k=0;k<3;k++){const a=-1.2+k*2.094;c.beginPath();c.moveTo(24,22);c.lineTo(24+Math.cos(a)*11,22+Math.sin(a)*11);c.stroke()}},
-  nucleaire(c,e){c.fillStyle=e;c.beginPath();c.moveTo(16,36);c.lineTo(19,22);c.lineTo(18,18);c.lineTo(30,18);c.lineTo(29,22);c.lineTo(32,36);c.fill();c.beginPath();c.arc(22,13,3,0,7);c.arc(27,11,4,0,7);c.arc(32,13,3,0,7);c.fill()},
+  nucleaire(c,e){c.fillStyle=e;c.fillRect(17,22,14,14);c.beginPath();c.arc(24,22,7,Math.PI,0);c.fill();c.fillRect(11,28,5,8);c.fillRect(33,30,5,6);c.clearRect(23,27,2,6)},
   barrage(c,e){c.fillStyle=e;c.beginPath();c.moveTo(20,14);c.lineTo(27,14);c.lineTo(33,36);c.lineTo(20,36);c.fill();for(let k=0;k<3;k++)R(c,11,18+k*5,7,2,e);R(c,34,33,5,2,e)},
   datacenter(c,e){for(let k=0;k<3;k++){R(c,14+k*7,14,6,22,e);c.clearRect(15+k*7,17,4,1);c.clearRect(15+k*7,21,4,1);c.clearRect(15+k*7,25,4,1)}}
 };

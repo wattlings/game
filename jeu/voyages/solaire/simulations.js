@@ -36,65 +36,49 @@ function solAnnee(incl,azim,suivi){
 }
 
 /* ================= 1. INCLINE ET ORIENTE ================= */
-const SOL_MISSIONS=[
-  {t:"Mission 1 · Le maximum sur l'année",vue:'mois',
-    x:"Un hangar tout neuf, un toit qu'on peut tourner comme on veut. Le client veut « le maximum ». Trouve l'inclinaison et l'orientation qui produisent le plus sur l'année.",
-    ok:(r,ref)=>r.total>=ref.total*.99,
-    bravo:"Plein sud, entre 30 et 40° : la règle en France. Et regarde comme le sommet est plat : à 20° ou à 45°, on ne perd que 2 à 3 %. Inutile de se fâcher avec le charpentier pour cinq degrés.",
-    indice:(r,s)=>Math.abs(s.azim)>15?"Regarde la boussole : à midi, le soleil est au sud. Tes panneaux regardent ailleurs.":s.incl<30?"Trop à plat : tu attrapes bien le soleil d'été, tu rates celui d'hiver. Redresse un peu.":"Trop debout : tu soignes l'hiver et tu sacrifies l'été, qui pèse bien plus lourd. Couche un peu."},
-  {t:"Mission 2 · Le maximum en décembre",vue:'mois',
-    x:"Un refuge de montagne chauffé à l'électricité, fermé tout l'été. Son seul problème s'appelle décembre. Règle les panneaux pour produire le plus possible ce mois-là.",
-    ok:(r,ref)=>r.mois[11]>=ref.decembre*.985,
-    bravo:"Entre 60 et 70° : en décembre, à midi, le soleil ne monte qu'à 23° au-dessus de l'horizon, alors on se redresse pour le regarder en face. Prix à payer : 8 à 15 % de moins sur l'année. Le « meilleur » réglage dépend de la question qu'on pose.",
-    indice:(r,s)=>Math.abs(s.azim)>15?"En hiver, le soleil se lève tard, se couche tôt et reste au sud. Reviens-y.":s.incl<60?"Le soleil de décembre est très bas. Tes panneaux le regardent de travers : redresse encore.":"Là, c'est presque un mur. Un peu moins debout."},
-  {t:"Mission 3 · Du courant le matin",vue:'jour',
-    x:"Une école : la cantine chauffe dès 10 h, plus personne après 16 h 30. Fais tomber le pic d'une belle journée de juin à 10 h 30 au soleil, ou avant, sans perdre plus de 12 % sur l'année.",
-    ok:(r,ref)=>r.pic<=10.5&&r.total>=ref.total*.88,
-    bravo:"Tournés vers l'est-sud-est, les panneaux produisent quand l'école consomme. On y laisse une dizaine de pour cent, mais chaque kWh tombe au bon moment : il est consommé sur place au lieu d'être bradé à midi, quand tout le monde en a trop.",
-    indice:(r,s,ref)=>r.pic>10.5?"Le pic arrive encore trop tard. Le soleil du matin est à l'est : tourne les panneaux vers lui.":"Tu as le matin, mais tu as trop perdu sur l'année. Plein est ou très redressé, c'est trop : cherche entre le sud et l'est, pas trop debout."},
-  {t:"Essai libre · Et si les panneaux bougeaient ?",vue:'jour',libre:1,
-    x:"Dernier réglage : coche « tracker ». Les panneaux pivotent d'est en ouest et suivent le soleil toute la journée. Compare la journée de juin, puis l'année."}
-];
+/* le meilleur réglage fixe, auquel tout se compare */
+const SOL_REF=solAnnee(35,0,false);SOL_REF.decembre=Math.max(...[55,60,65,70].map(i=>solAnnee(i,0,false).mois[11]));
+const SOL_ORIENTATION={
+  suivi:'Incline et oriente',legende:'Production selon le réglage',hauteur:230,
+  etat:{incl:10,azim:45,suivi:false},
+  reglages:[
+    {id:'incl',genre:'curseur',nom:'Inclinaison',min:0,max:90,pas:5,dire:v=>v===0?'0° · à plat':v===90?'90° · debout':v+'°',inactif:e=>e.suivi},
+    {id:'azim',genre:'curseur',nom:'Orientation',min:-90,max:90,pas:15,inactif:e=>e.suivi,
+      dire:v=>({'-90':'plein est','-45':'sud-est','0':'plein sud','45':'sud-ouest','90':'plein ouest'}[v]||(Math.abs(v)<45?'sud, '+Math.abs(v)+'° vers l\''+(v<0?'est':'ouest'):(v<0?'est':'ouest')+', '+(90-Math.abs(v))+'° vers le sud'))},
+    {id:'suivi',genre:'case',seulement:'libre',nom:"Tracker : les panneaux suivent le soleil d'est en ouest",note:"Le réglage fixe ne compte plus : c'est le moteur qui décide."}],
+  calcul:e=>solAnnee(e.incl,e.azim,e.suivi),
+  chiffres:r=>[[fmt(Math.round(r.total/10)*10),'kWh par kWc et par an'],[Math.round(r.total/SOL_REF.total*100)+' %','du meilleur réglage fixe'],[Math.round(r.mois[11])+' · '+Math.round(r.mois[5]),'décembre · juin'],[voyHeure(r.pic),'pic de juin, heure au soleil']],
+  croquis:(cv,e)=>solCroquis(cv,e),
+  vues:[
+    {id:'mois',nom:"L'année, mois par mois",graphe:(cv,r)=>voyGraphe(cv,{x:[-.6,11.6],y:260,unite:'kWh/kWc',gradY:[0,50,100,150,200,250],gradX:SOL_MODELE.mois.map((l,i)=>[i,l]),
+      series:[{p:SOL_REF.mois.map((v,i)=>[i,v]),c:VOY_ENCRE.repere,genre:'barres',nom:'35°, plein sud',l:36},{p:r.mois.map((v,i)=>[i,v]),c:VOY_ENCRE.soleil,genre:'barres',nom:'Ton réglage',l:22}]})},
+    {id:'jour',nom:'Une belle journée de juin',graphe:(cv,r,e,m)=>voyGraphe(cv,{x:[4,20],y:1,unite:'kW par kWc',gradY:[0,.25,.5,.75,1],gradX:[5,7,9,11,13,15,17,19].map(h=>[h,h+' h']),
+      series:[{p:SOL_REF.juin,c:VOY_ENCRE.prevu,genre:'tirets',nom:'35°, plein sud'},{p:r.juin,c:VOY_ENCRE.soleil,genre:'aire',nom:'Ton réglage'}],reperes:m.libre?[]:[{x:r.pic,c:VOY_ENCRE.alerte,nom:'pic'}]})}],
+  missions:[
+    {t:"Mission 1 · Le maximum sur l'année",vue:'mois',
+      x:"Un hangar tout neuf, un toit qu'on peut tourner comme on veut. Le client veut « le maximum ». Trouve l'inclinaison et l'orientation qui produisent le plus sur l'année.",
+      ok:r=>r.total>=SOL_REF.total*.99,
+      bravo:"Plein sud, entre 30 et 40° : la règle en France. Et regarde comme le sommet est plat : à 20° ou à 45°, on ne perd que 2 à 3 %. Inutile de se fâcher avec le charpentier pour cinq degrés.",
+      indice:(r,s)=>Math.abs(s.azim)>15?"Regarde la boussole : à midi, le soleil est au sud. Tes panneaux regardent ailleurs.":s.incl<30?"Trop à plat : tu attrapes bien le soleil d'été, tu rates celui d'hiver. Redresse un peu.":"Trop debout : tu soignes l'hiver et tu sacrifies l'été, qui pèse bien plus lourd. Couche un peu."},
+    {t:"Mission 2 · Le maximum en décembre",vue:'mois',
+      x:"Un refuge de montagne chauffé à l'électricité, fermé tout l'été. Son seul problème s'appelle décembre. Règle les panneaux pour produire le plus possible ce mois-là.",
+      ok:r=>r.mois[11]>=SOL_REF.decembre*.985,
+      bravo:"Entre 60 et 70° : en décembre, à midi, le soleil ne monte qu'à 23° au-dessus de l'horizon, alors on se redresse pour le regarder en face. Prix à payer : 8 à 15 % de moins sur l'année. Le « meilleur » réglage dépend de la question qu'on pose.",
+      indice:(r,s)=>Math.abs(s.azim)>15?"En hiver, le soleil se lève tard, se couche tôt et reste au sud. Reviens-y.":s.incl<60?"Le soleil de décembre est très bas. Tes panneaux le regardent de travers : redresse encore.":"Là, c'est presque un mur. Un peu moins debout."},
+    {t:"Mission 3 · Du courant le matin",vue:'jour',
+      x:"Une école : la cantine chauffe dès 10 h, plus personne après 16 h 30. Fais tomber le pic d'une belle journée de juin à 10 h 30 au soleil, ou avant, sans perdre plus de 12 % sur l'année.",
+      ok:r=>r.pic<=10.5&&r.total>=SOL_REF.total*.88,
+      bravo:"Tournés vers l'est-sud-est, les panneaux produisent quand l'école consomme. On y laisse une dizaine de pour cent, mais chaque kWh tombe au bon moment : il est consommé sur place au lieu d'être bradé à midi, quand tout le monde en a trop.",
+      indice:r=>r.pic>10.5?"Le pic arrive encore trop tard. Le soleil du matin est à l'est : tourne les panneaux vers lui.":"Tu as le matin, mais tu as trop perdu sur l'année. Plein est ou très redressé, c'est trop : cherche entre le sud et l'est, pas trop debout."},
+    {t:"Essai libre · Et si les panneaux bougeaient ?",vue:'jour',libre:1,bouton:'Rendre le pupitre',
+      x:"Dernier réglage : coche « tracker ». Les panneaux pivotent d'est en ouest et suivent le soleil toute la journée. Compare la journée de juin, puis l'année.",
+      fini:(r,e)=>e.suivi,
+      constat:(r,e)=>e.suivi?`Avec un tracker : ${fmt(Math.round(r.total/10)*10)} kWh par kWc, soit ${Math.round((r.total/SOL_REF.total-1)*100)} % de plus que le meilleur réglage fixe. Et la cloche de juin est devenue un plateau : on produit fort dès 8 h et jusqu'à 18 h.`:''}]
+};
 function solSimOrientation(fin){
-  const etat={incl:10,azim:45,suivi:false},ref=solAnnee(35,0,false);ref.decembre=Math.max(...[55,60,65,70].map(i=>solAnnee(i,0,false).mois[11]));
   trk('voyage_sim',{site:'solaire',sim:'orientation'});
-  voyEtapes('Incline et oriente',SOL_MISSIONS.map(m=>(el,suite)=>{
-    let vue=m.vue,essais=0,gagne=false,vuTracker=false;
-    el.innerHTML=`<h3>${esc(m.t)}</h3><div class="ctx">${esc(m.x)}</div>
-      <div class="voy-atelier"><canvas class="voy-croquis" width="240" height="150" aria-hidden="true"></canvas><div class="voy-reglages"></div></div>
-      <div class="voy-chiffres" aria-live="polite"></div>
-      <div class="seg" role="group"><button type="button" data-v="mois">L'année, mois par mois</button><button type="button" data-v="jour">Une belle journée de juin</button></div>
-      <canvas class="chart" width="640" height="230" role="img" aria-label="Production selon le réglage"></canvas><div class="fbz"></div><div class="row"></div>`;
-    const R0=el.querySelector('.voy-reglages'),ch=el.querySelector('.voy-chiffres'),cvs=el.querySelector('.chart'),fbz=el.querySelector('.fbz'),row=el.querySelector('.row');
-    const dessiner=()=>{
-      const r=solAnnee(etat.incl,etat.azim,etat.suivi),pc=Math.round(r.total/ref.total*100);
-      solCroquis(el.querySelector('.voy-croquis'),etat);
-      ch.innerHTML=`<div><b class="num">${fmt(Math.round(r.total/10)*10)}</b><span>kWh par kWc et par an</span></div><div><b class="num">${pc} %</b><span>du meilleur réglage fixe</span></div><div><b class="num">${Math.round(r.mois[11])} · ${Math.round(r.mois[5])}</b><span>décembre · juin</span></div><div><b class="num">${voyHeure(r.pic)}</b><span>pic de juin, heure au soleil</span></div>`;
-      el.querySelectorAll('.seg button').forEach(b=>{b.classList.toggle('on',b.dataset.v===vue);b.setAttribute('aria-pressed',b.dataset.v===vue)});
-      if(vue==='mois')voyGraphe(cvs,{x:[-.6,11.6],y:260,unite:'kWh/kWc',gradY:[0,50,100,150,200,250],gradX:SOL_MODELE.mois.map((l,i)=>[i,l]),
-        series:[{p:ref.mois.map((v,i)=>[i,v]),c:VOY_ENCRE.repere,genre:'barres',nom:'35°, plein sud',l:36},{p:r.mois.map((v,i)=>[i,v]),c:VOY_ENCRE.soleil,genre:'barres',nom:'Ton réglage',l:22}]});
-      else voyGraphe(cvs,{x:[4,20],y:1,unite:'kW par kWc',gradY:[0,.25,.5,.75,1],gradX:[5,7,9,11,13,15,17,19].map(h=>[h,h+' h']),
-        series:[{p:ref.juin,c:VOY_ENCRE.prevu,genre:'tirets',nom:'35°, plein sud'},{p:r.juin,c:VOY_ENCRE.soleil,genre:'aire',nom:'Ton réglage'}],reperes:m.libre?[]:[{x:r.pic,c:VOY_ENCRE.alerte,nom:'pic'}]});
-      return r;
-    };
-    const cI=voyCurseur(R0,{nom:'Inclinaison',min:0,max:90,pas:5,val:etat.incl,dire:v=>v===0?'0° · à plat':v===90?'90° · debout':v+'°',quand:v=>{etat.incl=v;dessiner()}});
-    const cA=voyCurseur(R0,{nom:'Orientation',min:-90,max:90,pas:15,val:etat.azim,dire:v=>({'-90':'plein est','-45':'sud-est','0':'plein sud','45':'sud-ouest','90':'plein ouest'}[v]||(Math.abs(v)<45?'sud, '+Math.abs(v)+'° vers l\''+(v<0?'est':'ouest'):(v<0?'est':'ouest')+', '+(90-Math.abs(v))+'° vers le sud')),quand:v=>{etat.azim=v;dessiner()}});
-    el.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{vue=b.dataset.v;dessiner()});
-    if(m.libre){
-      const l=document.createElement('label');l.className='chk';l.innerHTML=`<input type="checkbox"${etat.suivi?' checked':''}><span>Tracker : les panneaux suivent le soleil d'est en ouest<small>Le réglage fixe ne compte plus : c'est le moteur qui décide.</small></span>`;R0.appendChild(l);
-      const fini=document.createElement('button');fini.className='btn';fini.textContent='Rendre le pupitre ▸';fini.disabled=true;row.appendChild(fini);
-      l.querySelector('input').onchange=e=>{etat.suivi=e.target.checked;cI.disabled=cA.disabled=etat.suivi;const r=dessiner();
-        if(etat.suivi){vuTracker=true;fini.disabled=false;fbz.innerHTML=`<div class="fb ok">Avec un tracker : ${fmt(Math.round(r.total/10)*10)} kWh par kWc, soit ${Math.round((r.total/ref.total-1)*100)} % de plus que le meilleur réglage fixe. Et la cloche de juin est devenue un plateau : on produit fort dès 8 h et jusqu'à 18 h.</div>`;voyMontrer(fbz)}};
-      fini.onclick=()=>{if(vuTracker)suite()};
-    }else{
-      const v=document.createElement('button');v.className='btn';v.textContent='Valider le réglage ▸';row.appendChild(v);
-      v.onclick=()=>{if(gagne)return;const r=dessiner();
-        if(m.ok(r,ref)){gagne=true;v.remove();cI.disabled=cA.disabled=true;fbz.innerHTML=`<div class="fb ok">✔ ${esc(m.bravo)}</div>`;gainXP(essais?5:15);contBtn(fbz,suite)}
-        else{essais++;sfx('bad');trk('wrong_answer',{t:'Incline et oriente',q:m.t,a:etat.incl+'° / '+etat.azim});fbz.innerHTML=`<div class="fb ko">✘ ${esc(m.indice(r,etat,ref))}</div>`}
-        voyMontrer(fbz)};
-    }
-    dessiner();
-  }),()=>{voyEtat().faits['solaire.orientation']=1;save();if(fin)fin()},{plusTard:true});
+  Object.assign(SOL_ORIENTATION.etat,{incl:10,azim:45,suivi:false});
+  voyAtelier('Incline et oriente',SOL_ORIENTATION,()=>{voyEtat().faits['solaire.orientation']=1;save();if(fin)fin()});
 }
 /* le croquis : le panneau vu de profil (inclinaison) et vu du ciel (orientation) */
 function solCroquis(cv,s){
@@ -174,38 +158,25 @@ function solMidiBilan(departs){
   co.push([24,co[47][1]]);au.push([24,0]);
   return{pv,co,au,prod,conso,auto,autoconso:auto/prod*100,autoprod:auto/conso*100,achat:conso-auto,injecte:prod-auto};
 }
-const solMidi=(el,suite)=>{
-  const M=SOL_MIDI,departs=M.usages.map(u=>u.depart);let essais=0,gagne=false;const b0=solMidiBilan(departs);
-  el.innerHTML=`<h3>Dernière épreuve · Midi pile</h3><div class="ctx"><b>Mme Zénith :</b> « L'école Jean-Jaurès. 36 kWc sur le toit, un jeudi de mai, grand soleil. Trois appareils tournent à des heures choisies il y a longtemps par quelqu'un qui est parti depuis. Déplace-les. Je veux au moins <b>${M.objectif} %</b> d'autoconsommation. Et retiens que midi pile, au soleil, c'est 13 h 40 à ta montre. »</div>
-    <canvas class="chart" width="640" height="270" role="img" aria-label="Production du toit et consommation de l'école sur 24 heures"></canvas>
-    <div class="voy-chiffres" aria-live="polite"></div><div class="voy-usages"></div><div class="fbz"></div><div class="row"><button class="btn" id="vVal">Valider le planning ▸</button></div>`;
-  const cvs=el.querySelector('canvas'),ch=el.querySelector('.voy-chiffres'),U=el.querySelector('.voy-usages'),fbz=el.querySelector('.fbz'),val=el.querySelector('#vVal');
-  const dessiner=()=>{const b=solMidiBilan(departs);
-    voyGraphe(cvs,{x:[0,24],y:32,unite:'kW',gradY:[0,10,20,30],gradX:[0,4,8,12,16,20,24].map(h=>[h,h+' h']),
-      series:[{p:b.pv,c:VOY_ENCRE.soleil,genre:'aire',fond:VOY_ENCRE.soleilClair,nom:'Produit',e:2},{p:b.au,c:VOY_ENCRE.soleil,genre:'aire',marches:1,fond:VOY_ENCRE.soleil,nom:'Consommé sur place',e:1},{p:b.co,c:VOY_ENCRE.conso,genre:'escalier',nom:'Consommation'}]});
-    ch.innerHTML=`<div class="${b.autoconso>=M.objectif?'bon':''}"><b class="num">${Math.round(b.autoconso)} %</b><span>autoconsommation (objectif ${M.objectif} %)</span></div><div><b class="num">${Math.round(b.autoprod)} %</b><span>autoproduction</span></div><div><b class="num">${Math.round(b.achat)} kWh</b><span>achetés au réseau</span></div><div><b class="num">${Math.round(b.injecte)} kWh</b><span>injectés sur le réseau</span></div>`;return b};
-  const curseurs=M.usages.map((u,k)=>{const d=document.createElement('div');d.className='voy-usage';d.style.setProperty('--u',u.c);U.appendChild(d);
-    const i=voyCurseur(d,{nom:`${u.nom} · ${u.kw} kW pendant ${u.h} h`,min:u.min,max:u.max,pas:.5,val:departs[k],dire:v=>`de ${voyHeure(v)} à ${voyHeure(v+u.h)}`,quand:v=>{departs[k]=v;dessiner()}});
-    d.insertAdjacentHTML('beforeend',`<small>${esc(u.note)}</small>`);return i});
-  val.onclick=()=>{if(gagne)return;const b=dessiner();
-    if(b.autoconso>=M.objectif){gagne=true;val.remove();curseurs.forEach(i=>i.disabled=true);gainXP(essais?10:25);
-      fbz.innerHTML=`<div class="fb ok">✔ De ${Math.round(b0.autoconso)} à ${Math.round(b.autoconso)} % d'autoconsommation, sans acheter un seul appareil : tu as juste changé trois horaires. L'école achète ${Math.round(b0.achat-b.achat)} kWh de moins ce jour-là. ${b.autoconso>=75?"C'est presque le maximum possible. ":''}Il reste ${Math.round(b.injecte)} kWh injectés : à midi, le toit produit plus que l'école ne peut avaler. C'est là, et seulement là, qu'on commence à parler de batterie.</div>`;contBtn(fbz,suite)}
-    else{essais++;sfx('bad');trk('wrong_answer',{t:'Midi pile',q:'planning',a:departs.join(' / ')});
-      fbz.innerHTML=`<div class="fb ko">✘ ${Math.round(b.autoconso)} % : pas encore. Regarde le jaune clair : c'est du courant produit que personne ne consomme. Glisse les appareils sous la cloche, entre 12 h et 18 h, sans tous les empiler au même moment.</div>`}
-    voyMontrer(fbz)};
-  dessiner();
+const SOL_MIDI_ATELIER={
+  suivi:'Midi pile',legende:"Production du toit et consommation de l'école sur 24 heures",hauteur:270,grapheEnHaut:true,
+  etat:Object.fromEntries(SOL_MIDI.usages.map((u,k)=>['u'+k,u.depart])),
+  reglages:SOL_MIDI.usages.map((u,k)=>({id:'u'+k,genre:'curseur',nom:`${u.nom} · ${u.kw} kW pendant ${u.h} h`,min:u.min,max:u.max,pas:.5,dire:v=>`de ${voyHeure(v)} à ${voyHeure(v+u.h)}`,note:u.note,couleur:u.c})),
+  calcul:e=>solMidiBilan(SOL_MIDI.usages.map((u,k)=>e['u'+k])),
+  chiffres:b=>[[Math.round(b.autoconso)+' %',`autoconsommation (objectif ${SOL_MIDI.objectif} %)`,b.autoconso>=SOL_MIDI.objectif],[Math.round(b.autoprod)+' %','autoproduction'],[Math.round(b.achat)+' kWh','achetés au réseau'],[Math.round(b.injecte)+' kWh','injectés sur le réseau']],
+  vues:[{id:'jour',nom:'La journée',graphe:(cv,b)=>voyGraphe(cv,{x:[0,24],y:32,unite:'kW',gradY:[0,10,20,30],gradX:[0,4,8,12,16,20,24].map(h=>[h,h+' h']),
+    series:[{p:b.pv,c:VOY_ENCRE.soleil,genre:'aire',fond:VOY_ENCRE.soleilClair,nom:'Produit',e:2},{p:b.au,c:VOY_ENCRE.soleil,genre:'aire',marches:1,fond:VOY_ENCRE.soleil,nom:'Consommé sur place',e:1},{p:b.co,c:VOY_ENCRE.conso,genre:'escalier',nom:'Consommation'}]})}],
+  missions:[{t:'Dernière épreuve · Midi pile',bouton:'Valider le planning',xp:25,
+    html:`<b>Mme Zénith :</b> « L'école Jean-Jaurès. 36 kWc sur le toit, un jeudi de mai, grand soleil. Trois appareils tournent à des heures choisies il y a longtemps par quelqu'un qui est parti depuis. Déplace-les. Je veux au moins <b>${SOL_MIDI.objectif} %</b> d'autoconsommation. Et retiens que midi pile, au soleil, c'est 13 h 40 à ta montre. »`,
+    ok:b=>b.autoconso>=SOL_MIDI.objectif,
+    bravo:b=>{const b0=solMidiBilan(SOL_MIDI.usages.map(u=>u.depart));return `De ${Math.round(b0.autoconso)} à ${Math.round(b.autoconso)} % d'autoconsommation, sans acheter un seul appareil : tu as juste changé trois horaires. L'école achète ${Math.round(b0.achat-b.achat)} kWh de moins ce jour-là. ${b.autoconso>=75?"C'est presque le maximum possible. ":''}Il reste ${Math.round(b.injecte)} kWh injectés : à midi, le toit produit plus que l'école ne peut avaler. C'est là, et seulement là, qu'on commence à parler de batterie.`},
+    indice:b=>`${Math.round(b.autoconso)} % : pas encore. Regarde le jaune clair : c'est du courant produit que personne ne consomme. Glisse les appareils sous la cloche, entre 12 h et 18 h, sans tous les empiler au même moment.`}]
 };
 function solDefi(){
-  const W='Mme Zénith',sid='solaire';
-  if(voyTampon(sid)){solDefi.k=(solDefi.k||0)+1;say([{w:W,t:SOL.dit.zenithApres[solDefi.k%SOL.dit.zenithApres.length]}]);return}
-  const manque=voyClesManquantes(sid);
-  if(manque.length){say([{w:W,t:SOL.dit.zenithAttente[0]},{w:W,t:`Il te manque ${manque.length} info${manque.length>1?'s':''} clé${manque.length>1?'s':''}. Commence par ${manque[0].ou}.`}]);return}
-  say([{w:W,t:"Tu as fait le tour ? On va voir ça. Six questions, puis une épreuve. Si tu confonds encore kWc et kWh à la fin, je garde le tampon."}],()=>{
-    trk('voyage_defi',{site:sid});
-    voyEtapes('Le défi de Mme Zénith',[
-      ...SOL.questions.map((q,i)=>choice({title:`Question ${i+1} sur ${SOL.questions.length}`,q:q.q,opts:q.o})),
-      solMidi,
-      info(`<h3>Verdict</h3><p><b>Mme Zénith :</b> « Bien. Tu sais ce qu'un panneau promet, ce qu'il tient, pourquoi sa courbe a cette forme, et quoi faire d'un bâtiment qui consomme à contretemps. »</p><p>« La plupart des gens repartent d'ici avec une photo des brebis. Toi, tu repars avec un tampon. »</p>`,'Tendre le passeport')
-    ],()=>voyTamponner(sid,()=>say([{w:W,t:"Voilà. Ne le perds pas : je ne tamponne qu'une fois, et j'ai une excellente mémoire des visages."}])),{plusTard:true});
-  });
+  Object.assign(SOL_MIDI_ATELIER.etat,Object.fromEntries(SOL_MIDI.usages.map((u,k)=>['u'+k,u.depart])));
+  voyDefi('solaire',SOL.defi=SOL.defi||{qui:'Mme Zénith',attente:SOL.dit.zenithAttente[0],apres:SOL.dit.zenithApres,
+    entree:"Tu as fait le tour ? On va voir ça. Six questions, puis une épreuve. Si tu confonds encore kWc et kWh à la fin, je garde le tampon.",
+    questions:SOL.questions,epreuves:voyAtelierEtapes(SOL_MIDI_ATELIER),
+    verdict:`<p><b>Mme Zénith :</b> « Bien. Tu sais ce qu'un panneau promet, ce qu'il tient, pourquoi sa courbe a cette forme, et quoi faire d'un bâtiment qui consomme à contretemps. »</p><p>« La plupart des gens repartent d'ici avec une photo des brebis. Toi, tu repars avec un tampon. »</p>`,
+    merci:"Voilà. Ne le perds pas : je ne tamponne qu'une fois, et j'ai une excellente mémoire des visages."});
 }

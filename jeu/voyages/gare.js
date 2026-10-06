@@ -36,15 +36,15 @@ voyCarte('gare',{
     // tableau des départs et porte des quais, sur le mur du fond
     [8,9,10].forEach((x,i)=>o.push({x,y:2,kind:i===0?'vDeparts':'none',voy:1,act:gareDeparts}));
     o.push({x:13,y:2,kind:'vPorteQuai',voy:1,act:()=>voyEtat().pass?gareDeparts():say([{t:"Accès aux quais. Un portillon : « Passeport des énergies exigé ». Le portillon a l'air très sûr de lui."}])});
-    // affiches des destinations à venir
+    // affiches des destinations (un bandeau rouge sur celles qui ne sont pas encore ouvertes)
     D(1,2,'clockw',0,{act:voyDire(null,["L'horloge de la gare. Le chef de gare la remet à l'heure chaque matin depuis des années, pour des trains qui n'existaient pas.","C'est la seule horloge de France qui a toujours été en avance sur son réseau."])});
-    VOY.ordre.filter(id=>!VOY.sites[id].ouvert).forEach((id,i)=>{const s=VOY.sites[id];o.push({x:[2,3,5,6][i],y:2,kind:'vAffiche',voy:1,theme:id,act:voyDire(null,[`Une affiche : « ${s.nom} · ${s.region} ». En bandeau : « Prochainement ».`,s.accroche])})});
+    VOY.ordre.slice(0,5).forEach((id,i)=>{const s=VOY.sites[id];o.push({x:[2,3,5,6,7][i],y:2,kind:'vAffiche',voy:1,theme:id,ferme:!s.ouvert,act:voyDire(null,[`Une affiche : « ${s.nom} · ${s.region} ».${s.ouvert?'':' En bandeau : « Prochainement ».'}`,s.accroche])})});
     // salle d'attente
     D(10,7,'bench',1);D(11,7,'bench',1);D(13,7,'bench',1);
     D(14,4,'vending',1,{act:voyDire(null,["Un distributeur. Il propose de l'eau, des biscuits, et une boisson énergisante nommée « 1 kWh ».","Vérification faite : la canette contient 0,13 kWh. De quoi faire tenir un humain une bonne heure en réunion. La publicité exagère d'un facteur huit : dans l'énergie, c'est presque de la retenue."])});
     o.push({x:1,y:9,kind:'plant',solid:1},{x:14,y:9,kind:'plant',solid:1});
     o.push({x:12,y:6,kind:'npc',solid:1,who:'Voyageur',dir:'down',pal:{skin:'#f1c7a1',shirt:'#7a8594',pants:'#2f3a5c',jacket:'#6b4a2b',hair:'#9a9aa2',hat:'#3a3a44',hatType:'beret',prop:'book',glasses:1},
-      act:()=>{VOY.nVoyageur=(VOY.nVoyageur||0)+1;say([{w:'Voyageur',t:["J'attends le train pour la centrale nucléaire. Le tableau dit « prochainement ». J'ai pris un livre. Puis un deuxième.","On m'a dit que le train roulait à l'électricité. J'ai demandé laquelle. On m'a regardé bizarrement. Vous, vous comprenez la question, non ?","Vous allez au solaire ? Prenez un chapeau. Et un deuxième pour le poser sur le premier."][VOY.nVoyageur%3]}])}});
+      act:()=>{VOY.nVoyageur=(VOY.nVoyageur||0)+1;say([{w:'Voyageur',t:[VOY.sites.nucleaire&&VOY.sites.nucleaire.ouvert?"J'ai attendu le train pour la centrale nucléaire si longtemps que, maintenant qu'il existe, je n'ose plus le prendre. J'ai mes habitudes sur ce banc.":"J'attends le train pour la centrale nucléaire. Le tableau dit « prochainement ». J'ai pris un livre. Puis un deuxième.","On m'a dit que le train roulait à l'électricité. J'ai demandé laquelle. On m'a regardé bizarrement. Vous, vous comprenez la question, non ?","Un conseil de voyageur : au solaire, prenez un chapeau. En Bretagne, tenez-le. Dans les Alpes, mettez-en deux."][VOY.nVoyageur%3]}])}});
     D(8,9,'vBagages',1,{voy:1,decor:0,act:voyDire(null,["Une valise oubliée, étiquetée « Service Énergie · mairie d'Ampère-sur-Loire ».","Dedans : un wattmètre, trois gilets orange et un rapport intitulé « Sobriété : synthèse en 400 pages ». L'ironie pèse 2 kg."])});
   }
 });
@@ -65,10 +65,11 @@ VOY.dessins.vAffiche=(c,o,X,Y)=>{
   const col={eolien:'#8ec9e8',nucleaire:'#f2c12e',barrage:'#9fd0c4',datacenter:'#c9b6e8',solaire:'#f7d98a'}[o.theme]||'#f7f0dc';
   R(c,X+2,Y+1,12,13,'#1c2440');R(c,X+3,Y+2,10,11,col);
   if(o.theme==='eolien'){R(c,X+7,Y+6,1,6,'#f7f0dc');R(c,X+5,Y+5,5,1,'#f7f0dc');R(c,X+7,Y+3,1,3,'#f7f0dc')}
-  else if(o.theme==='nucleaire'){R(c,X+5,Y+6,6,6,'#e8eef5');R(c,X+4,Y+5,8,1,'#c9d3de');R(c,X+6,Y+3,2,2,'#fff');R(c,X+8,Y+2,2,2,'#fff')}
+  else if(o.theme==='nucleaire'){R(c,X+5,Y+6,6,6,'#e8eef5');R(c,X+6,Y+4,4,2,'#e8eef5');R(c,X+7,Y+3,2,1,'#e8eef5');R(c,X+10,Y+6,1,6,'#c9d3de');R(c,X+3,Y+10,10,2,'#4a78c9')}
+  else if(o.theme==='solaire'){R(c,X+9,Y+3,3,3,'#f2a33a');R(c,X+4,Y+7,8,4,'#1f3d7c');R(c,X+4,Y+7,8,1,'#8fb6ee');R(c,X+8,Y+7,1,4,'#8fb6ee')}
   else if(o.theme==='barrage'){R(c,X+3,Y+5,10,3,'#4a78c9');R(c,X+6,Y+5,4,7,'#b9b4a6');R(c,X+7,Y+9,2,3,'#8ec9e8')}
   else if(o.theme==='datacenter'){for(let k=0;k<3;k++){R(c,X+4+k*3,Y+4,2,8,'#2c2c34');R(c,X+4+k*3,Y+5+k,2,1,'#3be07a')}}
-  R(c,X+3,Y+11,10,2,'#c43d3d');
+  if(o.ferme)R(c,X+3,Y+11,10,2,'#c43d3d');
 };
 VOY.dessins.vBagages=(c,o,X,Y)=>{R(c,X+2,Y+14,13,1,'rgba(20,20,40,.25)');R(c,X+3,Y+6,10,8,'#8a3b3b');R(c,X+3,Y+6,10,1,'#b85a5a');R(c,X+6,Y+3,4,3,'#5a3a22');R(c,X+7,Y+4,2,2,'#c89b62');R(c,X+4,Y+9,8,1,'#5d2424');R(c,X+10,Y+10,3,3,'#f7f0dc')};
 
@@ -86,7 +87,7 @@ function gareGuichet(){
   gareGuichet.k=(gareGuichet.k||0)+1;
   const n=Object.keys(v.tampons).length;
   say([{w:W,t:[`${n} tampon${n>1?'s':''} sur ${VOY.ordre.length}. Le tableau des départs est sur votre droite. Les trains partent quand vous montez dedans : c'est notre conception de la ponctualité.`,
-    "Une seule ligne est en service pour l'instant. Les quatre autres sont « en cours de pose ». Depuis un moment. Les rails, vous savez, c'est comme les travaux d'isolation : tout le monde est pour.",
+    VOY.ordre.some(id=>!VOY.sites[id].ouvert)?"Toutes les lignes ne sont pas encore en service. Les autres sont « en cours de pose ». Depuis un moment. Les rails, vous savez, c'est comme les travaux d'isolation : tout le monde est pour.":"Cinq lignes en service. Cinq ! J'ai dû commander de l'encre pour les tampons. Le budget « encre » de la gare a quintuplé : j'ai fait une note, personne ne l'a lue.",
     "Non, on ne peut pas tamponner soi-même. J'ai déjà vu des gens essayer avec une pomme de terre sculptée. Le tampon officiel a une dent de plus."][gareGuichet.k%3]}]);
 }
 
@@ -105,54 +106,65 @@ function gareDeparts(){
 }
 function gareTableauDehors(){
   const o=VOY.ordre.filter(id=>VOY.sites[id].ouvert).map(id=>VOY.sites[id].gare);
-  say([{t:`Tableau des départs. Une ligne s'est allumée : ${o.join(', ')}. Les autres affichent toujours « — ».`},{t:"Quelqu'un a effacé « prochainement » à la craie et écrit « ENFIN » à la place. L'écriture ressemble à celle du chef de gare."}]);
+  const reste=VOY.ordre.length-o.length;
+  say([{t:reste?`Tableau des départs. ${o.length>1?o.length+' lignes se sont allumées':"Une ligne s'est allumée"} : ${o.join(', ')}. Les autres affichent toujours « — ».`:`Tableau des départs. Toutes les lignes sont allumées : ${o.join(', ')}. Le tableau n'avait jamais consommé autant.`},{t:"Quelqu'un a effacé « prochainement » à la craie et écrit « ENFIN » à la place. L'écriture ressemble à celle du chef de gare."}]);
 }
 function gareEntrer(){
   warp('gare',7,10,'up');
   const v=voyEtat();if(!v.hall){v.hall=1;save();qkTimeout(()=>{if(!busy&&!dlg.open)say([{t:"La gare d'Ampère-sur-Loire est ouverte. Le hall sent la cire, la peinture fraîche et dix ans d'attente."},{t:"Au fond à gauche, le guichet. Au mur, le tableau des départs."}])},450)}
 }
 /* le chef de gare, dehors, change de refrain quand la gare est ouverte */
-{const chef=TOWNSFOLK.find(f=>f.who==='Chef de gare');if(chef){const avant=chef.lines,apres=["Un train est parti ce matin. Un vrai. Avec des gens dedans. J'ai sifflé, j'ai agité le drapeau, j'ai un peu pleuré.","La ligne du Sud est ouverte. Les quatre autres suivront. « Prochainement », cette fois, je le dis avec un sourire."];
+{const chef=TOWNSFOLK.find(f=>f.who==='Chef de gare');if(chef){const avant=chef.lines,apres=["Un train est parti ce matin. Un vrai. Avec des gens dedans. J'ai sifflé, j'ai agité le drapeau, j'ai un peu pleuré.","Cinq lignes. J'ai connu cette gare avec zéro. « Prochainement », je ne veux plus jamais lire ce mot, sauf sur un menu."];
   Object.defineProperty(chef,'lines',{get:()=>voyOuvert()?apres:avant})}}
 
-/* ================= LE TRAJET EN TRAIN =================
-   Quelques secondes de paysage, les annonces du chef de bord, puis l'arrivée. Une touche ou un clic pour passer.
-   dest : l'identifiant d'un site, ou 'retour' pour rentrer à Ampère-sur-Loire depuis le site « depuis ». */
-function voyTrajet(dest,depuis){
+/* ================= LA FENÊTRE DE VOYAGE =================
+   Quelques secondes de paysage qui défile, des annonces, puis l'arrivée. Une touche ou un clic pour passer.
+   Sert au train (voyTrajet) et à tout autre trajet d'un site (un bateau, une navette) :
+   voyFenetre({de:'…', vers:'…', annonces:['…'], dessiner:(x, f, d)=>{…}, fin:()=>{…}})
+     x : le dessin (240 × 112) ; f : l'avancement du trajet, de 0 à 1 ; d : un compteur qui avance avec le temps. */
+function voyFenetre(o){
   if(VOY.trajet)return;
-  const retour=dest==='retour',site=VOY.sites[retour?depuis:dest],P0=[['#8fd0f0','#bfe6f5'],['#74b060','#5f9a52'],['#7cc56a','#58a551']],P1=site.paysage||P0;
-  const de=retour?site.gare:"Ampère-sur-Loire",vers=retour?"Ampère-sur-Loire":site.gare;
-  const annonces=(retour?site.annoncesRetour:site.annonces)||[];
-  busy=true;clearKeys();sfx('door');trk('voyage_train',{vers:retour?'ampere':dest});
+  const annonces=o.annonces||[];busy=true;clearKeys();sfx('door');
   const el=document.createElement('div');el.className='voy-trajet';
-  el.innerHTML=`<div class="voy-trajet-in"><div class="voy-trajet-tete"><span>${esc(de)}</span><i></i><b>${esc(vers)}</b></div><canvas width="240" height="112" aria-hidden="true"></canvas><p class="voy-annonce" aria-live="polite"></p><button type="button" class="btn">Passer ▸</button></div>`;
+  el.innerHTML=`<div class="voy-trajet-in"><div class="voy-trajet-tete"><span>${esc(o.de)}</span><i></i><b>${esc(o.vers)}</b></div><canvas width="240" height="112" aria-hidden="true"></canvas><p class="voy-annonce" aria-live="polite"></p><button type="button" class="btn">Passer ▸</button></div>`;
   $('layer').appendChild(el);
-  const cvT=el.querySelector('canvas'),x=cvT.getContext('2d'),txt=el.querySelector('.voy-annonce'),DUREE=annonces.length*3200+1600;let t0=performance.now(),k=-1;
-  const mix=(a,b,f)=>hexMix(a,b,f);
-  const fin=()=>{const T=VOY.trajet;if(!T)return;VOY.trajet=null;qkClear(T.id);el.remove();busy=false;
-    if(retour){warp('gare',13,4,'down');qkTimeout(()=>{if(!busy&&!dlg.open)say([{t:"Ampère-sur-Loire, terminus. Le chef de gare est sur le quai. Il a sifflé à l'arrivée. On ne l'arrêtera plus."}])},450)}
-    else{const a=site.arrivee;warp(site.carte,a[0],a[1],a[2]);toast(site.gare);if(site.arriver)qkTimeout(site.arriver,450)}};
-  const dessiner=()=>{
-    const n=performance.now()-t0,f=Math.min(1,n/DUREE),g=retour?1-f:f,d=n/16;
-    const ciel=mix(P0[0][0],P1[0][0],g),ciel2=mix(P0[0][1],P1[0][1],g),loin=mix(P0[1][0],P1[1][0],g),loin2=mix(P0[1][1],P1[1][1],g),pres=mix(P0[2][0],P1[2][0],g),pres2=mix(P0[2][1],P1[2][1],g);
-    const gr=x.createLinearGradient(0,0,0,70);gr.addColorStop(0,ciel);gr.addColorStop(1,ciel2);x.fillStyle=gr;x.fillRect(0,0,240,112);
-    R(x,196,12,12,12,'#fff3c4');R(x,194,14,16,8,'#fff3c4');R(x,198,10,8,16,'#fff3c4');                                   // le soleil
-    for(let i=0;i<3;i++){const cx=((i*97-d*.15)%300+300)%300-30;R(x,cx,18+i*9,26,5,'rgba(255,255,255,.8)');R(x,cx+6,15+i*9,14,4,'rgba(255,255,255,.8)')}   // nuages
-    for(let px=0;px<240;px+=2){const u=px+d*.35,h1=22+Math.sin(u/41)*9+Math.sin(u/17)*4;R(x,px,70-h1,2,h1+4,loin)}        // collines lointaines
-    for(let px=0;px<240;px+=2){const u=px+d*.9,h2=12+Math.sin(u/29+2)*6+Math.sin(u/11)*2;R(x,px,74-h2,2,h2+2,loin2)}
-    R(x,0,74,240,38,pres);for(let i=0;i<14;i++){const gx=((i*37-d*2.2)%260+260)%260-10;R(x,gx,78+(i*7)%22,9,2,pres2)}
-    for(let i=0;i<3;i++){const px=((i*120-d*3)%360+360)%360-40;R(x,px+5,30,2,52,'#59627c');R(x,px,32,12,2,'#59627c');R(x,px+2,40,8,1,'#59627c');x.strokeStyle='rgba(60,70,100,.55)';x.lineWidth=1;x.beginPath();x.moveTo(px+6,33);x.quadraticCurveTo(px+66,46,px+126,33);x.stroke()}   // la ligne électrique suit la voie
-    R(x,0,101,240,2,'#8a8f9a');R(x,0,104,240,1,'#6d7480');for(let i=0;i<12;i++){const tx=((i*22-d*4)%264+264)%264-12;R(x,tx,100,3,6,'#5a4630')}
-    drawTrain(x,26,88+((d>>2)%2),d|0);
-    for(let i=0;i<6;i++){const sx=((i*53-d*6)%300+300)%300-30;R(x,sx,106+(i%3)*2,10,1,'rgba(255,255,255,.35)')}
+  const x=el.querySelector('canvas').getContext('2d'),txt=el.querySelector('.voy-annonce'),DUREE=Math.max(1,annonces.length)*3200+1600,t0=performance.now();let k=-1;
+  const fin=()=>{const T=VOY.trajet;if(!T)return;VOY.trajet=null;qkClear(T.id);el.remove();busy=false;o.fin()};
+  const boucle=()=>{if(!VOY.trajet)return;const n=performance.now()-t0;o.dessiner(x,Math.min(1,n/DUREE),n/16);
     const kk=Math.min(annonces.length-1,Math.floor(n/3200));if(kk!==k&&annonces[kk]){k=kk;txt.textContent=annonces[kk]}
-    if(n>=DUREE)fin();
-  };
-  const boucle=()=>{if(!VOY.trajet)return;dessiner();if(VOY.trajet)VOY.trajet.id=qkTimeout(boucle,33)};
+    if(n>=DUREE){fin();return}VOY.trajet.id=qkTimeout(boucle,33)};
   VOY.trajet={fin};boucle();
   el.querySelector('button').onclick=fin;el.querySelector('button').focus();
 }
 onKey('keydown',e=>{if(!VOY.trajet)return;if(e.key===' '||e.key==='Enter'||e.key==='Escape'){e.preventDefault();VOY.trajet.fin()}});
+
+/* ================= LE TRAJET EN TRAIN =================
+   dest : l'identifiant d'un site, ou 'retour' pour rentrer à Ampère-sur-Loire depuis le site « depuis ».
+   Le paysage glisse des couleurs de la Loire vers celles du site (site.paysage : ciel, collines, premier plan). */
+const VOY_LOIRE=[['#8fd0f0','#bfe6f5'],['#74b060','#5f9a52'],['#7cc56a','#58a551']];
+function voyTrajet(dest,depuis){
+  const retour=dest==='retour',site=VOY.sites[retour?depuis:dest],P0=VOY_LOIRE,P1=site.paysage||P0;
+  trk('voyage_train',{vers:retour?'ampere':dest});
+  voyFenetre({de:retour?site.gare:"Ampère-sur-Loire",vers:retour?"Ampère-sur-Loire":site.gare,annonces:retour?site.annoncesRetour:site.annonces,
+    dessiner(x,f,d){
+      const g=retour?1-f:f,mix=(i,j)=>hexMix(P0[i][j],P1[i][j],g);
+      const gr=x.createLinearGradient(0,0,0,70);gr.addColorStop(0,mix(0,0));gr.addColorStop(1,mix(0,1));x.fillStyle=gr;x.fillRect(0,0,240,112);
+      R(x,196,12,12,12,'#fff3c4');R(x,194,14,16,8,'#fff3c4');R(x,198,10,8,16,'#fff3c4');                                   // le soleil
+      for(let i=0;i<3;i++){const cx=((i*97-d*.15)%300+300)%300-30;R(x,cx,18+i*9,26,5,'rgba(255,255,255,.8)');R(x,cx+6,15+i*9,14,4,'rgba(255,255,255,.8)')}   // nuages
+      const relief=site.relief||1;
+      for(let px=0;px<240;px+=2){const u=px+d*.35,h1=(22+Math.sin(u/41)*9+Math.sin(u/17)*4)*(1+(relief-1)*g);R(x,px,70-h1,2,h1+4,mix(1,0))}        // collines lointaines
+      for(let px=0;px<240;px+=2){const u=px+d*.9,h2=12+Math.sin(u/29+2)*6+Math.sin(u/11)*2;R(x,px,74-h2,2,h2+2,mix(1,1))}
+      R(x,0,74,240,38,mix(2,0));for(let i=0;i<14;i++){const gx=((i*37-d*2.2)%260+260)%260-10;R(x,gx,78+(i*7)%22,9,2,mix(2,1))}
+      for(let i=0;i<3;i++){const px=((i*120-d*3)%360+360)%360-40;R(x,px+5,30,2,52,'#59627c');R(x,px,32,12,2,'#59627c');R(x,px+2,40,8,1,'#59627c');x.strokeStyle='rgba(60,70,100,.55)';x.lineWidth=1;x.beginPath();x.moveTo(px+6,33);x.quadraticCurveTo(px+66,46,px+126,33);x.stroke()}   // la ligne électrique suit la voie
+      R(x,0,101,240,2,'#8a8f9a');R(x,0,104,240,1,'#6d7480');for(let i=0;i<12;i++){const tx=((i*22-d*4)%264+264)%264-12;R(x,tx,100,3,6,'#5a4630')}
+      drawTrain(x,26,88+((d>>2)%2),d|0);
+      for(let i=0;i<6;i++){const sx=((i*53-d*6)%300+300)%300-30;R(x,sx,106+(i%3)*2,10,1,'rgba(255,255,255,.35)')}
+    },
+    fin(){
+      if(retour){warp('gare',13,4,'down');qkTimeout(()=>{if(!busy&&!dlg.open)say([{t:"Ampère-sur-Loire, terminus. Le chef de gare est sur le quai. Il a sifflé à l'arrivée. On ne l'arrêtera plus."}])},450)}
+      else{const a=site.arrivee;warp(site.carte,a[0],a[1],a[2]);toast(site.gare);if(site.arriver)qkTimeout(site.arriver,450)}
+    }});
+}
 
 /* ---- sur un site : le train du retour attend à quai ---- */
 function voyRetour(sid){
