@@ -36,18 +36,18 @@ const DAT_PUE_ATELIER={
     {t:"Mission 1 · Le data center d'il y a quinze ans",reglages:['temp','conf','eco'],depart:{temp:18,conf:false,gal:false,eco:false,charge:100},
       x:"Salle à 18 °C, air chaud et air froid mélangés, groupes froids à fond. PUE : 1,70. Fais-le descendre sous 1,50, sans toucher au mode de refroidissement.",
       ok:r=>r.pue<1.5,
-      bravo:"Deux gestes qui ne coûtent presque rien : remonter la consigne et séparer les allées. Pendant des années, on a climatisé des salles entières à 18 °C pour des machines qui en supportent 27. C'est exactement ce qui se passe encore dans beaucoup de locaux serveurs de mairies.",
+      bravo:"Les deux gestes qui comptent le plus ne coûtent presque rien : remonter la consigne et séparer les allées. Pendant des années, on a climatisé des salles entières à 18 °C pour des machines qui en supportent 27. C'est exactement ce qui se passe encore dans beaucoup de locaux serveurs de mairies.",
       indice:r=>`PUE ${r.pue.toFixed(2).replace('.',',')} : pas encore. Les serveurs acceptent un air bien plus chaud que 18 °C, et l'air froid n'a aucune raison de se mélanger au chaud.`},
     {t:'Mission 2 · Le site du quai des Octets',reglages:['temp','conf','gal','eco'],
       x:"Tu peux maintenant utiliser l'eau de la galerie. Objectif : un PUE inférieur à 1,30, celui du site réel.",
       ok:r=>r.pue<1.3,
-      bravo:"Sous 1,30 : c'est le froid « gratuit » qui fait la différence. Quand on peut refroidir avec de l'eau fraîche ou de l'air extérieur, on n'a plus besoin de fabriquer le froid, seulement de le faire circuler. Regarde ce qui reste : ce sont surtout les pertes électriques.",
+      bravo:"Sous 1,30 : c'est le froid « gratuit » qui fait la différence. Quand on peut refroidir avec de l'eau fraîche ou de l'air extérieur, on n'a plus besoin de fabriquer le froid, seulement de le faire circuler. Regarde ce qui reste : le froid a fondu, et les pertes électriques, qu'on ne remarquait pas, commencent à compter.",
       indice:r=>`PUE ${r.pue.toFixed(2).replace('.',',')}. Le plus gros poste après les serveurs reste le froid : il y a mieux à faire que de le produire avec des compresseurs.`},
     {t:'Mission 3 · La salle au tiers vide',reglages:['temp','conf','gal','eco'],depart:{temp:22,conf:true,gal:true,eco:false,charge:30},
       x:"Un gros client est parti : la salle ne tourne plus qu'à 30 % de sa charge. Regarde le PUE : il a monté, alors que rien n'a changé dans les réglages. Ramène-le sous 1,33.",
       ok:r=>r.pue<1.33,
-      bravo:"À faible charge, ce sont les consommations fixes qui pèsent : des onduleurs dimensionnés pour 10 MW perdent presque autant à 3 MW. Un équipement surdimensionné est inefficace quand il tourne loin de sa puissance : c'est vrai pour un data center, une chaudière ou une centrale de traitement d'air.",
-      indice:r=>`PUE ${r.pue.toFixed(2).replace('.',',')}. Le froid a déjà beaucoup baissé avec la charge. Regarde la barre orange : elle, elle n'a presque pas bougé.`}]
+      bravo:"À faible charge, ce sont les consommations fixes qui pèsent : des onduleurs dimensionnés pour 10 MW perdent encore, à 3 MW, la moitié de ce qu'ils perdaient à pleine charge. Un équipement surdimensionné est inefficace quand il tourne loin de sa puissance : c'est vrai pour un data center, une chaudière ou une centrale de traitement d'air.",
+      indice:r=>`PUE ${r.pue.toFixed(2).replace('.',',')}. Le froid a déjà beaucoup baissé avec la charge. Regarde la barre orange : elle a baissé bien moins vite que celle des serveurs.`}]
 };
 function datSimPue(fin){trk('voyage_sim',{site:'datacenter',sim:'pue'});voyAtelier('Le PUE',DAT_PUE_ATELIER,()=>{voyEtat().faits['datacenter.pue']=1;save();if(fin)fin()})}
 

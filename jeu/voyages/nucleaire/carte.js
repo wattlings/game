@@ -68,7 +68,7 @@ voyCarte('nucleaire',{
     // ---- la halte
     o.push({x:15,y:28,kind:'train',decor:1});
     for(let x=15;x<=26;x++)o.push({x,y:27,kind:'none',act:()=>voyRetour(sid)});
-    gens(23,25,'Chef de halte','down',{skin:'#e0ac7e',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#1c1c22',hat:'#c43d3d',hatType:'cap',glasses:1,tie:'#c43d3d'},()=>say(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
+    gens(23,25,'Chef de halte','down',{skin:'#e0ac7e',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#1c1c22',hat:'#c43d3d',hatType:'cap',glasses:1,tie:'#c43d3d'},()=>voyParler(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
     pose(19,25,'vPanneau',{theme:'nucleaire',teinte:'#6a3fa0',act:voyDire(null,["Un grand panneau : « Centrale nucléaire de Neutron-sur-Mer · 2 réacteurs de 1 300 MW · 17 TWh par an ».","En petit : « Jours sans accident : beaucoup. Jours sans qu'un visiteur demande où sont les tours : zéro. »"])});
     pose(25,25,'vPoster',{theme:'nucleaire',teinte:'#6a3fa0',glow:!vue('epr'),act:source('epr','affiche')});
 
@@ -78,7 +78,7 @@ voyCarte('nucleaire',{
     pose(9,24,'vFut',{glow:!vue('dechets'),act:source('dechets','fut')});
     const conduire=voyAnimateur(sid,'pilotage','M. Bore',["M. Bore, opérateur de conduite. Vingt ans de salle de commande. Mon travail consiste à ce qu'il ne se passe rien. Je suis très bon.","Ce simulateur est le même que celui où l'on nous entraîne, en plus petit. Tu veux essayer ? Doucement avec les barres. J'ai dit doucement."],["On me demande si c'est stressant. Un réacteur, ça prévient longtemps à l'avance, et ça s'arrête tout seul. Ce qui est stressant, c'est la machine à café du deuxième étage."],nucSimConduite);
     gens(12,24,'M. Bore','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#274f8f',jacket:'#274f8f',hair:'#9a9aa2',glasses:1,tie:'#2f6db5',prop:'clipboard'},conduire,{glow:!vue('pilotage')});
-    pose(13,24,'vSimulateur',{act:()=>say([{t:D.bouton[0]}],()=>nucSimConduite(()=>voyDonnerInfo(sid,'pilotage')))});o.push({x:14,y:24,kind:'none',solid:1,act:voyDire(null,D.bouton)});
+    pose(13,24,'vSimulateur',{act:()=>voyParler([{t:D.bouton[0]}],()=>nucSimConduite(()=>voyDonnerInfo(sid,'pilotage')))});o.push({x:14,y:24,kind:'none',solid:1,act:voyDire(null,D.bouton)});
     decor(16,24,'chair',{act:voyDire(null,D.beignets)});
     gens(27,23,'Mme Carbone','down',{skin:'#c68a5c',shirt:'#2f9e7a',pants:'#3a4050',jacket:'#f7f0dc',hair:'#2b1d14',style:'boucle',lash:1,scarf:'#2f9e7a',prop:'tablet'},source('carbone','carbone','Mme Carbone'),{glow:!vue('carbone')});
     pose(28,23,'vCompteurCarbone',{act:voyDire(null,["Un afficheur : « Électricité française, en ce moment : 20 g de CO₂ par kWh ». Le chiffre tremble d'un gramme de temps en temps, par politesse."])});
@@ -110,4 +110,4 @@ voyCarte('nucleaire',{
     decor(34,3,'casier');
   }
 });
-VOY.sites.nucleaire.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['nucleaire.arrivee']){voyEtat().faits['nucleaire.arrivee']=1;save();say(NUC.dit.arrivee)}};
+VOY.sites.nucleaire.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['nucleaire.arrivee']){voyEtat().faits['nucleaire.arrivee']=1;save();voyParler(NUC.dit.arrivee)}};

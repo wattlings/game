@@ -35,7 +35,7 @@ voyCarte('gare',{
     o.push({x:4,y:3,kind:'npc',solid:1,still:1,who:'Mme Aiguillage',dir:'down',glow:!voyEtat().pass,pal:{skin:'#e0ac7e',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#b8431f',style:'carre',hat:'#c43d3d',hatType:'cap',scarf:'#f2c12e',glasses:1,lash:1},act:gareGuichet});
     // tableau des départs et porte des quais, sur le mur du fond
     [8,9,10].forEach((x,i)=>o.push({x,y:2,kind:i===0?'vDeparts':'none',voy:1,act:gareDeparts}));
-    o.push({x:13,y:2,kind:'vPorteQuai',voy:1,act:()=>voyEtat().pass?gareDeparts():say([{t:"Accès aux quais. Un portillon : « Passeport des énergies exigé ». Le portillon a l'air très sûr de lui."}])});
+    o.push({x:13,y:2,kind:'vPorteQuai',voy:1,act:()=>voyEtat().pass?gareDeparts():voyParler([{t:"Accès aux quais. Un portillon : « Passeport des énergies exigé ». Le portillon a l'air très sûr de lui."}])});
     // affiches des destinations (un bandeau rouge sur celles qui ne sont pas encore ouvertes)
     D(1,2,'clockw',0,{act:voyDire(null,["L'horloge de la gare. Le chef de gare la remet à l'heure chaque matin depuis des années, pour des trains qui n'existaient pas.","C'est la seule horloge de France qui a toujours été en avance sur son réseau."])});
     VOY.ordre.slice(0,5).forEach((id,i)=>{const s=VOY.sites[id];o.push({x:[2,3,5,6,7][i],y:2,kind:'vAffiche',voy:1,theme:id,ferme:!s.ouvert,act:voyDire(null,[`Une affiche : « ${s.nom} · ${s.region} ».${s.ouvert?'':' En bandeau : « Prochainement ».'}`,s.accroche])})});
@@ -44,7 +44,7 @@ voyCarte('gare',{
     D(14,4,'vending',1,{act:voyDire(null,["Un distributeur. Il propose de l'eau, des biscuits, et une boisson énergisante nommée « 1 kWh ».","Vérification faite : la canette contient 0,13 kWh. De quoi faire tenir un humain une bonne heure en réunion. La publicité exagère d'un facteur huit : dans l'énergie, c'est presque de la retenue."])});
     o.push({x:1,y:9,kind:'plant',solid:1},{x:14,y:9,kind:'plant',solid:1});
     o.push({x:12,y:6,kind:'npc',solid:1,who:'Voyageur',dir:'down',pal:{skin:'#f1c7a1',shirt:'#7a8594',pants:'#2f3a5c',jacket:'#6b4a2b',hair:'#9a9aa2',hat:'#3a3a44',hatType:'beret',prop:'book',glasses:1},
-      act:()=>{VOY.nVoyageur=(VOY.nVoyageur||0)+1;say([{w:'Voyageur',t:[VOY.sites.nucleaire&&VOY.sites.nucleaire.ouvert?"J'ai attendu le train pour la centrale nucléaire si longtemps que, maintenant qu'il existe, je n'ose plus le prendre. J'ai mes habitudes sur ce banc.":"J'attends le train pour la centrale nucléaire. Le tableau dit « prochainement ». J'ai pris un livre. Puis un deuxième.","On m'a dit que le train roulait à l'électricité. J'ai demandé laquelle. On m'a regardé bizarrement. Vous, vous comprenez la question, non ?","Un conseil de voyageur : au solaire, prenez un chapeau. En Bretagne, tenez-le. Dans les Alpes, mettez-en deux."][VOY.nVoyageur%3]}])}});
+      act:()=>{VOY.nVoyageur=(VOY.nVoyageur||0)+1;voyParler([{w:'Voyageur',t:[VOY.sites.nucleaire&&VOY.sites.nucleaire.ouvert?"J'ai attendu le train pour la centrale nucléaire si longtemps que, maintenant qu'il existe, je n'ose plus le prendre. J'ai mes habitudes sur ce banc.":"J'attends le train pour la centrale nucléaire. Le tableau dit « prochainement ». J'ai pris un livre. Puis un deuxième.","On m'a dit que le train roulait à l'électricité. J'ai demandé laquelle. On m'a regardé bizarrement. Vous, vous comprenez la question, non ?","Un conseil de voyageur : au solaire, prenez un chapeau. En Bretagne, tenez-le. Dans les Alpes, mettez-en deux."][VOY.nVoyageur%3]}])}});
     D(8,9,'vBagages',1,{voy:1,decor:0,act:voyDire(null,["Une valise oubliée, étiquetée « Service Énergie · mairie d'Ampère-sur-Loire ».","Dedans : un wattmètre, trois gilets orange et un rapport intitulé « Sobriété : synthèse en 400 pages ». L'ironie pèse 2 kg."])});
   }
 });
@@ -77,7 +77,7 @@ VOY.dessins.vBagages=(c,o,X,Y)=>{R(c,X+2,Y+14,13,1,'rgba(20,20,40,.25)');R(c,X+3
 function gareGuichet(){
   const v=voyEtat(),W='Mme Aiguillage';
   if(!v.pass){
-    say([{w:W,t:"Bonjour. Guichet ouvert. Oui, ouvert. Ne faites pas cette tête, ça arrive."},
+    voyParler([{w:W,t:"Bonjour. Guichet ouvert. Oui, ouvert. Ne faites pas cette tête, ça arrive."},
       {w:W,t:"Vous êtes {name}, la personne qui a fait baisser les factures de toute la ville ? La mairie nous a prévenus : vous avez le droit de voir d'où vient l'électricité."},
       {w:W,t:"Voici votre passeport des énergies. Cinq destinations, cinq tampons. Un champ solaire, des éoliennes, une centrale nucléaire, un barrage, et un data center, parce qu'il faut bien que quelqu'un consomme tout ça."},
       {w:W,t:"Sur place : promenez-vous, lisez les panneaux, parlez aux gens. Quand vous en savez assez, le responsable du site vous met à l'épreuve et tamponne. Pas de tampon sans épreuve. C'est le règlement, et le règlement, c'est moi."}],
@@ -86,7 +86,7 @@ function gareGuichet(){
   }
   gareGuichet.k=(gareGuichet.k||0)+1;
   const n=Object.keys(v.tampons).length;
-  say([{w:W,t:[`${n} tampon${n>1?'s':''} sur ${VOY.ordre.length}. Le tableau des départs est sur votre droite. Les trains partent quand vous montez dedans : c'est notre conception de la ponctualité.`,
+  voyParler([{w:W,t:[`${n} tampon${n>1?'s':''} sur ${VOY.ordre.length}. Le tableau des départs est sur votre droite. Les trains partent quand vous montez dedans : c'est notre conception de la ponctualité.`,
     VOY.ordre.some(id=>!VOY.sites[id].ouvert)?"Toutes les lignes ne sont pas encore en service. Les autres sont « en cours de pose ». Depuis un moment. Les rails, vous savez, c'est comme les travaux d'isolation : tout le monde est pour.":"Cinq lignes en service. Cinq ! J'ai dû commander de l'encre pour les tampons. Le budget « encre » de la gare a quintuplé : j'ai fait une note, personne ne l'a lue.",
     "Non, on ne peut pas tamponner soi-même. J'ai déjà vu des gens essayer avec une pomme de terre sculptée. Le tampon officiel a une dent de plus."][gareGuichet.k%3]}]);
 }
@@ -94,7 +94,7 @@ function gareGuichet(){
 /* ================= TABLEAU DES DÉPARTS ================= */
 function gareDeparts(){
   const v=voyEtat();
-  if(!v.pass){say([{t:"Le tableau des départs. Cinq lignes. En dessous, une étiquette : « Passeport des énergies exigé. S'adresser au guichet. »"}]);return}
+  if(!v.pass){voyParler([{t:"Le tableau des départs. Cinq lignes. En dessous, une étiquette : « Passeport des énergies exigé. S'adresser au guichet. »"}]);return}
   const ov=voyPanneau('Tableau des départs'),b=ov.querySelector('.pbody');
   const h=new Date(),hh=k=>{const m=h.getHours()*60+h.getMinutes()+3+k*17;return String(Math.floor(m/60)%24).padStart(2,'0')+' h '+String(m%60).padStart(2,'0')};
   b.innerHTML=`<p>Gare d'Ampère-sur-Loire · départs. ${Object.keys(v.tampons).length} / ${VOY.ordre.length} tampons dans ton passeport.</p><div class="voy-departs">${VOY.ordre.map((id,k)=>{const s=VOY.sites[id],t=voyTampon(id);
@@ -107,11 +107,11 @@ function gareDeparts(){
 function gareTableauDehors(){
   const o=VOY.ordre.filter(id=>VOY.sites[id].ouvert).map(id=>VOY.sites[id].gare);
   const reste=VOY.ordre.length-o.length;
-  say([{t:reste?`Tableau des départs. ${o.length>1?o.length+' lignes se sont allumées':"Une ligne s'est allumée"} : ${o.join(', ')}. Les autres affichent toujours « — ».`:`Tableau des départs. Toutes les lignes sont allumées : ${o.join(', ')}. Le tableau n'avait jamais consommé autant.`},{t:"Quelqu'un a effacé « prochainement » à la craie et écrit « ENFIN » à la place. L'écriture ressemble à celle du chef de gare."}]);
+  voyParler([{t:reste?`Tableau des départs. ${o.length>1?o.length+' lignes se sont allumées':"Une ligne s'est allumée"} : ${o.join(', ')}. Les autres affichent toujours « — ».`:`Tableau des départs. Toutes les lignes sont allumées : ${o.join(', ')}. Le tableau n'avait jamais consommé autant.`},{t:"Quelqu'un a effacé « prochainement » à la craie et écrit « ENFIN » à la place. L'écriture ressemble à celle du chef de gare."}]);
 }
 function gareEntrer(){
   warp('gare',7,10,'up');
-  const v=voyEtat();if(!v.hall){v.hall=1;save();qkTimeout(()=>{if(!busy&&!dlg.open)say([{t:"La gare d'Ampère-sur-Loire est ouverte. Le hall sent la cire, la peinture fraîche et dix ans d'attente."},{t:"Au fond à gauche, le guichet. Au mur, le tableau des départs."}])},450)}
+  const v=voyEtat();if(!v.hall){v.hall=1;save();qkTimeout(()=>{if(!busy&&!dlg.open)voyParler([{t:"La gare d'Ampère-sur-Loire est ouverte. Le hall sent la cire, la peinture fraîche et dix ans d'attente."},{t:"Au fond à gauche, le guichet. Au mur, le tableau des départs."}])},450)}
 }
 /* le chef de gare, dehors, change de refrain quand la gare est ouverte */
 {const chef=TOWNSFOLK.find(f=>f.who==='Chef de gare');if(chef){const avant=chef.lines,apres=["Un train est parti ce matin. Un vrai. Avec des gens dedans. J'ai sifflé, j'ai agité le drapeau, j'ai un peu pleuré.","Cinq lignes. J'ai connu cette gare avec zéro. « Prochainement », je ne veux plus jamais lire ce mot, sauf sur un menu."];
@@ -161,7 +161,7 @@ function voyTrajet(dest,depuis){
       for(let i=0;i<6;i++){const sx=((i*53-d*6)%300+300)%300-30;R(x,sx,106+(i%3)*2,10,1,'rgba(255,255,255,.35)')}
     },
     fin(){
-      if(retour){warp('gare',13,4,'down');qkTimeout(()=>{if(!busy&&!dlg.open)say([{t:"Ampère-sur-Loire, terminus. Le chef de gare est sur le quai. Il a sifflé à l'arrivée. On ne l'arrêtera plus."}])},450)}
+      if(retour){warp('gare',13,4,'down');qkTimeout(()=>{if(!busy&&!dlg.open)voyParler([{t:"Ampère-sur-Loire, terminus. Le chef de gare est sur le quai. Il a sifflé à l'arrivée. On ne l'arrêtera plus."}])},450)}
       else{const a=site.arrivee;warp(site.carte,a[0],a[1],a[2]);toast(site.gare);if(site.arriver)qkTimeout(site.arriver,450)}
     }});
 }

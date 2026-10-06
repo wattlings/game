@@ -69,14 +69,14 @@ voyCarte('barrage',{
     // ---- la halte
     o.push({x:13,y:30,kind:'train',decor:1});
     for(let x=13;x<=24;x++)o.push({x,y:29,kind:'none',act:()=>voyRetour(sid)});
-    gens(22,27,'Chef de halte','down',{skin:'#f6d3b3',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#d9a441',hat:'#c43d3d',hatType:'cap',scarf:'#f7f0dc'},()=>say(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
+    gens(22,27,'Chef de halte','down',{skin:'#f6d3b3',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#d9a441',hat:'#c43d3d',hatType:'cap',scarf:'#f7f0dc'},()=>voyParler(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
     pose(18,27,'vPanneau',{theme:'barrage',teinte:'#1f8f7a',act:voyDire(null,["Un grand panneau : « Aménagement de Val-Turbine · Barrage de 130 m · Chute de 600 m · 420 MW · dont 200 MW de pompage ».","Un ajout à la craie : « Le lac est en haut. Oui, tout en haut. Bon courage. »"])});
     pose(24,27,'vPoster',{theme:'barrage',teinte:'#1f8f7a',glow:!vue('france'),act:source('france','affiche')});
 
     // ---- l'usine et son parvis : M. Newton, M. Vanne, Mlle Pelton, Mme Lachute
     const chute=voyAnimateur(sid,'formule','M. Newton',D.newton[0],D.newton[1],barSimChute);
     gens(9,21,'M. Newton','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#3a4050',jacket:'#1f8f7a',hair:'#9a9aa2',beard:'#9a9aa2',glasses:1,hat:'#f7f0dc',hatType:'helmet',prop:'clipboard'},chute,{glow:!vue('formule')});
-    pose(8,21,'vPupitre',{act:()=>say([{t:"Le pupitre de M. Newton. Deux curseurs : la hauteur, le débit."}],()=>barSimChute(()=>voyDonnerInfo(sid,'formule')))});
+    pose(8,21,'vPupitre',{act:()=>voyParler([{t:"Le pupitre de M. Newton. Deux curseurs : la hauteur, le débit."}],()=>barSimChute(()=>voyDonnerInfo(sid,'formule')))});
     gens(12,21,'M. Vanne','down',{skin:'#c68a5c',shirt:'#2f6db5',pants:'#274f8f',overall:'#274f8f',hair:'#2b1d14',hat:'#f2c12e',hatType:'helmet'},source('flexible','vanne','M. Vanne'),{glow:!vue('flexible')});
     const turbines=voyAnimateur(sid,'turbines','Mlle Pelton',D.pelton[0],D.pelton[1],barSimTurbines);
     gens(15,21,'Mlle Pelton','down',{skin:'#e0ac7e',shirt:'#f2a33a',pants:'#3a4050',overall:'#3a4050',hair:'#b8431f',style:'queue',lash:1,hat:'#f7f0dc',hatType:'helmet'},turbines,{glow:!vue('turbines')});
@@ -114,4 +114,4 @@ voyCarte('barrage',{
     pose(37,8,'vMarmotte',{act:voyDire(null,D.marmotte)});
   }
 });
-VOY.sites.barrage.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['barrage.arrivee']){voyEtat().faits['barrage.arrivee']=1;save();say(BAR.dit.arrivee)}};
+VOY.sites.barrage.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['barrage.arrivee']){voyEtat().faits['barrage.arrivee']=1;save();voyParler(BAR.dit.arrivee)}};

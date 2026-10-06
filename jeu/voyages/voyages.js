@@ -20,9 +20,16 @@ function voyObjectifVille(){
 /* l'état des voyages dans la sauvegarde (créé à la première utilisation : les anciennes parties n'en ont pas) */
 function voyEtat(){const v=S.voy=S.voy||{};v.infos=v.infos||{};v.faits=v.faits||{};v.tampons=v.tampons||{};return v}
 
+/* ---- typographie : en français, on ne coupe pas la ligne avant « : ; ? ! » ni après un guillemet ouvrant ----
+   Appliqué à tout ce que les voyages affichent, pour qu'un deux-points ne se retrouve jamais seul en début de ligne sur un petit écran. */
+const voyTypo=t=>typeof t==='string'?t.replace(/ ([:;?!»])/g,'\u00a0$1').replace(/« /g,'«\u00a0'):t;
+/* say(), avec cette typographie : c'est par là que passent tous les dialogues des voyages */
+function voyParler(lignes,cb){say(lignes.map(l=>typeof l==='string'?voyTypo(l):Object.assign({},l,{t:voyTypo(l.t)})),cb)}
+const voyTypoTout=o=>typeof o==='string'?voyTypo(o):Array.isArray(o)?o.map(voyTypoTout):o;
+
 /* ---- déclarer une destination ----
    d : { nom, gare, region, theme, ouvert, accroche, carte, arrivee:[x,y,direction], annonces:[…], paysage:{…}, infos:[{id,cle,t,x}], pret } */
-function voyDeclarer(id,d){d.id=id;d.infos=d.infos||[];VOY.sites[id]=d;VOY.ordre.push(id)}
+function voyDeclarer(id,d){d.id=id;d.infos=(d.infos||[]).map(f=>Object.assign(f,{t:voyTypo(f.t),x:voyTypo(f.x),retiens:voyTypo(f.retiens)}));['annonces','annoncesRetour'].forEach(k=>{if(d[k])d[k]=d[k].map(voyTypo)});['accroche','pret','bravo'].forEach(k=>{d[k]=voyTypo(d[k])});VOY.sites[id]=d;VOY.ordre.push(id)}
 
 /* ---- déclarer une carte de voyage ----
    d.plan : la carte, une chaîne par rangée, un caractère par case.
@@ -90,11 +97,11 @@ function voyDonnerInfo(sid,id,cb){
 /* quelqu'un (ou quelque chose) qui détient une information : il parle, puis la donne ; ensuite il radote.
    qui : nom affiché (null pour un objet) ; lignes : ce qu'il dit la première fois ; ensuite : ce qu'il dit après. */
 function voySource(sid,id,qui,lignes,ensuite){
-  const L=t=>qui?{w:qui,t}:{t};
-  return()=>{if(!voyInfoVue(sid,id))say(lignes.map(L),()=>voyDonnerInfo(sid,id));else say((ensuite||lignes.slice(-1)).map(L))};
+  const L=t=>qui?{w:qui,t:voyTypo(t)}:{t:voyTypo(t)};
+  return()=>{if(!voyInfoVue(sid,id))voyParler(lignes.map(L),()=>voyDonnerInfo(sid,id));else voyParler((ensuite||lignes.slice(-1)).map(L))};
 }
 /* une remarque sans information à la clé (les vannes) */
-const voyDire=(qui,lignes)=>()=>say(lignes.map(t=>qui?{w:qui,t}:{t}));
+const voyDire=(qui,lignes)=>()=>voyParler(lignes.map(t=>qui?{w:qui,t:voyTypo(t)}:{t:voyTypo(t)}));
 
 /* ---- flèches d'objectif d'un site : vers les informations clés manquantes, puis vers le défi final ----
    lieux : où se trouve chaque information clé sur CETTE carte ; passage : sur un site à plusieurs cartes, la case qui mène

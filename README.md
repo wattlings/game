@@ -81,10 +81,12 @@ Chaque modification enregistrée sur la branche `main` est en ligne après une �
 | Le plan d'un site, la place de chaque personnage et de chaque objet | `jeu/voyages/<site>/carte.js` |
 | Les simulations et le défi final d'un site (missions, seuils, messages) | `jeu/voyages/<site>/simulations.js` |
 | Un dessin d'un site (panneaux, onduleur, totem…) | `jeu/voyages/<site>/dessins.js` |
-| Les destinations annoncées « prochainement » | `jeu/voyages/prochainement.js` |
+| Annoncer une future destination (« prochainement ») | `jeu/voyages/prochainement.js` |
 | Le hall de la gare, le guichet, le tableau des départs, le trajet | `jeu/voyages/gare.js` |
 | Le passeport et ses tampons | `jeu/voyages/passeport.js` |
-| L'allure des sols (chemin, gravier, quai, grillage…) et des graphiques, pour tous les sites | `jeu/voyages/peinture.js`, `graphes.js` |
+| L'allure des sols (chemin, gravier, quai, mer, murs…) et des graphiques, pour tous les sites | `jeu/voyages/peinture.js`, `graphes.js` |
+| Les objets communs à plusieurs sites (transformateur, pupitre, panneaux) | `jeu/voyages/dessins.js` |
+| Le fonctionnement des ateliers à curseurs et du défi final, pour tous les sites | `jeu/voyages/ateliers.js` |
 | Les couleurs et la mise en page des écrans de voyage | `jeu/interface/styles/voyages.css` |
 
 ### Les réglages
@@ -153,20 +155,32 @@ outils/                   facultatif : serveur local, vérification, fichier uni
 
 À l'épilogue (les 8 badges gagnés, le patrimoine pris en main), la gare d'Ampère-sur-Loire ouvre. Le guichet remet un **passeport des énergies** ; le tableau des départs mène à des sites de production. Sur place : on se promène, on examine, on parle aux gens, on manipule deux simulations, puis le responsable du site fait passer un défi et tamponne le passeport.
 
-Une destination est ouverte : la **centrale solaire de Saint-Photon** (`jeu/voyages/solaire/`). Quatre autres sont annoncées dans `jeu/voyages/prochainement.js` : parc éolien, centrale nucléaire, barrage, data center.
+Cinq lignes sont ouvertes, une par dossier :
+
+| Destination | Dossier | On y manipule |
+|---|---|---|
+| Centrale solaire de Saint-Photon (Provence) | `jeu/voyages/solaire/` | l'inclinaison et l'orientation des panneaux, cinq courbes à diagnostiquer, les horaires d'une école |
+| Parc éolien de Port-Rafale (Bretagne), sur la lande et en mer | `jeu/voyages/eolien/` | la courbe de puissance, un an de vent, le dosage éolien-solaire |
+| Centrale nucléaire de Neutron-sur-Mer (Nord) | `jeu/voyages/nucleaire/` | un simulateur de conduite en temps réel, la chaîne du neutron à la prise, le planning des arrêts |
+| Barrage de Val-Turbine (Alpes) | `jeu/voyages/barrage/` | débit et hauteur de chute, le choix d'une turbine, une journée de pompage-turbinage |
+| Data center du quai des Octets (Marseille) | `jeu/voyages/datacenter/` | le PUE, la chasse aux serveurs inutiles, une coupure de courant |
+
+Chaque site compte 14 informations à collecter, dont 6 « clés » exigées avant le défi. Les sites sont inventés ; leurs chiffres sont réels, et les sources de chaque site sont listées en bas de son fichier `textes.js` (le joueur les retrouve dans son passeport).
 
 Ce que les voyages enregistrent vit dans la sauvegarde du jeu, sous `voy` (passeport, informations notées, tampons) : les clés de sauvegarde n'ont pas changé, et une ancienne partie s'ouvre comme avant.
 
 ### Ajouter une destination
 
-Prendre `jeu/voyages/solaire/` comme modèle : quatre fichiers, chacun son rôle.
+Prendre un dossier existant comme modèle (`jeu/voyages/barrage/` est le plus simple) : quatre fichiers, chacun son rôle.
 
 1. **`textes.js`** : `voyDeclarer('monsite', {…})` avec le nom, la gare, la région, les annonces du train, la liste des informations (`infos` : un titre, un texte, une phrase à retenir, `cle:1` pour celles qu'exige le défi, `ou` pour l'indice) et les sources des chiffres. Puis les répliques et les questions du défi.
 2. **`dessins.js`** : les dessins propres au site (`VOY.dessins.nom = (c, o, X, Y, t) => …`).
-3. **`simulations.js`** : ce qui se manipule, et le défi, qui se termine par `voyTamponner('monsite')`.
+3. **`simulations.js`** : ce qui se manipule. `voyAtelier(titre, {…})` fabrique un atelier à partir de ses réglages (curseurs, choix, cases), de son calcul, de son graphique et de ses missions ; `voyDefi('monsite', {…})` fabrique le défi final (questions, épreuve, tampon). Le mode d'emploi est en tête de `jeu/voyages/ateliers.js`.
 4. **`carte.js`** : `voyCarte('monsite', {…})` avec le plan (une chaîne par rangée, un caractère par case), la légende (quel pinceau pour quel caractère), et `objets(o)` qui pose personnages et objets. `voySource(site, info, qui, répliques, ensuite)` fabrique un personnage ou un objet qui donne une information.
 
-Ensuite : retirer la destination de `prochainement.js`, ajouter les quatre fichiers dans `jeu/index.html` (dans l'ordre textes, dessins, simulations, carte, comme pour `solaire/`), donner une encre et un motif au tampon dans `passeport.js`, et lancer `node outils/verifier.mjs voyages` : la vérification prend le train, contrôle que tout ce qui s'examine est accessible à pied, examine tout et fait tamponner le passeport.
+Ensuite : ajouter les quatre fichiers dans `jeu/index.html` (`textes.js` avec les autres `textes.js`, dans l'ordre du tableau des départs ; les trois autres après ceux des sites existants), donner une encre et un motif au tampon dans `passeport.js`, un pictogramme dans `voyages/dessins.js`, et lancer `node outils/verifier.mjs voyages` : la vérification prend le train, contrôle que tout ce qui s'examine est accessible à pied, examine tout, manipule les ateliers et fait tamponner le passeport.
+
+Un site peut tenir sur plusieurs cartes (le parc éolien en a deux, reliées par un bateau) : déclarer `cartes:['a','b']` dans `textes.js`, et voir `eolEmbarquer` dans `jeu/voyages/eolien/carte.js`.
 
 ## Les outils (facultatifs)
 
@@ -206,7 +220,7 @@ Dans le fichier unique produit par `outils/fichier-unique.mjs`, le jeu s'ouvre p
 
 `outils/migration/` contient la version 18 et l'outil qui a comparé les deux versions. Il peut être supprimé une fois la migration acceptée.
 
-Depuis, le jeu a gagné les voyages en train (voir plus haut) : c'est la seule différence de contenu avec la version 18, et elle n'apparaît qu'à l'épilogue.
+Depuis, le jeu a gagné les voyages en train (voir plus haut) : c'est la seule différence de contenu avec la version 18, et elle n'apparaît qu'à l'épilogue. Les chapitres 1 à 10 se jouent exactement comme avant.
 
 ## Limites connues
 

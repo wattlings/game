@@ -33,9 +33,9 @@ const EOL_COURBE={
     voyGraphe(cv,{x:[0,30],y:3.2,unite:'MW',gradY:[0,1,2,3],gradX:[0,5,10,15,20,25,30].map(v=>[v,v+' m/s']),series:[{p:P,c:VOY_ENCRE.reseau,genre:'aire',nom:"Puissance de l'éolienne"}],reperes:[{x:e.v,c:VOY_ENCRE.alerte,nom:'le vent du moment'}]})}}],
   missions:[
     {t:'Mission 1 · Le premier tour',x:"Pas de vent, pas de courant. Monte doucement : trouve le vent le plus faible qui fait produire l'éolienne.",
-      ok:(r,e)=>e.v>=3&&e.v<=3.5,
-      bravo:"3 m/s, soit 11 km/h : une petite brise, celle qui agite les feuilles. En dessous, il n'y a pas assez d'énergie pour vaincre les frottements. L'éolienne attend, face au vent.",
-      indice:(r,e)=>e.v<3?"Rien ne bouge encore. Un peu plus de vent.":"Elle produit, mais elle a démarré plus tôt. Redescends jusqu'au tout premier kilowatt."},
+      ok:(r,e)=>e.v===3.5,
+      bravo:"Dès que le vent dépasse 3 m/s, soit 11 km/h, elle démarre : une petite brise, celle qui agite les feuilles. En dessous, il n'y a pas assez d'énergie pour vaincre les frottements. L'éolienne attend, face au vent.",
+      indice:(r,e)=>e.v<3.5?"Rien ne bouge encore. Un peu plus de vent.":"Elle produit, mais elle a démarré plus tôt. Redescends jusqu'au tout premier kilowatt."},
     {t:'Mission 2 · La pleine puissance',x:"Les 3 MW de l'étiquette, elle ne les donne pas à la première brise. Trouve le vent le plus faible auquel elle produit à 100 %.",
       ok:(r,e)=>e.v===13,
       bravo:"13 m/s, soit 47 km/h : à ce vent-là, les parapluies se retournent. Regarde la courbe : entre 3 et 13 m/s, elle grimpe comme le cube du vent. Au-delà, les pales pivotent pour laisser filer le surplus : c'est le plateau.",
@@ -125,8 +125,8 @@ const EOL_MOIS_ATELIER={
   missions:[{t:'Dernière épreuve · Douze mois',bouton:'Valider le dosage',xp:25,
     html:`<b>Mme Suroît :</b> « La région veut couvrir 30 % de sa consommation avec du vent et du soleil. Tu as un seul curseur : la part de chacun. Trouve le dosage qui colle le mieux aux besoins, mois après mois. Je veux moins de <b>${String(EOL_MOIS.objectif).replace('.',',')} %</b> de production au mauvais moment. »`,
     ok:b=>b.malPlace<=EOL_MOIS.objectif,
-    bravo:(b,e)=>`${e.a} % d'éolien, ${100-e.a} % de solaire : l'un donne l'hiver, l'autre l'été. Seul, le solaire ne couvre que 43 % des besoins d'hiver et déborde de 80 % en été ; seul, l'éolien manque de moitié en juin. Reste un problème que ce graphique ne montre pas : la semaine de janvier sans vent ni soleil. Celle-là, ce sont les barrages et les centrales qui la passent. Il y a un train pour ça.`,
-    indice:(b,e)=>b.ete>115?`${b.malPlace.toFixed(1).replace('.',',')} % : trop de production en été, pas assez en hiver. Qui produit l'hiver ?`:`${b.malPlace.toFixed(1).replace('.',',')} % : l'hiver est couvert, mais l'été manque. Remets un peu de solaire.`}]
+    bravo:(b,e)=>`${e.a} % d'éolien, ${100-e.a} % de solaire : l'un donne l'hiver, l'autre l'été. Seul, le solaire ne couvre que 43 % des besoins d'hiver et déborde de 85 % en été ; seul, l'éolien manque de moitié en juin. Reste un problème que ce graphique ne montre pas : la semaine de janvier sans vent ni soleil. Celle-là, ce sont les barrages et les centrales qui la passent. Il y a un train pour ça.`,
+    indice:(b,e)=>b.ete>b.hiver?`${b.malPlace.toFixed(1).replace('.',',')} % : trop de production en été, pas assez en hiver. Qui produit l'hiver ?`:`${b.malPlace.toFixed(1).replace('.',',')} % : l'hiver est couvert, mais l'été manque. Remets un peu de solaire.`}]
 };
 function eolDefi(){
   EOL_MOIS_ATELIER.etat.a=0;

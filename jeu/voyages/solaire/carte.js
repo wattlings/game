@@ -69,7 +69,7 @@ voyCarte('solaire',{
     // ---- la halte : le train, le chef de halte, l'affiche
     o.push({x:16,y:28,kind:'train',decor:1});
     for(let x=16;x<=27;x++)o.push({x,y:27,kind:'none',act:()=>voyRetour(sid)});
-    gens(24,25,'Chef de halte','down',{skin:'#e0ac7e',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#3a2a1a',hat:'#c43d3d',hatType:'cap',beard:'#3a2a1a'},()=>say(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
+    gens(24,25,'Chef de halte','down',{skin:'#e0ac7e',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#3a2a1a',hat:'#c43d3d',hatType:'cap',beard:'#3a2a1a'},()=>voyParler(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
     pose(26,25,'vAfficheFrance',{glow:!vue('france'),act:source('france')});
     decor(15,25,'bench');decor(16,25,'bench');
 
@@ -83,11 +83,11 @@ voyCarte('solaire',{
     decor(12,23,'fontaineP',{act:voyDire(null,["Une fontaine. L'eau est fraîche, l'ombre est rare, et le panneau « eau non contrôlée » n'a jamais découragé personne en août."])});
 
     // ---- la zone technique : onduleurs, transformateur, supervision, poste de livraison
-    [18,19,20,23,24,25].forEach((x,i)=>pose(x,6,'vOnduleur',{act:()=>say([{t:`L'onduleur n° ${i+1}. Il ronronne. ${solEnDirect()}`}])}));
+    [18,19,20,23,24,25].forEach((x,i)=>pose(x,6,'vOnduleur',{act:()=>voyParler([{t:`L'onduleur n° ${i+1}. Il ronronne. ${solEnDirect()}`}])}));
     gens(20,7,'M. Sinus','down',{skin:'#f1c7a1',shirt:'#2f6db5',pants:'#274f8f',overall:'#274f8f',hair:'#9a9aa2',glasses:1,hat:'#f2c12e',hatType:'helmet',prop:'tablet'},source('onduleur','M. Sinus'),{glow:!vue('onduleur')});
     pose(18,4,'vTransfo',{glow:!vue('reseau'),act:source('reseau')});o.push({x:19,y:4,kind:'none',solid:1,act:source('reseau')});
-    const superviser=()=>{if(voyEtat().faits['solaire.courbes']&&vue('cloche'))say([{w:'Mlle Cloche',t:D.cloche[1][0]},{t:solEnDirect()},{w:'Mlle Cloche',t:"Tu veux revoir les cinq courbes ? L'écran est à toi."}],()=>solSimCourbes());
-      else say(D.cloche[0].map(t=>({w:'Mlle Cloche',t})),()=>solSimCourbes(()=>voyDonnerInfo(sid,'cloche')))};
+    const superviser=()=>{if(voyEtat().faits['solaire.courbes']&&vue('cloche'))voyParler([{w:'Mlle Cloche',t:D.cloche[1][0]},{t:solEnDirect()},{w:'Mlle Cloche',t:"Tu veux revoir les cinq courbes ? L'écran est à toi."}],()=>solSimCourbes());
+      else voyParler(D.cloche[0].map(t=>({w:'Mlle Cloche',t})),()=>solSimCourbes(()=>voyDonnerInfo(sid,'cloche')))};
     pose(24,9,'vEcran',{act:superviser});o.push({x:25,y:9,kind:'none',solid:1,act:superviser});
     gens(23,9,'Mlle Cloche','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#3a4050',jacket:'#2aa198',hair:'#5a3a22',style:'queue',lash:1,glasses:1,prop:'tablet'},superviser,{glow:!vue('cloche')});
     gens(23,3,'Mme Zénith','down',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#c8502a',hair:'#1c1c22',style:'carre',lash:1,hat:'#f7f0dc',hatType:'helmet',scarf:'#f2c12e',prop:'clipboard'},solDefi,{still:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
@@ -106,8 +106,8 @@ voyCarte('solaire',{
     // ---- le champ est : les trackers, Mlle Azimut et son pupitre
     const g=MAPS.solaire.g;g.forEach((l,y)=>l.forEach((ch,x)=>{if(ch==='x')o.push({x,y,kind:'vTracker',voy:1,haut:g[y-1][x]!=='x',bas:g[y+1][x]!=='x'})}));
     const regler=()=>solSimOrientation(()=>voyDonnerInfo(sid,'tracker'));
-    gens(35,13,'Mlle Azimut','down',{skin:'#f1c7a1',shirt:'#f2c12e',pants:'#3a4050',hair:'#b8431f',style:'queue',lash:1,hat:'#f7f0dc',hatType:'helmet',vest:1},()=>{if(vue('tracker'))say(D.azimut[1].map(t=>({w:'Mlle Azimut',t})));else say(D.azimut[0].map(t=>({w:'Mlle Azimut',t})),regler)},{glow:!vue('tracker')});
-    pose(36,13,'vPupitre',{act:()=>say([{t:"Le pupitre des trackers : deux curseurs, une case à cocher. "+solTrackersEnDirect()}],regler)});
+    gens(35,13,'Mlle Azimut','down',{skin:'#f1c7a1',shirt:'#f2c12e',pants:'#3a4050',hair:'#b8431f',style:'queue',lash:1,hat:'#f7f0dc',hatType:'helmet',vest:1},()=>{if(vue('tracker'))voyParler(D.azimut[1].map(t=>({w:'Mlle Azimut',t})));else voyParler(D.azimut[0].map(t=>({w:'Mlle Azimut',t})),regler)},{glow:!vue('tracker')});
+    pose(36,13,'vPupitre',{act:()=>voyParler([{t:"Le pupitre des trackers : deux curseurs, une case à cocher. "+solTrackersEnDirect()}],regler)});
 
     // ---- au sud : la palette, M. Riverain, les ruches, la cigale
     pose(6,21,'vPalette',{glow:!vue('carbone'),act:source('carbone')});
@@ -130,4 +130,4 @@ function solTrackersEnDirect(){
   return SKY.el<=0?"Il fait nuit : les panneaux sont rangés à plat, en attendant le lever du soleil.":Math.abs(p)<.15?"Le soleil est au plus haut : les panneaux sont presque à plat.":p<0?"C'est le matin : toutes les rangées penchent vers l'est.":"C'est l'après-midi : toutes les rangées penchent vers l'ouest.";
 }
 /* à l'arrivée du train */
-VOY.sites.solaire.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['solaire.arrivee']){voyEtat().faits['solaire.arrivee']=1;save();say(SOL.dit.arrivee)}};
+VOY.sites.solaire.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['solaire.arrivee']){voyEtat().faits['solaire.arrivee']=1;save();voyParler(SOL.dit.arrivee)}};

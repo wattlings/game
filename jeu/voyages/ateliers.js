@@ -29,7 +29,7 @@ function voyAtelierEtapes(A){
     const R0=(m.reglages?A.reglages.filter(g=>m.reglages.includes(g.id)):A.reglages.filter(g=>!g.seulement||(g.seulement==='libre'&&m.libre))),plusieursVues=A.vues&&A.vues.length>1&&!m.vueSeule;
     const blocGraphe=`${plusieursVues?`<div class="seg" role="group">${A.vues.map(v=>`<button type="button" data-v="${v.id}">${esc(v.nom)}</button>`).join('')}</div>`:''}${A.vues&&A.vues.length?`<canvas class="chart" width="640" height="${A.hauteur||240}" role="img" aria-label="${esc(A.legende||'Graphique de la simulation')}"></canvas>`:''}`;
     const blocReglages=A.croquis?`<div class="voy-atelier"><canvas class="voy-croquis" width="240" height="150" aria-hidden="true"></canvas><div class="voy-reglages"></div></div>`:`<div class="voy-reglages seuls"></div>`;
-    el.innerHTML=`<h3>${esc(m.t)}</h3><div class="ctx">${m.html||esc(m.x)}</div>${A.grapheEnHaut?blocGraphe+'<div class="voy-chiffres" aria-live="polite"></div>'+blocReglages:blocReglages+'<div class="voy-chiffres" aria-live="polite"></div>'+blocGraphe}<div class="fbz"></div><div class="row"></div>`;
+    el.innerHTML=`<h3>${esc(voyTypo(m.t))}</h3><div class="ctx">${voyTypo(m.html)||esc(voyTypo(m.x))}</div>${A.grapheEnHaut?blocGraphe+'<div class="voy-chiffres" aria-live="polite"></div>'+blocReglages:blocReglages+'<div class="voy-chiffres" aria-live="polite"></div>'+blocGraphe}<div class="fbz"></div><div class="row"></div>`;
     const zone=el.querySelector('.voy-reglages'),ch=el.querySelector('.voy-chiffres'),cvs=el.querySelector('.chart'),fbz=el.querySelector('.fbz'),row=el.querySelector('.row'),champs=[];let bouton=null;
     const dessiner=()=>{
       const r=A.calcul(etat,m);
@@ -38,7 +38,7 @@ function voyAtelierEtapes(A){
       el.querySelectorAll('.seg[role=group]>button[data-v]').forEach(b=>{b.classList.toggle('on',b.dataset.v===vue);b.setAttribute('aria-pressed',b.dataset.v===vue)});
       if(cvs){const v=A.vues.find(v=>v.id===vue)||A.vues[0];v.graphe(cvs,r,etat,m)}
       champs.forEach(c=>c.maj());
-      if(m.libre){if(!libreOk&&(!m.fini||m.fini(r,etat))){libreOk=true;if(bouton)bouton.disabled=false}const t=m.constat&&m.constat(r,etat);if(t&&fbz.dataset.t!==t){fbz.dataset.t=t;fbz.innerHTML=`<div class="fb ok">${t}</div>`}}
+      if(m.libre){if(!libreOk&&(!m.fini||m.fini(r,etat))){libreOk=true;if(bouton)bouton.disabled=false}const t=voyTypo(m.constat&&m.constat(r,etat));if(t&&fbz.dataset.t!==t){fbz.dataset.t=t;fbz.innerHTML=`<div class="fb ok">${t}</div>`}}
       return r;
     };
     R0.forEach(g=>{
@@ -56,8 +56,8 @@ function voyAtelierEtapes(A){
     if(m.libre){bouton=document.createElement('button');bouton.className='btn';bouton.textContent=(m.bouton||'Terminer')+' ▸';bouton.disabled=true;row.appendChild(bouton);bouton.onclick=()=>{if(libreOk)suite()}}
     else{bouton=document.createElement('button');bouton.className='btn';bouton.textContent=(m.bouton||'Valider le réglage')+' ▸';row.appendChild(bouton);
       bouton.onclick=()=>{if(gagne)return;const r=dessiner();
-        if(m.ok(r,etat)){gagne=true;bouton.remove();champs.forEach(c=>c.maj());fbz.innerHTML=`<div class="fb ok">✔ ${typeof m.bravo==='function'?m.bravo(r,etat):esc(m.bravo)}</div>`;gainXP(essais?5:m.xp||15);contBtn(fbz,suite)}
-        else{essais++;sfx('bad');trk('wrong_answer',{t:A.suivi||panelTitle(),q:trkTxt(m.t).slice(0,100),a:trkTxt(JSON.stringify(etat)).slice(0,80)});fbz.innerHTML=`<div class="fb ko">✘ ${esc(m.indice?m.indice(r,etat):'Pas encore. Regarde les chiffres, et réessaie.')}</div>`}
+        if(m.ok(r,etat)){gagne=true;bouton.remove();champs.forEach(c=>c.maj());fbz.innerHTML=`<div class="fb ok">✔ ${voyTypo(typeof m.bravo==='function'?m.bravo(r,etat):esc(m.bravo))}</div>`;gainXP(essais?5:m.xp||15);contBtn(fbz,suite)}
+        else{essais++;sfx('bad');trk('wrong_answer',{t:A.suivi||panelTitle(),q:trkTxt(m.t).slice(0,100),a:trkTxt(JSON.stringify(etat)).slice(0,80)});fbz.innerHTML=`<div class="fb ko">✘ ${esc(voyTypo(m.indice?m.indice(r,etat):'Pas encore. Regarde les chiffres, et réessaie.'))}</div>`}
         voyMontrer(fbz)}}
     dessiner();
   });
@@ -70,21 +70,22 @@ function voyAtelier(titre,A,fin){voyEtapes(titre,voyAtelierEtapes(A),fin,{plusTa
    voyDefi('solaire', {qui:'Mme Zénith', attente:'…', entree:'…', questions:[Q(…)…], epreuves:[étapes…], verdict:'<p>…</p>', merci:'…', apres:['…','…']}) */
 function voyDefi(sid,d){
   const W=d.qui;
-  if(voyTampon(sid)){d.k=(d.k||0)+1;say([{w:W,t:d.apres[d.k%d.apres.length]}]);return}
+  if(!d.typo){d.typo=1;['attente','entree','merci','verdict'].forEach(k=>{d[k]=voyTypo(d[k])});d.apres=d.apres.map(voyTypo);d.questions=d.questions.map(q=>({q:voyTypo(q.q),o:q.o.map(o=>[voyTypo(o[0]),o[1],voyTypo(o[2])])}))}
+  if(voyTampon(sid)){d.k=(d.k||0)+1;voyParler([{w:W,t:d.apres[d.k%d.apres.length]}]);return}
   const manque=voyClesManquantes(sid);
-  if(manque.length){say([{w:W,t:d.attente},{w:W,t:`Il te manque ${manque.length} info${manque.length>1?'s':''} clé${manque.length>1?'s':''}. Commence par ${manque[0].ou}.`}]);return}
-  say([{w:W,t:d.entree}],()=>{
+  if(manque.length){voyParler([{w:W,t:d.attente},{w:W,t:`Il te manque ${manque.length} info${manque.length>1?'s':''} clé${manque.length>1?'s':''}. Commence par ${manque[0].ou}.`}]);return}
+  voyParler([{w:W,t:d.entree}],()=>{
     trk('voyage_defi',{site:sid});
     voyEtapes('Le défi de '+W,[
       ...d.questions.map((q,i)=>choice({title:`Question ${i+1} sur ${d.questions.length}`,q:q.q,opts:q.o})),
       ...(d.epreuves||[]),
       info(`<h3>Verdict</h3>${d.verdict}`,'Tendre le passeport')
-    ],()=>voyTamponner(sid,()=>say([{w:W,t:d.merci}])),{plusTard:true});
+    ],()=>voyTamponner(sid,()=>voyParler([{w:W,t:d.merci}])),{plusTard:true});
   });
 }
 
 /* quelqu'un qui fait manipuler avant de donner une information : il parle, lance l'atelier, et l'information est notée à la fin */
 function voyAnimateur(sid,id,qui,avant,apres,lancer){
-  const L=t=>({w:qui,t});
-  return()=>{if(voyInfoVue(sid,id))say(apres.map(L));else say(avant.map(L),()=>lancer(()=>voyDonnerInfo(sid,id)))};
+  const L=t=>({w:qui,t:voyTypo(t)});
+  return()=>{if(voyInfoVue(sid,id))voyParler(apres.map(L));else voyParler(avant.map(L),()=>lancer(()=>voyDonnerInfo(sid,id)))};
 }

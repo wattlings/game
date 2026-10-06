@@ -20,11 +20,11 @@ const BAR_ATELIER={
   reglages:[
     {id:'ih',genre:'curseur',nom:'Hauteur de chute',min:0,max:BAR_CHUTE.hauteurs.length-1,pas:1,dire:v=>fmt(BAR_CHUTE.hauteurs[v])+' m'},
     {id:'iq',genre:'curseur',nom:'Débit',min:0,max:BAR_CHUTE.debits.length-1,pas:1,dire:v=>BAR_CHUTE.debits[v]+' m³ par seconde'}],
-  calcul:e=>{const h=BAR_CHUTE.hauteurs[e.ih],q=BAR_CHUTE.debits[e.iq];return{h,q,p:barPuissance(q,h),kwh:9.81*h*BAR_CHUTE.rendement/3600,bars:h/10.2}},
+  calcul:e=>{const h=BAR_CHUTE.hauteurs[e.ih],q=BAR_CHUTE.debits[e.iq];return{h,q,p:barPuissance(q,h),kwh:9.81*h*BAR_CHUTE.rendement/3600,bars:h/10}},
   chiffres:r=>[[barMW(r.p),'de puissance'],[r.kwh.toFixed(2).replace('.',',')+' kWh','par mètre cube turbiné'],[r.bars<10?r.bars.toFixed(1).replace('.',','):Math.round(r.bars)+'',"bars au pied de la conduite"],[BAR_CHUTE.turbine(r.h),'la turbine adaptée']],
   croquis:(cv,e,r)=>barCroquis(cv,r),
   vues:[{id:'p',nom:'La puissance',graphe:(cv,r)=>{const m=barPuissance(500,r.h),y=m>500?Math.ceil(m/1000)*1000:m>50?Math.ceil(m/100)*100:m>5?Math.ceil(m/10)*10:Math.ceil(m);
-    voyGraphe(cv,{x:[0,520],y:y*1.05,unite:'MW',gradY:[0,y/2,y],gradX:[0,100,200,300,400,500].map(v=>[v,v+' m³/s']),series:[{p:[[0,0],[500,m]],c:VOY_ENCRE.reseau,genre:'aire',nom:`Puissance pour ${fmt(r.h)} m de chute`}],reperes:[{x:r.q,c:VOY_ENCRE.alerte,nom:barMW(r.p)}]})}}],
+    voyGraphe(cv,{x:[0,520],y:y*1.05,unite:'MW',gradY:[0,y/2,y],gradX:[0,100,200,300,400,500].map(v=>[v,String(v)]),series:[{p:[[0,0],[500,m]],c:VOY_ENCRE.reseau,genre:'aire',nom:`Puissance pour ${fmt(r.h)} m de chute, selon le débit (m³/s)`}],reperes:[{x:r.q,c:VOY_ENCRE.alerte,nom:barMW(r.p)}]})}}],
   missions:[
     {t:'Mission 1 · Val-Turbine',x:"L'usine de Val-Turbine exploite une chute de 600 mètres. Règle la hauteur, puis trouve le débit qui lui fait produire 420 MW, à 10 MW près.",
       ok:r=>r.h===600&&Math.abs(r.p-420)<=10,

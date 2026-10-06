@@ -69,7 +69,7 @@ voyCarte('datacenter',{
     // ---- la halte et le parvis
     o.push({x:15,y:26,kind:'train',decor:1});
     for(let x=15;x<=26;x++)o.push({x,y:25,kind:'none',act:()=>voyRetour(sid)});
-    gens(24,23,'Chef de halte','down',{skin:'#c68a5c',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#1c1c22',hat:'#c43d3d',hatType:'cap',beard:'#1c1c22'},()=>say(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
+    gens(24,23,'Chef de halte','down',{skin:'#c68a5c',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#1c1c22',hat:'#c43d3d',hatType:'cap',beard:'#1c1c22'},()=>voyParler(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
     pose(17,23,'vPanneau',{theme:'datacenter',teinte:'#3a4050',act:voyDire(null,["Un panneau, discret : « Quai des Octets · 10 MW informatiques · 2 000 baies · disponibilité 99,98 % ».","Pas de logo, pas de nom de client. Une ligne en bas : « Si vous savez ce qu'il y a dedans, vous n'avez pas besoin de panneau. »"])});
     pose(26,23,'vPoster',{theme:'datacenter',teinte:'#3a4050',glow:!vue('carbone'),act:source('carbone','affiche')});
 
@@ -96,7 +96,7 @@ voyCarte('datacenter',{
     gens(27,8,'M. Talon','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#59627c',hair:'#b8431f',beard:'#b8431f',glasses:1,tie:'#2aa198',prop:'clipboard'},source('plate','talon','M. Talon'),{glow:!vue('plate')});
     const pue=voyAnimateur(sid,'pue','Mme Ratio',D.ratio[0],D.ratio[1],datSimPue);
     gens(32,9,'Mme Ratio','down',{skin:'#e0ac7e',shirt:'#2aa198',pants:'#2f3a5c',jacket:'#f7f0dc',hair:'#5a3a22',style:'queue',lash:1,glasses:1,prop:'tablet'},pue,{glow:!vue('pue')});
-    pose(33,9,'vPupitre',{act:()=>say([{t:"Le pupitre du jumeau numérique : une consigne, trois interrupteurs, et un chiffre qui réagit."}],()=>datSimPue(()=>voyDonnerInfo(sid,'pue')))});
+    pose(33,9,'vPupitre',{act:()=>voyParler([{t:"Le pupitre du jumeau numérique : une consigne, trois interrupteurs, et un chiffre qui réagit."}],()=>datSimPue(()=>voyDonnerInfo(sid,'pue')))});
     [[30,11],[33,11]].forEach(([x,y])=>pose(x,y,'vPoste',{act:voyDire(null,D.bureau)}));
 
     // ---- le local des batteries : Mmes Redondance
@@ -116,4 +116,4 @@ voyCarte('datacenter',{
     pose(17,3,'vGoeland',{act:voyDire(null,D.gabian)});
   }
 });
-VOY.sites.datacenter.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['datacenter.arrivee']){voyEtat().faits['datacenter.arrivee']=1;save();say(DAT.dit.arrivee)}};
+VOY.sites.datacenter.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['datacenter.arrivee']){voyEtat().faits['datacenter.arrivee']=1;save();voyParler(DAT.dit.arrivee)}};

@@ -143,7 +143,7 @@ SOL.dit={
     "On m'a nommé chef de halte la semaine dernière. Avant, j'étais chef de rien du tout au même endroit. La promotion se sent surtout à la casquette."],
   zenithAttente:["Mme Zénith, cheffe d'exploitation. Tu veux un tampon ? Tout le monde veut un tampon. Reviens quand tu sauras de quoi tu parles."],
   zenithApres:["Tampon donné, tampon mérité. Reviens quand tu veux. Et si tu poses des panneaux sur ton école, envoie-moi la courbe : j'adore corriger les copies.",
-    "Un réacteur nucléaire produit entre 6 et 8 TWh par an. Ma centrale, 17 GWh. Il en faudrait environ quatre cents comme la mienne pour en égaler un seul. Je le dis avant que tu l'apprennes ailleurs : c'est plus élégant."]
+    "Un réacteur nucléaire produit entre 6 et 9 TWh par an, selon sa taille. Ma centrale, 17 GWh. Il en faudrait environ quatre cents comme la mienne pour en égaler un seul. Je le dis avant que tu l'apprennes ailleurs : c'est plus élégant."]
 };
 
 /* ================= LE DÉFI DE MME ZÉNITH : LES QUESTIONS =================
