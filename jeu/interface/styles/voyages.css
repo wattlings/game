@@ -69,3 +69,6 @@
 .voy-choix{display:grid;gap:2px}
 .voy-choix b{font-size:16px}
 .voy-choix .seg{margin:2px 0 0}
+.voy-chiffres .alerte{border-color:var(--bad);background:#f8e1dd}
+.btn.voy-rouge{background:var(--bad);color:#fff}
+.btn.voy-rouge:disabled{opacity:.5;cursor:default}

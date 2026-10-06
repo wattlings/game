@@ -10,7 +10,7 @@
      series:[{p:[[x,y],…], c:'#couleur', genre:'aire'|'ligne'|'tirets'|'escalier'|'barres', nom:'Légende', l:largeur des barres, base:[…] pour empiler des barres sur d'autres, marches:1 pour une aire en escalier}],
      reperes:[{x,c,nom}]                    des traits verticaux
    }) */
-const VOY_ENCRE={texte:'#1c2440',discret:'#5b6380',grille:'#e3d9b8',repere:'#cdbf95',fond:'#fffaf0',soleil:'#f2a33a',soleilClair:'#f9d58f',prevu:'#5b6380',conso:'#2aa198',alerte:'#c43d3d',reseau:'#4a78c9'};
+const VOY_ENCRE={texte:'#1c2440',discret:'#5b6380',grille:'#e3d9b8',repere:'#cdbf95',fond:'#fffaf0',soleil:'#f2a33a',soleilClair:'#f9d58f',prevu:'#5b6380',conso:'#2aa198',alerte:'#c43d3d',ok:'#2f8f4e',reseau:'#4a78c9'};
 
 function voyGraphe(cv,o){
   // sur un écran étroit, le dessin est rétréci à l'affichage : on grossit le texte et on rehausse le graphique pour qu'il reste lisible

@@ -3,9 +3,6 @@
    une page vide dans le passeport. Quand un site est construit, sa déclaration quitte ce fichier pour son propre dossier
    (voyages/<site>/textes.js), avec ouvert:true. L'ordre des déclarations est celui du tableau des départs. */
 
-voyDeclarer('nucleaire',{
-  nom:'Centrale nucléaire de Neutron-sur-Mer',gare:'Neutron-sur-Mer',region:'Nord, littoral',theme:'Nucléaire',ouvert:false,
-  accroche:"Deux réacteurs, une digue, et la plus grande bouilloire de la région. Visite guidée : on ne touche à rien, surtout pas au bouton rouge. Il n'y a pas de bouton rouge."});
 voyDeclarer('barrage',{
   nom:'Barrage de Val-Turbine',gare:'Val-Turbine',region:'Alpes',theme:'Hydraulique',ouvert:false,
   accroche:"Un lac, un mur, une chute. La seule batterie de France qui se remplit quand il pleut."});
