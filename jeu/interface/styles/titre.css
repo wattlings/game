@@ -47,3 +47,9 @@
 .slots.solo{grid-template-columns:minmax(0,440px);justify-content:center}
 .slot.auth{text-align:center;align-items:center;gap:8px;padding:14px}
 .slot.auth .acts{justify-content:center;margin-top:4px}
+/* « Plus d'options » de la nouvelle partie */
+.slot .plus{margin-top:4px;color:#b7bdd6;font-size:14px}
+.slot .plus summary{cursor:pointer;width:max-content}
+.slot .plus[open]{display:grid;gap:8px}
+.slot .plus .btn{justify-self:start;font-size:15px;padding:6px 10px;margin:0}
+.slot.empty label[for=pn1]{font-size:14px;color:#b7bdd6}

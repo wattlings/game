@@ -35,5 +35,6 @@ function jumpTo(ch,sid){
   S.map=pos[0];S.x=pos[1];S.y=pos[2];S.dir=pos[3];save();
   if(!ROOT.querySelector('.title-screen'))boot(true);
   const hint=JOULE_HINTS[ch];
-  qkTimeout(()=>say([{t:`Reprise : ${CHAPTERS[ch]} · ${s.name}.`},{t:"Un doute ? Ouvre le menu (touche M) : tu y trouves ton objectif et le bouton « Comprendre cette étape », qui t'emmène à la bonne section du cours."},...(hint?hint.map(t=>({w:'Mme Joule',t})):[{t:objectiveText()}])]),350);
+  const suite=prochaineEtapeTexte();
+  qkTimeout(()=>say([{t:`${CHAPTERS[ch]} · ${s.name}.`},...(hint?hint.map(t=>({w:'Mme Joule',t})):[]),...(suite?[{t:`Prochaine étape : ${suite}. Suis la flèche orange.`}]:[])]),350);
 }

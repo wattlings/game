@@ -68,7 +68,7 @@ function voyHoule(c,ox,oy,t){
   for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++){if(g[y][x]!=='~')continue;const h=wh(x,y,k&63);if(h>.9)c.fillRect(x*16-ox+((h*97)&7)+2,y*16-oy+((h*53)&7)+3,4,1)}
 }
 
-/* ---- panneaux : les voyages n'ont pas de page de cours, le lien « Revoir le cours » est retiré ---- */
+/* ---- panneaux : les voyages n'ont pas de page de cours, le lien « Cours de cette étape » est retiré ---- */
 function voyPanneau(titre){const ov=openPanel(titre),l=ov.querySelector('.course-link');if(l)l.remove();return ov}
 /* une suite d'étapes dans un panneau (comme runSteps). Avec plusTard:true, un bouton permet de refermer avant la fin : rien n'est validé. */
 function voyEtapes(titre,etapes,fin,options){

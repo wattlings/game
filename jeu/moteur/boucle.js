@@ -34,8 +34,18 @@ function render(){
   // flèches d'objectif
   const bob=Math.sin(tick/8)*2;
   objs.forEach(o=>{if(!o.glow)return;const X=o.x*TS-ox+8,Y=o.y*TS-oy-14+bob;R(ctx,X-4,Y-6,9,9,'#fffaf0');R(ctx,X-3,Y-7,7,11,'#fffaf0');R(ctx,X,Y-5,2,4,'#1c2440');R(ctx,X,Y,2,2,'#1c2440')});
-  if(!AR.lock)targets().forEach(([x,y])=>{const X=x*TS-ox+8,Y=y*TS-oy-8+bob;ctx.fillStyle='#f2a33a';ctx.beginPath();ctx.moveTo(X-5,Y-6);ctx.lineTo(X+5,Y-6);ctx.lineTo(X,Y);ctx.fill();ctx.strokeStyle='#1c2440';ctx.lineWidth=1;ctx.stroke()});
+  aideFlecheHors=false;if(!AR.lock)targets().forEach(([x,y])=>flecheObjectif(ctx,x*TS-ox+8,y*TS-oy-8,bob));
   // nom de lieu
   if(fade>0){ctx.globalAlpha=fade;R(ctx,0,0,cv.width,cv.height,'#000');ctx.globalAlpha=1}
 }
-let lastT=0;function loop(now){const k=lastT?Math.min(3,(now-lastT)/16.667):1;lastT=now;if(!QK_HOST.hidden){update(k);render()}qkRAF(loop)}
+/* la flèche d'objectif : au-dessus de la cible si elle est à l'écran, sinon au bord de l'écran, tournée vers elle */
+function flecheObjectif(ctx,X,Y,bob){
+  const W=ctx.canvas.width,H=ctx.canvas.height,m=14;
+  if(X>=4&&X<=W-4&&Y>=10&&Y<=H-4){Y+=bob;ctx.fillStyle='#f2a33a';ctx.beginPath();ctx.moveTo(X-5,Y-6);ctx.lineTo(X+5,Y-6);ctx.lineTo(X,Y);ctx.fill();ctx.strokeStyle='#1c2440';ctx.lineWidth=1;ctx.stroke();return}
+  aideFlecheHors=true;
+  const cx=W/2,cy=H/2,dx=X-cx,dy=Y-cy,k=Math.min((W/2-m)/Math.abs(dx||1e-6),(H/2-m)/Math.abs(dy||1e-6)),ex=cx+dx*k,ey=cy+dy*k,a=Math.atan2(dy,dx),p=1+Math.sin(tick/8)*.12;
+  ctx.save();ctx.translate(ex,ey);ctx.rotate(a);ctx.scale(p,p);
+  ctx.fillStyle='#f2a33a';ctx.strokeStyle='#1c2440';ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(9,0);ctx.lineTo(-6,-8);ctx.lineTo(-3,0);ctx.lineTo(-6,8);ctx.closePath();ctx.fill();ctx.stroke();
+  ctx.restore();
+}
+let lastT=0,objT=0;function loop(now){const k=lastT?Math.min(3,(now-lastT)/16.667):1;lastT=now;if(!QK_HOST.hidden){update(k);render();if(now-objT>500){objT=now;objFlash();aidesVeille()}}qkRAF(loop)}

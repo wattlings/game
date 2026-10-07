@@ -13,7 +13,7 @@ function nextLine(){
   if(!dlg.q.length){dlg.open=false;if(dlg.el){dlg.el.remove();dlg.el=null}const cb=dlg.cb;dlg.cb=null;if(cb)qkTimeout(cb,30);return}
   dlg.cur=dlg.q.shift();dlg.shown=0;
   if(!dlg.el){dlg.el=document.createElement('div');dlg.el.className='dialog';dlg.el.addEventListener('click',pressA);$('wrap').appendChild(dlg.el)}
-  dlg.cur.full=dlg.cur.t.replace(/\{name\}/g,S.name);paginate();typeTick();
+  dlg.cur.full=selonAppareil(dlg.cur.t.replace(/\{name\}/g,S.name));paginate();typeTick();
 }
 /* Taille de texte fixe (calée sur l'encart, identique pour toutes les répliques) ; le texte est découpé en pages qui remplissent l'encart */
 const spkHTML=c=>c.w?`<span class="spk">${esc(c.w)}</span>`:'';

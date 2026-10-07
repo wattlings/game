@@ -18,7 +18,7 @@ function actPanel(id){
 }
 function checkCh1(){if(S.ch!==1||!S.notes.adresse||!S.notes.surface)return;
   if(missingReq(1).length)return say([{t:"Adresse et surface notées. Mais il te manque encore des notions pour cadrer ton site."},...missingLines(1)]);
-  S.ch=2;save();hud();say([{t:"Repérage terminé : adresse, surface et activité sont dans ton carnet."},{w:'Mme Joule',t:"(au téléphone) Bien ! Maintenant, entre dans le bâtiment et trouve les compteurs. Ensuite, direction l'Arène du Cadastre, au sud."}])}
+  S.ch=2;save();hud();say([{t:"Repérage terminé : adresse, surface et activité sont dans ton carnet."},{w:'Mme Joule',t:"(au téléphone) Bien ! Maintenant, entre dans le bâtiment et trouve les compteurs. Ensuite, direction l'Arène du Cadastre, au Puy du Cadastre, au nord de la place de la Donnée."}])}
 function others(key){return Object.values(SITES).filter(x=>x.id!==S.site).map(x=>x[key])}
 function gamePatrimoine(done){
   const s=site();

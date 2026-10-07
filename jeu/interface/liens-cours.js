@@ -4,7 +4,7 @@
 /* ================= LIENS JEU ⇄ COURS =================
    Le jeu est une page à part (jeu/) ; le cours est la page voisine.
    - « ← Cours » quitte le jeu : la partie est sauvegardée, on revient au cours dans le même onglet.
-   - « Revoir le cours ↗ » ouvre le cours dans un autre onglet : la partie reste ouverte ici, telle quelle.
+   - « Cours de cette étape ↗ » ouvre le cours dans un autre onglet : la partie reste ouverte ici, telle quelle.
    Adresses comprises par la page du jeu : jeu/#chapitre-3 (jouer ce chapitre), jeu/#reprendre (continuer la partie),
    jeu/#essai-… (mode essai de la page de pilotage, voir moteur/essai.js). */
 function courseHash(){return CH2HASH[S.ch]||'accueil'}

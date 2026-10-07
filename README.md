@@ -84,7 +84,8 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Les fiches savoir à collecter | `jeu/recit/fiches-savoir.js` |
 | Où se trouvent les informations en ville | `jeu/recit/lieux-savoir.js` |
 | Les conseils de Mme Joule, le choix du site | `jeu/recit/histoire.js` |
-| Le texte de l'objectif de chaque chapitre | `jeu/recit/objectifs.js` |
+| Le guidage : les tâches de chaque étape, dans l'ordre (texte court, cible de la flèche), la prochaine action affichée en permanence en haut de l'écran avec sa progression, la liste cochée du menu → Objectif | `jeu/recit/objectifs.js` (`objectiveText0` : les tâches, `prochaineAction`, `objectiveText`), `jeu/moteur/cibles.js` (la flèche), `jeu/moteur/boucle.js` (`flecheObjectif` : au bord de l'écran quand la cible est hors champ) |
+| Les aides montrées en jouant (se déplacer, parler, la carte, la flèche, le menu : chacune une fois, au moment où elle sert) et les textes adaptés au tactile (« touche K » devient « bouton CARTE ») | `jeu/interface/aides.js` |
 | La présentation du début de partie (les commandes, puis le jeu et son objectif). Elle s'ouvre à chaque nouvelle partie, avant l'avatar ; « Passer la présentation » ou Échap la saute ; menu → Options → « Revoir la présentation » | `jeu/interface/presentation.js` (textes et tableau des commandes, repris par le menu → Commandes), `jeu/interface/styles/presentation.css` |
 | Les habitants et leurs répliques | `jeu/recit/habitants.js`, `habitants-regions.js`, `meteo.js` |
 | Les secrets et clins d'œil | `jeu/recit/secrets.js`, `clins-d-oeil.js` |

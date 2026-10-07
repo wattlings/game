@@ -49,9 +49,10 @@ function metNpc(o){
 const avCanvas=(p,sc)=>{const c=document.createElement('canvas');c.width=20;c.height=24;c.style.width=(20*(sc||2))+'px';c.style.imageRendering='pixelated';drawChar(c.getContext('2d'),2,8,'down',0,p);return c};
 function openAvatar(onDone){
   const g0=(S.av&&S.av.g)||'h';let p=avLook(),g=g0,tab='modeles',tpl='';busy=true;clearKeys();
-  const ov=openPanel('Ton avatar'),b=ov.querySelector('.pbody');
+  const premiere=!S.av;   // première fois (nouvelle partie) : on peut partir tout de suite, et changer plus tard
+  const ov=openPanel(premiere?'Choisis ton avatar':'Ton avatar',{sansCours:true}),b=ov.querySelector('.pbody');
   b.innerHTML=`<div class="av-grid"><div class="av-prev"><canvas id="avc" width="64" height="26" aria-label="Aperçu de l'avatar : face, profil, dos"></canvas><small>Face, profil, dos</small></div><div class="av-ctl"><div class="seg" role="group" aria-label="Rubriques" id="avTabs"></div><div id="avBody"></div></div></div>
-    <div class="row"><button class="btn alt" type="button" id="avRnd">Au hasard</button><button class="btn" type="button" id="avOk">Valider mon avatar ▸</button></div>`;
+    <div class="row av-actions"><button class="btn alt" type="button" id="avRnd">Au hasard</button><button class="btn" type="button" id="avOk">${premiere?"C'est parti ▸":'Valider mon avatar ▸'}</button>${premiere?'<small>Tu pourras changer d’avatar quand tu veux : menu → ta carte de joueur.</small>':''}</div>`;
   const body=b.querySelector('#avBody'),tabs=b.querySelector('#avTabs');
   const sw=(key,list,none)=>{const cur=p[key]||'',custom=cur&&!list.includes(cur);
     return `<div class="swatches" role="radiogroup">${none?`<button type="button" class="sw none${!cur?' on':''}" data-c="${key}" data-v="" aria-label="Aucun" title="Aucun"></button>`:''}${list.map(c=>`<button type="button" class="sw${cur===c?' on':''}" data-c="${key}" data-v="${c}" style="background:${c}" aria-label="Couleur ${c}"></button>`).join('')}<label class="sw pick${custom?' on':''}" style="${custom?'background:'+cur:''}" title="Autre couleur"><input type="color" data-pc="${key}" value="${custom?cur:'#888888'}" aria-label="Autre couleur"></label></div>`};

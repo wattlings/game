@@ -26,7 +26,9 @@ function titleScreen(){
       <span class="stats">${(v.badges||[]).length}/8 badges · ${Object.keys(v.secrets||{}).length}/${NSEC} secrets · ${Object.keys(v.fiches||{}).length}/${FICHES.length} fiches</span>
       <small>${INVITE?'Partie sans compte : non sauvegardée':'Sauvegardé le '+fmtDate(v.savedAt)}</small>
       <div class="acts"><button class="btn" data-a="cont">Continuer</button><button class="btn alt" data-a="chap">Choisir une étape</button><button class="btn alt" data-a="restart">Recommencer l'histoire</button><button class="btn danger" data-a="erase">${INVITE?'Abandonner':'Effacer'}</button></div></div>`;
-  const nouvelle=`<div class="slot empty"><b>Nouvelle partie</b><label for="pn1" class="sr-only">Ton prénom</label><input id="pn1" maxlength="14" value="" placeholder="Ton prénom"><label class="hades"><input type="checkbox" data-hades> Mode Hadès <small>les personnages se font prier : il faut tout leur demander deux fois</small></label><div class="acts"><button class="btn" data-a="new">Nouvelle partie</button><button class="btn alt" data-a="newchap">Commencer à une étape</button></div></div>`;
+  /* nouvelle partie : le prénom et un seul bouton ; les choix pour joueurs avertis sont rangés sous « Plus d'options » */
+  const nouvelle=`<div class="slot empty"><b>Nouvelle partie</b><label for="pn1">Ton prénom</label><input id="pn1" maxlength="14" value="" placeholder="Ton prénom"><div class="acts"><button class="btn" data-a="new">Commencer ▸</button></div>
+    <details class="plus"><summary>Plus d'options</summary><label class="hades"><input type="checkbox" data-hades> Mode Hadès <small>les personnages se font prier : il faut tout leur demander deux fois</small></label><button class="btn alt" data-a="newchap">Commencer directement à une étape</button></details></div>`;
   /* une partie commencée dans ce navigateur avant les comptes : elle rejoindra le compte s'il n'en a pas */
   const ancienne=needAuth()?readSave():null;
   const corps=needAuth()?`<div class="slots solo"><div class="slot auth"><b>Connecte-toi pour sauvegarder ta partie</b>

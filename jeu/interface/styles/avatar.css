@@ -26,3 +26,6 @@
 .chap .chap-done{background:#eef6ea}
 .chap .chap-cur{border-color:var(--amber);background:#fff3dc}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+/* le bouton pour valider reste toujours visible en bas de la fenêtre, même au milieu de la liste des tenues */
+.av-actions{position:sticky;bottom:-18px;z-index:2;background:var(--paper);margin:12px -18px -18px;padding:10px 18px 14px;border-top:2px solid #e3d6ae;align-items:center}
+.av-actions small{flex-basis:100%;color:var(--muted);font-size:14px}

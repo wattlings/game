@@ -4,7 +4,8 @@
 /* ================= PANNEAUX / MINI-JEUX ================= */
 let panelEl=null;
 function clearKeys(){for(const k in keys)keys[k]=0;ROOT.querySelectorAll('.dpad .held').forEach(b=>b.classList.remove('held'))}
-function openPanel(title){busy=true;clearKeys();const ov=document.createElement('div');ov.className='overlay';ov.innerHTML=`<div class="panel" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header><span>${esc(title)}</span><span class="hdr-r"><button type="button" class="course-link" title="Ouvre la section du cours correspondante">Revoir le cours ↗</button><span class="step"></span></span></header><div class="pbody"></div></div>`;$('layer').appendChild(ov);panelEl=ov;ov.querySelector('.course-link').onclick=()=>goCourse();return ov}
+/* sansCours : une fenêtre qui n'a pas d'étape du cours à revoir (avatar, choix du site) n'affiche pas « Cours de cette étape » */
+function openPanel(title,{sansCours=false}={}){busy=true;clearKeys();const ov=document.createElement('div');ov.className='overlay';ov.innerHTML=`<div class="panel" role="dialog" aria-modal="true" aria-label="${esc(title)}"><header><span>${esc(title)}</span><span class="hdr-r"><button type="button" class="course-link" title="Ouvre la section du cours dans un autre onglet ; le jeu reste ouvert">Cours de cette étape ↗</button><span class="step"></span></span></header><div class="pbody"></div></div>`;$('layer').appendChild(ov);panelEl=ov;const cl=ov.querySelector('.course-link');if(sansCours)cl.remove();else cl.onclick=()=>goCourse();return ov}
 function closePanel(){if(panelEl){panelEl.remove();panelEl=null}busy=false;clearKeys();hud()}
 function runSteps(title,steps,done){
   const ov=openPanel(title),body=ov.querySelector('.pbody'),st=ov.querySelector('.step');let i=0;

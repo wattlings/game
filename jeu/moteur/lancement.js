@@ -8,5 +8,5 @@ function boot(){
   rebuildMaps();P.x=S.x;P.y=S.y;P.px=S.x*TS;P.py=S.y*TS;P.dir=S.dir||'up';P.moving=false;
   if(isSolid(P.x,P.y)){const f={office:[5,6],town:front('office'),rdc:[7,9],cave:[2,2]}[S.map]||MAPS[S.map].depart||(curArena()?[7,10]:[5,6]);P.x=f[0];P.y=f[1];P.px=P.x*TS;P.py=P.y*TS}
   lastObj=null;hud();fadeIn();applySobriete();updateMusic();
-  if(S.ch===0&&S.map==='office')qkTimeout(()=>{if(!busy&&!dlg.open)say([{t:"Ton premier jour. Mme Joule, l'energy manager senior, t'attend à droite. Approche-toi et appuie sur A (Espace)."},{t:"Ton objectif, ton carnet, les options et le retour au cours sont dans le menu (touche M, ou bouton MENU en haut à droite). Le bouton « ← Cours » te ramène au cours à tout moment."},{t:"La ville est une boucle de huit quartiers, un par étape. Pour t'y retrouver, ouvre la carte : touche K, ou bouton CARTE."}])},500);
+  /* les commandes ne sont plus expliquées ici d'un coup : elles sont montrées au moment où elles servent (interface/aides.js) */
 }

@@ -29,7 +29,7 @@ function openPresentation(onDone){
       <ul><li><b>Trouve les informations clés</b> en ville : parle aux habitants, lis les panneaux et les documents. Les flèches orange et la carte te montrent où chercher.</li>
       <li><b>Entre dans l'arène</b> : trois dresseurs, puis un champion, te posent des questions sur l'étape.</li>
       <li><b>Gagne le badge</b> : il ouvre la barrière du quartier suivant.</li></ul>
-      <p>En chemin, complète ta collection : fiches savoir, Anomalidex, secrets. Un doute ? Le menu donne ton objectif, et « Revoir le cours » t'emmène à la bonne page du cours.</p>`},
+      <p>En chemin, complète ta collection : fiches savoir, Anomalidex, secrets. Un doute ? Le menu donne ton objectif, et « Cours de cette étape » t'emmène à la bonne page du cours.</p>`},
   ];
   const ov=document.createElement('div');ov.className='overlay presentation';
   let i=0;

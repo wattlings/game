@@ -9,6 +9,8 @@
 //   voyages : prend le train vers chaque destination ouverte, vérifie que tout ce qui s'examine est accessible à pied,
 //             examine tout, manipule les simulations, fait tamponner le passeport et rentre ;
 //   liens : fait l'aller-retour cours → jeu → cours et contrôle sauvegarde, reprise et anciennes adresses ;
+//   guidage : la ligne d'objectif (une action, sa progression), la flèche au bord de l'écran, les aides montrées en jouant,
+//             l'avatar et l'écran titre simplifiés, le message à la porte d'une arène, les textes adaptés au tactile ;
 //   menu : la liste façon Rouge Feu (curseur, aide, A ouvre, B revient, M referme), poches du carnet, options, patine par défaut ;
 //   comptes : sans compte, le jeu propose de se connecter ou de jouer sans rien enregistrer, et n'enregistre rien ;
 //             la présentation du début de partie, l'avertissement en quittant une partie non sauvegardée ;
@@ -225,6 +227,63 @@ if (quoi === "tout" || quoi === "voyages") {
   await contexte.close();
 }
 
+// ---------------------------------------------------------------- guidage
+if (quoi === "tout" || quoi === "guidage") {
+  console.log("Guidage : objectif, flèche, aides, premières minutes");
+  const ombreDe = (page) => (s) => page.evaluate((s) => { const e = document.getElementById("qk-host").shadowRoot.querySelector(s); return e ? e.textContent : null; }, s);
+  const finDialogue = async (page) => { for (let i = 0; i < 40 && (await page.evaluate(() => dlg.open)); i++) { await page.evaluate(() => nextLine()); await page.waitForTimeout(40); } };
+  // une vraie première partie, sans compte : écran titre, avatar, première aide
+  {
+    const contexte = await navigateur.newContext({ viewport: { width: 1280, height: 800 }, sansCompte: true });
+    const page = await contexte.newPage(); const erreurs = ecouterErreurs(page); const ombre = ombreDe(page);
+    await page.goto(adresse + "jeu/"); await page.waitForTimeout(1000);
+    await page.evaluate(() => document.getElementById("qk-host").shadowRoot.querySelector("[data-a=guest]").click()); await page.waitForTimeout(300);
+    verif("titre : un seul bouton pour commencer, le reste sous « Plus d'options »", await page.evaluate(() => { const r = document.getElementById("qk-host").shadowRoot; return !!r.querySelector("[data-a=new]") && !r.querySelector("details.plus").open && !!r.querySelector("details.plus [data-hades]"); }));
+    await page.evaluate(() => { const r = document.getElementById("qk-host").shadowRoot; r.querySelector("#pn1").value = "Léa"; r.querySelector("[data-a=new]").click(); }); await page.waitForTimeout(300);
+    await page.evaluate(() => document.getElementById("qk-host").shadowRoot.getElementById("prSkip").click()); await page.waitForTimeout(300);
+    const av = await page.evaluate(() => { const b = document.getElementById("qk-host").shadowRoot.getElementById("avOk"), r = b.getBoundingClientRect(); return { txt: b.textContent, vu: r.bottom <= innerHeight && r.top >= 0, cours: !!document.getElementById("qk-host").shadowRoot.querySelector(".panel .course-link") }; });
+    verif("avatar : « C'est parti » visible sans faire défiler, sans lien vers le cours", /C'est parti/.test(av.txt) && av.vu && !av.cours, JSON.stringify(av));
+    await page.evaluate(() => document.getElementById("qk-host").shadowRoot.getElementById("avOk").click()); await page.waitForTimeout(1500);
+    verif("début : pas de long dialogue d'accueil, la ligne d'objectif est là", !(await page.evaluate(() => dlg.open)) && /Parle à Mme Joule/.test((await ombre("#objFlash")) || ""));
+    verif("début : l'aide montre comment se déplacer", /déplacer/.test((await ombre("#aide")) || ""));
+    await page.waitForTimeout(7000);
+    verif("début : la ligne d'objectif reste affichée", await page.evaluate(() => !document.getElementById("qk-host").shadowRoot.getElementById("objFlash").hidden));
+    await page.evaluate(() => { P.x = 8; P.y = 5; P.dir = "up"; P.px = P.x * TS; P.py = P.y * TS; }); await page.waitForTimeout(1200);
+    verif("début : devant Mme Joule, l'aide montre comment parler", /Espace pour parler/.test((await ombre("#aide")) || ""), await ombre("#aide"));
+    await page.evaluate(() => actJoule()); await finDialogue(page); await page.waitForTimeout(300);
+    verif("choix du site : l'école est recommandée, sans lien vers le cours", /Recommandé/.test((await ombre(".panel .cards")) || "") && !(await page.evaluate(() => !!document.getElementById("qk-host").shadowRoot.querySelector(".panel .course-link"))));
+    verif("guidage : aucune erreur (première partie)", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+    await contexte.close();
+  }
+  // le guidage étape par étape
+  {
+    const contexte = await navigateur.newContext({ viewport: { width: 1280, height: 800 } });
+    const page = await contexte.newPage(); const erreurs = ecouterErreurs(page); const ombre = ombreDe(page);
+    await page.goto(adresse + "jeu/#essai-chapitre-1"); await page.waitForTimeout(2200); await finDialogue(page); await page.waitForTimeout(700);
+    verif("chapitre 1 : une seule action, dans l'ordre de Mme Joule, avec sa progression", /^▶Lis l'adresse.*0\/4$/.test((await ombre("#objFlash")) || ""), await ombre("#objFlash"));
+    verif("chapitre 1 : une seule cible pour la flèche", (await page.evaluate(() => targets().length)) === 1);
+    await page.evaluate(() => { S.notes.adresse = "x"; }); await page.waitForTimeout(800);
+    verif("chapitre 1 : l'adresse lue, l'objectif passe à la surface (1/4)", /surface.*1\/4$/.test((await ombre("#objFlash")) || ""), await ombre("#objFlash"));
+    await page.evaluate(() => { const [x, y] = targets()[0]; P.x = x + 40; P.y = y; P.px = P.x * TS; P.py = P.y * TS; }); await page.waitForTimeout(400);
+    verif("flèche : la cible hors de l'écran, la flèche se pose au bord", await page.evaluate(() => aideFlecheHors === true));
+    await page.goto(adresse + "jeu/#essai-chapitre-3"); await page.waitForTimeout(2200); await finDialogue(page);
+    verif("porte d'arène : combien d'infos clés manquent, et la prochaine", /^Il te manque 3 infos clés sur 3\. Prochaine : parle à/.test(await page.evaluate(() => missingLines(3)[0].t)), await page.evaluate(() => missingLines(3)[0].t));
+    await page.evaluate(() => openMenu("objectif")); await page.waitForTimeout(200);
+    verif("menu → Objectif : la liste des tâches de l'étape, la prochaine marquée", (await page.evaluate(() => document.getElementById("qk-host").shadowRoot.querySelectorAll(".obj-liste li").length)) >= 4 && (await page.evaluate(() => document.getElementById("qk-host").shadowRoot.querySelectorAll(".obj-liste li.cur").length)) === 1);
+    verif("guidage : aucune erreur (étapes)", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+    await contexte.close();
+  }
+  // à l'écran tactile, les textes parlent des boutons
+  {
+    const contexte = await navigateur.newContext({ viewport: { width: 390, height: 760 }, hasTouch: true, isMobile: true });
+    const page = await contexte.newPage();
+    await page.goto(adresse + "jeu/#essai-chapitre-3"); await page.waitForTimeout(2200); await finDialogue(page);
+    const t = await page.evaluate(() => { say([{ t: "La carte (touche K) montre le chemin ; le menu (touche M)." }]); return dlg.cur.full; });
+    verif("tactile : « touche K » devient « bouton CARTE »", /bouton CARTE/.test(t) && /bouton Menu/.test(t) && !/touche/.test(t), t);
+    await contexte.close();
+  }
+}
+
 // ---------------------------------------------------------------- menu
 if (quoi === "tout" || quoi === "menu") {
   console.log("Menu : la liste, ses écrans, les options");
@@ -350,9 +409,9 @@ if (quoi === "tout" || quoi === "liens") {
   const dansLaPage = (f, ...a) => page.evaluate(f, ...a);
   await page.goto(adresse + "#etape-3");
   await page.waitForSelector(".qk-band");
-  verif("bandeau « Mode jeu » sur l'étape 3", await dansLaPage(() => document.querySelector(".qk-band .qk-play").textContent.includes("Fiabiliser")));
+  verif("bandeau « Mode jeu » sur l'étape 3 : sans partie, « Commencer le jeu » et un lien direct vers l'étape", await dansLaPage(() => /Commencer le jeu/.test(document.querySelector(".qk-band .qk-play").textContent) && /Fiabiliser/.test(document.querySelector(".qk-band .qk-direct").textContent)));
   verif("bouton flottant « Jouer » tant qu'aucune partie n'existe", await dansLaPage(() => document.querySelector("#qk-fab span").textContent === "Jouer"));
-  await page.click(".qk-band .qk-play");
+  await page.click(".qk-band .qk-direct a");
   await page.waitForURL(/\/jeu\//);
   await page.waitForTimeout(1200);
   verif("le bouton du bandeau ouvre la page du jeu", await dansLaPage(() => location.pathname.endsWith("/jeu/") && location.hash === ""));
@@ -375,7 +434,7 @@ if (quoi === "tout" || quoi === "liens") {
   verif("« Reprendre le jeu » reprend au même endroit", await dansLaPage((p) => EN_ON === true && S.x === p.x && S.y === p.y && S.map === p.carte, position));
   const [onglet] = await Promise.all([contexte.waitForEvent("page"), dansLaPage(() => document.getElementById("qk-host").shadowRoot.getElementById("qkCourse").click())]);
   await onglet.waitForLoadState();
-  verif("« Comprendre cette étape » ouvre le cours dans un autre onglet", /#etape-3$/.test(onglet.url()) && !onglet.url().includes("/jeu/"), onglet.url());
+  verif("« Cours de cette étape » ouvre le cours dans un autre onglet", /#etape-3$/.test(onglet.url()) && !onglet.url().includes("/jeu/"), onglet.url());
   verif("le jeu reste ouvert pendant ce temps", await dansLaPage(() => EN_ON === true));
   await onglet.close();
   await page.goto(adresse + "#jeu-5");

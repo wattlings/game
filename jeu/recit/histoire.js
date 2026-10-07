@@ -23,15 +23,15 @@ function actJoule(){
   jouleExtra((JOULE_HINTS[S.ch]||["Bon travail."]).map(t=>({w:J,t})));
 }
 function chooseSite(){
-  const ov=openPanel('Choisis ton site'),b=ov.querySelector('.pbody');
-  b.innerHTML=`<p>Tu es <b>gestionnaire de site</b>. Choisis le bâtiment dont tu vas t'occuper. Chaque site a ses propres chiffres et ses pièges.</p><div class="cards"></div>`;
+  const ov=openPanel('Choisis ton site',{sansCours:true}),b=ov.querySelector('.pbody');
+  b.innerHTML=`<p>Tu es <b>gestionnaire de site</b>. Choisis le bâtiment dont tu vas t'occuper. Chaque site a ses propres chiffres et ses pièges. Tu hésites&nbsp;? Prends l'école : c'est l'exemple suivi dans le cours.</p><div class="cards"></div>`;
   const cards=b.querySelector('.cards');
   const blurb={ecole:'Bâtiment public, 250 élèves. Chauffage gaz, cantine, vacances scolaires.',bureau:'Tertiaire privé, 90 salariés. Grosse puissance, salle serveurs.',boulangerie:'Petit commerce avec compteur Linky. Le fournil travaille la nuit.'};
   ['ecole','bureau','boulangerie'].forEach(id=>{const s=SITES[id],bd=BLD.find(x=>x.id===id);
     const c=document.createElement('button');c.className='card';const cv2=document.createElement('canvas');cv2.width=(bd.w+2)*TS;cv2.height=(bd.h+1)*TS;const x=cv2.getContext('2d');
     R(x,0,0,cv2.width,cv2.height,'#7cc56a');drawBuilding(x,{...bd,x:1,y:.7,door:[bd.door[0]-bd.x+1,bd.door[1]-bd.y+.7]});
-    c.appendChild(cv2);c.insertAdjacentHTML('beforeend',`<b>${s.name}</b><span><span class="tag">${fmt(s.surface)} m²</span> <span class="tag">${s.kva} kVA</span></span><small>${blurb[id]}</small>`);
+    c.appendChild(cv2);c.insertAdjacentHTML('beforeend',`${id==='ecole'?'<span class="tag key">Recommandé : l\'école du cours</span>':''}<b>${s.name}</b><span><span class="tag">${fmt(s.surface)} m²</span> <span class="tag">${s.kva} kVA</span></span><small>${blurb[id]}</small>`);
     c.onclick=()=>{trk('site_choice',{site:id});S.site=id;S.ch=1;S.notes={};S.flags={};closePanel();rebuildMaps();save();hud();
-      say([{w:'Mme Joule',t:`${s.name}, bon choix ! La démarche compte 8 étapes. Chacune a son quartier, avec ses informations et son arène : trois dresseurs, un champion, un badge. Une piste cyclable relie les huit quartiers dans l'ordre, et chaque badge ouvre la barrière du quartier suivant. Chaque quartier a pris les couleurs d'une région : tu vas faire un petit tour de France. La carte (touche K) montre tout.`},{w:'Mme Joule',t:"Et ne perds jamais de vue le but : consommer moins de kWh. Regarde le compteur en haut de l'écran : il est à zéro. Il le restera longtemps : les premières étapes n'économisent rien, elles rendent les économies possibles."},{w:'Mme Joule',t:"Mais on n'entre pas dans une arène les mains vides : il faut d'abord trouver en ville les informations de l'étape. Première étape : cadrer."},{w:'Mme Joule',t:`Va dehors. Trouve l'adresse sur la boîte aux lettres, et la surface sur la fiche technique affichée près de l'entrée. Suis la flèche orange.`}])};
+      say([{w:'Mme Joule',t:`${s.name}, bon choix ! La démarche compte 8 étapes : chacune a son quartier, ses informations à trouver et son arène. Le but : faire baisser les kWh, que compte le compteur en haut de l'écran.`},{w:'Mme Joule',t:"Première étape : cadrer ton site. Va dehors, lis l'adresse sur la boîte aux lettres, puis la surface sur la fiche technique. Suis la flèche orange."}])};
     cards.appendChild(c)});
 }

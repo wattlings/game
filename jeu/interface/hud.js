@@ -13,15 +13,19 @@ function hud(){
   objFlash();
 }
 let toastQ=[],toastOn=false;function toast(msg){toastQ.push(msg);if(!toastOn)nextToast()}
-function nextToast(){const msg=toastQ.shift();if(!msg){toastOn=false;return}toastOn=true;const t=document.createElement('div');t.className='toast';t.textContent=msg;ROOT.appendChild(t);qkTimeout(()=>t.remove(),1700);qkTimeout(nextToast,1750)}
-/* rappel de l'objectif : il s'affiche quelques secondes sur l'écran quand il change (il reste lisible dans le menu START) */
+function nextToast(){const msg=toastQ.shift();if(!msg){toastOn=false;return}toastOn=true;const t=document.createElement('div');t.className='toast';t.textContent=selonAppareil(msg);ROOT.appendChild(t);qkTimeout(()=>t.remove(),1700);qkTimeout(nextToast,1750)}
+/* la ligne d'objectif, toujours visible en haut de l'écran : la prochaine action et l'avancée de l'étape (recit/objectifs.js).
+   Elle s'anime quand l'objectif change ; un clic ouvre le menu → Objectif, qui montre toutes les tâches de l'étape */
 let lastObj=null;
-function objFlash(force){
-  const el=$('objFlash');if(!el||QK_HOST.hidden)return;const t=objectiveText();
-  if(!force&&t===lastObj)return;
-  if(busy||dlg.open||ROOT.querySelector('.title-screen')){qkClear(objFlash.w);objFlash.w=qkTimeout(()=>objFlash(force),600);return}
-  lastObj=t;el.hidden=true;void el.offsetWidth;el.innerHTML='<div><b>Objectif :</b> '+esc(t)+'</div>';el.hidden=false;
-  qkClear(objFlash.t);objFlash.t=qkTimeout(()=>{el.hidden=true},6000);
+function objFlash(){
+  const el=$('objFlash');if(!el)return;
+  if(QK_HOST.hidden||ROOT.querySelector('.title-screen')||(!S.site&&S.ch>0)){el.hidden=true;lastObj=null;return}
+  const a=prochaineAction(),t=a.t+(a.prog?` (${a.prog})`:''),k=t+'|'+a.n;
+  el.hidden=false;if(k===lastObj)return;
+  const change=lastObj!==null;lastObj=k;
+  el.innerHTML=`<button type="button" class="obj-l" title="Voir toutes les tâches de l'étape (menu → Objectif)"><b aria-hidden="true">▶</b><span>${esc(t)}</span>${a.total>1?`<em>${a.n}/${a.total}</em>`:''}</button>`;
+  el.querySelector('button').onclick=e=>{e.currentTarget.blur();if(!busy&&!dlg.open)openMenu('objectif')};
+  if(change){el.classList.remove('neuf');void el.offsetWidth;el.classList.add('neuf')}
 }
 function gainXP(n){sfx('good');const before=level();S.xp+=n;save();hud();if(level()>before)qkTimeout(()=>toast(`Niveau ${level()} !`),400);else toast(`+${n} XP`)}
 function badge(name){if(!S.badges.includes(name)){trk('badge',{name});S.badges.push(name);S.xp+=60;save();hud();jingle('badge');toast(`Badge ${BLAB(name)} obtenu !`)}}

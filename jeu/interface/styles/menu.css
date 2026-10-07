@@ -75,3 +75,13 @@
 .optg{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin:8px 0 14px}
 .optg .btn{margin:0;width:100%}
 .segh{font-family:var(--f-pix);font-size:17.5px;margin:12px 0 2px}
+
+/* Menu → Objectif : la liste cochée des tâches de l'étape */
+.obj-liste{list-style:none;padding:0;margin:4px 0 12px;display:grid;gap:4px}
+.obj-liste li{display:grid;grid-template-columns:1.4em 1fr;gap:6px;padding:6px 10px;border-radius:6px;background:#fffaf0;border:1px solid #e3d6ae}
+.obj-liste li.ok{color:var(--muted)}
+.obj-liste li.ok span:first-child{color:#2e8b57}
+.obj-liste li.cur{border:2px solid var(--amber);font-weight:600}
+.obj-liste li.cur span:first-child{color:var(--amber)}
+.obj-liste small{font-weight:400;color:var(--muted)}
+.obj-liste .obj-cle{background:var(--paper-2);border-radius:4px;padding:0 5px;margin-left:4px}

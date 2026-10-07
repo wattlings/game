@@ -31,8 +31,12 @@ function lienJeu(suite, classe) {
   return a;
 }
 
-/** Le bandeau « Mode jeu ». chapitres : les chapitres proposés, ou null pour un seul bouton « Lancer le jeu ». */
-function bandeau(surtitre, titre, texte, chapitres) {
+/**
+ * Le bandeau « Mode jeu ». chapitres : les chapitres proposés, ou null pour un seul bouton « Lancer le jeu ».
+ * direct : sans partie en cours, un seul bouton « Commencer le jeu » (le début), et ces chapitres en liens secondaires,
+ * pour qui veut aller droit à l'étape.
+ */
+function bandeau(surtitre, titre, texte, chapitres, direct) {
   const b = document.createElement("section");
   b.className = "qk-band";
   b.setAttribute("aria-label", "Le jeu");
@@ -43,6 +47,23 @@ function bandeau(surtitre, titre, texte, chapitres) {
   b.appendChild(t);
   const actions = document.createElement("div");
   actions.className = "qk-band-act";
+  if (direct) {
+    const debut = lienJeu("", "qk-play");
+    debut.innerHTML = "▶ Commencer le jeu<small>Depuis le début : ton bureau, Mme Joule, le choix de ton site</small>";
+    actions.appendChild(debut);
+    const p = document.createElement("p");
+    p.className = "qk-direct";
+    p.append("ou aller directement à : ");
+    direct.forEach((ch, i) => {
+      const l = lienJeu("chapitre-" + ch, "");
+      l.textContent = CHAPITRES_JEU[ch].titre;
+      if (i) p.append(" · ");
+      p.append(l);
+    });
+    actions.appendChild(p);
+    b.appendChild(actions);
+    return b;
+  }
   (chapitres || [null]).forEach((ch) => {
     const lien = lienJeu(ch === null ? "" : "chapitre-" + ch, "qk-play");
     lien.innerHTML =
@@ -87,13 +108,17 @@ function poser() {
     const n = +m[1];
     const chapitres = chapitresDeLEtape(n);
     if (!chapitres.length) return;
+    const enCours = !!partieEnCours();
     const b = bandeau(
       "Mode jeu · étape " + n,
       `Pratique « ${ETAPES_DE_BASE[n - 1].titre} » dans Wattlings`,
-      chapitres.length > 1
-        ? "Cette étape se joue en deux temps : le repérage, puis l’arène. Le jeu reprend directement au bon endroit, avec ton avatar et ton site."
-        : "Le jeu reprend directement au bon endroit, avec ton avatar et ton site. Le bouton « ← Cours » du jeu te ramène ici à tout moment.",
+      !enCours
+        ? "Le jeu reprend tout le parcours en 8 étapes, version RPG. Le bouton « ← Cours » du jeu te ramène ici à tout moment."
+        : chapitres.length > 1
+          ? "Cette étape se joue en deux temps : le repérage, puis l’arène. Le jeu reprend directement au bon endroit, avec ton avatar et ton site."
+          : "Le jeu reprend directement au bon endroit, avec ton avatar et ton site. Le bouton « ← Cours » du jeu te ramène ici à tout moment.",
       chapitres,
+      enCours ? null : chapitres,
     );
     if (n === 8)
       b.querySelector(".qk-band-txt").insertAdjacentHTML(

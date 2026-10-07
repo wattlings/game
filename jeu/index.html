@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="interface/styles/tableau-de-bord.css">
 <link rel="stylesheet" href="../commun/graphiques/graphiques.css">
 <link rel="stylesheet" href="interface/styles/voyages.css">
-<div class="qk-app"><div class="qk-top"><button type="button" id="qkBack">←<span class="lg"> Retour au cours</span><span class="sm"> Cours</span></button><span class="qk-top-r"><button type="button" id="qkCourse"><span class="lg">Comprendre cette étape : </span><span class="sm">Cours : </span><b id="qkStep">Le cycle</b></button><button type="button" id="qkPip" aria-pressed="false" title="Détacher le jeu dans une petite fenêtre flottante">⧉<span class="lg"> Vignette</span></button><button type="button" id="qkFs" aria-pressed="false" title="Plein écran (touche F)">⛶<span class="lg"> Plein écran</span></button></span></div>
+<div class="qk-app"><div class="qk-top"><button type="button" id="qkBack">←<span class="lg"> Retour au cours</span><span class="sm"> Cours</span></button><span class="qk-top-r"><button type="button" id="qkCourse"><span class="lg">Cours de cette étape : </span><span class="sm">Cours : </span><b id="qkStep">Le cycle</b> ↗</button><button type="button" id="qkPip" aria-pressed="false" title="Détacher le jeu dans une petite fenêtre flottante">⧉<span class="lg"> Vignette</span></button><button type="button" id="qkFs" aria-pressed="false" title="Plein écran (touche F)">⛶<span class="lg"> Plein écran</span></button></span></div>
 <div class="console" id="console">
   <div class="hud" role="status">
     <span class="who" id="hudName">—</span>
@@ -103,6 +103,7 @@
 <script defer src="moteur/boucle.js"></script>
 <script defer src="moteur/dialogue.js"></script>
 <script defer src="interface/hud.js"></script>
+<script defer src="interface/aides.js"></script>
 <script defer src="recit/objectifs.js"></script>
 <script defer src="rendu/art-base.js"></script>
 <script defer src="rendu/art-vegetation.js"></script>

@@ -110,8 +110,13 @@ function menuEcran(k){
 const menuSeg=(vals,cur)=>vals.find(v=>String(v[0])===String(cur))||vals[0];
 
 const MENU_ECRANS={
+  /* l'objectif : la prochaine action en grand, puis toutes les tâches de l'étape, cochées (recit/objectifs.js) */
   objectif:{t:()=>'Objectif',
-    html:()=>{const s=S.site?site():null;return `<div class="obj-box"><p>${esc(objectiveText())}</p></div><p class="dnote">${s?esc(s.name)+' · ':''}${esc(CHAPTERS[S.ch]||'')}. Les flèches orange dans le décor indiquent où aller ; un point d'exclamation signale un personnage qui a une information pour toi. La carte montre ton objectif et les infos clés qui te manquent.</p><div class="row"><button class="btn" id="oMap" data-focus>Voir sur la carte (K)</button><button class="btn" id="oCourse">Comprendre cette étape : ${esc(courseLabel())} ↗</button></div>`},
+    html:()=>{const s=S.site?site():null,a=prochaineAction(),T=a.voyage?[]:objectiveText0();
+      return `<div class="obj-box"><p><b>▶</b> ${esc(objectiveText())}</p></div>
+      ${T.length>1?`<h4 class="segh">${esc(CHAPTERS[S.ch]||'Cette étape')}</h4><ol class="obj-liste">${T.map(x=>`<li class="${x.ok?'ok':x===a||x.t===a.t?'cur':''}"><span aria-hidden="true">${x.ok?'✔':x.t===a.t?'▶':'○'}</span><span>${esc(x.t)}${x.prog&&!x.ok?` <small>(${esc(x.prog)})</small>`:''}${x.cle?' <small class="obj-cle">info clé</small>':''}</span></li>`).join('')}</ol>`:''}
+      <p class="dnote">${s?esc(s.name)+' · ':''}La flèche orange montre où aller ; au bord de l'écran, elle indique la direction. Un point d'exclamation signale quelqu'un qui a une information pour toi.</p>
+      <div class="row"><button class="btn" id="oMap" data-focus>Voir sur la carte</button><button class="btn" id="oCourse">Cours de cette étape ↗</button></div>`},
     lier:mt=>{mt.querySelector('#oCourse').onclick=()=>{closePanel();goCourse()};mt.querySelector('#oMap').onclick=()=>{closePanel();openMap()}}},
 
   energie:{t:()=>'Énergie',html:()=>enTab(),lier:(mt,show)=>enBind(mt,show)},
@@ -121,7 +126,7 @@ const MENU_ECRANS={
     lier:mt=>{const g=mt.querySelector('#dexg');ANOM.forEach(a=>{const d=document.createElement('div');const got=S.dex[a.id];if(!got)d.className='unk';d.appendChild(monCanvas(got?a:{...a,col:'#999',sym:'?'},40));d.insertAdjacentHTML('beforeend',`<br><b>${got?a.name:'???'}</b><br>${got?esc(a.data):''}`);g.appendChild(d)})}},
 
   classeur:{t:()=>'Classeur',
-    html:()=>`<p>${Object.keys(S.fiches||{}).length} / ${FICHES.length} fiches savoir. Les fiches <b>clés</b> ouvrent les portes des arènes ; les autres rapportent de l'XP.</p>`+[0,1,2,3,4,5,6,7,8,'P'].map(st=>{const L=FICHES.filter(f=>f.st===st);return `<div class="cls"><div class="cls-h"><b>${st===0?'Le cycle':st==='P'?'Patrimoine':'Étape '+st+' · '+STEP_NAMES[st]}</b><span>${L.filter(f=>fGot(f.id)).length}/${L.length}</span><button type="button" class="course-link dark" data-h="${STEP_HASH(st)}">Cours ↗</button></div>${L.map(f=>fGot(f.id)?`<div class="fiche mini${f.req?' req':''}"><b>${esc(f.t)}</b><p>${esc(f.x)}</p>${refsHTML(f.refs)}</div>`:`<div class="fiche mini unk"><b>???${f.req?' · info clé':''}</b><p>${fAvail(f)?'Indice : '+esc(SRC[f.src].where):'Disponible à partir de cette étape du jeu.'}</p></div>`).join('')}</div>`}).join(''),
+    html:()=>`<p>${Object.keys(S.fiches||{}).length} / ${FICHES.length} fiches savoir. Les fiches <b>clés</b> ouvrent les portes des arènes ; les autres rapportent de l'XP.</p>`+[0,1,2,3,4,5,6,7,8,'P'].map(st=>{const L=FICHES.filter(f=>f.st===st);return `<div class="cls"><div class="cls-h"><b>${st===0?'Le cycle':st==='P'?'Patrimoine':'Étape '+st+' · '+STEP_NAMES[st]}</b><span>${L.filter(f=>fGot(f.id)).length}/${L.length}</span><button type="button" class="course-link dark" data-h="${STEP_HASH(st)}">Cours de l'étape ↗</button></div>${L.map(f=>fGot(f.id)?`<div class="fiche mini${f.req?' req':''}"><b>${esc(f.t)}</b><p>${esc(f.x)}</p>${refsHTML(f.refs)}</div>`:`<div class="fiche mini unk"><b>???${f.req?' · info clé':''}</b><p>${fAvail(f)?'Indice : '+esc(SRC[f.src].where):'Disponible à partir de cette étape du jeu.'}</p></div>`).join('')}</div>`}).join(''),
     lier:mt=>mt.querySelectorAll('[data-h]').forEach(x=>x.onclick=()=>{closePanel();goCourse(x.dataset.h)})},
 
   /* le carnet a des poches, comme le Sac : ◀ ▶ (ou gauche et droite) pour en changer */

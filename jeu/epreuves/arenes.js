@@ -108,7 +108,7 @@ const ARENA_OPEN={1:"Une barrière se lève : la Cité des Beffrois est ouverte,
 function arenaWin(A){
   S.ch=ARENA_CH[A.id]+1;if(A.id===5)S.derives={};badge(A.badge);save();hud();
   const L=A.cWin.map(t=>({w:A.champ,t}));L.push({t:enBadge(A.id)});enHud(true);
-  const O={t:ARENA_OPEN[A.id]+' La carte (touche K) montre le chemin.'};
+  const suite=prochaineEtapeTexte(),O={t:ARENA_OPEN[A.id]+(suite?` Prochaine étape : ${suite}. Sors de l'arène et suis la flèche orange.`:' La carte (touche K) montre le chemin.')};
   if(A.id===4)return say(L,()=>evolve(1,()=>say([{w:'Mme Joule',t:'(au téléphone) '+A.next},O])));
   if(A.id===8)return say(L,()=>evolve(2,()=>say([{t:"Les 8 badges sont à toi. Mme Joule a quitté l'estrade : elle t'attend au bureau."},O])));
   say([...L,{w:'Mme Joule',t:'(au téléphone) '+A.next},O]);

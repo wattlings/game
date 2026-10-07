@@ -118,3 +118,13 @@ a.qk-play,
 a.qk-fab {
   text-decoration: none;
 }
+/* sans partie en cours : aller directement à l'étape, en lien secondaire sous « Commencer le jeu » */
+.qk-direct {
+  margin: 6px 0 0;
+  font-size: var(--t-xs);
+  color: var(--muted);
+  max-width: 34em;
+}
+.qk-direct a {
+  color: inherit;
+}
