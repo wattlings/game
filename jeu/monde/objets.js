@@ -19,6 +19,7 @@ function objsFor(id){
     if(S.ch===9&&!missingReq(9).length)o.push({x:8,y:4,kind:'desk',solid:1,act:()=>say([{t:"Un mot sur le bureau de Mme Joule : « Partie à l'Arène de la Preuve. Viens me montrer ce que tu sais. »"}])});
     else o.push({x:8,y:4,kind:'npc',solid:1,who:'Mme Joule',pal:{skin:'#e0ac7e',shirt:'#8a3b8f',pants:'#2f3a5c',hair:'#9a9aa2',style:'carre',bun:1,glasses:1,scarf:'#f2a33a',lash:1,prop:'tablet'},dir:'left',act:actJoule});
     o.push({x:10,y:2,kind:'shelf',solid:1,act:actArchives},{x:9,y:2,kind:'shelf',solid:1,act:actArchives});
+    Object.keys(MAQUETTES).forEach(id=>o.push({x:MAQUETTES[id].x,y:4,kind:'maquette',sid:id,solid:1,draw:(c,X,Y)=>dessinerMaquette(c,X,Y,id),act:()=>actMaquette(id)}));   // la table des trois maquettes (recit/histoire.js)
     o.push({x:6,y:1,kind:'mapwall',act:()=>say([{t:"Plan d'Ampère-sur-Loire. Trois sites y sont épinglés : l'école Jean-Jaurès, les bureaux Le Carré et la boulangerie du Moulin."}])});
     {const pl=()=>secret('plante',["Une plante verte. Consommation : 0 kWh. Production : de l'oxygène.","Meilleur ratio du bâtiment, et de loin. Elle n'a jamais réclamé la clim, contrairement à la direction."]);o.push({x:1,y:6,kind:'plant',solid:1,act:pl},{x:10,y:7,kind:'plant',solid:1,act:pl})}
   }

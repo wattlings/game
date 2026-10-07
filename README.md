@@ -83,7 +83,7 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Les questions, dresseurs et répliques d'une arène | `jeu/recit/arenes/arene-N.js` |
 | Les fiches savoir à collecter | `jeu/recit/fiches-savoir.js` |
 | Où se trouvent les informations en ville | `jeu/recit/lieux-savoir.js` |
-| Les conseils de Mme Joule, le choix du site | `jeu/recit/histoire.js` |
+| Les conseils de Mme Joule, le choix du site (comme le choix du starter dans Pokémon Rouge Feu : trois maquettes sur la table du bureau ; A en montre une en grand, puis « Tu choisis… ? » Oui / Non) | `jeu/recit/histoire.js` (`MAQUETTES`, `chooseSite`, `choisirSite`), la table dans `jeu/monde/objets.js` |
 | Le guidage : les tâches de chaque étape, dans l'ordre (texte court, cible de la flèche), la prochaine action affichée en permanence en haut de l'écran avec sa progression, la liste cochée du menu → Objectif | `jeu/recit/objectifs.js` (`objectiveText0` : les tâches, `prochaineAction`, `objectiveText`), `jeu/moteur/cibles.js` (la flèche), `jeu/moteur/boucle.js` (`flecheObjectif` : au bord de l'écran quand la cible est hors champ) |
 | Les aides montrées en jouant (se déplacer, parler, la carte, la flèche, le menu : chacune une fois, au moment où elle sert) et les textes adaptés au tactile (« touche K » devient « bouton CARTE ») | `jeu/interface/aides.js` |
 | La présentation du début de partie (les commandes, puis le jeu et son objectif). Elle s'ouvre à chaque nouvelle partie, avant l'avatar ; « Passer la présentation » ou Échap la saute ; menu → Options → « Revoir la présentation » | `jeu/interface/presentation.js` (textes et tableau des commandes, repris par le menu → Commandes), `jeu/interface/styles/presentation.css` |

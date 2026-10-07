@@ -250,8 +250,20 @@ if (quoi === "tout" || quoi === "guidage") {
     verif("début : la ligne d'objectif reste affichée", await page.evaluate(() => !document.getElementById("qk-host").shadowRoot.getElementById("objFlash").hidden));
     await page.evaluate(() => { P.x = 8; P.y = 5; P.dir = "up"; P.px = P.x * TS; P.py = P.y * TS; }); await page.waitForTimeout(1200);
     verif("début : devant Mme Joule, l'aide montre comment parler", /Espace pour parler/.test((await ombre("#aide")) || ""), await ombre("#aide"));
-    await page.evaluate(() => actJoule()); await finDialogue(page); await page.waitForTimeout(300);
-    verif("choix du site : l'école est recommandée, sans lien vers le cours", /Recommandé/.test((await ombre(".panel .cards")) || "") && !(await page.evaluate(() => !!document.getElementById("qk-host").shadowRoot.querySelector(".panel .course-link"))));
+    // le choix du site, comme le starter de Pokémon Rouge Feu : trois maquettes sur la table
+    await page.evaluate(() => actMaquette("ecole")); await page.waitForTimeout(200);
+    verif("maquettes : avant Mme Joule, on les regarde sans pouvoir choisir", (await page.evaluate(() => dlg.open && /Mme Joule t'en dira plus/.test(dlg.cur.full))) && !(await ombre(".maquette-vue")));
+    await finDialogue(page);
+    await page.evaluate(() => actJoule()); await finDialogue(page); await page.waitForTimeout(700);
+    verif("maquettes : Mme Joule les présente, l'objectif et la flèche y mènent", /Choisis ton site.*1\/2/.test((await ombre("#objFlash")) || "") && JSON.stringify(await page.evaluate(() => targets())) === "[[3,4]]", await ombre("#objFlash"));
+    await page.evaluate(() => actMaquette("bureau")); await page.waitForTimeout(200);
+    verif("maquette : A la montre en grand, « Tu choisis… ? » Oui / Non, sans lien vers le cours", /Tu choisis les Bureaux Le Carré/.test((await ombre(".pbody")) || "") && !!(await ombre("#csOui")) && !(await page.evaluate(() => !!document.getElementById("qk-host").shadowRoot.querySelector(".panel .course-link"))));
+    await page.evaluate(() => document.getElementById("qk-host").shadowRoot.getElementById("csNon").click()); await page.waitForTimeout(150);
+    verif("maquette : Non referme, rien n'est choisi", (await page.evaluate(() => !panelEl && S.ch === 0 && !S.site)));
+    await page.evaluate(() => actMaquette("ecole")); await page.waitForTimeout(200);
+    verif("maquette : l'école est recommandée", /Recommandé/.test((await ombre(".maquette-vue")) || ""));
+    await page.evaluate(() => document.getElementById("qk-host").shadowRoot.getElementById("csOui").click()); await page.waitForTimeout(300);
+    verif("maquette : Oui choisit le site et lance l'étape 1", await page.evaluate(() => S.site === "ecole" && S.ch === 1 && dlg.open));
     verif("guidage : aucune erreur (première partie)", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }

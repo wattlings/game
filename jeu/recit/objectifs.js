@@ -43,7 +43,8 @@ function areneTaches(A){
 
 function objectiveText0(){
   const s=site(),A=ARENAS.find(a=>ARENA_CH[a.id]===S.ch),arene=A?areneTaches(A):[],b=porteSite();
-  if(S.ch===0)return [{t:"Parle à Mme Joule, au fond de ton bureau",ok:false,cible:()=>vers('office',8,4,BLD[0].door)}];
+  if(S.ch===0)return [{t:"Parle à Mme Joule, au fond de ton bureau",ok:!!S.flags.choix,cible:()=>vers('office',8,4,BLD[0].door)},
+    {t:"Choisis ton site : regarde les trois maquettes sur la table",ok:false,cible:()=>vers('office',3,4,BLD[0].door)}];
   if(S.ch===1)return [
     {t:`Lis l'adresse sur la boîte aux lettres ${enDe(s)}`,ok:!!S.notes.adresse,cible:()=>b&&vers('town',b[0]+2,b[1]+1)},
     {t:"Lis la surface sur la fiche technique, près de l'entrée",ok:!!S.notes.surface,cible:()=>b&&vers('town',b[0]-2,b[1]+1)},

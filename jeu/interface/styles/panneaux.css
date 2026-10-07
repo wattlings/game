@@ -51,3 +51,11 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 .sticker{display:inline-block;font-family:var(--f-pix);background:#fff;border:2px solid #444;padding:2px 8px;border-radius:3px;margin:3px;color:#222}
 .meter-art{display:flex;justify-content:center;margin:6px 0 12px}
 .meter-art canvas{width:min(260px,70%);image-rendering:pixelated}
+/* la maquette en grand, au moment de choisir son site (recit/histoire.js, chooseSite) */
+.maquette-vue{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:16px;align-items:center}
+.maquette-vue .mq-img canvas{width:100%;height:auto;image-rendering:pixelated;border:3px solid var(--ink);border-radius:8px;display:block}
+.maquette-vue .mq-txt{display:grid;gap:6px;justify-items:start}
+.maquette-vue .mq-txt b{font-family:var(--f-pix);font-size:22px}
+.maquette-vue .mq-txt p{margin:0}
+.mq-q{font-family:var(--f-pix);font-size:20px;margin:16px 0 4px}
+@media (max-width:560px){.maquette-vue{grid-template-columns:1fr}}
