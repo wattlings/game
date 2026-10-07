@@ -535,6 +535,9 @@ if (quoi === "tout" || quoi === "pilotage") {
     verif("pilotage : 8 arènes, 3 dresseurs et 1 champion chacune", bilan.arenes.length === 8 && bilan.arenes.every((t) => t === "3/1"), bilan.arenes.join(" "));
     verif("pilotage : 5 sites, leurs informations et leur défi", bilan.sites.length === 5 && bilan.sites.every((t) => +t.split("/")[0] >= 10 && t.endsWith("/1")), bilan.sites.join(" "));
     verif("pilotage : les fiches savoir sont toutes là", bilan.fiches >= 40, String(bilan.fiches));
+    // le temps de jeu estimé (pilotage/duree.js) : chaque chapitre et chaque site, et le total jusqu'à l'épilogue
+    const temps = await page.evaluate(() => ({ total: document.querySelector(".intro .tuile")?.textContent || "", rangs: [...document.querySelectorAll('#s-histoire .rang, #s-voyages .rang')].filter((r) => r.querySelector(".rang-num").textContent !== "+").map((r) => r.querySelector(".rang-duree")?.textContent || ""), ailleurs: document.querySelectorAll('.section:not(#s-histoire):not(#s-voyages) .rang-duree').length }));
+    verif("pilotage : un temps estimé pour chaque chapitre et chaque site, et le total jusqu'à l'épilogue", /^≈ \d+ h( \d\d)? à \d+ h.*jusqu'à l'épilogue/.test(temps.total) && temps.rangs.length >= 18 && temps.rangs.every((t) => /^≈ \d/.test(t)) && temps.ailleurs === 0, JSON.stringify(temps).slice(0, 300));
     verif("pilotage : chaque pastille s'ouvre et montre son contenu", bilan.muettes.length === 0, bilan.muettes.slice(0, 5).join(" | "));
     verif("pilotage : chaque texte se réécrit sans abîmer son fichier", bilan.fragiles.length === 0, bilan.fragiles.length + " : " + bilan.fragiles.slice(0, 3).join(" | "));
     verif("pilotage : une modification rend un seul fichier, lisible", bilan.pose.ok && bilan.nbFichiers === 1 && !bilan.erreurFichier && bilan.ajout, JSON.stringify({ pose: bilan.pose, n: bilan.nbFichiers, e: bilan.erreurFichier, ajout: bilan.ajout }));

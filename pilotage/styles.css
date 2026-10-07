@@ -277,3 +277,18 @@ button.barre-ligne:hover, button.barre-ligne:focus-visible { background: var(--s
 .tx-verrou { color: var(--muted); }
 .edition .tx-verrou { cursor: not-allowed; border-bottom: 1.5px dotted var(--line); }
 .conseil.alerte { color: var(--warn); font-weight: 700; }
+
+/* le temps de jeu estimé d'une ligne (duree.js) */
+.rang-duree {
+  align-self: start;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink, #14203a);
+  background: var(--surface-2, #eef1f7);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+.rang-duree::before {
+  content: "⏱ ";
+}

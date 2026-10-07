@@ -126,6 +126,7 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Voir le parcours | Onglet « Le parcours » : une ligne par chapitre (puis par site de voyage, par quartier, par secret), une pastille par moment du jeu. Un clic sur une pastille montre tout ce qui s'y passe : répliques, questions avec bonnes et mauvaises réponses, retours, conditions. Le champ de recherche fouille tous les textes du jeu. |
 | Tester un endroit précis | Bouton « Tester » d'une ligne ou « Tester ici » d'une pastille : le jeu s'ouvre à cet endroit dans un nouvel onglet, en **mode essai**. Rien n'est enregistré : ni sauvegarde, ni suivi. Recharger l'onglet rend le jeu normal. |
 | Corriger un texte | Allumer « Modifier les textes », cliquer un texte, le réécrire. Puis onglet « Mes modifications » : télécharger l'archive, la décompresser, et glisser son dossier `jeu` dans GitHub (*Add file › Upload files*). Chaque fichier rendu est le fichier en ligne où seuls ces textes ont changé. |
+| Savoir combien de temps dure le jeu | En haut de l'onglet « Le parcours » : le temps de jeu estimé jusqu'à l'épilogue (finale comprise), et celui des voyages, en plus. Chaque chapitre et chaque site de voyage porte aussi son estimation (⏱). C'est une fourchette calculée à partir des textes du jeu : à comparer avec le temps réellement mesuré, dans « Les joueurs ». |
 | Voir ce que font les joueurs | Onglet « Les joueurs » : se connecter avec un compte créé dans Supabase (c'est celui de `stats.html` ; la marche à suivre pour en créer un est dans l'onglet). Les chiffres se posent ensuite sur les frises. Le bouton « Voir avec des données d'exemple » montre la page avec des chiffres inventés, signalés comme tels. |
 
 La page ne recopie rien : elle lit les fichiers du jeu tels qu'ils sont en ligne (ceux que liste `jeu/index.html`), sans les exécuter. Un texte ajouté au jeu y apparaît donc tout seul.
@@ -136,6 +137,7 @@ La page ne recopie rien : elle lit les fichiers du jeu tels qu'ils sont en ligne
 | Faire reconnaître une nouvelle façon d'afficher du texte dans le jeu | `pilotage/lecture.js` (`APPELS`) |
 | L'allure des pastilles, d'un bloc du détail | `pilotage/rendu.js`, `pilotage/styles.css` |
 | Les chiffres de l'onglet « Les joueurs » | `pilotage/suivi.js` (lecture et comptage), `pilotage/vue-joueurs.js` (affichage) |
+| Le calcul du temps de jeu estimé (vitesse de lecture, temps de réflexion par question, déplacements, marge) | `pilotage/duree.js` (les constantes en tête du fichier) |
 | Les endroits où « Tester » sait ouvrir le jeu | `jeu/moteur/essai.js` |
 
 Ce qui n'est rangé dans aucun chapitre reste visible dans « Mécanique et interface » : rien ne disparaît. Les mots qui servent aussi de repère au jeu (un nom de badge, d'étape, de jour) s'affichent en gris et ne se modifient pas depuis la page : les changer à un seul endroit casserait les parties en cours ; ils se changent dans les fichiers, partout à la fois. Les modifications en attente vivent dans le navigateur (clé `pilotage-modifs-v1`), pas sur le site.

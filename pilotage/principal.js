@@ -10,6 +10,7 @@
  *   rendu.js     dessine frises, pastilles et détails           edition.js   modifie les textes, rend les fichiers à déposer
  *   suivi.js     lit et compte les événements des joueurs       vue-modifs.js, vue-joueurs.js : les deux autres onglets
  */
+import { MODELE, additionner, estimerRang, texteDuree } from "./duree.js";
 import { lireFichier, lisible } from "./lecture.js";
 import { construire } from "./parcours.js";
 import { creerRendu, h, icone, mettreEnForme, nombre, pluriel, surligner } from "./rendu.js";
@@ -74,13 +75,19 @@ async function demarrer() {
   const compte = (genre) => [...noeuds.values()].filter((x) => x.n.genre === genre).length;
   const tuile = (v, nom) => h("div", { class: "tuile" }, h("strong", null, typeof v === "number" ? nombre(v) : v), h("span", null, nom));
   const exemplePastille = (genre, nom, extra = {}) => h("li", null, (() => { const p = rendu.pastille(Object.assign({ id: "legende-" + nom, genre, titre: "", sous: "" }, extra)); p.disabled = true; p.removeAttribute("data-n"); p.classList.add("mini"); return p; })(), h("span", null, nom));
+  // ---- le temps de jeu estimé (duree.js) : par chapitre et par site, puis jusqu'à l'épilogue (chapitres 0 à 10)
+  //      (la ligne 11 réunit la finale et l'écran de fin : ils se jouent avant l'épilogue, ils sont comptés ; l'exploration libre ne l'est pas)
+  const estimation = new Map([histoire, voyages].flatMap((S) => S.rangs.filter((r) => r.num !== "+" && r.noeuds.length).map((r) => [r.id, estimerRang(r)])));
+  const jusquEpilogue = additionner(histoire.rangs.filter((r) => r.suivi).map((r) => estimation.get(r.id)).filter(Boolean));
+  const voyagesTemps = additionner(voyages.rangs.map((r) => estimation.get(r.id)).filter(Boolean));
   const intro = h("section", { class: "intro" },
-    h("div", { class: "tuiles" }, tuile(histoire.rangs.filter((r) => r.suivi).length, "chapitres"), tuile(histoire.rangs.reduce((s, r) => s + r.noeuds.filter((n) => n.genre === "champion").length, 0), "arènes"),
+    h("div", { class: "tuiles" }, tuile(texteDuree(jusquEpilogue), "de jeu jusqu'à l'épilogue"), tuile(texteDuree(voyagesTemps), "pour les voyages, en plus"), tuile(histoire.rangs.filter((r) => r.suivi).length, "chapitres"), tuile(histoire.rangs.reduce((s, r) => s + r.noeuds.filter((n) => n.genre === "champion").length, 0), "arènes"),
       tuile(voyages.rangs.filter((r) => r.suivi).length, "sites en train"), tuile(compte("fiche"), "fiches et informations"), tuile(P.stats.questions, "questions et épreuves"), tuile(P.stats.textes, "textes")),
     h("div", { class: "mode-emploi" },
       h("p", null, h("strong", null, "Une ligne par chapitre, une pastille par moment du jeu."), " Clique une pastille pour lire tout ce qui s'y passe : les répliques, les questions avec leurs bonnes et mauvaises réponses, ce que le jeu répond dans chaque cas."),
       h("ul", { class: "legende" }, exemplePastille("depart", "début du chapitre"), exemplePastille("scene", "scène, dialogue"), exemplePastille("fiche", "fiche savoir"), exemplePastille("fiche", "info clé (exigée)", { cle: true }),
         exemplePastille("porte", "porte d'arène"), exemplePastille("dresseur", "dresseur (duel)", { pal: {} }), exemplePastille("champion", "champion (épreuve)", { pal: { hair: "#b8431f", shirt: "#2f6db5" } }), exemplePastille("epreuve", "manipulation"), exemplePastille("secret", "secret")),
+      h("p", { class: "muet" }, h("strong", null, "Temps de jeu : une estimation."), ` Chaque chapitre et chaque site affichent une fourchette, calculée sur leur contenu : lecture à ${MODELE.LECTURE} mots par minute, un temps de réflexion par question et par manipulation, une question par duel, un temps de marche par endroit à rejoindre. La valeur basse suit le chemin obligatoire ; la haute ajoute ${Math.round((MODELE.MARGE - 1) * 100)} % d'hésitations et d'erreurs, et les fiches facultatives. Le total va jusqu'à l'épilogue, finale comprise ; l'exploration libre qui suit n'est pas comptée, ni les voyages, estimés à part. Le temps réellement passé par les joueurs est dans l'onglet « Les joueurs ».`),
       h("p", { class: "muet" }, "La page lit les ", nombre(P.stats.fichiers), " fichiers du jeu tels qu'ils sont en ligne, sans les faire tourner : elle est toujours à jour. Les morceaux en ", h("span", { class: "calc" }, "gris"), " sont calculés par le jeu au moment de jouer (un prénom, un chiffre).",
         P.stats.illisibles.length ? h("strong", { class: "alerte" }, " " + pluriel(P.stats.illisibles.length, "fichier illisible", "fichiers illisibles") + " : " + P.stats.illisibles.join(" ; ")) : null)));
 
@@ -89,6 +96,7 @@ async function demarrer() {
   const rangEl = (r) => h("article", { class: "rang", "data-r": r.id },
     h("header", { class: "rang-tete" }, h("span", { class: "rang-num" }, r.num),
       h("div", { class: "rang-titres" }, h("h3", null, r.titre), r.resume ? h("p", { class: "muet" }, r.resume) : null, h("p", { class: "rang-suivi", "data-suivi-rang": r.id, hidden: true })),
+      estimation.has(r.id) ? h("span", { class: "rang-duree", "data-duree": r.id, title: "Temps de jeu estimé pour cette ligne (le détail du calcul est en haut de la page)" }, texteDuree(estimation.get(r.id))) : null,
       r.essai ? h("a", { class: "bouton", href: "../jeu/#essai-" + r.essai, target: "_blank", rel: "noopener", title: "Ouvre le jeu ici, dans un nouvel onglet. Rien n'est enregistré, ta partie n'est pas touchée." }, h("span", { html: icone("jouer", 13) }), " Tester") : null),
     h("div", { class: "frise" }, r.noeuds.map((n) => rendu.pastille(n))), h("div", { class: "rang-detail" }));
   const vueParcours = h("div", { class: "vue", id: "vue-parcours" }, intro, barreSections,

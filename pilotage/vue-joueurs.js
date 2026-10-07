@@ -3,6 +3,7 @@
  * L'onglet « Les joueurs » : se connecter au projet Supabase, lire les événements du jeu, et montrer
  * jusqu'où vont les joueurs, où ils se trompent, ce qu'ils trouvent. Les mêmes chiffres se posent ensuite sur les frises.
  */
+import { estimerRang, texteDuree } from "./duree.js";
 import { h, nombre, pluriel, remplir } from "./rendu.js";
 import { agreger, charger, connecter, exemple } from "./suivi.js";
 
@@ -61,7 +62,7 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
     const bulle = h("div", { class: "bulle-graphe", hidden: true });
     const ligneGraphe = (r) => {
       const c = A.chapitres[r.suivi.ch] || { debut: new Set(), fin: new Set(), durees: [] }, n = c.debut.size, m = A.mediane(r.suivi.ch);
-      const txt = [`${r.titre}`, `${pluriel(n, "joueur arrivé", "joueurs arrivés")} ici`, n ? `${Math.round((100 * c.fin.size) / n)} % terminent le chapitre (${c.fin.size})` : "", m ? `temps médian : ${duree(m)}` : ""].filter(Boolean);
+      const txt = [`${r.titre}`, `${pluriel(n, "joueur arrivé", "joueurs arrivés")} ici`, n ? `${Math.round((100 * c.fin.size) / n)} % terminent le chapitre (${c.fin.size})` : "", m ? `temps médian : ${duree(m)}` : "", `temps estimé : ${texteDuree(estimerRang(r)).replace("≈ ", "")}`].filter(Boolean);
       const e = h("button", { class: "barre-ligne", type: "button", "aria-label": txt.join(", ") },
         h("span", { class: "barre-nom" }, h("span", { class: "rang-num" }, r.num), h("span", null, r.titre.replace(/^Arène \d · |^Chapitre \d+ · |^Épilogue · /, ""))),
         h("span", { class: "barre-piste" }, h("span", { class: "barre", style: `width:${(100 * n) / base}%` }), h("span", { class: "barre-v" }, nombre(n))),
@@ -76,8 +77,8 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
       h("div", { class: "barre-ligne barre-tete muet", "aria-hidden": "true" }, h("span", null, "Chapitre"), h("span", null, "Joueurs arrivés"), h("span", null, "le terminent"), h("span", null, "temps médian")),
       chapitres.map(ligneGraphe), bulle);
     const tableau = h("details", { class: "en-tableau" }, h("summary", null, "Voir en tableau"),
-      h("table", null, h("thead", null, h("tr", null, ["Chapitre", "Arrivés", "L'ont terminé", "Taux", "Temps médian"].map((t) => h("th", null, t)))),
-        h("tbody", null, chapitres.map((r) => { const c = A.chapitres[r.suivi.ch] || { debut: new Set(), fin: new Set() }; return h("tr", null, h("td", null, r.num + " · " + r.titre), h("td", { class: "num" }, nombre(c.debut.size)), h("td", { class: "num" }, nombre(c.fin.size)), h("td", { class: "num" }, c.debut.size ? Math.round((100 * c.fin.size) / c.debut.size) + " %" : "–"), h("td", { class: "num" }, duree(A.mediane(r.suivi.ch)))); }))));
+      h("table", null, h("thead", null, h("tr", null, ["Chapitre", "Arrivés", "L'ont terminé", "Taux", "Temps médian", "Temps estimé"].map((t) => h("th", null, t)))),
+        h("tbody", null, chapitres.map((r) => { const c = A.chapitres[r.suivi.ch] || { debut: new Set(), fin: new Set() }; return h("tr", null, h("td", null, r.num + " · " + r.titre), h("td", { class: "num" }, nombre(c.debut.size)), h("td", { class: "num" }, nombre(c.fin.size)), h("td", { class: "num" }, c.debut.size ? Math.round((100 * c.fin.size) / c.debut.size) + " %" : "–"), h("td", { class: "num" }, duree(A.mediane(r.suivi.ch))), h("td", { class: "num muet" }, texteDuree(estimerRang(r)).replace("≈ ", ""))); }))));
 
     // ---- les questions qui font trébucher
     const erreurs = [...A.erreurs.values()].sort((a, b) => b.n - a.n).slice(0, 15);
