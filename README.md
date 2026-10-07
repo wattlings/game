@@ -54,7 +54,7 @@ Chaque fait et chaque règle enseignés renvoient à une source qui a été ouve
 | Donner ses sources à une fiche savoir, une arène | `refs:['cle']` dans `jeu/recit/fiches-savoir.js`, `jeu/recit/arenes/arene-N.js` |
 | Référencer ce que disent les habitants et l'épreuve d'une étape | `jeu/recit/references.js` |
 | Donner ses sources à une information de voyage, à un site | `refs:['cle']` dans `jeu/voyages/<site>/textes.js` |
-| Changer l'allure des notes, de la page Sources, de l'onglet Sources du jeu | `cours/blocs/notes.js`, `cours/pages/sources.js`, `cours/styles/niveaux.css` ; `jeu/interface/sources.js`, `jeu/interface/styles/tableau-de-bord.css` |
+| Changer l'allure des notes, de la page Sources, de la poche Sources du carnet du jeu | `cours/blocs/notes.js`, `cours/pages/sources.js`, `cours/styles/niveaux.css` ; `jeu/interface/sources.js`, `jeu/interface/styles/tableau-de-bord.css` |
 | Voir la preuve : pour chaque information, son type, son verdict et le passage lu dans la source | `outils/sources/releve-*.json` (les relevés), ou le tableau de relecture ci-dessous |
 
 Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inventé pour l'exemple (l'école, la ville, les sites visités), la méthode du cours, les calculs, les vannes. Les relevés les classent « sans objet ».
@@ -85,7 +85,7 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Où se trouvent les informations en ville | `jeu/recit/lieux-savoir.js` |
 | Les conseils de Mme Joule, le choix du site | `jeu/recit/histoire.js` |
 | Le texte de l'objectif de chaque chapitre | `jeu/recit/objectifs.js` |
-| La présentation du début de partie (les commandes, puis le jeu et son objectif). Elle s'ouvre à chaque nouvelle partie, avant l'avatar ; « Passer la présentation » ou Échap la saute ; menu → Commandes → « Revoir la présentation » | `jeu/interface/presentation.js` (textes et tableau des commandes, repris par le menu → Commandes), `jeu/interface/styles/presentation.css` |
+| La présentation du début de partie (les commandes, puis le jeu et son objectif). Elle s'ouvre à chaque nouvelle partie, avant l'avatar ; « Passer la présentation » ou Échap la saute ; menu → Options → « Revoir la présentation » | `jeu/interface/presentation.js` (textes et tableau des commandes, repris par le menu → Commandes), `jeu/interface/styles/presentation.css` |
 | Les habitants et leurs répliques | `jeu/recit/habitants.js`, `habitants-regions.js`, `meteo.js` |
 | Les secrets et clins d'œil | `jeu/recit/secrets.js`, `clins-d-oeil.js` |
 | Le nom et le résumé d'un chapitre | `commun/donnees/etapes.js` (`CHAPITRES_JEU`) |
@@ -95,6 +95,8 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Les économies d'énergie, les actions, les événements | `jeu/simulation/` |
 | Une musique | `jeu/audio/partitions.js` |
 | Le menu, la carte, le tableau de bord, l'avatar | `jeu/interface/<écran>.js` |
+| Le menu (à la manière de Pokémon Rouge Feu : une liste en haut à droite, un curseur ▶, un bandeau d'aide en bas ; A ouvre, B revient, M referme) : ses entrées, leur texte d'aide, leurs écrans | `jeu/interface/menu.js` (`MENU_ENTREES` pour la liste, `MENU_ECRANS` pour les écrans, `MENU_ALIAS` pour les anciens noms d'onglets), `jeu/interface/styles/menu.css` |
+| La patine de la ville par défaut (1 · Neuf ; le joueur la change dans menu → Options) | `jeu/monde/ciel.js` (`PREF`) |
 
 ### Les voyages en train (après la fin du jeu)
 
@@ -305,7 +307,7 @@ Dans le fichier unique produit par `outils/fichier-unique.mjs`, le jeu s'ouvre p
 
 `outils/migration/` contient la version 18 et l'outil qui a comparé les deux versions. Il peut être supprimé une fois la migration acceptée.
 
-Depuis, le jeu a gagné les voyages en train (voir plus haut), puis le référencement des sources a commencé : textes corrigés à l'étape 2, page Sources dans le cours, onglet Sources dans le menu du jeu. Le contenu n'est donc plus identique à la version 18, et `outils/migration/comparer.mjs` signale ces écarts : ce n'est plus une alerte. La vérification du site, c'est `outils/verifier.mjs`.
+Depuis, le jeu a gagné les voyages en train (voir plus haut), puis le référencement des sources a commencé : textes corrigés à l'étape 2, page Sources dans le cours, onglet Sources dans le menu du jeu (aujourd'hui : menu → Carnet, poche Sources). Le contenu n'est donc plus identique à la version 18, et `outils/migration/comparer.mjs` signale ces écarts : ce n'est plus une alerte. La vérification du site, c'est `outils/verifier.mjs`.
 
 ## Limites connues
 

@@ -7,7 +7,7 @@
    Internet) : elle se déduit de la date et de l'heure, de façon déterministe, avec des tendances propres à chaque saison.
    Deux joueurs qui ouvrent le jeu au même moment voient donc le même temps. Les réglages du menu permettent de forcer
    un moment de la journée, un temps ou une saison. */
-const PREF={wear:3,hour:'auto',meteo:'auto',saison:'auto',cal:'jeu'};
+const PREF={wear:1,hour:'auto',meteo:'auto',saison:'auto',cal:'jeu'};
 try{Object.assign(PREF,JSON.parse(localStorage.getItem(PREF_KEY)||'{}'))}catch(e){}
 function prefSet(k,v){PREF[k]=v;try{localStorage.setItem(PREF_KEY,JSON.stringify(PREF))}catch(e){}SKY.stamp=0;SKY.quiet=true}
 const SEASONS=['printemps','été','automne','hiver'],SEASON_DOY=[115,201,298,15];

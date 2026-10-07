@@ -80,7 +80,7 @@ function gareGuichet(){
       {w:W,t:"Vous êtes {name}, la personne qui a fait baisser les factures de toute la ville ? La mairie nous a prévenus : vous avez le droit de voir d'où vient l'électricité."},
       {w:W,t:"Voici votre passeport des énergies. Cinq destinations, cinq tampons. Un champ solaire, des éoliennes, une centrale nucléaire, un barrage, et un data center, parce qu'il faut bien que quelqu'un consomme tout ça."},
       {w:W,t:"Sur place : promenez-vous, lisez les panneaux, parlez aux gens. Quand vous en savez assez, le responsable du site vous met à l'épreuve et tamponne. Pas de tampon sans épreuve. C'est le règlement, et le règlement, c'est moi."}],
-      ()=>{v.pass=1;save();sfx('secret');trk('voyage_passeport',{});toast('Passeport des énergies obtenu (menu → Passeport)');gainXP(10);hud()});
+      ()=>{v.pass=1;save();sfx('secret');trk('voyage_passeport',{});toast('Passeport des énergies obtenu (menu → Carnet → Passeport)');gainXP(10);hud()});
     return;
   }
   gareGuichet.k=(gareGuichet.k||0)+1;

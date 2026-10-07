@@ -1,7 +1,7 @@
 /* Wattlings · jeu/interface/presentation.js
    La présentation du début de partie, en deux temps : les commandes, puis le jeu et son objectif.
    Elle se lance à chaque nouvelle partie, avant le choix de l'avatar, et se passe à tout moment (bouton « Passer »
-   ou touche Échap). Elle se revoit depuis le menu → Commandes. Les commandes sont décrites une seule fois, ici :
+   ou touche Échap). Elle se revoit depuis le menu → Options. Les commandes sont décrites une seule fois, ici :
    le menu affiche le même tableau (keysTable). */
 
 /* le tableau des commandes, au clavier ou à l'écran tactile */
@@ -21,7 +21,7 @@ function openPresentation(onDone){
   busy=true;clearKeys();
   const etapes=[1,2,3,4,5,6,7,8].map(n=>`<li><b>${n}. ${esc(STEP_T[n])}</b></li>`).join('');
   const pages=[
-    {titre:'Les commandes',corps:`<p>Voici comment te déplacer et agir${touch?' sur cet écran tactile':' au clavier'}. Ce tableau reste dans le menu, onglet « Commandes ».</p>${keysTable(touch)}`},
+    {titre:'Les commandes',corps:`<p>Voici comment te déplacer et agir${touch?' sur cet écran tactile':' au clavier'}. Tu retrouves ce tableau dans le menu → Options → Commandes.</p>${keysTable(touch)}`},
     {titre:'Le jeu et son objectif',corps:`<p>Tu es <b>gestionnaire de site</b> dans la ville d'Ampère-sur-Loire, et tu ne connais rien à l'énergie. Mme Joule, l'energy manager senior, va te guider.</p>
       <p><b>Ton objectif :</b> faire baisser la consommation d'énergie (le compteur de kWh économisés, en haut de l'écran) en suivant la démarche de l'energy management, étape par étape, jusqu'à devenir <b>gestionnaire de patrimoine</b>.</p>
       <p>La ville est une boucle de <b>8 quartiers</b>, un par étape de la démarche :</p><ol class="pr-etapes">${etapes}</ol>

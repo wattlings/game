@@ -1,5 +1,5 @@
 /* Wattlings · jeu/interface/sources.js
-   Les sources dans le jeu : le petit volet « Sources » sous une fiche ou une information de voyage, et l'onglet Sources du menu.
+   Les sources dans le jeu : le petit volet « Sources » sous une fiche ou une information de voyage, et la poche Sources du carnet (menu → Carnet).
    Le registre de toutes les références est commun au cours et au jeu : commun/donnees/sources.js (SOURCES, libelleSource).
    Pour citer une source : refs:['cle-1','cle-2'] sur une fiche savoir (recit/fiches-savoir.js), une arène (recit/arenes/),
    une information de voyage ou un site (voyages/<site>/textes.js) ; ce que disent les habitants et les épreuves d'une étape

@@ -1,21 +1,74 @@
 /* Wattlings · jeu/interface/styles/menu.css
-   Menu (objectif, carnet, classeur, collection, options). */
-/* menu START */
-.pcard{display:flex;gap:12px;align-items:center;background:var(--ink);color:var(--on-desk);border-radius:8px;padding:10px 12px;margin-bottom:12px;font-family:var(--f-pix)}
-.pcard canvas{width:56px;height:56px;image-rendering:pixelated;background:#7cc56a;border-radius:6px;border:2px solid #0b1020;flex:none}
-.pcard .pc-m{flex:1;min-width:0;display:grid;gap:5px}
-.pcard .pc-n{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-.pcard .pc-n b{font-size:18.5px}
-.pcard .pc-n span{color:var(--amber);font-size:15.5px}
-.pcard .pc-x{display:flex;gap:8px;align-items:center;font-size:14.5px}
-.pcard .pc-x .xpbar{flex:1;min-width:60px}
-.pcard .pc-x small{color:#b7bdd6;white-space:nowrap}
-.pcard .badges span{width:13px;height:13px}
-.menu-tabs{display:grid;gap:6px;margin-bottom:12px}
-.menu-tabs .mgrp{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.menu-tabs .mg{font-family:var(--f-body);font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);min-width:82px}
+   Le menu (interface/menu.js), à la manière de Pokémon Rouge Feu : la liste et son curseur, le bandeau d'aide,
+   puis les écrans (carte de joueur, poches du carnet, lignes d'options, sauvegarde). */
+
+/* ---- la liste, posée sur le jeu ---- */
+.fr-fond{position:fixed;inset:0;z-index:25;background:rgba(8,11,22,.18)}
+.fr-menu{position:fixed;display:flex;flex-direction:column;min-width:190px;max-height:calc(100vh - 120px);overflow-y:auto;
+  background:#f8f8f8;border:4px solid #4a4a5a;border-radius:10px;box-shadow:inset 0 0 0 2px #fff,inset 0 0 0 4px #b8b8c8,0 6px 0 rgba(0,0,0,.35);padding:10px 8px}
+.fr-item{all:unset;box-sizing:border-box;display:block;cursor:pointer;font-family:var(--f-pix);font-size:18px;line-height:1.15;letter-spacing:.04em;text-transform:uppercase;
+  color:#383848;padding:7px 12px 7px 30px;position:relative;border-radius:4px;white-space:nowrap;max-width:15em;overflow:hidden;text-overflow:ellipsis}
+.fr-item.on::before{content:'▶';position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:13px;color:#383848}
+.fr-item:focus-visible{outline:2px solid #6a8ad8;outline-offset:-2px}
+.fr-item.on{background:#e8ecf8}
+/* le bandeau d'aide, en bas de l'écran : il explique l'entrée sous le curseur */
+.fr-aide{position:fixed;min-height:2.6em;background:#2c4078;color:#fff;border:4px solid #142048;border-radius:10px;box-shadow:inset 0 0 0 2px #5a72b8,0 6px 0 rgba(0,0,0,.35);
+  padding:10px 14px;font-size:16.5px;line-height:1.4}
+
+/* ---- les écrans ---- */
+.fr-ecran .panel header{gap:10px}
+.fr-ecran .panel header .fr-titre{flex:1;text-align:center;text-transform:uppercase;letter-spacing:.06em}
+.fr-retour,.fr-x{font-family:var(--f-pix);font-size:15px;background:transparent;color:var(--paper);border:2px solid currentColor;border-radius:5px;padding:2px 8px;cursor:pointer}
+.fr-retour:hover,.fr-x:hover,.fr-retour:focus-visible,.fr-x:focus-visible{color:var(--amber);outline:none}
+.fr-touches{font-size:13.5px;color:var(--muted);margin:14px 0 0;text-align:right}
+.fr-fl{font-family:var(--f-pix);background:transparent;border:0;color:var(--ink);cursor:pointer;font-size:15px;padding:4px 8px;border-radius:4px}
+.fr-fl:hover,.fr-fl:focus-visible{background:var(--paper-2);outline:2px solid var(--ink);outline-offset:-2px}
+
+/* poches du carnet, comme celles du Sac */
+.fr-poches{display:flex;align-items:center;gap:4px;flex-wrap:wrap;background:var(--ink);border-radius:8px;padding:6px;margin-bottom:14px}
+.fr-poches .fr-fl{color:var(--paper)}
+.fr-poches .fr-fl:hover,.fr-poches .fr-fl:focus-visible{background:#2a3358;outline-color:var(--amber)}
+.fr-poche{font-family:var(--f-pix);font-size:15.5px;background:transparent;color:#b7bdd6;border:2px solid transparent;border-radius:5px;padding:4px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:.04em}
+.fr-poche.on{background:var(--paper);color:var(--ink);border-color:var(--amber)}
+.fr-poche:focus-visible{outline:2px solid var(--amber);outline-offset:1px}
+
+/* la carte de joueur */
+.fr-carte{background:linear-gradient(#5f8fd8,#3f6cc0);border:4px solid #23407a;border-radius:12px;padding:10px 12px 12px;color:#10183a;box-shadow:inset 0 0 0 2px #9fc0f0}
+.fr-carte-h{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--f-pix);color:#fff;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.fr-carte-h span{color:#ffe08a;font-size:14px}
+.fr-carte-c{display:flex;gap:14px;align-items:flex-start;background:#f8f8f0;border-radius:8px;padding:10px 12px}
+.fr-carte-c dl{flex:1;min-width:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:0;font-size:16px}
+.fr-carte-c dt{font-family:var(--f-pix);text-transform:uppercase;color:#4a5a88;font-size:14px;align-self:center}
+.fr-carte-c dd{margin:0;font-weight:600;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.fr-carte-c dd .xpbar{min-width:70px;max-width:140px;display:inline-block}
+.fr-carte-c dd small{font-weight:400;color:#5a6488}
+.fr-sprite{width:96px;height:96px;image-rendering:pixelated;background:#7cc56a;border:3px solid #23407a;border-radius:8px;flex:none}
+.fr-badges{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;margin-top:10px;background:#23407a;border-radius:8px;padding:8px}
+.fr-badges div{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+.fr-badges canvas{width:40px;height:40px;image-rendering:pixelated}
+.fr-badges .unk canvas{filter:grayscale(1) brightness(.5)}
+.fr-badges small{font-size:11.5px;color:#dfe8ff;line-height:1.1}
+.fr-badges .unk small{color:#8a9ac8}
+@media (max-width:560px){.fr-badges{grid-template-columns:repeat(4,minmax(0,1fr))}.fr-sprite{width:64px;height:64px}}
+
+/* les options : une ligne par réglage, la valeur entre ◀ et ▶ */
+.fr-opts{display:grid;gap:2px;margin:12px 0 0;background:#fffaf0;border:2px solid #c9bb92;border-radius:8px;padding:6px}
+.fr-opt{display:grid;grid-template-columns:1fr auto minmax(9em,auto) auto;align-items:center;gap:4px;padding:4px 6px 4px 26px;border-radius:5px;position:relative;cursor:pointer}
+.fr-opt.on{background:var(--paper-2)}
+.fr-opt.on::before{content:'▶';position:absolute;left:8px;font-size:12px}
+.fr-ol{font-family:var(--f-pix);font-size:16px;text-transform:uppercase;letter-spacing:.03em}
+.fr-ov{text-align:center;font-weight:700;color:#c0392b}
+.fr-aide-l{background:#2c4078;color:#fff;border:3px solid #142048;border-radius:8px;padding:8px 12px;margin:8px 0 4px;font-size:15.5px}
+@media (max-width:560px){.fr-opt{grid-template-columns:1fr auto auto auto}.fr-ov{min-width:6em}}
+
+/* Sauver */
+.fr-resume{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;background:#fffaf0;border:2px solid #c9bb92;border-radius:8px;padding:10px 14px;margin:0 0 12px}
+.fr-resume dt{font-family:var(--f-pix);text-transform:uppercase;font-size:14px;color:#6a5a2a}
+.fr-resume dd{margin:0;font-weight:600}
+.fr-question{font-family:var(--f-pix);font-size:19px}
+
+/* repris de l'ancien menu */
 .obj-box{background:#fffaf0;border:2px solid var(--amber);border-radius:8px;padding:10px 14px;box-shadow:inset 4px 0 0 var(--amber)}
-@media (max-width:560px){.menu-tabs .mg{min-width:100%}.pcard canvas{width:44px;height:44px}}
 .obj-box p{margin:0;font-size:18.5px}
 .obj-box+.dnote{margin-top:10px}
 .keys-t td:first-child{white-space:nowrap;font-family:var(--f-pix);font-weight:700}

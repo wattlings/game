@@ -1,6 +1,6 @@
 /* Wattlings · jeu/voyages/passeport.js
    Le passeport des énergies : un tampon par site visité, et tout ce qu'on y a appris.
-   Il s'ouvre depuis le menu (onglet Passeport), une fois reçu au guichet de la gare. */
+   Il s'ouvre depuis le menu → Carnet, poche Passeport, une fois reçu au guichet de la gare. */
 
 /* ---- l'encre de chaque tampon ---- */
 const PASSEPORT_ENCRE={solaire:'#c8502a',eolien:'#2f6db5',nucleaire:'#6a3fa0',barrage:'#1f8f7a',datacenter:'#3a4050'};

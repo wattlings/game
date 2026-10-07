@@ -9,6 +9,7 @@
 //   voyages : prend le train vers chaque destination ouverte, vérifie que tout ce qui s'examine est accessible à pied,
 //             examine tout, manipule les simulations, fait tamponner le passeport et rentre ;
 //   liens : fait l'aller-retour cours → jeu → cours et contrôle sauvegarde, reprise et anciennes adresses ;
+//   menu : la liste façon Rouge Feu (curseur, aide, A ouvre, B revient, M referme), poches du carnet, options, patine par défaut ;
 //   comptes : sans compte, le jeu propose de se connecter ou de jouer sans rien enregistrer, et n'enregistre rien ;
 //             la présentation du début de partie, l'avertissement en quittant une partie non sauvegardée ;
 //   (toutes les autres vérifications jouent connectées à un compte d'essai simulé : voir compteDEssai dans essais.mjs)
@@ -224,6 +225,64 @@ if (quoi === "tout" || quoi === "voyages") {
   await contexte.close();
 }
 
+// ---------------------------------------------------------------- menu
+if (quoi === "tout" || quoi === "menu") {
+  console.log("Menu : la liste, ses écrans, les options");
+  const contexte = await navigateur.newContext({ viewport: { width: 1000, height: 760 } });
+  const page = await contexte.newPage();
+  const erreurs = ecouterErreurs(page);
+  const dansLaPage = (f, ...a) => page.evaluate(f, ...a);
+  const ombre = (s) => dansLaPage((s) => { const e = document.getElementById("qk-host").shadowRoot.querySelector(s); return e ? e.textContent : null; }, s);
+  await page.goto(adresse + "jeu/#chapitre-2");
+  await page.waitForTimeout(1200);
+  await validerAvatar(page);
+  await page.waitForTimeout(900);
+  await dansLaPage(() => { dlg.q = []; if (dlg.open) nextLine(); if (panelEl) closePanel(); });
+  await page.waitForTimeout(200);
+  verif("menu : la patine de la ville est à 1 par défaut", await dansLaPage(() => PREF.wear === 1 && wearLvl() === 1));
+  await page.keyboard.press("m"); await page.waitForTimeout(200);
+  const liste = await dansLaPage(() => [...document.getElementById("qk-host").shadowRoot.querySelectorAll(".fr-menu .fr-item")].map((b) => b.dataset.k));
+  verif("menu : M ouvre la liste (objectif, carte, énergie, anomalidex, classeur, carnet, joueur, étapes, sauver, options, retour)", liste.join() === "objectif,carte,energie,dex,classeur,carnet,joueur,etapes,save,opt,fermer", liste.join());
+  const aide1 = await ombre(".fr-aide");
+  await page.keyboard.press("ArrowDown"); await page.keyboard.press("ArrowDown"); await page.waitForTimeout(100);
+  verif("menu : le curseur descend et le bandeau explique l'entrée choisie", (await ombre(".fr-item.on")) === "Énergie" && (await ombre(".fr-aide")) !== aide1 && /tableau de bord/.test(await ombre(".fr-aide")));
+  await page.keyboard.press("Enter"); await page.waitForTimeout(300);
+  verif("menu : A ouvre l'écran Énergie", /Énergie/i.test((await ombre(".fr-ecran .fr-titre")) || "") && !(await ombre(".fr-menu")));
+  await page.keyboard.press("Escape"); await page.waitForTimeout(200);
+  verif("menu : B ramène à la liste, curseur à la même place", (await ombre(".fr-item.on")) === "Énergie");
+  await page.keyboard.press("m"); await page.waitForTimeout(200);
+  verif("menu : M referme tout", await dansLaPage(() => !panelEl && !busy));
+  await dansLaPage(() => openMenu("sec")); await page.waitForTimeout(200);
+  verif("menu : un ancien onglet (secrets) ouvre la bonne poche du carnet", /Secrets/i.test((await ombre(".fr-poche.on")) || "") && /secrets trouvés/.test((await ombre("#mt")) || ""));
+  await page.keyboard.press("ArrowRight"); await page.waitForTimeout(150);
+  verif("menu : droite change de poche", !/Secrets/i.test((await ombre(".fr-poche.on")) || ""));
+  await dansLaPage(() => { closePanel(); openMenu("badges"); }); await page.waitForTimeout(200);
+  verif("menu : la carte de joueur montre les 8 badges", (await dansLaPage(() => document.getElementById("qk-host").shadowRoot.querySelectorAll(".fr-badges canvas").length)) === 8);
+  await dansLaPage(() => { closePanel(); MENU.opt = 0; openMenu("opt"); }); await page.waitForTimeout(200);
+  for (let i = 0; i < 5; i++) await page.keyboard.press("ArrowDown");
+  await page.keyboard.press("ArrowRight"); await page.waitForTimeout(200);
+  verif("menu : dans les options, droite change la patine (1 → 2) et l'enregistre", await dansLaPage(() => PREF.wear === 2 && JSON.parse(localStorage.getItem("wattlings-prefs") || "{}").wear === 2));
+  await page.keyboard.press("ArrowLeft"); await page.waitForTimeout(150);
+  await dansLaPage(() => closePanel());
+  await dansLaPage(() => openMenu()); await page.waitForTimeout(150);
+  await dansLaPage(() => document.getElementById("qk-host").shadowRoot.querySelector('.fr-menu [data-k=save]').click()); await page.waitForTimeout(200);
+  await dansLaPage(() => document.getElementById("qk-host").shadowRoot.getElementById("svNow").click()); await page.waitForTimeout(150);
+  verif("menu : Sauver → Oui sauvegarde la partie", /sauvegardé la partie/.test((await ombre("#svMsg")) || ""));
+  await dansLaPage(() => closePanel());
+  // à l'écran tactile : la croix déplace le curseur, A ouvre, B revient
+  const toucher = (sel) => dansLaPage((sel) => document.getElementById("qk-host").shadowRoot.querySelector(sel).dispatchEvent(new PointerEvent("pointerdown", { bubbles: true, composed: true })), sel);
+  await dansLaPage(() => { MENU.cur = 0; openMenu(); }); await page.waitForTimeout(100);
+  await toucher('.dpad button[data-k="down"]'); await page.waitForTimeout(100);
+  verif("menu tactile : la croix déplace le curseur", (await ombre(".fr-item.on")) === "Carte");
+  await toucher('.dpad button[data-k="down"]'); await toucher(".ab .a"); await page.waitForTimeout(250);
+  verif("menu tactile : A ouvre l'écran", /Énergie/i.test((await ombre(".fr-ecran .fr-titre")) || ""));
+  await toucher(".ab .b"); await page.waitForTimeout(200);
+  verif("menu tactile : B revient à la liste", (await ombre(".fr-item.on")) === "Énergie");
+  await dansLaPage(() => closePanel());
+  verif("menu : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+  await contexte.close();
+}
+
 // ---------------------------------------------------------------- comptes : jouer sans compte
 if (quoi === "tout" || quoi === "comptes") {
   console.log("Comptes : jouer sans compte, sans rien enregistrer");
@@ -257,7 +316,7 @@ if (quoi === "tout" || quoi === "comptes") {
   for (let i = 0; i < 6; i++) { await page.keyboard.press("Space"); await page.waitForTimeout(200); }
   await dansLaPage(() => { save(); qkSaveNow(); });
   await page.keyboard.press("m"); await page.waitForTimeout(300);
-  await cliquer(".menu-tabs [data-t=save]"); await page.waitForTimeout(200);
+  await cliquer(".fr-menu [data-k=save]"); await page.waitForTimeout(200);
   const ongletSauvegarde = await dansLaPage(() => document.getElementById("qk-host").shadowRoot.querySelector(".pbody")?.textContent || "");
   await page.keyboard.press("m");
   await page.waitForTimeout(300);
@@ -356,8 +415,7 @@ if (quoi === "tout" || quoi === "sources") {
     S.fiches = S.fiches || {}; S.fiches.s2r1 = 1;
     openMenu("sources");
     const r = document.getElementById("qk-host").shadowRoot, onglet = { blocs: r.querySelectorAll("#mt .cls").length, liens: [...r.querySelectorAll("#mt .refs-l a")].map((a) => a.href) };
-    openMenu("classeur"); // le menu est déjà ouvert : on change d'onglet à la main
-    r.querySelector('.menu-tabs [data-t="classeur"]').click();
+    closePanel(); openMenu("classeur");
     const fiche = r.querySelectorAll("#mt .fiche .refs a").length;
     closePanel();
     return { onglet, fiche };
