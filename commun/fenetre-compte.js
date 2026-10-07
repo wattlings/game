@@ -31,10 +31,11 @@ const echapper = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<"
 
 /**
  * Ouvre la fenêtre. parent : l'élément où l'accrocher (le corps de la page par défaut) ;
- * onglet : "connexion" ou "creation", celui montré d'abord à qui n'est pas connecté.
+ * onglet : "connexion" ou "creation", celui montré d'abord à qui n'est pas connecté ;
+ * surFermeture : appelée quand la fenêtre se ferme.
  * Après une déconnexion, ou une connexion qui change ce que la page garde en mémoire, celle-ci est rechargée.
  */
-export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexion" } = {}) {
+export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexion", surFermeture } = {}) {
   const fond = document.createElement("div");
   fond.className = "cpt-fond";
   const style = document.createElement("style");
@@ -51,6 +52,7 @@ export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexio
     fond.remove();
     removeEventListener("keydown", touche, true);
     if (avant && avant.focus) avant.focus();
+    if (surFermeture) surFermeture();
   };
   const touche = (e) => {
     if (e.key === "Escape") {

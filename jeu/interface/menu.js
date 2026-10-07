@@ -43,16 +43,10 @@ function openMenu(tab0){
       <h4 class="segh">Temps</h4>${seg('meteo',[['auto','Selon la date'],['clair','Soleil'],['nuageux','Nuageux'],['couvert','Couvert'],['pluie','Pluie'],['orage','Orage'],['brouillard','Brouillard'],['neige','Neige'],['vent','Grand vent']])}
       <h4 class="segh">Saison</h4>${seg('saison',[['auto','Selon la date'],['printemps','Printemps'],['été','Été'],['automne','Automne'],['hiver','Hiver']])}
       <h4 class="segh">Patine de la ville</h4>${seg('wear',WEAR_NAMES.map((n,i)=>[i+1,(i+1)+' · '+n]))}<p class="dnote">Usure, traces de vie, herbes folles, petits défauts : de la ville neuve (1) à la ville qui a beaucoup vécu (5).</p>`},
-    keys:()=>`<h3>Commandes</h3><div class="tbl keys-t"><table>
-      <tr><td>${touch?'Croix':'Flèches · ZQSD / WASD'}</td><td>Marcher</td></tr>
-      <tr><td>${touch?'A':'Espace · Entrée · E'}</td><td>Parler, lire, interagir, faire défiler un dialogue</td></tr>
-      <tr><td>${touch?'Menu':'M'}</td><td>${touch?'Ouvrir ce menu':'Ouvrir et refermer ce menu'}</td></tr>
-      <tr><td>${touch?'CARTE':'K'}</td><td>Carte de la ville : quartiers, arènes, objectif. Dans la carte : ${touch?'touche un endroit pour savoir ce que c’est, glisse pour déplacer, + et − pour zoomer':'les flèches déplacent le curseur, Espace ou + et − zooment, K referme'}${wmEtages()?'. Depuis que la gare a rouvert : dézoome encore pour voir tout le pays et ses lignes de train, puis zoome sur un site pour voir son plan':''}</td></tr>
-      <tr><td>${touch?'Courir':'Maj (maintenue) · R'}</td><td>Courir</td></tr>
-      <tr><td>${touch?'Roulade':'C'}</td><td>Roulade avant : trois cases d'une traite, plus vite qu'en courant</td></tr>
-      ${touch?'':'<tr><td>F</td><td>Plein écran</td></tr>'}</table></div><p class="dnote">Le bouton MENU, en haut à droite de l'écran, ouvre aussi ce menu. À côté : « CARTE » ouvre la carte de la ville, « ← Cours » ramène au cours${touch?'':', « ⧉ Vignette » détache le jeu dans une petite fenêtre flottante'}.</p>`
+    keys:()=>`<h3>Commandes</h3>${keysTable(touch)}<div class="row"><button class="btn alt" id="kIntro">Revoir la présentation</button></div>`
   };
   const show=k=>{if(k==='carte'){closePanel();openMap();return}b.querySelectorAll('.menu-tabs button').forEach(x=>x.classList.toggle('on',x.dataset.t===k));mt.innerHTML=tabs[k]();
+    if(k==='keys')mt.querySelector('#kIntro').onclick=()=>{closePanel();openPresentation()};
     if(k==='objectif'){mt.querySelector('#oCourse').onclick=()=>{closePanel();goCourse()};mt.querySelector('#oMap').onclick=()=>{closePanel();openMap()}}
     if(k==='badges')mt.querySelectorAll('canvas[data-bd]').forEach(c=>c.getContext('2d').drawImage(badgeCanvas(+c.dataset.bd),0,0));
     if(k==='dex'){const g=mt.querySelector('#dexg');ANOM.forEach(a=>{const d=document.createElement('div');const got=S.dex[a.id];if(!got)d.className='unk';d.appendChild(monCanvas(got?a:{...a,col:'#999',sym:'?'},40));d.insertAdjacentHTML('beforeend',`<br><b>${got?a.name:'???'}</b><br>${got?esc(a.data):''}`);g.appendChild(d)})}

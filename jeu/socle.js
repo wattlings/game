@@ -32,7 +32,7 @@ const COMPTE = {
   disponible: comptesDisponibles(),
   identifiant: compteActuel,
   surChangement: surChangementDeCompte,
-  ouvrir: (parent, onglet) => ouvrirFenetreCompte({ parent, onglet }),
+  ouvrir: (parent, onglet, surFermeture) => ouvrirFenetreCompte({ parent, onglet, surFermeture }),
 };
 
 // ---- étapes du cycle et chapitres du jeu

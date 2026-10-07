@@ -85,6 +85,7 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Où se trouvent les informations en ville | `jeu/recit/lieux-savoir.js` |
 | Les conseils de Mme Joule, le choix du site | `jeu/recit/histoire.js` |
 | Le texte de l'objectif de chaque chapitre | `jeu/recit/objectifs.js` |
+| La présentation du début de partie (les commandes, puis le jeu et son objectif). Elle s'ouvre à chaque nouvelle partie, avant l'avatar ; « Passer la présentation » ou Échap la saute ; menu → Commandes → « Revoir la présentation » | `jeu/interface/presentation.js` (textes et tableau des commandes, repris par le menu → Commandes), `jeu/interface/styles/presentation.css` |
 | Les habitants et leurs répliques | `jeu/recit/habitants.js`, `habitants-regions.js`, `meteo.js` |
 | Les secrets et clins d'œil | `jeu/recit/secrets.js`, `clins-d-oeil.js` |
 | Le nom et le résumé d'un chapitre | `commun/donnees/etapes.js` (`CHAPITRES_JEU`) |
@@ -262,6 +263,8 @@ Sans rien installer : dans le dépôt GitHub, onglet **Actions**, lancer « Fich
 Tout est enregistré dans le navigateur du visiteur, sous des clés inchangées depuis la version d'origine : la progression du cours (`ems-pedagogie-v1`) et la partie du jeu (`wattlings-slot-1`, nom hérité des trois emplacements d'autrefois).
 
 **Le jeu a une seule partie par joueur, celle de son compte** (voir « Comptes joueurs » ci-dessous). Sans compte, l'écran titre propose de se connecter, de créer un compte, ou de **« Continuer sans s'authentifier »** : la partie se joue alors normalement, mais rien n'est enregistré, et elle s'arrête quand on ferme la page. Une demande venue du cours (« jouer le chapitre 3 ») attend ce choix, puis est servie. Un joueur sans compte qui se connecte en cours de partie (menu → Sauvegarde) l'enregistre sur son compte, sauf si le compte a déjà une partie : c'est alors celle du compte qui reprend.
+
+**En quittant une partie sans compte** (« ← Retour au cours », bouton « ← Cours »), un avertissement rappelle que rien n'est sauvegardé et propose trois choix : « Créer un profil et sauvegarder » (la partie est enregistrée sur le nouveau compte, puis on quitte), « Quitter sans enregistrer », ou « Continuer à jouer ». Fermer l'onglet ou recharger la page déclenche la demande de confirmation du navigateur (qui n'affiche que son propre message). Textes et comportement : `jeu/interface/liens-cours.js`.
 
 Les parties d'avant les comptes (emplacements 2 et 3, première version du jeu) ne sont pas perdues : la première fois, la plus récente est reprise comme partie de ce navigateur, et rejoint le compte du joueur à sa connexion s'il n'en a pas encore. Les anciennes clés restent en place, sans être lues à nouveau.
 

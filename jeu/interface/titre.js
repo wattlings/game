@@ -7,7 +7,10 @@ if(COMPTE.disponible)COMPTE.surChangement((id,reecrites)=>{
   /* connecté pendant une partie sans compte. Si le compte apporte sa propre partie, la page se recharge pour la
      reprendre (commun/fenetre-compte.js) : d'ici là, la partie en cours reste sans compte, pour que la sauvegarde
      faite en quittant la page ne remplace pas celle du compte. Sinon, la partie en cours devient celle du compte */
-  if(id&&INVITE&&!reecrites.includes(SAVE_KEY)){INVITE=false;if(S.site){save();toast('✓ Partie enregistrée sur ton compte '+id)}}
+  if(id&&INVITE&&!reecrites.includes(SAVE_KEY)){INVITE=false;if(S.site||EN_ON){save();toast('✓ Partie enregistrée sur ton compte '+id)}}
+  if(id&&reecrites.includes(SAVE_KEY))qkSansEnregistrer=true;   // la page va se recharger : pas d'avertissement « partie non sauvegardée »
+  /* le profil a été créé pour sauvegarder avant de quitter (liens-cours.js) : on quitte, partie enregistrée */
+  if(id&&qkQuitterApres&&!reecrites.includes(SAVE_KEY)){const q=qkQuitterApres;qkQuitterApres=null;leaveGame(q.hash);return}
   const t=ROOT.querySelector('.title-screen');if(t){t.remove();titleScreen()}
   if(id&&!reecrites.includes(SAVE_KEY))qkServirAttente();
 });
@@ -49,7 +52,7 @@ function titleScreen(){
     if(a==='login'||a==='signup'){COMPTE.ouvrir(ROOT,a==='signup'?'creation':'connexion');return}
     if(a==='compte'){COMPTE.ouvrir(ROOT,'connexion');return}
     if(a==='guest'){trk('game_guest');INVITE=true;S=DEF();ov.remove();if(!qkServirAttente())titleScreen();return}
-    if(a==='new'||a==='newchap'){const hd=!!el.querySelector('[data-hades]').checked;trk('game_new',{etape:a==='newchap',hades:hd,compte:!INVITE});const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';S=DEF();S.name=nm;S.hades=hd;save();leave();a==='new'?openAvatar(()=>boot()):openAvatar(pick);return}
+    if(a==='new'||a==='newchap'){const hd=!!el.querySelector('[data-hades]').checked;trk('game_new',{etape:a==='newchap',hades:hd,compte:!INVITE});const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';S=DEF();S.name=nm;S.hades=hd;save();leave();openPresentation(()=>a==='new'?openAvatar(()=>boot()):openAvatar(pick));return}
     if(a==='erase'){if(btn.dataset.ok){trk('slot_erase');if(INVITE)S=DEF();else try{localStorage.removeItem(SAVE_KEY)}catch(e){}ov.remove();titleScreen()}else{btn.dataset.ok=1;btn.textContent='Confirmer : tout effacer'}return}
     S=Object.assign(DEF(),v);
     if(a==='cont'){trk('game_continue',{ch:S.ch});leave();if(!S.av)openAvatar(()=>boot());else boot()}

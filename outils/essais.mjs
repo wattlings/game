@@ -154,4 +154,9 @@ export const agirJeu = (r) => {
 export const TOUCHES = ["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight"];
 export const avancer = (page, ms) => page.evaluate((d) => __avance(d), ms);
 /** Valide l'écran de l'avatar s'il est affiché. */
-export const validerAvatar = (page) => page.evaluate(() => { const b = document.getElementById("qk-host").shadowRoot.getElementById("avOk"); if (b) b.click(); });
+/** Passe la présentation du début de partie (si elle est là), puis valide l'avatar proposé. */
+export const validerAvatar = (page) => page.evaluate(() => {
+  const r = document.getElementById("qk-host").shadowRoot;
+  r.getElementById("prSkip")?.click();
+  r.getElementById("avOk")?.click();
+});

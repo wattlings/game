@@ -18,8 +18,32 @@ function goCourse(hash){
   hash=hash||courseHash();trk('game_to_course',{target:hash,ch:S.ch});qkSaveNow();clearKeys();
   LIENS.consulterCours(hash);
 }
+/* ---- sans compte, rien n'est enregistré : avant de quitter une partie commencée, le joueur est prévenu ---- */
+let qkSansEnregistrer=false;   // le joueur a choisi de quitter sans enregistrer (ou la page se recharge sur la partie de son compte)
+let qkQuitterApres=null;       // il crée un profil pour sauvegarder : une fois connecté, il quitte comme il le voulait (titre.js)
+const qkPartieNonSauvee=()=>INVITE&&!qkSansEnregistrer&&(EN_ON||!!S.site);
+function qkAvertirDepart(hash){
+  const avant=busy;busy=true;clearKeys();
+  const ov=document.createElement('div');ov.className='overlay invite-quit';
+  ov.innerHTML=`<div class="panel" role="dialog" aria-modal="true" aria-labelledby="iqT"><header><span id="iqT">Ta partie n'est pas sauvegardée</span></header><div class="pbody">
+    <p>Tu joues sans compte : si tu quittes maintenant, ta progression sera perdue.</p>
+    <p>Crée un profil (un identifiant et un mot de passe) pour l'enregistrer et la retrouver plus tard, sur n'importe quel appareil.</p>
+    <div class="row"><button type="button" class="btn" data-a="creer">Créer un profil et sauvegarder</button><button type="button" class="btn danger" data-a="quitter">Quitter sans enregistrer</button><button type="button" class="btn alt" data-a="rester">Continuer à jouer</button></div></div></div>`;
+  const fermer=()=>{removeEventListener('keydown',touche,true);ov.remove();busy=avant;clearKeys()};
+  const touche=e=>{if(e.key==='Escape'&&ov.isConnected){e.preventDefault();e.stopPropagation();fermer()}};
+  addEventListener('keydown',touche,true);
+  ov.querySelector('[data-a=rester]').onclick=()=>{trk('guest_leave',{choix:'rester'});fermer()};
+  ov.querySelector('[data-a=quitter]').onclick=()=>{trk('guest_leave',{choix:'quitter'});fermer();qkSansEnregistrer=true;leaveGame(hash)};
+  ov.querySelector('[data-a=creer]').onclick=()=>{trk('guest_leave',{choix:'profil'});fermer();
+    qkQuitterApres={hash};COMPTE.ouvrir(ROOT,'creation',()=>{qkQuitterApres=null})};
+  $('layer').appendChild(ov);ov.querySelector('[data-a=creer]').focus();
+}
+/* fermer l'onglet ou recharger la page : le navigateur demande confirmation (il n'affiche que son propre message) */
+addEventListener('beforeunload',e=>{if(qkPartieNonSauvee()){e.preventDefault();e.returnValue=''}});
+
 /* quitter le jeu pour le cours (sans page précisée : retour à la page d'où l'on venait) */
 function leaveGame(hash){
+  if(qkPartieNonSauvee()){qkAvertirDepart(hash);return}
   trk('game_to_course',{target:hash||'retour',ch:S.ch});qkSaveNow();clearKeys();
   if(AUD.ctx)AUD.ctx.suspend();
   LIENS.quitterVersCours(hash);
@@ -32,7 +56,7 @@ function openGame(ch){
     ROOT.querySelectorAll('#layer > *').forEach(n=>n.remove());busy=false;dlg.q=[];dlg.cb=null;dlg.open=false;if(dlg.el){dlg.el.remove();dlg.el=null}
     const sv=loadSave();S=Object.assign(DEF(),sv||{});
     const go=()=>{if(S.site&&S.ch===ch)boot();else jumpTo(ch,S.site||'ecole')};
-    if(!S.av)openAvatar(go);else go();
+    if(!S.av)openPresentation(()=>openAvatar(go));else go();   // nouvelle partie : la présentation, puis l'avatar
   }
   updateMusic();
   qkTimeout(()=>{const b=ROOT.querySelector('.title-screen .slot button, .title-screen .auth button, .overlay button');if(b)b.focus()},60);

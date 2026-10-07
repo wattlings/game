@@ -10,6 +10,7 @@
 //             examine tout, manipule les simulations, fait tamponner le passeport et rentre ;
 //   liens : fait l'aller-retour cours → jeu → cours et contrôle sauvegarde, reprise et anciennes adresses ;
 //   comptes : sans compte, le jeu propose de se connecter ou de jouer sans rien enregistrer, et n'enregistre rien ;
+//             la présentation du début de partie, l'avertissement en quittant une partie non sauvegardée ;
 //   (toutes les autres vérifications jouent connectées à un compte d'essai simulé : voir compteDEssai dans essais.mjs)
 //   sources : contrôle que chaque source citée existe, et que chaque fait relevé a la sienne (voir outils/sources.mjs).
 //   pilotage : ouvre la page de pilotage, chaque pastille, modifie un texte, et lance des essais dans le jeu.
@@ -242,6 +243,14 @@ if (quoi === "tout" || quoi === "comptes") {
   verif("sans compte : une partie d'avant les comptes est annoncée", /Ancien/.test((await ombre(".title-screen .slot.auth")) || ""));
   await cliquer("[data-a=guest]");
   await page.waitForTimeout(600);
+  // nouvelle partie : la présentation d'abord (les commandes, puis le jeu), qu'on peut passer
+  verif("présentation : elle s'ouvre sur les commandes", /Les commandes/.test((await ombre(".presentation header")) || "") && /Marcher/.test((await ombre(".presentation .keys-t")) || ""));
+  await cliquer("#prNext"); await page.waitForTimeout(150);
+  verif("présentation : puis le jeu et son objectif", /Le jeu et son objectif/.test((await ombre(".presentation header")) || "") && /8 quartiers/.test((await ombre(".presentation .pbody")) || ""));
+  await page.keyboard.press("ArrowLeft"); await page.waitForTimeout(150);
+  verif("présentation : on revient en arrière", /Les commandes/.test((await ombre(".presentation header")) || ""));
+  await cliquer("#prSkip"); await page.waitForTimeout(300);
+  verif("présentation : « Passer » mène à l'avatar", !(await ombre(".presentation")) && (await dansLaPage(() => !!document.getElementById("qk-host").shadowRoot.getElementById("avOk"))));
   await validerAvatar(page);
   await page.waitForTimeout(1200);
   verif("« Continuer sans s'authentifier » ouvre le chapitre demandé", await dansLaPage(() => INVITE === true && EN_ON === true && S.ch === 3 && location.hash === ""), JSON.stringify(await dansLaPage(() => ({ invite: INVITE, en: EN_ON, ch: S.ch, h: location.hash }))));
@@ -250,8 +259,20 @@ if (quoi === "tout" || quoi === "comptes") {
   await page.keyboard.press("m"); await page.waitForTimeout(300);
   await cliquer(".menu-tabs [data-t=save]"); await page.waitForTimeout(200);
   const ongletSauvegarde = await dansLaPage(() => document.getElementById("qk-host").shadowRoot.querySelector(".pbody")?.textContent || "");
-  await page.keyboard.press("Escape");
-  await page.goto("about:blank");
+  await page.keyboard.press("m");
+  await page.waitForTimeout(300);
+  // quitter sans compte : le joueur est prévenu, peut rester, créer un profil ou quitter sans enregistrer
+  await cliquer("#qkBack"); await page.waitForTimeout(200);
+  verif("quitter sans compte : le joueur est prévenu", /n'est pas sauvegardée/.test((await ombre(".invite-quit")) || "") && !!(await ombre(".invite-quit [data-a=creer]")) && !!(await ombre(".invite-quit [data-a=quitter]")));
+  await cliquer(".invite-quit [data-a=rester]"); await page.waitForTimeout(200);
+  verif("quitter sans compte : « Continuer à jouer » referme l'avertissement", !(await ombre(".invite-quit")) && (await dansLaPage(() => EN_ON && !busy)));
+  await cliquer("#qkBack"); await page.waitForTimeout(200);
+  await cliquer(".invite-quit [data-a=creer]"); await page.waitForTimeout(200);
+  verif("quitter sans compte : « Créer un profil » ouvre la création de compte", /Créer mon compte/.test((await ombre(".cpt")) || ""));
+  await page.keyboard.press("Escape"); await page.waitForTimeout(200);
+  await cliquer("#qkBack"); await page.waitForTimeout(200);
+  await Promise.all([page.waitForURL((u) => !u.pathname.includes("/jeu/")), cliquer(".invite-quit [data-a=quitter]")]);
+  verif("quitter sans compte : « Quitter sans enregistrer » ramène au cours", !page.url().includes("/jeu/"));
   await page.goto(adresse);
   const cles = await dansLaPage(() => ({ partie: JSON.parse(localStorage.getItem("wattlings-slot-1") || "null"), compte: localStorage.getItem("wattlings-compte") }));
   verif("sans compte : la partie jouée n'est pas enregistrée", !cles.partie || cles.partie.name === "Ancien", JSON.stringify(cles.partie && cles.partie.name));

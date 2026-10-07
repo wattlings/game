@@ -1,0 +1,9 @@
+/* Wattlings · jeu/interface/styles/presentation.css
+   La présentation du début de partie (interface/presentation.js) et l'avertissement « partie non sauvegardée ». */
+.overlay.presentation,.overlay.invite-quit{z-index:36}
+.presentation .pbody ul,.presentation .pbody ol{margin:0 0 10px;padding-left:1.3em}
+.presentation .pbody li{margin:0 0 4px}
+.presentation .pr-etapes{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px 14px;list-style:none;padding-left:0}
+.presentation .pr-nav,.invite-quit .row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:14px}
+.presentation .pr-sep{flex:1}
+.invite-quit .btn.danger{background:transparent;color:#a3261b;border-color:#a3261b}
