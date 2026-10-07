@@ -1,12 +1,15 @@
 /**
  * Suivi d'audience anonyme (Supabase), partagé par le cours et le jeu.
  *
- * Aucun cookie, aucune donnée personnelle : un identifiant aléatoire (13 mois) par navigateur.
+ * Aucun cookie : un identifiant aléatoire (13 mois) par navigateur. Quand le joueur est connecté à son compte
+ * (commun/compte.js), chaque événement porte aussi son identifiant (props.profil) : on peut alors compter les joueurs
+ * par profil, d'un appareil à l'autre, et suivre ce que fait chacun. Sans compte, rien ne dit qui joue.
  * Ne fait rien tant que commun/config.js n'est pas renseigné, en navigation « Ne pas me pister »,
  * après un clic sur « Ne pas me compter », ou hors d'un site web (fichier local, aperçu, localhost).
  *
  * Chaque événement part dans la table « events » : vid, sid, name, page, device, lang, props, ref.
  */
+import { compteActuel } from "./compte.js";
 import { SUIVI } from "./config.js";
 import { CLES_SUIVI, ecrire, lire, supprimer } from "./stockage.js";
 
@@ -110,6 +113,8 @@ export function suivre(nom, props) {
     lang: (navigator.language || "").slice(0, 12),
     props: Object.assign({}, props || {}),
   };
+  const profil = compteActuel();
+  if (profil) ligne.props.profil = profil;
   if (premierEvenement) {
     premierEvenement = false;
     ligne.props.first = true;

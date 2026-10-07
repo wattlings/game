@@ -5,7 +5,8 @@
  */
 import { estimerRang, texteDuree } from "./duree.js";
 import { h, nombre, pluriel, remplir } from "./rendu.js";
-import { agreger, charger, connecter, exemple } from "./suivi.js";
+import { agreger, charger, connecter, estProfil, exemple } from "./suivi.js";
+import { sectionProfils } from "./vue-profils.js";
 
 const CLE_PROJET = "pilotage-projet-v1";
 const jour = (d) => d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
@@ -55,6 +56,7 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
     surStats(A, estExemple);
     const C = Object.keys(A.chapitres).map(Number).sort((a, b) => a - b), base = Math.max(1, ...C.map((c) => A.chapitres[c].debut.size));
     const chapitres = P.sections.find((s) => s.id === "histoire").rangs.filter((r) => r.suivi && r.suivi.ch !== undefined);
+    const avecProfil = [...A.joueurs].filter(estProfil).length;
     const tuile = (v, nom, sous) => h("div", { class: "tuile" }, h("strong", null, v), h("span", null, nom), sous ? h("small", null, sous) : null);
     const fin = chapitres.length ? A.chapitres[chapitres.at(-1).suivi.ch] : null, arrives = fin ? fin.debut.size : 0, departs = A.chapitres[0] ? A.chapitres[0].debut.size : A.nouvelles.size;
 
@@ -102,13 +104,15 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
     remplir(resultats,
       estExemple ? h("p", { class: "bandeau alerte" }, h("strong", null, "Données d'exemple, inventées."), " Elles montrent à quoi ressemblera cette page une fois le suivi branché. Aucun de ces chiffres n'est réel.") : null,
       !A.evenements ? h("p", { class: "bandeau" }, "Aucun événement du jeu sur cette période." + (lignes.length ? " (" + nombre(lignes.length) + " événements lus, qui viennent tous du cours.)" : " La table est vide, ou la règle de lecture ne laisse rien passer : voir plus bas.")) : [
-        h("div", { class: "tuiles" }, tuile(nombre(A.joueurs.size), "joueurs", A.premier ? "du " + jour(A.premier) + " au " + jour(A.dernier) : ""), tuile(nombre(departs), "ont commencé l'histoire"),
+        h("div", { class: "tuiles" }, tuile(nombre(A.joueurs.size), "joueurs uniques", A.premier ? "du " + jour(A.premier) + " au " + jour(A.dernier) : ""),
+          tuile(nombre(avecProfil), "avec un profil", pluriel(A.profils.size, "profil actif", "profils actifs") + " (cours compris)"), tuile(nombre(A.joueurs.size - avecProfil), "sans profil", "comptés un par navigateur"), tuile(nombre(departs), "ont commencé l'histoire"),
           tuile(nombre(arrives), "sont arrivés à l'épilogue", departs ? Math.round((100 * arrives) / departs) + " % de ceux qui ont commencé" : ""), tuile(nombre(A.nbErreurs), "mauvaises réponses", A.joueurs.size ? (A.nbErreurs / A.joueurs.size).toFixed(1).replace(".", ",") + " par joueur" : ""),
           tuile(nombre(A.passeports.size), "passeports des énergies")),
         h("section", { class: "bloc-page" }, h("h3", null, "Jusqu'où vont les joueurs"), h("p", { class: "muet" }, "Le nombre de joueurs arrivés à chaque chapitre. Là où la barre raccourcit d'un coup, des joueurs ont lâché au chapitre d'avant. Un clic ouvre le chapitre."), graphe, tableau),
         h("section", { class: "bloc-page" }, h("h3", null, "Les questions qui font trébucher"), h("p", { class: "muet" }, "Les quinze questions qui récoltent le plus de mauvaises réponses. Beaucoup d'erreurs sur une même mauvaise réponse : la question est peut-être ambiguë, ou le piège trop bon."), tErreurs),
         h("div", { class: "deux" }, h("section", { class: "bloc-page" }, h("h3", null, "Les dresseurs les plus coriaces"), tDuels), h("section", { class: "bloc-page" }, h("h3", null, "Les voyages en train"), tVoyages)),
-        h("p", { class: "muet" }, "Ces chiffres sont aussi posés sur les frises du parcours (sous chaque chapitre, sous chaque pastille, à côté de chaque question). Le comptage est anonyme : un joueur est un navigateur. Ne sont pas comptés : les navigateurs qui demandent à ne pas être pistés, ceux qui ont refusé, et tes essais lancés depuis cette page.", A.sansDate ? " La table ne donne pas de date : le choix de la période est ignoré." : ""),
+        sectionProfils(A, { P }),
+        h("p", { class: "muet" }, "Ces chiffres sont aussi posés sur les frises du parcours (sous chaque chapitre, sous chaque pastille, à côté de chaque question). Un joueur est un profil quand il est connecté à son compte (le même, d'un appareil à l'autre ; ce qu'il a fait sur ce navigateur avant de se connecter lui revient aussi, si personne d'autre ne s'y est connecté) ; sinon, c'est un navigateur, compté anonymement. Ne sont pas comptés : les navigateurs qui demandent à ne pas être pistés, ceux qui ont refusé, et tes essais lancés depuis cette page.", A.sansDate ? " La table ne donne pas de date : le choix de la période est ignoré." : ""),
       ]);
   }
 
@@ -119,7 +123,7 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
   remplir(racine,
     h("section", { class: "bloc-page" },
       h("h2", null, "Les joueurs"),
-      h("p", null, "Ce que le suivi anonyme du jeu a enregistré : jusqu'où vont les joueurs, où ils se trompent, ce qu'ils trouvent. La lecture demande de se connecter : la clé du site sait écrire des événements, pas les relire."),
+      h("p", null, "Ce que le suivi du jeu a enregistré : jusqu'où vont les joueurs, où ils se trompent, ce qu'ils trouvent, et, pour chaque profil, le journal de ses actions. La lecture demande de se connecter : la clé du site sait écrire des événements, pas les relire."),
       h("form", { class: "connexion", onsubmit: lire },
         h("label", null, h("span", null, "Adresse du projet Supabase"), cUrl), h("label", null, h("span", null, "Clé « publishable »"), cCle),
         h("label", null, h("span", null, "Adresse e-mail"), cMail), h("label", null, h("span", null, "Mot de passe"), cMdp),

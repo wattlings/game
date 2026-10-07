@@ -54,26 +54,58 @@ export async function charger({ url, cle, jeton, depuis, surProgres, plafond = 6
   return [];
 }
 
-const dateDe = (l) => { const d = l.ts || l.created_at || l.inserted_at || l.date || l.t; const x = d ? new Date(d) : null; return x && !isNaN(x) ? x : null; };
+export const dateDe = (l) => { const d = l.ts || l.created_at || l.inserted_at || l.date || l.t; const x = d ? new Date(d) : null; return x && !isNaN(x) ? x : null; };
+/** Les événements du jeu (les autres viennent du cours, ou de la fenêtre « Mon compte »). */
+export const estDuJeu = (n) => /^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$|intro$|avatar$|aide$|menu$|setting$|guest_leave$|slot_erase$)/.test(n);
 const mediane = (L) => { if (!L.length) return null; const s = L.slice().sort((a, b) => a - b), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 
-/** Les chiffres : qui est arrivé où, ce qui a été trouvé, ce qui a été raté. */
+/** Le profil (identifiant du compte) d'un événement, s'il a été envoyé par un joueur connecté. */
+export const profilDe = (l) => { const p = l && l.props; return p && typeof p.profil === "string" && p.profil ? p.profil : null; };
+
+/**
+ * Qui a envoyé chaque événement : un joueur est un profil (son compte, d'un appareil à l'autre) ; sans profil, un navigateur.
+ * Un événement sans profil, envoyé par un navigateur où un seul profil s'est connecté, revient à ce profil (ce qu'il a fait
+ * avant de se connecter ou de créer son compte). Renvoie la fonction qui donne la clé d'un joueur (« @identifiant » ou « v:… »).
+ */
+export function joueurDe(lignes) {
+  const profils = new Map(); // vid → Set des profils vus sur ce navigateur
+  for (const l of lignes) { const pr = profilDe(l); if (pr && l.vid) (profils.get(l.vid) || profils.set(l.vid, new Set()).get(l.vid)).add(pr); }
+  return (l) => { const pr = profilDe(l); if (pr) return "@" + pr; const S = profils.get(l.vid); return S && S.size === 1 ? "@" + [...S][0] : "v:" + l.vid; };
+}
+export const estProfil = (cle) => cle.startsWith("@");
+
+/** Les chiffres : qui est arrivé où, ce qui a été trouvé, ce qui a été raté. Un joueur est un profil, ou à défaut un navigateur. */
 export function agreger(lignes, { depuis } = {}) {
   const A = {
     evenements: 0, joueurs: new Set(), nouvelles: new Set(), finies: new Set(), chapitres: {}, fiches: {}, duels: {}, badges: {}, erreurs: new Map(), nbErreurs: 0,
     secrets: {}, trains: {}, infos: {}, tampons: {}, defis: {}, sims: {}, sites: {}, passeports: new Set(), premier: null, dernier: null, sansDate: false,
+    profils: new Map(), visiteurs: new Set(), navigateursSansProfil: new Set(),
   };
   const ens = (o, k) => (o[k] ||= new Set());
+  const qui = joueurDe(lignes);
   for (const l of lignes) {
     const d = dateDe(l);
     if (!d) A.sansDate = true;
     if (d && depuis && d < depuis) continue;
-    const p = l.props && typeof l.props === "object" ? l.props : {}, v = l.vid, n = l.name;
-    if (!n || !v) continue;
-    const duJeu = /^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$)/.test(n);
-    if (!duJeu) continue;
+    if (!l.name || !l.vid) continue;
+    const p = l.props && typeof l.props === "object" ? l.props : {}, v = qui(l), n = l.name;
+    A.visiteurs.add(v);
+    if (estProfil(v)) {
+      const id = v.slice(1), F = A.profils.get(id) || { id, navigateurs: new Set(), visites: new Set(), lignes: [], premier: null, dernier: null, chMax: -1, fini: false, jeu: 0, cours: 0, erreurs: 0, fiches: new Set(), badges: new Set(), appareils: new Set() };
+      A.profils.set(id, F);
+      F.navigateurs.add(l.vid); if (l.sid) F.visites.add(l.sid); if (l.device) F.appareils.add(l.device); F.lignes.push(l);
+      if (d) { if (!F.premier || d < F.premier) F.premier = d; if (!F.dernier || d > F.dernier) F.dernier = d; }
+      if (n === "chapter_start" && Number.isInteger(p.ch)) F.chMax = Math.max(F.chMax, p.ch);
+      if (n === "game_end") F.fini = true;
+      if (n === "wrong_answer") F.erreurs++;
+      if (n === "fiche" && p.id) F.fiches.add(p.id);
+      if (n === "badge" && p.name) F.badges.add(p.name);
+      if (estDuJeu(n)) F.jeu++; else F.cours++;
+    }
+    if (!estDuJeu(n)) continue;
     A.evenements++;
     A.joueurs.add(v);
+    if (!estProfil(v)) A.navigateursSansProfil.add(l.vid);
     if (d) { if (!A.premier || d < A.premier) A.premier = d; if (!A.dernier || d > A.dernier) A.dernier = d; }
     switch (n) {
       case "game_new": A.nouvelles.add(v); break;
@@ -127,6 +159,8 @@ export function etiquettes(A, P) {
   return { rangs, noeuds };
 }
 
+const PRENOMS = ["camille", "lea.m", "hugo", "ines-b", "nathan", "manon", "sacha", "jules", "chloe.v", "adam", "lina", "noah", "emma.r", "louis", "zoe", "malo", "rose", "tom", "alice", "yanis"];
+
 /** Des événements inventés, pour voir à quoi ressemble la page avant de brancher Supabase. */
 export function exemple(P) {
   let g = 20260;
@@ -136,13 +170,18 @@ export function exemple(P) {
   const garde = [1, 0.93, 0.9, 0.84, 0.86, 0.9, 0.82, 0.88, 0.9, 0.93, 0.8, 0.95];
   for (let j = 0; j < 214; j++) {
     const vid = "ex" + j, t0 = maintenant - alea() * 60 * 864e5;
-    let t = t0;
-    const ev = (name, props) => L.push({ vid, sid: "s" + j, name, props, created_at: new Date((t += 20000 + alea() * 90000)).toISOString() });
+    // un peu plus d'un joueur sur deux a un profil ; certains jouent sur deux appareils (le second à partir du chapitre 4)
+    const profil = j % 9 < 5 ? PRENOMS[j % PRENOMS.length] + (j >= PRENOMS.length ? "." + Math.floor(j / PRENOMS.length) : "") : null, deux = profil && j % 4 === 0;
+    let t = t0, autre = false, visite = 0, avant = t0;
+    const ev = (name, props = {}, page = "jeu") => { const ts = (t += 20000 + alea() * 90000); if (ts - avant > 30 * 6e4) visite++; avant = ts;
+      L.push({ vid: autre ? vid + "b" : vid, sid: "s" + j + "-" + visite + (autre ? "b" : ""), name, page, device: autre ? "mobile" : j % 3 ? "desktop" : "tablet", props: profil ? Object.assign({}, props, { profil }) : props, created_at: new Date(ts).toISOString() }); };
+    if (profil) { ev("account_signup", {}, "accueil"); ["accueil", "etape-1"].forEach((pg) => ev("pageview", {}, pg)); ev("read_time", { p: "etape-1", s: Math.round(60 + alea() * 300) }, "etape-1"); }
     ev("game_open", { from: "bouton" }); ev("game_new", { slot: 1 });
     ev("site_choice", { site: ["ecole", "ecole", "mairie", "boulangerie", "gymnase"][Math.floor(alea() * 5)] });
     for (let ch = 0; ch < histoire.length; ch++) {
       const r = histoire[ch];
       if (alea() > (garde[ch] ?? 0.9)) break;
+      if (deux && ch === 4) { autre = true; t += 2 * 864e5; ev("account_login"); ev("game_continue", { ch }); }
       ev("chapter_start", { ch, site: "ecole", via: "jeu" });
       r.noeuds.forEach((n) => {
         const s = n.suivi || {};

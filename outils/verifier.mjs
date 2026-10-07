@@ -549,6 +549,15 @@ if (quoi === "tout" || quoi === "pilotage") {
     await page.waitForTimeout(400);
     const joueurs = await page.evaluate(() => ({ barres: document.querySelectorAll(".graphe button.barre-ligne").length, tuiles: document.querySelectorAll(".resultats .tuile").length, etiquettes: [...document.querySelectorAll("[data-suivi]")].filter((e) => e.textContent).length, mention: /inventées/.test(document.querySelector(".resultats").textContent) }));
     verif("pilotage : l'onglet des joueurs s'affiche avec des données d'exemple, signalées comme telles", joueurs.barres === 12 && joueurs.tuiles >= 4 && joueurs.etiquettes > 50 && joueurs.mention, JSON.stringify(joueurs));
+    const profils = await page.evaluate(async () => {
+      const tuiles = document.querySelector(".resultats > .tuiles").textContent, lignes = document.querySelectorAll(".profils tbody tr").length;
+      document.querySelector(".profils tbody button.lien").click();
+      await new Promise((r) => setTimeout(r, 200));
+      const actions = document.querySelectorAll(".profil-detail .journal li").length, cours = document.querySelectorAll(".profil-detail .journal li.a-cours").length;
+      const recherche = document.querySelector(".profils input[type=search]"); recherche.value = "zzz"; recherche.dispatchEvent(new Event("input"));
+      return { profil: /avec un profil/.test(tuiles) && /sans profil/.test(tuiles), lignes, actions, cours, filtre: document.querySelectorAll(".profils tbody tr").length };
+    });
+    verif("pilotage : les joueurs comptés par profil, et le journal des actions d'un profil", profils.profil && profils.lignes > 10 && profils.actions > 5 && profils.cours > 0 && profils.filtre === 0, JSON.stringify(profils));
     verif("pilotage : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
 
     // côté jeu : chaque bouton « Tester » mène quelque part, et le mode essai ne touche ni à la sauvegarde ni au suivi

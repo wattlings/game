@@ -77,7 +77,7 @@ function mention() {
       ? 'Mesure d’audience : ce navigateur n’est pas compté. <button type="button">Me compter à nouveau</button>'
       : nePasPister()
         ? "Mesure d’audience : désactivée par le réglage « Ne pas me pister » de ton navigateur."
-        : 'Mesure d’audience anonyme, sans cookie ni donnée personnelle, conservée 13 mois, réservée à l’auteur du site. <button type="button">Ne pas me compter</button>';
+        : 'Mesure d’audience sans cookie, conservée 13 mois, réservée à l’auteur du site : anonyme, sauf si tu es connecté à ton compte (elle est alors rattachée à ton identifiant). <button type="button">Ne pas me compter</button>';
     const b = p.querySelector("button");
     if (b)
       b.onclick = () => {

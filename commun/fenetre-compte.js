@@ -3,6 +3,7 @@
  * Elle porte ses propres styles, ce qui lui permet de s'afficher aussi dans le jeu (dessiné dans un shadow DOM).
  */
 import { compteActuel, concernePage, messageErreur, seConnecter, seDeconnecter } from "./compte.js";
+import { suivre } from "./suivi.js";
 
 const STYLES = `
 .cpt-fond{position:fixed;inset:0;z-index:2147483000;background:rgba(8,12,24,.62);display:flex;align-items:center;justify-content:center;padding:16px;font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -70,7 +71,7 @@ export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexio
     boite.innerHTML = `
       <button type="button" class="cpt-fermer" aria-label="Fermer">×</button>
       <h2 id="cpt-titre">Mon compte</h2>
-      <p>Avec un compte, ta progression dans le cours et tes parties du jeu te suivent sur tous tes appareils et navigateurs.</p>
+      <p>Avec un compte, ta progression dans le cours et tes parties du jeu te suivent sur tous tes appareils et navigateurs. La mesure d'audience du site rattache alors ce que tu y fais à ton identifiant (sauf si tu as choisi « Ne pas me compter »).</p>
       <div class="cpt-onglets" role="tablist">
         <button type="button" role="tab" data-o="connexion" aria-selected="${!creer}">Se connecter</button>
         <button type="button" role="tab" data-o="creation" aria-selected="${creer}">Créer un compte</button>
@@ -114,6 +115,7 @@ export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexio
       bouton.textContent = "Un instant…";
       try {
         const reecrites = await seConnecter(id.value, mdp, { creer });
+        suivre(creer ? "account_signup" : "account_login");
         if (concernePage(reecrites)) {
           location.reload();
           return;
@@ -144,6 +146,7 @@ export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexio
     let forcer = false;
     sortir.onclick = async () => {
       sortir.disabled = true;
+      suivre("account_logout");
       try {
         await seDeconnecter({ forcer });
         location.reload();
