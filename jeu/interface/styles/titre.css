@@ -43,3 +43,7 @@
 .dex div{background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:6px;text-align:center;font-size:15px}
 .dex canvas{width:64px;image-rendering:pixelated}
 .dex .unk{opacity:.45}
+/* une seule partie (celle du compte), ou l'invitation à se connecter */
+.slots.solo{grid-template-columns:minmax(0,440px);justify-content:center}
+.slot.auth{text-align:center;align-items:center;gap:8px;padding:14px}
+.slot.auth .acts{justify-content:center;margin-top:4px}

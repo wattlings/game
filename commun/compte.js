@@ -11,7 +11,7 @@
  * dans le navigateur depuis la dernière synchronisation.
  */
 import { SUIVI } from "./config.js";
-import { CLES_SYNCHRONISEES, CLE_COMPTE, CLE_COMPTE_SYNCHRO, ecrire, lire, supprimer } from "./stockage.js";
+import { CLES_SYNCHRONISEES, CLE_COMPTE, CLE_COMPTE_SYNCHRO, ecrire, lire, reprendreAnciennePartie, supprimer } from "./stockage.js";
 
 /** Les comptes sont-ils proposés (projet Supabase renseigné) ? */
 export const comptesDisponibles = () => !!(SUIVI.url && SUIVI.cle);
@@ -49,18 +49,24 @@ function heureDeLaPartie(valeur) {
   }
 }
 
+reprendreAnciennePartie();
+
 let compte = lireJSON(CLE_COMPTE); // { identifiant, jeton } ou null
 // pour chaque clé : h = empreinte de la valeur au dernier passage, t = son heure, sale = pas encore envoyée
 let synchro = lireJSON(CLE_COMPTE_SYNCHRO) || { cles: {}, verif: 0 };
 if (!compte || !compte.jeton) compte = null;
 
 const abonnes = new Set();
-const prevenir = () => abonnes.forEach((f) => f(compteActuel()));
+const prevenir = (reecrites = []) => abonnes.forEach((f) => f(compteActuel(), reecrites));
 
 /** L'identifiant du joueur connecté, ou null. */
 export const compteActuel = () => (compte ? compte.identifiant : null);
 
-/** Prévient fn(identifiant ou null) à chaque connexion ou déconnexion. Renvoie de quoi se désabonner. */
+/**
+ * Prévient fn(identifiant ou null, clés réécrites) à chaque connexion ou déconnexion. À la connexion, l'appel vient
+ * une fois le compte et le navigateur réunis : les clés réécrites sont celles que le compte a apportées.
+ * Renvoie de quoi se désabonner.
+ */
 export function surChangementDeCompte(fn) {
   abonnes.add(fn);
   return () => abonnes.delete(fn);
@@ -220,9 +226,10 @@ export async function seConnecter(identifiant, motDePasse, { creer = false } = {
   ecrire(CLE_COMPTE, JSON.stringify(compte));
   synchro = { cles: {}, verif: 0 };
   releverChangements(0); // heure 0 : le compte l'emporte, sauf pour les parties (leur heure de sauvegarde)
-  prevenir();
   demarrer();
-  return synchroniser().catch(() => []);
+  const reecrites = await synchroniser().catch(() => []);
+  prevenir(reecrites);
+  return reecrites;
 }
 
 /**
@@ -256,9 +263,12 @@ export function reglerCompte(r) {
   Object.assign(reglages, r);
 }
 
+/** Ce qui a été réécrit concerne-t-il ce que la page garde en mémoire ? */
+export const concernePage = (reecrites) => reecrites.some((c) => reglages.cles.includes(c));
+
 const MARQUE_RECHARGE = "wattlings-compte-recharge";
 function rechargerSiBesoin(reecrites) {
-  if (!reecrites.some((c) => reglages.cles.includes(c)) || !reglages.peutRecharger()) return;
+  if (!concernePage(reecrites) || !reglages.peutRecharger()) return;
   try {
     // jamais deux fois en 20 secondes : pas de boucle si deux appareils se renvoient la balle
     if (Date.now() - (+sessionStorage.getItem(MARQUE_RECHARGE) || 0) < 20000) return;

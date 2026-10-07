@@ -5,7 +5,38 @@ import { servir } from "./serveur.mjs";
 export async function demarrer() {
   const serveur = await servir(0);
   const navigateur = await chromium.launch();
+  // chaque contexte (un « appareil ») est connecté à un compte d'essai, sauf si on demande { sansCompte: true }
+  const nouveau = navigateur.newContext.bind(navigateur);
+  navigateur.newContext = async ({ sansCompte = false, ...options } = {}) => {
+    const contexte = await nouveau(options);
+    if (!sansCompte) await compteDEssai(contexte);
+    return contexte;
+  };
   return { adresse: serveur.adresse, navigateur, fermer: async () => { await navigateur.close(); await serveur.fermer(); } };
+}
+
+/**
+ * Connecte un contexte à un compte d'essai : le site croit parler à Supabase (commun/compte.js), mais les appels
+ * sont interceptés et servis ici, comme le ferait outils/supabase/comptes-joueurs.sql. Rien ne sort de la machine.
+ */
+export async function compteDEssai(contexte, identifiant = "essai") {
+  const donnees = {};
+  await contexte.addInitScript((c) => {
+    try {
+      if (!localStorage.getItem("wattlings-compte")) localStorage.setItem("wattlings-compte", JSON.stringify({ identifiant: c, jeton: "jeton-d-essai" }));
+    } catch {} // about:blank : pas de stockage
+  }, identifiant);
+  await contexte.route(/\/rest\/v1\/rpc\/wattlings_/, async (route) => {
+    const fonction = route.request().url().split("/").pop();
+    const p = JSON.parse(route.request().postData() || "{}");
+    let reponse = { ok: true };
+    if (fonction === "wattlings_connexion" || fonction === "wattlings_inscription") reponse = { identifiant, jeton: "jeton-d-essai" };
+    if (fonction === "wattlings_synchroniser") {
+      for (const [cle, d] of Object.entries(p.p_donnees || {})) if (!donnees[cle] || d.t >= donnees[cle].t) donnees[cle] = d;
+      reponse = { donnees };
+    }
+    await route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify(reponse) });
+  });
 }
 
 /** Relève les erreurs d'une page (erreurs de script, messages d'erreur de la console, fichiers introuvables). */

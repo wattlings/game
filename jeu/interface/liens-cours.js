@@ -35,7 +35,7 @@ function openGame(ch){
     if(!S.av)openAvatar(go);else go();
   }
   updateMusic();
-  qkTimeout(()=>{const b=ROOT.querySelector('.title-screen .slot button, .overlay button');if(b)b.focus()},60);
+  qkTimeout(()=>{const b=ROOT.querySelector('.title-screen .slot button, .title-screen .auth button, .overlay button');if(b)b.focus()},60);
 }
 $('qkBack').onclick=()=>leaveGame();
 $('qkCourse').onclick=()=>goCourse();
@@ -49,13 +49,17 @@ function qkSync(){
 }
 
 /* ---- ce que demande l'adresse de la page : "chapitre-3", "reprendre" ou rien (écran titre, ou la partie telle qu'elle est) ---- */
+/* une demande (chapitre, reprise) faite avant que le joueur se connecte ou choisisse de jouer sans compte : servie ensuite (titre.js) */
+let qkAttente=null;
 function qkRoute(h){
+  let adresse=false;
   if(typeof h!=='string'){
     const e=window.WATTLINGS_EMBARQUE;
     if(e&&typeof e.demande==='string'){h=e.demande;e.demande=null}   // version « fichier unique » : la demande vient de la page du cours
-    else{h=decodeURIComponent(location.hash.slice(1));
-      if(h)try{history.replaceState(null,'',location.pathname+location.search)}catch(x){}}   // l'adresse redevient neutre : recharger la page ne rejoue pas la demande
+    else{h=decodeURIComponent(location.hash.slice(1));adresse=true}
   }
+  if(h&&!/^essai-/.test(h)&&needAuth()){qkAttente=h;openGame();return}   // l'écran titre demande d'abord un compte ; l'adresse est gardée, pour le cas où la connexion recharge la page
+  if(adresse&&h)try{history.replaceState(null,'',location.pathname+location.search)}catch(x){}   // l'adresse redevient neutre : recharger la page ne rejoue pas la demande
   const m=h.match(/^chapitre-(\d{1,2})$/);
   if(m)openGame(Math.min(11,+m[1]));
   else if(/^essai-/.test(h))essaiLancer(h.slice(6));   // page de pilotage : ouvrir le jeu à un endroit précis, sans rien enregistrer (moteur/essai.js)
@@ -63,12 +67,15 @@ function qkRoute(h){
   else openGame();
 }
 addEventListener('hashchange',()=>{if(location.hash.length>1)qkRoute()});
+/* le joueur s'est connecté ou joue sans compte : la demande en attente est servie. Seule une demande de chapitre ouvre
+   le jeu ; « reprendre » ne change rien, l'écran titre montre déjà la partie du compte. Renvoie vrai si le jeu s'est ouvert */
+function qkServirAttente(){const h=qkAttente;qkAttente=null;try{if(location.hash)history.replaceState(null,'',location.pathname+location.search)}catch(x){}if(h&&/^chapitre-/.test(h)){qkRoute(h);return true}return false}
 
 /* ---- une seule fenêtre joue à la fois : si la partie est reprise ailleurs, cette fenêtre lui laisse la main,
         puis recharge la partie sauvegardée la prochaine fois qu'on la regarde ---- */
 let qkAilleurs=false;
 addEventListener('storage',e=>{
-  if(e.storageArea!==localStorage||e.key!==SLOT_KEY(SLOT)||e.newValue===null)return;
+  if(INVITE||ESSAI||e.storageArea!==localStorage||e.key!==SAVE_KEY||e.newValue===null)return;
   if(PIP.isPop){window.close();return}
   if(PIP.win)pipToggle();
   if(qkAilleurs)return;qkAilleurs=true;

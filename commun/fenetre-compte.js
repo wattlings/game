@@ -2,7 +2,7 @@
  * La fenêtre « Mon compte », commune au cours et au jeu : se connecter, créer un compte, se déconnecter.
  * Elle porte ses propres styles, ce qui lui permet de s'afficher aussi dans le jeu (dessiné dans un shadow DOM).
  */
-import { compteActuel, messageErreur, seConnecter, seDeconnecter } from "./compte.js";
+import { compteActuel, concernePage, messageErreur, seConnecter, seDeconnecter } from "./compte.js";
 
 const STYLES = `
 .cpt-fond{position:fixed;inset:0;z-index:2147483000;background:rgba(8,12,24,.62);display:flex;align-items:center;justify-content:center;padding:16px;font:16px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -30,10 +30,11 @@ const STYLES = `
 const echapper = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
 /**
- * Ouvre la fenêtre. parent : l'élément où l'accrocher (le corps de la page par défaut).
- * Après une connexion ou une déconnexion qui change ce que montre la page, celle-ci est rechargée.
+ * Ouvre la fenêtre. parent : l'élément où l'accrocher (le corps de la page par défaut) ;
+ * onglet : "connexion" ou "creation", celui montré d'abord à qui n'est pas connecté.
+ * Après une déconnexion, ou une connexion qui change ce que la page garde en mémoire, celle-ci est rechargée.
  */
-export function ouvrirFenetreCompte({ parent = document.body } = {}) {
+export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexion" } = {}) {
   const fond = document.createElement("div");
   fond.className = "cpt-fond";
   const style = document.createElement("style");
@@ -61,8 +62,6 @@ export function ouvrirFenetreCompte({ parent = document.body } = {}) {
   fond.addEventListener("mousedown", (e) => {
     if (e.target === fond) fermer();
   });
-
-  let onglet = "connexion";
 
   function afficherConnexion() {
     const creer = onglet === "creation";
@@ -113,7 +112,7 @@ export function ouvrirFenetreCompte({ parent = document.body } = {}) {
       bouton.textContent = "Un instant…";
       try {
         const reecrites = await seConnecter(id.value, mdp, { creer });
-        if (reecrites.length) {
+        if (concernePage(reecrites)) {
           location.reload();
           return;
         }

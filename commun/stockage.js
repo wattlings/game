@@ -6,12 +6,12 @@
 // ---- cours : progression, thème, réglages des démos
 export const CLE_ETAT_COURS = "ems-pedagogie-v1";
 
-// ---- jeu : 3 emplacements de sauvegarde
-export const NB_EMPLACEMENTS = 3;
-export const cleEmplacement = (n) => "wattlings-slot-" + n;
-export const CLE_EMPLACEMENT_ACTIF = "wattlings-active";
-/** Sauvegarde unique de la première version du jeu : reprise dans l'emplacement 1. */
-export const CLE_ANCIENNE_SAUVEGARDE = "quete-kilowatt-v1";
+// ---- jeu : une seule partie, celle du compte du joueur (sans compte, rien n'est enregistré)
+/** La partie. Son nom date des 3 emplacements de sauvegarde, dont c'était le premier : ne pas le renommer. */
+export const CLE_PARTIE = "wattlings-slot-1";
+/** Les parties d'avant (emplacements 2 et 3, première version du jeu) : lues pour reprendre une partie, jamais écrites. */
+const ANCIENNES_PARTIES = ["wattlings-slot-2", "wattlings-slot-3", "quete-kilowatt-v1"];
+const CLE_ANCIENNES_REPRISES = "wattlings-anciennes-reprises";
 export const CLE_PREFERENCES_JEU = "wattlings-prefs";
 export const CLE_SON = "wattlings-son";
 /** Petite image de l'avatar, écrite par le jeu et affichée par le cours sur les boutons « Jouer ». */
@@ -23,8 +23,7 @@ export const CLE_COMPTE_SYNCHRO = "wattlings-compte-synchro";
 /** Ce qui suit le joueur d'un appareil à l'autre quand il est connecté à son compte. */
 export const CLES_SYNCHRONISEES = [
   CLE_ETAT_COURS,
-  ...Array.from({ length: NB_EMPLACEMENTS }, (_, i) => cleEmplacement(i + 1)),
-  CLE_EMPLACEMENT_ACTIF,
+  CLE_PARTIE,
   CLE_PREFERENCES_JEU,
   CLE_SON,
   CLE_AVATAR,
@@ -61,19 +60,28 @@ export const supprimer = (cle) => {
   } catch {}
 };
 
-/** Le numéro de l'emplacement de sauvegarde utilisé en dernier (1 à 3). */
-export const emplacementActif = () =>
-  Math.min(NB_EMPLACEMENTS, Math.max(1, +lire(CLE_EMPLACEMENT_ACTIF) || 1));
-
-/** La partie de l'emplacement actif, ou null si aucune partie n'a commencé. */
-export function partieEnCours() {
-  const n = emplacementActif();
-  let brut = lire(cleEmplacement(n));
-  if (!brut && n === 1) brut = lire(CLE_ANCIENNE_SAUVEGARDE);
+const lirePartie = (cle) => {
   try {
-    const partie = JSON.parse(brut || "null");
+    const partie = JSON.parse(lire(cle) || "null");
     return partie && partie.site ? partie : null;
   } catch {
     return null;
   }
+};
+
+/** La partie de ce navigateur, ou null si aucune partie n'a commencé. */
+export const partieEnCours = () => lirePartie(CLE_PARTIE);
+
+/**
+ * Au temps des 3 emplacements, une partie pouvait être ailleurs que dans le premier. S'il est vide, la plus récente
+ * des parties d'avant y est recopiée : c'est elle que le joueur retrouvera (et qui rejoindra son compte).
+ * Une seule fois par navigateur (sinon la partie reviendrait après chaque déconnexion). Les anciennes clés ne sont
+ * ni modifiées ni effacées.
+ */
+export function reprendreAnciennePartie() {
+  if (lire(CLE_ANCIENNES_REPRISES) || !ANCIENNES_PARTIES.some((c) => lire(c) != null)) return;
+  ecrire(CLE_ANCIENNES_REPRISES, "1");
+  if (partieEnCours()) return;
+  const anciennes = ANCIENNES_PARTIES.filter(lirePartie).sort((a, b) => (lirePartie(b).savedAt || 0) - (lirePartie(a).savedAt || 0));
+  if (anciennes.length) ecrire(CLE_PARTIE, lire(anciennes[0]));
 }

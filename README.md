@@ -259,15 +259,19 @@ Sans rien installer : dans le dépôt GitHub, onglet **Actions**, lancer « Fich
 
 ## Sauvegardes
 
-Tout est enregistré dans le navigateur du visiteur, sous des clés inchangées depuis la version d'origine : la progression du cours (`ems-pedagogie-v1`) et les trois emplacements du jeu (`wattlings-slot-1` à `3`).
+Tout est enregistré dans le navigateur du visiteur, sous des clés inchangées depuis la version d'origine : la progression du cours (`ems-pedagogie-v1`) et la partie du jeu (`wattlings-slot-1`, nom hérité des trois emplacements d'autrefois).
+
+**Le jeu a une seule partie par joueur, celle de son compte** (voir « Comptes joueurs » ci-dessous). Sans compte, l'écran titre propose de se connecter, de créer un compte, ou de **« Continuer sans s'authentifier »** : la partie se joue alors normalement, mais rien n'est enregistré, et elle s'arrête quand on ferme la page. Une demande venue du cours (« jouer le chapitre 3 ») attend ce choix, puis est servie. Un joueur sans compte qui se connecte en cours de partie (menu → Sauvegarde) l'enregistre sur son compte, sauf si le compte a déjà une partie : c'est alors celle du compte qui reprend.
+
+Les parties d'avant les comptes (emplacements 2 et 3, première version du jeu) ne sont pas perdues : la première fois, la plus récente est reprise comme partie de ce navigateur, et rejoint le compte du joueur à sa connexion s'il n'en a pas encore. Les anciennes clés restent en place, sans être lues à nouveau.
 
 Une sauvegarde est attachée à l'adresse du site. Si le site change d'adresse, les visiteurs repartent de zéro sur la nouvelle.
 
 ## Comptes joueurs
 
-Un visiteur peut se créer un compte (un identifiant et un mot de passe, sans adresse e-mail) pour retrouver sa progression du cours et ses parties du jeu sur n'importe quel appareil ou navigateur. Le bouton « Se connecter » est en haut du cours et sous les emplacements de l'écran titre du jeu. Sans compte, rien ne change : tout reste dans le navigateur.
+Un visiteur peut se créer un compte (un identifiant et un mot de passe, sans adresse e-mail) pour retrouver sa progression du cours et ses parties du jeu sur n'importe quel appareil ou navigateur. Le bouton « Se connecter » est en haut du cours et sur l'écran titre du jeu. Sans compte, le cours garde sa progression dans le navigateur ; le jeu se joue sans rien enregistrer.
 
-**Comment ça marche.** Le cours et le jeu enregistrent toujours dans le navigateur. Quand quelqu'un est connecté, `commun/compte.js` recopie les clés de `CLES_SYNCHRONISEES` (cours, trois emplacements, réglages du jeu, avatar) vers le projet Supabase de `commun/config.js` : dès qu'il y a du nouveau (vérifié toutes les 20 secondes) et quand on quitte la page. Dans l'autre sens, il ramène ce qui a été fait ailleurs à l'ouverture de la page, quand on y revient et chaque minute, et recharge la page si ce qu'elle affiche a changé. Pour chaque clé, la version la plus récente l'emporte. Le mode essai du pilotage n'est jamais rechargé.
+**Comment ça marche.** Le cours et le jeu enregistrent toujours dans le navigateur. Quand quelqu'un est connecté, `commun/compte.js` recopie les clés de `CLES_SYNCHRONISEES` (cours, partie du jeu, réglages du jeu, avatar) vers le projet Supabase de `commun/config.js` : dès qu'il y a du nouveau (vérifié toutes les 20 secondes) et quand on quitte la page. Dans l'autre sens, il ramène ce qui a été fait ailleurs à l'ouverture de la page, quand on y revient et chaque minute, et recharge la page si ce qu'elle affiche a changé. Pour chaque clé, la version la plus récente l'emporte. Le mode essai du pilotage n'est jamais rechargé.
 
 - **À la connexion**, ce que le navigateur contenait déjà rejoint le compte : une partie du jeu garde la version la plus récente des deux ; pour le cours et les réglages, le compte l'emporte s'il a déjà quelque chose.
 - **À la déconnexion**, les derniers changements partent, puis tout ce qui suit le compte est retiré du navigateur, pour que la personne suivante sur cet appareil ne le retrouve pas. Sans connexion à Internet, la fenêtre prévient avant de rien perdre.

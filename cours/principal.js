@@ -4,7 +4,7 @@
 // en premier : le compte joueur note ce qui a changé dans le navigateur avant que le cours ne le lise
 import { comptesDisponibles, compteActuel, reglerCompte, surChangementDeCompte } from "../commun/compte.js";
 import { ouvrirFenetreCompte } from "../commun/fenetre-compte.js";
-import { CLE_AVATAR, CLE_ETAT_COURS } from "../commun/stockage.js";
+import { CLE_AVATAR, CLE_ETAT_COURS, CLE_PARTIE } from "../commun/stockage.js";
 import { icone } from "./blocs/icones.js";
 import { echapper, un } from "./blocs/outils.js";
 import { adresseJeu } from "../commun/liens.js";
@@ -159,7 +159,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener?.("change", () =>
 );
 
 // compte joueur : retrouver sa progression sur tous ses appareils (commun/compte.js)
-reglerCompte({ cles: [CLE_ETAT_COURS, CLE_AVATAR] });
+reglerCompte({ cles: [CLE_ETAT_COURS, CLE_PARTIE, CLE_AVATAR] });
 function majBoutonCompte() {
   const b = un("#btn-compte");
   const id = compteActuel();

@@ -14,32 +14,25 @@ import * as patrimoine from "../commun/donnees/patrimoine.js";
 import { SOURCES, libelleSource, sourcesVuesLe } from "../commun/donnees/sources.js";
 import * as graphiques from "../commun/graphiques/barres.js";
 import { LIENS } from "../commun/liens.js";
-import {
-  CLE_ANCIENNE_SAUVEGARDE,
-  CLE_AVATAR,
-  CLE_EMPLACEMENT_ACTIF,
-  CLE_PREFERENCES_JEU,
-  CLE_SON,
-  NB_EMPLACEMENTS,
-  cleEmplacement,
-} from "../commun/stockage.js";
+import { CLE_AVATAR, CLE_PARTIE, CLE_PREFERENCES_JEU, CLE_SON } from "../commun/stockage.js";
 import { reglerSuivi, suiviActif, suivre } from "../commun/suivi.js";
 
 // ---- suivi d'audience : pour les statistiques, toute la page du jeu s'appelle « jeu »
 reglerSuivi({ page: () => "jeu" });
 const TRK = { track: suivre, active: suiviActif };
 
-// ---- compte joueur : si une partie a avancé sur un autre appareil, la page se recharge pour la reprendre,
-//      sauf en mode essai (moteur/essai.js), qu'un rechargement ferait perdre
+// ---- compte joueur : la partie est celle du compte (sans compte, rien n'est enregistré : moteur/etat.js).
+//      Si elle a avancé sur un autre appareil, la page se recharge pour la reprendre, sauf en mode essai
+//      (moteur/essai.js), qu'un rechargement ferait perdre
 reglerCompte({
-  cles: [...Array.from({ length: NB_EMPLACEMENTS }, (_, i) => cleEmplacement(i + 1)), CLE_EMPLACEMENT_ACTIF, CLE_PREFERENCES_JEU, CLE_SON],
+  cles: [CLE_PARTIE, CLE_PREFERENCES_JEU, CLE_SON],
   peutRecharger: () => !/^#essai-/.test(location.hash) && !(typeof ESSAI !== "undefined" && ESSAI),
 });
 const COMPTE = {
   disponible: comptesDisponibles(),
   identifiant: compteActuel,
   surChangement: surChangementDeCompte,
-  ouvrir: (parent) => ouvrirFenetreCompte({ parent }),
+  ouvrir: (parent, onglet) => ouvrirFenetreCompte({ parent, onglet }),
 };
 
 // ---- étapes du cycle et chapitres du jeu
@@ -70,10 +63,7 @@ Object.assign(globalThis, {
   libelleSource,
   sourcesVuesLe,
   // sauvegardes
-  SAVE_KEY: CLE_ANCIENNE_SAUVEGARDE,
-  SLOT_N: NB_EMPLACEMENTS,
-  SLOT_KEY: cleEmplacement,
-  ACTIVE_KEY: CLE_EMPLACEMENT_ACTIF,
+  SAVE_KEY: CLE_PARTIE,
   PREF_KEY: CLE_PREFERENCES_JEU,
   CLE_SON,
   CLE_AVATAR,

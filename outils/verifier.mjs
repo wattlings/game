@@ -1,7 +1,7 @@
 // Vérifie que le site fonctionne après une modification : à lancer avant de publier.
 //
 //   node outils/verifier.mjs            → tout (environ 3 minutes)
-//   node outils/verifier.mjs cours      → seulement le cours   (ou : jeu, voyages, liens, sources, pilotage)
+//   node outils/verifier.mjs cours      → seulement le cours   (ou : jeu, voyages, liens, comptes, sources, pilotage)
 //
 // Ce que fait la vérification :
 //   cours : ouvre chaque page, manipule chaque démo, et relève toute erreur ;
@@ -9,6 +9,8 @@
 //   voyages : prend le train vers chaque destination ouverte, vérifie que tout ce qui s'examine est accessible à pied,
 //             examine tout, manipule les simulations, fait tamponner le passeport et rentre ;
 //   liens : fait l'aller-retour cours → jeu → cours et contrôle sauvegarde, reprise et anciennes adresses ;
+//   comptes : sans compte, le jeu propose de se connecter ou de jouer sans rien enregistrer, et n'enregistre rien ;
+//   (toutes les autres vérifications jouent connectées à un compte d'essai simulé : voir compteDEssai dans essais.mjs)
 //   sources : contrôle que chaque source citée existe, et que chaque fait relevé a la sienne (voir outils/sources.mjs).
 //   pilotage : ouvre la page de pilotage, chaque pastille, modifie un texte, et lance des essais dans le jeu.
 import {
@@ -221,6 +223,44 @@ if (quoi === "tout" || quoi === "voyages") {
   await contexte.close();
 }
 
+// ---------------------------------------------------------------- comptes : jouer sans compte
+if (quoi === "tout" || quoi === "comptes") {
+  console.log("Comptes : jouer sans compte, sans rien enregistrer");
+  const contexte = await navigateur.newContext({ viewport: { width: 1000, height: 760 }, sansCompte: true });
+  const page = await contexte.newPage();
+  const erreurs = ecouterErreurs(page);
+  const dansLaPage = (f, ...a) => page.evaluate(f, ...a);
+  const ombre = (s) => dansLaPage((s) => { const e = document.getElementById("qk-host").shadowRoot.querySelector(s); return e ? e.textContent : null; }, s);
+  const cliquer = (s) => dansLaPage((s) => { const e = document.getElementById("qk-host").shadowRoot.querySelector(s); if (e) e.click(); return !!e; }, s);
+  // une partie d'avant les comptes, restée dans ce navigateur : elle doit être annoncée, pas jouée
+  await page.goto(adresse + "pilotage/");
+  await dansLaPage(() => localStorage.setItem("wattlings-slot-2", JSON.stringify({ site: "ecole", ch: 2, name: "Ancien", savedAt: 5 })));
+  await page.goto(adresse + "jeu/#chapitre-3");
+  await page.waitForTimeout(1200);
+  verif("sans compte : l'écran titre propose de se connecter", /Connecte-toi/.test((await ombre(".title-screen .slot.auth")) || "") && /sans s'authentifier/.test((await ombre(".title-screen [data-a=guest]")) || ""));
+  verif("sans compte : la demande « chapitre 3 » attend le choix du joueur", await dansLaPage(() => !EN_ON && /chapitre-3/.test(location.hash)));
+  verif("sans compte : une partie d'avant les comptes est annoncée", /Ancien/.test((await ombre(".title-screen .slot.auth")) || ""));
+  await cliquer("[data-a=guest]");
+  await page.waitForTimeout(600);
+  await validerAvatar(page);
+  await page.waitForTimeout(1200);
+  verif("« Continuer sans s'authentifier » ouvre le chapitre demandé", await dansLaPage(() => INVITE === true && EN_ON === true && S.ch === 3 && location.hash === ""), JSON.stringify(await dansLaPage(() => ({ invite: INVITE, en: EN_ON, ch: S.ch, h: location.hash }))));
+  for (let i = 0; i < 6; i++) { await page.keyboard.press("Space"); await page.waitForTimeout(200); }
+  await dansLaPage(() => { save(); qkSaveNow(); });
+  await page.keyboard.press("m"); await page.waitForTimeout(300);
+  await cliquer(".menu-tabs [data-t=save]"); await page.waitForTimeout(200);
+  const ongletSauvegarde = await dansLaPage(() => document.getElementById("qk-host").shadowRoot.querySelector(".pbody")?.textContent || "");
+  await page.keyboard.press("Escape");
+  await page.goto("about:blank");
+  await page.goto(adresse);
+  const cles = await dansLaPage(() => ({ partie: JSON.parse(localStorage.getItem("wattlings-slot-1") || "null"), compte: localStorage.getItem("wattlings-compte") }));
+  verif("sans compte : la partie jouée n'est pas enregistrée", !cles.partie || cles.partie.name === "Ancien", JSON.stringify(cles.partie && cles.partie.name));
+  verif("sans compte : aucune clé de compte", !cles.compte);
+  verif("sans compte : le menu dit que rien n'est sauvegardé", /sans compte/.test(ongletSauvegarde), ongletSauvegarde.slice(0, 80));
+  verif("comptes : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+  await contexte.close();
+}
+
 // ---------------------------------------------------------------- liens entre les deux pages
 if (quoi === "tout" || quoi === "liens") {
   console.log("Liens : cours → jeu → cours");
@@ -373,7 +413,7 @@ if (quoi === "tout" || quoi === "pilotage") {
     }), bilan.essais);
     verif("pilotage : chaque bouton « Tester » désigne un endroit qui existe dans le jeu", bilan.essais.length > 150 && inconnus.length === 0, bilan.essais.length + " essais ; inconnus : " + inconnus.slice(0, 5).join(", "));
     // les sauvegardes sont relevées depuis la page de pilotage (même site), une fois la vraie partie quittée : elle s'enregistre en partant
-    const sauvegardes = () => page.evaluate(() => JSON.stringify(Object.entries(localStorage).filter(([k]) => /^wattlings|^quete|^ems/.test(k)).sort()));
+    const sauvegardes = () => page.evaluate(() => JSON.stringify(Object.entries(localStorage).filter(([k]) => /^wattlings|^quete|^ems/.test(k) && !/^wattlings-compte/.test(k)).sort()));
     await jeu.goto("about:blank");
     const sauvegarde = await sauvegardes();
     for (const essai of ["dresseur-2.1", "fiche-s2r1", "champion-4", "info-solaire.module", "defi-barrage", "sim-datSimPue"]) {

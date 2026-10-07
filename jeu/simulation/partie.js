@@ -48,7 +48,7 @@ function enTick(k){
     enEvents(g+1);
     if(S.ch>=4&&!busy){const a=enVac(enDate(g+1)),b=enVac(enDate(g));if(a&&!b)toast(`Vacances ${a} : ${e.pk.on?'les écoles se vident':"l'école se vide"}${S.site==='ecole'&&!e.pk.on?', sa consommation tombe au talon':''}.`);else if(b&&!a)toast(e.pk.on?"C'est la rentrée : les écoles reprennent.":"C'est la rentrée : l'école reprend.")}}
   const n=performance.now();if(n-EN_T>400){EN_T=n;enHud()}
-  if(n-EN_SV>30000){EN_SV=n;try{localStorage.setItem(SLOT_KEY(SLOT),JSON.stringify(S))}catch(x){}}
+  if(n-EN_SV>30000){EN_SV=n;if(!ESSAI&&!INVITE)try{localStorage.setItem(SAVE_KEY,JSON.stringify(S))}catch(x){}}
 }
 let EN_HT='';
 function enHud(force){
