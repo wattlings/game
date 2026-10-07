@@ -72,6 +72,14 @@ td.n{text-align:right;white-space:nowrap}
 .msg{font-size:.9rem;padding:8px 10px;border-radius:8px}
 .msg.err{background:color-mix(in srgb,var(--bad) 14%,transparent);color:var(--bad)}
 .msg.info{background:var(--surface-2);color:var(--muted)}
+.prof-head{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between;margin-bottom:8px}.prof-head h3{margin:0}
+.prof-head input{font:inherit;font-size:.9rem;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);min-width:min(16rem,100%)}
+.prof-list{max-height:26rem;overflow:auto}.prof-list tr.on td{background:var(--surface-2)}
+.lien{font:inherit;background:none;border:0;padding:0;color:var(--data);text-decoration:underline;cursor:pointer;text-align:left}
+.visit{border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin-top:6px}.visit summary{cursor:pointer}.visit summary small{color:var(--muted);margin-left:8px}
+.acts{list-style:none;margin:6px 0 2px;padding:0;display:grid;gap:2px;font-size:.88rem}.acts li{display:grid;grid-template-columns:3.2em 4.4em minmax(0,1fr);gap:8px}
+.acts time{color:var(--muted);font-variant-numeric:tabular-nums}.acts .g{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);align-self:center}.acts .jeu .g{color:var(--energie-ink)}.acts .compte .g{color:var(--data)}
+@media (max-width:560px){.acts li{grid-template-columns:3em minmax(0,1fr)}.acts .g{display:none}}
 [hidden]{display:none!important}
 @media (max-width:560px){header.top{position:static}.row{grid-template-columns:minmax(0,8.5em) minmax(0,1fr) auto}.funnel .row{grid-template-columns:minmax(0,9em) minmax(0,1fr) auto}.grid{grid-template-columns:1fr}}
 </style>
@@ -101,7 +109,7 @@ td.n{text-align:right;white-space:nowrap}
     <p class="msg info" id="status">Chargement…</p>
 
     <section class="block" aria-labelledby="h-aud">
-      <header><h2 id="h-aud">Audience</h2><p>Visiteurs anonymes (un par navigateur), visites (une session de 30 min), pages du cours.</p></header>
+      <header><h2 id="h-aud">Audience</h2><p>Visiteurs (un par navigateur, ou un par profil pour les personnes uniques), visites (une session de 30 min), pages du cours.</p></header>
       <div class="tiles" id="audTiles"></div>
       <div class="card"><h3>Visiteurs uniques par jour</h3><div class="chart" id="daily"></div></div>
       <div class="grid" style="margin-top:12px">
@@ -110,8 +118,16 @@ td.n{text-align:right;white-space:nowrap}
       </div>
     </section>
 
+    <section class="block" aria-labelledby="h-prof">
+      <header><h2 id="h-prof">Profils</h2><p>Les joueurs connectés à leur compte : comptés une fois, quel que soit l’appareil, et suivis action par action.</p></header>
+      <p class="msg info" id="profStatus" hidden></p>
+      <div class="tiles" id="profTiles"></div>
+      <div class="card"><div class="prof-head"><h3>Les profils</h3><input type="search" id="profSearch" placeholder="Chercher un profil…" aria-label="Chercher un profil" autocomplete="off" spellcheck="false"></div><div class="tbl prof-list" id="profList"></div><p class="note">Un clic sur un profil ouvre son journal. Ce qu’un navigateur a fait avant de se connecter revient au profil, si aucun autre profil ne s’y est connecté. Les événements ne portent le profil que depuis le 7 octobre 2026.</p></div>
+      <div class="card" id="profDetail" hidden style="margin-top:12px"></div>
+    </section>
+
     <section class="block" aria-labelledby="h-game">
-      <header><h2 id="h-game">Entonnoir du jeu</h2><p>Joueurs uniques ayant commencé chaque chapitre, et où ils se sont arrêtés.</p></header>
+      <header><h2 id="h-game">Entonnoir du jeu</h2><p>Joueurs uniques ayant commencé chaque chapitre, et où ils se sont arrêtés (un joueur = un navigateur ; par profil : voir la page de pilotage).</p></header>
       <div class="tiles" id="gameTiles"></div>
       <div class="grid">
         <div class="card funnel"><h3>Joueurs par chapitre</h3><div id="funnel"></div><p class="note">En rouge : perte par rapport au chapitre précédent.</p></div>
@@ -182,6 +198,7 @@ async function load(){
   const {data,error}=await sb.rpc('stats',{p_from:from.toISOString(),p_to:to.toISOString()});
   if(error){$('status').textContent='Erreur : '+error.message+'. Vérifie que le script SQL a bien été exécuté et que ton e-mail y est renseigné.';return}
   $('status').hidden=true;render(data,from,to);
+  loadProfils(from,to,data.totals.visitors);
 }
 function render(s,from,to){
   const t=s.totals,g=s.game,c=s.course;
@@ -214,6 +231,69 @@ function render(s,from,to){
   bars($('secrets'),[...all(SECRETS),...other],{lab:r=>r.l,val:r=>r.n,cls:'e'});
   bars($('eggs'),all(EGGS),{lab:r=>r.l,val:r=>r.n,cls:'e'});
 }
+/* ==== Profils : lus directement dans la table events (props.profil, posé par commun/suivi.js quand le joueur est connecté) ==== */
+const APP={desktop:'ordinateur',mobile:'mobile',tablet:'tablette'};
+let PROFS=[],profOn=null,profCours=true;
+async function toutLire(q){const out=[];for(let i=0;i<60000;i+=1000){const {data,error}=await q().range(i,i+999);if(error)throw error;out.push(...data);if(data.length<1000)break}return out}
+async function loadProfils(from,to,visiteurs){
+  const st=$('profStatus');st.hidden=false;st.className='msg info';st.textContent='Lecture des profils…';
+  const cols='ts,vid,sid,name,page,device,props',per=q=>q.gte('ts',from.toISOString()).lt('ts',to.toISOString()).order('ts');
+  let avec,sans=[];
+  try{
+    avec=await toutLire(()=>per(sb.from('events').select(cols).not('props->>profil','is',null)));
+    const vids=[...new Set(avec.map(l=>l.vid))];
+    for(let i=0;i<vids.length;i+=80)sans.push(...await toutLire(()=>per(sb.from('events').select(cols).in('vid',vids.slice(i,i+80)).is('props->>profil',null))));
+  }catch(e){st.className='msg err';st.textContent='Profils illisibles : '+e.message;$('profTiles').innerHTML='';$('profList').innerHTML='';return}
+  st.hidden=true;
+  const parVid=new Map();avec.forEach(l=>{(parVid.get(l.vid)||parVid.set(l.vid,new Set()).get(l.vid)).add(l.props.profil)});
+  const P=new Map();
+  for(const l of [...avec,...sans]){const S=parVid.get(l.vid),id=l.props&&l.props.profil||(S&&S.size===1?[...S][0]:null);if(!id)continue;
+    const p=P.get(id)||P.set(id,{id,lignes:[],vids:new Set(),sids:new Set(),app:new Set(),ch:-1,fin:false,jeu:0,cours:0,nouveau:false}).get(id);
+    p.lignes.push(l);p.vids.add(l.vid);if(l.sid)p.sids.add(l.sid);if(l.device)p.app.add(l.device);
+    const q=l.props||{};if(l.name==='chapter_start'&&Number.isInteger(q.ch))p.ch=Math.max(p.ch,q.ch);if(l.name==='game_end')p.fin=true;if(l.name==='account_signup')p.nouveau=true;
+    if(/^account_/.test(l.name)){}else if(estJeu(l.name))p.jeu++;else p.cours++}
+  PROFS=[...P.values()].map(p=>(p.lignes.sort((a,b)=>new Date(a.ts)-new Date(b.ts)),p.premier=new Date(p.lignes[0].ts),p.dernier=new Date(p.lignes.at(-1).ts),p)).sort((a,b)=>b.dernier-a.dernier);
+  const lies=new Set([...parVid.keys()]),personnes=Math.max(0,(visiteurs||0)-lies.size)+PROFS.length;
+  tiles($('profTiles'),[[fmt(personnes),'personnes uniques (un profil = une personne, sinon un navigateur)'],[fmt(PROFS.length),'profils actifs'],[fmt(Math.max(0,(visiteurs||0)-lies.size)),'visiteurs sans profil (navigateurs)'],[fmt(PROFS.filter(p=>p.nouveau).length),'profils créés sur la période'],[fmt(PROFS.filter(p=>p.vids.size>1).length),'profils sur plusieurs navigateurs'],[fmt(PROFS.filter(p=>p.jeu).length),'profils qui ont joué']]);
+  if(profOn&&!PROFS.some(p=>p.id===profOn.id)){profOn=null;$('profDetail').hidden=true}
+  listeProfils();
+}
+const estJeu=n=>/^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$|intro$|avatar$|aide$|menu$|setting$|guest_leave$|slot_erase$)/.test(n);
+const jour=d=>d.toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
+function listeProfils(){
+  const q=$('profSearch').value.trim().toLowerCase(),L=PROFS.filter(p=>!q||p.id.includes(q));
+  if(!PROFS.length){$('profList').innerHTML='<p class="empty">Aucun profil sur la période : aucun joueur connecté à son compte n’a encore été compté.</p>';return}
+  table($('profList'),[{t:'Profil'},{t:'Navigateurs',n:1},{t:'Visites',n:1},{t:'Le plus loin'},{t:'Actions',n:1},{t:'Première venue'},{t:'Dernière venue'}],
+    L.slice(0,200).map(p=>[`<button class="lien" type="button" data-p="${esc(p.id)}">${esc(p.id)}</button>`,fmt(p.vids.size),fmt(p.sids.size),p.fin?'Épilogue':p.ch<0?'—':esc(CH[p.ch]||'Ch. '+p.ch),fmt(p.jeu+p.cours),jour(p.premier),jour(p.dernier)]),'Aucun profil ne correspond.');
+  $('profList').querySelectorAll('tbody tr').forEach(tr=>{const b=tr.querySelector('[data-p]');tr.classList.toggle('on',!!profOn&&b.dataset.p===profOn.id);b.onclick=()=>{journal(PROFS.find(p=>p.id===b.dataset.p));$('profDetail').scrollIntoView({behavior:'smooth',block:'start'})}});
+}
+function decrire(l){
+  const p=l.props||{},g=t=>'« '+t+' »',ch=c=>CH[c]||'chapitre '+c,d=s=>dur(s||0);
+  const T={account_signup:['compte','Crée son profil'],account_login:['compte','Se connecte à son profil'],account_logout:['compte','Se déconnecte'],
+    pageview:['cours','Ouvre '+PAGE(l.page)],read_time:['cours','Lit '+PAGE(p.p)+' pendant '+d(p.s)],course_tab:['cours','Passe au niveau '+g(p.niv)],demo_use:['cours','Manipule la démo '+g(p.demo)],glossary_open:['cours','Ouvre le glossaire : '+g(p.term)],
+    quiz_answer:['cours','Quiz : '+g(p.q)+(p.ok===true?' : juste':p.ok===false?' : faux':'')],
+    game_open:['jeu','Ouvre le jeu'+(p.from==='cours'?' depuis le cours':'')],game_new:['jeu','Commence une nouvelle partie'+(p.hades?' (mode Hadès)':'')],game_continue:['jeu','Reprend sa partie ('+ch(p.ch)+')'],game_guest:['jeu','Joue sans profil'],game_restart:['jeu','Recommence sa partie'],slot_erase:['jeu','Efface sa partie'],
+    game_end:['jeu','Termine l’histoire : arrivé à l’épilogue'],intro:['jeu',p.passee?'Passe la présentation (page '+p.vue+')':'Lit la présentation jusqu’au bout'],avatar:['jeu','Choisit son avatar'],site_choice:['jeu','Choisit son site : '+(SITE[p.site]||p.site)],
+    aide:['jeu','Voit l’aide '+g(p.k)],menu:['jeu','Ouvre le menu → '+p.k],chapter_start:['jeu',(p.via==='reprise'?'Reprend au ':p.via==='jump'?'Saute au ':'Arrive au ')+ch(p.ch)],chapter_end:['jeu','Termine '+ch(p.ch)+(p.s?' en '+d(p.s):'')],
+    jump:['jeu','Saute à '+ch(p.ch)],fiche:['jeu','Trouve la fiche '+g(p.id)],badge:['jeu','Gagne le badge '+g(p.name)],battle:['jeu','Duel contre '+p.a+' : '+({win:'gagné',lose:'perdu',flee:'fuite'}[p.r]||p.r)],
+    wrong_answer:['jeu','Se trompe'+(p.t?' ('+p.t+')':'')+' : '+g(p.q)+(p.a?' → '+g(p.a):'')],secret:['jeu','Trouve le secret '+g(SECRETS[p.id]||EGGS[p.id]||p.id)],mission:['jeu','Termine la mission '+(p.n||'')+(p.titre?' '+g(p.titre):'')],evolve:['jeu','Passe au rang '+p.rank],
+    setting:['jeu','Réglage : '+p.k+' = '+p.v],guest_leave:['jeu','Quitte sans profil : '+p.choix],game_to_course:['jeu','Va au cours : '+PAGE(p.target)],
+    voyage_train:['jeu','Prend le train vers '+p.vers],voyage_info:['jeu','Trouve une info ('+p.site+')'],voyage_defi:['jeu','Commence le défi ('+p.site+')'],voyage_tampon:['jeu','Obtient le tampon ('+p.site+')'],voyage_sim:['jeu','Essaie le simulateur '+g(p.sim)+' ('+p.site+')'],voyage_passeport:['jeu','Reçoit le passeport des énergies']}[l.name];
+  return T||[estJeu(l.name)?'jeu':'cours',l.name];
+}
+function journal(p){
+  profOn=p;const el=$('profDetail');el.hidden=false;listeProfils();
+  const L=p.lignes.filter(l=>profCours||/^account_/.test(l.name)||estJeu(l.name)),V=[];
+  L.forEach(l=>{const k=l.sid+'|'+l.vid,v=V.at(-1);if(v&&v.k===k)v.L.push(l);else V.push({k,L:[l]})});
+  const h=d=>d.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'});
+  el.innerHTML=`<div class="prof-head"><h3>👤 ${esc(p.id)}</h3><button class="btn" type="button" id="profCsv">Télécharger ses actions (CSV)</button></div>
+    <p class="note" style="margin:0 0 8px">${[fmt(p.vids.size)+' navigateur'+(p.vids.size>1?'s':''),[...p.app].map(a=>APP[a]||a).join(', '),fmt(p.sids.size)+' visite'+(p.sids.size>1?'s':''),'du '+jour(p.premier)+' au '+jour(p.dernier),p.fin?'histoire terminée':p.ch>=0?'le plus loin : '+esc(CH[p.ch]||'ch. '+p.ch):''].filter(Boolean).join(' · ')}</p>
+    <label style="font-size:.9rem"><input type="checkbox" id="profCours"${profCours?' checked':''}> Montrer aussi le cours</label> <span class="note">${fmt(p.jeu)} actions dans le jeu, ${fmt(p.cours)} dans le cours</span>
+    ${V.length?V.reverse().map((v,i)=>{const d0=new Date(v.L[0].ts),d1=new Date(v.L.at(-1).ts),s=(d1-d0)/1000;return `<details class="visit"${i?'':' open'}><summary><b>${d0.toLocaleString('fr-FR',{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'})}</b><small>${[APP[v.L[0].device]||v.L[0].device,s>=60?dur(s):'',v.L.length+' action'+(v.L.length>1?'s':'')].filter(Boolean).join(' · ')}</small></summary><ol class="acts">${v.L.map(l=>{const [g,t]=decrire(l);return `<li class="${g}"><time>${h(new Date(l.ts))}</time><span class="g">${g}</span><span>${esc(t)}</span></li>`}).join('')}</ol></details>`}).join(''):'<p class="empty">Aucune action.</p>'}`;
+  $('profCours').onchange=e=>{profCours=e.target.checked;journal(p)};
+  $('profCsv').onclick=()=>{const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';const out=['date;visite;navigateur;appareil;genre;action;événement;détails',...p.lignes.map(l=>{const [g,t]=decrire(l);const {profil,...r}=l.props||{};return [l.ts,l.sid,l.vid,l.device,g,t,l.name,JSON.stringify(r)].map(q).join(';')})];
+    const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+out.join('\n')],{type:'text/csv;charset=utf-8'}));a.download='wattlings-'+p.id+'.csv';a.click()};
+}
 async function exportCSV(){
   const btn=$('csv');btn.disabled=true;btn.textContent='Export…';
   const to=new Date();to.setHours(24,0,0,0);const from=new Date(to);from.setDate(from.getDate()-days);
@@ -235,7 +315,7 @@ async function start(){
     const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('pwd').value});
     if(error){$('loginErr').hidden=false;$('loginErr').textContent='Connexion refusée : vérifie l’e-mail et le mot de passe.';return}show(data.session)});
   $('logout').onclick=async()=>{await sb.auth.signOut();show(null)};
-  $('refresh').onclick=load;$('csv').onclick=exportCSV;
+  $('refresh').onclick=load;$('csv').onclick=exportCSV;$('profSearch').oninput=listeProfils;
   document.querySelectorAll('#period button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#period button').forEach(x=>x.setAttribute('aria-pressed',x===b));days=+b.dataset.d;load()});
 }
 document.querySelectorAll('header.top .btn,header.top .seg').forEach(x=>x.hidden=true);
