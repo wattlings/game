@@ -23,13 +23,8 @@ function others(key){return Object.values(SITES).filter(x=>x.id!==S.site).map(x=
 function gamePatrimoine(done){
   const s=site();
   runSteps('Arène du Cadastre · Fiche patrimoine',[
-    info(`<h3>Du patrimoine au point de comptage</h3><p>Un energy manager suit des objets emboîtés :</p><div class="ctx"><b>Patrimoine</b> (tous les sites d'un propriétaire) → <b>Site</b> (${esc(s.name)}) → <b>Bâtiment</b> → <b>Points de comptage</b> (un par énergie livrée).</div><p>Tout ce que le logiciel affichera ensuite sera rattaché à l'un de ces objets. Remplis la fiche de ton site avec ce que tu as trouvé dehors.</p>`),
-    form({title:'Fiche patrimoine',fields:[
-      {label:'Adresse du site',opts:[[`${s.addr}, ${s.cp}`,1,'Lue sur la boîte aux lettres.'],...others('addr').map(a=>[`${a}, 45100 Ampère-sur-Loire`,0,"C'est l'adresse d'un autre site de la ville."])]},
-      {label:'Localisation',opts:[['Ampère-sur-Loire (45) · zone climatique H1 · météo Orléans-Bricy',1,'La commune donne la station météo de référence.'],['Ampère-sur-Loire (45) · zone climatique H3',0,'H3 correspond au pourtour méditerranéen.'],['Siège du fournisseur d\'énergie, à Paris',0,'On localise le bâtiment, pas le fournisseur.']]},
-      {label:'Activité',opts:[[s.activite,1],...others('activite').map(a=>[a,0,"Ce n'est pas l'activité de ton site."])]},
-      {label:'Surface de référence',opts:[[`${fmt(s.surface)} m²`,1,'Lue sur la fiche technique.'],[`${fmt(s.surface/10)} m²`,0,'Relis la fiche technique : il manque un zéro.'],[`${fmt(s.surface*10)} m²`,0,'Relis la fiche technique : un zéro de trop.']]}
-    ],okMsg:'Fiche patrimoine complète : adresse, localisation, activité, surface.'}),
+    info(`<h3>Du patrimoine au point de comptage</h3><p>Un energy manager suit des objets emboîtés :</p><div class="ctx"><b>Patrimoine</b> (tous les sites d'un propriétaire) → <b>Site</b> (${esc(s.name)}) → <b>Bâtiment</b> → <b>Points de comptage</b> (un par énergie livrée).</div><p>Tout ce que le logiciel affichera ensuite sera rattaché à l'un de ces objets. Tu vas créer ton site dans l'EMS du bureau avec ce que tu as trouvé dehors.</p>`),
+    ficheEmsStep,
     choice({q:'Pourquoi la localisation est-elle importante pour un energy manager ?',opts:[
       ['Elle donne la météo locale (DJU), pour corriger la consommation de chauffage du climat',1,'Un hiver doux fait baisser le chauffage sans que personne n\'ait rien fait. Sans météo locale, impossible de comparer deux années.'],
       ['Elle sert uniquement à envoyer les factures',0,'La facture utilise l\'adresse, mais l\'energy manager s\'en sert surtout pour la météo.'],
@@ -37,7 +32,9 @@ function gamePatrimoine(done){
     choice({title:'Décret tertiaire',ctx:`Le décret tertiaire (dispositif Éco Énergie Tertiaire) vise les bâtiments accueillant des activités tertiaires sur <b>au moins 1 000 m²</b> (surfaces cumulées sur le site). Ton site : <span class="num">${fmt(s.surface)} m²</span>.`,q:'Ton site est-il concerné ?',opts:[
       ['Oui, il a au moins 1 000 m² de surface tertiaire',assujetti(s),assujetti(s)?'Il devra réduire sa consommation (−40 % en 2030) et la déclarer chaque année sur OPERAT.':`${fmt(s.surface)} m², c'est sous le seuil.`],
       ['Non, il fait moins de 1 000 m²',!assujetti(s),!assujetti(s)?'Pas d\'obligation réglementaire, mais le suivi reste utile pour la facture et le climat.':`${fmt(s.surface)} m², c'est au-dessus du seuil.`],
-      ['Oui, tous les bâtiments de France sont concernés',0,'Le décret ne vise que le tertiaire, à partir de 1 000 m².']]})
+      ['Oui, tous les bâtiments de France sont concernés',0,'Le décret ne vise que le tertiaire, à partir de 1 000 m².']]}),
+    perimetreStep,
+    objectifStep
   ],()=>say([{w:'Mme Périmètre',t:"Fiche patrimoine complète. Deuxième manche : ton plan de comptage."}],done));
 }
 function actElec(){

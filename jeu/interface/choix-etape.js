@@ -21,7 +21,7 @@ function openChapterSelect(){
 function jumpTo(ch,sid){
   TCH.via='jump';trk('jump',{ch,site:sid});
   const s=SITES[sid],keep={badges:(S.badges||[]).slice(),fiches:Object.assign({},S.fiches),dex:Object.assign({},S.dex),xp:S.xp||0,rank:S.rank||0};
-  S.site=sid;S.ch=ch;S.notes={};S.flags={pmIntro:ch>=10?1:0,profilPropose:S.flags&&S.flags.profilPropose};S.arena={};S.v=4;AR.lock=false;AR.id=0;S.fiches={};FICHES.forEach(f=>{if(STEP_CH[f.st]<ch)S.fiches[f.id]=1});S.pm=ch>=11?6:0;S.derives={};S.dex={};
+  S.site=sid;S.ch=ch;S.notes={};S.flags={pmIntro:ch>=10?1:0,profilPropose:S.flags&&S.flags.profilPropose};S.arena={};S.v=4;AR.lock=false;AR.id=0;S.fiches={};FICHES.forEach(f=>{if(STEP_CH[f.st]<ch)S.fiches[f.id]=1});S.pm=ch>=11?6:0;S.derives={};S.dex={};S.ems={};
   if(ch>=2){S.notes.adresse=`${s.addr}, ${s.cp}`;S.notes.surface=s.surface;S.notes.activite=s.activite}
   if(ch>=3){S.notes.pdl=s.pdl;S.notes.pce=s.pce;Object.assign(S.flags,{elec:true,gas:true,sub:true})}
   if(ch>=5)ANOM.forEach(a=>S.dex[a.id]=1);

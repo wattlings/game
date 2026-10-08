@@ -324,6 +324,51 @@ if (quoi === "tout" || quoi === "guidage") {
     verif("fiabiliser : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }
+  // les ateliers de l'EMS du bureau (epreuves/ems-*.js) et les retours qui expliquent (moteur/panneaux.js), au doigt sur un téléphone
+  {
+    const contexte = await navigateur.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    const page = await contexte.newPage(); const erreurs = ecouterErreurs(page);
+    await page.goto(adresse + "jeu/#essai-chapitre-3"); await page.waitForTimeout(2200); await finDialogue(page);
+    const R = (f, ...a) => page.evaluate(f, ...a), ombre = (sel) => R((sel) => document.getElementById("qk-host").shadowRoot.querySelector(sel)?.textContent || "", sel);
+    const lancer = (fn, ch, sid) => R(([fn, ch, sid]) => { jumpTo(ch, sid); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); if (panelEl) closePanel(); window.__fini = 0; runSteps("Essai", [window[fn] || eval(fn)], () => { window.__fini = 1; }); }, [fn, ch, sid]);
+    const saisir = (sel, v) => R(([sel, v]) => { const e = document.getElementById("qk-host").shadowRoot.querySelector(sel); e.value = v; e.dispatchEvent(new Event("input", { bubbles: true })); }, [sel, v]);
+    const clic = (sel) => R((sel) => document.getElementById("qk-host").shadowRoot.querySelector(sel).click(), sel);
+    // Collecter : le PDL d'un autre site est refusé (403), le bon est raccordé
+    await lancer("raccordStep", 3, "bureau"); await page.waitForTimeout(300);
+    await saisir("#colPdl", await R(() => SITES.ecole.pdl)); await saisir("#colPce", "GI217703"); await clic("#colGo"); await page.waitForTimeout(100);
+    const log = await ombre(".ems-log");
+    await saisir("#colPdl", await R(() => SITES.bureau.pdl)); await clic("#colGo"); await page.waitForTimeout(100);
+    verif("collecter : le PDL d'un autre site est refusé (403, pas de consentement), le PDL du carnet est raccordé", /403/.test(log) && /Aucun consentement/.test(log) && /Deux points raccordés/.test(await ombre(".pbody .fb.ok")), log.slice(0, 120));
+    // Structurer : une pièce mal rangée est expliquée et revient dans le vrac
+    await lancer("arbreStep", 5, "ecole"); await page.waitForTimeout(300);
+    await R(() => { const r = document.getElementById("qk-host").shadowRoot; [...r.querySelectorAll(".ems-piece")].find((b) => /^Compteur · Gazpar/.test(b.textContent)).click(); r.querySelector('[data-c="pg"]').click(); });
+    verif("structurer : un compteur rangé à la place du point est expliqué, la pièce revient", /Un compteur se change, un point reste/.test(await ombre(".ems-diag")) && (await R(() => document.getElementById("qk-host").shadowRoot.querySelectorAll(".ems-piece").length)) === 9);
+    // Détecter : un seuil trop bas sonne pour rien ; seuil et persistance réglés, la dérive est attrapée sans fausse alerte
+    await lancer("seuilStep", 7, "boulangerie"); await page.waitForTimeout(300);
+    await clic("#seuOk"); await page.waitForTimeout(80); const trop = await ombre(".pbody .fb.ko");
+    await saisir("#seuS", "10"); await clic('[data-p="2"]'); await clic("#seuOk"); await page.waitForTimeout(80);
+    verif("détecter : seuil trop bas = fausses alertes expliquées ; bien réglé = dérive attrapée, aucune fausse alerte", /fausses? alertes?/.test(trop) && /Aucune fausse alerte/.test(await ombre(".pbody .fb.ok")) && (await R(() => S.ems.alerte.persist)) === 2, trop.slice(0, 100));
+    // Cadrer → Mesurer : l'objectif choisi est l'indicateur de la preuve
+    await lancer("objectifStep", 2, "bureau"); await page.waitForTimeout(300); await clic('[data-k="co2"]'); await page.waitForTimeout(80);
+    await R(() => { closePanel(); S.ch = 9; emsSet("plan", { ids: ["consigne", "veilles", "reduit"], kwh: 1, cout: 0 }); window.__fini = 0; runSteps("Essai", [mvStep], () => { window.__fini = 1; }); }); await page.waitForTimeout(300);
+    const opt = (re) => R((re) => [...document.getElementById("qk-host").shadowRoot.querySelectorAll(".pbody .opt")].find((b) => new RegExp(re).test(b.textContent)).click(), re);
+    await opt("directement"); await page.waitForTimeout(80); const brut = await ombre(".pbody .fb.ko");
+    await opt("seulement le chauffage"); await page.waitForTimeout(80);
+    await R(() => [...document.getElementById("qk-host").shadowRoot.querySelectorAll(".pbody .btn")].pop().click()); await page.waitForTimeout(80);
+    await opt("^Ça a marché, mais"); await page.waitForTimeout(80); const fin = await ombre(".ems-diag");
+    verif("mesurer : la comparaison brute est expliquée, la météo corrigée, et le résultat lu dans l'objectif de l'étape Cadrer (CO₂)", /météo a fait/.test(brut) && /Réduire le CO₂/.test(fin) && /tCO₂e/.test(fin) && /grain de sable/i.test(fin), fin.slice(0, 120));
+    // 1d : une mauvaise réponse d'un choix est expliquée, et rien n'est grisé (pas de victoire par élimination)
+    const retours = await R(() => { const r = document.getElementById("qk-host").shadowRoot; if (panelEl) closePanel();
+      runSteps("Essai", [choice({ q: "Q ?", opts: [["Juste", 1, "oui"], ["Faux A", 0, "parce que A"], ["Faux B", 0, "parce que B"]] })], () => {});
+      [...r.querySelectorAll(".pbody .opt")].find((b) => b.textContent === "Faux A").click();
+      const c = r.querySelector(".pbody .fb.ko").textContent + " · grisées : " + [...r.querySelectorAll(".pbody .opt")].filter((b) => b.disabled).length;
+      closePanel(); runSteps("Essai", [order({ q: "Ordre ?", items: ["Un", "Deux", "Trois"] })], () => {});
+      for (const t of ["Un", "Trois", "Deux"]) [...r.querySelectorAll(".pbody .opt")].find((b) => b.textContent === t).click();
+      const o = r.querySelector(".pbody .fb.ko").textContent; closePanel(); return c + " || " + o; });
+    verif("retours : un choix faux est expliqué, aucune proposition grisée ; un ordre faux dit ce qui est juste", /parce que A.* grisées : 0 \|\| .*1 sur 3 à la bonne place/.test(retours), retours);
+    verif("ateliers : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+    await contexte.close();
+  }
 }
 
 // ---------------------------------------------------------------- menu

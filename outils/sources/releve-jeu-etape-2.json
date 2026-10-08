@@ -1327,14 +1327,14 @@
  },
  {
   "id": "ja2-067",
-  "fichier": "jeu/epreuves/collecter.js",
-  "repere": "gameCollecte › « Points couverts »",
-  "texte": "Le mandat ne vaut que pour ces deux points.",
+  "fichier": "jeu/epreuves/ems-collecter.js",
+  "repere": "colReponse › réponse 403 (raccordStep)",
+  "texte": "Aucun consentement pour ce point.",
   "affirmation": "Le consentement ne vaut que pour les points (PDL, PCE) qu'il désigne ; un point dont le titulaire n'a pas consenti est hors périmètre.",
   "type": "regle",
   "verdict": "confirme",
   "correction": null,
-  "note": "Les numéros proposés (PDL voisin, PDL aux deux chiffres inversés) sont fictifs.",
+  "note": "L'atelier de raccordement répond 403 quand on tape le PDL ou le PCE d'un autre site : son titulaire n'a pas consenti. Les numéros sont fictifs.",
   "sources": [
    {
     "cle": "grdf-adict-contrat",

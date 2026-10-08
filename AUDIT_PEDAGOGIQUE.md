@@ -464,6 +464,14 @@ C'est l'option ambitieuse (point 9), construite pas à pas : chaque lot ajoute d
 
 **Effort** : grand (8 manipulations, le plus gros chantier du plan), mais découpable étape par étape. On peut publier les étapes une par une.
 
+**Avancement** : lot 1 réalisé. Fiabiliser d'abord (étape pilote, `jeu/epreuves/serie-brute.js`), puis les sept autres étapes (`jeu/epreuves/ems-*.js`) :
+- les manipulations 1b de chaque étape, sur les données des trois sites, au doigt comme à la souris ;
+- ce qui passe d'une étape à l'autre, dans `S.ems` : objectif (Cadrer) → indicateur (Mesurer), alerte et dérives (Détecter) → plan (Agir) → vérification (Mesurer) ;
+- 1c : le site se crée en recopiant le carnet, et le raccordement exige le PDL et le PCE relevés (avec les erreurs de l'API) ;
+- 1d : plus d'élimination dans les choix (les propositions sont remélangées après une erreur expliquée), les remises en ordre disent ce qui est juste et la première place fausse, les duels montrent la bonne réponse, et « Revoir la fiche » s'ouvre après deux erreurs.
+
+Reste du lot 1, non fait : la console de l'EMS ouverte depuis le PC du bureau (1a). Les ateliers vivent pour l'instant dans les épreuves des champions.
+
 **Risques**
 - Le temps de jeu augmente : ce n'est plus une contrainte, mais l'estimation du pilotage le montrera.
 - Les gestes à la souris doivent marcher au doigt sur mobile ; je les testerai sur les deux.

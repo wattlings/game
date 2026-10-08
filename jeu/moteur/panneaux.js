@@ -14,13 +14,17 @@ function runSteps(title,steps,done){
 }
 function contBtn(el,next,label='Continuer'){const b=document.createElement('button');b.className='btn';b.textContent=label+' ▸';b.onclick=next;el.appendChild(b);b.focus();return b}
 const info=(html,label)=>(el,next)=>{el.innerHTML=html;contBtn(el,next,label)};
+/* une erreur est expliquée, puis les propositions sont remélangées (sauf keep) : on ne gagne pas par élimination.
+   Après deux erreurs, « Revoir la fiche » s'ouvre sans quitter l'épreuve. */
 const choice=({title,ctx,gas,q,opts,keep})=>(el,next)=>{
   let tries=0;
   el.innerHTML=(title?`<h3>${title}</h3>`:'')+(ctx?`<div class="ctx${gas?' gas':''}">${ctx}</div>`:'')+`<p><b>${q}</b></p><div class="opts"></div><div class="fbz"></div>`;
   const box=el.querySelector('.opts'),fbz=el.querySelector('.fbz');
-  (keep?opts:shuffle(opts)).forEach(o=>{const b=document.createElement('button');b.className='opt';b.innerHTML=o[0];box.appendChild(b);
+  const montrer=()=>{box.innerHTML='';(keep?opts:shuffle(opts)).forEach(o=>{const b=document.createElement('button');b.className='opt';b.innerHTML=o[0];box.appendChild(b);
     b.onclick=()=>{if(o[1]){b.classList.add('good');box.querySelectorAll('.opt').forEach(x=>x.disabled=true);fbz.innerHTML=`<div class="fb ok">✔ ${o[2]||'Exact !'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
-      else{tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(q).slice(0,100),a:trkTxt(o[0]).slice(0,80)});b.classList.add('badc');b.disabled=true;sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ ${o[2]||'Pas tout à fait.'} Réessaie.</div>`}}});
+      else{tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(q).slice(0,100),a:trkTxt(o[0]).slice(0,80)});sfx('bad');montrer();
+        fbz.innerHTML=`<div class="fb ko">✘ « ${o[0].replace(/<[^>]+>/g,'')} » : ${o[2]||'pas tout à fait.'} ${tries>=2&&typeof revoirFiche==='function'?revoirFiche():''}Relis, et choisis encore${keep?'':' (les propositions ont bougé)'}.</div>`}}})};
+  montrer();
 };
 const multi=({title,ctx,gas,q,items,okMsg})=>(el,next)=>{
   let tries=0;
@@ -52,7 +56,10 @@ const order=({title,ctx,q,items,okMsg})=>(el,next)=>{
     box.innerHTML='';shuffledItems.filter(x=>!seq.includes(x)).forEach(x=>{const b=document.createElement('button');b.className='opt';b.textContent=x;b.onclick=()=>{seq.push(x);draw();if(seq.length===items.length)check()};box.appendChild(b)})};
   const shuffledItems=shuffle(items);
   const check=()=>{if(seq.every((s,i)=>s===items[i])){fbz.innerHTML=`<div class="fb ok">✔ ${okMsg||'Bon ordre !'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
-    else{tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(q).slice(0,100),a:trkTxt(seq.join(' > ')).slice(0,80)});sfx('bad');fbz.innerHTML=`<div class="fb ko">✘ Ce n'est pas le bon ordre.</div>`;const r=document.createElement('button');r.className='btn alt';r.textContent='Recommencer';r.onclick=()=>{seq=[];fbz.innerHTML='';draw()};fbz.appendChild(r)}};
+    else{tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(q).slice(0,100),a:trkTxt(seq.join(' > ')).slice(0,80)});sfx('bad');
+      const bien=seq.filter((s,i)=>s===items[i]).length,faux=seq.findIndex((s,i)=>s!==items[i]);   // on dit ce qui est déjà juste, et la première place fausse, sans donner tout l'ordre
+      sq.innerHTML=seq.map((s,i)=>`<span class="it ${s===items[i]?'ok':'ko'}">${s===items[i]?'✔':'✘'} ${i+1}. ${esc(s)}</span>`).join('');
+      fbz.innerHTML=`<div class="fb ko">✘ ${bien} sur ${items.length} à la bonne place. « ${esc(seq[faux])} » ne vient pas en ${faux+1}${faux?'e':'re'} position : sa place est ${items.indexOf(seq[faux])>faux?'plus loin':'avant'}. ${tries>=2&&typeof revoirFiche==='function'?revoirFiche():''}</div>`;const r=document.createElement('button');r.className='btn alt';r.textContent='Recommencer';r.onclick=()=>{seq=[];fbz.innerHTML='';draw()};fbz.appendChild(r)}};
   draw();
 };
 const signature=(who,orgName)=>(el,next)=>{

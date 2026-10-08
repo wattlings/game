@@ -80,8 +80,8 @@ function duel(A,k){
         msg.innerHTML=`Bonne réponse ! ${esc(o[2])}<br><b>${esc(T.n)}</b> est battu. +15 XP`;qkTimeout(()=>mon.classList.add('ko'),500);
         qkTimeout(()=>one('Continuer ▸',()=>end(()=>say([{w:T.n,t:T.lose}]))),900)}
       else{trk('wrong_answer',{t:A.name,q:trkTxt(q.q).slice(0,100),a:trkTxt(o[0]).slice(0,80)});sfx('bad');AR.cred-=34;setBar();ov.querySelector('.hero').classList.add('hit');qkTimeout(()=>{const h=ov.querySelector('.hero');if(h)h.classList.remove('hit')},500);
-        if(AR.cred<=0){over=true;trk('battle',{a:(A.name+' · '+T.n).slice(0,100),r:'lose'});msg.innerHTML=`Raté. ${esc(o[2])}<br>Ta crédibilité est à zéro : <b>${esc(T.n)}</b> te raccompagne à l'entrée.`;one("Retour à l'entrée ▸",()=>end(arenaDefeat))}
-        else{msg.innerHTML=`Raté. ${esc(o[2])}<br><b>${esc(T.n)}</b> enchaîne avec une autre question.`;one('Question suivante ▸',()=>{qi++;ask()})}}}});
+        if(AR.cred<=0){over=true;trk('battle',{a:(A.name+' · '+T.n).slice(0,100),r:'lose'});msg.innerHTML=`Raté. ${esc(o[2])} La bonne réponse : « ${esc(q.o.find(z=>z[1])[0])} ».<br>Ta crédibilité est à zéro : <b>${esc(T.n)}</b> te raccompagne à l'entrée.`;one("Retour à l'entrée ▸",()=>end(arenaDefeat))}
+        else{const bonne=q.o.find(z=>z[1]);msg.innerHTML=`Raté. ${esc(o[2])}<br>La bonne réponse : « ${esc(bonne[0])} ». ${esc(bonne[2]||'')}<br><b>${esc(T.n)}</b> enchaîne avec une autre question.`;one('Question suivante ▸',()=>{qi++;ask()})}}}});
     const b0=mv.querySelector('button');if(b0)b0.focus()};
   ask();
 }

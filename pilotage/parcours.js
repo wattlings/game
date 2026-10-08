@@ -23,7 +23,22 @@ const SCENES = {
   11: [["gameFinale", "La finale"], ["evolve", "Les évolutions"], ["endScreen", "L'écran de fin"]],
 };
 /* les fonctions qui servent une épreuve sans être l'épreuve elle-même */
-const AIDES = { gameAnalyse: ["talonStep"], gameAgir: ["planStep"], gameCollecte: ["dataAnim"] };
+const AIDES = {
+  gamePatrimoine: ["ficheEmsStep", "perimetreStep", "objectifStep"], gameCollecte: ["dataAnim", "raccordStep", "colReponse", "sourcesStep"],
+  gameStructurer: ["arbreStep", "strPieces", "strPourquoi", "conversionStep"], gameAnalyse: ["talonStep", "signatureStep"], gameDetect: ["seuilStep"],
+  gameAgir: ["planStep", "agirDerives"], gamePiloter: ["mvStep"],
+};
+/* les ateliers de l'EMS du bureau (jeu/epreuves/ems-*.js) : ce qu'on y fait, et les données qu'ils lisent */
+const ATELIERS = {
+  gamePatrimoine: ["Les ateliers de l'EMS du bureau : créer le site en recopiant le carnet (adresse, surface, activité), tracer le périmètre sur le plan, puis choisir l'objectif. L'objectif choisi décide de l'indicateur affiché à l'arène de la Preuve.", ["CAD_ZONES", "CAD_OBJ"]],
+  gameCollecte: ["Les ateliers : raccorder les deux points en tapant le PDL et le PCE du carnet (l'API répond 400, 403 ou 404 comme en vrai), puis comparer la courbe, l'index et la facture d'une même semaine.", ["COL_Q"]],
+  gameStructurer: ["Les ateliers : ranger les pièces dans l'arbre site → point → compteur → mesures (chaque erreur est expliquée), puis passer des puissances à l'énergie du jour et des m³ aux kWh.", []],
+  gameAnalyse: ["L'atelier de la signature : régler à la main le talon gaz et la pente sur douze mois ; l'EMS montre ensuite la régression.", []],
+  gameDetect: ["L'atelier des alertes : régler le seuil et la persistance sur quatre semaines ; il faut attraper la dérive sans fausse alerte.", ["SEU_EVT"]],
+  gameAgir: ["Le plan d'action rappelle les dérives de l'étape Détecter ; les actions qui les traitent portent l'étiquette « ta dérive ».", ["AGIR_DER"]],
+  gamePiloter: ["L'atelier de la mesure : le plan choisi à l'arène du Chantier est vérifié sur un hiver plus doux. Corriger la météo, conclure, puis lire le résultat dans l'indicateur choisi à l'arène du Cadastre.", ["MES_GRAIN"]],
+};
+const RANGEES_ATELIERS = ["SB_JOURS", "SIG_MOIS", "SIG_DJU", "STR_CASES", ...Object.values(ATELIERS).flatMap((a) => a[1])];
 /* un nom lisible pour les fonctions du jeu les plus courantes (section « Mécanique et interface ») */
 const NOMS = {
   enterArena: "Entrer dans une arène", duel: "Le duel contre un dresseur", arenaDefeat: "Défaite dans une arène", champTalk: "Parler au champion", arenaWin: "Victoire dans une arène",
@@ -35,7 +50,7 @@ const NOMS = {
   enBadge: "L'énergie après chaque badge", enTick: "La simulation d'énergie", enEvents: "Les événements d'énergie", enWhy: "Tableau de bord : les explications", enViewSite: "Tableau de bord : le site",
   enViewParc: "Tableau de bord : le parc", enViewPsite: "Tableau de bord : un site du parc", wmPlaceAt: "La carte : les lieux", gareGuichet: "Le guichet", gareDeparts: "Le tableau des départs",
   gareEntrer: "Entrer dans la gare", gareTableauDehors: "Le tableau des départs, dehors", voyTrajet: "Le trajet en train", voyRetour: "Le train du retour", voyDonnerInfo: "Carnet de voyage",
-  voyTamponner: "Tampon obtenu", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
+  voyTamponner: "Tampon obtenu", emsCarnet: "Le carnet, dans les ateliers", emsTransfert: "La ligne « Dans un EMS »", emsChoix: "Les choix des ateliers", revoirFiche: "Revoir la fiche", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
   atlasGare: "Carte : la gare", secretObjs: "Objets à secrets", eggObjs: "Objets à clins d'œil", nameEgg: "Les prénoms prédestinés", jouleExtra: "Harceler Mme Joule", actMobilier: "Le mobilier bavard",
 };
 const NOMS_DONNEES = (N) => Object.assign(N, { QUARTERS: "Les quartiers", WALKERS: "Les passants", LIFE_WX: "Les habitants, selon la météo", REG_WX: "Les régions, selon la météo", LOCALS: "Les bâtiments", MAPS: "Les lieux", SKY_IDLE: "L'horloge du jardin",
@@ -109,7 +124,8 @@ export function construire(FF, { chapitres }) {
         ...ANOM.filter((a) => !BOCAUX.length || BOCAUX.includes(a.id)).map((a) => ({ genre: "choix", titre: a.name, q: a.data, rep: (a.moves || []).map((o) => ({ t: o[0], ok: !!o[1], fb: o[2] })) })), ...prendre("champAnomalies"),
         note("Puis l'atelier, dans l'EMS du labo : une semaine de données brutes du site. Le joueur repère lui-même chaque anomalie sur la courbe (un clic ailleurs explique pourquoi ce n'en est pas une), puis choisit son traitement ; à la fin, l'écart entre la semaine brute et la semaine fiabilisée."),
         ...prendre("champSerie"), ...SB_ANOM.map((a) => ({ genre: "choix", titre: a.forme, q: a.quoi, rep: (a.opts || []).map((o) => ({ t: o[0], ok: !!o[1], fb: o[2] })) })), ...prendre("sbLeurre"), ...prendre("serieBruteStep"));
-      else epreuve.push(...prendre(fn), ...(AIDES[fn] || []).flatMap((a) => prendre(a)));
+      else epreuve.push(...prendre(fn), ...(ATELIERS[fn] ? [note(ATELIERS[fn][0])] : []), ...(AIDES[fn] || []).flatMap((a) => prendre(a)),
+        ...(ATELIERS[fn] ? ATELIERS[fn][1] : []).map((nom) => ({ genre: "donnees", nom, valeur: (fichiers.find((F) => F.donnees[nom]) || { donnees: {} }).donnees[nom], filet: true })).filter((b) => b.valeur));
     });
     N.push({ id: `arene-${n}-champion`, genre: "champion", titre: lisible(A.champ), sous: "champion", pal: A.cpal, essai: "champion-" + n, suivi: { arene: nom, badge: lisible(A.badge), epreuve: true },
       blocs: [{ genre: "dialogue", titre: "Avant l'épreuve", lignes: (A.cIntro || []).map((t) => ({ qui: A.champ, t })) }, ...epreuve,
@@ -147,7 +163,7 @@ export function construire(FF, { chapitres }) {
 
   // ---------------------------------------------------------------- 2. les voyages
   const declares = fichiers.flatMap((F) => F.appels.filter((a) => a._appel === "voyDeclarer").map((a) => ({ id: a.args[0].v, d: a.args[1], F })));
-  const rangees = new Set(["SB_JOURS"]); // les constantes de données déjà rangées quelque part (SB_JOURS : les noms des jours de l'atelier, des libellés)
+  const rangees = new Set(RANGEES_ATELIERS); // les constantes de données déjà rangées quelque part (dans l'épreuve de leur atelier, ou de simples libellés)
   const voyages = declares.map(({ id, d }) => {
     const dossier = `jeu/voyages/${id}/`, FS = fichiers.filter((F) => F.chemin.startsWith(dossier));
     const prefixe = Object.keys(Object.assign({}, ...FS.map((F) => F.donnees))).find((k) => /^[A-Z]{3}\.dit$/.test(k))?.slice(0, 3);

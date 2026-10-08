@@ -79,3 +79,38 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 .ems-legende .lg-r:before{content:"×";width:auto;height:auto;background:none;color:#c43d3d;font-weight:700}.ems-legende .lg-t:before{height:10px;background:rgba(226,87,59,.18)}
 .ems-diag{min-height:3em}.ems-quoi{margin-bottom:4px!important}
 .ems .tbl table{width:100%}
+
+/* l'EMS du bureau (epreuves/ems-*.js) : carnet, plan du périmètre, sources, arbre de données, journal de l'API */
+.ems-carnet{border:2px dashed #c9bb92;border-radius:6px;padding:4px 10px;background:#fffdf6}.ems-carnet summary{cursor:pointer;font-weight:700}
+.ems .ff{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:4px 14px}
+.ems .field input:not([type=range]),.ems .field select{width:100%;box-sizing:border-box}
+.ems .field .m{display:block;min-height:1.2em;font-size:14px}
+.ems-plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;background:repeating-linear-gradient(0deg,#eef2e4 0 23px,#e2e8d4 23px 24px),repeating-linear-gradient(90deg,transparent 0 23px,#e2e8d4 23px 24px);padding:10px;border-radius:8px;border:2px solid #c9bb92}
+.ems-zone{font:inherit;text-align:left;background:#fffaf0;border:2px dashed #9aa0a8;border-radius:6px;padding:8px 10px;cursor:pointer;color:var(--text);min-height:44px}
+.ems-zone small{display:block;color:var(--muted);font-size:14px}.ems-zone small:empty{display:none}
+.ems-zone[aria-pressed=true]{border:2px solid var(--ink);background:#e7eefb;box-shadow:inset 4px 0 0 #2f6db5}
+.ems-zone.badc{border-color:var(--bad);background:#f8e1dd}.ems-zone.badc small{color:#8a2a1f}
+.ems-zone.good{border:2px solid var(--ok);background:#e3f4e6}.ems-zone.hors{opacity:.7}
+.ems-zone:disabled{cursor:default}
+.ems-chips{display:flex;flex-wrap:wrap;gap:6px}.ems-chips .ems-zone{min-height:0;padding:6px 10px}
+.ems-obj .opt small{display:block;color:var(--muted);font-size:14px}
+.ems-log{list-style:none;margin:0;padding:6px 10px;background:#1c2440;color:#e8eef7;border-radius:6px;font-size:14.5px;display:grid;gap:4px}
+.ems-log .mono{font-family:var(--f-pix);margin-right:6px}.ems-log .ok .mono{color:#7fe0a0}.ems-log .ko .mono{color:#ff9b87}
+.ems-sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px}
+.ems-src{border:2px solid #c9bb92;border-radius:6px;padding:6px 8px;background:#fffaf0}.ems-src small{display:block;color:var(--muted)}.ems-src canvas{width:100%;height:auto;display:block}.ems-src .num{margin-top:4px!important}
+.ems-pieces{display:flex;flex-wrap:wrap;gap:6px}
+.ems-piece{font:inherit;font-size:14.5px;background:#fffaf0;border:2px solid #c9bb92;border-radius:6px;padding:6px 9px;cursor:pointer;color:var(--text);text-align:left}
+.ems-piece.tenue{border-color:var(--ink);background:#e7eefb;box-shadow:0 0 0 3px rgba(47,109,181,.25)}
+.ems-arbre{display:flex;flex-direction:column;gap:8px}
+.ems-branches{display:grid;grid-template-columns:1fr 1fr;gap:8px;border-top:3px solid #c9bb92;padding-top:8px}
+.ems-br{display:flex;flex-direction:column;gap:6px;padding-left:10px;border-left:3px solid #c9bb92}.ems-brt{font-family:var(--f-pix);font-size:14px;color:var(--muted)}
+.ems-case{min-height:40px;border:2px dashed #9aa0a8;border-radius:6px;padding:5px 8px;display:flex;flex-direction:column;gap:3px;justify-content:center;background:#fffdf6;font-size:14px}
+.ems-case+.ems-case{margin-left:12px}.ems-br .ems-case:nth-of-type(3){margin-left:24px}
+.ems-case.cible{border-color:#2f6db5;background:#eef3fc;cursor:pointer}.ems-case:focus-visible{outline:3px solid var(--amber)}
+.ems-vide{color:#9aa0a8;font-family:var(--f-pix)}.ems-pose{font-weight:700}
+.ems-hors{border-style:dotted;flex-direction:row;flex-wrap:wrap;gap:4px 12px}.ems-hors>span:first-child{font-family:var(--f-pix);color:var(--muted)}
+.ems .lbl{display:block;font-weight:700;margin-bottom:4px}
+.tag.der{background:#c43d3d;color:#fff;margin-left:4px}
+.revoir{display:inline-block;margin:4px 0;font-weight:400}.revoir summary{cursor:pointer;text-decoration:underline}.revoir p{margin:4px 0}
+@media (max-width:560px){.ems-branches{grid-template-columns:1fr}.ems-case+.ems-case,.ems-br .ems-case:nth-of-type(3){margin-left:0}}
+.seq .it.ok{background:var(--ok)}.seq .it.ko{background:var(--bad)}

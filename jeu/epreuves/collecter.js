@@ -8,7 +8,7 @@ function actPC(){
 }
 function gameCollecte(done){
   const s=site(),now=new Date(),d=n=>{const x=new Date(now);x.setFullYear(x.getFullYear()+n);return x.toLocaleDateString('fr-FR')},hier=new Date(now-864e5).toLocaleDateString('fr-FR');
-  const oth=Object.values(SITES).find(x=>x.id!==S.site),canal=elecChannel(s);
+  const canal=elecChannel(s);
   runSteps('Arène des Flux · Le mandat',[
     info(`<h3>D'où viennent les données ?</h3><p>La donnée d'énergie arrive par trois canaux :</p><div class="tbl"><table><tr><th>Source</th><th>Pas</th><th>Sert à</th></tr><tr><td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'10 min':'30 min'} (élec), 1 jour (gaz)</td><td>Analyser</td></tr><tr><td>Index</td><td>1 relevé par période</td><td>Contrôler</td></tr><tr><td>Facture</td><td>1 montant par période</td><td>Chiffrer le coût</td></tr></table></div><p>Avant de recevoir la moindre donnée de mesure, il faut le <b>consentement</b> du titulaire du contrat : ${esc(s.titulaire)}.</p>`),
     choice({q:'Qui te fournit les données de mesure de ton site ?',opts:[['Le distributeur : Enedis pour l\'électricité, GRDF pour le gaz',1,'Le distributeur pose et relève les compteurs. Le fournisseur, lui, vend l\'énergie et envoie la facture.'],['Le fournisseur qui envoie la facture',0,'Le fournisseur facture, il ne relève pas les compteurs.'],['La mairie',0,'Elle peut être titulaire du contrat, pas gestionnaire du réseau.']]}),
@@ -25,14 +25,10 @@ function gameCollecte(done){
       ['<span class="tag">Gaz</span> Courbe de charge au pas de 10 minutes',false,'Gazpar transmet un volume par jour, pas une courbe 10 min.'],
       ['Factures d\'électricité et de gaz',false,'Les factures viennent du fournisseur, pas des distributeurs.'],
       ['Liste nominative des occupants',false,'Données personnelles sans rapport : on ne demande que le nécessaire.']],okMsg:'Chaque source a son usage : analyser, contrôler, chiffrer.'}),
-    multi({title:'Mandat unique · Points couverts',q:'Coche les deux points de ton site : son PDL et son PCE.',items:[
-      [`<span class="mono">${s.pdl}</span>`,true,'Ton point électrique (PDL).'],
-      [`<span class="mono">${s.pce}</span>`,true,'Ton point gaz (PCE).'],
-      [`<span class="mono">${oth.pdl}</span>`,false,`PDL de ${oth.name} : son titulaire n'a pas consenti. Hors périmètre.`],
-      [`<span class="mono">${s.pdl.slice(0,12)+s.pdl[13]+s.pdl[12]}</span>`,false,'Presque ton PDL, mais deux chiffres sont inversés.'],
-      [`<span class="mono">${oth.pce}</span>`,false,`PCE de ${oth.name} : hors périmètre.`]],okMsg:'Le mandat ne vaut que pour ces deux points.'}),
     signature(s.titulaire,'Enedis + GRDF'),
+    raccordStep,
     dataAnim,
+    sourcesStep,
     choice({q:"Le logiciel appelle l'API pour un PDL sans consentement valide. Que se passe-t-il ?",opts:[['Refus : sans consentement valide, pour ce point et à cette date, pas de données',1,'Même chose après l\'expiration du consentement : la collecte s\'arrête. Il faut surveiller les dates de fin.'],['L\'API renvoie les données, c\'est une formalité',0,'Le consentement est obligatoire.'],['L\'API renvoie des données estimées',0,'Elle ne renvoie rien.']]})
   ],done);
 }
