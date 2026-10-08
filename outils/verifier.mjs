@@ -398,6 +398,18 @@ if (quoi === "tout" || quoi === "guidage") {
       const dip = r.querySelector(".pbody").textContent; closePanel();
       return `${carte} ${ko} ${S.bilans && S.bilans[6] === 1} ${suite} ${/Ce que fait un EMS/.test(dip) && /Mes décisions/.test(dip) && /Ce que je retiens/.test(dip) && /Mesurer/.test(dip) && !!r.querySelector || ""}`; });
     verif("bilan : carte « Dans un EMS » après le badge, 3 questions, une idée reçue expliquée, puis la suite ; le diplôme reprend EMS, décisions et « je retiens »", bilanTxt === "true true true true true", bilanTxt + " · " + (await R(() => window.__suite)));
+    // lot 4 : « Culture énergie » (voyages/retours.js) dans la console, et le mode Expert
+    const culture = await R(async () => { const r = document.getElementById("qk-host").shadowRoot, att = (ms) => new Promise((ok) => setTimeout(ok, ms));
+      if (panelEl) closePanel(); jumpTo(11, "bureau"); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); if (panelEl) closePanel();
+      S.voy = Object.assign(S.voy || {}, { pass: 1, tampons: { datacenter: 1 } }); actPC(); await att(80); const n = r.querySelectorAll("[data-ret]").length;
+      r.querySelector('[data-ret="datacenter"]').click(); await att(80); r.querySelector("#retOk").click(); await att(30); const ko = !!r.querySelector(".pbody .fb.ko");
+      r.querySelector('[data-nom="consigne"] [data-v="26"]').click(); r.querySelector("#retOk").click(); await att(30); const ok = !!r.querySelector(".pbody .fb.ok");
+      [...r.querySelectorAll(".pbody .btn")].pop().click(); await att(100); const retour = !!r.querySelector(".ems-culture"); closePanel();
+      S.expert = { on: true, depuis: 1 }; runSteps("Essai", [choice({ q: "Q ?", opts: [["Juste", 1, "oui"], ["Faux", 0, "parce que"]] })], () => {});
+      [...r.querySelectorAll(".pbody .opt")].find((b) => b.textContent === "Faux").click(); const ex = /pas d'indice/.test(r.querySelector(".pbody .fb.ko").textContent) && !/parce que/.test(r.querySelector(".pbody .fb.ko").textContent);
+      closePanel(); endScreen(); await att(60); const mention = /mention Expert/.test(r.querySelector(".pbody").textContent); closePanel(); S.expert = null;
+      return `${n} ${ko} ${ok} ${retour} ${retFait("datacenter")} ${ex} ${mention}`; });
+    verif("culture énergie : un tampon débloque son atelier dans la console, PUE trop haut expliqué puis réglé ; mode Expert : pas d'explication, mention au diplôme", culture === "1 true true true true true true", culture);
     verif("ateliers : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }

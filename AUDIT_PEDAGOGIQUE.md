@@ -511,6 +511,11 @@ Le lot 1 est terminé.
 - **Un mode « Expert » facultatif** (point 12) : des questions plus dures, sans aide.
 - **Réglage de la difficulté** à partir des questions les plus ratées du pilotage, une fois les lots 1 et 2 en ligne.
 
+**Avancement** : lot 4 réalisé, sauf le réglage de la difficulté.
+- Les voyages sont présentés comme « Culture énergie » (tableau des départs, tampon). Chaque tampon débloque, dans la console de l'EMS du bureau, un atelier « De retour au bureau » sur le site du joueur (`jeu/voyages/retours.js`) : la taille d'une installation solaire pour tenir 75 % d'autoconsommation ; le PUE du local informatique et sa chaleur perdue ; l'heure d'un usage déplaçable face au prix de l'heure et à la pointe ; le carbone du contrat (garanties d'origine) contre le carbone des kWh, pour l'éolien et le nucléaire. Le contenu des voyages n'a pas changé.
+- Le mode Expert (Menu → Options) retire l'aide plutôt qu'il n'ajoute des questions : aucune explication après une erreur, pas de « Revoir la fiche » ni d'indice dans les ateliers, et en duel une erreur coûte la moitié de la crédibilité. Activé dès le début, il vaut une mention sur le diplôme. Des questions plus dures restent à écrire.
+- **Reste à faire** : régler la difficulté (et choisir les questions du mode Expert) à partir des questions les plus ratées, quand le pilotage aura assez de parties jouées avec les ateliers.
+
 ### Ce qui est retiré du plan
 
 - La mesure avant / après et l'attestation (réponse 6).

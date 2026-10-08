@@ -14,6 +14,8 @@ function runSteps(title,steps,done){
 }
 function contBtn(el,next,label='Continuer'){const b=document.createElement('button');b.className='btn';b.textContent=label+' ▸';b.onclick=next;el.appendChild(b);b.focus();return b}
 const info=(html,label)=>(el,next)=>{el.innerHTML=html;contBtn(el,next,label)};
+/* le mode Expert (Menu → Options) : pas d'explication après une erreur, pas de « Revoir la fiche », des duels plus sévères */
+const expert=()=>!!(S.expert&&S.expert.on);
 /* une erreur est expliquée, puis les propositions sont remélangées (sauf keep) : on ne gagne pas par élimination.
    Après deux erreurs, « Revoir la fiche » s'ouvre sans quitter l'épreuve. */
 const choice=({title,ctx,gas,q,opts,keep})=>(el,next)=>{
@@ -23,7 +25,7 @@ const choice=({title,ctx,gas,q,opts,keep})=>(el,next)=>{
   const montrer=()=>{box.innerHTML='';(keep?opts:shuffle(opts)).forEach(o=>{const b=document.createElement('button');b.className='opt';b.innerHTML=o[0];box.appendChild(b);
     b.onclick=()=>{if(o[1]){b.classList.add('good');box.querySelectorAll('.opt').forEach(x=>x.disabled=true);fbz.innerHTML=`<div class="fb ok">✔ ${o[2]||'Exact !'}</div>`;gainXP(tries?5:20);contBtn(fbz,next)}
       else{tries++;trk('wrong_answer',{t:panelTitle(),q:trkTxt(q).slice(0,100),a:trkTxt(o[0]).slice(0,80)});sfx('bad');montrer();
-        fbz.innerHTML=`<div class="fb ko">✘ « ${o[0].replace(/<[^>]+>/g,'')} » : ${o[2]||'pas tout à fait.'} ${tries>=2&&typeof revoirFiche==='function'?revoirFiche():''}Relis, et choisis encore${keep?'':' (les propositions ont bougé)'}.</div>`}}})};
+        fbz.innerHTML=expert()?`<div class="fb ko">✘ Non. Mode Expert : pas d'indice.</div>`:`<div class="fb ko">✘ « ${o[0].replace(/<[^>]+>/g,'')} » : ${o[2]||'pas tout à fait.'} ${tries>=2&&typeof revoirFiche==='function'?revoirFiche():''}Relis, et choisis encore${keep?'':' (les propositions ont bougé)'}.</div>`}}})};
   montrer();
 };
 const multi=({title,ctx,gas,q,items,okMsg})=>(el,next)=>{

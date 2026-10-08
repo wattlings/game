@@ -196,6 +196,8 @@ const MENU_ECRANS={
       {k:'meteo',l:'Temps',v:[['auto','Selon la date'],['clair','Soleil'],['nuageux','Nuageux'],['couvert','Couvert'],['pluie','Pluie'],['orage','Orage'],['brouillard','Brouillard'],['neige','Neige'],['vent','Grand vent']],d:"Le temps qu'il fait est simulé : le jeu ne se connecte à aucun service météo."},
       {k:'saison',l:'Saison',v:[['auto','Selon la date'],['printemps','Printemps'],['été','Été'],['automne','Automne'],['hiver','Hiver']],d:"La saison des arbres, de l'herbe et de la neige."},
       {k:'wear',l:'Patine de la ville',v:WEAR_NAMES.map((n,i)=>[i+1,(i+1)+' · '+n]),d:"Usure, traces de vie, herbes folles, petits défauts : de la ville neuve (1) à la ville qui a beaucoup vécu (5)."},
+      {k:'expert',l:'Mode Expert',v:[['off','Non'],['on','Oui']],get:()=>S.expert&&S.expert.on?'on':'off',set:v=>{S.expert={on:v==='on',depuis:v==='on'?((S.expert&&S.expert.on&&S.expert.depuis)??S.ch):null};save()},
+        d:"Pour qui connaît déjà la démarche : aucune explication après une erreur, pas de « Revoir la fiche » ni d'indice, et en duel, deux erreurs suffisent pour retourner à l'entrée. Activé dès le début de l'histoire, il vaut une mention sur le diplôme."},
     ].map(L=>Object.assign({get:()=>PREF[L.k],set:v=>{prefSet(L.k,L.k==='wear'?+v:v);skyUpdate(true);skyApply()}},L)),
     html(){skyUpdate(true);const R=this.lignes();MENU.opt=Math.max(0,Math.min(MENU.opt,R.length-1));
       return `<div class="obj-box"><p>${esc(skyLine())}</p></div>
@@ -204,7 +206,7 @@ const MENU_ECRANS={
       <div class="fr-aide-l">${esc(R[MENU.opt].d)}</div>
       <h4 class="segh">Jeu</h4><div class="optg">${PIP.win||PIP.isPop?'':`<button class="btn alt" id="oFs">${QK_APP.classList.contains('fs')?'✕ Quitter le plein écran':'⛶ Plein écran'}</button>`}${PIPB.hidden||PIP.isPop?'':`<button class="btn alt" id="oPip">${PIP.win?'↩ Remettre le jeu dans l’onglet':'⧉ Vignette flottante'}</button>`}<button class="btn alt" id="oKeys">Commandes</button><button class="btn alt" id="oIntro">Revoir la présentation</button><button class="btn alt" id="oBack">← Retour au cours</button></div>
       <div class="row"><button class="btn alt" id="rst">Recommencer l'histoire</button></div><div id="rstc"></div>`},
-    changer(i,d){const L=this.lignes()[i],k=L.v.findIndex(v=>String(v[0])===String(L.get())),v=L.v[((k<0?0:k)+d+L.v.length)%L.v.length][0];L.set(v);trk('setting',{k:L.k==='son'?'son':'ciel_'+L.k,v})},
+    changer(i,d){const L=this.lignes()[i],k=L.v.findIndex(v=>String(v[0])===String(L.get())),v=L.v[((k<0?0:k)+d+L.v.length)%L.v.length][0];L.set(v);trk('setting',{k:L.k==='son'||L.k==='expert'?L.k:'ciel_'+L.k,v})},
     lier(mt,show){
       mt.querySelectorAll('.fr-opt').forEach(r=>{const i=+r.dataset.r;r.onpointerenter=()=>{};r.querySelectorAll('.fr-fl').forEach(b=>b.onclick=()=>{MENU.opt=i;this.changer(i,+b.dataset.d);show();mt.querySelector(`.fr-opt[data-r="${i}"] .fr-fl[data-d="${b.dataset.d}"]`).focus()});r.onclick=e=>{if(e.target.closest('.fr-fl'))return;MENU.opt=i;show()}});
       const f=mt.querySelector('#oFs'),p=mt.querySelector('#oPip');if(f)f.onclick=()=>{closePanel();FSB.click()};if(p)p.onclick=()=>{closePanel();PIPB.click()};

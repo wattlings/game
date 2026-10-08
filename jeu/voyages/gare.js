@@ -98,7 +98,7 @@ function gareDeparts(){
   const h=new Date(),hh=k=>{const m=h.getHours()*60+h.getMinutes()+3+k*17;return String(Math.floor(m/60)%24).padStart(2,'0')+' h '+String(m%60).padStart(2,'0')};
   b.innerHTML=`<p>Gare d'Ampère-sur-Loire · départs. ${Object.keys(v.tampons).length} / ${VOY.ordre.length} tampons dans ton passeport.</p><div class="voy-departs">${VOY.ordre.map((id,k)=>{const s=VOY.sites[id],t=voyTampon(id);
     return `<div class="voy-ligne${s.ouvert?'':' ferme'}"><span class="h">${s.ouvert?hh(k):'— h —'}</span><span class="d"><b>${esc(s.gare)}</b><small>${esc(s.nom)} · ${esc(s.region)}${t?' · ✔ tamponné':''}</small></span>${s.ouvert?`<button class="btn" data-d="${id}">Monter à bord ▸</button>`:'<span class="st">Prochainement</span>'}</div>`}).join('')}</div>
-    <p class="dnote">Le trajet dure quelques secondes. Sur place, le train t'attend à quai pour le retour.</p><div class="row"><button class="btn alt" id="vNon">Rester à Ampère-sur-Loire</button></div>`;
+    <p class="dnote"><b>Culture énergie</b> : les voyages ne comptent pas dans les 8 étapes, ils les éclairent. Chaque tampon débloque un atelier dans la console de l'EMS du bureau, pour appliquer ce que tu as vu à ton site. Le trajet dure quelques secondes ; sur place, le train t'attend à quai pour le retour.</p><div class="row"><button class="btn alt" id="vNon">Rester à Ampère-sur-Loire</button></div>`;
   b.querySelectorAll('[data-d]').forEach(x=>x.onclick=()=>{closePanel();voyTrajet(x.dataset.d)});
   b.querySelector('#vNon').onclick=closePanel;
   (b.querySelector('[data-d]')||b.querySelector('#vNon')).focus();

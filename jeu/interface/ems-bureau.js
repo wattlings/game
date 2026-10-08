@@ -16,6 +16,13 @@ const EMS_MODULES=[
   [7,'Plan d’action',()=>{const p=emsGet('plan'),ids=p&&p.ids||Object.keys((S.en&&S.en.acts)||{});return ids.length?`${ids.map(id=>enAct(id)).filter(Boolean).map(a=>esc(a.t.split(' :')[0])).join(' · ')}${p&&p.kwh?`<br>Gain attendu : ${emsKwh(p.kwh)} kWh par an.`:''} Le compteur en haut de l'écran suit les kWh économisés.${emsGet('enjeu')?`<br>Enjeu du site · ${esc(emsGet('enjeu').t)} : ${emsKwh(emsGet('enjeu').kwh)} kWh par an.`:''}`:"Aucune action lancée."},null],
   [8,'Mesure et vérification',()=>{const m=emsGet('mv');return m?`Promis : ${emsKwh(m.prevu)} kWh. Prouvé, à météo comparable : <b>${emsKwh(m.reel)} kWh</b>. Le chiffre brut disait −${m.brut} % : la météo avait fait une partie du travail.`:"Rien de prouvé pour l'instant : une économie annoncée n'est qu'une promesse."},()=>mvStep]
 ];
+/* « Culture énergie » : un atelier par tampon du passeport, pour appliquer la leçon du voyage au site (voyages/retours.js) */
+function emsCulture(){
+  const v=S.voy||{},T=VOY.ordre.filter(id=>v.tampons&&v.tampons[id]);
+  if(!v.pass)return '';
+  return `<section class="ems-module ems-culture"><h4>Culture énergie · de retour au bureau</h4><p>${T.length?'Chaque voyage tamponné, appliqué à ton site.':"Les voyages en train sont une annexe du parcours. Chaque tampon débloque ici un atelier : la leçon du site visité, appliquée au tien."}</p>
+    ${T.length?`<div class="ems-chips">${T.map(id=>`<button type="button" class="btn alt" data-ret="${id}">${retFait(id)?'✔ ':''}${esc(VOY.sites[id].nom)} · ${esc(RET_TITRES[id])}</button>`).join('')}</div>`:''}</section>`;
+}
 function openEmsBureau(){
   const s=site(),ov=openPanel('EMS du bureau',{sansCours:true}),b=ov.querySelector('.pbody');
   const A=ARENAS.find(a=>ARENA_CH[a.id]===S.ch),rappel=A?`Rappel : ${esc(A.name)}, ${esc(qAu(A.id))}. ${esc(A.champ)} t'attend.`:'';
@@ -26,10 +33,13 @@ function openEmsBureau(){
     <div class="ems-modules">${EMS_MODULES.map(([n,t,res,fn],i)=>ouvert(n)
       ?`<section class="ems-module"><h4>${n} · ${esc(t)}</h4><p>${res()}</p>${fn?`<button type="button" class="btn alt" data-r="${i}">Rejouer l'atelier</button>`:''}</section>`
       :`<section class="ems-module ferme"><h4>${n} · ${esc(t)}</h4><p>🔒 Module livré avec le badge ${esc(BLAB(ARENAS[n-1].badge))}. Le commercial avait pourtant juré qu'il était inclus.</p></section>`).join('')}</div>
+    ${emsCulture()}
     <p class="dnote">Rejouer un atelier sert à s'entraîner : pas d'XP, et ton plan d'action ne bouge pas.</p>
     <div class="row"><button type="button" class="btn" id="emsFermer">Fermer ▸</button></div></div>`;
   b.querySelectorAll('[data-r]').forEach(x=>x.onclick=()=>{const M=EMS_MODULES[+x.dataset.r];closePanel();emsRejeu=true;trk('setting',{k:'ems_rejeu',v:M[1]});
     runSteps('EMS du bureau · '+M[1],[M[3]()],()=>{emsRejeu=false;openEmsBureau()})});
   maCourbeDessiner(b.querySelector('.mc canvas'));
+  b.querySelectorAll('[data-ret]').forEach(x=>x.onclick=()=>{const sid=x.dataset.ret;closePanel();emsRejeu=retFait(sid);
+    runSteps('EMS du bureau · '+RET_TITRES[sid],[RET_ATELIERS[sid]],()=>{emsRejeu=false;openEmsBureau()})});
   const f=b.querySelector('#emsFermer');f.onclick=()=>closePanel();f.focus();
 }

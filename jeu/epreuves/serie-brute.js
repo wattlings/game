@@ -124,7 +124,7 @@ function serieBruteStep(el,next){
     if(a&&fait[a.id]){choisi=null;dessiner();diag.innerHTML=`<p class="dnote">Déjà traité : statut « ${a.id==='doublon'?'corrigée':'estimée'} ». La brute reste consultable.</p>`;return}
     if(a)return traiter(a);
     choisi=null;dessiner();rates++;
-    const reste=SB_ANOM.filter(z=>!fait[z.id]),indice=rates>=3&&reste.length?`<p class="dnote">Indice du Dr Doublon, à ne répéter à personne : regarde ${esc(SB_JOURS[Math.floor(reste[0].de/48)].toLowerCase())}, et cherche ${esc(reste[0].forme)}.</p>`:'';
+    const reste=SB_ANOM.filter(z=>!fait[z.id]),indice=rates>=3&&!expert()&&reste.length?`<p class="dnote">Indice du Dr Doublon, à ne répéter à personne : regarde ${esc(SB_JOURS[Math.floor(reste[0].de/48)].toLowerCase())}, et cherche ${esc(reste[0].forme)}.</p>`:'';
     diag.innerHTML=`<p><b>${esc(sbHeure(cur))}</b> · ${esc(sbLeurre(s.id,cur))}</p>${indice}`;
   };
   const idx=e=>{const r=cv.getBoundingClientRect(),px=(e.clientX-r.left)*720/r.width;return Math.max(0,Math.min(N-1,Math.floor((px-L)/W*N)))};

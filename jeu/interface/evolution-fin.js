@@ -23,6 +23,8 @@ const DIP_SAVOIR={1:'Délimiter un périmètre, créer la fiche du site, choisir
   3:'Repérer trous, doublons, pics, valeurs figées ; traiter sans effacer la donnée brute',4:'Ranger site → point → compteur → mesures ; kW → kWh, m³ → kWh',
   5:'Talon, DJU, signature énergétique, puissance souscrite, ratios',6:'Référence, seuil et persistance d’une alerte ; faux positifs ; coût d’une dérive',
   7:'Sobriété → efficacité → production ; plan chiffré sous budget ; enjeu du site',8:'Mesure et vérification corrigée des DJU ; décret tertiaire, OPERAT, ISO 50001'};
+/* la mention Expert : le mode était actif dès le début de l'histoire (avant le premier badge), et l'est resté */
+const dipExpert=()=>!!(S.expert&&S.expert.on&&S.expert.depuis!==null&&S.expert.depuis<=2);
 function diplomeDonnees(){
   const e=typeof EN==='function'?EN():{log:[]},miss=(e.log||[]).filter(l=>l[1]==='miss'),perdus=miss.reduce((a,l)=>a+(l[3]||0),0);
   const al=emsGet('alerte'),enj=emsGet('enjeu'),plan=emsGet('plan'),mv=emsGet('mv'),o=CAD_OBJ[emsObjectif()];
@@ -50,14 +52,14 @@ function diplomeImprimer(){
     table{border-collapse:collapse;width:100%}th,td{border:1px solid #c9bb92;padding:4px 6px;text-align:left;vertical-align:top}th{background:#f3ead6}ul{margin:4px 0;padding-left:18px}
     .tete{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:3px double #1c2440;padding-bottom:8px;margin-bottom:10px}img{width:300px;border:1px solid #c9bb92}
     @page{size:A4;margin:12mm}@media print{body{margin:0}}</style></head><body>
-    <div class="tete"><div><h1>Diplôme de l'Energy Management par la donnée</h1><h2><b>${esc(S.name)}</b>, ${esc(RANKS[S.rank])} · ${esc(site().name)} · ${new Date().toLocaleDateString('fr-FR')}</h2></div><img src="${cv.toDataURL()}" alt="Ma courbe"></div>
+    <div class="tete"><div><h1>Diplôme de l'Energy Management par la donnée</h1><h2><b>${esc(S.name)}</b>, ${esc(RANKS[S.rank])}${dipExpert()?' · mention Expert':''} · ${esc(site().name)} · ${new Date().toLocaleDateString('fr-FR')}</h2></div><img src="${cv.toDataURL()}" alt="Ma courbe"></div>
     ${diplomeHtml()}<p style="margin-top:12px;color:#5b6380">Wattlings · La démarche en 8 étapes, de la donnée à l'économie prouvée. Valeurs du jeu fictives.</p></body></html>`);
   w.document.close();w.focus();setTimeout(()=>{try{w.print()}catch(e){}},300);trk('setting',{k:'diplome',v:'imprimer'});
 }
 function endScreen(){
   if(S.ch>=11&&!S.flags.finVue){S.flags.finVue=1;trk('game_end',{site:S.site,niveau:level()});save()}
   const ov=openPanel('Quête terminée'),b=ov.querySelector('.pbody');
-  b.innerHTML=`<h3>Diplôme de l'Energy Management par la donnée</h3><p><b>${esc(S.name)}</b>, ${RANKS[S.rank]}, niveau ${level()}${S.hades?' · <b>mention Hadès</b> (tout a été demandé deux fois, et obtenu quand même)':''}.</p><p>Tu as remporté les 8 arènes de la démarche avec ${esc(site().name)}, puis tu as pris en main un patrimoine entier.</p>
+  b.innerHTML=`<h3>Diplôme de l'Energy Management par la donnée</h3><p><b>${esc(S.name)}</b>, ${RANKS[S.rank]}, niveau ${level()}${S.hades?' · <b>mention Hadès</b> (tout a été demandé deux fois, et obtenu quand même)':''}${dipExpert()?' · <b>mention Expert</b> (tout le parcours, sans aide)':''}.</p><p>Tu as remporté les 8 arènes de la démarche avec ${esc(site().name)}, puis tu as pris en main un patrimoine entier.</p>
   ${maCourbeHtml()}${diplomeHtml()}
   <div class="row"><button class="btn alt" id="endPrint">Imprimer mon diplôme</button></div>
   <p><b>La suite :</b> ${fmtKwh(enTotal())} économisés jusqu'ici. Le fonds de travaux de toute la ville est maintenant entre tes mains. Vingt bâtiments, un seul compteur, un objectif : <b>−40 %</b>.</p>${voyAnnonce()}<div class="row"><button class="btn" id="endPark">Piloter le parc ▸</button><button class="btn alt" id="endStay">Continuer à explorer</button><button class="btn alt" id="endNew">Rejouer avec un autre site (collection conservée)</button></div>`;

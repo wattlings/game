@@ -124,7 +124,7 @@ function voyTamponner(sid,cb){
   const site=VOY.sites[sid],v=voyEtat();if(v.tampons[sid]){if(cb)cb();return}
   v.tampons[sid]=Date.now();S.xp+=60;save();hud();jingle('badge');trk('voyage_tampon',{site:sid,n:Object.keys(v.tampons).length});
   const ov=voyPanneau('Passeport des énergies'),b=ov.querySelector('.pbody'),n=Object.keys(v.tampons).length,N=VOY.ordre.length;
-  b.innerHTML=`<div class="voy-tampon-box"><canvas width="48" height="48" class="voy-tampon pose"></canvas><div><h3>Tampon obtenu : ${esc(site.nom)}</h3><p>${esc(site.bravo||'')}</p><p class="dnote">${n} / ${N} tampons · +60 XP. Ton passeport est dans le menu, onglet Passeport.</p></div></div><div class="row"><button class="btn" id="vOk">Ranger le passeport ▸</button></div>`;
+  b.innerHTML=`<div class="voy-tampon-box"><canvas width="48" height="48" class="voy-tampon pose"></canvas><div><h3>Tampon obtenu : ${esc(site.nom)}</h3><p>${esc(site.bravo||'')}</p><p>De retour au bureau, un atelier t'attend dans la console de l'EMS (le PC du bureau) : « ${esc(RET_TITRES[sid]||'Culture énergie')} », pour appliquer la leçon à ton site.</p><p class="dnote">${n} / ${N} tampons · +60 XP. Ton passeport est dans le menu, onglet Passeport.</p></div></div><div class="row"><button class="btn" id="vOk">Ranger le passeport ▸</button></div>`;
   passeportTampon(b.querySelector('canvas').getContext('2d'),sid,true);
   const ok=b.querySelector('#vOk');ok.onclick=()=>{closePanel();if(cb)cb()};ok.focus();
 }

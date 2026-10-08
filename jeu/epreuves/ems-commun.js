@@ -25,12 +25,13 @@ function emsChoix(box,opts,ok,{q='',txt=t=>t,rendu=null}={}){
   let essais=0;
   const montrer=msg=>{box.innerHTML=(q?`<p><b>${q}</b></p>`:'')+'<div class="opts"></div>'+(msg||'');const o=box.querySelector('.opts');
     shuffle(opts).forEach(p=>{const b=document.createElement('button');b.type='button';b.className='opt';b.innerHTML=txt(p[0]);o.appendChild(b);
-      b.onclick=()=>{if(p[1]){sfx('select');ok(p,essais)}else{essais++;emsRate(q||'Atelier EMS',p[0].replace(/<[^>]+>/g,''));montrer(`<div class="fb ko">✘ ${txt(p[2])} ${essais>=2?revoirFiche():''}Relis, et choisis encore.</div>`)}}});if(rendu)rendu(box)};
+      b.onclick=()=>{if(p[1]){sfx('select');ok(p,essais)}else{essais++;emsRate(q||'Atelier EMS',p[0].replace(/<[^>]+>/g,''));montrer(expert()?`<div class="fb ko">✘ Non. Mode Expert : pas d'indice.</div>`:`<div class="fb ko">✘ ${txt(p[2])} ${essais>=2?revoirFiche():''}Relis, et choisis encore.</div>`)}}});if(rendu)rendu(box)};
   montrer();
 }
 
 /* « Revoir la fiche » : après deux erreurs, les fiches de l'étape déjà trouvées, dépliables sans quitter l'épreuve */
 function revoirFiche(){
+  if(expert())return '';
   const A=curArena(),st=A?A.id:Math.max(1,Math.min(8,S.ch-1)),F=FICHES.filter(f=>f.st===st&&S.fiches&&S.fiches[f.id]);
   if(!F.length)return '';
   return `<details class="revoir"><summary>Revoir la fiche</summary>${F.map(f=>`<p><b>${esc(f.t)}</b> · ${esc(f.x)}</p>`).join('')}</details> `;

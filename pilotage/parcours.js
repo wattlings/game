@@ -38,7 +38,7 @@ const ATELIERS = {
   gameAgir: ["D'abord l'enjeu propre au site, simulé dans l'EMS : les vacances d'hiver (école), la climatisation de l'été (bureaux), le four et le contrat (boulangerie). Le résultat revient à l'étape Mesurer. Puis le plan d'action, qui rappelle les dérives de l'étape Détecter ; les actions qui les traitent portent l'étiquette « ta dérive ».", ["ENJ_ECOLE", "AGIR_DER"]],
   gamePiloter: ["L'atelier de la mesure : le plan choisi à l'arène du Chantier est vérifié sur un hiver plus doux. Corriger la météo, conclure, puis lire le résultat dans l'indicateur choisi à l'arène du Cadastre.", ["MES_GRAIN"]],
 };
-const RANGEES_ATELIERS = ["SB_JOURS", "BILANS", "SIG_MOIS", "SIG_DJU", "STR_CASES", ...Object.values(ATELIERS).flatMap((a) => a[1])];
+const RANGEES_ATELIERS = ["SB_JOURS", "BILANS", "RET_TITRES", "RET_IT", "RET_USAGE", "SIG_MOIS", "SIG_DJU", "STR_CASES", ...Object.values(ATELIERS).flatMap((a) => a[1])];
 /* un nom lisible pour les fonctions du jeu les plus courantes (section « Mécanique et interface ») */
 const NOMS = {
   enterArena: "Entrer dans une arène", duel: "Le duel contre un dresseur", arenaDefeat: "Défaite dans une arène", champTalk: "Parler au champion", arenaWin: "Victoire dans une arène",
@@ -257,6 +257,10 @@ export function construire(FF, { chapitres }) {
         { genre: "groupe", titre: "Verdict et tampon", blocs: [D.verdict, D.merci, d.pret, d.bravo].filter(Boolean).map((t) => ({ genre: "texte", t })) },
         ...(cleDit(D.apres) ? repliques(cleDit(D.apres), D.qui).map((b) => Object.assign(b, { titre: "Ensuite, à chaque visite" })) : Array.isArray(D.apres) ? [{ genre: "dialogue", titre: "Ensuite, à chaque visite", lignes: D.apres.map((t) => ({ qui: D.qui, t })) }] : [])] });
     }
+    // de retour au bureau : l'atelier « Culture énergie » que débloque le tampon (voyages/retours.js)
+    { const fn = { solaire: "retourSolaire", datacenter: "retourDatacenter", barrage: "retourBarrage", eolien: "retourCarbone", nucleaire: "retourCarbone" }[id], B = fn ? prendre(fn) : [];
+      const donnees = ({ datacenter: ["RET_IT"], barrage: ["RET_USAGE"] }[id] || []).map((nom) => ({ genre: "donnees", nom, valeur: (fichiers.find((F) => F.donnees[nom]) || { donnees: {} }).donnees[nom], filet: true })).filter((b) => b.valeur);
+      if (fn) N.push(...scene(`voy-${id}-retour`, "De retour au bureau", [note("Débloqué par le tampon, dans la console de l'EMS du bureau (module « Culture énergie ») : la leçon du site, appliquée au site du joueur." + (B.length ? "" : " C'est le même atelier que pour l'éolien : le carbone du contrat.")), ...B, ...donnees], { genre: "epreuve" })); }
     // tout le reste du site : répliques sans information, objets, zones du plan
     const autres = Object.keys(dit).filter((k) => !servi.has(k) && textesDe(dit[k]).length).flatMap((k) => repliques(k).map((b) => Object.assign(b, { titre: (b.titre ? b.titre + " · " : "") + k })));
     FS.forEach((F) => porteesDe(F).forEach((p) => autres.push(...prendre(p))));
