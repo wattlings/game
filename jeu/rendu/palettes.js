@@ -4,7 +4,9 @@
 
 /* ---- personnages : teints de peau, cheveux, hauts, bas (dans l'ordre proposé par l'écran de l'avatar) ---- */
 const SKINS=['#f6d3b3','#f1c7a1','#e0ac7e','#c68a5c','#9a6440','#6b4128'];
-const HAIRC=['#2b1d14','#5a3a22','#8a5a2b','#d9a441','#b8431f','#9a9aa2','#ece6d6','#3a5fc0','#c94f8a'];
+/* les teints proposés par l'écran de l'avatar, du plus clair au plus foncé (SKINS garde son ordre : les anciennes sauvegardes y renvoient par numéro) */
+const SKIN_CHOIX=['#fbe3d0','#f6d3b3','#f1c7a1','#e8b98f','#e0ac7e','#d19a6a','#c68a5c','#a8714a','#9a6440','#7a4e30','#6b4128','#4a2c1c'];
+const HAIRC=['#2b1d14','#5a3a22','#8a5a2b','#d9a441','#b8431f','#9a9aa2','#ece6d6','#3a5fc0','#c94f8a','#141216'];   // à la fin : les anciennes sauvegardes y renvoient par numéro
 const TOPS=['#7a8594','#c43d3d','#2f6db5','#2f9e7a','#e2a13a','#8a3b8f','#f7f0dc','#2c2c34','#e57399'];
 const BOTS=['#2f3a5c','#333338','#6b4a2b','#6d7896','#8a3b3b','#2f6d34','#c9b28a'];
 

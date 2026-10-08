@@ -1,7 +1,7 @@
 /* Wattlings · jeu/rendu/personnages.js
    Dessin des personnages : couleurs de peau, cheveux, tenues, et le sprite en 4 directions. */
 
-const STYLES={court:'Court',long:'Long',queue:'Queue-de-cheval',carre:'Carré',boucle:'Bouclé',chauve:'Crâne rasé'};
+const STYLES={court:'Court',long:'Long',queue:'Queue-de-cheval',carre:'Carré',boucle:'Bouclé',afro:'Afro',tresses:'Tresses',couettes:'Couettes',chauve:'Crâne rasé'};
 const AVDEF=g=>g==='f'?{g:'f',skin:1,style:'long',hair:1,top:1,bot:0,bt:'jupe'}:{g:'h',skin:1,style:'court',hair:1,top:0,bot:0,bt:'pantalon'};
 function avPal(rank,av){const me=!av;av=av||S.av||AVDEF('h');
   const p=av.p?Object.assign({},av.p):{skin:SKINS[av.skin],hair:HAIRC[av.hair],style:av.style,shirt:TOPS[av.top],pants:BOTS[av.bot],skirt:av.bt==='jupe',
@@ -32,18 +32,36 @@ function drawLegs(c,x,y,dir,ph,p,run){
   }
   if(p.skirt){R(c,x+4,y+11,8,2,p.pants);R(c,x+3,y+12,10,1,p.pants)}
 }
+/* Le fauteuil roulant, à la place des jambes. temps : 'avant' (sous le corps) ou 'apres' (par-dessus : la roue de profil, le dossier vu de dos).
+   Les roues tournent avec le pas. */
+function drawChair(c,x,y,dir,ph,p,temps){
+  const M='#3a3a44',H='#9aa0a8',skin=p.skin||'#f1c7a1',leg=p.skirt?skin:p.pants,shoe='#222',rot=ph%2;
+  if(dir==='down'||dir==='up'){
+    if(temps==='avant'){R(c,x+4,y+11,8,2,M);
+      if(dir==='down'){R(c,x+5,y+12,2,3,leg);R(c,x+9,y+12,2,3,leg);R(c,x+5,y+14,2,1,shoe);R(c,x+9,y+14,2,1,shoe);R(c,x+4,y+15,8,1,M)}}
+    else{if(dir==='up')R(c,x+4,y+8,8,4,M);
+      R(c,x+2,y+8,2,8,M);R(c,x+12,y+8,2,8,M);R(c,x+2,y+9+rot*3,2,1,H);R(c,x+12,y+12-rot*3,2,1,H)}   // les deux grandes roues, de face
+  }else{const f=dir==='right'?1:-1,ax=x+7;
+    if(temps==='avant'){R(c,f>0?ax+1:ax-4,y+11,4,2,leg);R(c,f>0?ax+4:ax-5,y+12,2,3,leg);R(c,f>0?ax+4:ax-5,y+14,2,1,shoe);
+      R(c,f>0?ax+3:ax-5,y+15,3,1,M);R(c,f>0?ax+5:ax-6,y+14,1,2,M);   // repose-pieds et petite roue avant
+      R(c,f>0?ax-4:ax+4,y+7,1,6,M)}   // le dossier
+    else{R(c,ax-2,y+9,5,1,M);R(c,ax-3,y+10,1,5,M);R(c,ax+3,y+10,1,5,M);R(c,ax-2,y+15,5,1,M);R(c,ax,y+11+rot,1,2,H);R(c,ax-1,y+12-rot,3,1,H)}}   // la grande roue, de profil
+}
+/* une peau assez foncée pour que les yeux s'y perdent */
+const peauFoncee=hex=>{const n=parseInt(String(hex).slice(1),16);return !isNaN(n)&&(0.299*(n>>16)+0.587*((n>>8)&255)+0.114*(n&255))<120};
 function shade(hex){const n=parseInt(String(hex).slice(1),16);if(isNaN(n))return hex;const r=Math.max(0,(n>>16)-28),g=Math.max(0,((n>>8)&255)-28),b=Math.max(0,(n&255)-28);return `rgb(${r},${g},${b})`}
 function drawChar0(c,x,y,dir,frame,p,run,fx){
   x=Math.round(x);y=Math.round(y);const skin=p.skin||'#f1c7a1',hc=p.hair,st=p.style||'court';
-  const ph=((frame|0)%4+4)%4,bob=(ph===1||ph===3)?1:0;
+  const ph=((frame|0)%4+4)%4,bob=!p.chair&&(ph===1||ph===3)?1:0;
   c.fillStyle='rgba(20,40,30,.24)';c.fillRect(x+3,y+14,10,2);c.fillRect(x+4,y+16,8,1);
-  if(dir==='up'&&(st==='long'))R(c,x+4,y+5-bob,8,5,hc);
-  drawLegs(c,x,y,dir,ph,p,run);
+  if(dir==='up'&&(st==='long'||st==='tresses'))R(c,x+4,y+5-bob,8,5,hc);
+  if(p.chair)drawChair(c,x,y,dir,ph,p,'avant');else drawLegs(c,x,y,dir,ph,p,run);
   if(p.robe){R(c,x+4,y+11,8,4,p.robe);R(c,x+3,y+14,10,1,shade(p.robe))}
   y-=bob+(fx&&fx.idle?1:0);
   const sw=ph===1?1:ph===3?-1:0,sa=run?2:1;
   // tresse/cheveux longs derrière le corps (vue de dos)
-  if(dir==='up'&&(st==='long'))R(c,x+4,y+5,8,5,hc);
+  if(dir==='up'&&(st==='long'||st==='tresses'))R(c,x+4,y+5,8,5,hc);
+  if(dir==='up'&&st==='tresses')for(let k=0;k<4;k++)R(c,x+5+k*2,y+5,1,6,shade(hc));
   R(c,x+4,y+7,8,p.skirt?5:6,p.shirt);
   if(dir==='down'||dir==='up'){R(c,x+3,y+8-sw*sa,1,4,skin);R(c,x+12,y+8+sw*sa,1,4,skin)}
   else{const f=dir==='right'?1:-1;R(c,x+7+f*sw*sa,y+8,2,4,shade(p.shirt));R(c,x+7+f*sw*sa+(f>0?1:0),y+11,1,1,skin)}
@@ -59,20 +77,28 @@ function drawChar0(c,x,y,dir,frame,p,run,fx){
   if(p.scarf){R(c,x+4,y+7,8,1,p.scarf);if(dir==='down')R(c,x+9,y+8,2,3,p.scarf)}
   if(p.bag){if(dir==='down'){for(let i=0;i<5;i++)R(c,x+10-i,y+7+i,1,1,'#3b3240');R(c,x+3,y+10,4,4,p.bag)}else if(dir!=='up')R(c,x+6,y+10,4,4,p.bag)}
   if(p.stetho&&dir==='down'){R(c,x+6,y+8,1,3,'#333');R(c,x+9,y+8,1,3,'#333');R(c,x+7,y+11,2,1,'#9aa0a8')}
+  if(p.chair)drawChair(c,x,y,dir,ph,p,'apres');
   R(c,x+4,y+1,8,7,skin);
   if(st==='chauve'){if(dir!=='up')R(c,x+5,y+1,2,1,'rgba(255,255,255,.35)');else R(c,x+4,y+1,8,2,'rgba(0,0,0,.08)')}
-  else if(dir==='up'){R(c,x+4,y+1,8,6,hc);if(st==='queue')R(c,x+7,y+7,2,3,hc);if(st==='carre')R(c,x+4,y+1,8,7,hc);if(st==='boucle'){R(c,x+3,y,10,6,hc)}}
+  else if(dir==='up'){R(c,x+4,y+1,8,6,hc);if(st==='queue')R(c,x+7,y+7,2,3,hc);if(st==='carre')R(c,x+4,y+1,8,7,hc);if(st==='boucle'){R(c,x+3,y,10,6,hc)}
+    if(st==='afro'){R(c,x+2,y-3,12,9,hc);R(c,x+3,y-4,10,1,hc)}
+    if(st==='couettes'){R(c,x+1,y-1,3,3,hc);R(c,x+12,y-1,3,3,hc)}}
   else{
     if(st==='boucle'){R(c,x+3,y-1,10,4,hc);R(c,x+3,y+2,2,3,hc);R(c,x+11,y+2,2,3,hc)}
+    else if(st==='afro'){R(c,x+2,y-3,12,6,hc);R(c,x+3,y-4,10,1,hc);if(dir!=='right')R(c,x+2,y+3,2,3,hc);if(dir!=='left')R(c,x+12,y+3,2,3,hc);R(c,x+5,y-3,1,1,shade(hc));R(c,x+10,y-2,1,1,shade(hc))}
     else R(c,x+4,y,8,3,hc);
+    if(st==='tresses'){const T=(tx)=>{for(let k=0;k<8;k++)R(c,tx,y+2+k,2,1,k%2?shade(hc):hc)};if(dir!=='right')T(x+3);if(dir!=='left')T(x+11);if(dir==='left')R(c,x+10,y+1,3,8,hc);if(dir==='right')R(c,x+3,y+1,3,8,hc)}
+    if(st==='couettes'){if(dir!=='right')R(c,x+1,y-1,3,3,hc);if(dir!=='left')R(c,x+12,y-1,3,3,hc)}
     if(st==='long'){if(dir!=='right')R(c,x+3,y+2,2,7,hc);if(dir!=='left')R(c,x+11,y+2,2,7,hc);if(dir==='left')R(c,x+10,y+1,3,8,hc);if(dir==='right')R(c,x+3,y+1,3,8,hc)}
     if(st==='carre'){if(dir!=='right')R(c,x+3,y+2,2,5,hc);if(dir!=='left')R(c,x+11,y+2,2,5,hc)}
     if(st==='queue'){if(dir==='left')R(c,x+12,y+2,2,5,hc);if(dir==='right')R(c,x+2,y+2,2,5,hc)}
-    if(dir==='left'&&st!=='long')R(c,x+9,y+1,3,4,hc);if(dir==='right'&&st!=='long')R(c,x+4,y+1,3,4,hc);
-    const ey=y+4,eh=fx&&fx.blink?1:2,e0=fx&&fx.blink?ey+1:ey;if(dir==='down'){R(c,x+6,e0,1,eh,'#222');R(c,x+9,e0,1,eh,'#222');if(p.lash&&eh>1){R(c,x+5,ey,1,1,'#222');R(c,x+10,ey,1,1,'#222')}}
+    if(dir==='left'&&st!=='long'&&st!=='tresses')R(c,x+9,y+1,3,4,hc);if(dir==='right'&&st!=='long'&&st!=='tresses')R(c,x+4,y+1,3,4,hc);
+    const ey=y+4,eh=fx&&fx.blink?1:2,e0=fx&&fx.blink?ey+1:ey;
+    if(eh>1&&peauFoncee(skin)){const W='#efe6da';if(dir==='down'){R(c,x+5,ey+1,1,1,W);R(c,x+10,ey+1,1,1,W)}if(dir==='left')R(c,x+6,ey+1,1,1,W);if(dir==='right')R(c,x+9,ey+1,1,1,W)}   // sur une peau foncée, le blanc de l'œil fait ressortir le regard
+    if(dir==='down'){R(c,x+6,e0,1,eh,'#222');R(c,x+9,e0,1,eh,'#222');if(p.lash&&eh>1){R(c,x+5,ey,1,1,'#222');R(c,x+10,ey,1,1,'#222')}}
     if(dir==='left')R(c,x+5,e0,1,eh,'#222');if(dir==='right')R(c,x+10,e0,1,eh,'#222')}
   if(p.beard&&dir!=='up'){if(dir==='down')R(c,x+5,y+6,6,2,p.beard);else R(c,x+(dir==='left'?4:9),y+6,3,2,p.beard)}
-  if(p.bun&&st!=='chauve')R(c,x+6,y-2,4,2,hc);
+  if(p.bun&&st!=='chauve'&&!(p.hat&&(p.hatType==='voile'||p.hatType==='turban')))R(c,x+6,y-2,4,2,hc);
   if(p.hat){const ht=p.hatType;
     if(ht==='helmet'){R(c,x+3,y-1,10,3,p.hat);R(c,x+4,y-2,8,1,p.hat);R(c,x+3,y+2,10,1,shade(p.hat));R(c,x+7,y-2,2,2,'rgba(255,255,255,.4)')}
     else if(ht==='straw'){R(c,x+4,y-2,8,3,p.hat);R(c,x+1,y+1,14,1,p.hat);R(c,x+4,y,8,1,shade(p.hat))}
@@ -80,6 +106,15 @@ function drawChar0(c,x,y,dir,frame,p,run,fx){
     else if(ht==='coiffe'){R(c,x+5,y-7,6,8,p.hat);R(c,x+5,y-7,1,8,'#fff');R(c,x+10,y-7,1,8,shade(p.hat));R(c,x+4,y,8,1,p.hat);for(let k=0;k<3;k++)R(c,x+6,y-6+k*2,4,1,shade(p.hat))}
     else if(ht==='bonnet'){R(c,x+3,y-1,10,3,p.hat);R(c,x+4,y-2,8,1,p.hat);R(c,x+3,y+1,10,1,'#f7f0dc');R(c,x+7,y-4,2,2,'#f7f0dc')}
     else if(ht==='noeud'){R(c,x+1,y-4,6,5,p.hat);R(c,x+9,y-4,6,5,p.hat);R(c,x+6,y-2,4,3,p.hat);R(c,x+2,y-3,2,1,'#3a3a44');R(c,x+12,y-3,2,1,'#3a3a44')}
+    else if(ht==='voile'){const v=p.hat,d=shade(v);   // le voile couvre les cheveux et le cou, le visage reste dégagé
+      if(dir==='up'){R(c,x+3,y-1,10,10,v);R(c,x+4,y+7,8,2,d)}
+      else{R(c,x+3,y-1,10,3,v);R(c,x+4,y-2,8,1,v);
+        if(dir!=='right')R(c,x+3,y+1,2,8,v);if(dir!=='left')R(c,x+11,y+1,2,8,v);
+        if(dir==='left')R(c,x+9,y+1,4,8,v);if(dir==='right')R(c,x+3,y+1,4,8,v);
+        R(c,x+4,y+7,8,2,v);R(c,x+3,y+8,10,1,d);if(dir==='down')R(c,x+5,y+1,6,1,d)}}
+    else if(ht==='turban'){R(c,x+3,y-3,10,5,p.hat);R(c,x+4,y-4,8,1,p.hat);R(c,x+3,y+1,10,1,shade(p.hat));
+      if(dir!=='up'){for(let k=0;k<4;k++)R(c,x+4+k*2,y-3+k,2,1,shade(p.hat))}}
+    else if(ht==='kippa'){R(c,x+5,y-1,6,1,p.hat);R(c,x+6,y-2,4,1,p.hat)}
     else if(ht==='toque'){R(c,x+4,y-4,8,5,p.hat);R(c,x+3,y-5,10,3,p.hat);R(c,x+4,y,8,1,shade(p.hat))}
     else{R(c,x+3,y,10,3,p.hat);R(c,x+4,y-1,8,1,p.hat);if(ht==='cap'){if(dir==='down')R(c,x+4,y+2,8,1,shade(p.hat));if(dir==='left')R(c,x+1,y+2,4,1,p.hat);if(dir==='right')R(c,x+11,y+2,4,1,p.hat)}}}
   if(p.glasses&&dir!=='up'){R(c,x+5,y+4,6,1,'#222')}

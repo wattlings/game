@@ -96,6 +96,7 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Les économies d'énergie, les actions, les événements | `jeu/simulation/` |
 | Une musique | `jeu/audio/partitions.js` |
 | Le menu, la carte, le tableau de bord, l'avatar | `jeu/interface/<écran>.js` |
+| Les personnages tout prêts de l'écran de l'avatar (`PERSOS`), les chapeaux et coiffes (`HATS`) ; les coiffures (`STYLES`) et le dessin des personnages, fauteuil roulant compris | `jeu/interface/avatar.js` ; `jeu/rendu/personnages.js` ; les teints proposés : `SKIN_CHOIX` dans `jeu/rendu/palettes.js` |
 | Le menu (à la manière de Pokémon Rouge Feu : une liste en haut à droite, un curseur ▶, un bandeau d'aide en bas ; A ouvre, B revient, M referme) : ses entrées, leur texte d'aide, leurs écrans | `jeu/interface/menu.js` (`MENU_ENTREES` pour la liste, `MENU_ECRANS` pour les écrans, `MENU_ALIAS` pour les anciens noms d'onglets), `jeu/interface/styles/menu.css` |
 | La patine de la ville par défaut (1 · Neuf ; le joueur la change dans menu → Options) | `jeu/monde/ciel.js` (`PREF`) |
 

@@ -243,6 +243,10 @@ if (quoi === "tout" || quoi === "guidage") {
     await page.evaluate(() => document.getElementById("qk-host").shadowRoot.getElementById("prSkip").click()); await page.waitForTimeout(300);
     const av = await page.evaluate(() => { const b = document.getElementById("qk-host").shadowRoot.getElementById("avOk"), r = b.getBoundingClientRect(); return { txt: b.textContent, vu: r.bottom <= innerHeight && r.top >= 0, cours: !!document.getElementById("qk-host").shadowRoot.querySelector(".panel .course-link") }; });
     verif("avatar : « C'est parti » visible sans faire défiler, sans lien vers le cours", /C'est parti/.test(av.txt) && av.vu && !av.cours, JSON.stringify(av));
+    const divers = await page.evaluate(() => { const r = document.getElementById("qk-host").shadowRoot; const n = r.querySelectorAll('.av-tpl [data-m^="p"]').length;
+      r.querySelector('[data-m="p11"]').click(); const roule = !!avClean(PERSOS[11].p).chair; r.querySelector('[data-tab="tete"]').click();
+      return { n, roule, peaux: r.querySelectorAll('.sw[data-c="skin"]').length, coiffures: [...r.querySelectorAll('[data-k="style"]')].map((b) => b.dataset.v), chapeaux: [...r.querySelectorAll('[data-k="hatType"]')].map((b) => b.dataset.v) }; });
+    verif("avatar : des personnages variés tout prêts, 12 teints, coiffures afro et tresses, voile, turban, fauteuil roulant", divers.n >= 12 && divers.roule && divers.peaux >= 12 && ["afro", "tresses", "couettes"].every((s) => divers.coiffures.includes(s)) && ["voile", "turban", "kippa"].every((h) => divers.chapeaux.includes(h)), JSON.stringify(divers));
     await page.evaluate(() => document.getElementById("qk-host").shadowRoot.getElementById("avOk").click()); await page.waitForTimeout(1500);
     verif("début : pas de long dialogue d'accueil, la ligne d'objectif est là", !(await page.evaluate(() => dlg.open)) && /Parle à Mme Joule/.test((await ombre("#objFlash")) || ""));
     verif("début : l'aide montre comment se déplacer", /déplacer/.test((await ombre("#aide")) || ""));

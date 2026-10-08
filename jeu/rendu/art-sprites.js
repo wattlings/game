@@ -13,7 +13,7 @@ function gbaFx(x,w,h){
   x.putImageData(im,0,0);return x1<0?null:[x0,y0,x1-x0+1,y1-y0+1];
 }
 /* ---- personnages : sprite dessiné une fois par pose, puis mis en cache ---- */
-const CHF=['skin','hair','style','shirt','pants','skirt','hat','hatType','vest','jacket','tie','lash','glasses','robe','coat','apron','overall','sash','scarf','bag','stetho','beard','bun','prop','umb','stripes'],CHC=new Map();
+const CHF=['skin','hair','style','shirt','pants','skirt','hat','hatType','vest','jacket','tie','lash','glasses','robe','coat','apron','overall','sash','scarf','bag','stetho','beard','bun','prop','umb','stripes','chair'],CHC=new Map();
 function drawChar(c,x,y,dir,frame,p,run,fx){
   x=Math.round(x);y=Math.round(y);const ph=((frame|0)%4+4)%4;let k=dir+ph+(run?'r':'')+(fx&&fx.idle?'i':'')+(fx&&fx.blink?'b':'');for(let i=0;i<CHF.length;i++)k+='|'+(p[CHF[i]]||'');
   let s=CHC.get(k);

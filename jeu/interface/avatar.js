@@ -7,7 +7,7 @@
    - Des modèles : une tenue par région (disponibles tout de suite), les tenues de rang (proposées à chaque promotion, jamais imposées),
      et la tenue de chaque personnage à qui on a parlé (S.models, une collection de plus).
    Les anciennes sauvegardes (avatar à indices, tenue de rang imposée) restent lisibles : elles sont converties à la première retouche. */
-const HATS={'':'Aucun',cap:'Casquette',helmet:'Casque',straw:'Paille',beret:'Béret',toque:'Toque',bonnet:'Bonnet',coiffe:'Coiffe',noeud:'Nœud',plat:'Bob'};
+const HATS={'':'Aucun',cap:'Casquette',helmet:'Casque',straw:'Paille',beret:'Béret',toque:'Toque',bonnet:'Bonnet',voile:'Voile',turban:'Turban',kippa:'Kippa',coiffe:'Coiffe',noeud:'Nœud',plat:'Bob'};
 const PROPS={'':'Rien',tablet:'Tablette',clipboard:'Bloc-notes',plan:'Plan',book:'Livre',case:'Mallette',wrench:'Clé',broom:'Balai',lantern:'Lanterne',cane:'Canne',crook:'Houlette',rod:'Canne à pêche',net:'Épuisette',basket:'Panier',baguette:'Baguette',bretzel:'Bretzel',boule:'Boule',leash:'Laisse',umbrella:'Parapluie'};
 const AVF=CHF.filter(k=>k!=='umb');
 /* une tenue propre : seulement les champs renseignés */
@@ -21,6 +21,22 @@ function rankOutfit(p,rank){const q=Object.assign({},p);
   if(rank===1){q.hat='#f2c12e';q.hatType='helmet';q.vest=1}
   else if(rank===2){if(q.vest&&q.hat==='#f2c12e'){delete q.hat;delete q.hatType}delete q.vest;q.jacket='#262b4f';q.tie='#f2a33a'}
   return avClean(q)}
+/* des personnages tout prêts, d'aujourd'hui : tous les teints, toutes les coiffures, voile, turban, kippa, fauteuil roulant… */
+const PERSOS=[
+  {n:'Awa',d:'ingénieure thermicienne',p:{skin:'#4a2c1c',hair:'#141216',style:'afro',lash:1,glasses:1,shirt:'#2aa198',pants:'#1c2440',prop:'tablet'}},
+  {n:'Karim',d:'technicien chauffage',p:{skin:'#9a6440',hair:'#141216',style:'court',beard:'#141216',shirt:'#f7f0dc',pants:'#27325a',overall:'#2f6db5',hat:'#c43d3d',hatType:'cap',prop:'wrench'}},
+  {n:'Yasmine',d:'cheffe de projet',p:{skin:'#d19a6a',hair:'#2b1d14',style:'long',lash:1,shirt:'#f7f0dc',pants:'#2c2c34',jacket:'#59627c',hat:'#2f6db5',hatType:'voile',prop:'clipboard'}},
+  {n:'Harpreet',d:'conseiller énergie',p:{skin:'#a8714a',hair:'#141216',style:'court',beard:'#141216',shirt:'#f7f0dc',pants:'#59627c',jacket:'#27325a',hat:'#e2a13a',hatType:'turban',prop:'plan'}},
+  {n:'Fatou',d:'data analyste',p:{skin:'#6b4128',hair:'#141216',style:'tresses',lash:1,shirt:'#8a3b8f',pants:'#2f3a5c',bag:'#e2a13a',prop:'tablet'}},
+  {n:'Bernard',d:'responsable maintenance',p:{skin:'#f1c7a1',hair:'#ece6d6',style:'chauve',beard:'#ece6d6',glasses:1,shirt:'#7a8594',pants:'#333338',jacket:'#6b4a2b',chair:1,prop:'case'}},
+  {n:'Linh',d:'économe de flux',p:{skin:'#e8b98f',hair:'#141216',style:'carre',lash:1,shirt:'#f2c12e',pants:'#27325a',skirt:1,prop:'book'}},
+  {n:'Kevin',d:'agent technique',p:{skin:'#fbe3d0',hair:'#b8431f',style:'boucle',shirt:'#59627c',pants:'#2f3a5c',vest:1,hat:'#f2c12e',hatType:'helmet',prop:'lantern'}},
+  {n:'Mireille',d:'élue au climat',p:{skin:'#7a4e30',hair:'#9a9aa2',style:'boucle',lash:1,glasses:1,shirt:'#f7f0dc',pants:'#2c2c34',jacket:'#8a3b3b',sash:1}},
+  {n:'David',d:'stagiaire',p:{skin:'#f6d3b3',hair:'#5a3a22',style:'court',shirt:'#8ec9e8',pants:'#6d7896',hat:'#1c2440',hatType:'kippa',bag:'#2f9e7a',prop:'book'}},
+  {n:'Moussa',d:'gestionnaire de patrimoine',p:{skin:'#4a2c1c',hair:'#141216',style:'tresses',beard:'#141216',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#2f6d34',tie:'#f2c12e',prop:'case'}},
+  {n:'Inès',d:'énergéticienne',p:{skin:'#c68a5c',hair:'#5a3a22',style:'couettes',lash:1,shirt:'#e57399',pants:'#2f3a5c',chair:1,prop:'tablet'}},
+  {n:'Sam',d:'technicien·ne mesures',g:'n',p:{skin:'#e0ac7e',hair:'#3a5fc0',style:'court',shirt:'#2f9e7a',pants:'#333338',coat:'#f7f0dc',glasses:1,prop:'clipboard'}},
+  {n:'Rose',d:'retraitée bénévole',p:{skin:'#9a6440',hair:'#ece6d6',style:'court',bun:1,lash:1,glasses:1,shirt:'#c43d3d',pants:'#2c2c34',skirt:1,scarf:'#f2c12e',prop:'cane'}}];
 /* tenues des régions */
 const REG_MODELS=[
   {r:'Val de Loire',n:'Batelier de Loire',p:{skin:'#e0ac7e',hair:'#5a3a22',shirt:'#f7f0dc',stripes:'#2f6db5',pants:'#27325a',hat:'#e3cf98',hatType:'straw',scarf:'#c43d3d',prop:'rod'}},
@@ -61,33 +77,34 @@ function openAvatar(onDone){
   const F=(l,h)=>`<div class="field"><label>${l}</label>${h}</div>`;
   const TAB={
     modeles:()=>{const M=S.models||{},names=Object.keys(M),rk=[1,2].filter(r=>S.rank>=r);
-      return `<h4 class="segh">Tenues des régions</h4><div class="av-tpl">${REG_MODELS.map((m,i)=>`<button type="button" data-m="r${i}"><span data-cv="r${i}"></span><b>${esc(m.n)}</b><small>${esc(m.r)}</small></button>`).join('')}</div>
+      return `<h4 class="segh">Personnages</h4><div class="av-tpl">${PERSOS.map((m,i)=>`<button type="button" data-m="p${i}"><span data-cv="p${i}"></span><b>${esc(m.n)}</b><small>${esc(m.d)}</small></button>`).join('')}</div><p class="dnote">Choisis un personnage tel quel, ou pars de lui et retouche tout dans les autres rubriques.</p>
+        <h4 class="segh">Tenues des régions</h4><div class="av-tpl">${REG_MODELS.map((m,i)=>`<button type="button" data-m="r${i}"><span data-cv="r${i}"></span><b>${esc(m.n)}</b><small>${esc(m.r)}</small></button>`).join('')}</div>
         ${rk.length?`<h4 class="segh">Tenues de rang</h4><div class="av-tpl">${rk.map(r=>`<button type="button" data-m="k${r}"><span data-cv="k${r}"></span><b>${RANK_FIT[r].n}</b><small>${RANK_FIT[r].d}</small></button>`).join('')}</div><p class="dnote">Une tenue de rang se pose sur ta tenue actuelle : elle ne change ni ta tête ni tes couleurs.</p>`:''}
         <h4 class="segh">Personnages rencontrés · ${names.length}</h4>${names.length?`<div class="av-tpl">${names.map((n,i)=>`<button type="button" data-m="c${i}"><span data-cv="c${i}"></span><b>${esc(n)}</b></button>`).join('')}</div>`:''}<p class="dnote">Parle aux habitants, aux dresseurs et aux champions : chacun te prête sa tenue.</p>`},
-    tete:()=>F('Personnage',pills('g',{h:'Homme',f:'Femme'},g))+F('Peau',sw('skin',SKINS))+F('Coiffure',pills('style',STYLES,p.style||'court')+togs([['bun','Chignon'],['glasses','Lunettes']]))+F('Cheveux',sw('hair',HAIRC))+F('Barbe',sw('beard',HAIRC,1))+F('Chapeau',pills('hatType',HATS,p.hat?p.hatType||'plat':'')+(p.hat?sw('hat',CLOTH):'')),
+    tete:()=>F('Personnage',pills('g',{h:'Homme',f:'Femme',n:'Sans préciser'},g))+F('Peau',sw('skin',SKIN_CHOIX))+F('Coiffure',pills('style',STYLES,p.style||'court')+togs([['bun','Chignon'],['glasses','Lunettes']]))+F('Cheveux',sw('hair',HAIRC))+F('Barbe',sw('beard',HAIRC,1))+F('Chapeau',pills('hatType',HATS,p.hat?p.hatType||'plat':'')+(p.hat?sw('hat',CLOTH):'')),
     haut:()=>F('Haut',sw('shirt',CLOTH))+F('Rayures',sw('stripes',CLOTH,1))+F('Veste',sw('jacket',CLOTH,1))+F('Manteau ou blouse',sw('coat',CLOTH,1))+F('Cravate',sw('tie',CLOTH,1))+F('Foulard',sw('scarf',CLOTH,1))+F('Par-dessus',togs([['vest','Gilet haute visibilité'],['sash','Écharpe tricolore'],['stetho','Stéthoscope']])),
-    bas:()=>F('Bas',pills('bt',{pantalon:'Pantalon',jupe:'Jupe'},p.skirt?'jupe':'pantalon')+sw('pants',CLOTH))+F('Salopette',sw('overall',CLOTH,1))+F('Tablier',sw('apron',CLOTH,1))+F('Robe longue',sw('robe',CLOTH,1)),
+    bas:()=>F('Se déplacer',pills('chair',{'':'À pied','1':'En fauteuil roulant'},p.chair?'1':''))+F('Bas',pills('bt',{pantalon:'Pantalon',jupe:'Jupe'},p.skirt?'jupe':'pantalon')+sw('pants',CLOTH))+F('Salopette',sw('overall',CLOTH,1))+F('Tablier',sw('apron',CLOTH,1))+F('Robe longue',sw('robe',CLOTH,1)),
     objets:()=>F('En main',pills('prop',PROPS,p.prop||''))+F('Sacoche',sw('bag',CLOTH,1))};
   const TN={modeles:'Modèles',tete:'Tête',haut:'Haut',bas:'Bas',objets:'Objets'};
-  const model=id=>{const k=id[0],i=+id.slice(1);return k==='r'?REG_MODELS[i].p:k==='k'?rankOutfit(p,i):(S.models||{})[Object.keys(S.models||{})[i]]};
+  const model=id=>{const k=id[0],i=+id.slice(1);return k==='p'?PERSOS[i].p:k==='r'?REG_MODELS[i].p:k==='k'?rankOutfit(p,i):(S.models||{})[Object.keys(S.models||{})[i]]};
   const draw=()=>{
     tabs.innerHTML=Object.entries(TN).map(([k,l])=>`<button type="button" data-tab="${k}" class="${tab===k?'on':''}">${l}</button>`).join('');
     body.innerHTML=TAB[tab]();
     tabs.querySelectorAll('[data-tab]').forEach(x=>x.onclick=()=>{tab=x.dataset.tab;sfx('select');draw()});
     body.querySelectorAll('[data-cv]').forEach(s=>s.appendChild(avCanvas(model(s.dataset.cv))));
-    body.querySelectorAll('[data-m]').forEach(x=>x.onclick=()=>{const id=x.dataset.m,m=model(id);if(!m)return;p=avClean(m);if(id[0]!=='k')g=p.lash?'f':'h';tpl=id[0]==='r'?REG_MODELS[+id.slice(1)].n:id[0]==='k'?RANK_FIT[+id.slice(1)].n:Object.keys(S.models)[+id.slice(1)];sfx('select');draw()});
+    body.querySelectorAll('[data-m]').forEach(x=>x.onclick=()=>{const id=x.dataset.m,m=model(id);if(!m)return;p=avClean(m);if(id[0]!=='k')g=id[0]==='p'&&PERSOS[+id.slice(1)].g||(p.lash?'f':'h');tpl=id[0]==='p'?PERSOS[+id.slice(1)].n:id[0]==='r'?REG_MODELS[+id.slice(1)].n:id[0]==='k'?RANK_FIT[+id.slice(1)].n:Object.keys(S.models)[+id.slice(1)];sfx('select');draw()});
     body.querySelectorAll('[data-c]').forEach(x=>x.onclick=()=>{const k=x.dataset.c,v=x.dataset.v;if(v)p[k]=v;else delete p[k];sfx('select');draw()});
     body.querySelectorAll('[data-pc]').forEach(x=>{x.oninput=()=>{p[x.dataset.pc]=x.value;x.parentNode.style.background=x.value};x.onchange=()=>draw()});
     body.querySelectorAll('[data-t]').forEach(x=>x.onclick=()=>{const k=x.dataset.t;if(p[k])delete p[k];else p[k]=1;sfx('select');draw()});
     body.querySelectorAll('[data-k]').forEach(x=>x.onclick=()=>{const k=x.dataset.k,v=x.dataset.v;
-      if(k==='g'){if(g!==v){g=v;if(v==='f'){p.lash=1;if(!p.style||p.style==='court')p.style='long'}else{delete p.lash;if(p.style==='long')p.style='court'}}}
+      if(k==='g'){if(g!==v){g=v;if(v==='f'){p.lash=1;if(!p.style||p.style==='court')p.style='long'}else if(v==='h'){delete p.lash;if(p.style==='long')p.style='court'}}}
       else if(k==='bt'){if(v==='jupe')p.skirt=1;else delete p.skirt}
-      else if(k==='hatType'){if(!v){delete p.hat;delete p.hatType}else{p.hatType=v;if(!p.hat)p.hat=v==='helmet'?'#f2c12e':v==='straw'?'#e3cf98':v==='toque'||v==='coiffe'?'#f7f0dc':'#2c2c34'}}
+      else if(k==='hatType'){if(!v){delete p.hat;delete p.hatType}else{p.hatType=v;if(!p.hat)p.hat=v==='helmet'?'#f2c12e':v==='straw'?'#e3cf98':v==='toque'||v==='coiffe'?'#f7f0dc':v==='voile'?'#2f6db5':v==='turban'?'#e2a13a':'#2c2c34'}}
       else if(v)p[k]=v;else delete p[k];
       sfx('select');draw()});
   };
   b.querySelector('#avRnd').onclick=()=>{const r=n=>Math.floor(Math.random()*n),pick=a=>a[r(a.length)],ch=x=>Math.random()<x;g=r(2)?'f':'h';
-    p={skin:pick(SKINS),hair:pick(HAIRC),style:pick(Object.keys(STYLES)),shirt:pick(CLOTH),pants:pick(BOTS)};if(g==='f')p.lash=1;if(ch(.4))p.skirt=1;if(ch(.3)){p.hatType=pick(Object.keys(HATS).slice(1));p.hat=pick(CLOTH)}if(ch(.2))p.glasses=1;if(g==='h'&&ch(.3))p.beard=p.hair;
+    p={skin:pick(SKIN_CHOIX),hair:pick(HAIRC),style:pick(Object.keys(STYLES)),shirt:pick(CLOTH),pants:pick(BOTS)};if(ch(.07))p.chair=1;if(g==='f')p.lash=1;if(ch(.4))p.skirt=1;if(ch(.3)){p.hatType=pick(Object.keys(HATS).slice(1));p.hat=pick(CLOTH)}if(ch(.2))p.glasses=1;if(g==='h'&&ch(.3))p.beard=p.hair;
     if(ch(.25))p.jacket=pick(CLOTH);if(ch(.2))p.scarf=pick(CLOTH);if(ch(.15))p.apron=pick(CLOTH);if(ch(.12))p.stripes=pick(CLOTH);if(ch(.25))p.prop=pick(Object.keys(PROPS).slice(1));if(ch(.15))p.bag=pick(CLOTH);tpl='hasard';sfx('select');draw()};
   b.querySelector('#avOk').onclick=()=>{qkCancelRAF(raf);avSet(p,g);trk('avatar',{g,style:p.style||'court',bas:p.skirt?'jupe':'pantalon',modele:tpl});save();closePanel();if(onDone)onDone()};
   let fr=0,raf=0;const c=b.querySelector('#avc'),x=c.getContext('2d');
