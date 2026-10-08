@@ -427,6 +427,27 @@ if (quoi === "tout" || quoi === "guidage") {
       let n = 0; while (dlg.open && n++ < 12) { nextLine(); nextLine(); await att(30); }
       return `${nom} ${!!S.derives.cave} ${!!S.dex.ventilox} ${crImage("ventilox").width}`; });
     verif("créatures : la ventilation des bureaux est un Ventilox à affronter ; le bon traitement note la dérive et l'ajoute à l'Anomalidex", derive === "Ventilox true true 48", derive);
+    // les arènes-donjons (recit/arenes/donjons.js, epreuves/donjons.js) : première visite = le choix explorer / raccourci ;
+    // une borne se pousse ; des leviers dans le désordre remontent ; énigme, clé et dresseurs ouvrent la route du champion ; le raccourci y mène directement
+    const donjons = await R(async () => { const r = document.getElementById("qk-host").shadowRoot, att = (ms) => new Promise((ok) => setTimeout(ok, ms)), out = [];
+      const vide = () => { dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); if (panelEl) closePanel(); };
+      const reach = () => { const vu = new Set([P.x + "," + P.y]), f = [[P.x, P.y]]; while (f.length) { const [x, y] = f.shift(); for (const [dx, dy] of Object.values(DIRS)) { const a = x + dx, b = y + dy, k = a + "," + b; if (vu.has(k) || tileAt(a, b) === undefined || tileAt(a, b) === "E" || isSolid(a, b)) continue; vu.add(k); f.push([a, b]); } } return vu; };
+      const adj = (vu, x, y) => Object.values(DIRS).some(([dx, dy]) => vu.has(x + dx + "," + (y + dy)));
+      const A1 = ARENAS[0]; vide(); jumpTo(ARENA_CH[1], "ecole"); vide(); await att(400); vide(); S.donjons = {}; S.flags.elec = S.flags.gas = 1; enterArena(A1); await att(80); dlg.shown = 999; while (dlg.open) { nextLine(); await att(40); }
+      for (let k = 0; k < 20 && !r.querySelector("#dgDir"); k++) await att(40); out.push(!!r.querySelector("#dgExp") && !!r.querySelector("#dgDir")); r.querySelector("#dgExp").click(); vide();
+      const b = dgRT(A1).blocs[0], bx = b.x, by = b.y; P.x = b.x; P.y = b.y + 1; P.moving = false; tryMove("up"); out.push(b.x === bx && b.y === by - 1); vide();
+      let bon = 0; for (const A of ARENAS) { const n = A.id, C = dgCalc(n); S.donjons = {}; if (S.arena) delete S.arena[n]; arenaInit(A); const [x, y] = dgDepart(A); warp("arena" + n, x, y, "up");
+        const st = dgEtat(n), [cx, cy] = dgChamp(A), avant = adj(reach(), cx, cy) && C.portes.some((p) => p.t === "b");
+        st.enigme = 1; st.cles = 1; delete DG_RT[n]; const pk = C.portes.find((p) => p.t === "k"); if (pk) { st.o[pk.i] = 1; st.cles = 0; }
+        S.arena = S.arena || {}; const tr = AR.t.every((t) => adj(reach(), t.x, t.y)); S.arena[n] = [1, 1, 1]; const champ = adj(reach(), cx, cy);
+        S.donjons = {}; delete S.arena[n]; dgRaccourci(A); vide(); const vu = reach(), rac = dgSalleDe(C, P.x, P.y) === C.salleChamp && AR.t.every((t) => adj(vu, t.x, t.y));
+        if (!avant && tr && champ && rac) bon++; else out.push(`arène ${n}: ${avant} ${tr} ${champ} ${rac}`); }
+      out.push(bon);
+      const A7 = ARENAS[6]; S.donjons = {}; arenaInit(A7); warp("arena7", ...dgDepart(A7), "up"); const lev = objsFor("arena7").filter((o) => o.kind === "dglevier");
+      lev.find((o) => o.x === dgCalc(7).salles[1].x0 + 4).act(); vide(); const rt = dgRT(A7), reset = rt.leviers.length === 0;
+      [10, 4, 7].forEach((rx) => objsFor("arena7").find((o) => o.kind === "dglevier" && o.x === dgCalc(7).salles[1].x0 + rx).act()); vide(); out.push(reset && dgEtat(7).enigme === 1);
+      S.donjons = {}; return out.join(" "); });
+    verif("donjons : choix explorer / raccourci à la 1re visite, une borne se pousse, les leviers dans le désordre remontent ; pour les 8 arènes, énigme + clé + dresseurs mènent au champion, et le raccourci aussi", donjons === "true true 8 true", donjons);
     verif("ateliers : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }

@@ -10,6 +10,7 @@ function render(){
   const m=MAPS[S.map],mc=mapCache[S.map],mw=mc.width,mh=mc.height;
   const vw=cv.width,vh=cv.height;let ox=P.px+8-vw/2,oy=P.py+8-vh/2;
   ox=mw<vw?(mw-vw)/2:Math.max(0,Math.min(mw-vw,ox));oy=mh<vh?(mh-vh)/2:Math.max(0,Math.min(mh-vh,oy));
+  if(m.donjon)[ox,oy]=dgCamera(ox,oy,vw,vh);   // la caméra se cale sur la salle du donjon
   ox=Math.round(ox);oy=Math.round(oy);
   R(ctx,0,0,cv.width,cv.height,'#0b1020');ctx.drawImage(mc,-ox,-oy);
   const objs=objsFor(S.map),town=S.map==='town',pal=town&&skWet()&&!P.rolling&&!BOX.on?skPal({pal:PAL[S.rank],fresh:1}):PAL[S.rank];

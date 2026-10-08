@@ -37,6 +37,7 @@ function arenaFloor(x,A){
     chantier:(X,Y,i,j)=>{R(x,X,Y,16,16,'#a3a6ab');if(AHASH(i,j)>.4)R(x,X+(AHASH(j,i)*12|0),Y+(AHASH(i,j*3)*12|0),2,1,'#8d9096');if(AHASH(i*3,j)>.75)R(x,X+3,Y+11,3,1,'#b8bbc0')},
     preuve:(X,Y,i,j)=>{R(x,X,Y,16,16,(i+j)%2?'#efe9dc':'#e2d9c6');if(i===7&&j>3){R(x,X,Y,16,16,'#a23a3a');R(x,X,Y,1,16,'#c9a227');R(x,X+15,Y,1,16,'#c9a227')}}};
   const WALL={cadastre:['#f4efe6','#8c6d4a'],flux:['#3b4258','#20242f'],labo:['#cfd8e0','#8a97a3'],archives:['#e8dcc0','#8c6d4a'],courbes:['#1c2748','#0e1528'],nuit:['#262a3a','#141722'],chantier:['#b5694a','#7a4630'],preuve:['#f3ece0','#c9a227']}[t];
+  if(MAPS['arena'+A.id]&&MAPS['arena'+A.id].donjon)return dgSol(x,A,F,WALL);   // l'arène en donjon (epreuves/donjons.js)
   for(let j=0;j<AH;j++)for(let i=0;i<AW;i++){const X=i*16,Y=j*16;
     if(j<2){R(x,X,Y,16,16,WALL[0]);if(j===1)R(x,X,Y+13,16,3,WALL[1]);if(t==='chantier'){R(x,X,Y+5,16,1,'#8e4f37');R(x,X,Y+11,16,1,'#8e4f37');R(x,X+(j%2?4:11),Y,1,5,'#8e4f37');R(x,X+(j%2?12:3),Y+6,1,5,'#8e4f37')}}
     else F[t](X,Y,i,j)}

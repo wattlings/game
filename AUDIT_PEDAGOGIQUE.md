@@ -70,6 +70,7 @@ En chemin :
 
 **Ce qui fait réussir ou échouer**
 - **Duels.** Chaque erreur coûte un tiers de la « crédibilité ». À zéro, retour à l'entrée de l'arène ; les dresseurs déjà battus le restent.
+- **Donjons.** Une énigme ratée n'a pas de coût : une dalle fausse renvoie au début du couloir, de mauvais leviers remontent, un panneau remet les blocs en place.
 - **Épreuves.** Aucun échec définitif : on réessaie la même étape sans limite.
 - **Anomalies.** Une défaite renvoie au bureau.
 
@@ -89,7 +90,7 @@ En chemin :
 |---|---|:-:|---|
 | 1 | Objectif pédagogique précis | **3** | Le parcours principal suit fidèlement les 8 étapes de la démarche ; le lien avec *un EMS* reste mince, et un gros tiers du code (voyages) parle d'autre chose. |
 | 2 | Apprentissage dans la mécanique | **2** | Pour l'essentiel, on se déplace pour collecter des fiches puis on répond à des quiz. Quelques moments font vraiment manipuler la donnée (curseur du talon, plan d'action, parc à −40 %). |
-| 3 | Difficulté bien dosée | **2** · *à tester* | Même structure d'arène en arène, pas d'adaptation au joueur ; un duel se gagne en une bonne réponse. |
+| 3 | Difficulté bien dosée | **2** · *à tester* | Chaque arène est désormais un mini-donjon différent, avec une énigme qui fait manipuler l'étape (bornes du périmètre, câbles des flux, dalles des anomalies, arbre des données, talon de la courbe, voyants de veille, ordre sobriété-efficacité-production, correction météo) ; le raccourci vers le champion reste ouvert. Pas d'adaptation au joueur ; un duel se gagne en une bonne réponse. |
 | 4 | Retour immédiat et clair | **3** | Chaque mauvaise réponse a son explication ; les remises en ordre se contentent de « Ce n'est pas le bon ordre ». |
 | 5 | Droit à l'erreur | **3** | Réessayer coûte peu, mais l'élimination des mauvaises réponses permet de réussir au hasard. |
 | 6 | Motivation intrinsèque | **2** · *à tester* | Beaucoup de récompenses externes (XP, badges, rangs, compteurs de collection) ; l'histoire et l'humour existent, mais les choix et la maîtrise viennent tard. |

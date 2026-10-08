@@ -11,11 +11,12 @@ function genArena(){const g=grid(AW,AH,'a');rect(g,0,0,AW-1,1,'W');rect(g,0,AH-1
   [8,6,4].forEach(j=>{for(let i=0;i<AW;i++)if(i!==GAPS[j])g[j][i]='x'});
   for(const j of [2,3])for(let i=0;i<AW;i++)if(i<5||i>9)g[j][i]='x';
   return g}
-ARENAS.forEach(A=>{MAPS['arena'+A.id]={g:genArena(),name:A.name,arena:A};BLD.push({id:'arena'+A.id,arena:A,roof:A.col,wall:A.wall,...A.b})});
+ARENAS.forEach(A=>{const dj=typeof DONJONS!=='undefined'&&!!DONJONS[A.id];MAPS['arena'+A.id]={g:dj?genDonjon(A.id):genArena(),name:A.name,arena:A,donjon:dj};   // l'arène en donjon (epreuves/donjons.js)
+  BLD.push({id:'arena'+A.id,arena:A,roof:A.col,wall:A.wall,...A.b})});
 
 /* ---- état d'une visite d'arène (non sauvegardé : positions, crédibilité) ---- */
 const AR={id:0,cred:100,t:[],lock:false,seen:-1,bang:0};
-function arenaInit(A){AR.id=A.id;AR.cred=100;AR.lock=false;AR.seen=-1;AR.bang=0;AR.t=POSTS.map(([x,y,d])=>({x,y,px:x*TS,py:y*TS,dir:d,frame:0}))}
+function arenaInit(A){AR.id=A.id;AR.cred=100;AR.lock=false;AR.seen=-1;AR.bang=0;AR.salle=-1;if(typeof DG_RT!=='undefined')delete DG_RT[A.id];AR.t=(typeof dgPosts==='function'?dgPosts(A):POSTS).map(([x,y,d])=>({x,y,px:x*TS,py:y*TS,dir:d,frame:0}))}
 function arenaMissing(A){ // ce qui manque pour entrer : [] si la porte s'ouvre
   const ch=ARENA_CH[A.id];
   if(S.ch>ch)return [];
@@ -30,19 +31,23 @@ function arenaMissing(A){ // ce qui manque pour entrer : [] si la porte s'ouvre
 function enterArena(A){
   const L=arenaMissing(A);
   if(L.length)return say([{t:`${A.name}.`},...L]);
-  arenaInit(A);warp('arena'+A.id,7,10,'up');toast(A.name);
-  if(!arenaDone(A)&&!(S.arena&&S.arena[A.id]))say([{t:`${A.name}. Trois dresseurs gardent le chemin ; ${A.champ} t'attend au fond, sur l'estrade.`},{t:expert()?"Mode Expert : chaque dresseur pose une question, et une erreur coûte la moitié de ta crédibilité. À zéro, retour à l'entrée.":"Chaque dresseur pose une question. Une erreur coûte un tiers de ta crédibilité ; à zéro, retour à l'entrée."}]);
+  arenaInit(A);{const [x,y]=dgDepart(A);warp('arena'+A.id,x,y,'up')}toast(A.name);
+  const st=dgEtat(A.id),choix=()=>{if(DONJONS[A.id]&&!arenaDone(A)&&!st.vu&&!st.passe){st.vu=1;save();dgChoix(A)}};
+  if(!arenaDone(A)&&!(S.arena&&S.arena[A.id]))say([{t:`${A.name}. Trois dresseurs gardent le donjon ; ${A.champ} t'attend dans la dernière salle, sur l'estrade.`},{t:expert()?"Mode Expert : chaque dresseur pose une question, et une erreur coûte la moitié de ta crédibilité. À zéro, retour à l'entrée.":"Chaque dresseur pose une question. Une erreur coûte un tiers de ta crédibilité ; à zéro, retour à l'entrée."}],choix);
+  else choix();
 }
 function arenaObjs(A,o){
   if(AR.id!==A.id||!AR.t.length)arenaInit(A);
-  const g=MAPS['arena'+A.id].g;
-  for(let j=2;j<AH-1;j++)for(let i=0;i<AW;i++)if(g[j][i]==='x')o.push({x:i,y:j,kind:'ablock',draw:(c,X,Y,tk)=>arenaBlock(c,A.theme,X,Y,i,j,tk)});
+  const g=MAPS['arena'+A.id].g,[cx,cy]=dgChamp(A);
+  for(let j=1;j<g.length-1;j++)for(let i=0;i<g[0].length;i++)if(g[j][i]==='x')o.push({x:i,y:j,kind:'ablock',draw:(c,X,Y,tk)=>arenaBlock(c,A.theme,X,Y,i,j,tk)});
   A.tr.forEach((T,k)=>{const p=AR.t[k],won=trBeaten(A,k);o.push({x:p.x,y:p.y,px:p.px,py:p.py,kind:'npc',solid:1,pal:T.pal,dir:p.dir,frame:p.frame,who:T.n,noHades:!won,bang:AR.seen===k&&AR.bang>0,act:()=>won?say([{w:T.n,t:T.lose}]):duel(A,k)})});
-  if(A.id===8&&S.ch>9)o.push({x:7,y:2,kind:'sign',solid:1,act:()=>say([{t:"Une plaque sur l'estrade : « Championne absente. Elle est retournée au bureau, former la relève. »"}])});
-  else o.push({x:7,y:2,kind:'npc',solid:1,pal:A.cpal,dir:'down',who:A.champ,glow:!arenaDone(A)&&[0,1,2].every(k=>trBeaten(A,k)),act:()=>champTalk(A)});
+  if(A.id===8&&S.ch>9)o.push({x:cx,y:cy,kind:'sign',solid:1,act:()=>say([{t:"Une plaque sur l'estrade : « Championne absente. Elle est retournée au bureau, former la relève. »"}])});
+  else o.push({x:cx,y:cy,kind:'npc',solid:1,pal:A.cpal,dir:'down',who:A.champ,glow:!arenaDone(A)&&[0,1,2].every(k=>trBeaten(A,k)),act:()=>champTalk(A)});
+  dgObjs(A,o);   // portes, coffre, énigme, décor du donjon
 }
 /* un dresseur repère le joueur dans sa ligne de vue */
 function arenaStep(){
+  if(dgPas())return true;   // dalles, courbe, changement de salle (epreuves/donjons.js)
   const A=curArena();if(!A||AR.lock||arenaDone(A))return false;
   for(let k=0;k<3;k++){if(trBeaten(A,k))continue;const T=AR.t[k],[dx,dy]=DIRS[T.dir];
     for(let n=1;n<=10;n++){const x=T.x+dx*n,y=T.y+dy*n;if(x===P.x&&y===P.y){AR.lock=true;AR.seen=k;AR.bang=38;clearKeys();sfx('bad');return true}if(isSolid(x,y))break}}
@@ -58,7 +63,7 @@ function arenaUpdate(k){
   say([{w:A.tr[kk].n,t:A.tr[kk].intro}],()=>duel(A,kk));
 }
 function arenaDefeat(){
-  const A=curArena();if(!A)return;arenaInit(A);warp(S.map,7,10,'up');
+  const A=curArena();if(!A)return;arenaInit(A);{const [x,y]=dgDepart(A);warp(S.map,x,y,'up')}
   say([{t:"Ta crédibilité est à zéro. Tu reprends ton souffle à l'entrée de l'arène."},{t:"Les dresseurs déjà battus te laisseront passer. Un doute ? Relis tes fiches dans Menu → Classeur."}]);
 }
 /* ---- duel de questions contre un dresseur ---- */
@@ -130,7 +135,7 @@ function arenaNightFx(c,ox,oy){
   const A=curArena();if(!A||A.id!==6)return;
   AR.t.forEach((T,k)=>{if(trBeaten(A,k))return;const [dx,dy]=DIRS[T.dir],X=T.px-ox+8,Y=T.py-oy+6;c.fillStyle='rgba(255,236,150,.2)';c.beginPath();c.moveTo(X+dx*6,Y+dy*6);
     c.lineTo(X+dx*64-dy*14,Y+dy*64-dx*14);c.lineTo(X+dx*64+dy*14,Y+dy*64+dx*14);c.fill()});
-  const X=7*TS-ox+8,Y=2*TS-oy+6,g=c.createRadialGradient(X,Y,2,X,Y,26);g.addColorStop(0,'rgba(255,236,150,.35)');g.addColorStop(1,'rgba(255,236,150,0)');c.fillStyle=g;c.fillRect(X-26,Y-26,52,52);
+  const [chx,chy]=dgChamp(A),X=chx*TS-ox+8,Y=chy*TS-oy+6,g=c.createRadialGradient(X,Y,2,X,Y,26);g.addColorStop(0,'rgba(255,236,150,.35)');g.addColorStop(1,'rgba(255,236,150,0)');c.fillStyle=g;c.fillRect(X-26,Y-26,52,52);
 }
 /* tenue des dresseurs et des champions : chaque arène a son uniforme */
 {const KIT={cadastre:{prop:'plan'},flux:{prop:'tablet'},labo:{coat:'#f7f0dc'},archives:{prop:'book'},courbes:{prop:'clipboard'},nuit:{prop:'lantern',scarf:'#5b6ee0'},chantier:{vest:1,hat:'#f2c12e',hatType:'helmet'},preuve:{prop:'clipboard'}},

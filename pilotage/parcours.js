@@ -38,7 +38,7 @@ const ATELIERS = {
   gameAgir: ["D'abord l'enjeu propre au site, simulé dans l'EMS : les vacances d'hiver (école), la climatisation de l'été (bureaux), le four et le contrat (boulangerie). Le résultat revient à l'étape Mesurer. Puis le plan d'action, qui rappelle les dérives de l'étape Détecter ; les actions qui les traitent portent l'étiquette « ta dérive ».", ["ENJ_ECOLE", "AGIR_DER"]],
   gamePiloter: ["L'atelier de la mesure : le plan choisi à l'arène du Chantier est vérifié sur un hiver plus doux. Corriger la météo, conclure, puis lire le résultat dans l'indicateur choisi à l'arène du Cadastre.", ["MES_GRAIN"]],
 };
-const RANGEES_ATELIERS = ["SB_JOURS", "BILANS", "RET_TITRES", "RET_IT", "RET_USAGE", "SIG_MOIS", "SIG_DJU", "STR_CASES", ...Object.values(ATELIERS).flatMap((a) => a[1])];
+const RANGEES_ATELIERS = ["SB_JOURS", "BILANS", "DONJONS", "DG_CHEMIN", "DG_CIBLE_OK", "RET_TITRES", "RET_IT", "RET_USAGE", "SIG_MOIS", "SIG_DJU", "STR_CASES", ...Object.values(ATELIERS).flatMap((a) => a[1])];
 /* un nom lisible pour les fonctions du jeu les plus courantes (section « Mécanique et interface ») */
 const NOMS = {
   enterArena: "Entrer dans une arène", duel: "Le duel contre un dresseur", arenaDefeat: "Défaite dans une arène", champTalk: "Parler au champion", arenaWin: "Victoire dans une arène",
@@ -50,7 +50,9 @@ const NOMS = {
   enBadge: "L'énergie après chaque badge", enTick: "La simulation d'énergie", enEvents: "Les événements d'énergie", enWhy: "Tableau de bord : les explications", enViewSite: "Tableau de bord : le site",
   enViewParc: "Tableau de bord : le parc", enViewPsite: "Tableau de bord : un site du parc", wmPlaceAt: "La carte : les lieux", gareGuichet: "Le guichet", gareDeparts: "Le tableau des départs",
   gareEntrer: "Entrer dans la gare", gareTableauDehors: "Le tableau des départs, dehors", voyTrajet: "Le trajet en train", voyRetour: "Le train du retour", voyDonnerInfo: "Carnet de voyage",
-  voyTamponner: "Tampon obtenu", emsCarnet: "Le carnet, dans les ateliers", emsTransfert: "La ligne « Dans un EMS »", emsChoix: "Les choix des ateliers", revoirFiche: "Revoir la fiche", EMS_MODULES: "La console de l'EMS du bureau : les modules", IV_JOULE: "La vidéo d'introduction : les répliques de Mme Joule", CREA_DONNEES: "L'Anomalidex : les anomalies de données (créatures)", CREA_CONSO: "L'Anomalidex : les dérives de consommation (créatures)", DERIVE_CREA: "La ronde de nuit : quelle créature selon le site", MC_ETATS: "Ma courbe : le trophée, état par état", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
+  voyTamponner: "Tampon obtenu", emsCarnet: "Le carnet, dans les ateliers", emsTransfert: "La ligne « Dans un EMS »", emsChoix: "Les choix des ateliers", revoirFiche: "Revoir la fiche", EMS_MODULES: "La console de l'EMS du bureau : les modules", IV_JOULE: "La vidéo d'introduction : les répliques de Mme Joule", CREA_DONNEES: "L'Anomalidex : les anomalies de données (créatures)", CREA_CONSO: "L'Anomalidex : les dérives de consommation (créatures)", DERIVE_CREA: "La ronde de nuit : quelle créature selon le site", MC_ETATS: "Ma courbe : le trophée, état par état", DG_TXT: "Les donjons : ce qu'on lit en examinant le décor",
+  dgChoix: "Les donjons : explorer ou aller au champion", dgRaccourci: "Les donjons : le raccourci", dgObjs: "Les donjons : portes, coffre, panneaux, énigmes", dgPas: "Les donjons : les dalles et la courbe du sol",
+  dgVerifCibles: "Les donjons : les blocs sur leurs marques", dgPousser: "Les donjons : pousser un bloc", dgResoudre: "Les donjons : l'énigme résolue", dgDalle: "Les donjons : les dalles du laboratoire", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
   atlasGare: "Carte : la gare", secretObjs: "Objets à secrets", eggObjs: "Objets à clins d'œil", nameEgg: "Les prénoms prédestinés", jouleExtra: "Harceler Mme Joule", actMobilier: "Le mobilier bavard",
 };
 const NOMS_DONNEES = (N) => Object.assign(N, { QUARTERS: "Les quartiers", WALKERS: "Les passants", LIFE_WX: "Les habitants, selon la météo", REG_WX: "Les régions, selon la météo", LOCALS: "Les bâtiments", MAPS: "Les lieux", SKY_IDLE: "L'horloge du jardin",
@@ -112,6 +114,13 @@ export function construire(FF, { chapitres }) {
     N.push({ id: `arene-${n}-porte`, genre: "porte", titre: "La porte", sous: nom, blocs: [
       { genre: "texte", titre: "Le nom de l'arène", t: A.name }, ...(estTexte(A.step) ? [{ genre: "texte", titre: "L'étape du cycle", t: A.step }] : []),
       note(`Pour entrer dans l'${nom} : le badge précédent${cles.length ? `, et ${cles.length} info${cles.length > 1 ? "s" : ""} clé${cles.length > 1 ? "s" : ""} : ${cles.map((f) => "« " + lisible(f.t) + " »").join(", ")}` : ""}.`), ...manque], essai: "arene-" + n });
+    // le donjon (recit/arenes/donjons.js) : les salles, l'énigme de l'étape, les panneaux
+    const D = (don("DONJONS") || {})[n];
+    if (D) N.push({ id: `arene-${n}-donjon`, genre: "scene", titre: "Le donjon", sous: lisible(D.titre), essai: "arene-" + n, suivi: { arene: nom }, blocs: [
+      note(`Un mini-donjon de ${(D.salles || []).length} salles : ${(D.salles || []).map((s) => lisible(s[4])).join(", ")}. Une énigme ouvre une porte, une petite clé dans un coffre en ouvre une autre, les trois dresseurs ouvrent celle du champion. À la première visite, le joueur choisit : explorer, ou aller directement au champion (les dresseurs l'attendent devant l'estrade).`),
+      { genre: "texte", titre: "Le nom du donjon", t: D.titre },
+      ...(D.enigme ? [{ genre: "texte", titre: "L'énigme", t: D.enigme.texte }, { genre: "texte", titre: "L'indice (porte scellée)", t: D.enigme.indice }, { genre: "texte", titre: "Énigme résolue", t: D.enigme.bravo }] : []),
+      ...(D.contenu || []).flatMap((L, si) => (L || []).filter((it) => v(it[0]) === "t").map((it) => ({ genre: "texte", titre: "Panneau · " + lisible(D.salles[si][4]), t: it[3] })))] });
     (A.tr || []).forEach((T, k) => N.push({ id: `arene-${n}-dresseur-${k}`, genre: "dresseur", titre: lisible(T.n), sous: `dresseur ${k + 1}/${A.tr.length}`, pal: T.pal, essai: `dresseur-${n}.${k}`,
       suivi: { duel: nom + " · " + lisible(T.n), arene: nom }, blocs: [
         { genre: "dialogue", titre: "Quand il repère le joueur", lignes: [{ qui: T.n, t: T.intro }] },

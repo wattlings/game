@@ -28,7 +28,7 @@ function essaiLancer(quoi){
   /* ce que jumpTo annonce (« Reprise : … ») est refermé, puis l'essai commence */
   const ensuite=fn=>qkTimeout(()=>{dlg.q=[];dlg.cb=null;if(dlg.open)nextLine();if(panelEl)closePanel();qkTimeout(()=>{try{fn()}catch(e){console.error(e);toast('Cet essai n’a pas pu démarrer.')}},120)},520);
   const arene=n=>{const A=ARENAS[n-1];if(!A)return null;jumpTo(ARENA_CH[A.id],site);FICHES.forEach(f=>{S.fiches[f.id]=1});return A};
-  const dansArene=A=>{arenaInit(A);warp('arena'+A.id,7,10,'up')};
+  const dansArene=A=>{arenaInit(A);const [x,y]=dgDepart(A);warp('arena'+A.id,x,y,'up')};
   const voyage=sid=>{const s=typeof VOY!=='undefined'&&VOY.sites[sid];if(!s||!s.ouvert)return null;jumpTo(11,site);return s};
   const surSite=(sid,s)=>{voyEtat().pass=1;voyEtat().faits[sid+'.arrivee']=1;warp(s.carte,s.arrivee[0],s.arrivee[1],s.arrivee[2]||'up')};
   if(genre==='chapitre'){jumpTo(Math.max(0,Math.min(11,+arg||0)),site);return}

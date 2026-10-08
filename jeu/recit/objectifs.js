@@ -36,8 +36,8 @@ function areneTaches(A){
   const dedans=curArena()===A,fait=arenaDone(A),n=[0,1,2].filter(k=>trBeaten(A,k)).length;
   return [
     {t:`Entre dans l'${A.name}, ${qAu(A.id)}`,ok:dedans||fait,cible:()=>S.map==='town'?A.b.door:sortie()},
-    {t:"Bats les 3 dresseurs de l'arène",ok:fait||n>=3,prog:n+'/3',cible:()=>{if(!dedans)return null;const k=[0,1,2].find(k=>!trBeaten(A,k));return k===undefined?null:[AR.t[k]?AR.t[k].x:POSTS[k][0],AR.t[k]?AR.t[k].y:POSTS[k][1]]}},
-    {t:`Affronte ${A.champ}, sur l'estrade`,ok:fait,cible:()=>dedans?[7,2]:null},
+    {t:"Bats les 3 dresseurs de l'arène",ok:fait||n>=3,prog:n+'/3',cible:()=>{if(!dedans)return null;const k=[0,1,2].find(k=>!trBeaten(A,k));return k===undefined?null:dgCible(A,[AR.t[k]?AR.t[k].x:dgPosts(A)[k][0],AR.t[k]?AR.t[k].y:dgPosts(A)[k][1]])}},
+    {t:`Affronte ${A.champ}, sur l'estrade`,ok:fait,cible:()=>dedans?dgCible(A,dgChamp(A)):null},
   ];
 }
 
