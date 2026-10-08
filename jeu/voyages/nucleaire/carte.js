@@ -94,13 +94,13 @@ voyCarte('nucleaire',{
     gens(12,24,'M. Bore','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#274f8f',jacket:'#274f8f',hair:'#9a9aa2',glasses:1,tie:'#2f6db5',prop:'clipboard'},conduire,{glow:!vue('pilotage')});
     pose(13,24,'vSimulateur',{act:()=>voyParler([{t:D.bouton[0]}],()=>nucSimConduite(()=>voyDonnerInfo(sid,'pilotage')))});o.push({x:14,y:24,kind:'none',solid:1,act:voyDire(null,D.bouton)});
     decor(16,24,'chair',{act:voyDire(null,D.beignets)});
-    gens(27,23,'Mme Carbone','down',{skin:'#c68a5c',shirt:'#2f9e7a',pants:'#3a4050',jacket:'#f7f0dc',hair:'#2b1d14',style:'boucle',lash:1,scarf:'#2f9e7a',prop:'tablet'},source('carbone','carbone','Mme Carbone'),{glow:!vue('carbone')});
+    gens(27,23,'Mme Carbone','down',{skin:'#c68a5c',shirt:'#2f9e7a',pants:'#3a4050',jacket:'#f7f0dc',hair:'#2b1d14',style:'tresses',lash:1,scarf:'#2f9e7a',prop:'tablet'},source('carbone','carbone','Mme Carbone'),{glow:!vue('carbone')});
     pose(28,23,'vCompteurCarbone',{act:voyDire(null,["Un afficheur : « Électricité française, en ce moment : 20 g de CO₂ par kWh ». Le chiffre tremble d'un gramme de temps en temps, par politesse."])});
     pose(31,23,'vBallon',{glow:!vue('creuses'),act:source('creuses','ballon')});
 
     // ---- l'entrée du site : le portique, M. Sievert
     o.push({x:20,y:20,kind:'vPortique',voy:1});
-    gens(19,21,'M. Sievert','right',{skin:'#f6d3b3',shirt:'#f7f0dc',pants:'#3a4050',coat:'#f7f0dc',hair:'#d9a441',glasses:1,prop:'clipboard'},source('doses','sievert','M. Sievert'),{glow:!vue('doses')});
+    gens(19,21,'M. Sievert','right',{skin:'#6b4128',shirt:'#f7f0dc',pants:'#3a4050',coat:'#f7f0dc',hair:'#141216',glasses:1,prop:'clipboard'},source('doses','sievert','M. Sievert'),{glow:!vue('doses')});
     pose(18,19,'vCamera',{act:voyDire(null,D.camera)});
     pose(30,20,'vMouette',{act:voyDire(null,D.mouette)});
 
@@ -114,9 +114,9 @@ voyCarte('nucleaire',{
     pose(30,12,'vTransfo',{act:voyDire(null,["Le transformateur principal : 400 000 volts en sortie. Il bourdonne plus grave que tous ceux que tu as croisés. C'est le doyen, il a de la voix."])});o.push({x:31,y:12,kind:'none',solid:1});
     pose(34,12,'vPylone',{act:voyDire(null,D.ligne)});
     o.push({x:40,y:15,kind:'vPylone',voy:1,solid:1});
-    gens(24,15,'M. Planning','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#59627c',hair:'#2b1d14',beard:'#2b1d14',glasses:1,tie:'#f2a33a',prop:'clipboard'},source('arret','planning','M. Planning'),{glow:!vue('arret')});
+    gens(24,15,'M. Planning','down',{skin:'#4a2c1c',shirt:'#f7f0dc',pants:'#59627c',hair:'#141216',beard:'#141216',glasses:1,tie:'#f2a33a',prop:'clipboard'},source('arret','planning','M. Planning'),{glow:!vue('arret')});
     pose(25,15,'vPlanning',{act:voyDire(null,["Le tableau de M. Planning : douze colonnes, des dizaines de cases, quatre couleurs. Une case rouge est entourée trois fois : « PAS JANVIER »."])});
-    gens(21,12,'Mme Isotope','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#6a3fa0',hair:'#9a9aa2',style:'carre',lash:1,glasses:1,scarf:'#f2c12e',prop:'clipboard'},nucDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
+    gens(21,12,'Mme Isotope','down',{skin:'#4a2c1c',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#6a3fa0',hair:'#9a9aa2',style:'carre',lash:1,glasses:1,scarf:'#f2c12e',prop:'clipboard'},nucDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
 
     // ---- la digue : la station de pompage, Gaston
     o.push({x:37,y:7,kind:'none',solid:1,act:voyDire(null,D.pompe)});

@@ -63,7 +63,8 @@ function drawChar0(c,x,y,dir,frame,p,run,fx){
   if(dir==='up'&&(st==='long'||st==='tresses'))R(c,x+4,y+5,8,5,hc);
   if(dir==='up'&&st==='tresses')for(let k=0;k<4;k++)R(c,x+5+k*2,y+5,1,6,shade(hc));
   R(c,x+4,y+7,8,p.skirt?5:6,p.shirt);
-  if(dir==='down'||dir==='up'){R(c,x+3,y+8-sw*sa,1,4,skin);R(c,x+12,y+8+sw*sa,1,4,skin)}
+  if(dir==='down'||dir==='up'){R(c,x+11,y+8,1,p.skirt?4:5,shade(p.shirt));   // l'ombre du côté du torse
+    R(c,x+3,y+8-sw*sa,1,2,p.shirt);R(c,x+3,y+10-sw*sa,1,2,skin);R(c,x+12,y+8+sw*sa,1,2,shade(p.shirt));R(c,x+12,y+10+sw*sa,1,2,skin)}   // manches, puis mains
   else{const f=dir==='right'?1:-1;R(c,x+7+f*sw*sa,y+8,2,4,shade(p.shirt));R(c,x+7+f*sw*sa+(f>0?1:0),y+11,1,1,skin)}
   if(p.stripes)for(let k=0;k<3;k++)R(c,x+4,y+8+k*2,8,1,p.stripes);
   if(p.jacket){if(dir==='up')R(c,x+4,y+7,8,5,p.jacket);else{R(c,x+4,y+7,3,5,p.jacket);R(c,x+9,y+7,3,5,p.jacket)}if(dir==='down'||dir==='up'){R(c,x+3,y+8-sw*sa,1,3,p.jacket);R(c,x+12,y+8+sw*sa,1,3,p.jacket)}}
@@ -78,7 +79,9 @@ function drawChar0(c,x,y,dir,frame,p,run,fx){
   if(p.bag){if(dir==='down'){for(let i=0;i<5;i++)R(c,x+10-i,y+7+i,1,1,'#3b3240');R(c,x+3,y+10,4,4,p.bag)}else if(dir!=='up')R(c,x+6,y+10,4,4,p.bag)}
   if(p.stetho&&dir==='down'){R(c,x+6,y+8,1,3,'#333');R(c,x+9,y+8,1,3,'#333');R(c,x+7,y+11,2,1,'#9aa0a8')}
   if(p.chair)drawChair(c,x,y,dir,ph,p,'apres');
-  R(c,x+4,y+1,8,7,skin);
+  R(c,x+4,y+1,8,6,skin);R(c,x+5,y+7,6,1,skin);   // la mâchoire, arrondie aux coins
+  if(dir==='down'){R(c,x+3,y+4,1,2,skin);R(c,x+12,y+4,1,2,shade(skin));R(c,x+7,y+6,2,1,shade(skin))}   // oreilles, bouche
+  else if(dir!=='up')R(c,x+(dir==='left'?10:5),y+7,1,1,shade(skin));
   if(st==='chauve'){if(dir!=='up')R(c,x+5,y+1,2,1,'rgba(255,255,255,.35)');else R(c,x+4,y+1,8,2,'rgba(0,0,0,.08)')}
   else if(dir==='up'){R(c,x+4,y+1,8,6,hc);if(st==='queue')R(c,x+7,y+7,2,3,hc);if(st==='carre')R(c,x+4,y+1,8,7,hc);if(st==='boucle'){R(c,x+3,y,10,6,hc)}
     if(st==='afro'){R(c,x+2,y-3,12,9,hc);R(c,x+3,y-4,10,1,hc)}
@@ -93,6 +96,8 @@ function drawChar0(c,x,y,dir,frame,p,run,fx){
     if(st==='carre'){if(dir!=='right')R(c,x+3,y+2,2,5,hc);if(dir!=='left')R(c,x+11,y+2,2,5,hc)}
     if(st==='queue'){if(dir==='left')R(c,x+12,y+2,2,5,hc);if(dir==='right')R(c,x+2,y+2,2,5,hc)}
     if(dir==='left'&&st!=='long'&&st!=='tresses')R(c,x+9,y+1,3,4,hc);if(dir==='right'&&st!=='long'&&st!=='tresses')R(c,x+4,y+1,3,4,hc);
+    if(dir==='left')R(c,x+9,y+4,1,2,shade(skin));if(dir==='right')R(c,x+6,y+4,1,2,shade(skin));   // l'oreille, de profil
+    {const hl=tint(hc,.3);if(st==='afro')R(c,x+4,y-3,4,1,hl);else if(st==='boucle')R(c,x+4,y-1,3,1,hl);else R(c,x+5,y,3,1,hl)}   // le reflet des cheveux
     const ey=y+4,eh=fx&&fx.blink?1:2,e0=fx&&fx.blink?ey+1:ey;
     if(eh>1&&peauFoncee(skin)){const W='#efe6da';if(dir==='down'){R(c,x+5,ey+1,1,1,W);R(c,x+10,ey+1,1,1,W)}if(dir==='left')R(c,x+6,ey+1,1,1,W);if(dir==='right')R(c,x+9,ey+1,1,1,W)}   // sur une peau foncée, le blanc de l'œil fait ressortir le regard
     if(dir==='down'){R(c,x+6,e0,1,eh,'#222');R(c,x+9,e0,1,eh,'#222');if(p.lash&&eh>1){R(c,x+5,ey,1,1,'#222');R(c,x+10,ey,1,1,'#222')}}
@@ -111,7 +116,7 @@ function drawChar0(c,x,y,dir,frame,p,run,fx){
       else{R(c,x+3,y-1,10,3,v);R(c,x+4,y-2,8,1,v);
         if(dir!=='right')R(c,x+3,y+1,2,8,v);if(dir!=='left')R(c,x+11,y+1,2,8,v);
         if(dir==='left')R(c,x+9,y+1,4,8,v);if(dir==='right')R(c,x+3,y+1,4,8,v);
-        R(c,x+4,y+7,8,2,v);R(c,x+3,y+8,10,1,d);if(dir==='down')R(c,x+5,y+1,6,1,d)}}
+        R(c,x+4,y+7,8,2,v);R(c,x+3,y+8,10,1,d)}}
     else if(ht==='turban'){R(c,x+3,y-3,10,5,p.hat);R(c,x+4,y-4,8,1,p.hat);R(c,x+3,y+1,10,1,shade(p.hat));
       if(dir!=='up'){for(let k=0;k<4;k++)R(c,x+4+k*2,y-3+k,2,1,shade(p.hat))}}
     else if(ht==='kippa'){R(c,x+5,y-1,6,1,p.hat);R(c,x+6,y-2,4,1,p.hat)}

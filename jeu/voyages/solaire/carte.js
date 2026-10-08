@@ -80,7 +80,7 @@ voyCarte('solaire',{
     // ---- la halte : le train, le chef de halte, l'affiche
     o.push({x:16,y:28,kind:'train',decor:1});
     for(let x=16;x<=27;x++)o.push({x,y:27,kind:'none',act:()=>voyRetour(sid)});
-    gens(24,25,'Chef de halte','down',{skin:'#e0ac7e',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#3a2a1a',hat:'#c43d3d',hatType:'cap',beard:'#3a2a1a'},()=>voyParler(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
+    gens(24,25,'Chef de halte','down',{skin:'#6b4128',shirt:'#27325a',pants:'#1c2440',jacket:'#27325a',hair:'#3a2a1a',hat:'#c43d3d',hatType:'cap',beard:'#3a2a1a'},()=>voyParler(D.chefHalte.map(t=>({w:'Chef de halte',t})),()=>voyRetour(sid)));
     pose(26,25,'vAfficheFrance',{glow:!vue('france'),act:source('france')});
     decor(15,25,'bench');decor(16,25,'bench');
 
@@ -95,14 +95,14 @@ voyCarte('solaire',{
 
     // ---- la zone technique : onduleurs, transformateur, supervision, poste de livraison
     [18,19,20,23,24,25].forEach((x,i)=>pose(x,6,'vOnduleur',{act:()=>voyParler([{t:`L'onduleur n° ${i+1}. Il ronronne. ${solEnDirect()}`}])}));
-    gens(20,7,'M. Sinus','down',{skin:'#f1c7a1',shirt:'#2f6db5',pants:'#274f8f',overall:'#274f8f',hair:'#9a9aa2',glasses:1,hat:'#f2c12e',hatType:'helmet',prop:'tablet'},source('onduleur','M. Sinus'),{glow:!vue('onduleur')});
+    gens(20,7,'M. Sinus','down',{skin:'#e8b98f',shirt:'#2f6db5',pants:'#274f8f',overall:'#274f8f',hair:'#9a9aa2',glasses:1,hat:'#f2c12e',hatType:'helmet',prop:'tablet'},source('onduleur','M. Sinus'),{glow:!vue('onduleur')});
     pose(18,4,'vTransfo',{glow:!vue('reseau'),act:source('reseau')});o.push({x:19,y:4,kind:'none',solid:1,act:source('reseau')});
     const superviser=()=>{if(voyEtat().faits['solaire.courbes']&&vue('cloche'))voyParler([{w:'Mlle Cloche',t:D.cloche[1][0]},{t:solEnDirect()},{w:'Mlle Cloche',t:"Tu veux revoir les cinq courbes ? L'écran est à toi."}],()=>solSimCourbes());
       else voyParler(D.cloche[0].map(t=>({w:'Mlle Cloche',t})),()=>solSimCourbes(()=>voyDonnerInfo(sid,'cloche')))};
     pose(24,9,'vEcran',{act:superviser});o.push({x:25,y:9,kind:'none',solid:1,act:superviser});
     gens(23,9,'Mlle Cloche','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#3a4050',jacket:'#2aa198',hair:'#5a3a22',style:'queue',lash:1,glasses:1,prop:'tablet'},superviser,{glow:!vue('cloche'),info:'cloche'});
     gens(23,3,'Mme Zénith','down',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#c8502a',hair:'#1c1c22',style:'carre',lash:1,hat:'#f7f0dc',hatType:'helmet',scarf:'#f2c12e',prop:'clipboard'},solDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
-    gens(24,15,'Dr Nuage','down',{skin:'#f6d3b3',shirt:'#8ec9e8',pants:'#59627c',coat:'#f7f0dc',hair:'#d9d9dc',style:'boucle',glasses:1,prop:'tablet'},source('variable','Dr Nuage'),{glow:!vue('variable')});
+    gens(24,15,'Dr Nuage','down',{skin:'#4a2c1c',shirt:'#8ec9e8',pants:'#59627c',coat:'#f7f0dc',hair:'#141216',style:'afro',glasses:1,prop:'tablet'},source('variable','Dr Nuage'),{glow:!vue('variable')});
     pose(25,15,'vCiel',{act:voyDire(null,["Une caméra braquée vers le ciel. Elle photographie les nuages toutes les minutes pour deviner où ils seront dans un quart d'heure.","C'est le seul appareil du site payé à regarder en l'air."])});
 
     // ---- le champ ouest : panneaux fixes, brebis, station météo

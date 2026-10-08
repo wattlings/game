@@ -96,11 +96,11 @@ voyCarte('barrage',{
     const turbines=voyAnimateur(sid,'turbines','Mlle Pelton',D.pelton[0],D.pelton[1],barSimTurbines);
     gens(15,21,'Mlle Pelton','down',{skin:'#e0ac7e',shirt:'#f2a33a',pants:'#3a4050',overall:'#3a4050',hair:'#b8431f',style:'queue',lash:1,hat:'#f7f0dc',hatType:'helmet'},turbines,{glow:!vue('turbines')});
     pose(16,21,'vRoue',{act:voyDire(null,D.roue)});
-    gens(14,22,'Mme Lachute','down',{skin:'#f6d3b3',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#1f8f7a',hair:'#5a3a22',style:'carre',lash:1,hat:'#f7f0dc',hatType:'helmet',scarf:'#f2c12e',prop:'clipboard'},barDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
+    gens(14,22,'Mme Lachute','down',{skin:'#7a4e30',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#1f8f7a',hair:'#5a3a22',style:'carre',lash:1,hat:'#f7f0dc',hatType:'helmet',scarf:'#f2c12e',prop:'clipboard'},barDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
 
     // ---- le bassin aval : Mme Reflux, M. Spot et son écran
     gens(20,22,'Mme Reflux','right',{skin:'#c68a5c',shirt:'#8ec9e8',pants:'#2f3a5c',coat:'#2f6db5',hair:'#1c1c22',style:'boucle',lash:1,hat:'#f2c12e',hatType:'helmet',prop:'tablet'},source('step','reflux','Mme Reflux'),{glow:!vue('step')});
-    gens(18,24,'M. Spot','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#2f3a5c',jacket:'#2f3a5c',hair:'#d9a441',glasses:1,tie:'#e2573b',prop:'tablet'},source('pointe','spot','M. Spot'),{glow:!vue('pointe')});
+    gens(18,24,'M. Spot','down',{skin:'#4a2c1c',shirt:'#f7f0dc',pants:'#2f3a5c',jacket:'#2f3a5c',hair:'#141216',glasses:1,tie:'#e2573b',prop:'tablet'},source('pointe','spot','M. Spot'),{glow:!vue('pointe')});
     pose(19,24,'vEcranPrix',{act:voyDire(null,D.ecran)});o.push({x:20,y:24,kind:'none',solid:1,act:voyDire(null,D.ecran)});
 
     // ---- le torrent : le panneau jaune, Mme Truite, la passe à poissons

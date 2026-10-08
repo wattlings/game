@@ -90,7 +90,7 @@ voyCarte('datacenter',{
 
     // ---- le hall : M. Badge, le mur d'écrans, M. Placard, Mme Quatreneuf
     o.push({x:21,y:6,kind:'vEcranMonde',voy:1,glow:!vue('monde'),act:source('monde','ecrans')},{x:22,y:6,kind:'none',act:source('monde','ecrans')});
-    gens(23,18,'M. Badge','left',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#1c2440',hair:'#2b1d14',tie:'#3a4050',glasses:1},source('tier','badge','M. Badge'),{glow:!vue('tier')});
+    gens(23,18,'M. Badge','left',{skin:'#a8714a',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#1c2440',hair:'#2b1d14',tie:'#3a4050',glasses:1,hat:'#3a4050',hatType:'turban',beard:'#141216'},source('tier','badge','M. Badge'),{glow:!vue('tier')});
     gens(20,12,'M. Placard','right',{skin:'#f1c7a1',shirt:'#8ec9e8',pants:'#59627c',jacket:'#8a6a4a',hair:'#9a9aa2',glasses:1,tie:'#c0503a',bag:'#6b4a2b'},source('salle','placard','M. Placard'),{glow:!vue('salle')});
     gens(20,15,'Mme Quatreneuf','right',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#1c2440',jacket:'#3a4050',hair:'#1c1c22',style:'carre',lash:1,scarf:'#3be07a',prop:'tablet'},datDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
     decor(24,7,'vending',{act:voyDire(null,D.cafe)});o.push({x:19,y:7,kind:'plant',solid:1},{x:19,y:19,kind:'plant',solid:1},{x:24,y:19,kind:'plant',solid:1});
@@ -98,7 +98,7 @@ voyCarte('datacenter',{
     // ---- la salle des serveurs : Mlle Octet, le thermostat, la sonde de l'allée chaude
     o.push({x:10,y:6,kind:'vThermostat',voy:1,glow:!vue('consigne'),act:source('consigne','thermostat')});
     const zombies=voyAnimateur(sid,'zombies','Mlle Octet',D.octet[0],D.octet[1],datSimZombies);
-    gens(13,7,'Mlle Octet','down',{skin:'#f6d3b3',shirt:'#1c2440',pants:'#3a4050',jacket:'#2aa198',hair:'#8a3b8f',style:'boucle',lash:1,glasses:1,prop:'tablet'},zombies,{glow:!vue('zombies')});
+    gens(13,7,'Mlle Octet','down',{skin:'#f6d3b3',shirt:'#1c2440',pants:'#3a4050',jacket:'#2aa198',hair:'#8a3b8f',style:'boucle',lash:1,glasses:1,prop:'tablet',chair:1},zombies,{glow:!vue('zombies')});
     pose(5,11,'vSonde',{glow:!vue('chaleur'),act:source('chaleur','sonde')});
     [[8,8],[13,10],[9,12]].forEach(([x,y])=>o.push({x,y,kind:'none',act:voyDire(null,D.baie)}));
 
@@ -108,9 +108,9 @@ voyCarte('datacenter',{
 
     // ---- la salle de contrôle : M. Talon et sa courbe plate, Mme Ratio et son pupitre
     o.push({x:28,y:6,kind:'vEcranPlat',voy:1,act:voyDire(null,["L'écran de M. Talon : la courbe de charge du site sur sept jours. Une ligne verte, parfaitement horizontale. Un curseur la parcourt consciencieusement, à la recherche d'un événement."])},{x:29,y:6,kind:'none',act:voyDire(null,["La courbe plate. Lundi ressemble à dimanche, qui ressemble à 3 h du matin."])});
-    gens(27,8,'M. Talon','down',{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#59627c',hair:'#b8431f',beard:'#b8431f',glasses:1,tie:'#2aa198',prop:'clipboard'},source('plate','talon','M. Talon'),{glow:!vue('plate')});
+    gens(27,8,'M. Talon','down',{skin:'#e8b98f',shirt:'#f7f0dc',pants:'#59627c',hair:'#b8431f',beard:'#b8431f',glasses:1,tie:'#2aa198',prop:'clipboard'},source('plate','talon','M. Talon'),{glow:!vue('plate')});
     const pue=voyAnimateur(sid,'pue','Mme Ratio',D.ratio[0],D.ratio[1],datSimPue);
-    gens(32,9,'Mme Ratio','down',{skin:'#e0ac7e',shirt:'#2aa198',pants:'#2f3a5c',jacket:'#f7f0dc',hair:'#5a3a22',style:'queue',lash:1,glasses:1,prop:'tablet'},pue,{glow:!vue('pue')});
+    gens(32,9,'Mme Ratio','down',{skin:'#e0ac7e',shirt:'#2aa198',pants:'#2f3a5c',jacket:'#f7f0dc',hair:'#5a3a22',style:'queue',lash:1,glasses:1,prop:'tablet',hat:'#2aa198',hatType:'voile'},pue,{glow:!vue('pue')});
     pose(33,9,'vPupitre',{act:()=>voyParler([{t:"Le pupitre du jumeau numérique : une consigne, trois interrupteurs, et un chiffre qui réagit."}],()=>datSimPue(()=>voyDonnerInfo(sid,'pue')))});
     [[30,11],[33,11]].forEach(([x,y])=>pose(x,y,'vPoste',{act:voyDire(null,D.bureau)}));
 

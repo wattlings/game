@@ -88,7 +88,7 @@ voyCarte('eolien',{
     // ---- les éoliennes de la lande (six des douze sont visibles d'ici)
     [[15,11],[29,6],[12,5],[34,21],[36,3]].forEach(([x,y])=>pose(x,y,'vEolienne',{act:()=>voyParler([{t:`Une éolienne de 3 MW. ${eolEnDirect()}`}])}));
     pose(17,21,'vEolienne',{arret:1,act:source('bridage','loic','Loïc')});
-    gens(18,22,'Loïc','left',{skin:'#e0ac7e',shirt:'#f2a33a',pants:'#3a4050',hair:'#5a3a22',hat:'#f7f0dc',hatType:'helmet',vest:1,bag:'#3a4050'},source('bridage','loic','Loïc'),{glow:!vue('bridage')});
+    gens(18,22,'Loïc','left',{skin:'#fbe3d0',shirt:'#f2a33a',pants:'#3a4050',hair:'#5a3a22',hat:'#f7f0dc',hatType:'helmet',vest:1,bag:'#3a4050'},source('bridage','loic','Loïc'),{glow:!vue('bridage')});
     // M. Rafale et le pupitre de l'éolienne n° 1
     const courbe=voyAnimateur(sid,'courbe','M. Rafale',D.rafale[0],D.rafale[1],eolSimCourbe);
     gens(14,12,'M. Rafale','down',{skin:'#c68a5c',shirt:'#2f6db5',pants:'#274f8f',overall:'#274f8f',hair:'#2b1d14',hat:'#f2c12e',hatType:'helmet',prop:'tablet'},courbe,{glow:!vue('courbe')});
@@ -97,10 +97,10 @@ voyCarte('eolien',{
     // le mât de mesure et Mme Bourrasque
     pose(27,13,'vMat',{glow:!vue('cube'),act:source('cube','mat')});
     const vent=voyAnimateur(sid,'charge','Mme Bourrasque',D.bourrasque[0],D.bourrasque[1],eolSimVent);
-    gens(26,14,'Mme Bourrasque','down',{skin:'#f6d3b3',shirt:'#8ec9e8',pants:'#3a4050',coat:'#2f9e7a',hair:'#d9a441',style:'queue',lash:1,scarf:'#f2c12e',prop:'tablet'},()=>{if(vue('charge'))voyParler([{w:'Mme Bourrasque',t:D.bourrasque[1][0]},{w:'Mme Bourrasque',t:"Tu veux revoir l'année de vent ? La tablette est à toi."}],()=>eolSimVent());else vent()},{glow:!vue('charge'),info:'charge'});
+    gens(26,14,'Mme Bourrasque','down',{skin:'#7a4e30',shirt:'#8ec9e8',pants:'#3a4050',coat:'#2f9e7a',hair:'#141216',style:'tresses',lash:1,scarf:'#f2c12e',prop:'tablet'},()=>{if(vue('charge'))voyParler([{w:'Mme Bourrasque',t:D.bourrasque[1][0]},{w:'Mme Bourrasque',t:"Tu veux revoir l'année de vent ? La tablette est à toi."}],()=>eolSimVent());else vent()},{glow:!vue('charge'),info:'charge'});
     // le poste de livraison : Mme Suroît, Mme Origine, le transformateur
     gens(25,10,'Mme Suroît','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#1c2440',coat:'#f2c12e',hair:'#3a2a1a',style:'carre',lash:1,hat:'#f2c12e',hatType:'bonnet',prop:'clipboard'},eolDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
-    gens(20,11,'Mme Origine','right',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#2f3a5c',jacket:'#8a3b8f',hair:'#1c1c22',style:'boucle',lash:1,glasses:1,prop:'clipboard'},source('verte','origine','Mme Origine'),{glow:!vue('verte')});
+    gens(20,11,'Mme Origine','right',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#2f3a5c',jacket:'#8a3b8f',hair:'#141216',style:'afro',lash:1,glasses:1,prop:'clipboard'},source('verte','origine','Mme Origine'),{glow:!vue('verte')});
     pose(26,10,'vTransfo',{act:voyDire(null,["Le transformateur du parc de la lande : 20 000 volts en sortie, direction le réseau de distribution.","Il bourdonne à cinquante hertz. Le vent, lui, n'a jamais réussi à tenir une note."])});o.push({x:27,y:10,kind:'none',solid:1});
 
     // ---- le vieux moulin, la pale, les menhirs

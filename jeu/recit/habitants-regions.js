@@ -3,11 +3,11 @@
 
 /* ---- habitants des régions (ajoutés aux habitants de la ville) ---- */
 const REG_FOLK=[
-  {who:'Fromagère',at:[67,14],dir:'left',pal:{skin:'#f1c7a1',shirt:'#3a5fa8',pants:'#2c2c34',skirt:1,apron:'#f7f0dc',hair:'#5a3a22',bun:1,hat:'#1c1c24',hatType:'straw',lash:1},
+  {who:'Fromagère',at:[67,14],dir:'left',pal:{skin:'#a8714a',shirt:'#3a5fa8',pants:'#2c2c34',skirt:1,apron:'#f7f0dc',hair:'#5a3a22',bun:1,hat:'#1c1c24',hatType:'straw',lash:1},
     lines:["Mon saint-nectaire s'affine six semaines en cave, à 10 °C. La cave ne consomme rien : c'est la terre qui tient la température.","Avant de faire un fromage, on décide lequel. Avant de mesurer un bâtiment, c'est pareil : on cadre."]},
   {who:'Carillonneur',at:[77,24],dir:'down',pal:{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#2c2c34',jacket:'#5a3a2a',hair:'#9a9aa2',hat:'#2c2c34',hatType:'cap',beard:'#9a9aa2'},
     lines:["Je remonte l'horloge du beffroi chaque matin. Une heure sautée, et toute la ville est en retard. Une donnée manquante, c'est pareil.","Du haut du beffroi, on voit les fils partir dans toutes les directions. Tout arrive ici par des réseaux."]},
-  {who:'Friturier',at:[85,44],dir:'left',pal:{skin:'#f1c7a1',shirt:'#f7f0dc',pants:'#2f3a5c',apron:'#c43d3d',hair:'#b8431f',hat:'#f7f0dc',hatType:'toque',beard:'#b8431f'},
+  {who:'Friturier',at:[85,44],dir:'left',pal:{skin:'#7a4e30',shirt:'#f7f0dc',pants:'#2f3a5c',apron:'#c43d3d',hair:'#b8431f',hat:'#f7f0dc',hatType:'toque',beard:'#b8431f'},
     lines:["Une frite, c'est deux bains. Une facture, c'est deux parts : l'abonnement et la consommation. Dans les deux cas, on confond souvent.","Par chez nous, il pleut parfois. Alors on a inventé la chaleur humaine : ça ne passe par aucun compteur."]},
   {who:'Fermière',at:[78,56],dir:'down',pal:{skin:'#f6d3b3',shirt:'#8ec9e8',pants:'#6b4a2b',skirt:1,apron:'#f7f0dc',hair:'#d9a441',style:'long',lash:1,scarf:'#c43d3d',prop:'basket'},
     lines:["Mes pommes, je les trie une par une : les véreuses d'un côté, les bonnes de l'autre. Et je garde les véreuses pour savoir d'où elles viennent.","Une haie bien tenue, et rien ne s'échappe du pré. Un contrôle bien tenu, et rien de faux n'entre dans le tableau."]},
