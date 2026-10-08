@@ -108,7 +108,7 @@ function serieBruteStep(el,next){
       shuffle(a.opts).forEach(o=>{const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=o[0];box.appendChild(b);
         b.onclick=()=>{
           if(o[1]){fait[a.id]=1;for(let i=a.de;i<=a.a;i++)statut[i]=a.id==='doublon'?'corrigee':'estimee';choisi=null;
-            if(a.dex&&!S.dex[a.dex]){S.dex[a.dex]=1;toast(`Anomalidex : ${Object.keys(S.dex).length}/7`)}
+            if(a.dex&&!S.dex[a.dex]){S.dex[a.dex]=1;toast(`Anomalidex · données : ${dexCompte('donnees')}/7`)}
             sfx('select');cocher();dessiner();
             if(SB_ANOM.every(z=>fait[z.id]))return fin();
             diag.innerHTML=`<div class="fb ok">✔ ${txt(o[2])}</div><p class="dnote">Encore ${SB_ANOM.filter(z=>!fait[z.id]).length} à trouver.</p>`;cv.focus()}

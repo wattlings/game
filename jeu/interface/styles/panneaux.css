@@ -144,3 +144,10 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 @media (prefers-reduced-motion:reduce){.iv-suite{animation:none}}
 .iv-barre{display:flex;gap:12px;align-items:center;justify-content:space-between;width:min(100%,calc((100vh - 60px) * 1.5));max-width:100%;color:#9fb4d8;font-size:15px}
 .iv-barre .btn{flex:none}
+/* l'Anomalidex (interface/menu.js) : une fiche par créature (rendu/creatures.js) */
+.adx-l{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px;margin-bottom:10px}
+.adx{display:flex;gap:10px;align-items:flex-start;background:#fffaf0;border:2px solid #c9bb92;border-radius:8px;padding:8px}
+.adx canvas{width:96px;height:96px;flex:none;image-rendering:pixelated;background:radial-gradient(#e3f4e6 55%,#cfe8c8);border-radius:6px}
+.adx b{font-family:var(--f-pix);font-size:15px}.adx small{display:block;color:var(--muted);font-size:13px;margin:2px 0}.adx p{margin:4px 0 0;font-size:14px}
+.adx.unk{opacity:.85}.adx.unk canvas{background:#e6e0d0}.adx-cap{color:#1c7a9a}
+@media (max-width:560px){.adx canvas{width:72px;height:72px}}

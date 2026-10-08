@@ -15,7 +15,7 @@ const MENU_ENTREES=()=>[
   {k:'objectif',l:'Objectif',d:"Ce que tu dois faire maintenant et où aller. Un lien t'emmène à la bonne page du cours."},
   {k:'carte',l:'Carte',d:"La carte de la ville : quartiers, arènes, ton objectif et les infos clés qui te manquent. (Touche K)"},
   {k:'energie',l:'Énergie',d:"Ton tableau de bord : les kWh économisés, les consommations de ton site et tes actions."},
-  ...(Object.keys(S.dex||{}).length?[{k:'dex',l:'Anomalidex',d:"Les anomalies de données que tu as repérées et corrigées."}]:[]),
+  ...(Object.keys(S.dex||{}).length?[{k:'dex',l:'Anomalidex',d:"Les créatures que tu as corrigées ou maîtrisées : anomalies de données et dérives de consommation."}]:[]),
   ...(Object.keys(S.fiches||{}).length?[{k:'classeur',l:'Classeur',d:"Tes fiches savoir, étape par étape. Les fiches clés ouvrent les portes des arènes."}]:[]),
   {k:'carnet',l:'Carnet',d:`Ce que tu as noté sur ton site, tes secrets${S.voy&&S.voy.pass?', ton passeport de voyage':''} et les sources du jeu.`},
   {k:'joueur',l:'Moi · '+(S.name||'Alex'),d:"Ta carte de joueur : rang, niveau, badges et collection. C'est là que tu changes d'avatar."},
@@ -122,9 +122,17 @@ const MENU_ECRANS={
 
   energie:{t:()=>'Énergie',html:()=>enTab(),lier:(mt,show)=>enBind(mt,show)},
 
+  /* l'Anomalidex, comme un Pokédex : deux familles de créatures (rendu/creatures.js), une fiche par espèce rencontrée, une silhouette sinon */
   dex:{t:()=>'Anomalidex',
-    html:()=>`<p>${Object.keys(S.dex).length}/7 anomalies corrigées.</p><div class="dex" id="dexg"></div>`,
-    lier:mt=>{const g=mt.querySelector('#dexg');ANOM.forEach(a=>{const d=document.createElement('div');const got=S.dex[a.id];if(!got)d.className='unk';d.appendChild(monCanvas(got?a:{...a,col:'#999',sym:'?'},40));d.insertAdjacentHTML('beforeend',`<br><b>${got?a.name:'???'}</b><br>${got?esc(a.data):''}`);g.appendChild(d)})}},
+    html:()=>{const ou=c=>{if(CREA_DONNEES.includes(c))return "Hautes herbes du Parc des Données, ou bocaux du Dr Doublon (Arène du Tamis)";
+        const sites=Object.keys(SITES).filter(sid=>Object.keys(DERIVE_CREA).some(d=>deriveCrea(d,sid)===c.id)).map(sid=>SITES[sid].short);
+        const ar=(ARENE_6.crea||[]).includes(c.id);return [sites.length?'Ronde de nuit dans '+sites.join(', '):'',ar?"Arène de la Nuit, avec un dresseur":''].filter(Boolean).join(' ; ')};
+      const fiche=c=>{const vu=!!S.dex[c.id];return `<div class="adx${vu?'':' unk'}"><canvas width="48" height="48" data-cr="${c.id}"${vu?'':' data-noir="1"'}></canvas><div><b>N° ${String(c.num).padStart(3,'0')} · ${vu?esc(c.nom):'???'}</b>
+        ${vu?`<small>${esc(c.espece)} · ${c.types.map(x=>`<span class="tag">${esc(x)}</span>`).join(' ')} · ${esc(c.taille)} · ${esc(c.poids)}</small><p>${esc(c.dex)}</p><p class="adx-cap"><b>Capture</b> : ${esc(c.capacite)}</p>`:`<small>Où la trouver : ${esc(ou(c))}</small>`}</div></div>`};
+      return `<p>Les anomalies sont des créatures : chacune incarne un défaut de donnée ou une dérive de consommation. Corrige-les, maîtrise-les, et elles rejoignent ton Anomalidex.</p>
+        <h4 class="segh">Anomalies de données · ${dexCompte('donnees')} / ${CREA_DONNEES.length}</h4><div class="adx-l">${CREA_DONNEES.map(fiche).join('')}</div>
+        <h4 class="segh">Dérives de consommation · ${dexCompte('conso')} / ${CREA_CONSO.length}</h4><p class="dnote">Certaines ne vivent que dans un seul type de bâtiment : pour toutes les voir, il faudra rejouer avec un autre site.</p><div class="adx-l">${CREA_CONSO.map(fiche).join('')}</div>`},
+    lier:mt=>mt.querySelectorAll('canvas[data-cr]').forEach(c=>{const x=c.getContext('2d');x.imageSmoothingEnabled=false;x.drawImage(crImage(c.dataset.cr,!!c.dataset.noir),0,0)})},
 
   classeur:{t:()=>'Classeur',
     html:()=>`<p>${Object.keys(S.fiches||{}).length} / ${FICHES.length} fiches savoir. Les fiches <b>clés</b> ouvrent les portes des arènes ; les autres rapportent de l'XP.</p>`+[0,1,2,3,4,5,6,7,8,'P'].map(st=>{const L=FICHES.filter(f=>f.st===st);return `<div class="cls"><div class="cls-h"><b>${st===0?'Le cycle':st==='P'?'Patrimoine':'Étape '+st+' · '+STEP_NAMES[st]}</b><span>${L.filter(f=>fGot(f.id)).length}/${L.length}</span><button type="button" class="course-link dark" data-h="${STEP_HASH(st)}">Cours de l'étape ↗</button></div>${L.map(f=>fGot(f.id)?`<div class="fiche mini${f.req?' req':''}"><b>${esc(f.t)}</b><p>${esc(f.x)}</p>${refsHTML(f.refs)}</div>`:`<div class="fiche mini unk"><b>???${f.req?' · info clé':''}</b><p>${fAvail(f)?'Indice : '+esc(SRC[f.src].where):'Disponible à partir de cette étape du jeu.'}</p></div>`).join('')}${typeof st==='number'&&st>=1&&st<=8&&arenaDone(ARENAS[st-1])?bilanCarte(st):''}</div>`}).join(''),
@@ -163,7 +171,7 @@ const MENU_ECRANS={
         <dt>Niveau</dt><dd>${level()} <span class="xpbar" title="Expérience"><i style="width:${(S.xp%90)/90*100}%"></i></span> <small>${S.xp%90} / 90 XP</small></dd>
         <dt>Économisés</dt><dd>${S.site&&typeof enTotal==='function'?fmtKwh(enTotal()):'—'}</dd>
         <dt>Fiches</dt><dd>${Object.keys(S.fiches||{}).length} / ${FICHES.length}</dd>
-        <dt>Anomalidex</dt><dd>${Object.keys(S.dex).length} / 7</dd>
+        <dt>Anomalidex</dt><dd>${dexCompte('donnees')+dexCompte('conso')} / ${CREATURES.length}</dd>
         <dt>Secrets</dt><dd>${Object.keys(S.secrets).length} / ${NSEC}</dd></dl>
         <canvas width="20" height="20" class="fr-sprite"></canvas></div>
       <div class="fr-badges" aria-label="Badges : ${S.badges.length} sur 8">${ARENAS.map(A=>{const got=S.badges.includes(A.badge);return `<div class="${got?'':'unk'}" title="${got?'Remis par '+esc(A.champ):'À gagner'}"><canvas width="16" height="16" data-bd="${A.id}"></canvas><small>${BLAB(A.badge)}</small></div>`}).join('')}</div></div>

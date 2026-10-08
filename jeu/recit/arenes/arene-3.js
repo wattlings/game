@@ -3,6 +3,7 @@
    Une question : Q("question", "bonne réponse", "explication", "mauvaise réponse 1", "pourquoi", "mauvaise réponse 2", "pourquoi"). */
 
 const ARENE_3={id:3,badge:'Fiabiliser',name:'Arène du Tamis',champ:'Dr Doublon',theme:'labo',col:'#2f9e7a',wall:'#eef5f1',b:L.arena[3],
+  crea:['trou','doublon','pic'],   // la créature que chaque dresseur envoie (rendu/creatures.js)
   cpal:{shirt:'#f7f0dc',pants:'#2c2c34',hair:'#9a9aa2',style:'boucle',glasses:1,tie:'#2f9e7a',skin:'#e8b98f'},
   cIntro:["Arène du Tamis. D'abord, quatre spécimens en bocal : les anomalies qu'on ne voit pas sur une courbe.","Ensuite, la vraie vie : une semaine de données brutes de ton site. Et n'oublie pas : on ne corrige jamais en silence."],
   cWin:["Quatre bocaux vides et une semaine propre. Je suis presque ému. Presque.","Badge Fiabiliser. Garde toujours la donnée brute, avec son statut."],

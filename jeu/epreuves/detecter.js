@@ -2,10 +2,19 @@
    Étape 6 · Détecter : la ronde de nuit et les dérives. */
 
 /* ================= DÉTECTER ================= */
+/* chaque dérive de la ronde est une créature à affronter (rendu/creatures.js) ; elle dépend du site, comme les versions d'un jeu */
+const DERIVE_CREA={light:'lumignon',boiler:'weekendragon',rdc:{ecole:'veillotron',bureau:'veillotron',boulangerie:'givrou'},cave:{ecole:'bouillonix',bureau:'ventilox',boulangerie:'portagel'}};
+const deriveCrea=(id,sid)=>{const c=DERIVE_CREA[id];return typeof c==='string'?c:c&&c[sid||S.site]};
 function actDerive(id){
   const s=site();if(S.ch!==7)return;
   if(S.derives[id])return say([{t:'Déjà noté dans ton rapport de ronde.'}]);
-  const D={light:['Éclairage des circulations resté allumé toute la nuit',0.5],rdc:s.derRdc,cave:s.derCave,boiler:null};
+  const cr=deriveCrea(id,s.id);
+  if(cr&&typeof battle==='function')return battle(creaCombat(cr,s),{conso:true,onWin:()=>noterDerive(id),
+    perdu:{msg:'Ta crédibilité est à zéro ! La dérive file dans le noir. Reprends ton souffle, et retourne la voir : elle n’a pas bougé, elle consomme.',bouton:'Reprendre la ronde ▸',cb:null}});
+  noterDerive(id);
+}
+function noterDerive(id){
+  const s=site(),D={light:['Éclairage des circulations resté allumé toute la nuit',0.5],rdc:s.derRdc,cave:s.derCave,boiler:null};
   S.derives[id]=1;save();gainXP(15);
   const lines=id==='boiler'?[{t:"La chaudière tourne un samedi soir, bâtiment vide ! Dérive gaz : le réduit de week-end n'est pas programmé."},{t:"Une règle métier liée au calendrier (« chaudière en marche le week-end ») la repère tout de suite."}]:[{t:`Dérive trouvée : ${D[id][0]}.`},{t:`+${String(D[id][1]).replace('.',',')} kW sur le talon, toutes les nuits et tous les week-ends.`}];
   const n=Object.keys(S.derives).length;

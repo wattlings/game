@@ -3,6 +3,7 @@
    Une question : Q("question", "bonne réponse", "explication", "mauvaise réponse 1", "pourquoi", "mauvaise réponse 2", "pourquoi"). */
 
 const ARENE_6={id:6,badge:'Détecter',name:'Arène de la Nuit',champ:'La Veilleuse',theme:'nuit',col:'#5b6ee0',wall:'#eceefa',b:L.arena[6],
+  crea:['thermoclash','pointezilla','veillotron'],   // la créature que chaque dresseur envoie (rendu/creatures.js)
   cpal:{shirt:'#39426a',pants:'#1c2440',hair:'#ece6d6',style:'long',hat:'#1c2440',skin:'#6b4128',lash:1},
   cIntro:["Arène de la Nuit. Je vois tout ce qui consomme quand personne ne regarde.","Tu as fait ta ronde ? Alors chiffre-moi ce que coûtent ces dérives, et règle tes alertes."],
   cWin:["Tu sais ce qui fuit, combien ça coûte, et comment ne pas crier au loup. Voici le badge Détecter.","Le jour se lève sur Ampère-sur-Loire."],

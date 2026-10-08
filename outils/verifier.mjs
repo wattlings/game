@@ -419,6 +419,14 @@ if (quoi === "tout" || quoi === "guidage") {
       document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })); await att(80);
       return `${la} ${joule} ${!r.querySelector(".iv")} ${suite}`; });
     verif("vidéo d'introduction : elle se lance, le clic fait avancer jusqu'à Mme Joule, Échap la passe et la suite démarre", video === "true true true 1", video);
+    // les créatures (rendu/creatures.js) : une dérive de la ronde de nuit se combat, et rejoint l'Anomalidex
+    const derive = await R(async () => { const r = document.getElementById("qk-host").shadowRoot, att = (ms) => new Promise((ok) => setTimeout(ok, ms));
+      if (panelEl) closePanel(); jumpTo(7, "bureau"); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); await att(450); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine();
+      actDerive("cave"); await att(120); const b = r.querySelector(".battle"); if (!b) return "pas de combat"; const nom = b.querySelector(".enemy b").textContent;
+      [...b.querySelectorAll(".moves button")].find((x) => /Asservir/.test(x.textContent)).click(); await att(1500); b.querySelector(".moves button")?.click(); await att(120);
+      let n = 0; while (dlg.open && n++ < 12) { nextLine(); nextLine(); await att(30); }
+      return `${nom} ${!!S.derives.cave} ${!!S.dex.ventilox} ${crImage("ventilox").width}`; });
+    verif("créatures : la ventilation des bureaux est un Ventilox à affronter ; le bon traitement note la dérive et l'ajoute à l'Anomalidex", derive === "Ventilox true true 48", derive);
     verif("ateliers : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }

@@ -67,17 +67,20 @@ function duel(A,k){
   const bg={cadastre:'#c9dceb,#e3edf5',flux:'#3b4258,#2b3142',labo:'#cfd8e0,#eef2f5',archives:'#e8dcc0,#c89b62',courbes:'#1c2748,#16203a',nuit:'#262a3a,#353a4c',chantier:'#b5694a,#a3a6ab',preuve:'#f3ece0,#e2d9c6'}[A.theme].split(',');
   const ov=document.createElement('div');ov.className='battle';ov.innerHTML=`<div class="arena" role="dialog" aria-label="Duel"><div class="field2" style="background:linear-gradient(${bg[0]} 0 55%,${bg[1]} 55%)"><div class="hpbox enemy"><b>${esc(T.n)}</b> <small>dresseur ${k+1}/3</small><div class="bar"><i style="width:100%"></i></div></div><div class="hpbox me"><b>${esc(S.name)}</b> <small>Nv ${level()}</small><div class="bar"><i style="width:${AR.cred}%"></i></div><small>Crédibilité</small></div></div><div class="bmsg"></div><div class="moves"></div></div>`;
   $('layer').appendChild(ov);sfx('encounter');updateMusic();
-  const f=ov.querySelector('.field2'),mon=document.createElement('canvas');mon.width=20;mon.height=20;mon.className='mon';drawChar(mon.getContext('2d'),2,3,'down',0,T.pal);f.appendChild(mon);
+  const f=ov.querySelector('.field2'),cr=A.crea&&A.crea[k]&&typeof CREA!=='undefined'&&CREA[A.crea[k]]?A.crea[k]:null;let mon;
+  if(cr){mon=monCanvas({id:cr},48)}else{mon=document.createElement('canvas');mon.width=20;mon.height=20;drawChar(mon.getContext('2d'),2,3,'down',0,T.pal)}   // le dresseur envoie sa créature, s'il en a une
+  mon.className='mon';f.appendChild(mon);
   const hc=document.createElement('canvas');hc.width=20;hc.height=20;hc.className='hero';drawChar(hc.getContext('2d'),2,3,'up',0,PAL[S.rank]);f.appendChild(hc);
   const msg=ov.querySelector('.bmsg'),mv=ov.querySelector('.moves'),ebar=ov.querySelector('.enemy i'),mbar=ov.querySelector('.me i');
   const setBar=()=>{mbar.style.width=Math.max(0,AR.cred)+'%';mbar.style.background=AR.cred<40?'var(--bad)':AR.cred<100?'var(--amber)':''};setBar();
   const end=cb=>{ov.remove();busy=false;clearKeys();hud();save();updateMusic();if(cb)cb()};
   const one=(label,fn)=>{mv.innerHTML='';const c=document.createElement('button');c.textContent=label;c.style.gridColumn='1/-1';mv.appendChild(c);c.focus();c.onclick=fn};
-  const ask=()=>{const q=T.qs[qi%T.qs.length];msg.innerHTML=`<b>${esc(T.n)} :</b> « ${esc(q.q)} »`;mv.innerHTML='';
+  const ask=()=>{const q=T.qs[qi%T.qs.length];msg.innerHTML=`${cr?`${esc(T.n)} envoie <b>${esc(CREA[cr].nom)}</b> !<br>`:''}<b>${esc(T.n)} :</b> « ${esc(q.q)} »`;mv.innerHTML='';
     shuffle(q.o).forEach(o=>{const b=document.createElement('button');b.textContent=o[0];mv.appendChild(b);b.onclick=()=>{if(over)return;
       if(o[1]){over=true;mv.querySelectorAll('button').forEach(x=>x.disabled=true);ebar.style.width='0%';mon.classList.add('hit');jingle('victory');
         trk('battle',{a:(A.name+' · '+T.n).slice(0,100),r:'win'});S.arena=S.arena||{};S.arena[A.id]=S.arena[A.id]||[0,0,0];S.arena[A.id][k]=1;S.xp+=15;save();
-        msg.innerHTML=`Bonne réponse ! ${esc(o[2])}<br><b>${esc(T.n)}</b> est battu. +15 XP`;qkTimeout(()=>mon.classList.add('ko'),500);
+        const nouv=cr&&!S.dex[cr];if(nouv){S.dex[cr]=1;save()}
+        msg.innerHTML=`Bonne réponse ! ${esc(o[2])}<br><b>${esc(T.n)}</b> est battu${cr?` et ${esc(CREA[cr].nom)} est K.-O.`:''}. +15 XP${nouv?`<br>${esc(CREA[cr].nom)} rejoint ton Anomalidex !`:''}`;qkTimeout(()=>mon.classList.add('ko'),500);
         qkTimeout(()=>one('Continuer ▸',()=>end(()=>say([{w:T.n,t:T.lose}]))),900)}
       else{trk('wrong_answer',{t:A.name,q:trkTxt(q.q).slice(0,100),a:trkTxt(o[0]).slice(0,80)});sfx('bad');AR.cred-=expert()?50:34;setBar();ov.querySelector('.hero').classList.add('hit');qkTimeout(()=>{const h=ov.querySelector('.hero');if(h)h.classList.remove('hit')},500);
         if(AR.cred<=0){over=true;trk('battle',{a:(A.name+' · '+T.n).slice(0,100),r:'lose'});msg.innerHTML=`Raté. ${esc(o[2])} La bonne réponse : « ${esc(q.o.find(z=>z[1])[0])} ».<br>Ta crédibilité est à zéro : <b>${esc(T.n)}</b> te raccompagne à l'entrée.`;one("Retour à l'entrée ▸",()=>end(arenaDefeat))}
