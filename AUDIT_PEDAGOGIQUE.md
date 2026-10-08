@@ -412,4 +412,95 @@ Le plan est classé du meilleur rapport impact / effort au moins bon. L'effort e
 7. **Le ton et les récompenses.** L'esprit « Pokémon » (badges, rangs, évolutions, clins d'œil) est-il un choix assumé à garder tel quel, ou peut-il passer au second plan derrière l'effet sur le site ? (point 11)
 8. **La priorisation.** Parmi les huit principes, lequel compte le plus pour vous ? Je propose le 2 (apprendre en jouant) et le 8 (transfert vers le produit), mais c'est votre choix.
 
-*Fin du rapport. Je n'ai rien modifié dans le jeu, et j'attends ta validation avant toute modification.*
+## 6. Réponses reçues et plan affiné
+
+### Tes réponses
+
+| Question | Réponse | Ce que ça change |
+|---|---|---|
+| 1. Le produit | **Générique**, lié à aucun EMS en particulier | La carte « Dans un EMS » décrit des fonctions génériques (collecte automatique, contrôles de qualité, modèle de données, courbes, alertes, plan d'action, mesure et vérification). Le jeu ne nomme aucun produit ni écran réel. Dans le jeu, l'outil s'appelle simplement « l'EMS du bureau ». |
+| 2. Les profils | **Tous les métiers.** On explique la démarche, pas un produit | Pas de jargon de développeur dans le jeu. Le transfert se formule en « à quoi ça sert, pour qui, et quelle erreur éviter », compréhensible par tous. L'encadré « Pour tester le logiciel » reste dans le cours. |
+| 3. La durée | **Pas de contrainte** pour l'instant | Les options qui allongent le jeu (manipulations, deuxième question, console) deviennent possibles. |
+| 4. Le débriefing | **Tout en autonomie** | Le point 13 devient un **auto-bilan intégré au jeu**, et le diplôme imprimable devient la synthèse que le joueur garde. Pas de kit pour les managers. |
+| 5. Les voyages | **Annexe, réorientée vers l'energy management si nécessaire** | Option minimale du point 10 : chaque site garde son contenu et gagne une manipulation tournée vers l'energy management. |
+| 6. La preuve d'apprentissage | **Non** | Pas de questionnaire avant et après, pas d'attestation. |
+| 7. Le ton et les récompenses | **Garder l'esprit** | Badges, rangs, évolutions et clins d'œil restent tels quels. Le point 11 se réduit à *ajouter* la récompense par l'effet (la courbe du site qui s'améliore), sans rien retirer. |
+| 8. La priorité | **Le principe 2** | L'ordre change : apprendre *en manipulant* passe avant tout le reste. |
+
+### Le principe directeur
+
+**Chaque étape se joue dans « l'EMS du bureau », un outil générique, sur les données du site choisi.**
+- Le joueur ne répond plus seulement à des questions sur la donnée : il la manipule (il raccorde, nettoie, range, lit, détecte, décide, vérifie), et ce qu'il fait à une étape sert à la suivante.
+- Les arènes, les dresseurs et les badges restent. Ils vérifient les notions et gardent l'esprit du jeu.
+
+C'est l'option ambitieuse (point 9), construite pas à pas : chaque lot ajoute de vraies manipulations sans casser ce qui marche.
+
+### Lot 1 · Manipuler la donnée à chaque étape (principe 2)
+
+**1a. L'EMS du bureau.** Une console simple s'ouvre depuis le PC du bureau et depuis l'épreuve de chaque champion. Elle affiche le site du joueur et s'enrichit d'un module par badge. Elle réutilise les graphiques existants (`jeu/simulation/`, le curseur du talon de `jeu/epreuves/analyser.js`, les ateliers de `jeu/voyages/ateliers.js`).
+
+**1b. Une manipulation par étape**, sur les données du site. Elle remplace une partie des questions de l'épreuve. La colonne « Ce qui passe à la suite » montre comment chaque étape sert les suivantes.
+
+| Étape | Ce que le joueur fait dans l'EMS du bureau | Ce qui passe à la suite |
+|---|---|---|
+| 1 · Cadrer | Délimiter le périmètre sur le plan du site (bâtiment, usages suivis) et choisir l'objectif (facture, décret tertiaire ou CO₂) | L'objectif choisi décide de l'indicateur suivi jusqu'à l'étape Mesurer |
+| 2 · Collecter | Raccorder les compteurs en saisissant le PDL et le PCE **relevés en ville** (carnet), donner le consentement, puis comparer sur une même semaine ce qu'apportent la courbe, l'index et la facture | Un PDL mal recopié donne une erreur de raccordement, comme en vrai |
+| 3 · Fiabiliser | Sur la série brute du site, repérer à la souris les trous, les pics impossibles et les doublons, puis choisir leur traitement ; la courbe nettoyée apparaît | La courbe propre sert aux étapes 5 et 6 |
+| 4 · Structurer | Ranger site → point de comptage → compteur → mesure dans un arbre, convertir les m³ en kWh, passer du pas de 10 minutes à la journée | La structure rangée alimente les graphiques |
+| 5 · Analyser | Placer le talon (existe déjà) et tracer la signature énergétique (consommation selon les DJU) | La référence obtenue sert à détecter |
+| 6 · Détecter | Régler un seuil d'alerte par rapport à la référence : voir les vraies dérives et les fausses alertes sur quatre semaines ; la ronde de nuit confirme sur place | Les dérives trouvées deviennent des actions possibles |
+| 7 · Agir | Le plan d'action sous budget (existe déjà) ; on y retrouve les dérives de l'étape 6 | Le plan choisi est celui que l'on vérifie à l'étape 8 |
+| 8 · Mesurer | Comparer avant et après **sur son propre plan**, corriger l'effet de l'hiver avec les DJU, et conclure : ça a marché, ou pas assez | La boucle recommence, et le chapitre 10 passe à 20 sites |
+
+**1c. Les épreuves exigent ce qu'on a trouvé** (point 5). La fiche patrimoine se remplit depuis le carnet, au lieu de reconnaître des valeurs proposées. Un joueur qui saute une étape depuis le cours reçoit les notes correspondantes (`jeu/interface/choix-etape.js`, `jumpTo`).
+
+**1d. Des retours qui font apprendre** (points 2 et 3), indispensables pour que les manipulations aient du sens :
+- dire ce qui est faux et pourquoi, partout (remises en ordre comprises) ;
+- en duel, montrer la bonne réponse après une erreur ;
+- plus de réussite par simple élimination ;
+- après deux erreurs, « Revoir la fiche » sans quitter l'épreuve (point 7).
+
+**Fichiers concernés** : `jeu/epreuves/*.js` (les 8 épreuves), `jeu/moteur/panneaux.js`, `jeu/epreuves/arenes.js`, un nouveau module `jeu/interface/ems-bureau.js`, `jeu/simulation/` pour les séries du site, et `outils/verifier.mjs` pour vérifier chaque manipulation.
+
+**Effort** : grand (8 manipulations, le plus gros chantier du plan), mais découpable étape par étape. On peut publier les étapes une par une.
+
+**Risques**
+- Le temps de jeu augmente : ce n'est plus une contrainte, mais l'estimation du pilotage le montrera.
+- Les gestes à la souris doivent marcher au doigt sur mobile ; je les testerai sur les deux.
+- Chaque manipulation doit marcher pour les trois sites.
+
+### Lot 2 · Des décisions qui comptent (principes 7 et 6)
+
+- **Des décisions qui se suivent** (point 8) : l'objectif de l'étape Cadrer, les dérives de l'étape Détecter et le plan de l'étape Agir se retrouvent à l'étape Mesurer et dans le bilan.
+- **Un enjeu propre à chaque site** : l'école et les vacances scolaires, les bureaux et la climatisation, la boulangerie et son four et son contrat.
+- **La récompense par l'effet**, ajoutée sans rien retirer (point 11 réduit) : la courbe du site, visiblement plus propre puis plus basse étape après étape, devient un trophée de plus dans la carte de joueur.
+
+### Lot 3 · Transfert et auto-bilan, en autonomie (principe 8)
+
+- **Une carte « Dans un EMS »**, générique, après chaque badge. Trois cases : *ce que tu viens de faire* ; *ce que fait un EMS à cette étape* ; *pourquoi c'est important pour un client, et l'erreur à éviter*. Elle est rédigée pour tous les métiers et se range dans le Classeur.
+- **L'auto-bilan d'étape** (le point 13 transformé) : en sortant de l'arène, trois questions de rappel sur l'étape, sans pénalité et avec les explications, puis « Ce que je retiens » en une phrase choisie parmi trois.
+- **Le diplôme imprimable** (point 4) : la synthèse des 8 étapes (ce que je sais faire, notions clés, ce que fait un EMS) en une page à garder. L'écart « Piloter » / « Mesurer » est corrigé au passage.
+
+### Lot 4 · Les voyages et les finitions
+
+- **Les voyages en annexe assumée** (point 10, option minimale) : présentés comme « Culture énergie », avec une manipulation tournée vers l'energy management par site :
+  - solaire : l'autoconsommation sur la courbe de ton site ;
+  - data center : le PUE et la chaleur fatale ;
+  - barrage : la pointe et le prix de l'heure ;
+  - éolien et nucléaire : le contenu carbone et la garantie d'origine dans le contrat.
+- **Un mode « Expert » facultatif** (point 12) : des questions plus dures, sans aide.
+- **Réglage de la difficulté** à partir des questions les plus ratées du pilotage, une fois les lots 1 et 2 en ligne.
+
+### Ce qui est retiré du plan
+
+- La mesure avant / après et l'attestation (réponse 6).
+- Le kit de débriefing pour les managers, remplacé par l'auto-bilan (réponse 4).
+- Toute référence à un produit réel (réponse 1).
+- La réduction des badges, de l'XP ou des clins d'œil (réponse 7).
+
+### Ma proposition pour démarrer
+
+Commencer le **lot 1 par une seule étape pilote**, l'étape 3 · Fiabiliser (nettoyer la série brute du site). Elle est représentative et montre le mieux la différence entre répondre à une question sur la donnée et la traiter soi-même. Après ton retour sur cette étape, je déroule les sept autres.
+
+*Rapport mis à jour après tes réponses. Je n'ai toujours rien modifié dans le jeu, et j'attends ta validation pour démarrer.*
+
