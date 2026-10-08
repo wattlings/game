@@ -167,9 +167,10 @@ const MENU_ECRANS={
         <dt>Secrets</dt><dd>${Object.keys(S.secrets).length} / ${NSEC}</dd></dl>
         <canvas width="20" height="20" class="fr-sprite"></canvas></div>
       <div class="fr-badges" aria-label="Badges : ${S.badges.length} sur 8">${ARENAS.map(A=>{const got=S.badges.includes(A.badge);return `<div class="${got?'':'unk'}" title="${got?'Remis par '+esc(A.champ):'À gagner'}"><canvas width="16" height="16" data-bd="${A.id}"></canvas><small>${BLAB(A.badge)}</small></div>`}).join('')}</div></div>
+      ${S.site?maCourbeHtml():''}
       <p class="dnote">Évolutions : Gestionnaire de site → Energy Manager (4e badge) → Gestionnaire de patrimoine (8e badge).</p>
       <div class="row"><button class="btn" id="avEdit" data-focus>Modifier mon avatar</button></div><p class="dnote">Têtes, coiffures, tenues, objets en main ; une tenue par région, les tenues de rang, et celle de chaque personnage à qui tu as parlé (${Object.keys(S.models||{}).length} débloquée${Object.keys(S.models||{}).length>1?'s':''}).</p>`},
-    lier:mt=>{drawChar(mt.querySelector('.fr-sprite').getContext('2d'),2,3,'down',0,avPal(S.rank||0,S.av||AVDEF('h')));
+    lier:mt=>{drawChar(mt.querySelector('.fr-sprite').getContext('2d'),2,3,'down',0,avPal(S.rank||0,S.av||AVDEF('h')));maCourbeDessiner(mt.querySelector('.mc canvas'));
       mt.querySelectorAll('canvas[data-bd]').forEach(c=>c.getContext('2d').drawImage(badgeCanvas(+c.dataset.bd),0,0));
       mt.querySelector('#avEdit').onclick=()=>{closePanel();openAvatar()}}},
 

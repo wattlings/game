@@ -375,6 +375,15 @@ if (quoi === "tout" || quoi === "guidage") {
       await att(80); [...r.querySelectorAll(".pbody .btn")].pop().click(); await att(120);
       const retour = !!r.querySelector(".ems-modules"); closePanel(); return `${o} ouverts, ${f} fermés, XP +${S.xp - xp}, retour : ${retour}`; });
     verif("console de l'EMS : 4 modules ouverts après 4 badges, rejouer un atelier ne donne pas d'XP et ramène à la console", console_ === "4 ouverts, 4 fermés, XP +0, retour : true", console_);
+    // lot 2 : l'enjeu du site (epreuves/ems-enjeu.js) et « Ma courbe » (interface/ma-courbe.js)
+    const enjeu = await R(async () => { const r = document.getElementById("qk-host").shadowRoot, att = (ms) => new Promise((ok) => setTimeout(ok, ms)), clic = (n, v) => r.querySelector(`[data-nom="${n}"] [data-v="${v}"]`).click();
+      if (panelEl) closePanel(); jumpTo(8, "ecole"); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); if (panelEl) closePanel(); runSteps("Essai", [enjeuStep], () => {}); await att(80);
+      clic("regime", "8"); clic("relance", "lun7"); r.querySelector("#enjOk").click(); await att(40); const froid = r.querySelector(".pbody .fb.ko").textContent;
+      clic("relance", "dim"); r.querySelector("#enjOk").click(); await att(40); const ok = !!r.querySelector(".pbody .fb.ok"); closePanel();
+      jumpTo(9, "ecole"); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); if (panelEl) closePanel(); emsSet("enjeu", { t: "Les vacances d’hiver", kwh: 7157, eur: 644 });
+      openMenu("joueur"); await att(120); const mc = r.querySelector(".mc-etats li.cur")?.textContent; closePanel();
+      return `${/moufles/.test(froid)} ${ok} ${mc}`; });
+    verif("enjeu du site : l'école relancée trop tard a froid lundi, relancée la veille c'est réglé ; « Ma courbe » est « Plus basse » après le badge Agir", enjeu === "true true Plus basse", enjeu);
     verif("ateliers : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }

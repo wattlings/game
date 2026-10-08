@@ -485,6 +485,11 @@ Le lot 1 est terminé.
 - **Un enjeu propre à chaque site** : l'école et les vacances scolaires, les bureaux et la climatisation, la boulangerie et son four et son contrat.
 - **La récompense par l'effet**, ajoutée sans rien retirer (point 11 réduit) : la courbe du site, visiblement plus propre puis plus basse étape après étape, devient un trophée de plus dans la carte de joueur.
 
+**Avancement** : lot 2 réalisé.
+- Les décisions se suivent : l'objectif de Cadrer devient l'indicateur de Mesurer ; les dérives de Détecter sont étiquetées dans le plan d'Agir ; Mesurer vérifie ce plan-là, et rappelle l'enjeu du site. La console de l'EMS du bureau les montre toutes. Le bilan de fin viendra avec le lot 3.
+- L'enjeu propre à chaque site (`jeu/epreuves/ems-enjeu.js`), dans l'arène du Chantier : régime et relance du chauffage pendant les vacances d'hiver (école) ; consigne, coupure et rafraîchissement de nuit de la climatisation (bureaux) ; heure d'allumage du four et option tarifaire calculée sur la courbe du site (boulangerie).
+- La récompense par l'effet (`jeu/interface/ma-courbe.js`) : « Ma courbe », dans la carte de joueur et la console, passe de brute à propre, lue, surveillée, plus basse, puis prouvée. Rien n'a été retiré (badges, XP, collections).
+
 ### Lot 3 · Transfert et auto-bilan, en autonomie (principe 8)
 
 - **Une carte « Dans un EMS »**, générique, après chaque badge. Trois cases : *ce que tu viens de faire* ; *ce que fait un EMS à cette étape* ; *pourquoi c'est important pour un client, et l'erreur à éviter*. Elle est rédigée pour tous les métiers et se range dans le Classeur.

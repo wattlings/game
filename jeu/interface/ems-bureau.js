@@ -13,7 +13,7 @@ const EMS_MODULES=[
   [5,'Analyse',()=>{const g=emsGet('signature')||(()=>{const r=sigRegression(sigPoints(site().id).pts);return {a:Math.round(r.a),b:Math.round(r.b*10)/10}})();
     return `Talon électrique : ${BASE[site().id]} kW, jour et nuit.<br>Signature gaz : <b>${emsKwh(g.a)} kWh/mois + ${g.b.toLocaleString('fr-FR')} kWh par DJU</b>. C'est la référence du site.`},()=>signatureStep],
   [6,'Alertes',()=>{const a=emsGet('alerte');return a?`Alerte au-delà de <b>+${a.seuil} %</b> de la référence, ${a.persist>1?'deux jours de suite':'dès le premier jour'}. Dernière dérive attrapée : +3 kW de talon, confirmée par ta ronde de nuit.`:"Alertes réglées par défaut. Le commercial jure que c'est « optimal ». Rejoue l'atelier pour en juger."},()=>seuilStep],
-  [7,'Plan d’action',()=>{const p=emsGet('plan'),ids=p&&p.ids||Object.keys((S.en&&S.en.acts)||{});return ids.length?`${ids.map(id=>enAct(id)).filter(Boolean).map(a=>esc(a.t.split(' :')[0])).join(' · ')}${p&&p.kwh?`<br>Gain attendu : ${emsKwh(p.kwh)} kWh par an.`:''} Le compteur en haut de l'écran suit les kWh économisés.`:"Aucune action lancée."},null],
+  [7,'Plan d’action',()=>{const p=emsGet('plan'),ids=p&&p.ids||Object.keys((S.en&&S.en.acts)||{});return ids.length?`${ids.map(id=>enAct(id)).filter(Boolean).map(a=>esc(a.t.split(' :')[0])).join(' · ')}${p&&p.kwh?`<br>Gain attendu : ${emsKwh(p.kwh)} kWh par an.`:''} Le compteur en haut de l'écran suit les kWh économisés.${emsGet('enjeu')?`<br>Enjeu du site · ${esc(emsGet('enjeu').t)} : ${emsKwh(emsGet('enjeu').kwh)} kWh par an.`:''}`:"Aucune action lancée."},null],
   [8,'Mesure et vérification',()=>{const m=emsGet('mv');return m?`Promis : ${emsKwh(m.prevu)} kWh. Prouvé, à météo comparable : <b>${emsKwh(m.reel)} kWh</b>. Le chiffre brut disait −${m.brut} % : la météo avait fait une partie du travail.`:"Rien de prouvé pour l'instant : une économie annoncée n'est qu'une promesse."},()=>mvStep]
 ];
 function openEmsBureau(){
@@ -22,6 +22,7 @@ function openEmsBureau(){
   const ouvert=n=>arenaDone(ARENAS[n-1]);
   b.innerHTML=`<div class="ems">${emsBarre('tableau de bord du site')}
     <p>L'outil de tout energy manager, version générique : chaque badge y ajoute un module. Tout ce que tu y vois, c'est toi qui l'as fait. ${rappel?'<br><b>'+rappel+'</b>':''}</p>
+    ${maCourbeHtml()}
     <div class="ems-modules">${EMS_MODULES.map(([n,t,res,fn],i)=>ouvert(n)
       ?`<section class="ems-module"><h4>${n} · ${esc(t)}</h4><p>${res()}</p>${fn?`<button type="button" class="btn alt" data-r="${i}">Rejouer l'atelier</button>`:''}</section>`
       :`<section class="ems-module ferme"><h4>${n} · ${esc(t)}</h4><p>🔒 Module livré avec le badge ${esc(BLAB(ARENAS[n-1].badge))}. Le commercial avait pourtant juré qu'il était inclus.</p></section>`).join('')}</div>
@@ -29,5 +30,6 @@ function openEmsBureau(){
     <div class="row"><button type="button" class="btn" id="emsFermer">Fermer ▸</button></div></div>`;
   b.querySelectorAll('[data-r]').forEach(x=>x.onclick=()=>{const M=EMS_MODULES[+x.dataset.r];closePanel();emsRejeu=true;trk('setting',{k:'ems_rejeu',v:M[1]});
     runSteps('EMS du bureau · '+M[1],[M[3]()],()=>{emsRejeu=false;openEmsBureau()})});
+  maCourbeDessiner(b.querySelector('.mc canvas'));
   const f=b.querySelector('#emsFermer');f.onclick=()=>closePanel();f.focus();
 }

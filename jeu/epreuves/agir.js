@@ -27,6 +27,7 @@ function gameAgir(done){
   runSteps('Arène du Chantier · Plan d’action',[
     info(`<h3>Trois marches</h3><p>Pour un foyer : d'abord on éteint les lumières et on baisse le chauffage, ensuite on renégocie ses abonnements, enfin, si ça vaut le coup, on isole la maison. Pour un bâtiment, c'est pareil. Chaque marche coûte plus cher et prend plus de temps.</p>`),
     order({q:'Dans quel ordre agir ?',items:['Sobriété','Efficacité','Production'],okMsg:'On réduit d\'abord le besoin (souvent gratuit), puis on consomme mieux, puis on produit.'}),
+    enjeuStep,
     planStep,
     choice({q:'Deux actions de 10 % chacune sur le chauffage donnent au total…',opts:[['19 %',1,'La seconde s\'applique à ce qui reste : 1 − 0,9 × 0,9 = 19 %.'],['20 %',0,'Les pourcentages se multiplient, ils ne s\'additionnent pas.'],['10 %',0,'La seconde action compte aussi.']]}),
     choice({q:'Un investissement de 30 000 € économise 2 500 € par an. Temps de retour simple ?',opts:[['12 ans',1,'30 000 / 2 500 = 12 ans. C\'est un premier filtre : il ignore la hausse des prix, la durée de vie et les aides (CEE).'],['8 ans',0,'Refais la division.'],['75 ans',0,'On divise l\'investissement par l\'économie annuelle.']]}),

@@ -26,7 +26,7 @@ const SCENES = {
 const AIDES = {
   gamePatrimoine: ["ficheEmsStep", "perimetreStep", "objectifStep"], gameCollecte: ["dataAnim", "raccordStep", "colReponse", "sourcesStep"],
   gameStructurer: ["arbreStep", "strPieces", "strPourquoi", "conversionStep"], gameAnalyse: ["talonStep", "signatureStep"], gameDetect: ["seuilStep"],
-  gameAgir: ["planStep", "agirDerives"], gamePiloter: ["mvStep"],
+  gameAgir: ["enjeuStep", "enjEcole", "enjBureau", "enjBoulangerie", "planStep", "agirDerives"], gamePiloter: ["mvStep"],
 };
 /* les ateliers de l'EMS du bureau (jeu/epreuves/ems-*.js) : ce qu'on y fait, et les données qu'ils lisent */
 const ATELIERS = {
@@ -35,7 +35,7 @@ const ATELIERS = {
   gameStructurer: ["Les ateliers : ranger les pièces dans l'arbre site → point → compteur → mesures (chaque erreur est expliquée), puis passer des puissances à l'énergie du jour et des m³ aux kWh.", []],
   gameAnalyse: ["L'atelier de la signature : régler à la main le talon gaz et la pente sur douze mois ; l'EMS montre ensuite la régression.", []],
   gameDetect: ["L'atelier des alertes : régler le seuil et la persistance sur quatre semaines ; il faut attraper la dérive sans fausse alerte.", ["SEU_EVT"]],
-  gameAgir: ["Le plan d'action rappelle les dérives de l'étape Détecter ; les actions qui les traitent portent l'étiquette « ta dérive ».", ["AGIR_DER"]],
+  gameAgir: ["D'abord l'enjeu propre au site, simulé dans l'EMS : les vacances d'hiver (école), la climatisation de l'été (bureaux), le four et le contrat (boulangerie). Le résultat revient à l'étape Mesurer. Puis le plan d'action, qui rappelle les dérives de l'étape Détecter ; les actions qui les traitent portent l'étiquette « ta dérive ».", ["ENJ_ECOLE", "AGIR_DER"]],
   gamePiloter: ["L'atelier de la mesure : le plan choisi à l'arène du Chantier est vérifié sur un hiver plus doux. Corriger la météo, conclure, puis lire le résultat dans l'indicateur choisi à l'arène du Cadastre.", ["MES_GRAIN"]],
 };
 const RANGEES_ATELIERS = ["SB_JOURS", "SIG_MOIS", "SIG_DJU", "STR_CASES", ...Object.values(ATELIERS).flatMap((a) => a[1])];
@@ -50,7 +50,7 @@ const NOMS = {
   enBadge: "L'énergie après chaque badge", enTick: "La simulation d'énergie", enEvents: "Les événements d'énergie", enWhy: "Tableau de bord : les explications", enViewSite: "Tableau de bord : le site",
   enViewParc: "Tableau de bord : le parc", enViewPsite: "Tableau de bord : un site du parc", wmPlaceAt: "La carte : les lieux", gareGuichet: "Le guichet", gareDeparts: "Le tableau des départs",
   gareEntrer: "Entrer dans la gare", gareTableauDehors: "Le tableau des départs, dehors", voyTrajet: "Le trajet en train", voyRetour: "Le train du retour", voyDonnerInfo: "Carnet de voyage",
-  voyTamponner: "Tampon obtenu", emsCarnet: "Le carnet, dans les ateliers", emsTransfert: "La ligne « Dans un EMS »", emsChoix: "Les choix des ateliers", revoirFiche: "Revoir la fiche", EMS_MODULES: "La console de l'EMS du bureau : les modules", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
+  voyTamponner: "Tampon obtenu", emsCarnet: "Le carnet, dans les ateliers", emsTransfert: "La ligne « Dans un EMS »", emsChoix: "Les choix des ateliers", revoirFiche: "Revoir la fiche", EMS_MODULES: "La console de l'EMS du bureau : les modules", MC_ETATS: "Ma courbe : le trophée, état par état", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
   atlasGare: "Carte : la gare", secretObjs: "Objets à secrets", eggObjs: "Objets à clins d'œil", nameEgg: "Les prénoms prédestinés", jouleExtra: "Harceler Mme Joule", actMobilier: "Le mobilier bavard",
 };
 const NOMS_DONNEES = (N) => Object.assign(N, { QUARTERS: "Les quartiers", WALKERS: "Les passants", LIFE_WX: "Les habitants, selon la météo", REG_WX: "Les régions, selon la météo", LOCALS: "Les bâtiments", MAPS: "Les lieux", SKY_IDLE: "L'horloge du jardin",

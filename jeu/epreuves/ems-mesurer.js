@@ -60,6 +60,7 @@ function mvStep(el,next){
     diag.innerHTML=`<div class="fb ok">✔ La bonne conclusion : ça marche, pas autant que prévu. Alors on va voir.</div>
       <p><b>Le grain de sable :</b> ${esc(MES_GRAIN[s.id]||MES_GRAIN.ecole)}</p>
       <p>Ton objectif, choisi à l'arène du Cadastre : <b>${esc(O.t)}</b>. Ton indicateur : ${val}</p>
+      ${emsGet('enjeu')?`<p>Et l'enjeu de ton site, réglé à l'arène du Chantier (${esc(emsGet('enjeu').t.toLowerCase())}) : <b>${emsKwh(emsGet('enjeu').kwh)} kWh</b> de plus par an, hors plan d'action. Celui-là aussi, il faudra le vérifier l'an prochain.</p>`:''}
       ${emsTransfert('la mesure et vérification compare le suivi à une référence ajustée (météo, occupation), jamais au chiffre brut de l’an dernier. L’outil fait le calcul ; c’est une personne qui décide si l’écart avec le plan est normal, et qui va voir sur place quand il ne l’est pas.')}`;
     gainXP(essais?5:20);contBtn(diag,next)};
   dessiner();
