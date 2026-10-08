@@ -26,7 +26,7 @@ function startEncounter(){
 }
 function battle(a,opt){
   opt=opt||{};busy=true;clearKeys();let cred=100,over=false;const after=opt.onWin||afterCapture;
-  const ov=document.createElement('div');ov.className='battle';ov.innerHTML=`<div class="arena" role="dialog" aria-label="Combat"><div class="field2"><div class="hpbox enemy"><b>${a.name}</b> <small>${opt.owner?'spécimen de '+esc(opt.owner)+' · '+opt.n+'/7':'anomalie sauvage'}</small><div class="bar"><i style="width:100%"></i></div></div><div class="hpbox me"><b>${esc(S.name)}</b> <small>Nv ${level()}</small><div class="bar"><i style="width:100%"></i></div><small>Crédibilité</small></div></div><div class="bmsg"></div><div class="moves"></div></div>`;
+  const ov=document.createElement('div');ov.className='battle';ov.innerHTML=`<div class="arena" role="dialog" aria-label="Combat"><div class="field2"><div class="hpbox enemy"><b>${a.name}</b> <small>${opt.owner?'spécimen de '+esc(opt.owner)+' · '+opt.n+'/'+(opt.total||7):'anomalie sauvage'}</small><div class="bar"><i style="width:100%"></i></div></div><div class="hpbox me"><b>${esc(S.name)}</b> <small>Nv ${level()}</small><div class="bar"><i style="width:100%"></i></div><small>Crédibilité</small></div></div><div class="bmsg"></div><div class="moves"></div></div>`;
   $('layer').appendChild(ov);sfx('encounter');updateMusic();
   const f=ov.querySelector('.field2'),mon=monCanvas(a,40);mon.className='mon';f.appendChild(mon);
   const hc=document.createElement('canvas');hc.width=20;hc.height=20;hc.className='hero';const hx=hc.getContext('2d');drawChar(hx,2,3,'up',0,PAL[S.rank]);f.appendChild(hc);

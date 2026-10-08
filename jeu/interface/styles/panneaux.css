@@ -63,3 +63,19 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 /* petit écran : l'en-tête d'un panneau tient sur une ligne (« Cours ↗ », « 1 / 4 ») */
 .panel header .step,.course-link{white-space:nowrap}.course-link .sm{display:none}
 @media (max-width:560px){.course-link .lg{display:none}.course-link .sm{display:inline}.panel header>span:first-child{min-width:0}}
+
+/* l'EMS du labo (epreuves/serie-brute.js) : une console sobre, la courbe, la liste des symptômes, le diagnostic */
+.ems{display:flex;flex-direction:column;gap:8px}
+.ems-barre{display:flex;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;background:#1c2440;color:#e8eef7;font-family:var(--f-pix);font-size:14px;padding:5px 10px;border-radius:6px}
+.ems-barre span:last-child{color:#9fb4d8}
+.ems p{margin:0}
+.ems-liste{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:15px}
+.ems-liste li.ok{color:var(--ok);text-decoration:line-through}
+.ems-courbe{cursor:crosshair;touch-action:manipulation}.ems-courbe:focus-visible{outline:3px solid var(--amber)}
+.ems-cur{font-family:var(--f-pix);font-size:14px;color:var(--muted)}
+.ems-legende{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13.5px;color:var(--muted)}
+.ems-legende span:before{content:"";display:inline-block;width:18px;height:3px;margin-right:5px;vertical-align:middle;background:#2aa198}
+.ems-legende .lg-c:before{background:#2f6db5}.ems-legende .lg-e:before{background:repeating-linear-gradient(90deg,#e2a13a 0 5px,transparent 5px 8px)}
+.ems-legende .lg-r:before{content:"×";width:auto;height:auto;background:none;color:#c43d3d;font-weight:700}.ems-legende .lg-t:before{height:10px;background:rgba(226,87,59,.18)}
+.ems-diag{min-height:3em}.ems-quoi{margin-bottom:4px!important}
+.ems .tbl table{width:100%}

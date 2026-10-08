@@ -4,8 +4,8 @@
 
 const ARENE_3={id:3,badge:'Fiabiliser',name:'Arène du Tamis',champ:'Dr Doublon',theme:'labo',col:'#2f9e7a',wall:'#eef5f1',b:L.arena[3],
   cpal:{shirt:'#f7f0dc',pants:'#2c2c34',hair:'#9a9aa2',style:'boucle',glasses:1,tie:'#2f9e7a',skin:'#e8b98f'},
-  cIntro:["Arène du Tamis. Mes sept spécimens sont les pires anomalies de la région, élevées en bocal.","Corrige-les une par une. Et n'oublie pas : on ne corrige jamais en silence."],
-  cWin:["Sept sur sept. Mes bocaux sont vides et tes données sont propres.","Badge Fiabiliser. Garde toujours la donnée brute, avec son statut."],
+  cIntro:["Arène du Tamis. D'abord, quatre spécimens en bocal : les anomalies qu'on ne voit pas sur une courbe.","Ensuite, la vraie vie : une semaine de données brutes de ton site. Et n'oublie pas : on ne corrige jamais en silence."],
+  cWin:["Quatre bocaux vides et une semaine propre. Je suis presque ému. Presque.","Badge Fiabiliser. Garde toujours la donnée brute, avec son statut."],
   next:"Badge Fiabiliser ! On détecte sur des données fiabilisées, et on garde toujours la brute. Maintenant, il faut ranger tout ça : passe à l'armoire à archives du bureau, puis à l'Arène des Archives.",
   tr:[
    {n:'Laborantin Noé',pal:{shirt:'#f7f0dc',pants:'#6d7896',hair:'#141216',glasses:1,skin:'#6b4128',style:'afro'},intro:"Halte. Rien n'entre au labo sans contrôle. Toi non plus.",lose:"Contrôle passé. Suivant.",qs:[

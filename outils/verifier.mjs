@@ -298,6 +298,32 @@ if (quoi === "tout" || quoi === "guidage") {
     verif("tactile : « touche K » devient « bouton Carte »", /bouton Carte/.test(t) && /bouton Menu/.test(t) && !/touche/.test(t), t);
     await contexte.close();
   }
+  // Fiabiliser : l'atelier de la série brute (epreuves/serie-brute.js), au doigt sur un téléphone
+  {
+    const contexte = await navigateur.newContext({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
+    const page = await contexte.newPage(); const erreurs = ecouterErreurs(page);
+    await page.goto(adresse + "jeu/#essai-chapitre-4"); await page.waitForTimeout(2200); await finDialogue(page);
+    const R = (f, ...a) => page.evaluate(f, ...a), ombre = (sel) => R((sel) => document.getElementById("qk-host").shadowRoot.querySelector(sel)?.textContent || "", sel);
+    await R(() => { champSerie(ARENAS[2], () => { window.__serie = 1; }); document.getElementById("qk-host").shadowRoot.querySelector(".pbody .btn").click(); });
+    await page.waitForTimeout(300);
+    const toucher = (i) => R((i) => { const c = document.getElementById("qk-host").shadowRoot.querySelector(".ems-courbe"), r = c.getBoundingClientRect(), px = 58 + (720 - 70) * (i + 0.5) / 336; c.dispatchEvent(new MouseEvent("click", { clientX: r.left + px * r.width / 720, clientY: r.top + 80, bubbles: true })); }, i);
+    await toucher(0 * 48 + 24); await page.waitForTimeout(150);
+    verif("fiabiliser : toucher une donnée normale explique pourquoi ce n'est pas une anomalie", /cantine/.test(await ombre(".ems-diag")) && !(await ombre(".ems-diag .opt")));
+    await toucher(3 * 48 + 28); await page.waitForTimeout(150);
+    const avant = await R(() => [...document.getElementById("qk-host").shadowRoot.querySelectorAll(".ems-diag .opt")].map((b) => b.textContent));
+    await R(() => [...document.getElementById("qk-host").shadowRoot.querySelectorAll(".ems-diag .opt")].find((b) => /record/.test(b.textContent)).click()); await page.waitForTimeout(150);
+    const apres = await R(() => [...document.getElementById("qk-host").shadowRoot.querySelectorAll(".ems-diag .opt")].filter((b) => !b.disabled).length);
+    verif("fiabiliser : un mauvais traitement est expliqué, et on rechoisit parmi toutes les propositions (pas d'élimination)", /disjoncteur/.test(await ombre(".ems-diag .fb.ko")) && avant.length === 3 && apres === 3);
+    const bon = () => R(() => [...document.getElementById("qk-host").shadowRoot.querySelectorAll(".ems-diag .opt")].find((b) => /Rejeter la valeur|Estimer le créneau|Garder une seule|Valeurs figées/.test(b.textContent)).click());
+    await bon(); await page.waitForTimeout(150);
+    for (const i of [2 * 48 + 20, 1 * 48 + 20, 4 * 48 + 24]) { await toucher(i); await page.waitForTimeout(120); await bon(); await page.waitForTimeout(150); }
+    const bilan = await ombre(".ems-diag");
+    await R(() => document.getElementById("qk-host").shadowRoot.querySelector(".ems-diag .btn").click()); await page.waitForTimeout(300);
+    const fin = await R(() => ({ serie: window.__serie, ems: S.ems && S.ems.fiab, dex: ["trou", "doublon", "pic"].every((k) => S.dex[k]) }));
+    verif("fiabiliser : les quatre anomalies traitées, la semaine fiabilisée, l'écart brut / fiabilisé affiché, l'Anomalidex complété", /Semaine fiabilisée/.test(bilan) && /aurait annoncé/.test(bilan) && fin.serie === 1 && fin.ems && fin.ems.brut > fin.ems.net && fin.dex, JSON.stringify(fin));
+    verif("fiabiliser : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
+    await contexte.close();
+  }
 }
 
 // ---------------------------------------------------------------- menu

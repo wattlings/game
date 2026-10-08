@@ -68,7 +68,7 @@ export function construire(FF, { chapitres }) {
   const prendre = (dans, filtre) => (parPortee.get(dans) || []).filter((it) => !it._place && (!filtre || filtre(it))).map((it) => ((it._place = true), it));
   const chDe = (it) => { const m = (it.si || "").match(/S\.ch===(\d+)/g); return m && m.length === 1 ? +m[0].slice(7) : null; };
 
-  const FICHES = don("FICHES") || [], SRC = don("SRC") || {}, ARENA_CH = don("ARENA_CH") || {}, ARENA_OPEN = don("ARENA_OPEN") || {}, JOULE = don("JOULE_HINTS") || {}, ANOM = don("ANOM") || [];
+  const FICHES = don("FICHES") || [], SRC = don("SRC") || {}, ARENA_CH = don("ARENA_CH") || {}, ARENA_OPEN = don("ARENA_OPEN") || {}, JOULE = don("JOULE_HINTS") || {}, ANOM = don("ANOM") || [], BOCAUX = don("BOCAUX") || [], SB_ANOM = don("SB_ANOM") || [];
   const ARENES = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => don("ARENE_" + n)).filter(Boolean);
   const chapitresDeLEtape = (st) => chapitres.map((c, i) => (c.etape === st ? i : -1)).filter((i) => i >= 0);
   const chDeLaFiche = (f) => (typeof f.req === "number" ? f.req : f.st === 0 ? 0 : v(f.st) === "P" ? chapitres.findIndex((c) => c.page === "patrimoine") : chapitresDeLEtape(f.st)[0] ?? 0);
@@ -105,7 +105,10 @@ export function construire(FF, { chapitres }) {
         { genre: "dialogue", titre: "Une fois battu", lignes: [{ qui: T.n, t: T.lose }] }] }));
     const fns = EPREUVES[n] || [], epreuve = [];
     fns.forEach((fn) => {
-      if (fn === "champAnomalies") epreuve.push(note("Sept anomalies à corriger, l'une après l'autre. Une erreur coûte de la crédibilité."), ...ANOM.map((a) => ({ genre: "choix", titre: a.name, q: a.data, rep: (a.moves || []).map((o) => ({ t: o[0], ok: !!o[1], fb: o[2] })) })), ...prendre("champAnomalies"));
+      if (fn === "champAnomalies") epreuve.push(note("D'abord les bocaux : les anomalies qu'on ne voit pas sur une courbe, l'une après l'autre. Une erreur coûte de la crédibilité."),
+        ...ANOM.filter((a) => !BOCAUX.length || BOCAUX.includes(a.id)).map((a) => ({ genre: "choix", titre: a.name, q: a.data, rep: (a.moves || []).map((o) => ({ t: o[0], ok: !!o[1], fb: o[2] })) })), ...prendre("champAnomalies"),
+        note("Puis l'atelier, dans l'EMS du labo : une semaine de données brutes du site. Le joueur repère lui-même chaque anomalie sur la courbe (un clic ailleurs explique pourquoi ce n'en est pas une), puis choisit son traitement ; à la fin, l'écart entre la semaine brute et la semaine fiabilisée."),
+        ...prendre("champSerie"), ...SB_ANOM.map((a) => ({ genre: "choix", titre: a.forme, q: a.quoi, rep: (a.opts || []).map((o) => ({ t: o[0], ok: !!o[1], fb: o[2] })) })), ...prendre("sbLeurre"), ...prendre("serieBruteStep"));
       else epreuve.push(...prendre(fn), ...(AIDES[fn] || []).flatMap((a) => prendre(a)));
     });
     N.push({ id: `arene-${n}-champion`, genre: "champion", titre: lisible(A.champ), sous: "champion", pal: A.cpal, essai: "champion-" + n, suivi: { arene: nom, badge: lisible(A.badge), epreuve: true },
@@ -144,7 +147,7 @@ export function construire(FF, { chapitres }) {
 
   // ---------------------------------------------------------------- 2. les voyages
   const declares = fichiers.flatMap((F) => F.appels.filter((a) => a._appel === "voyDeclarer").map((a) => ({ id: a.args[0].v, d: a.args[1], F })));
-  const rangees = new Set(); // les constantes de données déjà rangées quelque part
+  const rangees = new Set(["SB_JOURS"]); // les constantes de données déjà rangées quelque part (SB_JOURS : les noms des jours de l'atelier, des libellés)
   const voyages = declares.map(({ id, d }) => {
     const dossier = `jeu/voyages/${id}/`, FS = fichiers.filter((F) => F.chemin.startsWith(dossier));
     const prefixe = Object.keys(Object.assign({}, ...FS.map((F) => F.donnees))).find((k) => /^[A-Z]{3}\.dit$/.test(k))?.slice(0, 3);

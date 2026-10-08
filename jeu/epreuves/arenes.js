@@ -95,12 +95,21 @@ function champTrial(A){
   const win=()=>arenaWin(A);
   ({1:()=>gamePatrimoine(()=>gamePlan(win)),2:()=>gameCollecte(win),3:()=>champAnomalies(A,win),4:()=>gameStructurer(win),5:()=>gameAnalyse(win),6:()=>gameDetect(win),7:()=>gameAgir(win),8:()=>gamePiloter(win)})[A.id]();
 }
+/* Arène 3 : d'abord les bocaux (les anomalies qu'on ne voit pas sur une courbe), puis l'atelier : une semaine brute du site à fiabiliser (serie-brute.js) */
+const BOCAUX=['recule','boucle','unite','heure'];
 function champAnomalies(A,win){
-  S.flags.c3=S.flags.c3||{};const rest=ANOM.filter(a=>!S.flags.c3[a.id]);
-  if(!rest.length)return win();
-  const a=rest[0],n=ANOM.length-rest.length+1;
-  battle(a,{owner:A.champ,n,onWin:()=>{S.flags.c3[a.id]=1;save();const left=ANOM.filter(x=>!S.flags.c3[x.id]).length;
-    if(!left)win();else say([{w:A.champ,t:[`Pas mal. Spécimen suivant !`,`Tiens, tiens. Celui-ci est plus coriace.`,`Tu corriges vite. Trop vite ? Voyons le suivant.`][n%3]+` (${n}/7 corrigées)`}],()=>champAnomalies(A,win))},onLose:arenaDefeat});
+  S.flags.c3=S.flags.c3||{};const B=ANOM.filter(a=>BOCAUX.includes(a.id)),rest=B.filter(a=>!S.flags.c3[a.id]);
+  if(!rest.length)return champSerie(A,win);
+  const a=rest[0],n=B.length-rest.length+1;
+  battle(a,{owner:A.champ,n,total:B.length,onWin:()=>{S.flags.c3[a.id]=1;save();const left=B.filter(x=>!S.flags.c3[x.id]).length;
+    if(!left)say([{w:A.champ,t:"Les bocaux, c'était l'échauffement. Voici une semaine de données de ton site, toute fraîche de l'API."},{w:A.champ,t:"Je n'y ai pas touché. Personne n'y a touché. C'est bien le problème."}],()=>champSerie(A,win));
+    else say([{w:A.champ,t:[`Pas mal. Spécimen suivant !`,`Tiens, tiens. Celui-ci est plus coriace.`,`Tu corriges vite. Trop vite ? Voyons le suivant.`][n%3]+` (${n}/${B.length} corrigées)`}],()=>champAnomalies(A,win))},onLose:arenaDefeat});
+}
+function champSerie(A,win){
+  S.flags.c3=S.flags.c3||{};if(S.flags.c3.serie)return win();
+  runSteps(A.name+' · L’EMS du labo',[
+    info(`<h3>La vraie vie</h3><p>Une semaine de données ${esc(enDe(site()))}, telle que l'EMS du labo vient de la recevoir. Brute. Très brute.</p><p>Ton travail : repérer ce qui cloche, choisir le bon traitement, et ne jamais effacer la donnée d'origine. Attention : une donnée surprenante n'est pas forcément fausse. La cantine a le droit d'avoir faim à midi.</p>`,'Ouvrir la série'),
+    serieBruteStep],()=>{S.flags.c3.serie=1;save();win()});
 }
 const ARENA_OPEN={1:"Une barrière se lève : la Cité des Beffrois est ouverte, à l'est de la place de la Donnée. Briques rouges et beffrois : te voilà dans le Nord.",2:"Une barrière se lève : le Clos du Tamis est ouvert, au sud de la Cité des Beffrois. Chaumières, pommiers et haies de bocage : la Normandie.",3:"Une barrière se lève : le Quartier des Colombages est ouvert, au sud de la place de la Donnée. Un petit air d'Alsace.",
   4:"Les ponts sont ouverts : la rive Énergie t'attend, avec la place de l'Énergie et les Coteaux des Courbes, plantés de vigne comme en Bourgogne.",5:"Une barrière se lève : l'Anse du Veilleur est ouverte, à l'ouest des Coteaux des Courbes. Granit, ardoise et un phare : la Bretagne.",6:"Une barrière se lève : le Mas du Soleil est ouvert, au nord de l'Anse du Veilleur. Lavande, oliviers et cyprès : la Provence.",
