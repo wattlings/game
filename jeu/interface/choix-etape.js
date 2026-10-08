@@ -21,7 +21,7 @@ function openChapterSelect(){
 function jumpTo(ch,sid){
   TCH.via='jump';trk('jump',{ch,site:sid});
   const s=SITES[sid],keep={badges:(S.badges||[]).slice(),fiches:Object.assign({},S.fiches),dex:Object.assign({},S.dex),xp:S.xp||0,rank:S.rank||0};
-  S.site=sid;S.ch=ch;S.notes={};S.flags={pmIntro:ch>=10?1:0};S.arena={};S.v=4;AR.lock=false;AR.id=0;S.fiches={};FICHES.forEach(f=>{if(STEP_CH[f.st]<ch)S.fiches[f.id]=1});S.pm=ch>=11?6:0;S.derives={};S.dex={};
+  S.site=sid;S.ch=ch;S.notes={};S.flags={pmIntro:ch>=10?1:0,profilPropose:S.flags&&S.flags.profilPropose};S.arena={};S.v=4;AR.lock=false;AR.id=0;S.fiches={};FICHES.forEach(f=>{if(STEP_CH[f.st]<ch)S.fiches[f.id]=1});S.pm=ch>=11?6:0;S.derives={};S.dex={};
   if(ch>=2){S.notes.adresse=`${s.addr}, ${s.cp}`;S.notes.surface=s.surface;S.notes.activite=s.activite}
   if(ch>=3){S.notes.pdl=s.pdl;S.notes.pce=s.pce;Object.assign(S.flags,{elec:true,gas:true,sub:true})}
   if(ch>=5)ANOM.forEach(a=>S.dex[a.id]=1);
@@ -32,9 +32,12 @@ function jumpTo(ch,sid){
   const b=BLD.find(x=>x.id===sid);let pos;
   const AJ=ARENAS.find(a=>ARENA_CH[a.id]===ch);
   if([1].includes(ch))pos=['town',...front('office'),'down'];else if(ch===2||ch===7)pos=['town',b.door[0],b.door[1]+1,'up'];else if(ch===5)pos=['office',8,3,'right'];else if(AJ)pos=['town',AJ.b.door[0],AJ.b.door[1]+1,'up'];else if(ch===10)pos=['town',...front('mairie'),'up'];else if(ch===11)pos=['town',...LW(56,36),'down'];else pos=['office',5,6,'up'];
+  S.flags.badgesOfferts=S.badges.length;   // la proposition de créer un profil attend un badge gagné en jouant (aides.js)
   S.map=pos[0];S.x=pos[1];S.y=pos[2];S.dir=pos[3];save();
   if(!ROOT.querySelector('.title-screen'))boot(true);
   const hint=JOULE_HINTS[ch];
   const suite=prochaineEtapeTexte();
-  qkTimeout(()=>say([{t:`${CHAPTERS[ch]} · ${s.name}.`},...(hint?hint.map(t=>({w:'Mme Joule',t})):[]),...(suite?[{t:`Prochaine étape : ${suite}. Suis la flèche orange.`}]:[])]),350);
+  bandeauEtape(CHAPTERS[ch],s.name);
+  const L=[...(hint?hint.map(t=>({w:'Mme Joule',t})):[]),...(suite?[{t:`Prochaine étape : ${suite}. Suis la flèche orange.`}]:[])];
+  if(L.length)qkTimeout(()=>say(L),350);
 }

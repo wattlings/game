@@ -7,7 +7,7 @@ const BADGES=['Cadrer','Collecter','Fiabiliser','Structurer','Analyser','Détect
 const DEF=()=>({en:null,ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,models:{},secrets:{},maxCh:0,sobriete:false,hades:false,hadesN:0,wololo:false,arena:{},v:4});
 let S=DEF();
 /* Une seule partie : celle du compte du joueur. Le navigateur la garde, commun/compte.js la recopie sur le compte.
-   Sans compte (« Continuer sans s'authentifier »), la partie se joue mais rien n'est enregistré : INVITE. */
+   Sans compte (« Jouer » sur l'écran titre), la partie se joue mais rien n'est enregistré : INVITE. */
 function readSave(){try{const r=localStorage.getItem(SAVE_KEY);return r?JSON.parse(r):null}catch(e){return null}}
 let saveOK=true;
 /* en mode essai (moteur/essai.js), rien n'est enregistré */

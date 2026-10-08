@@ -1,5 +1,6 @@
 /**
- * Passerelles du cours vers le jeu : le bandeau « Mode jeu » en haut des pages et le bouton flottant « Jouer ».
+ * Passerelles du cours vers le jeu. Le cours passe d'abord : le bandeau « Mode jeu » vient en fin d'étape (« mettre en pratique »),
+ * et le lien « Le jeu » de la barre du haut devient « Reprendre le jeu » quand une partie existe.
  * Le cours ne charge pas le jeu : ce sont de simples liens vers la page voisine jeu/.
  * (Les classes commencent par « qk- », du premier nom du jeu : La Quête du Kilowatt.)
  */
@@ -76,32 +77,26 @@ function bandeau(surtitre, titre, texte, chapitres, direct) {
   return b;
 }
 
-/** Met à jour le bouton flottant : « Jouer » ou « Reprendre le jeu », avec l'avatar du joueur. */
+/** Met à jour le lien du jeu dans la barre du haut : « Le jeu » ou « Reprendre le jeu ». */
 function majBoutonJeu() {
-  const f = document.getElementById("qk-fab");
+  const f = document.getElementById("qk-jeu");
   if (!f) return;
   const partie = partieEnCours();
-  f.querySelector("span").textContent = partie ? "Reprendre le jeu" : "Jouer";
+  f.textContent = partie ? "Reprendre le jeu" : "Le jeu";
   f.href = adresseJeu(partie ? "reprendre" : "");
   f.dataset.jeu = partie ? "reprendre" : "";
-  f.querySelector("canvas").replaceWith(avatar());
 }
 
 let enAttente = false;
 
-/** Pose le bouton flottant et, selon la page affichée, le bandeau « Mode jeu ». */
+/** Pose, selon la page affichée, le bandeau « Mode jeu » : après la leçon, juste avant les étapes voisines. */
 function poser() {
   enAttente = false;
   const c = document.getElementById("contenu");
   if (!c) return;
-  if (!document.getElementById("qk-fab")) {
-    const f = lienJeu("", "qk-fab");
-    f.id = "qk-fab";
-    f.innerHTML = "<canvas></canvas><span>Jouer</span>";
-    document.body.appendChild(f);
-    majBoutonJeu();
-  }
+  majBoutonJeu();
   if (c.querySelector(".qk-band")) return;
+  const enFin = (b) => { const pager = c.querySelector(".pager"); if (pager) pager.before(b); else c.append(b); };
   const h = decodeURIComponent(location.hash.slice(1)) || "accueil";
   const m = h.match(/^etape-(\d)/);
   if (m) {
@@ -110,8 +105,8 @@ function poser() {
     if (!chapitres.length) return;
     const enCours = !!partieEnCours();
     const b = bandeau(
-      "Mode jeu · étape " + n,
-      `Pratique « ${ETAPES_DE_BASE[n - 1].titre} » dans Wattlings`,
+      "Mettre en pratique · étape " + n,
+      `Joue « ${ETAPES_DE_BASE[n - 1].titre} » dans Wattlings`,
       !enCours
         ? "Le jeu reprend tout le parcours en 8 étapes, version RPG. Le bouton « ← Cours » du jeu te ramène ici à tout moment."
         : chapitres.length > 1
@@ -125,13 +120,10 @@ function poser() {
         "beforeend",
         '<p><a href="#patrimoine">Et après ? Lire « Piloter un patrimoine » →</a></p>',
       );
-    const tete = c.querySelector(".etape-head");
-    if (tete) tete.after(b);
-    else c.prepend(b);
+    enFin(b);
   } else if (h === "patrimoine") {
-    const tete = c.querySelector(".etape-head");
-    if (!tete) return;
-    tete.after(
+    if (!c.querySelector(".etape-head")) return;
+    enFin(
       bandeau(
         "Mode jeu · chapitre 10",
         "Pilote les 20 sites dans Wattlings",
@@ -139,17 +131,8 @@ function poser() {
         [10],
       ),
     );
-  } else if (h === "accueil") {
-    c.prepend(
-      bandeau(
-        "Mode jeu",
-        "Wattlings",
-        "Le même parcours en 8 étapes, version RPG : explore la ville, réunis les informations, puis remporte les 8 arènes et leurs badges pour devenir gestionnaire de patrimoine.",
-        null,
-      ),
-    );
   } else if (h === "ecole") {
-    c.prepend(
+    enFin(
       bandeau(
         "Mode jeu",
         "Visite l’école dans le jeu",
@@ -177,7 +160,7 @@ export function brancherJeu() {
       requestAnimationFrame(poser);
     }
   }).observe(document.body, { childList: true, subtree: true });
-  // au retour du jeu, l'avatar et le libellé du bouton peuvent avoir changé
+  // au retour du jeu, le libellé du lien peut avoir changé
   addEventListener("pageshow", majBoutonJeu);
   addEventListener("storage", majBoutonJeu);
   document.addEventListener("visibilitychange", () => {

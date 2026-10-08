@@ -115,7 +115,7 @@ const MENU_ECRANS={
     html:()=>{const s=S.site?site():null,a=prochaineAction(),T=a.voyage?[]:objectiveText0();
       return `<div class="obj-box"><p><b>▶</b> ${esc(objectiveText())}</p></div>
       ${T.length>1?`<h4 class="segh">${esc(CHAPTERS[S.ch]||'Cette étape')}</h4><ol class="obj-liste">${T.map(x=>`<li class="${x.ok?'ok':x===a||x.t===a.t?'cur':''}"><span aria-hidden="true">${x.ok?'✔':x.t===a.t?'▶':'○'}</span><span>${esc(x.t)}${x.prog&&!x.ok?` <small>(${esc(x.prog)})</small>`:''}${x.cle?' <small class="obj-cle">info clé</small>':''}</span></li>`).join('')}</ol>`:''}
-      <p class="dnote">${s?esc(s.name)+' · ':''}La flèche orange montre où aller ; au bord de l'écran, elle indique la direction. Un point d'exclamation signale quelqu'un qui a une information pour toi.</p>
+      <p class="dnote">${s?esc(s.name)+' · ':''}La flèche orange montre où aller ; au bord de l'écran, elle indique la direction. Un point d'exclamation signale quelqu'un qui a une information pour toi ; un petit, plus pâle, une information facultative.</p>
       <div class="row"><button class="btn" id="oMap" data-focus>Voir sur la carte</button><button class="btn" id="oCourse">Cours de cette étape ↗</button></div>`},
     lier:mt=>{mt.querySelector('#oCourse').onclick=()=>{closePanel();goCourse()};mt.querySelector('#oMap').onclick=()=>{closePanel();openMap()}}},
 

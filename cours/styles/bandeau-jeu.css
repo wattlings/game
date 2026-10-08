@@ -81,41 +81,13 @@
     grid-column: 1/-1;
   }
 }
-.qk-fab {
-  position: fixed;
-  left: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  z-index: 40;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #1c2440;
-  color: #f7f0dc;
-  border: 3px solid #f2a33a;
-  border-radius: 999px;
-  padding: 5px 16px 5px 5px;
-  font-family: "Pixelify Sans", var(--f-display);
-  font-size: 1rem;
-  cursor: pointer;
-  box-shadow: var(--shadow);
-}
-.qk-fab .qk-sprite {
-  width: 34px;
-  height: 34px;
-  border-width: 2px;
-  border-radius: 50%;
-}
-.qk-fab:hover {
-  background: #2c365c;
-}
 .nav a.qk-nav {
   font-family: "Pixelify Sans", var(--f-body);
   color: var(--energie-ink);
 }
 
 /* les boutons « Jouer » sont des liens vers la page du jeu */
-a.qk-play,
-a.qk-fab {
+a.qk-play {
   text-decoration: none;
 }
 /* sans partie en cours : aller directement à l'étape, en lien secondaire sous « Commencer le jeu » */

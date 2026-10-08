@@ -372,7 +372,7 @@ if (quoi === "tout" || quoi === "comptes") {
   await dansLaPage(() => localStorage.setItem("wattlings-slot-2", JSON.stringify({ site: "ecole", ch: 2, name: "Ancien", savedAt: 5 })));
   await page.goto(adresse + "jeu/#chapitre-3");
   await page.waitForTimeout(1200);
-  verif("sans compte : l'écran titre propose de se connecter", /Connecte-toi/.test((await ombre(".title-screen .slot.auth")) || "") && /sans s'authentifier/.test((await ombre(".title-screen [data-a=guest]")) || ""));
+  verif("sans compte : l'écran titre propose de jouer d'abord, et de se connecter dessous", /Jouer/.test((await ombre(".title-screen [data-a=guest]")) || "") && /Se connecter/.test((await ombre(".title-screen .slot.auth")) || ""), JSON.stringify([await ombre(".title-screen [data-a=guest]"), await ombre(".title-screen .slot.auth"), await dansLaPage(() => document.getElementById("qk-host").shadowRoot.activeElement?.outerHTML)]));
   verif("sans compte : la demande « chapitre 3 » attend le choix du joueur", await dansLaPage(() => !EN_ON && /chapitre-3/.test(location.hash)));
   verif("sans compte : une partie d'avant les comptes est annoncée", /Ancien/.test((await ombre(".title-screen .slot.auth")) || ""));
   await cliquer("[data-a=guest]");
@@ -380,16 +380,24 @@ if (quoi === "tout" || quoi === "comptes") {
   // nouvelle partie : la présentation d'abord (les commandes, puis le jeu), qu'on peut passer
   verif("présentation : elle s'ouvre sur les commandes", /Les commandes/.test((await ombre(".presentation header")) || "") && /Marcher/.test((await ombre(".presentation .keys-t")) || ""));
   await cliquer("#prNext"); await page.waitForTimeout(150);
-  verif("présentation : puis le jeu et son objectif", /Le jeu et son objectif/.test((await ombre(".presentation header")) || "") && /8 quartiers/.test((await ombre(".presentation .pbody")) || ""));
+  verif("présentation : puis le jeu et son objectif", /Le jeu et son objectif/.test((await ombre(".presentation header")) || "") && /Huit badges/.test((await ombre(".presentation .pbody")) || ""));
   await page.keyboard.press("ArrowLeft"); await page.waitForTimeout(150);
   verif("présentation : on revient en arrière", /Les commandes/.test((await ombre(".presentation header")) || ""));
   await cliquer("#prSkip"); await page.waitForTimeout(300);
   verif("présentation : « Passer » mène à l'avatar", !(await ombre(".presentation")) && (await dansLaPage(() => !!document.getElementById("qk-host").shadowRoot.getElementById("avOk"))));
   await validerAvatar(page);
   await page.waitForTimeout(1200);
-  verif("« Continuer sans s'authentifier » ouvre le chapitre demandé", await dansLaPage(() => INVITE === true && EN_ON === true && S.ch === 3 && location.hash === ""), JSON.stringify(await dansLaPage(() => ({ invite: INVITE, en: EN_ON, ch: S.ch, h: location.hash }))));
+  verif("« Jouer » sans compte ouvre le chapitre demandé", await dansLaPage(() => INVITE === true && EN_ON === true && S.ch === 3 && location.hash === ""), JSON.stringify(await dansLaPage(() => ({ invite: INVITE, en: EN_ON, ch: S.ch, h: location.hash }))));
   for (let i = 0; i < 6; i++) { await page.keyboard.press("Space"); await page.waitForTimeout(200); }
   await dansLaPage(() => { save(); qkSaveNow(); });
+  {
+    await page.waitForTimeout(1200);
+    const offert = await ombre(".panel header");
+    await dansLaPage(() => { S.badges = [...S.badges, "Collecter"]; }); await page.waitForTimeout(1300);
+    const gagne = await ombre(".panel header");
+    verif("sans compte : la création d'un profil est proposée après un badge gagné en jouant, pas pour ceux offerts en sautant à l'étape", !/Garde ta progression/.test(offert || "") && /Garde ta progression/.test(gagne || ""), JSON.stringify({ offert, gagne }));
+    await cliquer("[data-p=non]"); await page.waitForTimeout(200);
+  }
   await page.keyboard.press("m"); await page.waitForTimeout(300);
   await cliquer(".fr-menu [data-k=save]"); await page.waitForTimeout(200);
   const ongletSauvegarde = await dansLaPage(() => document.getElementById("qk-host").shadowRoot.querySelector(".pbody")?.textContent || "");
@@ -426,7 +434,7 @@ if (quoi === "tout" || quoi === "liens") {
   await page.goto(adresse + "#etape-3");
   await page.waitForSelector(".qk-band");
   verif("bandeau « Mode jeu » sur l'étape 3 : sans partie, « Commencer le jeu » et un lien direct vers l'étape", await dansLaPage(() => /Commencer le jeu/.test(document.querySelector(".qk-band .qk-play").textContent) && /Fiabiliser/.test(document.querySelector(".qk-band .qk-direct").textContent)));
-  verif("bouton flottant « Jouer » tant qu'aucune partie n'existe", await dansLaPage(() => document.querySelector("#qk-fab span").textContent === "Jouer"));
+  verif("le lien « Le jeu » de la barre du haut tant qu'aucune partie n'existe, et le bandeau du jeu après la leçon", await dansLaPage(() => document.querySelector("#qk-jeu").textContent === "Le jeu" && !document.querySelector("#qk-fab") && !!document.querySelector(".qk-band + .pager")));
   await page.click(".qk-band .qk-direct a");
   await page.waitForURL(/\/jeu\//);
   await page.waitForTimeout(1200);
@@ -443,8 +451,8 @@ if (quoi === "tout" || quoi === "liens") {
   verif("« ← Retour au cours » ramène à la page d'où l'on venait", await dansLaPage(() => location.hash === "#etape-3" && !location.pathname.includes("/jeu/")));
   const sauvegarde = await dansLaPage(() => JSON.parse(localStorage.getItem("wattlings-slot-1") || "null"));
   verif("la partie est sauvegardée en quittant le jeu", !!sauvegarde && sauvegarde.x === position.x && sauvegarde.y === position.y && sauvegarde.map === position.carte);
-  verif("le bouton flottant devient « Reprendre le jeu »", await dansLaPage(() => document.querySelector("#qk-fab span").textContent === "Reprendre le jeu"));
-  await page.click("#qk-fab");
+  verif("le lien de la barre du haut devient « Reprendre le jeu »", await dansLaPage(() => document.querySelector("#qk-jeu").textContent === "Reprendre le jeu"));
+  await page.click("#qk-jeu");
   await page.waitForURL(/\/jeu\//);
   await page.waitForTimeout(1300);
   verif("« Reprendre le jeu » reprend au même endroit", await dansLaPage((p) => EN_ON === true && S.x === p.x && S.y === p.y && S.map === p.carte, position));

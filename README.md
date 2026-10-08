@@ -33,7 +33,7 @@ Chaque modification enregistrée sur la branche `main` est en ligne après une �
 | La barre du haut, la navigation | `cours/styles/coquille.css` |
 | La mise en page d'une étape, de l'accueil | `cours/styles/etape.css`, `accueil.css` |
 | Boutons, champs, tableaux, graphiques des démos | `cours/styles/controles.css`, `demos.css`, `niveaux.css` |
-| Le bandeau « Mode jeu » et le bouton « Jouer » | `cours/styles/bandeau-jeu.css` |
+| Le bandeau « Mettre en pratique » (en fin d'étape, avant les étapes voisines) et le lien « Le jeu » / « Reprendre le jeu » de la barre du haut | `cours/coquille/jeu.js`, `cours/styles/bandeau-jeu.css` |
 | Une icône du cours | `cours/blocs/icones.js` |
 | Le schéma d'une étape | `cours/schemas/<étape>.js` |
 | Les couleurs des menus et panneaux du jeu | `jeu/interface/styles/jetons.css` |
@@ -98,6 +98,7 @@ Quatre sortes d'information n'ont pas de source, et c'est voulu : ce qui est inv
 | Le menu, la carte, le tableau de bord, l'avatar | `jeu/interface/<écran>.js` |
 | Les personnages tout prêts de l'écran de l'avatar (`PERSOS`), les chapeaux et coiffes (`HATS`) ; les coiffures (`STYLES`) et le dessin des personnages, fauteuil roulant compris | `jeu/interface/avatar.js` ; `jeu/rendu/personnages.js` ; les teints proposés : `SKIN_CHOIX` dans `jeu/rendu/palettes.js` |
 | Le menu (à la manière de Pokémon Rouge Feu : une liste en haut à droite, un curseur ▶, un bandeau d'aide en bas ; A ouvre, B revient, M referme) : ses entrées, leur texte d'aide, leurs écrans | `jeu/interface/menu.js` (`MENU_ENTREES` pour la liste, `MENU_ECRANS` pour les écrans, `MENU_ALIAS` pour les anciens noms d'onglets), `jeu/interface/styles/menu.css` |
+| Le nom de l'étape en bandeau qui s'efface tout seul (en arrivant à une étape) ; les « ! » des informations facultatives, plus petits et plus pâles que ceux de l'étape en cours | `jeu/interface/hud.js` (`bandeauEtape`) ; `jeu/moteur/boucle.js` |
 | La patine de la ville par défaut (1 · Neuf ; le joueur la change dans menu → Options) | `jeu/monde/ciel.js` (`PREF`) |
 
 ### Les voyages en train (après la fin du jeu)
@@ -270,7 +271,7 @@ Sans rien installer : dans le dépôt GitHub, onglet **Actions**, lancer « Fich
 
 Tout est enregistré dans le navigateur du visiteur, sous des clés inchangées depuis la version d'origine : la progression du cours (`ems-pedagogie-v1`) et la partie du jeu (`wattlings-slot-1`, nom hérité des trois emplacements d'autrefois).
 
-**Le jeu a une seule partie par joueur, celle de son compte** (voir « Comptes joueurs » ci-dessous). Sans compte, l'écran titre propose de se connecter, de créer un compte, ou de **« Continuer sans s'authentifier »** : la partie se joue alors normalement, mais rien n'est enregistré, et elle s'arrête quand on ferme la page. Une demande venue du cours (« jouer le chapitre 3 ») attend ce choix, puis est servie. Un joueur sans compte qui se connecte en cours de partie (menu → Sauvegarde) l'enregistre sur son compte, sauf si le compte a déjà une partie : c'est alors celle du compte qui reprend.
+**Le jeu a une seule partie par joueur, celle de son compte** (voir « Comptes joueurs » ci-dessous). Sans compte, l'écran titre propose d'abord **« Jouer »** : la partie se joue alors normalement, mais rien n'est enregistré, et elle s'arrête quand on ferme la page. Se connecter et créer un compte sont proposés dessous ; après le premier badge, le jeu propose une fois de créer un profil pour garder la partie. Une demande venue du cours (« jouer le chapitre 3 ») attend ce choix, puis est servie. Un joueur sans compte qui se connecte en cours de partie (menu → Sauvegarde) l'enregistre sur son compte, sauf si le compte a déjà une partie : c'est alors celle du compte qui reprend.
 
 **En quittant une partie sans compte** (« ← Retour au cours », bouton « ← Cours »), un avertissement rappelle que rien n'est sauvegardé et propose trois choix : « Créer un profil et sauvegarder » (la partie est enregistrée sur le nouveau compte, puis on quitte), « Quitter sans enregistrer », ou « Continuer à jouer ». Fermer l'onglet ou recharger la page déclenche la demande de confirmation du navigateur (qui n'affiche que son propre message). Textes et comportement : `jeu/interface/liens-cours.js`.
 

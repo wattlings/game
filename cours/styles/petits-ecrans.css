@@ -46,12 +46,8 @@
   .progress-bar {
     width: 60px;
   }
-  .brand small,
-  .fab span {
+  .brand small {
     display: none;
-  }
-  .fab {
-    padding: 14px;
   }
   .action {
     grid-template-columns: auto minmax(0, 1fr);

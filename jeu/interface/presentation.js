@@ -2,7 +2,7 @@
    La présentation du début de partie, en deux temps : les commandes, puis le jeu et son objectif.
    Elle se lance à chaque nouvelle partie, avant le choix de l'avatar, et se passe à tout moment (bouton « Passer »
    ou touche Échap). Elle se revoit depuis le menu → Options. Les commandes sont décrites une seule fois, ici :
-   le menu affiche le même tableau (keysTable). */
+   le menu affiche le tableau complet (keysTable) ; la présentation, seulement les trois commandes essentielles. */
 
 /* le tableau des commandes, au clavier ou à l'écran tactile */
 function keysTable(touch){
@@ -19,17 +19,18 @@ function keysTable(touch){
 function openPresentation(onDone){
   const touch=matchMedia('(pointer:coarse)').matches,avant=busy;
   busy=true;clearKeys();
-  const etapes=[1,2,3,4,5,6,7,8].map(n=>`<li><b>${n}. ${esc(STEP_T[n])}</b></li>`).join('');
+  /* l'essentiel seulement : les autres commandes sont montrées en jouant, au moment où elles servent (aides.js) */
+  const essentiel=`<div class="tbl keys-t"><table>
+      <tr><td>${touch?'Croix':'Flèches · ZQSD'}</td><td>Marcher</td></tr>
+      <tr><td>${touch?'A':'Espace'}</td><td>Parler, lire, faire défiler un dialogue</td></tr>
+      <tr><td>${touch?'Menu':'M'}</td><td>Le menu : ton objectif, ton carnet, tes fiches</td></tr></table></div>`;
   const pages=[
-    {titre:'Les commandes',corps:`<p>Voici comment te déplacer et agir${touch?' sur cet écran tactile':' au clavier'}. Tu retrouves ce tableau dans le menu → Options → Commandes.</p>${keysTable(touch)}`},
-    {titre:'Le jeu et son objectif',corps:`<p>Tu es <b>gestionnaire de site</b> dans la ville d'Ampère-sur-Loire, et tu ne connais rien à l'énergie. Mme Joule, l'energy manager senior, va te guider.</p>
-      <p><b>Ton objectif :</b> faire baisser la consommation d'énergie (le compteur de kWh économisés, en haut de l'écran) en suivant la démarche de l'energy management, étape par étape, jusqu'à devenir <b>gestionnaire de patrimoine</b>.</p>
-      <p>La ville est une boucle de <b>8 quartiers</b>, un par étape de la démarche :</p><ol class="pr-etapes">${etapes}</ol>
-      <p>Dans chaque quartier :</p>
-      <ul><li><b>Trouve les informations clés</b> en ville : parle aux habitants, lis les panneaux et les documents. Les flèches orange et la carte te montrent où chercher.</li>
-      <li><b>Entre dans l'arène</b> : trois dresseurs, puis un champion, te posent des questions sur l'étape.</li>
-      <li><b>Gagne le badge</b> : il ouvre la barrière du quartier suivant.</li></ul>
-      <p>En chemin, complète ta collection : fiches savoir, Anomalidex, secrets. Un doute ? Le menu donne ton objectif, et « Cours de cette étape » t'emmène à la bonne page du cours.</p>`},
+    {titre:'Les commandes',corps:`<p>Trois commandes suffisent pour commencer :</p>${essentiel}<p class="dnote">Les autres (la carte, courir…) te seront montrées en jouant, au moment où elles servent. Toutes sont dans le menu → Options → Commandes.</p>`},
+    {titre:'Le jeu et son objectif',corps:`<p>Tu es <b>gestionnaire de site</b> à Ampère-sur-Loire. Ton objectif : <b>faire baisser la consommation d'énergie</b>, étape par étape, avec l'aide de Mme Joule.</p>
+      <ul><li><b>Trouve les informations clés</b> : parle aux habitants, lis les panneaux. La flèche orange te montre où aller.</li>
+      <li><b>Bats l'arène du quartier</b> : des questions sur l'étape, puis le champion.</li>
+      <li><b>Gagne le badge</b> : il ouvre le quartier suivant. Huit badges, huit étapes de l'energy management.</li></ul>
+      <p class="dnote">Ton objectif du moment est toujours écrit en haut de l'écran.</p>`},
   ];
   const ov=document.createElement('div');ov.className='overlay presentation';
   let i=0;

@@ -1,6 +1,7 @@
 /* Wattlings · jeu/interface/titre.js
    L'écran titre. Avec un compte : la partie du joueur (une seule, enregistrée sur son compte).
-   Sans compte : se connecter, créer un compte, ou « Continuer sans s'authentifier » (INVITE : rien n'est enregistré). */
+   Sans compte : « Jouer » d'abord (INVITE : rien n'est enregistré) ; se connecter ou créer un compte reste proposé dessous,
+   et la création d'un profil est proposée après le premier badge (aides.js). */
 
 /* une connexion ou une déconnexion sans rechargement de la page */
 if(COMPTE.disponible)COMPTE.surChangement((id,reecrites)=>{
@@ -31,12 +32,12 @@ function titleScreen(){
     <details class="plus"><summary>Plus d'options</summary><label class="hades"><input type="checkbox" data-hades> Mode Hadès <small>les personnages se font prier : il faut tout leur demander deux fois</small></label><button class="btn alt" data-a="newchap">Commencer directement à une étape</button></details></div>`;
   /* une partie commencée dans ce navigateur avant les comptes : elle rejoindra le compte s'il n'en a pas */
   const ancienne=needAuth()?readSave():null;
-  const corps=needAuth()?`<div class="slots solo"><div class="slot auth"><b>Connecte-toi pour sauvegarder ta partie</b>
+  const corps=needAuth()?`<div class="slots solo"><button type="button" class="btn title-play" data-a="guest">Jouer ▸</button>
+      <p style="font-size:13px">Sans compte, ta partie n'est pas sauvegardée : tu pourras créer un profil en cours de route pour la garder.</p>
+      <div class="slot auth"><b>Déjà un profil, ou envie de sauvegarder dès maintenant ?</b>
       <small>Ta partie est enregistrée sur ton compte : tu la retrouves sur tous tes appareils et navigateurs.</small>
       ${ancienne&&ancienne.site?`<small>La partie commencée dans ce navigateur (${esc(ancienne.name||'Alex')} · ${esc(CHAPTERS[ancienne.ch]||'')}) rejoindra ton compte s'il n'en a pas encore.</small>`:''}
-      <div class="acts"><button class="btn" data-a="login">Se connecter</button><button class="btn alt" data-a="signup">Créer un compte</button></div></div></div>
-    <button type="button" class="title-back" data-a="guest">Continuer sans s'authentifier</button>
-    <p style="font-size:13px">Sans compte, rien n'est sauvegardé : la partie s'arrête quand tu fermes la page.</p>`
+      <div class="acts"><button class="btn alt" data-a="login">Se connecter</button><button class="btn alt" data-a="signup">Créer un compte</button></div></div></div>`
     :`<div class="slots solo">${v&&v.site?partie(v):nouvelle}</div>
     <p style="font-size:13px">${INVITE?'<b>Partie sans compte</b> : rien n\'est sauvegardé.':id?`Sauvegarde automatique sur ton compte <b>${esc(id)}</b>.`:'Sauvegarde automatique dans ce navigateur.'} Le son est coupé par défaut : active-le dans le menu → Options.</p>
     ${COMPTE.disponible?`<button type="button" class="title-back" data-a="compte">${id?'Mon compte':'Se connecter pour sauvegarder ta partie'}</button>`:''}`;
@@ -61,5 +62,5 @@ function titleScreen(){
     if(a==='chap'){leave();pick()}
     if(a==='restart'){if(btn.dataset.ok){trk('game_restart');restartStory();leave();boot()}else{btn.dataset.ok=1;btn.textContent='Confirmer (collection gardée)'}}
   });
-  const f=ov.querySelector('[data-a=cont]')||ov.querySelector('[data-a=login]')||ov.querySelector('.slot input');if(f)f.focus();
+  const f=ov.querySelector('[data-a=cont]')||ov.querySelector('.title-play')||ov.querySelector('.slot input');if(f)f.focus();
 }

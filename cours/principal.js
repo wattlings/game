@@ -39,7 +39,7 @@ racine.innerHTML = `
         <a href="#quiz-final" data-route="quiz-final">${icone("ok")}Quiz final</a>
         <a href="#sources" data-route="sources">Sources</a>
         <a href="#patrimoine" class="qk-nav-p" data-route="patrimoine">Patrimoine</a>
-        <a href="${adresseJeu()}" class="qk-nav" data-jeu="">Le jeu</a>
+        <a href="${adresseJeu()}" class="qk-nav" id="qk-jeu" data-jeu="">Le jeu</a>
       </nav>
       <div class="progress" id="progress" title="Une étape est terminée quand son Essentiel est lu et sa démo manipulée">
         <span class="progress-bar" aria-hidden="true"><span class="pd"></span><span class="pe"></span></span>
@@ -51,7 +51,7 @@ racine.innerHTML = `
     <nav class="steps-strip" aria-label="Les 8 étapes" id="strip"></nav>
   </header>
   <main id="contenu" tabindex="-1"></main>
-  <button class="fab" type="button" id="fab">${icone("livre")}<span>Glossaire</span></button>`;
+  <button class="fab" type="button" id="fab" aria-label="Glossaire" title="Glossaire">${icone("livre")}</button>`;
 
 /** Met à jour la barre de progression et le bandeau des 8 étapes. */
 function majProgression() {

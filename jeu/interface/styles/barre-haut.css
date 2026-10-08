@@ -12,3 +12,8 @@ button,input,select{font:inherit}
 
 /* mode essai (moteur/essai.js) : un rappel discret, en bas de l'écran */
 .essai-tag{position:absolute;left:50%;bottom:6px;transform:translateX(-50%);z-index:7;background:#c43d3d;color:#fff;font-family:var(--f-pix);font-size:14.5px;padding:2px 10px;border-radius:999px;pointer-events:none;opacity:.92;white-space:nowrap}
+
+/* le nom de l'étape, en bandeau éphémère (hud.js : bandeauEtape) */
+.chap-banner{position:absolute;left:50%;top:22%;transform:translateX(-50%);z-index:6;pointer-events:none;background:var(--paper);color:var(--text);border:4px double var(--ink);border-radius:6px;padding:8px 18px;text-align:center;font-family:var(--f-pix);max-width:86%;animation:chapBanner 3.6s ease both;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.chap-banner b{display:block;font-size:18px;font-weight:400}.chap-banner small{display:block;font-size:14px;color:var(--muted,#5e6882);margin-top:2px}
+@keyframes chapBanner{0%{opacity:0;transform:translate(-50%,-10px)}10%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-6px)}}

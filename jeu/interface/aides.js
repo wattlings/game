@@ -29,8 +29,22 @@ function aide(k){
   return true;
 }
 
+/* sans compte : après le premier badge gagné en jouant (pas ceux offerts en sautant à une étape : choix-etape.js), une seule fois, proposer de créer un profil pour garder la partie */
+function proposerProfil(){
+  S.flags.profilPropose=1;trk('guest_prompt');
+  const ov=openPanel('Garde ta progression',{sansCours:true}),b=ov.querySelector('.pbody');
+  b.innerHTML=`<p>Bravo pour ton premier badge ! Tu joues <b>sans compte</b> : ta partie s'arrêtera quand tu fermeras la page.</p>
+    <p>Crée un profil (un identifiant et un mot de passe, sans adresse e-mail) : ta partie y est enregistrée, et tu la retrouves sur tous tes appareils.</p>
+    <div class="row"><button class="btn" type="button" data-p="oui">Créer mon profil</button><button class="btn alt" type="button" data-p="non">Plus tard</button></div>
+    <p class="dnote">Tu pourras le faire à tout moment : menu → Sauver.</p>`;
+  b.querySelector('[data-p=oui]').onclick=()=>{trk('guest_prompt_oui');closePanel();COMPTE.ouvrir(ROOT,'creation')};
+  b.querySelector('[data-p=non]').onclick=()=>closePanel();
+  b.querySelector('[data-p=oui]').focus();
+}
+
 /* regardée deux fois par seconde (moteur/boucle.js) : quelle commande sert maintenant ? */
 function aidesVeille(){
+  if(INVITE&&COMPTE.disponible&&!ESSAI&&!busy&&!dlg.open&&EN_ON&&(S.badges||[]).length>(S.flags.badgesOfferts||0)&&!S.flags.profilPropose){proposerProfil();return}
   const el=ROOT.getElementById('aide');if(el&&!el.hidden&&(busy||dlg.open))el.hidden=true;   // un dialogue ou un panneau s'ouvre : la bulle s'efface
   if(busy||dlg.open||!EN_ON||ESSAI||QK_HOST.hidden)return;
   const A=S.aides||{};

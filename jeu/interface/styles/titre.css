@@ -53,3 +53,7 @@
 .slot .plus[open]{display:grid;gap:8px}
 .slot .plus .btn{justify-self:start;font-size:15px;padding:6px 10px;margin:0}
 .slot.empty label[for=pn1]{font-size:14px;color:#b7bdd6}
+/* sans compte : « Jouer » d'abord, la connexion en option dessous */
+.title-play{display:block;margin:6px auto 4px;font-size:20px;padding:12px 40px}
+.slots.solo .slot.auth{margin-top:6px}
+.slot.auth b{font-size:15px}

@@ -12,6 +12,13 @@ function hud(){
   $('objective').innerHTML='<b>Objectif :</b> '+esc(objectiveText());if(typeof courseLabel==='function'){$('qkStep').textContent=courseLabel();qkSync()}enHud(true);
   objFlash();
 }
+/* le nom de l'étape, en bandeau qui s'efface tout seul (comme le nom d'un lieu dans Pokémon) : il n'arrête pas le jeu */
+function bandeauEtape(titre,sous){
+  const vieux=ROOT.querySelector('.chap-banner');if(vieux)vieux.remove();
+  const b=document.createElement('div');b.className='chap-banner';b.setAttribute('role','status');
+  b.innerHTML=`<b>${esc(titre)}</b>${sous?`<small>${esc(sous)}</small>`:''}`;$('wrap').appendChild(b);
+  qkTimeout(()=>b.remove(),3600);
+}
 let toastQ=[],toastOn=false;function toast(msg){toastQ.push(msg);if(!toastOn)nextToast()}
 function nextToast(){const msg=toastQ.shift();if(!msg){toastOn=false;return}toastOn=true;const t=document.createElement('div');t.className='toast';t.textContent=selonAppareil(msg);ROOT.appendChild(t);qkTimeout(()=>t.remove(),1700);qkTimeout(nextToast,1750)}
 /* la ligne d'objectif, toujours visible en haut de l'écran : la prochaine action et l'avancée de l'étape (recit/objectifs.js).

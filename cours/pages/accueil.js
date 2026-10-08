@@ -2,6 +2,7 @@
  * La page d'accueil : le cycle, les chiffres de l'école, le programme.
  */
 import { ECOLE } from "../../commun/donnees/ecole.js";
+import { adresseJeu } from "../../commun/liens.js";
 import { FAMILLES } from "../../commun/donnees/etapes.js";
 import { icone } from "../blocs/icones.js";
 import { euros, nombre, texteRiche, tous, un } from "../blocs/outils.js";
@@ -38,7 +39,8 @@ export function pageAccueil(conteneur) {
           </div>
         </div>
         <p class="muted" style="font-size:var(--t-s)" id="desc-filtre"></p>
-        <div class="row"><a class="btn primary" href="#etape-1">Commencer par l’étape 1 ${icone("fleche")}</a><span class="muted" style="font-size:var(--t-s)">ou clique sur n’importe quelle étape</span></div>
+        <div class="row"><a class="btn primary" href="#etape-1">Commencer par l’étape 1 ${icone("fleche")}</a><a class="btn" href="${adresseJeu()}" data-jeu="">Ou jouer à Wattlings</a></div>
+        <p class="muted" style="font-size:var(--t-s);margin:0">Tu peux aussi cliquer sur n’importe quelle étape du cycle.</p>
       </div>
       <div>
         <div id="cycle-zone">${roueDuCycle()}</div>
