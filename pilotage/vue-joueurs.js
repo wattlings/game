@@ -101,6 +101,22 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
     const tVoyages = h("table", null, h("thead", null, h("tr", null, ["Site", "Voyageurs", "Défis commencés", "Tampons"].map((t) => h("th", null, t)))),
       h("tbody", null, sites.map((r) => h("tr", null, h("td", null, r.titre), h("td", { class: "num" }, nombre(n(A.trains[r.suivi.site]))), h("td", { class: "num" }, nombre(n(A.defis[r.suivi.site]))), h("td", { class: "num" }, nombre(n(A.tampons[r.suivi.site])))))));
 
+    // ---- le résumé à copier : de quoi régler la difficulté du jeu (chapitres, questions, ateliers, duels), en texte brut
+    const resume = () => {
+      const L = [`Wattlings · résumé du suivi${estExemple ? " (DONNÉES D'EXEMPLE, inventées)" : ""} · ${A.premier ? "du " + jour(A.premier) + " au " + jour(A.dernier) : "période vide"}`,
+        `${A.joueurs.size} joueurs · ${departs} ont commencé · ${arrives} à l'épilogue · ${A.nbErreurs} mauvaises réponses`, "", "CHAPITRES (arrivés / ont terminé / temps médian / estimé)"];
+      chapitres.forEach((r) => { const c = A.chapitres[r.suivi.ch] || { debut: new Set(), fin: new Set() }, m = A.mediane(r.suivi.ch);
+        L.push(`${r.num} ${r.titre} : ${c.debut.size} / ${c.fin.size} / ${m ? duree(m) : "—"} / ${texteDuree(estimerRang(r)).replace("≈ ", "")}`); });
+      L.push("", "QUESTIONS ET ATELIERS LES PLUS RATÉS (erreurs · joueurs · où · question → mauvaise réponse la plus choisie)");
+      [...A.erreurs.values()].sort((a, b) => b.n - a.n).slice(0, 40).forEach((e) => L.push(`${e.n} · ${e.joueurs.size} · ${e.t} · ${e.q}${pire(e) ? " → " + pire(e) : ""}`));
+      L.push("", "DUELS (duels · gagnés par le joueur)");
+      Object.entries(A.duels).filter(([k, d]) => /·/.test(k) && d.win + d.lose >= 1).forEach(([k, d]) => L.push(`${k} : ${d.win + d.lose} · ${Math.round((100 * d.win) / (d.win + d.lose))} %`));
+      return L.join("\n");
+    };
+    const zoneResume = h("textarea", { class: "resume-copie", readonly: true, rows: 8, hidden: true, "aria-label": "Résumé du suivi" });
+    const boutonResume = h("button", { class: "bouton", type: "button", onclick: async () => { const txt = resume(); zoneResume.value = txt; zoneResume.hidden = false;
+      try { await navigator.clipboard.writeText(txt); boutonResume.textContent = "Copié ✔"; } catch { zoneResume.select(); boutonResume.textContent = "Sélectionné : copie-le (Ctrl+C)"; } } }, "Copier le résumé");
+
     remplir(resultats,
       estExemple ? h("p", { class: "bandeau alerte" }, h("strong", null, "Données d'exemple, inventées."), " Elles montrent à quoi ressemblera cette page une fois le suivi branché. Aucun de ces chiffres n'est réel.") : null,
       !A.evenements ? h("p", { class: "bandeau" }, "Aucun événement du jeu sur cette période." + (lignes.length ? " (" + nombre(lignes.length) + " événements lus, qui viennent tous du cours.)" : " La table est vide, ou la règle de lecture ne laisse rien passer : voir plus bas.")) : [
@@ -109,6 +125,7 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
           tuile(nombre(arrives), "sont arrivés à l'épilogue", departs ? Math.round((100 * arrives) / departs) + " % de ceux qui ont commencé" : ""), tuile(nombre(A.nbErreurs), "mauvaises réponses", A.joueurs.size ? (A.nbErreurs / A.joueurs.size).toFixed(1).replace(".", ",") + " par joueur" : ""),
           tuile(nombre(A.passeports.size), "passeports des énergies")),
         h("section", { class: "bloc-page" }, h("h3", null, "Jusqu'où vont les joueurs"), h("p", { class: "muet" }, "Le nombre de joueurs arrivés à chaque chapitre. Là où la barre raccourcit d'un coup, des joueurs ont lâché au chapitre d'avant. Un clic ouvre le chapitre."), graphe, tableau),
+        h("section", { class: "bloc-page" }, h("h3", null, "Régler la difficulté"), h("p", { class: "muet" }, "Un résumé en texte de tout ce qui sert à régler la difficulté : chapitres (arrivées, temps), les 40 questions et ateliers les plus ratés, les duels. Colle-le dans une conversation avec Claude pour qu'il ajuste les questions, les ateliers et le mode Expert. Il ne contient aucun identifiant de joueur."), boutonResume, zoneResume),
         h("section", { class: "bloc-page" }, h("h3", null, "Les questions qui font trébucher"), h("p", { class: "muet" }, "Les quinze questions qui récoltent le plus de mauvaises réponses. Beaucoup d'erreurs sur une même mauvaise réponse : la question est peut-être ambiguë, ou le piège trop bon."), tErreurs),
         h("div", { class: "deux" }, h("section", { class: "bloc-page" }, h("h3", null, "Les dresseurs les plus coriaces"), tDuels), h("section", { class: "bloc-page" }, h("h3", null, "Les voyages en train"), tVoyages)),
         sectionProfils(A, { P }),

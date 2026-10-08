@@ -312,3 +312,4 @@ button.barre-ligne:hover, button.barre-ligne:focus-visible { background: var(--s
 .action.a-jeu .genre { color: var(--energie-ink, var(--muted)); }
 .action.a-compte .genre { color: var(--data-ink, var(--muted)); }
 @media (max-width: 560px) { .action { grid-template-columns: 3rem minmax(0, 1fr); } .action .genre { display: none; } }
+.resume-copie{width:100%;margin-top:8px;font:12px/1.4 ui-monospace,monospace}
