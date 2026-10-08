@@ -258,7 +258,7 @@ async function loadProfils(from,to,visiteurs){
   if(profOn&&!PROFS.some(p=>p.id===profOn.id)){profOn=null;$('profDetail').hidden=true}
   listeProfils();
 }
-const estJeu=n=>/^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$|intro$|avatar$|aide$|menu$|setting$|guest_leave$|slot_erase$)/.test(n);
+const estJeu=n=>/^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$|intro$|video$|avatar$|aide$|menu$|setting$|guest_leave$|slot_erase$)/.test(n);
 const jour=d=>d.toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'});
 function listeProfils(){
   const q=$('profSearch').value.trim().toLowerCase(),L=PROFS.filter(p=>!q||p.id.includes(q));
@@ -273,7 +273,7 @@ function decrire(l){
     pageview:['cours','Ouvre '+PAGE(l.page)],read_time:['cours','Lit '+PAGE(p.p)+' pendant '+d(p.s)],course_tab:['cours','Passe au niveau '+g(p.niv)],demo_use:['cours','Manipule la démo '+g(p.demo)],glossary_open:['cours','Ouvre le glossaire : '+g(p.term)],
     quiz_answer:['cours','Quiz : '+g(p.q)+(p.ok===true?' : juste':p.ok===false?' : faux':'')],
     game_open:['jeu','Ouvre le jeu'+(p.from==='cours'?' depuis le cours':'')],game_new:['jeu','Commence une nouvelle partie'+(p.hades?' (mode Hadès)':'')],game_continue:['jeu','Reprend sa partie ('+ch(p.ch)+')'],game_guest:['jeu','Joue sans profil'],game_restart:['jeu','Recommence sa partie'],slot_erase:['jeu','Efface sa partie'],
-    game_end:['jeu','Termine l’histoire : arrivé à l’épilogue'],intro:['jeu',p.passee?'Passe la présentation (page '+p.vue+')':'Lit la présentation jusqu’au bout'],avatar:['jeu','Choisit son avatar'],site_choice:['jeu','Choisit son site : '+(SITE[p.site]||p.site)],
+    game_end:['jeu','Termine l’histoire : arrivé à l’épilogue'],video:['jeu',p.fin==='passee'?'Passe la vidéo d’introduction (au bout de '+p.s+' s)':'Regarde la vidéo d’introduction jusqu’au bout'],intro:['jeu',p.passee?'Passe la présentation (page '+p.vue+')':'Lit la présentation jusqu’au bout'],avatar:['jeu','Choisit son avatar'],site_choice:['jeu','Choisit son site : '+(SITE[p.site]||p.site)],
     aide:['jeu','Voit l’aide '+g(p.k)],menu:['jeu','Ouvre le menu → '+p.k],chapter_start:['jeu',(p.via==='reprise'?'Reprend au ':p.via==='jump'?'Saute au ':'Arrive au ')+ch(p.ch)],chapter_end:['jeu','Termine '+ch(p.ch)+(p.s?' en '+d(p.s):'')],
     jump:['jeu','Saute à '+ch(p.ch)],fiche:['jeu','Trouve la fiche '+g(p.id)],badge:['jeu','Gagne le badge '+g(p.name)],battle:['jeu','Duel contre '+p.a+' : '+({win:'gagné',lose:'perdu',flee:'fuite'}[p.r]||p.r)],
     wrong_answer:['jeu','Se trompe'+(p.t?' ('+p.t+')':'')+' : '+g(p.q)+(p.a?' → '+g(p.a):'')],secret:['jeu','Trouve le secret '+g(SECRETS[p.id]||EGGS[p.id]||p.id)],mission:['jeu','Termine la mission '+(p.n||'')+(p.titre?' '+g(p.titre):'')],evolve:['jeu','Passe au rang '+p.rank],

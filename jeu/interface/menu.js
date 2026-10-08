@@ -204,7 +204,7 @@ const MENU_ECRANS={
       <p class="dnote">Degrés-jours du jour (base 18) : <b>${djuTxt()}</b> · Solaire : <b>${Math.round(SKY.pv*100)} %</b> de la puissance crête · Vent : <b>${Math.round(SKY.wind*62)} km/h</b></p>
       <div class="fr-opts" role="list">${R.map((L,i)=>`<div class="fr-opt${i===MENU.opt?' on':''}" role="listitem" data-r="${i}"><span class="fr-ol">${L.l}</span><button type="button" class="fr-fl" data-d="-1" aria-label="${L.l} : valeur précédente">◀</button><span class="fr-ov" aria-live="polite">${esc(menuSeg(L.v,L.get())[1])}</span><button type="button" class="fr-fl" data-d="1" aria-label="${L.l} : valeur suivante"${i===MENU.opt?' data-focus':''}>▶</button></div>`).join('')}</div>
       <div class="fr-aide-l">${esc(R[MENU.opt].d)}</div>
-      <h4 class="segh">Jeu</h4><div class="optg">${PIP.win||PIP.isPop?'':`<button class="btn alt" id="oFs">${QK_APP.classList.contains('fs')?'✕ Quitter le plein écran':'⛶ Plein écran'}</button>`}${PIPB.hidden||PIP.isPop?'':`<button class="btn alt" id="oPip">${PIP.win?'↩ Remettre le jeu dans l’onglet':'⧉ Vignette flottante'}</button>`}<button class="btn alt" id="oKeys">Commandes</button><button class="btn alt" id="oIntro">Revoir la présentation</button><button class="btn alt" id="oBack">← Retour au cours</button></div>
+      <h4 class="segh">Jeu</h4><div class="optg">${PIP.win||PIP.isPop?'':`<button class="btn alt" id="oFs">${QK_APP.classList.contains('fs')?'✕ Quitter le plein écran':'⛶ Plein écran'}</button>`}${PIPB.hidden||PIP.isPop?'':`<button class="btn alt" id="oPip">${PIP.win?'↩ Remettre le jeu dans l’onglet':'⧉ Vignette flottante'}</button>`}<button class="btn alt" id="oKeys">Commandes</button><button class="btn alt" id="oVideo">Revoir la vidéo d'introduction</button><button class="btn alt" id="oIntro">Revoir la présentation</button><button class="btn alt" id="oBack">← Retour au cours</button></div>
       <div class="row"><button class="btn alt" id="rst">Recommencer l'histoire</button></div><div id="rstc"></div>`},
     changer(i,d){const L=this.lignes()[i],k=L.v.findIndex(v=>String(v[0])===String(L.get())),v=L.v[((k<0?0:k)+d+L.v.length)%L.v.length][0];L.set(v);trk('setting',{k:L.k==='son'||L.k==='expert'?L.k:'ciel_'+L.k,v})},
     lier(mt,show){
@@ -212,6 +212,7 @@ const MENU_ECRANS={
       const f=mt.querySelector('#oFs'),p=mt.querySelector('#oPip');if(f)f.onclick=()=>{closePanel();FSB.click()};if(p)p.onclick=()=>{closePanel();PIPB.click()};
       mt.querySelector('#oKeys').onclick=()=>{closePanel();menuEcran('keys')};
       mt.querySelector('#oIntro').onclick=()=>{closePanel();openPresentation()};
+      mt.querySelector('#oVideo').onclick=()=>{closePanel();introVideo()};
       mt.querySelector('#oBack').onclick=()=>{closePanel();$('qkBack').click()};
       mt.querySelector('#rst').onclick=()=>{mt.querySelector('#rstc').innerHTML='<p>L\'histoire repart du début. Tes badges, secrets, fiches, ton Anomalidex et ton XP sont conservés.</p><button class="btn" id="rstOk">Confirmer : recommencer l\'histoire</button>';mt.querySelector('#rstOk').onclick=()=>{restartStory();closePanel();boot()}}},
     clavier(t,mt,show){const n=this.lignes().length;

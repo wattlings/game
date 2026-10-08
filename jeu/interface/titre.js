@@ -55,7 +55,7 @@ function titleScreen(){
     if(a==='login'||a==='signup'){COMPTE.ouvrir(ROOT,a==='signup'?'creation':'connexion');return}
     if(a==='compte'){COMPTE.ouvrir(ROOT,'connexion');return}
     if(a==='guest'){trk('game_guest');INVITE=true;S=DEF();ov.remove();if(!qkServirAttente())titleScreen();return}
-    if(a==='new'||a==='newchap'){const hd=!!el.querySelector('[data-hades]').checked;trk('game_new',{etape:a==='newchap',hades:hd,compte:!INVITE});const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';S=DEF();S.name=nm;S.hades=hd;save();leave();openPresentation(()=>a==='new'?openAvatar(()=>boot()):openAvatar(pick));return}
+    if(a==='new'||a==='newchap'){const hd=!!el.querySelector('[data-hades]').checked;trk('game_new',{etape:a==='newchap',hades:hd,compte:!INVITE});const nm=(el.querySelector('input').value||'Alex').trim().slice(0,14)||'Alex';S=DEF();S.name=nm;S.hades=hd;save();leave();introVideo(()=>openPresentation(()=>a==='new'?openAvatar(()=>boot()):openAvatar(pick)));return}   // nouvelle partie : la vidéo, les commandes, puis l'avatar
     if(a==='erase'){if(btn.dataset.ok){trk('slot_erase');if(INVITE)S=DEF();else try{localStorage.removeItem(SAVE_KEY)}catch(e){}ov.remove();titleScreen()}else{btn.dataset.ok=1;btn.textContent='Confirmer : tout effacer'}return}
     S=Object.assign(DEF(),v);
     if(a==='cont'){trk('game_continue',{ch:S.ch});leave();if(!S.av)openAvatar(()=>boot());else boot()}

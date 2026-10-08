@@ -56,7 +56,7 @@ function openGame(ch){
     ROOT.querySelectorAll('#layer > *').forEach(n=>n.remove());busy=false;dlg.q=[];dlg.cb=null;dlg.open=false;if(dlg.el){dlg.el.remove();dlg.el=null}
     const sv=loadSave();S=Object.assign(DEF(),sv||{});
     const go=()=>{if(S.site&&S.ch===ch)boot();else jumpTo(ch,S.site||'ecole')};
-    if(!S.av)openPresentation(()=>openAvatar(go));else go();   // nouvelle partie : la présentation, puis l'avatar
+    if(!S.av)introVideo(()=>openPresentation(()=>openAvatar(go)));else go();   // nouvelle partie : la vidéo, la présentation, puis l'avatar
   }
   updateMusic();
   qkTimeout(()=>{const b=ROOT.querySelector('.title-screen .slot button, .title-screen .auth button, .overlay button');if(b)b.focus()},60);

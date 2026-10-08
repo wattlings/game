@@ -133,3 +133,14 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 .ems-carte dl{margin:0;display:grid;gap:2px}.ems-carte dt{font-weight:700;font-size:14px;color:var(--muted);margin-top:4px}.ems-carte dd{margin:0}
 .ems-carte-r{margin:8px 0 0!important;padding-top:6px;border-top:1px dashed #c9bb92}
 .dip-retiens{margin:4px 0;padding-left:20px}
+/* la vidéo d'introduction (interface/intro-video.js) : une image de console agrandie sans flou, et sa boîte de dialogue */
+.iv{position:fixed;inset:0;z-index:60;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:8px;outline:none}
+.iv-ecran{position:relative;width:min(100%,calc((100vh - 70px) * 1.5));aspect-ratio:3/2;cursor:pointer}
+.iv-ecran canvas{width:100%;height:100%;display:block;image-rendering:pixelated;image-rendering:crisp-edges}
+.iv-boite{position:absolute;left:3%;right:3%;bottom:3%;background:#fffdf6;border:4px solid #2f6db5;box-shadow:inset 0 0 0 2px #fff,0 0 0 2px #1c2440;border-radius:8px;padding:8px 12px;font:clamp(16px,2.2vw,24px)/1.35 var(--f-pix,monospace);color:#1c2440;min-height:3.2em}
+.iv-boite b{display:block;font-size:.8em;color:#8a3b8f}
+.iv-suite{position:absolute;right:6%;bottom:6%;color:#c43d3d;font-size:14px;animation:iv-cligne 1s steps(2) infinite}
+@keyframes iv-cligne{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.iv-suite{animation:none}}
+.iv-barre{display:flex;gap:12px;align-items:center;justify-content:space-between;width:min(100%,calc((100vh - 60px) * 1.5));max-width:100%;color:#9fb4d8;font-size:15px}
+.iv-barre .btn{flex:none}

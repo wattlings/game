@@ -36,7 +36,7 @@ function decrire(l, I) {
     quiz_answer: ["cours", "Répond au quiz" + (p.q || p.question ? " " + g(p.q || p.question) : "") + (p.ok === true ? " : juste" : p.ok === false ? " : faux" : "")],
     game_open: ["jeu", "Ouvre le jeu" + (p.from === "cours" ? " depuis le cours" : "")], game_new: ["jeu", "Commence une nouvelle partie" + (p.hades ? " (mode Hadès)" : "")],
     game_continue: ["jeu", "Reprend sa partie (" + chap(p.ch) + ")"], game_guest: ["jeu", "Joue sans profil"], game_restart: ["jeu", "Recommence sa partie"], slot_erase: ["jeu", "Efface sa partie"],
-    game_end: ["jeu", "Termine l'histoire : arrivé à l'épilogue"], intro: ["jeu", p.passee ? "Passe la présentation (page " + p.vue + ")" : "Lit la présentation jusqu'au bout"],
+    game_end: ["jeu", "Termine l'histoire : arrivé à l'épilogue"], video: ["jeu", p.fin === "passee" ? "Passe la vidéo d'introduction (au bout de " + p.s + " s)" : "Regarde la vidéo d'introduction jusqu'au bout"], intro: ["jeu", p.passee ? "Passe la présentation (page " + p.vue + ")" : "Lit la présentation jusqu'au bout"],
     avatar: ["jeu", "Choisit son avatar"], site_choice: ["jeu", "Choisit son site : " + (p.site || "?")], aide: ["jeu", "Voit l'aide " + g(p.k)], menu: ["jeu", "Ouvre le menu → " + (p.k || "?")],
     chapter_start: ["jeu", (p.via === "reprise" ? "Reprend au " : p.via === "jump" ? "Saute au " : "Arrive au ") + chap(p.ch)], chapter_end: ["jeu", "Termine " + chap(p.ch) + (p.s ? " en " + duree(p.s) : "")],
     jump: ["jeu", "Saute à " + chap(p.ch)], fiche: ["jeu", "Trouve la fiche " + g(I.fiches[p.id] || p.id)], badge: ["jeu", "Gagne le badge " + g(p.name)],

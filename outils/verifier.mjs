@@ -240,6 +240,8 @@ if (quoi === "tout" || quoi === "guidage") {
     await page.evaluate(() => document.getElementById("qk-host").shadowRoot.querySelector("[data-a=guest]").click()); await page.waitForTimeout(300);
     verif("titre : un seul bouton pour commencer, le reste sous « Plus d'options »", await page.evaluate(() => { const r = document.getElementById("qk-host").shadowRoot; return !!r.querySelector("[data-a=new]") && !r.querySelector("details.plus").open && !!r.querySelector("details.plus [data-hades]"); }));
     await page.evaluate(() => { const r = document.getElementById("qk-host").shadowRoot; r.querySelector("#pn1").value = "Léa"; r.querySelector("[data-a=new]").click(); }); await page.waitForTimeout(300);
+    verif("nouvelle partie : la vidéo d'introduction se lance, avec un bouton pour la passer", await page.evaluate(() => !!document.getElementById("qk-host").shadowRoot.querySelector(".iv .iv-passer")));
+    await page.evaluate(() => document.getElementById("qk-host").shadowRoot.querySelector(".iv-passer").click()); await page.waitForTimeout(200);
     await page.evaluate(() => document.getElementById("qk-host").shadowRoot.getElementById("prSkip").click()); await page.waitForTimeout(300);
     const av = await page.evaluate(() => { const b = document.getElementById("qk-host").shadowRoot.getElementById("avOk"), r = b.getBoundingClientRect(); return { txt: b.textContent, vu: r.bottom <= innerHeight && r.top >= 0, cours: !!document.getElementById("qk-host").shadowRoot.querySelector(".panel .course-link") }; });
     verif("avatar : « C'est parti » visible sans faire défiler, sans lien vers le cours", /C'est parti/.test(av.txt) && av.vu && !av.cours, JSON.stringify(av));
@@ -410,6 +412,13 @@ if (quoi === "tout" || quoi === "guidage") {
       closePanel(); endScreen(); await att(60); const mention = /mention Expert/.test(r.querySelector(".pbody").textContent); closePanel(); S.expert = null;
       return `${n} ${ko} ${ok} ${retour} ${retFait("datacenter")} ${ex} ${mention}`; });
     verif("culture énergie : un tampon débloque son atelier dans la console, PUE trop haut expliqué puis réglé ; mode Expert : pas d'explication, mention au diplôme", culture === "1 true true true true true true", culture);
+    // la vidéo d'introduction (interface/intro-video.js) : elle avance au clic, Échap la passe, et la présentation suit
+    const video = await R(async () => { const r = document.getElementById("qk-host").shadowRoot, att = (ms) => new Promise((ok) => setTimeout(ok, ms));
+      if (panelEl) closePanel(); let suite = 0; introVideo(() => { suite = 1; }); await att(200); const la = !!r.querySelector(".iv canvas");
+      for (let i = 0; i < 4; i++) { r.querySelector(".iv-ecran").click(); await att(60); } const joule = !r.querySelector(".iv-boite").hidden && /Mme Joule/.test(r.querySelector(".iv-boite").textContent);
+      document.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape", bubbles: true })); window.dispatchEvent(new KeyboardEvent("keydown", { key: "Escape" })); await att(80);
+      return `${la} ${joule} ${!r.querySelector(".iv")} ${suite}`; });
+    verif("vidéo d'introduction : elle se lance, le clic fait avancer jusqu'à Mme Joule, Échap la passe et la suite démarre", video === "true true true 1", video);
     verif("ateliers : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }
@@ -492,7 +501,9 @@ if (quoi === "tout" || quoi === "comptes") {
   verif("sans compte : une partie d'avant les comptes est annoncée", /Ancien/.test((await ombre(".title-screen .slot.auth")) || ""));
   await cliquer("[data-a=guest]");
   await page.waitForTimeout(600);
-  // nouvelle partie : la présentation d'abord (les commandes, puis le jeu), qu'on peut passer
+  // nouvelle partie : la vidéo d'introduction (qu'on passe), puis la présentation (les commandes, puis le jeu), qu'on peut passer
+  verif("nouvelle partie depuis le cours : la vidéo d'introduction d'abord", !!(await ombre(".iv-barre")));
+  await cliquer(".iv-passer"); await page.waitForTimeout(200);
   verif("présentation : elle s'ouvre sur les commandes", /Les commandes/.test((await ombre(".presentation header")) || "") && /Marcher/.test((await ombre(".presentation .keys-t")) || ""));
   await cliquer("#prNext"); await page.waitForTimeout(150);
   verif("présentation : puis le jeu et son objectif", /Le jeu et son objectif/.test((await ombre(".presentation header")) || "") && /Huit badges/.test((await ombre(".presentation .pbody")) || ""));

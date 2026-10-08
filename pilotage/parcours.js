@@ -12,7 +12,7 @@ import { estProse, estTexte, lisible, textesDe } from "./lecture.js";
 
 /* les scènes de chaque chapitre : [fonction du jeu, titre affiché] */
 const SCENES = {
-  0: [["boot", "Arrivée au bureau"], ["actJoule", "Mme Joule"], ["chooseSite", "Le choix du site"]],
+  0: [["introVideo", "La vidéo d'introduction"], ["boot", "Arrivée au bureau"], ["actJoule", "Mme Joule"], ["chooseSite", "Le choix du site"]],
   1: [["actMailbox", "La boîte aux lettres"], ["actPanel", "La fiche technique"], ["checkCh1", "Repérage terminé"]],
   2: [["actElec", "Le compteur électrique"], ["actGas", "Le compteur de gaz"], ["actSub", "Le sous-compteur"], ["checkCh2", "Compteurs trouvés"]],
   3: [["actPC", "L'ordinateur du bureau"], ["openEmsBureau", "La console de l'EMS du bureau"]],
@@ -50,7 +50,7 @@ const NOMS = {
   enBadge: "L'énergie après chaque badge", enTick: "La simulation d'énergie", enEvents: "Les événements d'énergie", enWhy: "Tableau de bord : les explications", enViewSite: "Tableau de bord : le site",
   enViewParc: "Tableau de bord : le parc", enViewPsite: "Tableau de bord : un site du parc", wmPlaceAt: "La carte : les lieux", gareGuichet: "Le guichet", gareDeparts: "Le tableau des départs",
   gareEntrer: "Entrer dans la gare", gareTableauDehors: "Le tableau des départs, dehors", voyTrajet: "Le trajet en train", voyRetour: "Le train du retour", voyDonnerInfo: "Carnet de voyage",
-  voyTamponner: "Tampon obtenu", emsCarnet: "Le carnet, dans les ateliers", emsTransfert: "La ligne « Dans un EMS »", emsChoix: "Les choix des ateliers", revoirFiche: "Revoir la fiche", EMS_MODULES: "La console de l'EMS du bureau : les modules", MC_ETATS: "Ma courbe : le trophée, état par état", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
+  voyTamponner: "Tampon obtenu", emsCarnet: "Le carnet, dans les ateliers", emsTransfert: "La ligne « Dans un EMS »", emsChoix: "Les choix des ateliers", revoirFiche: "Revoir la fiche", EMS_MODULES: "La console de l'EMS du bureau : les modules", IV_JOULE: "La vidéo d'introduction : les répliques de Mme Joule", MC_ETATS: "Ma courbe : le trophée, état par état", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
   atlasGare: "Carte : la gare", secretObjs: "Objets à secrets", eggObjs: "Objets à clins d'œil", nameEgg: "Les prénoms prédestinés", jouleExtra: "Harceler Mme Joule", actMobilier: "Le mobilier bavard",
 };
 const NOMS_DONNEES = (N) => Object.assign(N, { QUARTERS: "Les quartiers", WALKERS: "Les passants", LIFE_WX: "Les habitants, selon la météo", REG_WX: "Les régions, selon la météo", LOCALS: "Les bâtiments", MAPS: "Les lieux", SKY_IDLE: "L'horloge du jardin",

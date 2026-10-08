@@ -56,7 +56,7 @@ export async function charger({ url, cle, jeton, depuis, surProgres, plafond = 6
 
 export const dateDe = (l) => { const d = l.ts || l.created_at || l.inserted_at || l.date || l.t; const x = d ? new Date(d) : null; return x && !isNaN(x) ? x : null; };
 /** Les événements du jeu (les autres viennent du cours, ou de la fenêtre « Mon compte »). */
-export const estDuJeu = (n) => /^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$|intro$|avatar$|aide$|menu$|setting$|guest_leave$|slot_erase$)/.test(n);
+export const estDuJeu = (n) => /^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$|intro$|video$|avatar$|aide$|menu$|setting$|guest_leave$|slot_erase$)/.test(n);
 const mediane = (L) => { if (!L.length) return null; const s = L.slice().sort((a, b) => a - b), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 
 /** Le profil (identifiant du compte) d'un événement, s'il a été envoyé par un joueur connecté. */
