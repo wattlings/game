@@ -114,3 +114,8 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 .revoir{display:inline-block;margin:4px 0;font-weight:400}.revoir summary{cursor:pointer;text-decoration:underline}.revoir p{margin:4px 0}
 @media (max-width:560px){.ems-branches{grid-template-columns:1fr}.ems-case+.ems-case,.ems-br .ems-case:nth-of-type(3){margin-left:0}}
 .seq .it.ok{background:var(--ok)}.seq .it.ko{background:var(--bad)}
+/* la console de l'EMS du bureau (interface/ems-bureau.js) : un module par badge */
+.ems-modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:8px}
+.ems-module{border:2px solid #c9bb92;border-radius:6px;padding:8px 10px;background:#fffaf0;display:flex;flex-direction:column;gap:6px}
+.ems-module h4{margin:0;font-family:var(--f-pix);font-size:16px}.ems-module p{font-size:15px}.ems-module .btn{align-self:flex-start}
+.ems-module.ferme{background:#efe9da;border-style:dashed;color:var(--muted)}

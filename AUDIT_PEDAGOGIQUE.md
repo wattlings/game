@@ -470,7 +470,9 @@ C'est l'option ambitieuse (point 9), construite pas à pas : chaque lot ajoute d
 - 1c : le site se crée en recopiant le carnet, et le raccordement exige le PDL et le PCE relevés (avec les erreurs de l'API) ;
 - 1d : plus d'élimination dans les choix (les propositions sont remélangées après une erreur expliquée), les remises en ordre disent ce qui est juste et la première place fausse, les duels montrent la bonne réponse, et « Revoir la fiche » s'ouvre après deux erreurs.
 
-Reste du lot 1, non fait : la console de l'EMS ouverte depuis le PC du bureau (1a). Les ateliers vivent pour l'instant dans les épreuves des champions.
+- 1a : la console de l'EMS du bureau s'ouvre depuis le PC du bureau dès le premier badge (`jeu/interface/ems-bureau.js`). Chaque badge y ajoute un module qui montre ce que le joueur a fait et décidé, et chaque atelier peut y être rejoué pour s'entraîner, sans XP.
+
+Le lot 1 est terminé.
 
 **Risques**
 - Le temps de jeu augmente : ce n'est plus une contrainte, mais l'estimation du pilotage le montrera.

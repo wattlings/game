@@ -366,6 +366,15 @@ if (quoi === "tout" || quoi === "guidage") {
       for (const t of ["Un", "Trois", "Deux"]) [...r.querySelectorAll(".pbody .opt")].find((b) => b.textContent === t).click();
       const o = r.querySelector(".pbody .fb.ko").textContent; closePanel(); return c + " || " + o; });
     verif("retours : un choix faux est expliqué, aucune proposition grisée ; un ordre faux dit ce qui est juste", /parce que A.* grisées : 0 \|\| .*1 sur 3 à la bonne place/.test(retours), retours);
+    // la console de l'EMS du bureau (interface/ems-bureau.js) : un module par badge, rejouer un atelier ne donne pas d'XP
+    const console_ = await R(async () => { const r = document.getElementById("qk-host").shadowRoot, att = (ms) => new Promise((ok) => setTimeout(ok, ms));
+      if (panelEl) closePanel(); jumpTo(6, "bureau"); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); if (panelEl) closePanel(); actPC(); await att(100);
+      const o = r.querySelectorAll(".ems-module:not(.ferme)").length, f = r.querySelectorAll(".ems-module.ferme").length, xp = S.xp;
+      [...r.querySelectorAll("[data-r]")].find((b) => /Modèle/.test(b.closest(".ems-module").textContent)).click(); await att(100);
+      for (const p of strPieces(site())) { [...r.querySelectorAll(".ems-piece")].find((b) => b.textContent === p.t).click(); r.querySelector(`[data-c="${p.ok}"]`).click(); }
+      await att(80); [...r.querySelectorAll(".pbody .btn")].pop().click(); await att(120);
+      const retour = !!r.querySelector(".ems-modules"); closePanel(); return `${o} ouverts, ${f} fermés, XP +${S.xp - xp}, retour : ${retour}`; });
+    verif("console de l'EMS : 4 modules ouverts après 4 badges, rejouer un atelier ne donne pas d'XP et ramène à la console", console_ === "4 ouverts, 4 fermés, XP +0, retour : true", console_);
     verif("ateliers : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }

@@ -34,5 +34,5 @@ function objFlash(){
   el.querySelector('button').onclick=e=>{e.currentTarget.blur();if(!busy&&!dlg.open)openMenu('objectif')};
   if(change){el.classList.remove('neuf');void el.offsetWidth;el.classList.add('neuf')}
 }
-function gainXP(n){sfx('good');const before=level();S.xp+=n;save();hud();if(level()>before)qkTimeout(()=>toast(`Niveau ${level()} !`),400);else toast(`+${n} XP`)}
+function gainXP(n){if(emsRejeu)return;sfx('good');const before=level();S.xp+=n;save();hud();if(level()>before)qkTimeout(()=>toast(`Niveau ${level()} !`),400);else toast(`+${n} XP`)}
 function badge(name){if(!S.badges.includes(name)){trk('badge',{name});S.badges.push(name);S.xp+=60;save();hud();jingle('badge');toast(`Badge ${BLAB(name)} obtenu !`)}}

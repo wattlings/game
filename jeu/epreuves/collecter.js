@@ -2,6 +2,7 @@
    Étape 2 · Collecter : le mandat et la collecte des données. */
 
 function actPC(){
+  if(S.ch>=3&&S.ch!==10)return openEmsBureau();   // dès le premier badge (sauf quand le maire attend) : la console de l'EMS du bureau (interface/ems-bureau.js)
   const m={0:"Ton ordinateur. Parle d'abord à Mme Joule.",1:"Rien à faire ici pour l'instant : cadre ton site depuis l'extérieur.",10:"Tableau de bord : Mme Joule veut te parler.",11:"Tableau de bord du patrimoine : tout est au vert. Enfin, presque."};
   const A=ARENAS.find(a=>ARENA_CH[a.id]===S.ch);
   say([{t:m[S.ch]||(A?`Ton ordinateur affiche un rappel : « ${A.name}, ${qAu(A.id)}. ${A.champ} t'attend. »`:'Ton ordinateur.')}]);
