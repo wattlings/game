@@ -64,7 +64,7 @@ voyCarte('datacenter',{
   objectif(){
     const sid='datacenter',S0=VOY.sites[sid],m=voyClesManquantes(sid),n=voyInfosVues(sid).length,N=S0.infos.length,C=S0.infos.filter(f=>f.cle).length;
     if(voyTampon(sid))return n<N?`Tampon obtenu ! Il reste ${N-n} information${N-n>1?'s':''} à dénicher, dans les salles ou sur le quai. Le train du retour attend à la halte.`:"Site visité de fond en comble. Le train du retour attend à la halte, au sud.";
-    if(m.length)return `Data center : visite les salles et le quai, réunis les infos clés (${C-m.length}/${C}). Prochaine piste : ${m[0].ou}.`;
+    if(m.length)return `Info clé suivante : ${m[0].ou} (${C-m.length}/${C})`;
     return "Infos clés réunies : Mme Quatreneuf t'attend dans le hall.";
   },
   cibles(){return voyCibles('datacenter',{salle:[20,12],chaleur:[5,11],pue:[32,9],plate:[27,8],secours:[29,16],fatale:[15,5]},[20,15])},

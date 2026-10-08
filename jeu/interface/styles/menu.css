@@ -20,7 +20,7 @@
 .fr-ecran .panel header .fr-titre{flex:1;text-align:center;text-transform:uppercase;letter-spacing:.06em}
 .fr-retour,.fr-x{font-family:var(--f-pix);font-size:15px;background:transparent;color:var(--paper);border:2px solid currentColor;border-radius:5px;padding:2px 8px;cursor:pointer}
 .fr-retour:hover,.fr-x:hover,.fr-retour:focus-visible,.fr-x:focus-visible{color:var(--amber);outline:none}
-.fr-touches{font-size:13.5px;color:var(--muted);margin:14px 0 0;text-align:right}
+.fr-touches{font-size:13.5px;color:var(--muted);margin:16px 0 0;padding-top:8px;border-top:1px solid #e3d6ae;text-align:right}
 .fr-fl{font-family:var(--f-pix);background:transparent;border:0;color:var(--ink);cursor:pointer;font-size:15px;padding:4px 8px;border-radius:4px}
 .fr-fl:hover,.fr-fl:focus-visible{background:var(--paper-2);outline:2px solid var(--ink);outline-offset:-2px}
 

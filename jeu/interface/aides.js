@@ -7,15 +7,15 @@ const TACTILE=()=>matchMedia('(pointer:coarse)').matches;
 const AIDES={
   bouger:()=>TACTILE()?'Utilise la croix pour te déplacer.':'Flèches (ou Z Q S D) pour te déplacer.',
   parler:()=>TACTILE()?'Touche le bouton A pour parler ou examiner ce qui est devant toi.':'Appuie sur Espace pour parler ou examiner ce qui est devant toi.',
-  carte:()=>TACTILE()?'Le bouton CARTE montre toute la ville et ton objectif.':'Touche K : la carte de toute la ville et ton objectif.',
+  carte:()=>TACTILE()?'Le bouton Carte montre toute la ville et ton objectif.':'Touche K : la carte de toute la ville et ton objectif.',
   fleche:()=>"La flèche orange au bord de l'écran indique la direction de ton objectif.",
   menu:()=>TACTILE()?'Le bouton Menu : ton objectif, ton carnet et tes fiches.':'Touche M : le menu (ton objectif, ton carnet et tes fiches).',
 };
 let aideFin=0,aideFlecheHors=false;
 
 /* les textes du jeu citent les touches du clavier ; à l'écran tactile, ils parlent des boutons (dialogues, messages) */
-const selonAppareil=t=>!TACTILE()?t:String(t).replace(/\(touche K([^)]*)\)/g,'(bouton CARTE$1)').replace(/\(touche M\)/g,'(bouton Menu)')
-  .replace(/\btouche K\b/g,'bouton CARTE').replace(/\btouche M\b/g,'bouton Menu').replace(/\bA \(Espace\)/g,'A');
+const selonAppareil=t=>!TACTILE()?t:String(t).replace(/\(touche K([^)]*)\)/g,'(bouton Carte$1)').replace(/\(touche M\)/g,'(bouton Menu)')
+  .replace(/\btouche K\b/g,'bouton Carte').replace(/\btouche M\b/g,'bouton Menu').replace(/\bA \(Espace\)/g,'A');
 
 function aide(k){
   if(ESSAI||!AIDES[k])return false;
@@ -36,7 +36,7 @@ function proposerProfil(){
   b.innerHTML=`<p>Bravo pour ton premier badge ! Tu joues <b>sans compte</b> : ta partie s'arrêtera quand tu fermeras la page.</p>
     <p>Crée un profil (un identifiant et un mot de passe, sans adresse e-mail) : ta partie y est enregistrée, et tu la retrouves sur tous tes appareils.</p>
     <div class="row"><button class="btn" type="button" data-p="oui">Créer mon profil</button><button class="btn alt" type="button" data-p="non">Plus tard</button></div>
-    <p class="dnote">Tu pourras le faire à tout moment : menu → Sauver.</p>`;
+    <p class="dnote">Tu pourras le faire à tout moment : menu → Créer un profil.</p>`;
   b.querySelector('[data-p=oui]').onclick=()=>{trk('guest_prompt_oui');closePanel();COMPTE.ouvrir(ROOT,'creation')};
   b.querySelector('[data-p=non]').onclick=()=>closePanel();
   b.querySelector('[data-p=oui]').focus();

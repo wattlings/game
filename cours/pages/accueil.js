@@ -2,7 +2,9 @@
  * La page d'accueil : le cycle, les chiffres de l'école, le programme.
  */
 import { ECOLE } from "../../commun/donnees/ecole.js";
+import { comptesDisponibles, compteActuel } from "../../commun/compte.js";
 import { adresseJeu } from "../../commun/liens.js";
+import { esc as echapperHTML } from "../../commun/texte.js";
 import { FAMILLES } from "../../commun/donnees/etapes.js";
 import { icone } from "../blocs/icones.js";
 import { euros, nombre, texteRiche, tous, un } from "../blocs/outils.js";
@@ -31,11 +33,11 @@ export function pageAccueil(conteneur) {
         <h1>De la <span class="d">donnée</span> à l’<span class="e">énergie</span> économisée</h1>
         <p class="lead">Tu développes ou tu testes un logiciel d’energy management ? Ce site t’explique le métier en 8 étapes, avec une école fictive comme terrain de jeu.</p>
         <div class="stack" style="gap:8px">
-          <span class="eyebrow" id="lbl-filtre">Mettre en avant</span>
+          <span class="eyebrow" id="lbl-filtre">Les deux familles d’étapes, sur le cycle</span>
           <div class="segmented" role="group" aria-labelledby="lbl-filtre">
-            <button type="button" data-f="tout" aria-pressed="${u === "tout"}">Tout</button>
-            <button type="button" data-f="data" aria-pressed="${u === "data"}">${icone("data")}Data</button>
-            <button type="button" data-f="energie" aria-pressed="${u === "energie"}">${icone("energie")}Énergie</button>
+            <button type="button" data-f="tout" aria-pressed="${u === "tout"}">Les 8</button>
+            <button type="button" data-f="data" aria-pressed="${u === "data"}">${icone("data")}Data · 1 à 4</button>
+            <button type="button" data-f="energie" aria-pressed="${u === "energie"}">${icone("energie")}Énergie · 5 à 8</button>
           </div>
         </div>
         <p class="muted" style="font-size:var(--t-s)" id="desc-filtre"></p>
@@ -86,9 +88,10 @@ export function pageAccueil(conteneur) {
 
     <section class="stack" aria-labelledby="prog-t">
       <div class="row" style="justify-content:space-between"><div class="stack" style="gap:6px"><span class="eyebrow">Ton parcours</span><h2 id="prog-t">Ta progression</h2></div>
-      <div class="row"><a class="btn primary" href="#quiz-final">${icone("ok")} Quiz de synthèse${magasin.get().quizFinal != null ? ` · ${magasin.get().quizFinal}/${QUESTIONS_QUIZ_FINAL.length}` : ""}</a><button type="button" class="btn" id="prog-reset">Effacer ma progression</button></div></div>
+      <div class="row"><a class="btn primary" href="#quiz-final">${icone("ok")} Quiz de synthèse${magasin.get().quizFinal != null ? ` · ${magasin.get().quizFinal}/${QUESTIONS_QUIZ_FINAL.length}` : ""}</a></div></div>
       <div class="table-wrap"><table class="progression"><thead><tr><th>Étape</th><th>Essentiel</th><th>Démo</th><th>Comprendre</th><th>Approfondir</th><th>Quiz</th></tr></thead><tbody id="prog-body"></tbody></table></div>
-      <p class="note" id="prog-note">${icone("info")}<span>${magasin.persistant() ? "Ta progression est gardée dans ce navigateur uniquement." : "Le stockage du navigateur est indisponible : ta progression sera perdue en fermant la page."}</span></p>
+      <p class="note" id="prog-note">${icone("info")}<span>${!magasin.persistant() ? "Le stockage du navigateur est indisponible : ta progression sera perdue en fermant la page." : compteActuel() ? `Ta progression est enregistrée sur ton compte ${echapperHTML(compteActuel())} : tu la retrouves sur tous tes appareils.` : comptesDisponibles() ? "Ta progression est gardée dans ce navigateur. Connecte-toi (en haut à droite) pour la retrouver sur tous tes appareils." : "Ta progression est gardée dans ce navigateur."}</span></p>
+      <p class="note"><button type="button" class="lien-discret" id="prog-reset">Effacer ma progression</button></p>
     </section>
 
     <section class="card ecole-card">
@@ -146,7 +149,7 @@ export function pageAccueil(conteneur) {
   un("#prog-reset", conteneur).addEventListener("click", (p) => {
     if (!i) {
       i = true;
-      p.currentTarget.textContent = "Confirmer l’effacement";
+      p.currentTarget.textContent = "Confirmer : effacer toute ma progression du cours";
       p.currentTarget.classList.add("energie");
       return;
     }

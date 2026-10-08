@@ -32,23 +32,26 @@ racine.innerHTML = `
         <svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><path d="M17 3a14 14 0 0 1 0 28" fill="none" stroke="var(--energie)" stroke-width="5" stroke-linecap="round"/><path d="M17 31A14 14 0 0 1 17 3" fill="none" stroke="var(--data)" stroke-width="5" stroke-linecap="round"/></svg>
         <span>L’Energy Management<small>par la donnée</small></span>
       </a>
-      <nav class="nav" aria-label="Navigation principale">
+      <button class="icon-btn btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="nav-principale">${icone("menu")}<span>Menu</span></button>
+      <nav class="nav" id="nav-principale" aria-label="Navigation principale">
         <a href="#accueil" data-route="accueil">Le cycle</a>
-        <a href="#ecole" data-route="ecole">${icone("ecole")}L’école</a>
-        <a href="#glossaire" data-route="glossaire">${icone("livre")}Glossaire</a>
-        <a href="#quiz-final" data-route="quiz-final">${icone("ok")}Quiz final</a>
+        <a href="#ecole" data-route="ecole">L’école</a>
+        <a href="#glossaire" data-route="glossaire">Glossaire</a>
+        <a href="#quiz-final" data-route="quiz-final">Quiz final</a>
         <a href="#sources" data-route="sources">Sources</a>
         <a href="#patrimoine" class="qk-nav-p" data-route="patrimoine">Patrimoine</a>
         <a href="${adresseJeu()}" class="qk-nav" id="qk-jeu" data-jeu="">Le jeu</a>
       </nav>
+      <button class="icon-btn" id="btn-theme" type="button"></button>
+      <button class="icon-btn btn-compte" id="btn-compte" type="button" hidden></button>
+    </div>
+    <div class="steps-row">
+      <nav class="steps-strip" aria-label="Les 8 étapes" id="strip"></nav>
       <div class="progress" id="progress" title="Une étape est terminée quand son Essentiel est lu et sa démo manipulée">
         <span class="progress-bar" aria-hidden="true"><span class="pd"></span><span class="pe"></span></span>
         <span id="progress-txt"></span>
       </div>
-      <button class="icon-btn" id="btn-theme" type="button"></button>
-      <button class="icon-btn btn-compte" id="btn-compte" type="button" hidden></button>
     </div>
-    <nav class="steps-strip" aria-label="Les 8 étapes" id="strip"></nav>
   </header>
   <main id="contenu" tabindex="-1"></main>
   <button class="fab" type="button" id="fab" aria-label="Glossaire" title="Glossaire">${icone("livre")}</button>`;
@@ -132,6 +135,7 @@ function afficherRoute() {
     document.title = "L’Energy Management par la donnée";
   }
   majNavigation();
+  fermerMenu();
   window.scrollTo(0, 0);
   if (
     document.activeElement &&
@@ -173,6 +177,19 @@ un("#btn-compte").addEventListener("click", () => ouvrirFenetreCompte());
 
 un("#fab").addEventListener("click", () => ouvrirGlossaire());
 
+// sur un téléphone, la navigation se replie derrière le bouton « Menu »
+function fermerMenu() {
+  un(".topbar").classList.remove("menu-ouvert");
+  un("#btn-menu").setAttribute("aria-expanded", "false");
+}
+un("#btn-menu").addEventListener("click", () => {
+  const ouvert = un(".topbar").classList.toggle("menu-ouvert");
+  un("#btn-menu").setAttribute("aria-expanded", String(ouvert));
+});
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape") fermerMenu();
+});
+
 brancherGlossaire();
 
 magasin.on(majProgression);
@@ -186,5 +203,5 @@ majProgression();
 
 afficherRoute();
 
-// bandeaux « Mode jeu » et bouton flottant « Jouer »
+// bandeaux du jeu (« Mettre en pratique ») et lien « Le jeu » / « Reprendre le jeu » de la barre du haut
 brancherJeu();

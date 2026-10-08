@@ -34,11 +34,13 @@ function render(){
   // flèches d'objectif
   const bob=Math.sin(tick/8)*2;
   // le « ! » : plein pour ce qui sert à l'étape en cours, discret (plus petit, translucide) pour une information facultative
-  const facultatif=o=>{const L=FICHES.filter(f=>fAvail(f)&&!fGot(f.id)&&SRC[f.src]&&SRC[f.src].x===o.x&&SRC[f.src].y===o.y&&(SRC[f.src].map===S.map||(S.map==='local'&&SRC[f.src].ins===S.inside)));return L.length>0&&L.every(f=>f.req!==S.ch)};
+  const TG=AR.lock?[]:targets();
+  const facultatif=o=>{if(MAPS[S.map].cibles)return !VOYC.cles.some(([x,y])=>x===o.x&&y===o.y)&&!TG.some(([x,y])=>x===o.x&&y===o.y);
+    const L=FICHES.filter(f=>fAvail(f)&&!fGot(f.id)&&SRC[f.src]&&SRC[f.src].x===o.x&&SRC[f.src].y===o.y&&(SRC[f.src].map===S.map||(S.map==='local'&&SRC[f.src].ins===S.inside)));return L.length>0&&L.every(f=>f.req!==S.ch)};
   objs.forEach(o=>{if(!o.glow)return;const X=o.x*TS-ox+8;
     if(facultatif(o)){const Y=o.y*TS-oy-10;ctx.globalAlpha=.6;R(ctx,X-2,Y-5,5,8,'#fffaf0');R(ctx,X,Y-4,1,3,'#1c2440');R(ctx,X,Y,1,1,'#1c2440');ctx.globalAlpha=1;return}
     const Y=o.y*TS-oy-14+bob;R(ctx,X-4,Y-6,9,9,'#fffaf0');R(ctx,X-3,Y-7,7,11,'#fffaf0');R(ctx,X,Y-5,2,4,'#1c2440');R(ctx,X,Y,2,2,'#1c2440')});
-  aideFlecheHors=false;if(!AR.lock)targets().forEach(([x,y])=>flecheObjectif(ctx,x*TS-ox+8,y*TS-oy-8,bob));
+  aideFlecheHors=false;TG.forEach(([x,y])=>flecheObjectif(ctx,x*TS-ox+8,y*TS-oy-8,bob));
   // nom de lieu
   if(fade>0){ctx.globalAlpha=fade;R(ctx,0,0,cv.width,cv.height,'#000');ctx.globalAlpha=1}
 }

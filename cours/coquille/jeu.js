@@ -125,7 +125,7 @@ function poser() {
     if (!c.querySelector(".etape-head")) return;
     enFin(
       bandeau(
-        "Mode jeu · chapitre 10",
+        "Mettre en pratique · chapitre 10",
         "Pilote les 20 sites dans Wattlings",
         "Six missions au PC patrimoine de l’hôtel de ville : périmètre, Pareto, coût et CO₂, activités, bâtiments similaires, priorités.",
         [10],
@@ -134,7 +134,7 @@ function poser() {
   } else if (h === "ecole") {
     enFin(
       bandeau(
-        "Mode jeu",
+        "Le jeu Wattlings",
         "Visite l’école dans le jeu",
         "Choisis l’école Jean-Jaurès au début du jeu : mêmes chiffres, mêmes compteurs, mêmes pièges.",
         [0],

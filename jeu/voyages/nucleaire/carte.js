@@ -66,7 +66,7 @@ voyCarte('nucleaire',{
   objectif(){
     const sid='nucleaire',S0=VOY.sites[sid],m=voyClesManquantes(sid),n=voyInfosVues(sid).length,N=S0.infos.length,C=S0.infos.filter(f=>f.cle).length;
     if(voyTampon(sid))return n<N?`Tampon obtenu ! Il reste ${N-n} information${N-n>1?'s':''} à dénicher sur le site. Le train du retour attend à la halte, au sud.`:"Site visité de fond en comble. Le train du retour attend à la halte, au sud.";
-    if(m.length)return `Centrale nucléaire : fais le tour du site et réunis les infos clés (${C-m.length}/${C}). Prochaine piste : ${m[0].ou}.`;
+    if(m.length)return `Info clé suivante : ${m[0].ou} (${C-m.length}/${C})`;
     return "Infos clés réunies : Mme Isotope t'attend au bout de l'allée des visiteurs, passé le portique.";
   },
   cibles(){return voyCibles('nucleaire',{fission:[5,24],pilotage:[12,24],carbone:[27,23],creuses:[31,23],bouilloire:[27,11],ordres:[29,12]},[21,12])},

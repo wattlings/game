@@ -10,16 +10,17 @@ const MENU={cur:0,poche:'site',opt:0,avaler:false};
 /* les anciens onglets → écran (et poche du carnet) */
 const MENU_ALIAS={badges:'joueur',avatar:'joueur',sec:'carnet:secrets',passeport:'carnet:passeport',sources:'carnet:sources',ciel:'opt'};
 
+/* comme dans Rouge Feu, une entrée n'apparaît qu'une fois qu'elle sert : l'Anomalidex à la première anomalie, le classeur à la première fiche */
 const MENU_ENTREES=()=>[
   {k:'objectif',l:'Objectif',d:"Ce que tu dois faire maintenant et où aller. Un lien t'emmène à la bonne page du cours."},
   {k:'carte',l:'Carte',d:"La carte de la ville : quartiers, arènes, ton objectif et les infos clés qui te manquent. (Touche K)"},
   {k:'energie',l:'Énergie',d:"Ton tableau de bord : les kWh économisés, les consommations de ton site et tes actions."},
-  {k:'dex',l:'Anomalidex',d:"Les anomalies de données que tu as repérées et corrigées."},
-  {k:'classeur',l:'Classeur',d:"Tes fiches savoir, étape par étape. Les fiches clés ouvrent les portes des arènes."},
+  ...(Object.keys(S.dex||{}).length?[{k:'dex',l:'Anomalidex',d:"Les anomalies de données que tu as repérées et corrigées."}]:[]),
+  ...(Object.keys(S.fiches||{}).length?[{k:'classeur',l:'Classeur',d:"Tes fiches savoir, étape par étape. Les fiches clés ouvrent les portes des arènes."}]:[]),
   {k:'carnet',l:'Carnet',d:`Ce que tu as noté sur ton site, tes secrets${S.voy&&S.voy.pass?', ton passeport de voyage':''} et les sources du jeu.`},
-  {k:'joueur',l:S.name||'Alex',d:"Ta carte de joueur : rang, niveau, badges et collection. C'est là que tu changes d'avatar."},
+  {k:'joueur',l:'Moi · '+(S.name||'Alex'),d:"Ta carte de joueur : rang, niveau, badges et collection. C'est là que tu changes d'avatar."},
   {k:'etapes',l:'Étapes',d:"Aller directement à une étape du jeu, pour la rejouer ou la reprendre."},
-  {k:'save',l:'Sauver',d:INVITE?"Partie sans compte : rien n'est sauvegardé. Crée un compte pour garder ta progression.":"Enregistrer ta partie maintenant. Elle se sauvegarde aussi toute seule à chaque progrès."},
+  {k:'save',l:INVITE?'Créer un profil':'Sauver',d:INVITE?"Partie sans compte : rien n'est sauvegardé. Crée un compte pour garder ta progression.":"Enregistrer ta partie maintenant. Elle se sauvegarde aussi toute seule à chaque progrès."},
   {k:'opt',l:'Options',d:"Musique, plein écran, ciel et météo, patine de la ville, commandes, retour au cours."},
   {k:'fermer',l:'Retour',d:"Refermer le menu et reprendre le jeu. (Touche M ou Échap)"},
 ];
@@ -113,7 +114,7 @@ const MENU_ECRANS={
   /* l'objectif : la prochaine action en grand, puis toutes les tâches de l'étape, cochées (recit/objectifs.js) */
   objectif:{t:()=>'Objectif',
     html:()=>{const s=S.site?site():null,a=prochaineAction(),T=a.voyage?[]:objectiveText0();
-      return `<div class="obj-box"><p><b>▶</b> ${esc(objectiveText())}</p></div>
+      return `${T.length>1?'':`<div class="obj-box"><p><b>▶</b> ${esc(objectiveText())}</p></div>`}
       ${T.length>1?`<h4 class="segh">${esc(CHAPTERS[S.ch]||'Cette étape')}</h4><ol class="obj-liste">${T.map(x=>`<li class="${x.ok?'ok':x===a||x.t===a.t?'cur':''}"><span aria-hidden="true">${x.ok?'✔':x.t===a.t?'▶':'○'}</span><span>${esc(x.t)}${x.prog&&!x.ok?` <small>(${esc(x.prog)})</small>`:''}${x.cle?' <small class="obj-cle">info clé</small>':''}</span></li>`).join('')}</ol>`:''}
       <p class="dnote">${s?esc(s.name)+' · ':''}La flèche orange montre où aller ; au bord de l'écran, elle indique la direction. Un point d'exclamation signale quelqu'un qui a une information pour toi ; un petit, plus pâle, une information facultative.</p>
       <div class="row"><button class="btn" id="oMap" data-focus>Voir sur la carte</button><button class="btn" id="oCourse">Cours de cette étape ↗</button></div>`},
@@ -176,7 +177,7 @@ const MENU_ECRANS={
     lier:mt=>chapterList(mt.querySelector('#chl'),(ch,sid)=>{closePanel();jumpTo(ch,sid)})},
 
   /* Sauver : la question Oui / Non, avec le résumé de la partie */
-  save:{t:()=>'Sauver',
+  save:{t:()=>INVITE?'Créer un profil':'Sauver',
     html:()=>{const id=COMPTE.disponible&&COMPTE.identifiant();
       const resume=`<dl class="fr-resume"><dt>Joueur</dt><dd>${esc(S.name)}</dd><dt>Badges</dt><dd>${S.badges.length} / 8</dd><dt>Fiches</dt><dd>${Object.keys(S.fiches||{}).length} / ${FICHES.length}</dd>${INVITE?'':`<dt>${id?'Compte':'Enregistrée'}</dt><dd>${id?esc(id):'dans ce navigateur'}</dd><dt>Dernière sauvegarde</dt><dd>${fmtDate(S.savedAt)}</dd>`}</dl>`;
       return INVITE?`${resume}<p><b>Partie sans compte</b> : rien n'est sauvegardé, la partie s'arrête quand tu fermes la page.</p><p>Connecte-toi ou crée un compte pour l'enregistrer et la retrouver sur tous tes appareils. Si ton compte a déjà une partie, c'est elle qui reprend.</p><div class="row"><button class="btn" id="svCompte" data-focus>Se connecter ou créer un compte</button><button class="btn alt" id="svNon">Plus tard</button></div>`

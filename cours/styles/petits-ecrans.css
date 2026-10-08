@@ -27,8 +27,58 @@
   .topbar {
     position: static;
   }
+  /* une ligne : le logo, le compte, le thème et « Menu » ; la navigation se déplie dessous */
+  .topbar-in {
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+  .brand {
+    min-width: 0;
+    font-size: 0.98rem;
+  }
+  .btn-menu {
+    display: inline-flex;
+    border-color: var(--line);
+  }
+  .btn-compte span {
+    display: none;
+  }
+  .steps-row .progress {
+    display: none;
+  }
+  /* les trois niveaux tiennent sur une ligne */
+  .tabs {
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+  .tabs button {
+    flex: 1 1 0;
+    justify-content: center;
+    padding: 10px 6px;
+    font-size: var(--t-s);
+  }
+  .nav {
+    display: none;
+  }
+  .topbar {
+    position: relative;
+  }
+  .topbar.menu-ouvert .nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    z-index: 35;
+    padding: 10px 16px 14px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    box-shadow: var(--shadow);
+  }
   .nav a {
-    padding: 6px 8px;
+    padding: 8px 10px;
   }
   main {
     padding-top: 20px;

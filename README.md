@@ -33,6 +33,7 @@ Chaque modification enregistrée sur la branche `main` est en ligne après une �
 | La barre du haut, la navigation | `cours/styles/coquille.css` |
 | La mise en page d'une étape, de l'accueil | `cours/styles/etape.css`, `accueil.css` |
 | Boutons, champs, tableaux, graphiques des démos | `cours/styles/controles.css`, `demos.css`, `niveaux.css` |
+| La barre du haut du cours (une ligne, la progression au bout des 8 étapes ; sur un téléphone, la navigation se replie derrière « Menu ») | `cours/principal.js`, `cours/styles/coquille.css`, `cours/styles/petits-ecrans.css` |
 | Le bandeau « Mettre en pratique » (en fin d'étape, avant les étapes voisines) et le lien « Le jeu » / « Reprendre le jeu » de la barre du haut | `cours/coquille/jeu.js`, `cours/styles/bandeau-jeu.css` |
 | Une icône du cours | `cours/blocs/icones.js` |
 | Le schéma d'une étape | `cours/schemas/<étape>.js` |
@@ -271,7 +272,7 @@ Sans rien installer : dans le dépôt GitHub, onglet **Actions**, lancer « Fich
 
 Tout est enregistré dans le navigateur du visiteur, sous des clés inchangées depuis la version d'origine : la progression du cours (`ems-pedagogie-v1`) et la partie du jeu (`wattlings-slot-1`, nom hérité des trois emplacements d'autrefois).
 
-**Le jeu a une seule partie par joueur, celle de son compte** (voir « Comptes joueurs » ci-dessous). Sans compte, l'écran titre propose d'abord **« Jouer »** : la partie se joue alors normalement, mais rien n'est enregistré, et elle s'arrête quand on ferme la page. Se connecter et créer un compte sont proposés dessous ; après le premier badge, le jeu propose une fois de créer un profil pour garder la partie. Une demande venue du cours (« jouer le chapitre 3 ») attend ce choix, puis est servie. Un joueur sans compte qui se connecte en cours de partie (menu → Sauvegarde) l'enregistre sur son compte, sauf si le compte a déjà une partie : c'est alors celle du compte qui reprend.
+**Le jeu a une seule partie par joueur, celle de son compte** (voir « Comptes joueurs » ci-dessous). Sans compte, l'écran titre propose d'abord **« Jouer »** : la partie se joue alors normalement, mais rien n'est enregistré, et elle s'arrête quand on ferme la page. Se connecter et créer un compte sont proposés dessous ; après le premier badge, le jeu propose une fois de créer un profil pour garder la partie. Une demande venue du cours (« jouer le chapitre 3 ») attend ce choix, puis est servie. Un joueur sans compte qui se connecte en cours de partie (menu → « Créer un profil ») l'enregistre sur son compte, sauf si le compte a déjà une partie : c'est alors celle du compte qui reprend.
 
 **En quittant une partie sans compte** (« ← Retour au cours », bouton « ← Cours »), un avertissement rappelle que rien n'est sauvegardé et propose trois choix : « Créer un profil et sauvegarder » (la partie est enregistrée sur le nouveau compte, puis on quitte), « Quitter sans enregistrer », ou « Continuer à jouer ». Fermer l'onglet ou recharger la page déclenche la demande de confirmation du navigateur (qui n'affiche que son propre message). Textes et comportement : `jeu/interface/liens-cours.js`.
 

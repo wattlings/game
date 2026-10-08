@@ -320,3 +320,19 @@ tr.grave td {
   background: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 7px) !important;
   height: 2px;
 }
+
+/* une action rare ou destructrice : un simple lien, pas un bouton mis en avant */
+.lien-discret {
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  font-size: var(--t-xs);
+  color: var(--muted);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.lien-discret.energie {
+  color: var(--energie-ink);
+  font-weight: 700;
+}

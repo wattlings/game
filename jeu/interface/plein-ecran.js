@@ -9,7 +9,8 @@ function fitScreen(){
   const app=true;QK_APP.classList.add('app'); // l'écran de jeu occupe toujours toute la place disponible
   const c=$('screen'),w=$('wrap'),Wd=w.clientWidth,Ht=app?w.clientHeight:Math.round(Wd*11/15);
   if(!Wd||!Ht)return;
-  let s=Math.min(Wd,Ht)/(TS*10.5);s=Math.max(1.5,Math.min(6,s));if(s>=2)s=Math.round(s*2)/2;
+  // au moins 10,5 cases dans le plus petit côté ; sur un téléphone tenu en hauteur, 12 cases de large (sinon les pièces sont coupées sur les côtés)
+  let s=Math.min(Wd,Ht)/(TS*10.5);if(Ht>Wd*1.2)s=Math.min(s,Wd/(TS*12));s=Math.max(1.5,Math.min(6,s));if(s>=2)s=Math.floor(s*2)/2;
   const cw=Math.ceil(Wd/s),ch=Math.ceil(Ht/s);
   if(c.width!==cw||c.height!==ch){c.width=cw;c.height=ch;ctx.imageSmoothingEnabled=false}
   c.style.width=Wd+'px';c.style.height=Ht+'px';

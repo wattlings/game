@@ -59,3 +59,7 @@ input[type=range]{width:100%;accent-color:var(--flame)}
 .maquette-vue .mq-txt p{margin:0}
 .mq-q{font-family:var(--f-pix);font-size:20px;margin:16px 0 4px}
 @media (max-width:560px){.maquette-vue{grid-template-columns:1fr}}
+
+/* petit écran : l'en-tête d'un panneau tient sur une ligne (« Cours ↗ », « 1 / 4 ») */
+.panel header .step,.course-link{white-space:nowrap}.course-link .sm{display:none}
+@media (max-width:560px){.course-link .lg{display:none}.course-link .sm{display:inline}.panel header>span:first-child{min-width:0}}

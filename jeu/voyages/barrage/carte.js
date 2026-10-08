@@ -68,7 +68,7 @@ voyCarte('barrage',{
   objectif(){
     const sid='barrage',S0=VOY.sites[sid],m=voyClesManquantes(sid),n=voyInfosVues(sid).length,N=S0.infos.length,C=S0.infos.filter(f=>f.cle).length;
     if(voyTampon(sid))return n<N?`Tampon obtenu ! Il reste ${N-n} information${N-n>1?'s':''} à dénicher, dans la vallée ou là-haut. Le train du retour attend à la halte.`:"Site visité de fond en comble. Le train du retour attend à la halte, au sud.";
-    if(m.length)return `Barrage : visite l'usine, monte jusqu'à la crête, réunis les infos clés (${C-m.length}/${C}). Prochaine piste : ${m[0].ou}.`;
+    if(m.length)return `Info clé suivante : ${m[0].ou} (${C-m.length}/${C})`;
     return "Infos clés réunies : Mme Lachute t'attend devant l'usine, dans la vallée.";
   },
   cibles(){return voyCibles('barrage',{formule:[9,21],flexible:[12,21],step:[20,22],pointe:[18,24],types:[3,17],stock:[10,7]},[14,22])},

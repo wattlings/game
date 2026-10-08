@@ -39,3 +39,5 @@
 .wm-btns .wm-neuf{border-color:var(--amber);color:#131a2b;background:var(--amber);animation:wm-neuf 1.1s ease-in-out infinite}
 @keyframes wm-neuf{50%{box-shadow:0 0 0 5px rgba(242,163,58,.35)}}
 @media (prefers-reduced-motion:reduce){.wm-btns .wm-neuf{animation:none}}
+/* téléphone en hauteur : la manette ne sert pas dans la carte (on touche, on glisse) ; la carte prend sa place */
+@media (orientation:portrait) and (pointer:coarse){.qk-app.app.wm-open .pad{display:none}}

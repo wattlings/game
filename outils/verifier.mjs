@@ -295,7 +295,7 @@ if (quoi === "tout" || quoi === "guidage") {
     const page = await contexte.newPage();
     await page.goto(adresse + "jeu/#essai-chapitre-3"); await page.waitForTimeout(2200); await finDialogue(page);
     const t = await page.evaluate(() => { say([{ t: "La carte (touche K) montre le chemin ; le menu (touche M)." }]); return dlg.cur.full; });
-    verif("tactile : « touche K » devient « bouton CARTE »", /bouton CARTE/.test(t) && /bouton Menu/.test(t) && !/touche/.test(t), t);
+    verif("tactile : « touche K » devient « bouton Carte »", /bouton Carte/.test(t) && /bouton Menu/.test(t) && !/touche/.test(t), t);
     await contexte.close();
   }
 }
@@ -317,7 +317,7 @@ if (quoi === "tout" || quoi === "menu") {
   verif("menu : la patine de la ville est à 1 par défaut", await dansLaPage(() => PREF.wear === 1 && wearLvl() === 1));
   await page.keyboard.press("m"); await page.waitForTimeout(200);
   const liste = await dansLaPage(() => [...document.getElementById("qk-host").shadowRoot.querySelectorAll(".fr-menu .fr-item")].map((b) => b.dataset.k));
-  verif("menu : M ouvre la liste (objectif, carte, énergie, anomalidex, classeur, carnet, joueur, étapes, sauver, options, retour)", liste.join() === "objectif,carte,energie,dex,classeur,carnet,joueur,etapes,save,opt,fermer", liste.join());
+  verif("menu : M ouvre la liste (objectif, carte, énergie, anomalidex, classeur, carnet, joueur, étapes, sauver, options, retour)", liste.join() === ["objectif", "carte", "energie", ...(await dansLaPage(() => Object.keys(S.dex).length) ? ["dex"] : []), ...(await dansLaPage(() => Object.keys(S.fiches).length) ? ["classeur"] : []), "carnet", "joueur", "etapes", "save", "opt", "fermer"].join(), liste.join());
   const aide1 = await ombre(".fr-aide");
   await page.keyboard.press("ArrowDown"); await page.keyboard.press("ArrowDown"); await page.waitForTimeout(100);
   verif("menu : le curseur descend et le bandeau explique l'entrée choisie", (await ombre(".fr-item.on")) === "Énergie" && (await ombre(".fr-aide")) !== aide1 && /tableau de bord/.test(await ombre(".fr-aide")));

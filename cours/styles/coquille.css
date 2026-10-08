@@ -15,7 +15,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 .brand {
   display: flex;
@@ -39,8 +39,14 @@
 .nav {
   display: flex;
   gap: 4px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
+  min-width: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.nav a {
+  flex: none;
 }
 .nav a,
 .icon-btn {
@@ -90,10 +96,20 @@
 .progress-bar .pe {
   background: var(--energie);
 }
-.steps-strip {
+.steps-row {
   max-width: var(--w-page);
   margin: 0 auto;
   padding: 0 16px 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.steps-row .progress {
+  flex: none;
+  margin-left: auto;
+}
+.steps-strip {
+  min-width: 0;
   display: flex;
   gap: 6px;
   overflow-x: auto;
@@ -148,4 +164,21 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+/* entre le téléphone et le grand écran : le compte en icône seule, pour garder la barre sur une ligne */
+@media (max-width: 1000px) {
+  .btn-compte span {
+    display: none;
+  }
+  .nav a {
+    padding: 7px 7px;
+  }
+  .brand small {
+    display: none;
+  }
+}
+/* le bouton « Menu » : seulement sur un téléphone (petits-ecrans.css) */
+.btn-menu {
+  display: none;
 }

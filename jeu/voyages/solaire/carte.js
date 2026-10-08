@@ -62,7 +62,7 @@ voyCarte('solaire',{
   objectif(){
     const sid='solaire',S0=VOY.sites[sid],m=voyClesManquantes(sid),n=voyInfosVues(sid).length,N=S0.infos.length,C=S0.infos.filter(f=>f.cle).length;
     if(voyTampon(sid))return n<N?`Tampon obtenu ! Il reste ${N-n} information${N-n>1?'s':''} à dénicher sur le site. Le train du retour attend à la halte, au sud.`:"Site visité de fond en comble. Le train du retour attend à la halte, au sud.";
-    if(m.length)return `Centrale solaire : explore le site et réunis les infos clés (${C-m.length}/${C}). Prochaine piste : ${m[0].ou}.`;
+    if(m.length)return `Info clé suivante : ${m[0].ou} (${C-m.length}/${C})`;
     return "Infos clés réunies : Mme Zénith t'attend devant le poste de livraison, tout au nord du chemin.";
   },
   /* où pointent les flèches : les sources des informations clés encore manquantes, puis Mme Zénith */

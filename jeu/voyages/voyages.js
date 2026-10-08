@@ -109,9 +109,11 @@ const voyDire=(qui,lignes)=>()=>voyParler(lignes.map(t=>qui?{w:qui,t:voyTypo(t)}
 /* ---- flèches d'objectif d'un site : vers les informations clés manquantes, puis vers le défi final ----
    lieux : où se trouve chaque information clé sur CETTE carte ; passage : sur un site à plusieurs cartes, la case qui mène
    aux informations clés situées ailleurs ; defi : le responsable du site (null s'il est sur une autre carte). */
+const VOYC={cles:[]};   // où sont, sur la carte du site, les infos clés qui restent : leur « ! » reste plein (moteur/boucle.js)
 function voyCibles(sid,lieux,defi,passage){
+  VOYC.cles=[];
   if(voyTampon(sid))return [];
-  const M=voyClesManquantes(sid),ici=M.map(f=>lieux[f.id]).filter(Boolean);
+  const M=voyClesManquantes(sid),ici=M.map(f=>lieux[f.id]).filter(Boolean);VOYC.cles=ici;
   if(ici.length)return ici;                       // d'abord ce qui reste à trouver ici
   if(M.length)return passage?[passage]:[];        // puis ce qui reste à trouver ailleurs
   return defi?[defi]:passage?[passage]:[];        // enfin le responsable du site
