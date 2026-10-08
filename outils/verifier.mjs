@@ -384,6 +384,20 @@ if (quoi === "tout" || quoi === "guidage") {
       openMenu("joueur"); await att(120); const mc = r.querySelector(".mc-etats li.cur")?.textContent; closePanel();
       return `${/moufles/.test(froid)} ${ok} ${mc}`; });
     verif("enjeu du site : l'école relancée trop tard a froid lundi, relancée la veille c'est réglé ; « Ma courbe » est « Plus basse » après le badge Agir", enjeu === "true true Plus basse", enjeu);
+    // lot 3 : après le badge, la carte « Dans un EMS » et l'auto-bilan (recit/bilans.js), puis la suite ; le diplôme (interface/evolution-fin.js)
+    const bilanTxt = await R(async () => { const r = document.getElementById("qk-host").shadowRoot, att = (ms) => new Promise((ok) => setTimeout(ok, ms));
+      if (panelEl) closePanel(); jumpTo(7, "ecole"); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); if (panelEl) closePanel(); await att(50);
+      arenaWin(ARENAS[5]); let n = 0; for (let k = 0; k < 40 && !dlg.open; k++) await att(50);
+      while (dlg.open && n++ < 20) { nextLine(); await att(40); nextLine(); await att(40); } for (let k = 0; k < 40 && !r.querySelector(".ems-carte"); k++) await att(50);
+      const carte = !!r.querySelector(".ems-carte"); if (!carte) return "pas de carte : busy=" + busy + " q=" + dlg.q.length + " layer=" + r.getElementById("layer").children.length + " " + (dlg.open ? dlg.cur.full.slice(0, 80) : "") + " | " + (r.querySelector(".pbody")?.textContent || "").slice(0, 80); r.querySelector("#blOk").click(); await att(40);
+      for (let i = 0; i < 3; i++) { [...r.querySelectorAll(".pbody .opt")].find((b) => BILANS[6].q[i][1].find((x) => x[0] === b.textContent)?.[1]).click(); await att(20); r.querySelector(".pbody .fbz .btn").click(); await att(40); }
+      [...r.querySelectorAll(".pbody .opt")].find((b) => b.textContent === BILANS[6].retiens[1]).click(); await att(20); const ko = !!r.querySelector(".pbody .fb.ko");
+      [...r.querySelectorAll(".pbody .opt")].find((b) => b.textContent === BILANS[6].retiens[0]).click(); await att(20); r.querySelector(".pbody .btn").click(); for (let k = 0; k < 40 && !dlg.open; k++) await att(50);
+      const suite = dlg.open && /Chantier/.test([dlg.cur.full, ...dlg.q.map((l) => (l && (l.t || l.full)) || "")].join(" ")) && !r.querySelector(".pbody");   // la suite (et parfois, avant elle, le conseil programmé par le saut d'étape du test) window.__suite = dlg.open ? dlg.cur.full.slice(0, 90) : "fermé, layer=" + r.getElementById("layer").children.length + " " + (r.querySelector(".pbody")?.textContent || "").slice(0, 60); n = 0; while (dlg.open && n++ < 10) { nextLine(); nextLine(); await att(20); }
+      jumpTo(11, "ecole"); dlg.q = []; dlg.cb = null; if (dlg.open) nextLine(); if (panelEl) closePanel(); S.retiens = { 6: BILANS[6].retiens[0] }; endScreen(); await att(80);
+      const dip = r.querySelector(".pbody").textContent; closePanel();
+      return `${carte} ${ko} ${S.bilans && S.bilans[6] === 1} ${suite} ${/Ce que fait un EMS/.test(dip) && /Mes décisions/.test(dip) && /Ce que je retiens/.test(dip) && /Mesurer/.test(dip) && !!r.querySelector || ""}`; });
+    verif("bilan : carte « Dans un EMS » après le badge, 3 questions, une idée reçue expliquée, puis la suite ; le diplôme reprend EMS, décisions et « je retiens »", bilanTxt === "true true true true true", bilanTxt + " · " + (await R(() => window.__suite)));
     verif("ateliers : aucune erreur", erreurs.length === 0, erreurs.slice(0, 3).join(" | "));
     await contexte.close();
   }
@@ -669,9 +683,9 @@ if (quoi === "tout" || quoi === "pilotage") {
     await validerAvatar(jeu);
     await jeu.waitForTimeout(800);
     const inconnus = await jeu.evaluate((essais) => essais.filter((e) => {
-      const m = e.match(/^(chapitre|fiche|arene|dresseur|champion|epreuve|voyage|info|defi|sim)-([\w.]{1,40})$/); if (!m) return true;
+      const m = e.match(/^(chapitre|fiche|arene|dresseur|champion|epreuve|bilan|voyage|info|defi|sim)-([\w.]{1,40})$/); if (!m) return true;
       const [, g, a] = m, [x, y] = a.split(".");
-      return !(g === "chapitre" ? +a >= 0 && +a <= 11 : g === "fiche" ? FICHES.some((f) => f.id === a) : g === "arene" || g === "champion" || g === "epreuve" ? !!ARENAS[+a - 1] : g === "dresseur" ? !!(ARENAS[+x - 1] && ARENAS[+x - 1].tr[+y])
+      return !(g === "chapitre" ? +a >= 0 && +a <= 11 : g === "fiche" ? FICHES.some((f) => f.id === a) : g === "arene" || g === "champion" || g === "epreuve" ? !!ARENAS[+a - 1] : g === "bilan" ? !!(ARENAS[+a - 1] && BILANS[+a]) : g === "dresseur" ? !!(ARENAS[+x - 1] && ARENAS[+x - 1].tr[+y])
         : g === "voyage" || g === "defi" ? !!VOY.sites[a] : g === "info" ? !!(VOY.sites[x] && VOY.sites[x].infos.some((f) => f.id === y)) : typeof window[a] === "function");
     }), bilan.essais);
     verif("pilotage : chaque bouton « Tester » désigne un endroit qui existe dans le jeu", bilan.essais.length > 150 && inconnus.length === 0, bilan.essais.length + " essais ; inconnus : " + inconnus.slice(0, 5).join(", "));

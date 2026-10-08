@@ -118,9 +118,9 @@ function arenaWin(A){
   S.ch=ARENA_CH[A.id]+1;if(A.id===5)S.derives={};badge(A.badge);save();hud();
   const L=A.cWin.map(t=>({w:A.champ,t}));L.push({t:enBadge(A.id)});enHud(true);
   const suite=prochaineEtapeTexte(),O={t:ARENA_OPEN[A.id]+(suite?` Prochaine étape : ${suite}. Sors de l'arène et suis la flèche orange.`:' La carte (touche K) montre le chemin.')};
-  if(A.id===4)return say(L,()=>evolve(1,()=>say([{w:'Mme Joule',t:'(au téléphone) '+A.next},O])));
-  if(A.id===8)return say(L,()=>evolve(2,()=>say([{t:"Les 8 badges sont à toi. Mme Joule a quitté l'estrade : elle t'attend au bureau."},O])));
-  say([...L,{w:'Mme Joule',t:'(au téléphone) '+A.next},O]);
+  // après le badge : la carte « Dans un EMS » et l'auto-bilan de l'étape (recit/bilans.js), puis la suite
+  const J={w:'Mme Joule',t:'(au téléphone) '+A.next},apres=A.id===4?()=>evolve(1,()=>say([J,O])):A.id===8?()=>evolve(2,()=>say([{t:"Les 8 badges sont à toi. Mme Joule a quitté l'estrade : elle t'attend au bureau."},O])):()=>say([J,O]);
+  say(L,()=>bilanArene(A,apres));
 }
 /* éclairage de l'Arène de la Nuit : faisceaux des lampes des dresseurs */
 function arenaNightFx(c,ox,oy){

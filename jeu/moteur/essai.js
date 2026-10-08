@@ -10,13 +10,14 @@
      essai-dresseur-2.1          le duel contre le 2e dresseur de l'arène 2 (les dresseurs sont numérotés à partir de 0)
      essai-champion-2            le champion de l'arène 2, dresseurs déjà battus
      essai-epreuve-2             l'épreuve du champion, sans le dialogue qui la précède
+     essai-bilan-2               la carte « Dans un EMS » et l'auto-bilan qui suivent le badge
      essai-voyage-solaire        l'arrivée sur un site visité en train
      essai-info-solaire.module   une information de voyage (son carnet)
      essai-defi-solaire          le défi final d'un site, informations clés déjà réunies
      essai-sim-solSimCourbes     une manipulation d'un site (le nom de sa fonction dans simulations.js) */
 
 function essaiLancer(quoi){
-  const m=String(quoi).match(/^(chapitre|fiche|arene|dresseur|champion|epreuve|voyage|info|defi|sim)-([\w.]{1,40})$/);
+  const m=String(quoi).match(/^(chapitre|fiche|arene|dresseur|champion|epreuve|bilan|voyage|info|defi|sim)-([\w.]{1,40})$/);
   ESSAI=true;                                   // à partir d'ici : aucune sauvegarde, aucun suivi
   QK_HOST.hidden=false;qkTimeout(fitScreen,30);document.documentElement.classList.add('qk-lock');QK_HOST.scrollTop=0;
   ROOT.querySelectorAll('#layer > *').forEach(n=>n.remove());busy=false;dlg.q=[];dlg.cb=null;dlg.open=false;if(dlg.el){dlg.el.remove();dlg.el=null}
@@ -34,6 +35,7 @@ function essaiLancer(quoi){
   if(genre==='fiche'){const f=FICHES.find(x=>x.id===arg);if(!f){jumpTo(0,site);toast('Fiche inconnue.');return}
     jumpTo(typeof f.req==='number'?f.req:STEP_CH[f.st]||0,site);
     ensuite(()=>{FICHES.forEach(x=>{if(x.src===f.src)S.fiches[x.id]=1});delete S.fiches[f.id];srcAct(f.src)()});return}
+  if(genre==='bilan'){const A=arene(+arg);if(!A){jumpTo(0,site);toast('Arène inconnue.');return}ensuite(()=>bilanArene(A,()=>toast('Bilan terminé.')));return}
   if(genre==='arene'||genre==='dresseur'||genre==='champion'||genre==='epreuve'){
     const [n,k]=arg.split('.').map(Number),A=arene(n);if(!A){jumpTo(0,site);toast('Arène inconnue.');return}
     ensuite(()=>{dansArene(A);

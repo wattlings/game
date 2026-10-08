@@ -496,6 +496,11 @@ Le lot 1 est terminé.
 - **L'auto-bilan d'étape** (le point 13 transformé) : en sortant de l'arène, trois questions de rappel sur l'étape, sans pénalité et avec les explications, puis « Ce que je retiens » en une phrase choisie parmi trois.
 - **Le diplôme imprimable** (point 4) : la synthèse des 8 étapes (ce que je sais faire, notions clés, ce que fait un EMS) en une page à garder. L'écart « Piloter » / « Mesurer » est corrigé au passage.
 
+**Avancement** : lot 3 réalisé.
+- La carte « Dans un EMS » (`jeu/recit/bilans.js`) s'affiche après chaque badge et se range dans le Classeur, à la fin de son étape.
+- L'auto-bilan suit la carte : trois questions de rappel, sans pénalité, chaque erreur expliquée et les propositions remélangées, puis « Ce que je retiens », une phrase parmi trois (les deux autres sont des idées reçues, expliquées). On peut le passer. La phrase choisie va sur la carte et sur le diplôme.
+- Le diplôme (`jeu/interface/evolution-fin.js`) reprend, pour les 8 étapes, ce que je sais faire et ce que fait un EMS ; puis mes décisions (objectif, alerte, enjeu du site, plan, preuve), les alertes du tableau de bord ignorées, ce que je retiens et ma courbe. Il s'imprime sur une page à part, et s'ouvre aussi depuis la carte de joueur. L'écart « Piloter » / « Mesurer » est corrigé sur le diplôme.
+
 ### Lot 4 · Les voyages et les finitions
 
 - **Les voyages en annexe assumée** (point 10, option minimale) : présentés comme « Culture énergie », avec une manipulation tournée vers l'energy management par site :

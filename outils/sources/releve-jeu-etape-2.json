@@ -1830,9 +1830,9 @@
  {
   "id": "ja2-093",
   "fichier": "jeu/interface/evolution-fin.js",
-  "repere": "tableau récapitulatif de fin › ligne Collecter",
-  "texte": "<td>Collecter</td><td>Distributeur ≠ fournisseur, mandats, consentement</td>",
-  "affirmation": "Résumé de l'étape 2 : distributeur ≠ fournisseur, mandats, consentement.",
+  "repere": "diplôme de fin (DIP_SAVOIR) › ligne Collecter",
+  "texte": "Distributeur ≠ fournisseur ; raccorder PDL et PCE avec le consentement du titulaire ; courbe, index, facture",
+  "affirmation": "Résumé de l'étape 2 : distributeur ≠ fournisseur ; raccordement des points avec le consentement du titulaire ; trois sources (courbe, index, facture).",
   "type": "methode",
   "verdict": "sans-objet",
   "correction": null,

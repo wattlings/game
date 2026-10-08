@@ -38,7 +38,7 @@ const ATELIERS = {
   gameAgir: ["D'abord l'enjeu propre au site, simulé dans l'EMS : les vacances d'hiver (école), la climatisation de l'été (bureaux), le four et le contrat (boulangerie). Le résultat revient à l'étape Mesurer. Puis le plan d'action, qui rappelle les dérives de l'étape Détecter ; les actions qui les traitent portent l'étiquette « ta dérive ».", ["ENJ_ECOLE", "AGIR_DER"]],
   gamePiloter: ["L'atelier de la mesure : le plan choisi à l'arène du Chantier est vérifié sur un hiver plus doux. Corriger la météo, conclure, puis lire le résultat dans l'indicateur choisi à l'arène du Cadastre.", ["MES_GRAIN"]],
 };
-const RANGEES_ATELIERS = ["SB_JOURS", "SIG_MOIS", "SIG_DJU", "STR_CASES", ...Object.values(ATELIERS).flatMap((a) => a[1])];
+const RANGEES_ATELIERS = ["SB_JOURS", "BILANS", "SIG_MOIS", "SIG_DJU", "STR_CASES", ...Object.values(ATELIERS).flatMap((a) => a[1])];
 /* un nom lisible pour les fonctions du jeu les plus courantes (section « Mécanique et interface ») */
 const NOMS = {
   enterArena: "Entrer dans une arène", duel: "Le duel contre un dresseur", arenaDefeat: "Défaite dans une arène", champTalk: "Parler au champion", arenaWin: "Victoire dans une arène",
@@ -131,6 +131,14 @@ export function construire(FF, { chapitres }) {
       blocs: [{ genre: "dialogue", titre: "Avant l'épreuve", lignes: (A.cIntro || []).map((t) => ({ qui: A.champ, t })) }, ...epreuve,
         { genre: "dialogue", titre: "Après la victoire", lignes: (A.cWin || []).map((t) => ({ qui: A.champ, t })).concat(ARENA_OPEN[n] ? [{ t: ARENA_OPEN[n] }] : [], A.next ? [{ t: A.next }] : []) },
         ...(A.refs ? [{ genre: "refs", refs: A.refs.map(v) }] : [])] });
+    // après le badge : la carte « Dans un EMS » et l'auto-bilan (recit/bilans.js)
+    const B = (don("BILANS") || {})[n];
+    if (B) N.push({ id: `arene-${n}-bilan`, genre: "scene", titre: "Bilan de l'étape", sous: "carte et 3 questions", essai: "bilan-" + n, suivi: { arene: nom }, blocs: [
+      note("Après le badge : la carte « Dans un EMS », rangée dans le Classeur, puis trois questions de rappel sans pénalité (on peut passer), et « Ce que je retiens », une phrase parmi trois qui va sur la carte et le diplôme."),
+      { genre: "texte", titre: "Ce que tu viens de faire", t: B.fait }, { genre: "texte", titre: "Ce que fait un EMS à cette étape", t: B.ems },
+      { genre: "texte", titre: "Pourquoi c'est important", t: B.pourquoi }, { genre: "texte", titre: "L'erreur à éviter", t: B.erreur },
+      ...(B.q || []).map((q) => ({ genre: "choix", q: q[0], rep: (q[1] || []).map((o) => ({ t: o[0], ok: !!v(o[1]), fb: o[2] })) })),
+      { genre: "choix", titre: "Ce que je retiens", q: "Une phrase à garder.", rep: (B.retiens || []).map((r, i) => ({ t: r, ok: i === 0 })) }] });
     return N;
   }
   const scene = (id, titre, blocs, extra) => (blocs.length ? [Object.assign({ id, genre: "scene", titre, sous: resume(blocs), blocs }, extra)] : []);
