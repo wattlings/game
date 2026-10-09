@@ -18,6 +18,7 @@ function lifeInit(){
 function lifeUpdate(k){
   riderStep(k);
   if(S.map!=='town')return;if(LIFE.ch!==S.ch)lifeInit();
+  crabeStep(k);
   const frozen=busy||dlg.open;
   LIFE.w.forEach(w=>{const tx=Math.round(w.px/TS),ty=Math.round(w.py/TS);w.x=tx;w.y=ty;w.moving=false;
     const ax=P.x-tx,ay=P.y-ty;if(Math.abs(ax)+Math.abs(ay)<=1){if(ax||ay)w.dir=Math.abs(ax)>Math.abs(ay)?(ax>0?'right':'left'):(ay>0?'down':'up');return}   // tu es à côté : il s'arrête et te regarde

@@ -117,6 +117,7 @@ function eggObjs(id,o){
     o.push({x:TP(4,19)[0],y:TP(4,19)[1],kind:'sheep',solid:1,act:()=>egg('spyro',[{w:'Mouton',t:'Bêêê.'},{t:"Il jette des regards inquiets vers le ciel, comme si un petit dragon violet pouvait surgir à tout moment pour lui foncer dessus."}])});
     o.push({x:L.trees[0][0],y:L.trees[0][1],kind:'none',act:()=>{TREE.n++;if(TREE.n<4)return say([{t:["Tu frappes l'arbre à mains nues. Il ne se passe rien.","Tu frappes encore. Des fissures apparaissent. Étrange.","Encore un coup. Ça vient."][TREE.n-1]}]);TREE.n=0;
       egg('minecraft',["Un bloc de bois parfaitement cubique tombe au sol.","Tu n'as pas d'établi. Tu le reposes, un peu déçu."])}});
+    crabeInit();o.push({x:CRABE.x,y:CRABE.y,px:CRABE.px,py:CRABE.py,kind:'npc',solid:1,noHades:1,still:1,who:'Dr Crabouillard',draw:drawCrabe,act:crabeParler});
     // la piscine de la villa
     for(let y=POOL.y0;y<=POOL.y1;y++)for(let x=POOL.x0;x<=POOL.x1;x++)o.push({x,y,kind:'none',act:poolSay});
   }
@@ -175,4 +176,69 @@ function drawSwimmer(c,ox,oy,t){
   R(c,X+2,Y+6,10,3,'#f1c7a1');R(c,X+(f>0?9:-1),Y+(st?4:7),6,2,'#f1c7a1');R(c,X+(f>0?-1:9),Y+(st?7:4),6,2,'#f1c7a1');
   R(c,X+4,Y+1,6,6,'#f1c7a1');R(c,X+4,Y,6,3,'#5a3a22');R(c,X+(f>0?8:5),Y+4,1,1,'#222');
   c.fillStyle='rgba(184,236,250,.9)';c.fillRect(X+1,Y+9,12,1);
+}
+
+/* ---- Le Dr Crabouillard : un docteur crustacé, en blouse, pinces et tentacules. Il adore les chouquettes ;
+   une seule suffit à le faire courir en crabe dans tous les sens (dans un petit périmètre) en criant ---- */
+const CRABE={home:null,x:0,y:0,px:0,py:0,fou:0,dest:null,n:0};
+const CRABE_DIT=[
+  "Bonjour ! Docteur Crabouillard, médecin. Spécialiste des humains. Enfin, je me suis renseigné.",
+  "Votre talon m'inquiète. Le talon électrique, pas l'autre. Quoique, montrez-moi l'autre aussi.",
+  "J'ai un cabinet en ville. Une poubelle derrière le marché. Mais elle est très bien isolée, mieux que l'école.",
+  "Personne ne m'invite aux pots de départ. Pourtant, je viens toujours avec mes pinces. Pour le buffet.",
+  "Ma consommation d'énergie ? Très faible. Je dors dans l'eau froide et je mange ce que les autres jettent. Sobriété, mon ami."];
+function crabeInit(){if(CRABE.home)return;const [x,y]=TP(70,40);Object.assign(CRABE,{home:[x,y],x,y,px:x*TS,py:y*TS})}
+let CRABE_PISTE=null;
+function crabePiste(){if(CRABE_PISTE)return CRABE_PISTE;CRABE_PISTE=new Set();
+  ringSamples().s.forEach(q=>{for(const X of [Math.floor(q.x/TS),Math.ceil(q.x/TS)])for(const Y of [Math.floor(q.y/TS),Math.ceil(q.y/TS)])CRABE_PISTE.add(X+','+Y)});return CRABE_PISTE}
+function crabeLibre(x,y){const [hx,hy]=CRABE.home;if(Math.abs(x-hx)>3||Math.abs(y-hy)>2||(x===P.x&&y===P.y))return false;
+  const t=tileAt(x,y);if(t===undefined||SOLID.has(t)||t===':'||t==='D'||t==='E')return false;
+  if(crabePiste().has(x+','+y))return false;   // pas sur la piste cyclable : les vélos ont assez souffert
+  return !objsFor('town').some(o=>o.x===x&&o.y===y&&o.solid&&o.who!=='Dr Crabouillard')}
+function crabeParler(){
+  if(CRABE.fou>0)return say([{w:'Dr Crabouillard',t:'ULULULULULULU !'}]);
+  const t=CRABE_DIT[CRABE.n%CRABE_DIT.length];CRABE.n++;
+  say([{w:'Dr Crabouillard',t},{w:'Dr Crabouillard',t:"Dites… Vous n'auriez pas quelque chose à manger ? Quelque chose de sucré ?"}],()=>{
+    const ov=openPanel('Dr Crabouillard',{sansCours:true}),b=ov.querySelector('.pbody');
+    b.innerHTML=`<p>Il fixe le sachet de chouquettes qui dépasse de ta poche. Ses tentacules frémissent.</p><div class="opts"><button class="opt" id="crOui"><b>Lui donner une chouquette</b><small>Une seule. Qu'est-ce qui pourrait mal tourner ?</small></button><button class="opt" id="crNon"><b>Non</b><small>Tu gardes tes chouquettes.</small></button></div>`;
+    b.querySelector('#crNon').onclick=()=>closePanel();
+    b.querySelector('#crOui').onclick=()=>{closePanel();say([{t:"Tu lui tends une chouquette. Il l'avale d'un coup, sachet compris. Ses yeux se mettent à tourner."}],()=>{CRABE.fou=420;CRABE.dest=null;sfx('secret')})};
+    b.querySelector('#crOui').focus();
+  });
+}
+/* chaque image : pendant la crise, il file de côté (surtout à gauche et à droite, comme un crabe) sans quitter son coin */
+function crabeStep(k){
+  if(S.map!=='town'||!CRABE.home||CRABE.fou<=0||busy||dlg.open)return;
+  CRABE.fou-=k;
+  if(!CRABE.dest){const lat=Math.random()<.75,s=Math.random()<.5?-1:1,pas=1+(Math.random()<.4?1:0),[dx,dy]=lat?[s,0]:[0,s];let x=CRABE.x,y=CRABE.y;
+    for(let i=0;i<pas&&crabeLibre(x+dx,y+dy);i++){x+=dx;y+=dy}CRABE.dest=[x,y]}
+  const gx=CRABE.dest[0]*TS,gy=CRABE.dest[1]*TS,v=2.6*k,ddx=gx-CRABE.px,ddy=gy-CRABE.py;
+  CRABE.px+=Math.sign(ddx)*Math.min(v,Math.abs(ddx));CRABE.py+=Math.sign(ddy)*Math.min(v,Math.abs(ddy));
+  CRABE.x=Math.round(CRABE.px/TS);CRABE.y=Math.round(CRABE.py/TS);
+  if(CRABE.px===gx&&CRABE.py===gy)CRABE.dest=null;
+  if(CRABE.fou<=0){CRABE.fou=0;CRABE.dest=null;CRABE.px=CRABE.x*TS;CRABE.py=CRABE.y*TS;
+    egg('chouquette',[{t:"Wow. Intense. La prochaine fois je ferai attention avant de lui donner du sucre."}])}
+}
+function drawCrabe(c,X,Y,t){
+  const fou=CRABE.fou>0,w=fou?(t>>1)%2:(t>>4)%2,r=(a,b,l,h,col)=>R(c,X+a,Y+b,l,h,col),j=fou?((t>>1)%3)-1:0;
+  c.fillStyle='rgba(20,40,30,.22)';c.fillRect(X+2,Y+14,12,2);
+  // pattes, blouse, stylo dans la poche
+  r(5,13,2,3,'#b8484a');r(9,13,2,3,'#b8484a');if(fou){r(w?4:6,15,2,1,'#b8484a');r(w?10:8,15,2,1,'#b8484a')}
+  r(3,5,10,9,'#f4f4f0');r(3,5,10,1,'#d9d9d4');r(7,6,1,7,'#d9d9d4');r(4,10,2,2,'#e2e2dc');r(4,9,1,2,'#4a78c9');
+  // bras et pinces (levés pendant la crise)
+  const haut=fou&&w;
+  r(1,haut?2:6,2,5,'#e06a6a');r(13,haut?2:6,2,5,'#e06a6a');
+  const pince=(a,b)=>{r(a,b,3,2,'#d04848');r(a,b-2,1,2,'#d04848');r(a+2,b-2,1,2,'#d04848')};
+  pince(0,haut?1:11);pince(13,haut?1:11);
+  // tête : grosse, rose-rouge, des reflets
+  r(3+j,-5,10,10,'#e88080');r(3+j,-5,10,1,'#f3a6a6');r(12+j,-4,1,8,'#c85c5c');r(4+j,-4,1,7,'#f0a0a0');
+  // yeux sur pédoncules
+  r(5+j,-8,1,3,'#e88080');r(10+j,-8,1,3,'#e88080');r(4+j,-11,3,3,'#ffffff');r(9+j,-11,3,3,'#ffffff');
+  const o=fou?((t>>2)%2):0;r(5+j+o,-10,1,1,'#111');r(10+j-o,-10,1,1,'#111');r(4+j,-2,1,1,'#c85c5c');r(11+j,-2,1,1,'#c85c5c');
+  // tentacules de la bouche
+  for(let i=0;i<4;i++){const x=4+j+i*2+(w&&i%2?1:0),l=3+(i===1||i===2?1:0)+(fou&&i%2===w?1:0);r(x,4,1,l,'#d87070');r(x,4+l,1,1,'#c85c5c')}
+  // le cri
+  if(fou){const txt='ULULULULULU',dx=((t>>1)%3)-1;c.font='bold 7px monospace';const w=Math.ceil(c.measureText(txt).width)+6,bx=Math.round(X+8-w/2)+dx;
+    c.fillStyle='#fffaf0';c.fillRect(bx,Y-24,w,10);c.strokeStyle='#1c2440';c.lineWidth=1;c.strokeRect(bx+.5,Y-23.5,w-1,9);
+    c.fillStyle='#c43d3d';c.textAlign='left';c.textBaseline='alphabetic';c.fillText(txt,bx+3,Y-16.5)}
 }

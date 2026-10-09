@@ -8,7 +8,7 @@ const SECRETS={
   carton:'Le carton de 2003',vent:'Le mur de vent',pspe:'La machine PSPE',mobilier:'Le mobilier bavard',joule:'Harceler Mme Joule',fuite:'La stratégie de fuite',panneau:'Le règlement du parc'
 };
 /* clins d'œil aux jeux vidéo (un par jeu) */
-const EGGS={mgs:'Le carton qui marche',wow:'Le voyageur laconique',aoe:'Le prêtre persuasif',wc3:'L’artisan dévoué',zelda:'Dangereux d’y aller seul',crash:'La caisse nerveuse',
+const EGGS={chouquette:'Le docteur et la chouquette',mgs:'Le carton qui marche',wow:'Le voyageur laconique',aoe:'Le prêtre persuasif',wc3:'L’artisan dévoué',zelda:'Dangereux d’y aller seul',crash:'La caisse nerveuse',
   dofus:'Le prix des tomates',adibou:'Le CD-ROM éducatif',sims:'La piscine sans échelle',metroid:'Le conduit trop étroit',castlevania:'Le mur creux',smash:'Sans une égratignure',
   mario64:'Le tableau qui ondule',spyro:'Le mouton inquiet',minecraft:'Le bloc de bois',wii:'La dragonne'};
 const NSEC=Object.keys(SECRETS).length+Object.keys(EGGS).length;
