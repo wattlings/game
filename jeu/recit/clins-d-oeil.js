@@ -51,12 +51,17 @@ const HADES_LINES=[
   "Tu es la seule source d'énergie qui ne produit rien.",
   "Même un Linky n'arriverait pas à mesurer ton apport."
 ];
-const HAD={ok:null,der:-1};
+const HAD={ok:null};
 function hadesBlock(o){
   if(!S.hades||o.noHades)return false;
   const key=S.map+':'+(S.inside||'')+':'+o.x+','+o.y;
   if(HAD.ok===key){HAD.ok=null;return false}
-  const n=S.hadesN||0,L=HADES_LINES,k=n<L.length?n:(r=>r>=HAD.der?r+1:r)(Math.floor(Math.random()*(L.length-1))),line=L[k];HAD.der=k;   // une fois toutes dites : au hasard, jamais deux fois de suite la même
+  const L=HADES_LINES,n=S.hadesN||0;
+  // un sac mélangé : chaque réplique sort une fois, au hasard ; sac vide, on remélange (sans redire tout de suite la dernière)
+  let sac=(Array.isArray(S.hadesSac)?S.hadesSac:[]).filter(i=>i<L.length);
+  if(!sac.length){sac=L.map((_,i)=>i);for(let i=sac.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sac[i],sac[j]]=[sac[j],sac[i]]}
+    if(sac.length>1&&sac[0]===S.hadesDer)sac.push(sac.shift())}
+  const k=sac.shift(),line=L[k];S.hadesSac=sac;S.hadesDer=k;
   S.hadesN=n+1;HAD.ok=key;save();
   const who=o.who||(o.sid&&SRC[o.sid]&&SRC[o.sid].who)||'…';
   say([{w:who,t:line}]);return true;

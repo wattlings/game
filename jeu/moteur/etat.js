@@ -4,7 +4,7 @@
 /* ================= ÉTAT & SAUVEGARDE ================= */
 const RANKS=['Gestionnaire de site','Energy Manager','Gestionnaire de patrimoine'];
 const BADGES=['Cadrer','Collecter','Fiabiliser','Structurer','Analyser','Détecter','Agir','Piloter'];
-const DEF=()=>({en:null,ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,models:{},secrets:{},maxCh:0,sobriete:false,hades:false,hadesN:0,wololo:false,arena:{},v:4});
+const DEF=()=>({en:null,ch:0,site:null,xp:0,rank:0,map:'office',x:5,y:6,dir:'up',flags:{},notes:{},badges:[],dex:{},derives:{},pm:0,fiches:{},inside:null,name:'Alex',av:null,models:{},secrets:{},maxCh:0,sobriete:false,hades:false,hadesN:0,hadesSac:[],hadesDer:-1,wololo:false,arena:{},v:4});
 let S=DEF();
 /* Une seule partie : celle du compte du joueur. Le navigateur la garde, commun/compte.js la recopie sur le compte.
    Sans compte (« Jouer » sur l'écran titre), la partie se joue mais rien n'est enregistré : INVITE. */
@@ -18,7 +18,7 @@ const needAuth=()=>!INVITE&&!ESSAI&&COMPTE.disponible&&!COMPTE.identifiant();
 function save(){if(ESSAI||INVITE)return;S.savedAt=Date.now();try{localStorage.setItem(SAVE_KEY,JSON.stringify(S));saveOK=true}catch(e){saveOK=false}if(typeof savedFlash==='function')savedFlash()}
 function loadSave(){return ESSAI||INVITE?null:readSave()}
 const fmtDate=ts=>ts?new Date(ts).toLocaleString('fr-FR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
-function restartStory(){const k={expert:S.expert,name:S.name,av:S.av,models:S.models||{},secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees,hades:S.hades,hadesN:S.hadesN,voy:S.voy};S=Object.assign(DEF(),k);save()}
+function restartStory(){const k={expert:S.expert,name:S.name,av:S.av,models:S.models||{},secrets:S.secrets,fiches:S.fiches,dex:S.dex,badges:S.badges,xp:S.xp,rank:S.rank,sobriete:S.sobriete,maxCh:S.maxCh,flees:S.flees,hades:S.hades,hadesN:S.hadesN,hadesSac:S.hadesSac,hadesDer:S.hadesDer,voy:S.voy};S=Object.assign(DEF(),k);save()}
 let lastFlash=0;function savedFlash(){const el=typeof ROOT!=='undefined'&&ROOT.getElementById&&ROOT.getElementById('hudSaved');if(!el)return;const n=Date.now();if(n-lastFlash<2500)return;lastFlash=n;if(!saveOK&&!savedFlash.warned){savedFlash.warned=1;toast('⚠ Sauvegarde impossible dans ce navigateur')}el.textContent=saveOK?'✓ Sauvegardé':'⚠ Sauvegarde impossible';el.classList.remove('on');void el.offsetWidth;el.classList.add('on')}
 const $=id=>ROOT.getElementById(id);
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
