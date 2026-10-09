@@ -44,6 +44,19 @@ Les scripts, les captures et les mesures brutes sont dans le dossier temporaire 
 
 ---
 
+## Décisions de l'auteur après relecture (9 octobre 2026)
+
+Ces décisions s'appliquent à tout le rapport et priment sur les questions ouvertes de la section 6.
+
+| Question | Décision | Effet sur l'audit |
+|---|---|---|
+| Public visé | **Tous les salariés.** | L'accueil (« Tu développes ou tu testes un logiciel… ») est à réécrire. Le jargon technique sans définition pèse plus lourd : API, UTC, Σ, segments C1-C5, taux de taxes, versions d'API. Les encadrés « Pour tester le logiciel » deviennent du bruit pour la majorité : à replier ou à retirer. La note « facile à comprendre » reste à 3 pour l'Essentiel et Comprendre, mais tombe à **2 pour l'Approfondir**. |
+| Étape « faite » | **Laissée à mon choix.** Je retiens **« manipulée »** : une étape est faite quand l'onglet Essentiel a réellement été affiché **et** que la démo de l'Essentiel a été menée jusqu'à son résultat (une vérification ou un résultat obtenu, juste ou faux). La réussite au mini-quiz s'affiche à part, comme une mention « maîtrisée ★ » qui ne bloque rien. | « Vue » est trop faible : c'est déjà le défaut actuel. « Réussie » découragerait un public non spécialiste et ferait de la progression un examen. « Manipulée » garde l'esprit « on apprend en faisant ». La correction de la priorité 12 suit cette règle, avec un message « Étape N terminée » quand elle devient vraie. |
+| Pas de temps de l'école | **10 minutes**, choix assumé de cas d'école. | Les « 144 points par jour » et les démos restent tels quels. Il reste à corriger ce qui présente 10 min comme la règle générale : écrire « au pas de 10 min, celui de l'école » et signaler une fois, avec ses sources, que les compteurs réels sont souvent à 5 min (plus de 36 kVA) ou à 30 min (Linky). La priorité 16 est allégée en conséquence. |
+| Déclaration d'accessibilité | **Pas besoin.** | Aucun audit formel ni test exhaustif au lecteur d'écran. On garde les corrections qui gênent vraiment des personnes : fenêtre « Mon compte », focus perdu, tableaux, courbes, contrastes, messages de statut. Les écarts purement formels passent en facultatif : plan du site (12.1), `lang` sur « Energy Management » (8.7), menus sans liste (9.3), `role` des figures (1.9). |
+
+---
+
 ## 1. Résumé du parcours de l'apprenant
 
 *Corrige-moi ici si j'ai mal compris quelque chose : tout le reste de l'audit en dépend.*
@@ -103,7 +116,7 @@ Le détail étape par étape (contenu de chaque onglet, nombre de questions, cha
 
 | Axe | Question | Note | En une phrase |
 |---|---|---|---|
-| Pédagogie | Est-ce facile à comprendre ? | **3** | Essentiel court et régulier (13,7 mots par phrase en moyenne, analogies, exemples justes). Approfondir dense (jusqu'à 1 037 mots). Infobulles absentes hors Essentiel. Notions utilisées avant d'être expliquées. |
+| Pédagogie | Est-ce facile à comprendre ? | **3** (Essentiel et Comprendre) ; **2** pour l'Approfondir, le public étant tous les salariés | Essentiel court et régulier (13,7 mots par phrase en moyenne, analogies, exemples justes). Approfondir dense (jusqu'à 1 037 mots). Infobulles absentes hors Essentiel. Notions utilisées avant d'être expliquées. |
 | Pédagogie | Les étapes sont-elles claires ? | **3** | Question et phrase clé par étape, gabarit constant. Mais aucun objectif d'apprentissage explicite et presque aucune transition entre étapes. |
 | Pédagogie | Information représentée de plusieurs manières ? | **3** | Texte + schéma + exemple + tableau + démo + quiz pour presque toutes les notions. Aucune image réelle, ni audio ni vidéo. IPMVP sous une seule forme. |
 | Accessibilité | Le site respecte-t-il le RGAA (4.1.2) ? | **2** | Base solide (onglets ARIA, clavier, reflow, thème sombre sans défaut de contraste). Mais 26 critères non conformes sur 65 applicables évalués, dont la fenêtre « Mon compte » inutilisable au clavier. Taux indicatif ≈ 60 %, sans valeur de déclaration. |
@@ -1178,7 +1191,7 @@ Les tableaux détaillés de chaque axe (section 3) gardent la numérotation prop
 | 6 | Pas de « Reprendre ». L'accueil propose toujours « Commencer par l'étape 1 », et la dernière page lue n'est pas mémorisée. (UX-1) | UX | Petit | `cours/coquille/etat.js`, `cours/principal.js`, `cours/pages/accueil.js:44` | Mémoriser la dernière route et afficher « Reprendre : 3. Fiabiliser · Comprendre » en action principale. |
 | 7 | Les onglets ne sont pas dans l'adresse. On ne peut pas partager un niveau, et le retour arrière comme le rechargement le perdent. (UX-2) | UX | Petit | `cours/pages/etape.js:128-140` | `history.replaceState` vers `#etape-N-niveau` à chaque changement d'onglet. |
 | 8 | Le focus est perdu (il retombe sur `body`) après une réponse au quiz et après « Tout afficher » dans l'exemple pas à pas. Le score n'est pas annoncé. (A11Y-2, A11Y-14) | Accessibilité | Petit | `cours/blocs/quiz.js:240-257`, `cours/blocs/blocs.js:440-464` | Placer le focus sur le retour de correction (`tabindex=-1`), et ajouter une région live permanente pour le score. |
-| 9 | Promesses de l'accueil à revoir : « 30 secondes » par Essentiel, alors qu'il compte 231 à 442 mots plus une démo ; public annoncé « développeurs et testeurs » alors que le projet vise tous les salariés. (PÉD-P9, PÉD-P18) | Pédagogie | Petit, après décision | `cours/pages/accueil.js:34,60` | Annoncer « 2 à 5 minutes » ; fixer le public (voir question 1). |
+| 9 | Promesses de l'accueil à revoir : « 30 secondes » par Essentiel, alors qu'il compte 231 à 442 mots plus une démo ; public annoncé « développeurs et testeurs », alors que le public décidé est **tous les salariés**. Les encadrés « Pour tester le logiciel » ne concernent pas ce public. (PÉD-P9, PÉD-P18) | Pédagogie | Petit | `cours/pages/accueil.js:34,60`, blocs `ton: "qa"` de `cours/contenu/etape-*.js` | Réécrire l'accroche pour tous les salariés ; annoncer « 2 à 5 minutes » ; replier les encadrés « Pour tester le logiciel » (ou les retirer). |
 | 10 | Tableaux sans titre associé (36 sur 36) et sans en-têtes de ligne. (A11Y-5) | Accessibilité | Petit | `cours/blocs/blocs.js:391`, `cours/blocs/graphique.js:212-217`, `cours/pages/accueil.js:92,142` | Ajouter `<caption>`, mettre la première colonne en `<th scope="row">`, nommer le `<th>` vide. |
 
 ### Priorité 2 : graves, effort moyen (à planifier)
@@ -1186,11 +1199,11 @@ Les tableaux détaillés de chaque axe (section 3) gardent la numérotation prop
 | # | Problème | Axe | Effort | Fichiers | Correction recommandée |
 |---|---|---|---|---|---|
 | 11 | Réglementation sans source officielle. Concerne : décret tertiaire (1 000 m², −40/−50/−60 %, années de référence 2010-2022, 30 septembre, 7 500 €), OPERAT, ISO 50001, IPMVP, facteurs CO₂. Les seuls liens sont des sites commerciaux hors registre. Tous ces points sont « à vérifier ». (MÉT-P2) | Métier | Moyen | `cours/contenu/etape-1.js:121`, `etape-8.js:102-142`, `commun/donnees/glossaire.js`, `cours/demos/decret-tertiaire.js`, `cours/contenu/sources.js:58-87` | Faire le relevé du périmètre « Cours · étape 8 » avec la même méthode que l'étape 2 ; ajouter les textes officiels au registre après les avoir lus. |
-| 12 | La progression mesure une visite et un clic, pas un apprentissage : « faite » au premier clic, même faux, et sans aucun retour visible. (PÉD-P3, UX-11) | Pédagogie, UX | Petit à moyen | `cours/pages/etape.js:142,155,188,195`, `cours/coquille/etat.js:74-77` | Marquer l'Essentiel seulement s'il est affiché ; compter la démo de l'Essentiel ou une action réussie ; afficher « Étape 3 terminée » ; écrire la règle sous le tableau de progression. |
+| 12 | La progression mesure une visite et un clic, pas un apprentissage : « faite » au premier clic, même faux, et sans aucun retour visible. (PÉD-P3, UX-11) | Pédagogie, UX | Petit à moyen | `cours/pages/etape.js:142,155,188,195`, `cours/coquille/etat.js:74-77` | Règle décidée (« manipulée ») : Essentiel réellement affiché + démo de l'Essentiel menée jusqu'à son résultat ; mention « maîtrisée ★ » à part si le mini-quiz est réussi ; message « Étape 3 terminée » ; règle écrite sous le tableau de progression. |
 | 13 | Aucun objectif d'apprentissage, ni global ni par étape. (PÉD-P2) | Pédagogie | Moyen | `cours/contenu/etape-*.js`, `cours/pages/etape.js`, `cours/pages/accueil.js` | Ajouter « À la fin de cette étape, tu sauras… » (2 ou 3 verbes observables) sous la question. |
 | 14 | Sur téléphone : barre du haut qui défile avec la page, progression masquée, étape en cours (5 à 8) hors de l'écran dans le bandeau. (UX-3) | UX | Moyen | `cours/styles/petits-ecrans.css:27-48`, `cours/principal.js:62-72` | Garder une barre compacte collante ; faire défiler le bandeau jusqu'à l'étape en cours ; afficher « 3/8 ». |
 | 15 | Les courbes de charge de plus de 60 points n'ont ni tableau ni description. Le nuage de points (DJU) est absent du tableau. L'infobulle n'est pas annoncée et ne se ferme pas avec Échap. (A11Y-3, A11Y-4) | Accessibilité | Moyen | `cours/blocs/graphique.js:34-36,204-221,268-284` | Résumé en texte (minimum, maximum, talon, pics, jours en alerte) ou tableau agrégé ; `aria-live` sur l'infobulle ; touche Échap. |
-| 16 | Pas de temps de 10 min présenté comme la règle générale. Le relevé de l'étape 2 note 5 min depuis fin 2025 et 30 min pour Linky (3 lignes « à corriger » encore ouvertes). (MÉT-P3) | Métier | Petit | `cours/contenu/etape-2.js:17,137`, `cours/demos/collecter.js`, `commun/donnees/glossaire.js:40,47,283`, `commun/donnees/ecole.js:66` | Appliquer les corrections déjà rédigées dans le relevé ; ailleurs, écrire « au pas de 10 min, celui de l'école ». |
+| 16 | Pas de temps de 10 min présenté comme la règle générale. Le relevé de l'étape 2 note 5 min depuis fin 2025 et 30 min pour Linky (3 lignes « à corriger » encore ouvertes). (MÉT-P3) | Métier | Petit | `cours/contenu/etape-2.js:17,137`, `cours/demos/collecter.js`, `commun/donnees/glossaire.js:40,47,283`, `commun/donnees/ecole.js:66` | Décision : on garde 10 min pour l'école. Écrire partout « au pas de 10 min, celui de l'école », et signaler une fois, avec sa source, que les compteurs réels sont souvent à 5 min (plus de 36 kVA) ou à 30 min (Linky). |
 
 ### Priorité 3 : gênes réelles (moyennes, effort petit ou moyen)
 
@@ -1219,7 +1232,7 @@ Les tableaux détaillés de chaque axe (section 3) gardent la numérotation prop
 | 32 | Aucune image réelle (compteur, facture), ni audio ni vidéo. IPMVP sous une seule forme. Consentement et signature sans schéma. (PÉD-P16, PÉD-P17) | Pédagogie | Moyen à grand | `cours/schemas/`, nouveaux médias | Photos de compteurs, facture anonymisée, schémas manquants. Si des vidéos sont ajoutées : sous-titres et transcription obligatoires (thématique 4 du RGAA). |
 | 33 | Libellé « Étape suivante » ambigu dans les exemples chiffrés. (UX-7) | UX | Petit | `cours/blocs/blocs.js:56` | « Calcul suivant ». |
 | 34 | Accueil : badges « Disponible » inutiles, tableau de progression vide au centre, deux boutons principaux, école en bas de page. Code mort « V2/V3 à venir ». (UX-13, UX-14) | UX | Petit | `cours/pages/accueil.js:53-110`, `cours/pages/etape.js:15-27,107-114` | Nettoyer. |
-| 35 | Pas de plan du site (critère 12.1). Navigation sans liste. Figures sans `role`. Fermeture au `mousedown`. Anglicismes sans `lang`. (A11Y-19 à A11Y-26) | Accessibilité | Petit à moyen | voir les problèmes A11Y-19 à A11Y-26 en section 3.2 | Voir section 3.2. |
+| 35 | *Facultatif, pas de déclaration d'accessibilité visée.* Pas de plan du site (critère 12.1). Navigation sans liste. Figures sans `role`. Fermeture au `mousedown`. Anglicismes sans `lang`. (A11Y-19 à A11Y-26) | Accessibilité | Petit à moyen | voir les problèmes A11Y-19 à A11Y-26 en section 3.2 | Voir section 3.2. |
 | 36 | Retour arrière ramené en haut de page ; pages École, Glossaire, Quiz final et Sources sans suite. (UX-12, UX-15) | UX | Petit | `cours/principal.js:139`, `cours/pages/*.js` | Restaurer la position ; ajouter un lien de fin. |
 
 ---
@@ -1227,8 +1240,11 @@ Les tableaux détaillés de chaque axe (section 3) gardent la numérotation prop
 ## 6. Questions auxquelles je dois répondre pour affiner l'audit
 
 1. **Public visé.** Le cours s'adresse-t-il aux développeurs et testeurs d'un logiciel d'EMS, comme le dit l'accueil, ou à tous les salariés, comme le jeu ? Cela décide du niveau de vocabulaire attendu, de l'utilité des encadrés « Pour tester le logiciel » et de la note de clarté.
+   **Réponse : tous les salariés.**
 2. **« Étape faite ».** Que doit-elle signifier : « vue », « manipulée » ou « réussie » (mini-quiz réussi) ? Faut-il compter Patrimoine et le quiz final ?
+   **Réponse : laissée à mon choix, « manipulée » (voir les décisions en tête de rapport).**
 3. **Pas de temps de l'école.** Le pas de 10 min est-il un choix assumé de cas d'école, ou faut-il passer à 5 min ? Cela change les « 144 points par jour » de l'étape 3 et plusieurs démos.
+   **Réponse : 10 minutes.**
 4. **Ordre du référencement des sources.** Je recommande l'étape 8 (réglementaire) en premier. Faut-il réafficher les anciennes listes de liens en attendant, ou les retirer et corriger la page Sources ?
 5. **Sources réglementaires.** Lesquelles retenir pour le décret tertiaire (texte consolidé, arrêtés, FAQ OPERAT) ? Pour les facteurs d'émission, quelle base et quel millésime, et en PCS ou en PCI ?
 6. **Dates de consultation.** La date unique du 6 octobre 2026 pour les 102 sources est-elle réelle ?
@@ -1236,6 +1252,7 @@ Les tableaux détaillés de chaque axe (section 3) gardent la numérotation prop
 8. **Accessibilité.** As-tu besoin d'une déclaration d'accessibilité formelle ? Le site est-il soumis à une obligation légale ?
    - Si oui, il faut un audit sur un échantillon de pages défini, avec des tests au lecteur d'écran. Cet audit-ci n'en est pas un.
    - Le RGAA 5 est annoncé pour fin 2026 : faut-il anticiper les critères des WCAG 2.2, comme la taille des cibles (les appels de note font 13 à 17 px) ?
+   **Réponse : pas de déclaration nécessaire.**
 9. **« Energy Management ».** Faut-il le traiter comme le nom propre de la formation ? Si oui, le critère 8.7 devient conforme.
 10. **Médias.** Y a-t-il un budget ou une envie pour des photos réelles (compteurs, facture) ou de courtes vidéos ?
 11. **Tests apprenants.** Peux-tu réunir 5 à 8 personnes du public visé ? Plusieurs jugements de cet audit ne peuvent être confirmés qu'ainsi, notamment :
