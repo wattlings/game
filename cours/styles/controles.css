@@ -221,6 +221,18 @@ th {
   color: var(--muted);
   background: var(--surface-2);
 }
+/* l'en-tête d'une ligne (1re colonne) : il se lit comme une cellule en gras */
+th[scope="row"] {
+  font-size: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  color: inherit;
+  background: none;
+  font-weight: 700;
+}
+tr:last-child th[scope="row"] {
+  border-bottom: 0;
+}
 td.r,
 th.r {
   text-align: right;

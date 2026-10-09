@@ -16,10 +16,14 @@ export function monterQuiz(conteneur, questions, auScore = () => {}) {
     };
   });
   let c = {};
+  // le contenu est redessiné à chaque réponse ; l'annonce du score reste en place pour être lue par les lecteurs d'écran
+  conteneur.innerHTML = `<div class="quiz-zone"></div><p class="sr" aria-live="polite"></p>`;
+  const zone = un(".quiz-zone", conteneur);
+  const annonce = un("p.sr", conteneur);
   function o() {
     const d = Object.keys(c).length;
     const u = Object.entries(c).filter(([l, s]) => a[l].bonne === s).length;
-    conteneur.innerHTML = `
+    zone.innerHTML = `
       <ol class="quiz">${a
         .map((l, s) => {
           const r = c[s];
@@ -33,20 +37,22 @@ export function monterQuiz(conteneur, questions, auScore = () => {}) {
               })
               .join("")}
           </div>
-          ${r != null ? `<p class="feedback ${r === l.bonne ? "ok" : "bad"}" role="status">${icone(r === l.bonne ? "ok" : "alerte")}<span><b>${r === l.bonne ? "Exact." : "Pas tout à fait."}</b> ${texteRiche(l.explication)}</span></p>` : ""}
+          ${r != null ? `<p class="feedback ${r === l.bonne ? "ok" : "bad"}" tabindex="-1">${icone(r === l.bonne ? "ok" : "alerte")}<span><b>${r === l.bonne ? "Exact." : "Pas tout à fait."}</b> ${texteRiche(l.explication)}</span></p>` : ""}
         </li>`;
         })
         .join("")}</ol>
       <div class="row quiz-score"><span class="score">${d === a.length ? `Score : ${u} / ${a.length}` : `${d} / ${a.length} répondues`}</span>
       ${d === a.length ? `<span class="muted">${u === a.length ? "Sans faute !" : u >= a.length / 2 ? "Bien joué. Relis les explications des erreurs." : "Relis le niveau Comprendre, puis retente."}</span><button type="button" class="btn" id="quiz-reset">Recommencer</button>` : ""}</div>`;
-    tous(".quiz-q", conteneur).forEach((l) => {
+    tous(".quiz-q", zone).forEach((l) => {
       const s = +l.dataset.q;
       tous("button[data-c]", l).forEach((r) =>
         r.addEventListener("click", () => {
           if (c[s] == null) {
             c[s] = +r.dataset.c;
             o();
-            un(`.quiz-q[data-q="${s}"] .feedback`, conteneur)?.focus?.();
+            un(`.quiz-q[data-q="${s}"] .feedback`, zone)?.focus?.();
+            const n = Object.keys(c).length;
+            annonce.textContent = n === a.length ? `Quiz terminé. Score : ${Object.entries(c).filter(([i, p]) => a[i].bonne === p).length} sur ${a.length}.` : `${n} sur ${a.length} répondues.`;
             if (Object.keys(c).length === a.length) {
               auScore(Object.entries(c).filter(([i, p]) => a[i].bonne === p).length);
             }
@@ -54,9 +60,11 @@ export function monterQuiz(conteneur, questions, auScore = () => {}) {
         }),
       );
     });
-    un("#quiz-reset", conteneur)?.addEventListener("click", () => {
+    un("#quiz-reset", zone)?.addEventListener("click", () => {
       c = {};
       o();
+      annonce.textContent = "Le quiz recommence.";
+      un("button[data-c]", zone)?.focus();
     });
   }
   o();

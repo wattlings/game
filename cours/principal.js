@@ -8,8 +8,9 @@ import { CLE_AVATAR, CLE_ETAT_COURS, CLE_PARTIE } from "../commun/stockage.js";
 import { icone } from "./blocs/icones.js";
 import { echapper, un } from "./blocs/outils.js";
 import { adresseJeu } from "../commun/liens.js";
+import { FAMILLES } from "../commun/donnees/etapes.js";
 import { ETAPES } from "./contenu/index.js";
-import { magasin } from "./coquille/etat.js";
+import { magasin, maitrisee, NB_QUESTIONS } from "./coquille/etat.js";
 import { brancherGlossaire, ouvrirGlossaire } from "./coquille/glossaire.js";
 import { ancienLienVersJeu, brancherJeu } from "./coquille/jeu.js";
 import { brancherSuiviCours } from "./coquille/suivi-cours.js";
@@ -47,7 +48,7 @@ racine.innerHTML = `
     </div>
     <div class="steps-row">
       <nav class="steps-strip" aria-label="Les 8 étapes" id="strip"></nav>
-      <div class="progress" id="progress" title="Une étape est terminée quand son Essentiel est lu et sa démo manipulée">
+      <div class="progress" id="progress" title="Une étape est terminée quand son Essentiel est lu et sa démo menée jusqu’à son résultat">
         <span class="progress-bar" aria-hidden="true"><span class="pd"></span><span class="pe"></span></span>
         <span id="progress-txt"></span>
       </div>
@@ -55,6 +56,8 @@ racine.innerHTML = `
   </header>
   <main id="contenu" tabindex="-1"></main>
   <button class="fab" type="button" id="fab" aria-label="Glossaire" title="Glossaire">${icone("livre")}</button>`;
+
+ETAPES.forEach((e) => (NB_QUESTIONS[e.num] = e.quiz?.length || 0));
 
 /** Met à jour la barre de progression et le bandeau des 8 étapes. */
 function majProgression() {
@@ -67,7 +70,7 @@ function majProgression() {
   un("#progress").setAttribute("aria-label", `Progression : ${e.length} étapes terminées sur 8`);
   un("#strip").innerHTML = ETAPES.map(
     (a) =>
-      `<a href="#etape-${a.num}" class="fam-${a.famille} ${magasin.estFaite(a.num) ? "done" : ""}" data-num="${a.num}"><span class="pastille"><span>${a.num}</span></span>${echapper(a.titre)}</a>`,
+      `<a href="#etape-${a.num}" class="fam-${a.famille} ${magasin.estFaite(a.num) ? "done" : ""}" data-num="${a.num}"><span class="pastille"><span>${a.num}</span></span>${echapper(a.titre)}${maitrisee(a.num) ? '<span class="etoile" aria-hidden="true">★</span>' : ""}<span class="sr"> (${FAMILLES[a.famille].nom}${magasin.estFaite(a.num) ? ", terminée" : ""}${maitrisee(a.num) ? ", maîtrisée" : ""})</span></a>`,
   ).join("");
   majNavigation();
 }
@@ -196,6 +199,17 @@ magasin.on(majProgression);
 
 // le suivi d'audience écoute les changements de page avant le routeur
 brancherSuiviCours();
+
+// chaque tableau (y compris ceux que les démos redessinent) reçoit un titre lu par les lecteurs d'écran : celui de sa section
+new MutationObserver(() => {
+  document.querySelectorAll("#contenu table:not(:has(> caption))").forEach((t) => {
+    const titre = t.closest("section, details, .card")?.querySelector("h2, h3, summary")?.textContent.trim();
+    const c = document.createElement("caption");
+    c.className = "sr";
+    c.textContent = titre || "Tableau";
+    t.prepend(c);
+  });
+}).observe(un("#contenu"), { childList: true, subtree: true });
 
 window.addEventListener("hashchange", afficherRoute);
 

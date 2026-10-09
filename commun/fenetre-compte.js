@@ -12,7 +12,7 @@ const STYLES = `
 .cpt p{margin:0 0 12px;color:#45506a;font-size:14.5px}
 .cpt-onglets{display:flex;gap:4px;background:#eef1f7;border-radius:10px;padding:4px;margin:6px 0 14px}
 .cpt-onglets button{flex:1;border:0;background:transparent;border-radius:7px;padding:8px 6px;font:inherit;font-size:14.5px;font-weight:600;color:#45506a;cursor:pointer}
-.cpt-onglets button[aria-selected=true]{background:#fff;color:#14203a;box-shadow:0 1px 3px rgba(0,0,0,.15)}
+.cpt-onglets button[aria-pressed=true]{background:#fff;color:#14203a;box-shadow:0 1px 3px rgba(0,0,0,.15)}
 .cpt label{display:block;font-size:14px;font-weight:600;margin:0 0 4px}
 .cpt input{box-sizing:border-box;width:100%;font:inherit;padding:9px 11px;border:1.5px solid #c5cbd9;border-radius:8px;background:#fff;color:#14203a;margin:0 0 4px}
 .cpt input:focus{outline:2px solid #2f6fdd;outline-offset:1px;border-color:#2f6fdd}
@@ -60,10 +60,21 @@ export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexio
       e.stopPropagation();
       fermer();
     }
+    // Tab reste dans la fenêtre (fenêtre modale)
+    if (e.key === "Tab") {
+      const f = [...boite.querySelectorAll("button:not([disabled]), input, [href]")];
+      const ici = (parent.getRootNode && parent.getRootNode().activeElement) || document.activeElement;
+      if (!f.length) return;
+      if (e.shiftKey && (ici === f[0] || !boite.contains(ici))) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && (ici === f[f.length - 1] || !boite.contains(ici))) { e.preventDefault(); f[0].focus(); }
+    }
   };
   addEventListener("keydown", touche, true);
-  fond.addEventListener("mousedown", (e) => {
-    if (e.target === fond) fermer();
+  // un clic sur le fond (appui et relâchement sur le fond) ferme la fenêtre
+  let appuiFond = false;
+  fond.addEventListener("pointerdown", (e) => { appuiFond = e.target === fond; });
+  fond.addEventListener("click", (e) => {
+    if (appuiFond && e.target === fond) fermer();
   });
 
   function afficherConnexion() {
@@ -72,9 +83,9 @@ export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexio
       <button type="button" class="cpt-fermer" aria-label="Fermer">×</button>
       <h2 id="cpt-titre">Mon compte</h2>
       <p>Avec un compte, ta progression dans le cours et tes parties du jeu te suivent sur tous tes appareils et navigateurs. La mesure d'audience du site rattache alors ce que tu y fais à ton identifiant (sauf si tu as choisi « Ne pas me compter »).</p>
-      <div class="cpt-onglets" role="tablist">
-        <button type="button" role="tab" data-o="connexion" aria-selected="${!creer}">Se connecter</button>
-        <button type="button" role="tab" data-o="creation" aria-selected="${creer}">Créer un compte</button>
+      <div class="cpt-onglets" role="group" aria-label="J'ai déjà un compte, ou j'en crée un">
+        <button type="button" data-o="connexion" aria-pressed="${!creer}">Se connecter</button>
+        <button type="button" data-o="creation" aria-pressed="${creer}">Créer un compte</button>
       </div>
       <form novalidate>
         <label for="cpt-id">Identifiant</label>
@@ -159,7 +170,8 @@ export function ouvrirFenetreCompte({ parent = document.body, onglet = "connexio
     };
   }
 
+  // d'abord dans la page, puis le contenu : sinon le focus ne peut pas entrer dans la fenêtre
+  parent.appendChild(fond);
   if (compteActuel()) afficherConnecte("");
   else afficherConnexion();
-  parent.appendChild(fond);
 }

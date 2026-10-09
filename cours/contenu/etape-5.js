@@ -159,7 +159,7 @@ export default {
       explication: "b est la pente : la sensibilité au froid, en kWh/DJU.",
     },
     {
-      q: "La pointe annuelle de l’école est 57 kVA et elle a souscrit 100 kVA. C’est…",
+      q: "La pointe annuelle de l’école est 57 kVA. Si elle avait souscrit 100 kVA, ce serait…",
       choix: ["un dépassement", "une sur-souscription", "le réglage idéal"],
       bonne: 1,
       explication: "Elle paie 43 kVA de puissance qu’elle n’utilise jamais.",

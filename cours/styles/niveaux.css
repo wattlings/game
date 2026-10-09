@@ -59,12 +59,13 @@
 .fam-energie .encadre.ton-qa {
   background: var(--energie-soft);
 }
-.tab-texte td {
+.tab-texte td,
+.tab-texte th.col1 {
   white-space: normal;
   min-width: 120px;
   vertical-align: top;
 }
-.tab-texte td.col1 {
+.tab-texte .col1 {
   font-weight: 700;
   min-width: 110px;
 }
@@ -451,4 +452,39 @@
 .demo-sources {
   font-size: var(--t-xs);
   margin: 8px 0 0;
+}
+
+/* l'encadré « Pour tester le logiciel », replié par défaut */
+details.encadre.replie {
+  display: block;
+}
+details.encadre.replie > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  cursor: pointer;
+  list-style: none;
+}
+details.encadre.replie > summary::-webkit-details-marker {
+  display: none;
+}
+details.encadre.replie > summary::after {
+  content: "▸";
+  margin-left: auto;
+}
+details.encadre.replie[open] > summary::after {
+  content: "▾";
+}
+details.encadre.replie > summary .muted {
+  font-size: var(--t-xs);
+}
+details.encadre.replie > .stack {
+  margin: 10px 0 0 34px;
+}
+details.encadre.ton-qa > summary > svg {
+  color: var(--data-ink);
+  width: 24px;
+  height: 24px;
+  flex: none;
 }

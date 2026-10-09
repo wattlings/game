@@ -1264,3 +1264,25 @@ Les tableaux détaillés de chaque axe (section 3) gardent la numérotation prop
 
     Le suivi d'audience déjà en place (`course_tab`, `demo_use`, `glossary_open`) peut aussi apporter des données réelles : as-tu accès à ces statistiques ?
 12. **Patrimoine.** Doit-il faire partie du parcours (avec progression), ou rester un bonus ?
+
+---
+
+## 7. Suivi des corrections
+
+### Lot 1 (9 octobre 2026) : priorité 1, accroche de l'accueil, règle d'étape « faite »
+
+| # | Correction | Fichiers |
+|---|---|---|
+| 1 | Schéma de l'étape 8 : « −15 % à météo égale (brut : −27 %) ». La barre « après » est redessinée à −15 %. | `cours/schemas/mesurer.js` |
+| 2 | « 404 989 a été tapé au lieu de 413 989, deux chiffres mal recopiés ». Même correction dans l'atelier du jeu. | `cours/contenu/etape-3.js`, `jeu/epreuves/fiabiliser.js` |
+| 3 | Quiz de l'étape 5 : « Si elle avait souscrit 100 kVA, ce serait… » | `cours/contenu/etape-5.js` |
+| 4 | La page Sources dit maintenant la vérité : seules les étapes référencées citent leurs sources. | `cours/pages/sources.js` |
+| 5 | Fenêtre « Mon compte » : le focus y entre, Tab reste dans la fenêtre, la fermeture se fait au clic (et non plus à l'appui), et les pseudo-onglets deviennent des boutons à bascule. | `commun/fenetre-compte.js` |
+| 6 | Bouton « Reprendre : N. Étape · Niveau » sur l'accueil, avec « Recommencer à l'étape 1 » en secondaire. | `cours/pages/accueil.js`, `cours/pages/etape.js` |
+| 7 | L'onglet ouvert va dans l'adresse (`#etape-3-comprendre`). | `cours/pages/etape.js` |
+| 8 | Quiz : après une réponse, le focus va sur la correction, et la progression ou le score est annoncé par une région live permanente. Exemple pas à pas : le focus va sur ce qui apparaît. Le bouton « Étape suivante » devient « Calcul suivant ». | `cours/blocs/quiz.js`, `cours/blocs/blocs.js` |
+| 9 | L'accueil s'adresse à tous les salariés, avec les durées (2 à 5 min, environ 5 à 10, environ 10 à 20). Les badges « Disponible » sont remplacés par « Pour tous / Recommandé / Pour aller plus loin ». Le quiz de synthèse passe en bouton secondaire. Les encadrés « Pour tester le logiciel » sont repliés et marqués facultatifs. | `cours/pages/accueil.js`, `cours/blocs/blocs.js`, `cours/styles/niveaux.css` |
+| 10 | Chaque tableau a un titre pour les lecteurs d'écran, y compris ceux des démos. Les tableaux de contenu, des graphiques et de la progression ont des en-têtes de ligne. | `cours/blocs/blocs.js`, `cours/blocs/graphique.js`, `cours/pages/accueil.js`, `cours/principal.js`, `cours/styles/controles.css` |
+| 12 | Étape « faite » = « manipulée » : l'Essentiel a été réellement affiché et sa démo menée jusqu'au résultat (Cadrer : toutes les étiquettes placées puis vérifiées ; Analyser : estimation vérifiée ; les autres démos, à la première manipulation). Les démos de Comprendre et d'Approfondir ne comptent plus. Le message « Étape N terminée » est annoncé. La mention ★ « maîtrisée » s'affiche dans le bandeau et le tableau si le mini-quiz est réussi à 80 %. La règle est écrite au-dessus du tableau de progression. | `cours/pages/etape.js`, `cours/coquille/etat.js`, `cours/demos/cadrer.js`, `cours/demos/analyser.js`, `cours/principal.js`, `cours/pages/accueil.js` |
+
+Vérification : `node outils/verifier.mjs` donne 360 réussites et 0 échec. Un test navigateur dédié a contrôlé chaque correction.

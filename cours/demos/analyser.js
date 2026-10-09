@@ -144,6 +144,7 @@ export function demoAnalyser(zone, options) {
   un("#a-verif", zone).addEventListener("click", () => {
     s = true;
     options.toucher();
+    options.aboutir?.();
     i();
   });
   i();

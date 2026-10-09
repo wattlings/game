@@ -65,7 +65,7 @@ export default {
             calc: "404 989 − 413 989 = −9 000 kWh",
           },
           {
-            t: "Une consommation négative est impossible pour un compteur de consommation. On cherche la cause : bouclage ? Non, le compteur est loin de son maximum. Changement de compteur ? Aucun n’est déclaré. Il reste l’erreur de saisie : 413 → 404, deux chiffres inversés.",
+            t: "Une consommation négative est impossible pour un compteur de consommation. On cherche la cause : bouclage ? Non, le compteur est loin de son maximum. Changement de compteur ? Aucun n’est déclaré. Il reste l’erreur de saisie : 404 989 a été tapé au lieu de 413 989, deux chiffres mal recopiés.",
           },
           {
             t: "On rejette le relevé, on le signale, et on l’estime en attendant le suivant. Indice supplémentaire : en mars (saison haute), le poste HPB ne tourne pas, donc son index aurait dû rester à 413 989. Le relevé du 1er mai (418 534 kWh) confirme la hausse normale d’avril.",

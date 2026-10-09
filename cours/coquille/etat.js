@@ -81,3 +81,12 @@ export const magasin = {
     });
   },
 };
+
+/** L'étape est maîtrisée quand son mini-quiz a obtenu au moins 80 % de bonnes réponses (la mention ★). */
+export function maitrisee(num) {
+  const score = etat.quiz?.[num];
+  const total = NB_QUESTIONS[num];
+  return score != null && total > 0 && score >= Math.ceil(total * 0.8);
+}
+/** Le nombre de questions du mini-quiz de chaque étape, donné par le contenu au démarrage. */
+export const NB_QUESTIONS = {};

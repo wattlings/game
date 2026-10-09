@@ -209,12 +209,12 @@ export function graphique(conteneur, configInitiale) {
       const C = d.open;
       const S = (U, J) =>
         J == null ? "—" : (U.format || t.y?.format || ((ae) => `${nombre(ae, 1)} ${t.y?.unite || ""}`))(J);
-      d.innerHTML = `<summary>Voir les données en tableau</summary><div class="table-wrap"><table><thead><tr><th></th>${Xe.map((U) => `<th class="r">${echapper(U.nom)}</th>`).join("")}</tr></thead><tbody>${Array.from(
+      d.innerHTML = `<summary>Voir les données en tableau</summary><div class="table-wrap"><table><caption class="sr">Données du graphique : ${echapper(t.description || "")}</caption><thead><tr><th scope="col">${echapper(t.x.titre || "Période")}</th>${Xe.map((U) => `<th scope="col" class="r">${echapper(U.nom)}</th>`).join("")}</tr></thead><tbody>${Array.from(
         {
           length: t.x.n,
         },
         (U, J) =>
-          `<tr><td>${echapper(t.x.label(J))}</td>${Xe.map((ae) => `<td class="r mono">${echapper(S(ae, ae.valeurs[J]))}</td>`).join("")}</tr>`,
+          `<tr><th scope="row">${echapper(t.x.label(J))}</th>${Xe.map((ae) => `<td class="r mono">${echapper(S(ae, ae.valeurs[J]))}</td>`).join("")}</tr>`,
       ).join("")}</tbody></table></div>`;
       d.open = C;
       d.hidden = false;

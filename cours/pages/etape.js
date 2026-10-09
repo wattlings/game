@@ -34,6 +34,9 @@ const NIVEAUX = [
   },
 ];
 
+// les démos de l'Essentiel qui se terminent par une vérification : elles ne comptent qu'une fois vérifiées
+const DEMOS_A_VERIFIER = new Set(["cadrer", "analyser"]);
+
 const badgeFamille = (e, n = false) =>
   `<span class="badge ${e} ${n ? "plus" : ""}">${icone(FAMILLES[e].icone)}${n ? "+ " : ""}${FAMILLES[e].nom}</span>`;
 
@@ -89,6 +92,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
         <div class="demo-body" id="demo-zone"></div>
         ${sourcesDeLaDemo(a.demo.id)}
       </section>
+      <div id="fin-etape" role="status" aria-live="polite"></div>
 
       <div class="stack" style="gap:8px">
         <span class="eyebrow">Les mots de cette étape</span>
@@ -139,6 +143,10 @@ export function pageEtape(conteneur, num, niveauDemande) {
       un(`#pan-${x.id}`, conteneur).hidden = x.id !== m;
     });
     magasin.marquer(num, m);
+    // l'onglet ouvert va dans l'adresse (partage, rechargement) et devient le point de reprise de l'accueil
+    const route = `etape-${num}${m === "essentiel" ? "" : "-" + m}`;
+    if (decodeURIComponent(location.hash.slice(1)) !== route) history.replaceState(history.state, "", "#" + route);
+    if (magasin.get().derniere !== route) magasin.set({ derniere: route });
     const h = un(`[data-niveau="${m}"]`, conteneur);
     if (h && !h.dataset.monte) {
       h.dataset.monte = "1";
@@ -152,7 +160,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
         monterBlocs(h, x, {
           num,
           quiz: a.quiz,
-          toucher: () => magasin.marquer(num, "demo"),
+          toucher: () => {}, // seule la démo de l'Essentiel compte pour terminer l'étape
           marquerQuiz: (v) =>
             magasin.set({
               quiz: {
@@ -185,14 +193,25 @@ export function pageEtape(conteneur, num, niveauDemande) {
     }),
   );
   l(niveauDemande && NIVEAUX.some((m) => m.id === niveauDemande) ? niveauDemande : "essentiel");
-  magasin.marquer(num, "essentiel");
   majNotes(conteneur);
+  // une étape est terminée quand son Essentiel a été affiché et que sa démo a été menée jusqu'à son résultat
+  const demoMenee = () => {
+    const avant = magasin.estFaite(num);
+    magasin.marquer(num, "demo");
+    if (!avant && magasin.estFaite(num)) {
+      un("#fin-etape", conteneur).innerHTML = `<p class="feedback ok">${icone("ok")}<span><b>Étape ${num} terminée.</b> ${o ? `Tu peux approfondir avec le niveau Comprendre, ou passer à l’étape ${o.num}, ${echapper(o.titre)}.` : "Tu peux approfondir avec le niveau Comprendre, ou faire le quiz de synthèse."}</span></p>`;
+    }
+  };
   const r = un("#demo-zone", conteneur);
   const i = DEMOS[a.demo.id];
   let p = null;
   try {
     p = i(r, {
-      toucher: () => magasin.marquer(num, "demo"),
+      // les démos à vérification ne comptent qu'une fois vérifiées ; les autres, dès qu'on les manipule
+      toucher: () => {
+        if (!DEMOS_A_VERIFIER.has(a.demo.id)) demoMenee();
+      },
+      aboutir: demoMenee,
     });
   } catch (m) {
     console.error(m);

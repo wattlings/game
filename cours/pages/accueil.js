@@ -10,11 +10,21 @@ import { icone } from "../blocs/icones.js";
 import { euros, nombre, texteRiche, tous, un } from "../blocs/outils.js";
 import { ETAPES } from "../contenu/index.js";
 import { QUESTIONS_QUIZ_FINAL } from "../contenu/quiz-final.js";
-import { magasin } from "../coquille/etat.js";
+import { magasin, maitrisee } from "../coquille/etat.js";
 import { factures } from "../modele/factures.js";
 import { anneeCivile, anneeDeReference, totalElec, totalGaz } from "../modele/simulation.js";
 import { brancherRoue, roueDuCycle } from "../schemas/cycle.js";
 import { vignetteEcole } from "../schemas/vignette-ecole.js";
+
+/** Le bouton principal : « Reprendre » là où on s'est arrêté, sinon « Commencer par l'étape 1 ». */
+function boutonDepart() {
+  const route = magasin.get().derniere;
+  const m = route && route.match(/^etape-(\d)(?:-(comprendre|approfondir))?$/);
+  const etape = m && ETAPES.find((e) => e.num === +m[1]);
+  if (!etape) return `<a class="btn primary" href="#etape-1">Commencer par l’étape 1 ${icone("fleche")}</a>`;
+  const niveau = m[2] === "comprendre" ? " · Comprendre" : m[2] === "approfondir" ? " · Approfondir" : "";
+  return `<a class="btn primary" href="#${route}">Reprendre : ${etape.num}. ${etape.titre}${niveau} ${icone("fleche")}</a><a class="btn" href="#etape-1">Recommencer à l’étape 1</a>`;
+}
 
 /** Affiche la page d'accueil dans `conteneur`. */
 export function pageAccueil(conteneur) {
@@ -29,9 +39,9 @@ export function pageAccueil(conteneur) {
   <div class="stack" style="gap:48px">
     <section class="hero">
       <div class="hero-text">
-        <span class="eyebrow">Formation interne · niveau débutant</span>
+        <span class="eyebrow">Formation interne · pour tous les salariés · niveau débutant</span>
         <h1>De la <span class="d">donnée</span> à l’<span class="e">énergie</span> économisée</h1>
-        <p class="lead">Tu développes ou tu testes un logiciel d’energy management ? Ce site t’explique le métier en 8 étapes, avec une école fictive comme terrain de jeu.</p>
+        <p class="lead">Comment passe-t-on des chiffres d’un compteur à de l’énergie vraiment économisée ? Le métier de l’energy management expliqué en 8 étapes, sans prérequis technique, avec une école fictive comme terrain de jeu.</p>
         <div class="stack" style="gap:8px">
           <span class="eyebrow" id="lbl-filtre">Les deux familles d’étapes, sur le cycle</span>
           <div class="segmented" role="group" aria-labelledby="lbl-filtre">
@@ -41,7 +51,7 @@ export function pageAccueil(conteneur) {
           </div>
         </div>
         <p class="muted" style="font-size:var(--t-s)" id="desc-filtre"></p>
-        <div class="row"><a class="btn primary" href="#etape-1">Commencer par l’étape 1 ${icone("fleche")}</a><a class="btn" href="${adresseJeu()}" data-jeu="">Ou jouer à Wattlings</a></div>
+        <div class="row">${boutonDepart()}<a class="btn" href="${adresseJeu()}" data-jeu="">Ou jouer à Wattlings</a></div>
         <p class="muted" style="font-size:var(--t-s);margin:0">Tu peux aussi cliquer sur n’importe quelle étape du cycle.</p>
       </div>
       <div>
@@ -57,20 +67,20 @@ export function pageAccueil(conteneur) {
           [
             "Essentiel",
             1,
-            "30 secondes : l’idée en une phrase, un schéma, une analogie, et une démo à manipuler.",
-            "Disponible",
+            "2 à 5 minutes : l’idée en une phrase, un schéma, une analogie, et une démo à manipuler.",
+            "Pour tous",
           ],
           [
             "Comprendre",
             2,
-            "Des démos plus riches avec l’école et un exemple chiffré pas à pas.",
-            "Disponible",
+            "Environ 5 à 10 minutes : des démos plus riches avec l’école et un exemple chiffré pas à pas.",
+            "Recommandé",
           ],
           [
             "Approfondir",
             3,
-            "Les règles métier, les cas limites, le vocabulaire technique et un mini-quiz.",
-            "Disponible",
+            "Environ 10 à 20 minutes : les règles métier, les cas limites, le vocabulaire technique et un mini-quiz.",
+            "Pour aller plus loin",
           ],
         ]
           .map(
@@ -78,7 +88,7 @@ export function pageAccueil(conteneur) {
           <article class="card niveau-card">
             <h3><span class="dots">${[1, 2, 3].map((x) => `<i class="${x <= m ? "on" : ""}"></i>`).join("")}</span>${p}</h3>
             <p>${f}</p>
-            <p style="margin-top:10px"><span class="badge ok">${h}</span></p>
+            <p style="margin-top:10px"><span class="badge neutre">${h}</span></p>
           </article>`,
           )
           .join("")}
@@ -88,8 +98,9 @@ export function pageAccueil(conteneur) {
 
     <section class="stack" aria-labelledby="prog-t">
       <div class="row" style="justify-content:space-between"><div class="stack" style="gap:6px"><span class="eyebrow">Ton parcours</span><h2 id="prog-t">Ta progression</h2></div>
-      <div class="row"><a class="btn primary" href="#quiz-final">${icone("ok")} Quiz de synthèse${magasin.get().quizFinal != null ? ` · ${magasin.get().quizFinal}/${QUESTIONS_QUIZ_FINAL.length}` : ""}</a></div></div>
-      <div class="table-wrap"><table class="progression"><thead><tr><th>Étape</th><th>Essentiel</th><th>Démo</th><th>Comprendre</th><th>Approfondir</th><th>Quiz</th></tr></thead><tbody id="prog-body"></tbody></table></div>
+      <div class="row"><a class="btn" href="#quiz-final">${icone("ok")} Quiz de synthèse${magasin.get().quizFinal != null ? ` · ${magasin.get().quizFinal}/${QUESTIONS_QUIZ_FINAL.length}` : ""}</a></div></div>
+      <p class="muted" style="margin:0">Une étape est <b>terminée</b> quand tu as lu son Essentiel et mené sa démo jusqu’à son résultat, juste ou faux. L’étoile ★ dit que tu as <b>maîtrisé</b> l’étape : au moins 80 % de bonnes réponses à son mini-quiz.</p>
+      <div class="table-wrap"><table class="progression"><caption class="sr">Ta progression, étape par étape</caption><thead><tr><th scope="col">Étape</th><th scope="col">Essentiel</th><th scope="col">Démo</th><th scope="col">Comprendre</th><th scope="col">Approfondir</th><th scope="col">Quiz</th></tr></thead><tbody id="prog-body"></tbody></table></div>
       <p class="note" id="prog-note">${icone("info")}<span>${!magasin.persistant() ? "Le stockage du navigateur est indisponible : ta progression sera perdue en fermant la page." : compteActuel() ? `Ta progression est enregistrée sur ton compte ${echapperHTML(compteActuel())} : tu la retrouves sur tous tes appareils.` : comptesDisponibles() ? "Ta progression est gardée dans ce navigateur. Connecte-toi (en haut à droite) pour la retrouver sur tous tes appareils." : "Ta progression est gardée dans ce navigateur."}</span></p>
       <p class="note"><button type="button" class="lien-discret" id="prog-reset">Effacer ma progression</button></p>
     </section>
@@ -134,14 +145,14 @@ export function pageAccueil(conteneur) {
     const p = magasin.get();
     const m = (f, h) =>
       f
-        ? `<span class="badge ok" aria-label="${h} : fait">${icone("ok")}</span>`
-        : `<span class="muted" aria-label="${h} : à faire">—</span>`;
+        ? `<span class="badge ok">${icone("ok")}<span class="sr">${h} : fait</span></span>`
+        : `<span class="muted"><span aria-hidden="true">—</span><span class="sr">${h} : à faire</span></span>`;
     un("#prog-body", conteneur).innerHTML = ETAPES.map((f) => {
       const h = p.progression?.[f.num] || {};
       const x = p.quiz?.[f.num];
-      return `<tr><td><a href="#etape-${f.num}" class="fam-${f.famille}" style="display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:var(--ink)"><span class="pastille">${f.num}</span>${f.titre}</a> <span class="sr">(${FAMILLES[f.famille].nom})</span></td>
+      return `<tr><th scope="row"><a href="#etape-${f.num}" class="fam-${f.famille}" style="display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:var(--ink)"><span class="pastille">${f.num}</span>${f.titre}</a> <span class="sr">(${FAMILLES[f.famille].nom})</span></th>
         <td>${m(h.essentiel, "Essentiel")}</td><td>${m(h.demo, "Démo")}</td><td>${m(h.comprendre, "Comprendre")}</td><td>${m(h.approfondir, "Approfondir")}</td>
-        <td>${x != null ? `<span class="num">${x} / ${f.quiz?.length ?? "?"}</span>` : '<span class="muted">—</span>'}</td></tr>`;
+        <td>${x != null ? `<span class="num">${x} / ${f.quiz?.length ?? "?"}</span>${maitrisee(f.num) ? ' <span class="etoile" aria-hidden="true">★</span><span class="sr">, étape maîtrisée</span>' : ""}` : '<span class="muted">—</span>'}</td></tr>`;
     }).join("");
   };
   r();

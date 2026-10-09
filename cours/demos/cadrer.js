@@ -197,6 +197,7 @@ export function demoCadrer(zone, options) {
     options.toucher();
     const s = ETIQUETTES.filter((m) => t[m.id] && t[m.id] !== m.bon);
     const r = ETIQUETTES.filter((m) => !t[m.id]).length;
+    if (!r) options.aboutir?.(); // toutes les étiquettes placées : la démo est menée jusqu'au bout
     const i = ETIQUETTES.filter((m) => t[m.id] === m.bon).length;
     u();
     const p = un("#retour", zone);
