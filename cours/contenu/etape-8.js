@@ -103,8 +103,8 @@ export default {
           ],
           [
             "tCO2e",
-            "≈ 4,5 t (élec) + 42 t (gaz)",
-            "Facteurs ADEME à vérifier : ≈ 0,052 kg/kWh (élec, mix moyen) ; gaz ≈ 0,204 kg par kWh facturé, soit 0,227 kg par kWh PCI (le gaz se facture en PCS : 1 kWh PCS = 0,90 kWh PCI)[[legifrance-arrete-tertiaire-2020]]",
+            "≈ 5,5 t (élec) + 42 t (gaz)",
+            "Facteurs du dispositif tertiaire : 0,064 kg/kWh (élec, hors autoconsommation) ; gaz ≈ 0,204 kg par kWh facturé, soit 0,227 kg par kWh PCI (le gaz se facture en PCS : 1 kWh PCS = 0,90 kWh PCI)[[legifrance-arrete-tertiaire-2020]]",
           ],
         ],
       },
@@ -188,7 +188,7 @@ export default {
       q: "Pour l’école, quel indicateur fait le plus ressortir le gaz ?",
       choix: ["Les euros", "Les tonnes de CO2", "Le nombre de compteurs"],
       bonne: 1,
-      explication: "Le gaz émet environ 4 fois plus de CO2 par kWh que l’électricité française.",
+      explication: "Le gaz émet environ 3 fois plus de CO2 par kWh que l’électricité française (0,204 contre 0,064 kg par kWh facturé).",
     },
     {
       q: "Dans ISO 50001, l’étape « Vérifier » correspond surtout à…",

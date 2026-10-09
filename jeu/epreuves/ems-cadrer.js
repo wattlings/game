@@ -90,7 +90,7 @@ function objectifStep(el,next){
     el.querySelectorAll('.ems-obj .opt').forEach(x=>{x.disabled=true;x.classList.toggle('good',x===b)});emsSet('objectif',k);trk('setting',{k:'objectif',v:k});
     const mot={facture:`Va pour la facture. Le directeur financier t'a déjà ajouté à ses favoris.${a?" Le décret tertiaire, lui, reste une obligation : il sera suivi quand même, en tâche de fond.":''}`,
       decret:'Va pour le décret. L’objectif est fixé par la loi, l’indicateur aussi : les kWh/m², corrigés de la météo, par rapport à ton année de référence.',
-      co2:`Va pour le CO₂. Attention : ${s.gaz>s.elec*.5?'ton gaz pèse lourd. Un kWh de gaz émet environ quatre fois plus qu’un kWh électrique en France.':'chaque kWh n’a pas le même poids : le gaz émet environ quatre fois plus que l’électricité française.'}${a?' Le décret tertiaire reste une obligation : il sera suivi quand même.':''}`}[k];
+      co2:`Va pour le CO₂. Attention : ${s.gaz>s.elec*.5?'ton gaz pèse lourd. Un kWh de gaz émet environ trois fois plus qu’un kWh électrique en France.':'chaque kWh n’a pas le même poids : le gaz émet environ quatre fois plus que l’électricité française.'}${a?' Le décret tertiaire reste une obligation : il sera suivi quand même.':''}`}[k];
     fbz.innerHTML=`<div class="fb ok">✔ ${mot}</div>${emsTransfert('l’objectif décide de ce que l’outil affiche en premier (euros, kWh/m² ou CO₂). Le même plan d’action peut briller sur un indicateur et décevoir sur un autre : on le choisit avant, pas après, sinon on choisit celui qui arrange.')}`;
     gainXP(20);contBtn(fbz,next)});
 }

@@ -182,13 +182,12 @@
   "id": "ce8-010",
   "fichier": "cours/contenu/etape-8.js",
   "repere": "niveaux.approfondir › tableau « Les indicateurs clés » › tCO2e",
-  "texte": "≈ 0,052 kg/kWh (élec, mix moyen)",
+  "texte": "0,064 kg/kWh (élec, hors autoconsommation)",
   "affirmation": "Facteur d’émission de l’électricité : 0,052 kgCO2e/kWh.",
   "type": "fait",
-  "verdict": "a-corriger",
-  "attente": "Pour le dispositif tertiaire, l’arrêté fixe 0,064 kgCO2e/kWh pour l’électricité (hors autoconsommation, tous usages).",
-  "correction": "≈ 0,064 kg/kWh (élec, valeur du dispositif tertiaire)",
-  "note": "Décision de l’auteur attendue : 0,052 (mix moyen, source à lire) ou 0,064 (valeur réglementaire de l’attestation OPERAT). Changer la valeur modifie les tonnes de CO2 affichées dans le cours et le jeu.",
+  "verdict": "corrige",
+  "correction": "0,064 kg/kWh (élec, hors autoconsommation)",
+  "note": "Décision de l’auteur (9 octobre 2026) : on retient la valeur réglementaire de l’attestation OPERAT. Mise à jour du jeton FACTEURS_CO2.elec (commun/donnees/references.js) et des chiffres qui en dépendent (5,5 t d’électricité pour l’école ; le gaz émet environ 3 fois plus par kWh facturé).",
   "sources": [
    {
     "cle": "legifrance-arrete-tertiaire-2020",
@@ -196,6 +195,7 @@
     "relu": true,
     "page": "annexe VII, tableau VII-2"
    }
-  ]
+  ],
+  "avant": "≈ 0,052 kg/kWh (élec, mix moyen)"
  }
 ]

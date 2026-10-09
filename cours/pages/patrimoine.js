@@ -46,7 +46,7 @@ export function pagePatrimoine(c) {
       <p class="phrase-cle">À l’échelle d’un patrimoine, on ne lit plus une courbe : on classe, on compare et on priorise, pour mettre l’effort là où il rapporte le plus.</p>
       <ul class="a-retenir">
         <li><span>Le <strong>Pareto</strong> classe les sites du plus gros au plus petit et cumule leur part. Une minorité de sites fait souvent l’essentiel : la « règle des 80/20 » est un ordre de grandeur, pas une loi.</span></li>
-        <li><span>Le classement dépend de l’indicateur. En euros, l’électricité pèse plus (≈ 186 €/MWh contre ≈ 89 €/MWh pour le gaz). En CO₂, c’est le gaz (≈ 0,204 contre ≈ 0,052 tCO₂e/MWh).</span></li>
+        <li><span>Le classement dépend de l’indicateur. En euros, l’électricité pèse plus (≈ 186 €/MWh contre ≈ 89 €/MWh pour le gaz). En CO₂, c’est le gaz (≈ 0,204 contre ≈ 0,064 tCO₂e/MWh).</span></li>
         <li><span>Gros ne veut pas dire inefficace. On rapporte la consommation à la surface (kWh/m²) et on compare à des bâtiments de <strong>même activité</strong> : médiane du patrimoine et référence nationale.</span></li>
         <li><span>Le <strong>gisement</strong> = (ratio − référence) × surface. C’est lui qui dit où se jouent les MWh.</span></li>
       </ul>

@@ -1348,6 +1348,6 @@ Textes lus (fournis par l'auteur, les sites officiels refusant la machine de tra
 | Modulations des objectifs | Corrigé : ajout du volume d'activité et des contraintes patrimoniales |
 | Sanctions | Corrigé : amende par infraction (7 500 € personne morale, 1 500 € personne physique), après mise en demeure, et publication du nom |
 | Facteur du gaz 0,227 kgCO2e/kWh PCI, 1 kWh PCS = 0,90 kWh PCI | Confirmé (arrêté, annexes VII et I) |
-| Facteur de l'électricité 0,052 kgCO2e/kWh | **À corriger, en attente de décision** : l'arrêté fixe 0,064 pour le dispositif tertiaire |
+| Facteur de l'électricité 0,052 kgCO2e/kWh | Corrigé, sur décision de l'auteur : 0,064 (arrêté, annexe VII). Le jeton `FACTEURS_CO2.elec` passe à 0,064 : 5,5 t d'électricité pour l'école, et « le gaz émet environ 3 fois plus par kWh » (au lieu de 4) dans le cours et le jeu |
 
 Citations ajoutées : étape 8 (Approfondir et tableau), étape 1 (Comprendre), glossaire (décret tertiaire, OPERAT, PCI), démo « trajectoire du décret tertiaire ».

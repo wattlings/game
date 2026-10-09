@@ -41,7 +41,7 @@ export const TARIF_GAZ = {
 };
 
 export const FACTEURS_CO2 = {
-  elec: 0.052,
+  elec: 0.064, // arrêté du 10 avril 2020, annexe VII (électricité hors autoconsommation, tous usages)
   gaz: 0.2043,
 };
 
