@@ -363,6 +363,42 @@ export const GLOSSAIRE = {
     ex: "L’école suit ses kWh de gaz par DJU chaque mois.",
     etapes: [8],
   },
+  perimetre: {
+    terme: "Périmètre",
+    def: "Ce qu’on décide de suivre : un patrimoine, un site, un bâtiment, un usage. Tout ce qui est dedans est mesuré et comparé ; le reste est laissé de côté, volontairement.",
+    ex: "Le périmètre de l’école : le bâtiment et la cour, sans le logement du gardien, qui a son propre compteur.",
+    etapes: [1],
+  },
+  anomalie: {
+    terme: "Anomalie (de donnée)",
+    def: "Une valeur qui ne peut pas être juste : un trou, un doublon, un pic impossible, une valeur négative, une mauvaise unité. On la repère, on la marque, on ne l’efface jamais.",
+    ex: "Un pic à 999,9 kW sur un raccordement de 60 kVA est une anomalie.",
+    etapes: [3],
+  },
+  pointe: {
+    terme: "Pointe",
+    def: "La puissance la plus haute appelée sur une période. C’est elle qui doit tenir sous la puissance souscrite.",
+    ex: "La pointe annuelle de l’école est de 57 kVA, un midi d’hiver.",
+    etapes: [5, 7],
+  },
+  derive: {
+    terme: "Dérive",
+    def: "Une hausse de consommation qui s’installe et dure, par rapport à la référence : un équipement oublié, un réglage modifié, une panne.",
+    ex: "Un équipement resté allumé la nuit fait monter le talon de l’école de 3 kW.",
+    etapes: [6],
+  },
+  indicateur: {
+    terme: "Indicateur",
+    def: "Un chiffre suivi dans le temps pour savoir si l’on progresse : kWh, kWh/m², euros, CO2. On le choisit selon l’objectif.",
+    ex: "L’école suit ses kWh/m² par an, ses euros et ses tonnes de CO2.",
+    etapes: [1, 8],
+  },
+  pci: {
+    terme: "PCI",
+    def: "Pouvoir calorifique inférieur : l’énergie d’un combustible sans la chaleur qu’on récupérerait en condensant la vapeur d’eau des fumées. Le gaz se facture en PCS, environ 11 % au-dessus du PCI : un même facteur d’émission change donc selon la base.",
+    ex: "≈ 0,204 kg de CO2 par kWh de gaz facturé (PCS), soit ≈ 0,227 kg par kWh PCI.",
+    etapes: [8],
+  },
   talon: {
     terme: "Talon",
     def: "La puissance minimale appelée quand le bâtiment est vide (nuit, week-end) : les appareils qui ne s’arrêtent jamais.",
@@ -384,12 +420,12 @@ export const GLOSSAIRE = {
   signature: {
     terme: "Signature énergétique",
     def: "La relation entre la consommation de chauffage et les DJU, souvent une droite : chaque DJU coûte à peu près le même nombre de kWh.",
-    ex: "Pour l’école, environ 130 kWh de gaz par DJU un jour de classe.",
+    ex: "Pour l’école, environ 134 kWh de gaz par DJU un jour de classe.",
     etapes: [5, 8],
   },
   "puissance-souscrite": {
     terme: "Puissance souscrite",
-    def: "La puissance maximale prévue au contrat. Une partie de l’abonnement et de l’acheminement en dépend.",
+    def: "La puissance maximale prévue au contrat. La part fixe de l’acheminement en dépend et, selon l’offre, l’abonnement du fournisseur.",
     ex: "L’école a souscrit 60 kVA.",
     etapes: [5, 7],
   },

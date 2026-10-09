@@ -47,10 +47,10 @@ function rendreBloc(bloc, indice) {
       // « Pour tester le logiciel » : utile aux équipes produit, replié pour les autres lecteurs
       if ((bloc.ton || "info") === "qa")
         return `<details class="encadre ton-qa replie"><summary>${icone(a.ico)}<span class="eyebrow">${echapper(bloc.titre || a.titre)}</span><span class="muted">facultatif, pour les équipes produit</span></summary><div class="stack" style="gap:4px">${(Array.isArray(bloc.texte) ? bloc.texte : [bloc.texte]).map((c) => `<p>${texteRiche(c)}</p>`).join("")}</div></details>`;
-      return `<aside class="encadre ton-${bloc.ton || "info"}">${icone(a.ico)}<div class="stack" style="gap:4px"><span class="eyebrow">${echapper(bloc.titre || a.titre)}</span>${(Array.isArray(bloc.texte) ? bloc.texte : [bloc.texte]).map((c) => `<p>${texteRiche(c)}</p>`).join("")}</div></aside>`;
+      return `<div role="note" class="encadre ton-${bloc.ton || "info"}">${icone(a.ico)}<div class="stack" style="gap:4px"><span class="eyebrow">${echapper(bloc.titre || a.titre)}</span>${(Array.isArray(bloc.texte) ? bloc.texte : [bloc.texte]).map((c) => `<p>${texteRiche(c)}</p>`).join("")}</div></div>`;
     }
     case "tableau":
-      return `<section class="bloc">${t}<div class="table-wrap"><table class="tab-texte">${bloc.titre ? `<caption class="sr">${texteRiche(bloc.titre)}</caption>` : ""}<thead><tr>${bloc.entetes.map((a) => `<th scope="col">${echapper(a)}</th>`).join("")}</tr></thead><tbody>${bloc.lignes.map((a) => `<tr>${a.map((c, o) => (o === 0 ? `<th scope="row" class="col1">${texteRiche(c)}</th>` : `<td>${texteRiche(c)}</td>`)).join("")}</tr>`).join("")}</tbody></table></div>${bloc.note ? `<p class="note">${icone("info")}<span>${texteRiche(bloc.note)}</span></p>` : ""}</section>`;
+      return `<section class="bloc">${t}<div class="table-wrap"><table class="tab-texte">${bloc.titre ? `<caption class="sr">${texteRiche(bloc.titre)}</caption>` : ""}<thead><tr>${bloc.entetes.map((a) => `<th scope="col">${a ? echapper(a) : '<span class="sr">Élément</span>'}</th>`).join("")}</tr></thead><tbody>${bloc.lignes.map((a) => `<tr>${a.map((c, o) => (o === 0 ? `<th scope="row" class="col1">${texteRiche(c)}</th>` : `<td>${texteRiche(c)}</td>`)).join("")}</tr>`).join("")}</tbody></table></div>${bloc.note ? `<p class="note">${icone("info")}<span>${texteRiche(bloc.note)}</span></p>` : ""}</section>`;
     case "exemple":
       return `<section class="bloc exemple" data-exemple="${indice}">
         <div class="row" style="justify-content:space-between"><h3>${icone("tableau")} ${texteRiche(bloc.titre)}</h3><span class="badge neutre">Exemple chiffré</span></div>
@@ -60,11 +60,11 @@ function rendreBloc(bloc, indice) {
         ${bloc.conclusion ? `<p class="feedback ok conclusion" tabindex="-1" hidden>${icone("ok")}<span>${texteRiche(bloc.conclusion)}</span></p>` : ""}
       </section>`;
     case "demo":
-      return `<section class="demo" aria-labelledby="demo-${bloc.id}-t"><div class="demo-head"><span class="demo-tag">Démo</span><h2 id="demo-${bloc.id}-t">${echapper(bloc.titre)}</h2>${bloc.consigne ? `<p class="consigne">${echapper(bloc.consigne)}</p>` : ""}</div><div class="demo-body" data-demo="${bloc.id}"></div>${sourcesDeLaDemo(bloc.id)}</section>`;
+      return `<section class="demo" aria-labelledby="demo-${bloc.id}-t"><div class="demo-head"><span class="demo-tag">Démo</span><h3 id="demo-${bloc.id}-t">${echapper(bloc.titre)}</h3>${bloc.consigne ? `<p class="consigne">${echapper(bloc.consigne)}</p>` : ""}</div><div class="demo-body" data-demo="${bloc.id}"></div>${sourcesDeLaDemo(bloc.id)}</section>`;
     case "schema":
       return `<figure class="schema" style="margin:0">${SCHEMAS[bloc.id]()}${bloc.legende ? `<figcaption>${echapper(bloc.legende)}</figcaption>` : ""}</figure>`;
     case "quiz":
-      return `<section class="demo quiz-bloc" aria-labelledby="quiz-t"><div class="demo-head"><span class="demo-tag">Quiz</span><h2 id="quiz-t">${echapper(bloc.titre || "Mini-quiz")}</h2><p class="consigne">Choisis une réponse : la correction s’affiche tout de suite.</p></div><div class="demo-body" data-quiz></div></section>`;
+      return `<section class="demo quiz-bloc" aria-labelledby="quiz-t"><div class="demo-head"><span class="demo-tag">Quiz</span><h3 id="quiz-t">${echapper(bloc.titre || "Mini-quiz")}</h3><p class="consigne">Choisis une réponse : la correction s’affiche tout de suite.</p></div><div class="demo-body" data-quiz></div></section>`;
     case "sources":
       return `<section class="bloc sources"><span class="eyebrow">Sources consultées${bloc.date ? ` (${echapper(bloc.date)})` : ""}</span><ul>${bloc.liens.map((a) => `<li><a href="${echapper(a.url)}" target="_blank" rel="noopener">${echapper(a.t)}</a></li>`).join("")}</ul></section>`;
     default:

@@ -4,7 +4,7 @@
 import { FACTEURS_CO2, PRIX_KWH_ELEC, PRIX_KWH_GAZ, TARIF_ELEC } from "../../commun/donnees/references.js";
 import { icone } from "../blocs/icones.js";
 import { echapper, euros, nombre, texteRiche, tous, un } from "../blocs/outils.js";
-import { anneeCivile, anneeDeReference, totalElec, totalGaz } from "../modele/simulation.js";
+import { anneeCivile, anneeDeReference, repartitionUsages, totalElec, totalGaz } from "../modele/simulation.js";
 
 const FAMILLES_ACTIONS = [
   {
@@ -104,10 +104,14 @@ export function demoAgir(zone, options) {
   const a = anneeCivile(t);
   const c = totalElec(a);
   const o = totalGaz(a);
+  // les économies de chauffage portent sur le gaz du chauffage, pas sur celui de la cuisine (comme l'exemple chiffré)
+  const og = repartitionUsages(t).gaz.chauffage;
+  // arrondi à la dizaine d'euros, sauf pour les petits montants
+  const arrondi = (v) => (Math.abs(v) < 100 ? Math.round(v) : Math.round(v / 10) * 10);
   const d = new Set(["consigne"]);
   const u = (r) => {
     const i = r.elecKwh || 0;
-    const p = (r.gaz || 0) * o;
+    const p = (r.gaz || 0) * og;
     return i * PRIX_KWH_ELEC + p * PRIX_KWH_GAZ + (r.euros ? r.euros * c * 0.13 : 0) + (r.eurosFixe || 0);
   };
   const l = (r) => {
@@ -121,17 +125,19 @@ export function demoAgir(zone, options) {
   zone.innerHTML = `
     <div class="actions">${FAMILLES_ACTIONS.map(
       (r, i) => `
-      <div class="famille-titre"><span class="n">${i + 1}</span>${echapper(r.nom)} <span class="badge neutre">${echapper(r.sous)}</span></div>
+      <div role="group" aria-labelledby="ag-f-${r.id}" class="actions-groupe" style="display:contents">
+      <div class="famille-titre" id="ag-f-${r.id}"><span class="n">${i + 1}</span>${echapper(r.nom)} <span class="badge neutre">${echapper(r.sous)}</span></div>
       ${ACTIONS.filter((p) => p.f === r.id)
         .map(
           (p) => `
         <label class="action" for="ac-${p.id}">
           <input type="checkbox" id="ac-${p.id}" ${d.has(p.id) ? "checked" : ""}>
           <span><b>${echapper(p.nom)}</b><br><small class="muted">${echapper(p.note)}</small></span>
-          <span class="meta">${p.cout ? euros(p.cout) : "gratuit"} · ${euros(Math.round(u(p) / 10) * 10)}/an<br>retour ${l(p)}</span>
+          <span class="meta">${p.cout ? euros(p.cout) : "gratuit"} · ${euros(arrondi(u(p)))}/an<br>retour ${l(p)}</span>
         </label>`,
         )
-        .join("")}`,
+        .join("")}
+      </div>`,
     ).join("")}
     </div>
     <div class="kpis" id="ag-kpis"></div>
@@ -140,7 +146,7 @@ export function demoAgir(zone, options) {
   function s() {
     const r = ACTIONS.filter((w) => d.has(w.id));
     const i = r.reduce((w, $) => w * (1 - ($.gaz || 0)), 1);
-    const p = o * (1 - i);
+    const p = og * (1 - i);
     const m = r.reduce((w, $) => w + ($.elecKwh || 0), 0);
     const f =
       m * PRIX_KWH_ELEC +
@@ -150,7 +156,7 @@ export function demoAgir(zone, options) {
     const x = (m * FACTEURS_CO2.elec + p * FACTEURS_CO2.gaz) / 1000;
     un("#ag-kpis", zone).innerHTML = `
       <div class="kpi energie"><span class="v">−${nombre(((m + p) / (c + o)) * 100)} %</span><span class="l">d’énergie (${nombre((m + p) / 1000)} MWh/an)</span></div>
-      <div class="kpi ok"><span class="v">${euros(Math.round(f / 10) * 10)}</span><span class="l">économisés par an (HT)</span></div>
+      <div class="kpi ok"><span class="v">${euros(arrondi(f))}</span><span class="l">économisés par an (HT)</span></div>
       <div class="kpi"><span class="v">${euros(h)}</span><span class="l">d’investissement</span></div>
       <div class="kpi"><span class="v">${f > 0 ? (h === 0 ? "immédiat" : `${nombre(h / f, 1)} ans`) : "—"}</span><span class="l">temps de retour global</span></div>
       <div class="kpi"><span class="v">−${nombre(x, 1)} t</span><span class="l">de CO2e par an (facteurs à vérifier)</span></div>`;

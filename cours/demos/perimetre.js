@@ -10,9 +10,9 @@ const OBJECTIFS = {
     fiche: {
       Périmètre: "Le site, et si possible chaque usage",
       Sources: "Courbe de charge électrique, gaz journalier, météo",
-      "Pas de temps": "10 min (élec), 1 jour (gaz)",
+      "Pas de temps": "10 min (élec, celui de l’école), 1 jour (gaz)",
       Historique: "Au moins 1 an, pour comparer les saisons",
-      Indicateurs: "Talon, kWh par DJU, kWh hors occupation",
+      Indicateurs: "{{talon|Talon}}, kWh par {{dju|DJU}}, kWh hors occupation (vus à l’étape 5)",
       Suivi: "Chaque semaine",
     },
   },
@@ -35,7 +35,7 @@ const OBJECTIFS = {
       "Pas de temps": "1 an",
       Historique: "Une année de référence (2010 au plus tôt)",
       Indicateurs: "kWh d’énergie finale, kWh/m², écart à l’objectif 2030",
-      Suivi: "Chaque année (déclaration OPERAT)",
+      Suivi: "Chaque année (déclaration {{operat|OPERAT}})",
     },
   },
   climat: {
@@ -68,7 +68,7 @@ export function demoPerimetre(zone, options) {
     const o = Object.keys(OBJECTIFS.economies.fiche);
     un("#p-fiche", zone).innerHTML = c.length
       ? `<div class="table-wrap"><table class="tab-texte"><thead><tr><th>Fiche de cadrage</th>${c.map((u) => `<th>${echapper(u.nom)}</th>`).join("")}</tr></thead><tbody>
-      ${o.map((u) => `<tr><td class="col1">${u}</td>${c.map((l) => `<td>${echapper(l.fiche[u])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`
+      ${o.map((u) => `<tr><td class="col1">${u}</td>${c.map((l) => `<td>${texteRiche(l.fiche[u])}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`
       : "";
     const d = t.has("economies");
     un("#p-msg", zone).innerHTML = c.length

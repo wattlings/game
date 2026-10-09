@@ -1299,3 +1299,21 @@ Vérification : `node outils/verifier.mjs` donne 360 réussites et 0 échec. Un 
 Reste en priorité 2 : le point 11, les sources officielles de l'étape 8 (décret tertiaire, OPERAT, sanctions). Il demande de lire les textes, et le réseau de la session de travail les bloque.
 
 Vérification : `node outils/verifier.mjs` donne 360 réussites et 0 échec. Un test navigateur sur téléphone et sur ordinateur a contrôlé la barre, le bandeau, le résumé, l'annonce au clavier et la touche Échap.
+
+### Lot 3 (9 octobre 2026) : priorité 3
+
+| # | Correction | Fichiers |
+|---|---|---|
+| 17 | Étape 7 : le tableau devient « Les leviers, du moins cher au plus lourd » avec une ligne Contrat ; la note et le quiz précisent que le contrat baisse la facture, pas l'énergie (sur l'énergie : sobriété, efficacité, production, comme dans le jeu). | `cours/contenu/etape-7.js` |
+| 18 | Démo « plan d'action » : la baisse de consigne porte sur le gaz du chauffage (1 220 €/an, comme l'exemple), petits montants non arrondis (27 €) ; étape 8 : le facteur gaz affiché est celui du calcul (0,204 par kWh facturé, soit 0,227 PCI) ; glossaire : 134 kWh/DJU ; abonnement et puissance : même phrase prudente dans l'étape 7 et le glossaire. | `cours/demos/agir.js`, `cours/contenu/etape-8.js`, `commun/donnees/glossaire.js` |
+| 19 | Infobulles ajoutées dans Comprendre et Approfondir (étapes 3, 4, 6, 7) ; 6 termes ajoutés au glossaire : périmètre, anomalie, pointe, dérive, indicateur, PCI. « Les mots de cette étape » montre ceux de l'Essentiel, les autres sont repliés. | `cours/contenu/etape-3,4,6,7.js`, `commun/donnees/glossaire.js`, `cours/pages/etape.js` |
+| 20 | Étape 1 : talon, DJU et OPERAT ont leur infobulle dans la fiche de cadrage (« vus à l'étape 5 ») ; la puissance souscrite est expliquée dans la correction de la démo. | `cours/demos/perimetre.js`, `cours/demos/cadrer.js` |
+| 21 | « Passer à Approfondir » en fin de Comprendre ; « Étape suivante » en fin d'Approfondir ; le bouton du jeu devient bordé, moins voyant que la suite du cours. | `cours/pages/etape.js`, `cours/styles/bandeau-jeu.css` |
+| 22 | Téléphone : le bouton du glossaire s'efface quand on descend ; il disparaît sur la page Glossaire. | `cours/principal.js`, `cours/styles/petits-ecrans.css` |
+| 23 | Contrastes : contour des champs et interrupteurs (jeton `--line-ctrl`, ≥ 3:1), dates des sources, badge « ok », contour de focus plus foncé en clair, focus visible sur les lignes du Pareto, « m³ » lisible sur le compteur orange. | `commun/styles/jetons.css`, `cours/styles/*.css`, `commun/graphiques/graphiques.css`, `cours/schemas/*.js` |
+| 24 | Titres hiérarchisés (h1 → h2 → h3) ; annonces : nombre de résultats du glossaire, message éphémère, 8 démos ; bulle du glossaire survolable ; cases à cocher regroupées ; étiquette visible pour l'identifiant et la recherche ; jauges, encadrés et tableaux corrigés. axe-core : 0 défaut sur 10 pages contrôlées. | `cours/pages/etape.js`, `cours/blocs/blocs.js`, `cours/coquille/glossaire.js`, `commun/suivi.js`, `cours/demos/*.js` |
+| 26 | Suite unique après l'étape 8 : Patrimoine (bonus) puis quiz de synthèse ; Patrimoine perd son faux numéro « 20 » ; la barre du haut suit cet ordre. | `cours/pages/etape.js`, `cours/pages/patrimoine.js`, `cours/principal.js` |
+| 27 | Sur une étape, « Laboratoire actif : … » quand des anomalies ou des dérives sont activées, avec « Tout désactiver ». | `cours/pages/etape.js` |
+| 29 | Page Glossaire : index de A à Z, filtre par étape, nombre de résultats annoncé, termes rangés par lettre. | `cours/pages/glossaire.js`, `cours/styles/glossaire.css` |
+
+Reste : 25 (l'Approfondir de l'étape 2 reste long, seuls les encadrés « Pour tester » sont repliés) et 28 (sources, après décision).

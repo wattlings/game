@@ -87,6 +87,8 @@ svg[focusable="false"] {
   color: var(--muted);
 }
 .eyebrow {
+  font-family: var(--f-body);
+  line-height: 1.55;
   font-size: var(--t-xs);
   text-transform: uppercase;
   letter-spacing: 0.09em;

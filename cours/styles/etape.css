@@ -183,7 +183,8 @@
   border-bottom: 1px solid var(--line);
   background: var(--surface-2);
 }
-.demo-head h2 {
+.demo-head h2,
+.demo-head h3 {
   font-size: var(--t-l);
 }
 .demo-head .consigne {
@@ -299,4 +300,11 @@
 }
 .objectifs li + li {
   margin-top: 2px;
+}
+
+.termes-autres summary {
+  cursor: pointer;
+  font-size: var(--t-s);
+  color: var(--muted);
+  margin: 4px 0;
 }

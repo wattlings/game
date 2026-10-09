@@ -53,7 +53,7 @@ function verifierIdentifiant(saisie) {
 
 export function demoIdentifiants(zone, options) {
   zone.innerHTML = `
-    <div class="saisie"><label for="id-in" class="sr">Identifiant</label><input id="id-in" type="text" value="30001234567890" autocomplete="off" spellcheck="false" style="width:220px"></div>
+    <div class="saisie field"><label for="id-in">Identifiant à vérifier</label><input id="id-in" type="text" value="30001234567890" autocomplete="off" spellcheck="false" style="width:220px"></div>
     <div class="row" style="gap:6px"><span class="muted" style="font-size:var(--t-s)">Essaie :</span>${EXEMPLES.map((c) => `<button type="button" class="chip" data-x="${echapper(c)}">${echapper(c)}</button>`).join("")}</div>
     <div id="id-res" aria-live="polite"></div>`;
   const t = un("#id-in", zone);

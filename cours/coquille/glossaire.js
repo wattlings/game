@@ -77,9 +77,9 @@ export function ouvrirGlossaire(cleAOuvrir = null) {
     <header>
       <h2 id="drawer-titre">Glossaire</h2>
       <button class="icon-btn close" type="button" aria-label="Fermer le glossaire">${icone("ko")}</button>
-      <label class="sr" for="g-recherche">Rechercher un terme</label>
+      <label for="g-recherche" class="g-label">Rechercher un terme</label>
       <input id="g-recherche" type="search" placeholder="Rechercher : kWh, index, DJU…" autocomplete="off">
-      <p class="muted" style="font-size:var(--t-xs)"><span id="g-compte"></span> · <a href="#glossaire">Ouvrir en pleine page</a></p>
+      <p class="muted" style="font-size:var(--t-xs)"><span id="g-compte" aria-live="polite"></span> · <a href="#glossaire">Ouvrir en pleine page</a></p>
     </header>
     <div class="liste"></div>`;
   document.body.append(n, t);
@@ -152,11 +152,15 @@ export function brancherGlossaire() {
       minuterieBulle = setTimeout(() => ouvrirBulle(n), 250);
     }
   });
+  // la bulle reste ouverte le temps d'y amener le pointeur (pour la lire en grand ou la sélectionner)
   document.addEventListener("pointerout", (e) => {
-    if (e.target.closest?.(".terme")) {
-      clearTimeout(minuterieBulle);
-      fermerBulle();
-    }
+    const quitte = e.target.closest?.(".terme, .bulle");
+    if (!quitte || (e.relatedTarget && e.relatedTarget.closest?.(".terme, .bulle"))) return;
+    clearTimeout(minuterieBulle);
+    minuterieBulle = setTimeout(fermerBulle, 300);
+  });
+  document.addEventListener("pointerover", (e) => {
+    if (e.target.closest?.(".bulle")) clearTimeout(minuterieBulle);
   });
   document.addEventListener("focusin", (e) => {
     if (e.target.classList?.contains("terme")) {

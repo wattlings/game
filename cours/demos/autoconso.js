@@ -34,7 +34,7 @@ export function demoAutoconso(zone, options) {
   let a = null;
   const c = anneeCivile(anneeDeReference());
   zone.innerHTML = `<div class="field"><label for="ac-kwc">Puissance des panneaux : <span id="ac-kwc-txt" class="num"></span></label><input type="range" id="ac-kwc" min="6" max="120" step="3" value="${t}"></div>
-    <div id="ac-g"></div><div class="kpis" id="ac-kpis"></div><p class="feedback info" id="ac-msg"></p>`;
+    <div id="ac-g"></div><div class="kpis" id="ac-kpis"></div><p class="feedback info" id="ac-msg" aria-live="polite"></p>`;
   function o(u) {
     const l = MOIS_COURTS.map(() => ({
       prod: 0,

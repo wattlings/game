@@ -27,7 +27,7 @@ export function demoRattachement(zone, options) {
         ([o, d]) => `<button type="button" class="btn" data-m="${o}" aria-pressed="${o === a}">${d}</button>`,
       )
       .join("")}</div></div>
-    <div id="rt-res" class="stack" style="gap:12px"></div>`;
+    <div id="rt-res" aria-live="polite" class="stack" style="gap:12px"></div>`;
   function c() {
     const o = anneeDeReference();
     const d = factures(o)[t].find((h) => h.debut === "2026-01-14");

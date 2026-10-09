@@ -63,7 +63,7 @@ input[type="search"],
 input[type="text"] {
   padding: 8px 10px;
   border-radius: 10px;
-  border: 1.5px solid var(--line);
+  border: 1.5px solid var(--line-ctrl);
   background: var(--surface);
   min-width: 0;
 }
@@ -95,7 +95,7 @@ input[type="range"] {
   width: 38px;
   height: 22px;
   border-radius: 99px;
-  background: var(--line);
+  background: var(--line-ctrl);
   position: relative;
   flex: none;
   transition: background 0.15s;

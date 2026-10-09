@@ -42,7 +42,7 @@ export default {
       "Exemple chiffré : ajuster la puissance souscrite",
     ],
     approfondir: [
-      "Sobriété, efficacité, production",
+      "Les leviers, du moins cher au plus lourd",
       "Autoconsommation",
       "Temps de retour, impact sur abonnement et consommation",
       "Mini-quiz",
@@ -72,14 +72,14 @@ export default {
           },
         ],
         conclusion:
-          "Coût : zéro. Temps de retour : immédiat. C’est pour ça qu’on commence toujours par la sobriété.",
+          "Coût : zéro. Temps de retour : immédiat. C’est pour ça qu’on commence toujours par la {{sobriete|sobriété}}.",
       },
       {
         type: "exemple",
         titre: "Ajuster la puissance souscrite",
         etapes: [
           {
-            t: "La pointe de l’école est de **57 kVA** ; elle a souscrit 60 kVA.",
+            t: "La {{pointe}} de l’école est de **57 kVA** ; elle a souscrit 60 kVA ({{puissance-souscrite}}).",
           },
           {
             t: "Passer à 58 kVA économise, au tarif fictif de 13,50 €/kVA/an :",
@@ -104,7 +104,7 @@ export default {
     approfondir: [
       {
         type: "tableau",
-        titre: "Sobriété, efficacité, production",
+        titre: "Les leviers, du moins cher au plus lourd",
         entetes: ["Levier", "Principe", "Exemples à l’école", "Coût"],
         lignes: [
           [
@@ -112,6 +112,12 @@ export default {
             "Consommer moins en changeant les usages et les réglages",
             "Consigne à 19 °C, réduit la nuit, extinction des veilles",
             "Faible",
+          ],
+          [
+            "Contrat",
+            "Payer le juste prix, sans changer ce qu’on consomme",
+            "{{puissance-souscrite|Puissance souscrite}} ajustée, bonne option tarifaire",
+            "Nul",
           ],
           [
             "Efficacité",
@@ -126,7 +132,7 @@ export default {
             "Élevé",
           ],
         ],
-        note: "L’ordre compte : isoler un bâtiment qu’on chauffe le week-end, c’est payer des travaux pour chauffer du vide.",
+        note: "L’ordre compte : isoler un bâtiment qu’on chauffe le week-end, c’est payer des travaux pour chauffer du vide. Le contrat baisse la facture, pas l’énergie consommée : on le règle tôt, car il ne coûte rien. Sur l’énergie elle-même, l’ordre est sobriété, efficacité, production.",
       },
       {
         type: "texte",
@@ -141,7 +147,7 @@ export default {
         titre: "Temps de retour et impact sur la facture",
         paragraphes: [
           "Le {{temps-de-retour}} simple = investissement / économie annuelle. Il ignore la hausse des prix, la durée de vie de l’équipement, la maintenance et les aides (par exemple les certificats d’économies d’énergie) : c’est un premier filtre, pas une étude financière.",
-          "Une action sur les **kWh** réduit la fourniture, la part variable de l’acheminement et l’accise. Une action sur la **puissance** réduit la part fixe de l’acheminement (et donc la CTA). L’abonnement fournisseur, lui, ne bouge pas.",
+          "Une action sur les **kWh** réduit la fourniture, la part variable de l’acheminement et l’accise. Une action sur la **puissance** réduit la part fixe de l’acheminement (et donc la CTA). Selon l’offre, l’abonnement du fournisseur peut aussi en dépendre.",
         ],
       },
       {
@@ -154,14 +160,14 @@ export default {
   },
   quiz: [
     {
-      q: "Dans quel ordre recommande-t-on d’agir ?",
+      q: "Pour réduire l’énergie consommée, dans quel ordre recommande-t-on d’agir ?",
       choix: [
         "Production, efficacité, sobriété",
         "Sobriété, efficacité, production",
         "Efficacité, production, sobriété",
       ],
       bonne: 1,
-      explication: "On réduit d’abord le besoin (souvent gratuit), puis on consomme mieux, puis on produit.",
+      explication: "On réduit d’abord le besoin (souvent gratuit), puis on consomme mieux, puis on produit. Le contrat, lui, baisse la facture sans toucher à l’énergie : il se règle dès le début, car il ne coûte rien.",
     },
     {
       q: "Deux actions de 10 % chacune sur le chauffage donnent au total…",

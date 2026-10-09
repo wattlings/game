@@ -168,3 +168,37 @@
   color: var(--muted);
   margin: 4px 0 0;
 }
+.g-label {
+  font-size: var(--t-xs);
+  font-weight: 700;
+  color: var(--muted);
+}
+/* la page du glossaire : index de A à Z (il reste sous la main en descendant), lettres */
+.gp-outils {
+  align-items: flex-end;
+  gap: 12px;
+}
+.gp-index {
+  position: sticky;
+  top: 112px;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 6px 0;
+  background: var(--bg);
+}
+.gp-index .chip {
+  min-width: 34px;
+  justify-content: center;
+}
+.gp-lettre {
+  font-size: var(--t-xl);
+  border-bottom: 2px solid var(--line);
+  padding-bottom: 4px;
+}
+@media (max-width: 640px) {
+  .gp-index {
+    top: 0;
+  }
+}

@@ -19,5 +19,5 @@ export function dessinEcole(e, n, t = 1) {
   </g>`;
 }
 
-export const dessinCompteur = (e, n, t, a) =>
-  `<g transform="translate(${e} ${n})"><rect width="42" height="50" rx="8" fill="${t}"/><rect x="6" y="8" width="30" height="12" rx="2" fill="var(--surface)"/>${texteSchemaMono(9, 17.5, "0421", 'font-size="8.5" fill="var(--ink)"')}<text x="21" y="40" text-anchor="middle" font-size="14" fill="var(--surface)" font-family="var(--f-display)" font-weight="800">${a}</text></g>`;
+export const dessinCompteur = (e, n, t, a, encre = "var(--surface)") =>
+  `<g transform="translate(${e} ${n})"><rect width="42" height="50" rx="8" fill="${t}"/><rect x="6" y="8" width="30" height="12" rx="2" fill="var(--surface)"/>${texteSchemaMono(9, 17.5, "0421", 'font-size="8.5" fill="var(--ink)"')}<text x="21" y="40" text-anchor="middle" font-size="14" fill="${encre}" font-family="var(--f-display)" font-weight="800">${a}</text></g>`;

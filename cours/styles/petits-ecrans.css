@@ -113,3 +113,14 @@
     text-align: left;
   }
 }
+
+/* téléphone : le bouton du glossaire s'efface quand on descend (principal.js), comme la barre du haut */
+@media (max-width: 640px) {
+  .fab {
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .fab.cachee {
+    transform: translateY(140%);
+    opacity: 0;
+  }
+}

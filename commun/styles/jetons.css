@@ -14,8 +14,9 @@
   --ink: #0a1a33;
   --muted: #4a5b76;
   --line: #d6deea;
+  --line-ctrl: #7b889e; /* contour des champs et interrupteurs : au moins 3:1 sur le fond */
   --grid: #e6ebf3;
-  --ok: #17803d;
+  --ok: #146c34;
   --ok-soft: #e2f4e8;
   --warn: #9a6100;
   --warn-soft: #fff3d6;
@@ -23,7 +24,7 @@
   --bad-soft: #fde6e7;
   --on-data: #ffffff;
   --on-energie: #1a0a00;
-  --focus: #ff5e11;
+  --focus: #b23c00; /* contour de focus : au moins 3:1 sur les fonds clairs */
   --shadow: 0 1px 2px rgb(7 56 122 / 0.06), 0 8px 24px rgb(7 56 122 / 0.07);
   --f-display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
   --f-body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
@@ -55,6 +56,8 @@
     --ink: #e8eef7;
     --muted: #9eb0c9;
     --line: #22354f;
+    --line-ctrl: #647a9a;
+    --focus: #ff6d26;
     --grid: #1a2b43;
     --ok: #4cc47a;
     --ok-soft: #0f2e1c;
@@ -81,6 +84,8 @@
   --ink: #e8eef7;
   --muted: #9eb0c9;
   --line: #22354f;
+  --line-ctrl: #647a9a;
+  --focus: #ff6d26;
   --grid: #1a2b43;
   --ok: #4cc47a;
   --ok-soft: #0f2e1c;

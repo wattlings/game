@@ -62,7 +62,7 @@ const MOIS_DISPONIBLES = Array.from(
 );
 
 const jauge = (e) =>
-  `<span class="jauge" aria-label="${e} sur 5">${[1, 2, 3, 4, 5].map((n) => `<i class="${n <= e ? "on" : ""}"></i>`).join("")}</span>`;
+  `<span class="jauge" role="img" aria-label="${e} sur 5">${[1, 2, 3, 4, 5].map((n) => `<i class="${n <= e ? "on" : ""}"></i>`).join("")}</span>`;
 
 export function demoCollecter(zone, options) {
   let t = "tele";

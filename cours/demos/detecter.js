@@ -24,7 +24,7 @@ export function demoDetecter(zone, options) {
   let t = null;
   let a = null;
   zone.innerHTML = `
-    <div class="switch-list">${Object.entries(DERIVES)
+    <div class="switch-list" role="group" aria-label="Dérives à déclencher">${Object.entries(DERIVES)
       .map(([d, u]) => interrupteur(`dt-${d}`, u.libelle, u.aide, magasin.get().derives?.[d]))
       .join("")}</div>
     <div class="kpis" id="d-kpis"></div>

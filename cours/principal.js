@@ -37,10 +37,10 @@ racine.innerHTML = `
       <nav class="nav" id="nav-principale" aria-label="Navigation principale">
         <a href="#accueil" data-route="accueil">Le cycle</a>
         <a href="#ecole" data-route="ecole">L’école</a>
-        <a href="#glossaire" data-route="glossaire">Glossaire</a>
-        <a href="#quiz-final" data-route="quiz-final">Quiz final</a>
-        <a href="#sources" data-route="sources">Sources</a>
         <a href="#patrimoine" class="qk-nav-p" data-route="patrimoine">Patrimoine</a>
+        <a href="#quiz-final" data-route="quiz-final">Quiz final</a>
+        <a href="#glossaire" data-route="glossaire">Glossaire</a>
+        <a href="#sources" data-route="sources">Sources</a>
         <a href="${adresseJeu()}" class="qk-nav" id="qk-jeu" data-jeu="">Le jeu</a>
       </nav>
       <button class="icon-btn" id="btn-theme" type="button"></button>
@@ -142,6 +142,7 @@ function afficherRoute() {
     document.title = "L’Energy Management par la donnée";
   }
   majNavigation();
+  un("#fab").hidden = routeCourante === "glossaire"; // inutile sur la page du glossaire
   fermerMenu();
   window.scrollTo(0, 0);
   if (
@@ -197,6 +198,7 @@ addEventListener(
     const y = scrollY;
     if (Math.abs(y - dernierY) < 8) return;
     un(".topbar").classList.toggle("cachee", y > dernierY && y > 140);
+    un("#fab").classList.toggle("cachee", y > dernierY && y > 140); // le bouton du glossaire aussi : il ne cache pas ce qu'on lit
     dernierY = y;
   },
   { passive: true },

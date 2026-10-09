@@ -105,7 +105,7 @@ export default {
           [
             "tCO2e",
             "≈ 4,5 t (élec) + 42 t (gaz)",
-            "Facteurs ADEME à vérifier : ≈ 0,052 kg/kWh (élec, mix moyen), ≈ 0,227 kg/kWh PCI (gaz)",
+            "Facteurs ADEME à vérifier : ≈ 0,052 kg/kWh (élec, mix moyen) ; gaz ≈ 0,204 kg par kWh facturé, soit ≈ 0,227 kg par kWh PCI (le gaz se facture en PCS, environ 11 % au-dessus du PCI)",
           ],
         ],
       },

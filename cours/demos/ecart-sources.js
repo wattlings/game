@@ -17,11 +17,11 @@ export function demoEcartSources(zone, options) {
     indexRecule: "Index qui recule",
   };
   zone.innerHTML = `
-    <div class="switch-list">${Object.entries(a)
+    <div class="switch-list" role="group" aria-label="Anomalies à ajouter aux données">${Object.entries(a)
       .map(([o, d]) => interrupteur(`es-${o}`, d, "", magasin.get().anomalies?.[o]))
       .join("")}</div>
     <div class="field"><label for="es-seuil">Seuil d’alerte : écart de plus de <span id="es-seuil-txt" class="num"></span> entre courbe et index</label><input type="range" id="es-seuil" min="0.2" max="5" step="0.1" value="${t}"></div>
-    <div id="es-res" class="stack" style="gap:12px"></div>`;
+    <div id="es-res" aria-live="polite" class="stack" style="gap:12px"></div>`;
   function c() {
     const o = anneeAvecDerives();
     const d = anomaliesActives();

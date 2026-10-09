@@ -50,7 +50,10 @@
 .pc-row:hover,
 .pc-row:focus-visible {
   background: var(--pc-hover);
-  outline: none;
+}
+.pc-row:focus-visible {
+  outline: 3px solid var(--focus, #b23c00);
+  outline-offset: 1px;
 }
 .pc-l {
   white-space: nowrap;

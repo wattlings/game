@@ -20,7 +20,7 @@ export function demoTroisVoies(zone, options) {
       <div class="segmented" role="group" aria-label="Énergie"><button type="button" data-e="elec" aria-pressed="true">${icone("prise")}Électricité</button><button type="button" data-e="gaz" aria-pressed="false">${icone("flamme")}Gaz</button></div>
       <div class="segmented" role="group" aria-label="Période"><button type="button" data-p="mois" aria-pressed="true">Janvier 2026 (mois civil)</button><button type="button" data-p="facture" aria-pressed="false">14 janv. → 13 févr. (facture)</button></div>
     </div>
-    <div class="switch-list">${Object.entries(c)
+    <div class="switch-list" role="group" aria-label="Sources à comparer">${Object.entries(c)
       .map(([u, l]) =>
         interrupteur(
           `tv-${u}`,
@@ -32,7 +32,7 @@ export function demoTroisVoies(zone, options) {
         ),
       )
       .join("")}</div>
-    <div id="tv-res" class="stack" style="gap:12px"></div>`;
+    <div id="tv-res" aria-live="polite" class="stack" style="gap:12px"></div>`;
   function o() {
     const u = anneeAvecDerives();
     const l = anomaliesActives();

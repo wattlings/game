@@ -15,7 +15,7 @@ export function demoHorodatage(zone, options) {
       <div class="stack" style="gap:6px"><span class="eyebrow" id="h-api">L’API étiquette chaque mesure par…</span><div class="segmented" role="group" aria-labelledby="h-api"><button type="button" data-a="debut" aria-pressed="true">le début du pas</button><button type="button" data-a="fin" aria-pressed="false">la fin du pas</button></div></div>
       <div class="stack" style="gap:6px"><span class="eyebrow" id="h-lec">Le logiciel suppose…</span><div class="segmented" role="group" aria-labelledby="h-lec"><button type="button" data-l="debut" aria-pressed="true">le début du pas</button><button type="button" data-l="fin" aria-pressed="false">la fin du pas</button></div></div>
     </div>
-    <div id="h-res" class="stack" style="gap:12px"></div>`;
+    <div id="h-res" aria-live="polite" class="stack" style="gap:12px"></div>`;
   function c() {
     const o = anneeDeReference();
     const d = o.jours.find((h) => h.iso === "2026-01-31");

@@ -42,7 +42,7 @@ export function demoIndicateurs(zone, options) {
   const s = u.gaz.reduce((i, p) => i + p.ttc, 0);
   zone.innerHTML = `<div class="segmented" role="group" aria-label="Indicateur">${Object.entries(INDICATEURS)
     .map(([i, p]) => `<button type="button" data-i="${i}" aria-pressed="${i === t}">${p.nom}</button>`)
-    .join("")}</div><div id="in-res" class="stack" style="gap:10px"></div>`;
+    .join("")}</div><div id="in-res" aria-live="polite" class="stack" style="gap:10px"></div>`;
   function r() {
     const i = INDICATEURS[t];
     const [p, m] = i.f(o, d, l, s);

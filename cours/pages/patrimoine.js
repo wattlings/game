@@ -37,8 +37,8 @@ export function pagePatrimoine(c) {
   c.className = "fam-energie";
   c.innerHTML = `<div class="stack qk-patri" style="gap:24px">
     <header class="etape-head"><div class="titre">
-      <div class="row"><span class="badge energie">Énergie</span><span class="eyebrow">Au-delà des 8 étapes</span></div>
-      <h1><span class="accent-txt num">20</span> Piloter un patrimoine</h1>
+      <div class="row"><span class="badge energie">Énergie</span><span class="badge neutre">Bonus</span><span class="eyebrow">Au-delà des 8 étapes</span></div>
+      <h1>Piloter un patrimoine</h1>
       <p class="question">Où agir en premier quand on gère vingt bâtiments ?</p></div></header>
     <div class="essentiel"><div class="stack" style="gap:18px">
       <p class="phrase-cle">À l’échelle d’un patrimoine, on ne lit plus une courbe : on classe, on compare et on priorise, pour mettre l’effort là où il rapporte le plus.</p>

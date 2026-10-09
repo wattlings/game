@@ -45,9 +45,10 @@ export function pageEtape(conteneur, num, niveauDemande) {
   const a = ETAPES.find((m) => m.num === num);
   const c = ETAPES.find((m) => m.num === num - 1);
   const o = ETAPES.find((m) => m.num === num + 1);
-  const d = [...new Set([...a.retenir.join(" ").matchAll(/\{\{([a-z0-9-]+)/g)].map((m) => m[1]))]
-    .concat(Object.keys(GLOSSAIRE).filter((m) => GLOSSAIRE[m].etapes.includes(num)))
-    .filter((m, f, h) => h.indexOf(m) === f);
+  // les mots de l'Essentiel d'abord ; les autres mots de l'étape (souvent ceux d'Approfondir) restent repliés
+  const d = [...new Set([...[a.phrase, ...a.retenir, a.analogie.texte].join(" ").matchAll(/\{\{([a-z0-9-]+)/g)].map((m) => m[1]))].filter((m) => GLOSSAIRE[m]);
+  const dAutres = Object.keys(GLOSSAIRE).filter((m) => GLOSSAIRE[m].etapes.includes(num) && !d.includes(m));
+  const pastilleTerme = (m) => `<button type="button" class="badge neutre terme" data-g="${m}" style="text-decoration:none">${echapper(GLOSSAIRE[m].terme)}</button>`;
   conteneur.className = `fam-${a.famille}`;
   ouvrirNotes(); // les appels de note de la page repartent de 1
   conteneur.innerHTML = `
@@ -61,6 +62,14 @@ export function pageEtape(conteneur, num, niveauDemande) {
       </div>
     </header>
 
+    ${(() => {
+      // le laboratoire de l'école modifie toutes les démos : on le signale ici, pour qu'une démo changée ne surprenne pas
+      const nA = Object.values(magasin.get().anomalies || {}).filter(Boolean).length;
+      const nD = Object.values(magasin.get().derives || {}).filter(Boolean).length;
+      if (!nA && !nD) return "";
+      const quoi = [nA && `${nA} anomalie${nA > 1 ? "s" : ""} de données`, nD && `${nD} dérive${nD > 1 ? "s" : ""}`].filter(Boolean).join(" et ");
+      return `<p class="feedback info labo-actif" role="note">${icone("info")}<span><b>Laboratoire actif :</b> ${quoi} modifie${nA + nD > 1 ? "nt" : ""} les démos. <a href="#ecole">Voir le laboratoire</a> · <button type="button" class="lien-discret" id="labo-off">Tout désactiver</button></span></p>`;
+    })()}
     <div class="tabs" role="tablist" aria-label="Niveau de lecture">
       ${NIVEAUX.map((m) => {
         const f = a.niveaux?.[m.id] ? null : a.famille === "data" ? m.version : m.versionEnergie;
@@ -75,7 +84,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
           <ul class="a-retenir">${a.retenir.map((m) => `<li><span>${texteRiche(m)}</span></li>`).join("")}</ul>
           <aside class="analogie" aria-label="Analogie">
             <span class="ico">${icone(a.analogie.icone)}</span>
-            <div class="stack" style="gap:4px"><span class="eyebrow">Analogie</span><h3>${echapper(a.analogie.titre)}</h3><p>${texteRiche(a.analogie.texte)}</p></div>
+            <div class="stack" style="gap:4px"><h2 class="eyebrow">Analogie</h2><h3>${echapper(a.analogie.titre)}</h3><p>${texteRiche(a.analogie.texte)}</p></div>
           </aside>
         </div>
         <figure class="schema" style="margin:0">
@@ -96,8 +105,9 @@ export function pageEtape(conteneur, num, niveauDemande) {
       <div id="fin-etape" role="status" aria-live="polite"></div>
 
       <div class="stack" style="gap:8px">
-        <span class="eyebrow">Les mots de cette étape</span>
-        <div class="termes">${d.map((m) => `<button type="button" class="badge neutre terme" data-g="${m}" style="text-decoration:none">${echapper(GLOSSAIRE[m].terme)}</button>`).join("")}</div>
+        <h2 class="eyebrow">Les mots de cette étape</h2>
+        <div class="termes">${d.map(pastilleTerme).join("")}</div>
+        ${dAutres.length ? `<details class="termes-autres"><summary>${d.length ? "Et" : "Voir"} ${dAutres.length} autre${dAutres.length > 1 ? "s" : ""} mot${dAutres.length > 1 ? "s" : ""} de l’étape</summary><div class="termes">${dAutres.map(pastilleTerme).join("")}</div></details>` : ""}
       </div>
       ${a.niveaux ? `<div class="aller-plus-loin"><span><b>Tu as compris l’idée ?</b> Le niveau Comprendre la met en pratique avec l’école, chiffres à l’appui.</span><button type="button" class="btn primary" data-aller="comprendre">Passer à Comprendre ${icone("fleche")}</button></div>` : ""}
     </section>
@@ -108,7 +118,13 @@ export function pageEtape(conteneur, num, niveauDemande) {
     <section id="pan-${m}" role="tabpanel" aria-labelledby="tab-${m}" hidden>
       ${
         a.niveaux?.[m]
-          ? `<div class="niveau-intro"><span class="eyebrow">${m === "comprendre" ? "Niveau 2 · Comprendre" : "Niveau 3 · Approfondir"}</span><p class="muted">${m === "comprendre" ? "Des démos avec l’école et des exemples chiffrés pas à pas." : "Règles métier, cas limites, vocabulaire technique, puis un mini-quiz."}</p></div><div data-niveau="${m}"></div>`
+          ? `<div class="niveau-intro"><h2 class="eyebrow">${m === "comprendre" ? "Niveau 2 · Comprendre" : "Niveau 3 · Approfondir"}</h2><p class="muted">${m === "comprendre" ? "Des démos avec l’école et des exemples chiffrés pas à pas." : "Règles métier, cas limites, vocabulaire technique, puis un mini-quiz."}</p></div><div data-niveau="${m}"></div>${
+              m === "comprendre"
+                ? `<div class="aller-plus-loin"><span><b>Envie d’aller plus loin ?</b> Le niveau Approfondir donne les règles métier, les cas limites et un mini-quiz.</span><button type="button" class="btn primary" data-aller="approfondir">Passer à Approfondir ${icone("fleche")}</button></div>`
+                : o
+                  ? `<div class="aller-plus-loin"><span><b>Étape suivante :</b> ${o.num}. ${echapper(o.titre)}, ${echapper(o.question.charAt(0).toLowerCase() + o.question.slice(1))}</span><a class="btn primary" href="#etape-${o.num}">Continuer ${icone("fleche")}</a></div>`
+                  : `<div class="aller-plus-loin"><span><b>Tu as fait le tour du cycle.</b> Au-delà des 8 étapes : piloter tout un patrimoine, puis le quiz de synthèse.</span><a class="btn primary" href="#patrimoine">Piloter un patrimoine ${icone("fleche")}</a></div>`
+            }`
           : `
       <div class="placeholder-niveau">
         <span class="eyebrow">Arrive dans la ${a.famille === "data" ? "version 2 (partie Data)" : "version 3 (partie Énergie)"}</span>
@@ -121,7 +137,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
       )
       .join("")}
 
-    ${num === 8 ? `<a class="boucle" href="#etape-1" style="text-decoration:none;color:var(--ink)">${icone("boucle")}<span><b>La boucle recommence.</b> Les résultats mesurés servent à recadrer : nouveaux objectifs, nouveau périmètre. Retour à l’étape 1, Cadrer.</span></a><a class="aller-plus-loin" href="#quiz-final" style="text-decoration:none;color:var(--ink)">${icone("ok")}<span><b>Tu as fait le tour du cycle ?</b> Teste-toi avec le quiz de synthèse : 12 questions sur les 8 étapes.</span></a>` : ""}
+    ${num === 8 ? `<a class="boucle" href="#etape-1" style="text-decoration:none;color:var(--ink)">${icone("boucle")}<span><b>La boucle recommence.</b> Les résultats mesurés servent à recadrer : nouveaux objectifs, nouveau périmètre. Retour à l’étape 1, Cadrer.</span></a><a class="aller-plus-loin" href="#patrimoine" style="text-decoration:none;color:var(--ink)">${icone("fleche")}<span><b>Et après ?</b> Au-delà des 8 étapes : piloter tout un patrimoine (bonus). Puis le quiz de synthèse, 12 questions sur les 8 étapes.</span></a>` : ""}
 
     <section class="bloc sources" data-notes hidden></section>
 
@@ -130,6 +146,10 @@ export function pageEtape(conteneur, num, niveauDemande) {
       ${o ? `<a class="next" href="#etape-${o.num}"><small>Étape suivante →</small><b>${o.num}. ${echapper(o.titre)}</b></a>` : '<a class="next" href="#etape-1"><small>On boucle →</small><b>1. Cadrer</b></a>'}
     </nav>
   </div>`;
+  un("#labo-off", conteneur)?.addEventListener("click", () => {
+    magasin.set({ anomalies: {}, derives: {} });
+    dispatchEvent(new HashChangeEvent("hashchange")); // la page se redessine, démos remises à l'état normal
+  });
   const u = tous('[role="tab"]', conteneur);
   const l = (m, f = false) => {
     u.forEach((x) => {

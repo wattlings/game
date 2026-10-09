@@ -119,7 +119,7 @@ export default {
         type: "texte",
         titre: "Faux positifs, faux négatifs",
         paragraphes: [
-          "Un {{faux-positif|faux positif}} est une alerte sans vrai problème : trop nombreux, ils font ignorer toutes les alertes. Un **faux négatif** est un vrai problème sans alerte : le gaspillage continue. Baisser le seuil réduit les faux négatifs mais augmente les faux positifs ; la persistance (plusieurs jours de suite) filtre les écarts ponctuels.",
+          "Un {{faux-positif|faux positif}} est une alerte sans vrai problème : trop nombreux, ils font ignorer toutes les alertes. Un **faux négatif** est un vrai problème sans alerte : le gaspillage continue. Baisser le seuil réduit les faux négatifs mais augmente les faux positifs ; la persistance (plusieurs jours de suite, voir {{seuil-alerte|seuil d’alerte}}) filtre les écarts ponctuels.",
           "La détection dépend de la qualité des données (étape 3) : un doublon ressemble à une surconsommation, un trou à une économie, un pic aberrant à une alerte. On détecte sur des données fiabilisées, et on estime le surcoût en kWh puis en euros.",
         ],
       },

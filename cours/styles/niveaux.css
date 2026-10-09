@@ -426,7 +426,6 @@
 }
 .sources .quand {
   color: var(--muted, inherit);
-  opacity: 0.75;
 }
 .sources .secondaire {
   font-size: var(--t-xs);

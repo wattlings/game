@@ -188,6 +188,7 @@ export function accepterLeSuivi() {
 /** Petit message éphémère en haut de page. */
 export function annoncer(texte) {
   const d = document.createElement("div");
+  d.setAttribute("role", "status");
   d.textContent = texte;
   d.style.cssText =
     "position:fixed;left:50%;top:16px;transform:translateX(-50%);z-index:2000;background:#0a1a33;color:#fff;padding:10px 16px;border-radius:10px;font:15px system-ui;box-shadow:0 6px 20px rgba(0,0,0,.3)";

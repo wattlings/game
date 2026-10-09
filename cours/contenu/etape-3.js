@@ -127,8 +127,8 @@ export default {
         type: "texte",
         titre: "Puissance, énergie et unités",
         paragraphes: [
-          "Une courbe de charge contient des **puissances moyennes** (kW) sur chaque pas. Pour obtenir de l’énergie (kWh), on multiplie par la durée du pas en heures. Additionner des kW sans tenir compte du pas est l’erreur la plus fréquente.",
-          "Autres pièges : une API qui renvoie des **W** au lieu de kW (facteur 1 000), du gaz en **m³** comparé à des kWh, des **kVA** (puissance apparente) comparés à des kW.",
+          "Une {{courbe-de-charge}} contient des **{{puissance|puissances}} moyennes** ({{kw|kW}}) sur chaque {{pas-de-temps|pas}}. Pour obtenir de l’{{energie|énergie}} ({{kwh|kWh}}), on multiplie par la durée du pas en heures. Additionner des kW sans tenir compte du pas est l’erreur la plus fréquente.",
+          "Autres pièges : une API (le service qui livre les données) qui renvoie des **W** au lieu de kW (facteur 1 000), du gaz en **m³** comparé à des kWh, des **{{kva|kVA}}** (puissance apparente) comparés à des kW.",
         ],
       },
       {
@@ -147,7 +147,7 @@ export default {
             calc: "24 kW × 0,1667 h = 4 kWh",
           },
           {
-            t: "Pour une journée : somme des 144 puissances, divisée par 6.",
+            t: "Pour une journée : somme (Σ) des 144 puissances, divisée par 6.",
             calc: "E (kWh) = Σ P (kW) × 1/6",
           },
         ],
@@ -170,7 +170,7 @@ export default {
           ["Validée", "A passé tous les contrôles", "Une journée complète et plausible"],
           ["Corrigée", "Modifiée par une règle documentée", "Doublons retirés le 2 décembre"],
           ["Estimée", "Calculée faute de mesure", "Le trou du 18 novembre rempli par un profil type"],
-          ["Rejetée", "Écartée des calculs, conservée pour trace", "Le pic à 999,9 kW"],
+          ["Rejetée", "Écartée des calculs, conservée pour trace", "Le pic à 999,9 kW, une {{anomalie}}"],
         ],
         note: "On garde toujours la donnée brute : une correction doit pouvoir être expliquée et annulée.",
       },

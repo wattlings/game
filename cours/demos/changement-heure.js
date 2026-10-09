@@ -18,7 +18,7 @@ export function demoChangementHeure(zone, options) {
   let t = "ete";
   zone.innerHTML = `
     <div class="segmented" role="group" aria-label="Changement d’heure"><button type="button" data-c="ete" aria-pressed="true">29 mars 2026 : heure d’été</button><button type="button" data-c="hiver" aria-pressed="false">26 oct. 2025 : heure d’hiver</button></div>
-    <div id="ch-res" class="stack" style="gap:12px"></div>`;
+    <div id="ch-res" aria-live="polite" class="stack" style="gap:12px"></div>`;
   function a() {
     const c = t === "ete" ? "2026-03-29" : "2025-10-26";
     const o = anneeDeReference();

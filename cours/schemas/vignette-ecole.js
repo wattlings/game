@@ -8,5 +8,5 @@ export const vignetteEcole =
   ${dessinEcole(40, 10, 1)}
   <rect x="0" y="120" width="200" height="3" rx="1.5" fill="var(--line)"/>
   ${dessinCompteur(2, 68, "var(--data)", "kWh")}
-  ${dessinCompteur(156, 68, "var(--energie)", "m³")}
+  ${dessinCompteur(156, 68, "var(--energie)", "m³", "var(--on-energie)")}
 </svg>`;

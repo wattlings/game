@@ -75,7 +75,7 @@ export default {
           },
         ],
         conclusion:
-          "Agréger, c’est additionner des énergies dans la même unité. Jamais des kW, jamais des m³ avec des kWh.",
+          "{{agregation|Agréger}}, c’est additionner des énergies dans la même unité. Jamais des kW, jamais des m³ avec des kWh.",
       },
       {
         type: "demo",
@@ -89,7 +89,7 @@ export default {
         ton: "attention",
         titre: "Le piège du sous-compteur",
         texte:
-          "Un sous-compteur mesure une partie de ce que mesure déjà le compteur principal. L’additionner au principal compte deux fois la même énergie. Dans le modèle de données, il faut savoir qui est « parent » de qui.",
+          "Un {{sous-compteur}} mesure une partie de ce que mesure déjà le compteur principal. L’additionner au principal compte deux fois la même énergie. Dans le modèle de données, il faut savoir qui est « parent » de qui.",
       },
     ],
     approfondir: [

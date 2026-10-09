@@ -67,7 +67,7 @@ const ETIQUETTES = [
     txt: "Contrat de 60 kVA",
     k: "contrat",
     bon: "elec",
-    pourquoi: "La puissance souscrite en kVA est une notion de contrat d’électricité.",
+    pourquoi: "La {{puissance-souscrite}} (en {{kva|kVA}}) est la puissance maximale prévue au contrat d’électricité : on la verra en détail à l’étape 5.",
   },
   {
     id: "m3",
@@ -205,7 +205,7 @@ export function demoCadrer(zone, options) {
       p.innerHTML = `<div class="feedback ok">${icone("ok")}<div><b>Parfait, 10 sur 10.</b> ${texteRiche("Tu viens de faire le travail de cadrage : chaque énergie a son {{point-de-comptage}}, son identifiant et ses usages. C’est la base du modèle de données « site → compteur → mesure ».")}</div></div>`;
     } else {
       p.innerHTML = `<div class="feedback ${s.length ? "bad" : "info"}">${icone(s.length ? "alerte" : "info")}<div><b>${i} bonne${i > 1 ? "s" : ""} réponse${i > 1 ? "s" : ""} sur ${ETIQUETTES.length}.</b>${r ? ` Il reste ${r} étiquette${r > 1 ? "s" : ""} à placer.` : ""}
-        ${s.length ? `<ul style="margin:6px 0 0;padding-left:1.1em">${s.map((m) => `<li>« ${echapper(m.txt)} » : ${echapper(m.pourquoi)}</li>`).join("")}</ul><p style="margin-top:6px">Déplace les étiquettes marquées ✗ puis vérifie à nouveau.</p>` : ""}</div></div>`;
+        ${s.length ? `<ul style="margin:6px 0 0;padding-left:1.1em">${s.map((m) => `<li>« ${echapper(m.txt)} » : ${texteRiche(m.pourquoi)}</li>`).join("")}</ul><p style="margin-top:6px">Déplace les étiquettes marquées ✗ puis vérifie à nouveau.</p>` : ""}</div></div>`;
     }
   });
   un("#recommencer", zone).addEventListener("click", () => {

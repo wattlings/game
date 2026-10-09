@@ -32,7 +32,7 @@ export function demoSignature(zone, options) {
   let c = null;
   const o = 20;
   zone.innerHTML = `<div class="field"><label for="sg-t">Température moyenne du jour : <span id="sg-t-txt" class="num"></span></label><input type="range" id="sg-t" min="-5" max="20" step="0.5" value="${a}"></div>
-    <div id="sg-g"></div><div class="kpis" id="sg-kpis"></div><p class="feedback info" id="sg-msg"></p>`;
+    <div id="sg-g"></div><div class="kpis" id="sg-kpis"></div><p class="feedback info" id="sg-msg" aria-live="polite"></p>`;
   const d = t.filter((i) => i.chauffe && i.type === "classe" && i.dju <= o);
   const u = t.filter((i) => i.chauffe && (i.type === "weekend" || i.type === "vacances") && i.dju <= o);
   const l = regressionLineaire(d.map((i) => [i.dju, i.gazKwh]));

@@ -65,7 +65,7 @@ export function demoAgregationSite(zone, options) {
     }
   }
   let d = null;
-  zone.innerHTML = `<div class="switch-list">${Object.entries(COMPTEURS_DU_SITE)
+  zone.innerHTML = `<div class="switch-list" role="group" aria-label="Compteurs à additionner pour le site">${Object.entries(COMPTEURS_DU_SITE)
     .map(([l, s]) => interrupteur(`ag-${l}`, s.nom, s.aide, t.has(l)))
     .join("")}</div>
     <div id="ag-g"></div><div class="kpis" id="ag-kpis"></div><div id="ag-msg" aria-live="polite"></div>`;

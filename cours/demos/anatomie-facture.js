@@ -104,14 +104,14 @@ export function demoAnatomieFacture(zone, options) {
           <div class="lignes lignes-cliquables">${d.map((p, m) => `<button type="button" class="ligne" data-l="${m}" aria-pressed="${a === m}"><span>${echapper(p.libelle)}${p.detail ? `<small>${echapper(p.detail)}</small>` : ""}</span><span class="mono">${euros(p.montant, 2)}</span></button>`).join("")}
           <div class="ligne tot"><span>Total TTC</span><span class="mono">${euros(o.ttc, 2)}</span></div></div>
         </article>
-        <aside class="panneau" aria-live="polite">${
+        <div class="panneau" aria-live="polite">${
           i
             ? `
           <span class="eyebrow">${echapper(FAMILLES_DE_LIGNES[i.famille][0])}</span><h3>${echapper(r.libelle)}</h3>
           <p><b>Ce que ça paie :</b> ${echapper(i.quoi)}</p><p><b>Qui reçoit l’argent :</b> ${echapper(i.qui)}</p><p><b>Nature :</b> ${echapper(i.fixe)}</p>
           <p><b>Si l’école consomme 10 % de moins :</b> ${r.cle === "tva" ? `elle baisse avec le reste, à ${euros(s - s / (1 + TARIF_ELEC.tva), 2)}.` : dependDeLaConsommation(r) ? `${euros(r.montant * 0.9, 2)} au lieu de ${euros(r.montant, 2)}.` : "elle ne bouge pas."}</p>`
             : '<p class="muted">Clique sur une ligne de la facture pour l’expliquer.</p>'
-        }</aside>
+        }</div>
       </div>
       <div class="stack" style="gap:6px"><span class="eyebrow">Où va l’argent</span>
         <div class="barre-empilee" role="img" aria-label="${Object.entries(u)
