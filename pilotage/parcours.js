@@ -55,7 +55,7 @@ const NOMS = {
   dgVerifCibles: "Les donjons : les blocs sur leurs marques", dgPousser: "Les donjons : pousser un bloc", dgResoudre: "Les donjons : l'énigme résolue", dgDalle: "Les donjons : les dalles du laboratoire", voyDefi: "Le défi d'un site (commun)", passeportHTML: "Le passeport", atlasRegion: "Carte du pays : les régions", ATLAS_PAYS: "Carte du pays", atlasPlan: "Carte : le plan d'un site",
   atlasGare: "Carte : la gare", secretObjs: "Objets à secrets", eggObjs: "Objets à clins d'œil", nameEgg: "Les prénoms prédestinés", jouleExtra: "Harceler Mme Joule", actMobilier: "Le mobilier bavard",
 };
-const NOMS_DONNEES = (N) => Object.assign(N, { QUARTERS: "Les quartiers", WALKERS: "Les passants", LIFE_WX: "Les habitants, selon la météo", REG_WX: "Les régions, selon la météo", LOCALS: "Les bâtiments", MAPS: "Les lieux", SKY_IDLE: "L'horloge du jardin",
+const NOMS_DONNEES = (N) => Object.assign(N, { QUARTERS: "Les quartiers", WALKERS: "Les passants", CYCLISTES: "Les cyclistes de la boucle", LIFE_WX: "Les habitants, selon la météo", REG_WX: "Les régions, selon la météo", LOCALS: "Les bâtiments", MAPS: "Les lieux", SKY_IDLE: "L'horloge du jardin",
   SKY: "Le ciel", WM_BLD: "Carte : les bâtiments", WM_SPOTS: "Carte : les lieux-dits", WM_SHORT: "Carte : les noms courts", WM_VILLE: "Carte : la légende", RANKS: "Les grades", BADGES: "Les badges", STYLES: "Avatar : les coiffures", WEAR_NAMES: "L'usure des bâtiments",
   HATS: "Avatar : les chapeaux", PROPS: "Avatar : les accessoires", REG_MODELS: "Avatar : les tenues régionales", RANK_FIT: "Avatar : les tenues de grade", EN_WD: "Les jours de la semaine", EN_ACT: "Les actions d'économie", EN_PSH: "Les sites du parc",
   EN_EV: "Les événements d'énergie", ATLAS_PAYS: "Carte du pays", POOL_LINE: "La piscine",
@@ -342,7 +342,7 @@ export function construire(FF, { chapitres }) {
     for (const k in x) { const e = elaguer(x[k], prof + 1); if (e !== undefined) { o[k] = e; n++; } }
     return n ? o : undefined;
   };
-  const rangAmbiance = ville.find((r) => r.id === "ville-ambiance"), enVille = new Set(["QUARTERS", "WALKERS", "LIFE_WX", "REG_WX", "LOCALS", "MAPS", "SKY_IDLE", "SKY", "WM_BLD", "WM_SPOTS", "WM_SHORT", "WM_VILLE"]);
+  const rangAmbiance = ville.find((r) => r.id === "ville-ambiance"), enVille = new Set(["QUARTERS", "WALKERS", "CYCLISTES", "LIFE_WX", "REG_WX", "LOCALS", "MAPS", "SKY_IDLE", "SKY", "WM_BLD", "WM_SPOTS", "WM_SHORT", "WM_VILLE"]);
   fichiers.forEach((F) => Object.entries(F.donnees).forEach(([nom, valeur]) => {
     if (rangees.has(nom) || !elaguer(valeur)) return;
     const bloc = { genre: "donnees", nom, valeur, filet: true }, site = F.chemin.match(/^jeu\/voyages\/(\w+)\//)?.[1];

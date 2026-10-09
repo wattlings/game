@@ -26,6 +26,36 @@ const TOWNSFOLK=[
   {who:'Guetteur de vent',at:[85,45],dir:'right',pal:{skin:'#4a2c1c',shirt:'#5b6380',pants:'#2c2c34',coat:'#6d7896',hair:'#ece6d6',scarf:'#c43d3d',hat:'#3a3a44',hatType:'beret'},
     lines:["Écoute. De l'autre côté de la forêt, quelque chose tourne. Le vent ne laisse passer personne.","Un jour sans vent, peut-être. Je n'en ai jamais vu."]}
 ];
+/* les cinq cyclistes de la boucle (dans l'ordre de RIDERS, rendu/decor-velos.js) : ils s'arrêtent quand on leur parle.
+   Le vélo, et ce que les employeurs peuvent faire pour leurs salariés cyclistes (et ce que certains ne font pas). */
+const CYCLISTES=[
+  {who:'Vélotafeuse',lines:[
+    "Huit kilomètres matin et soir. Mon cardio me remercie. Mon employeur aussi : il me verse le forfait mobilités durables.",
+    "Le forfait mobilités durables, c'est l'employeur qui prend en charge une partie des trajets à vélo de ses salariés, sans charges sociales jusqu'à un plafond. Dans le privé, il est facultatif.",
+    "Facultatif. Le mot préféré de mon ancien patron. Juste après « on verra en septembre ».",
+    "Ici, j'ai un local vélo fermé, une douche et un casier. Avant, j'avais un arceau rouillé entre les poubelles et la place réservée du directeur.",
+    "Un vélo garé ne consomme aucun kWh. Ton tableau de bord pourrait en prendre de la graine."]},
+  {who:'Cycliste au panier',lines:[
+    "Pardon, pardon ! La baguette est prioritaire. C'est dans le code de la route. Enfin, dans le mien.",
+    "Quarante ans à aller au travail à vélo. Pas une fois mon entreprise ne m'a demandé comment je venais. Elle m'a quand même offert une place de parking, pour une voiture que je n'avais pas.",
+    "Aujourd'hui, un employeur peut prêter des vélos de fonction, payer l'entretien, installer un garage sécurisé. Certains le font. D'autres organisent un séminaire sur la mobilité douce. Ils y vont en voiture.",
+    "Le vélo, c'est la seule machine qui transforme des croissants en kilomètres. Rendement imbattable, émissions : des miettes."]},
+  {who:'Livreuse en vélo-cargo',lines:[
+    "Cent kilos dans la caisse, zéro litre dans le réservoir. Le diesel du quartier me déteste.",
+    "Mon patron a remplacé sa camionnette par trois vélos-cargos. Il dit que c'est pour la planète. Je pense que c'est pour le stationnement. Les deux marchent.",
+    "Un vélo-cargo électrique se recharge sur une prise ordinaire. Quelques kWh pour une semaine de tournées. Ta chaudière en rougirait.",
+    "Si tu bloques la piste, je sonne. Si tu la bloques encore, je sonne plus fort. C'est mon seul super-pouvoir, laisse-le-moi."]},
+  {who:'Papa à vélo',lines:[
+    "Crèche, école, bureau : trois arrêts, zéro bouchon. Le petit appelle ça « la fusée ».",
+    "Mon entreprise a installé un garage à vélos fermé et des prises pour les vélos électriques. La moitié de l'étage vient à vélo. L'autre moitié est en réunion.",
+    "Celle de ma voisine offre le parking et le badge d'autoroute. Le vélo ? « Pas assez professionnel. » Elle arrive tous les matins en retard, mais professionnellement.",
+    "Le petit me demande pourquoi les voitures sont toutes à l'arrêt et pas nous. Je lui ai dit : c'est un mystère de la vie d'adulte."]},
+  {who:'Ado pressé',lines:[
+    "Dring dring ! Pardon, je suis en retard. Comme tous les jours. Mais à vélo, je suis en retard plus vite.",
+    "Plus tard, je bosserai dans une boîte qui paye le vélo, les réparations et le café. Surtout le café.",
+    "Mon père dit que le vélo, c'est dangereux. Il le dit depuis sa voiture, coincé dans les bouchons, en mangeant un sandwich.",
+    "La piste cyclable fait toute la boucle de la ville. Huit quartiers. Zéro excuse."]},
+];
 /* passants : ils vont et viennent entre deux points de leur quartier */
 const WALKERS=[
   {who:'Écolier',a:[66,34],b:[59,37],pal:{skin:'#7a4e30',shirt:'#f2c12e',pants:'#2f6db5',hair:'#5a3a22',hat:'#c43d3d',hatType:'cap',bag:'#2f9e7a'},v:.75,

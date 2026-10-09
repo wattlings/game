@@ -16,6 +16,7 @@ function lifeInit(){
   if(!LIFE.birds)LIFE.birds=[[54,37],[61,12],[36,31],[27,41],[64,60],[30,60],[10,48],[9,20],[38,12],[79,43],[80,57],[67,46],[24,33],[57,22]].map(([x,y],i)=>{const p=LW(x,y);return {x:p[0],y:p[1],n:2+i%3,st:0,t:0}});
 }
 function lifeUpdate(k){
+  riderStep(k);
   if(S.map!=='town')return;if(LIFE.ch!==S.ch)lifeInit();
   const frozen=busy||dlg.open;
   LIFE.w.forEach(w=>{const tx=Math.round(w.px/TS),ty=Math.round(w.py/TS);w.x=tx;w.y=ty;w.moving=false;
@@ -32,8 +33,9 @@ function lifeUpdate(k){
 function lifeObjs(id,o){
   if(id!=='town'||LIFE.busy)return;
   TOWNSFOLK.forEach(f=>{if(!lifeOn(f.who))return;const p=TP(f.at[0],f.at[1]);o.push({x:p[0],y:p[1],kind:'npc',solid:1,who:f.who,pal:f.pal,dir:f.dir,act:()=>{f.n=(f.n||0)+1;say([{w:f.who,t:lifeLine(f,f.n)}])}})});
-  LIFE.w.forEach(w=>{const d=w.def;if(!lifeOn(d.who))return;o.push({x:w.x===undefined?w.path[0][0]:w.x,y:w.y===undefined?w.path[0][1]:w.y,px:w.px,py:w.py,kind:'npc',solid:0,who:d.who,pal:d.pal,dir:w.dir,frame:w.moving?Math.floor(w.frame):0,moving:w.moving,still:1,pet:d.pet,
+  LIFE.w.forEach(w=>{const d=w.def;if(!lifeOn(d.who))return;o.push({x:w.x===undefined?w.path[0][0]:w.x,y:w.y===undefined?w.path[0][1]:w.y,px:w.px,py:w.py,kind:'npc',solid:1,who:d.who,pal:d.pal,dir:w.dir,frame:w.moving?Math.floor(w.frame):0,moving:w.moving,still:1,pet:d.pet,
     noUmb:d.who==='Joggeuse',act:()=>{w.n++;say([{w:d.who,t:lifeLine(d,w.n)}])}})});
+  riderObjs(o);
 }
 /* ---- sous les personnages : l'eau miroite ---- */
 function lifeUnder(c,ox,oy,t){
