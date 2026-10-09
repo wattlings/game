@@ -25,14 +25,20 @@ const HADES_LINES=[
   "Je classe les gens en deux catégories : les utiles, et toi.",
   "Parle à ma main. Elle a un meilleur facteur de puissance que toi.",
   "Tu es une dérive. Personne ne t'a encore détecté, voilà tout.",
-  "Je te répondrais bien, mais j'ai une vie intérieure à entretenir, et tu n'y figures pas."
+  "Je te répondrais bien, mais j'ai une vie intérieure à entretenir, et tu n'y figures pas.",
+  "S'il pleuvait de la soupe, tu serais le premier à sortir ta fourchette.",
+  "Tu deviens de plus en plus difficile à sous-estimer.",
+  "Tu serais incapable de vider l'eau d'une botte, même si les instructions étaient sous la semelle.",
+  "T'es rare. C'est précieux.",
+  "Ta différence, c'est ta force.",
+  "Tu aides beaucoup à l'estime de soi de tes collègues."
 ];
-const HAD={ok:null};
+const HAD={ok:null,der:-1};
 function hadesBlock(o){
   if(!S.hades||o.noHades)return false;
   const key=S.map+':'+(S.inside||'')+':'+o.x+','+o.y;
   if(HAD.ok===key){HAD.ok=null;return false}
-  const n=S.hadesN||0,L=HADES_LINES,line=n<L.length?L[n]:L[L.length-8+Math.floor(Math.random()*8)];
+  const n=S.hadesN||0,L=HADES_LINES,k=n<L.length?n:(r=>r>=HAD.der?r+1:r)(Math.floor(Math.random()*(L.length-1))),line=L[k];HAD.der=k;   // une fois toutes dites : au hasard, jamais deux fois de suite la même
   S.hadesN=n+1;HAD.ok=key;save();
   const who=o.who||(o.sid&&SRC[o.sid]&&SRC[o.sid].who)||'…';
   say([{w:who,t:line}]);return true;
