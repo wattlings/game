@@ -31,7 +31,25 @@ const HADES_LINES=[
   "Tu serais incapable de vider l'eau d'une botte, même si les instructions étaient sous la semelle.",
   "T'es rare. C'est précieux.",
   "Ta différence, c'est ta force.",
-  "Tu aides beaucoup à l'estime de soi de tes collègues."
+  "Tu aides beaucoup à l'estime de soi de tes collègues.",
+  "Tu as une qualité rare : tu ne donnes jamais de faux espoirs.",
+  "On ne t'oublie pas facilement. On essaie, pourtant.",
+  "Tu as le mérite de la constance : toujours aussi peu au point.",
+  "Tu remontes le niveau de la réunion. Dès que tu sors.",
+  "Chaque équipe a besoin de quelqu'un comme toi. Pour se rassurer.",
+  "Tu as un vrai don pour rendre les choses simples compliquées.",
+  "Tu n'es pas inutile : tu peux toujours servir de mauvais exemple.",
+  "Tu es la preuve vivante qu'on peut réussir sans rien comprendre.",
+  "Tu serais capable de te perdre dans un couloir sans porte.",
+  "Si tu étais un interrupteur, tu serais sur « veille ».",
+  "Tu pourrais rater une porte ouverte même avec un plan et un guide.",
+  "On t'enverrait chercher de l'ombre dans le désert, tu reviendrais bronzé.",
+  "Tu as le rendement d'un radiateur fenêtre ouverte.",
+  "Tu es comme la veille d'une télé : discret, inutile, et ça coûte quand même.",
+  "Ton cerveau tourne au talon de nuit, même en pleine journée.",
+  "Si on t'installait un compteur, il afficherait « valeur aberrante ».",
+  "Tu es la seule source d'énergie qui ne produit rien.",
+  "Même un Linky n'arriverait pas à mesurer ton apport."
 ];
 const HAD={ok:null,der:-1};
 function hadesBlock(o){
