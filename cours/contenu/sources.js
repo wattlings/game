@@ -15,6 +15,7 @@ export const SOURCES_DEMOS = {
   collecter: ["enedis-nmo-cf-015e", "enedis-guide-flux-r6x", "grdf-adict-faq", "mne-coefficient-conversion", "mne-elements-facture", "ministere-guide-fiscalite-2026"],
   consentement: ["enedis-nmo-cf-015e", "enedis-contrat-data-connect"],
   casIndex: ["enedis-turpe7-brochure"],
+  decretTertiaire: ["legifrance-arrete-tertiaire-2020", "ademe-operat-faq"],
   anatomieFacture: ["ministere-guide-fiscalite-2026", "enedis-turpe7-brochure", "cnieg-cta-note", "mne-elements-facture", "mne-prix-pro", "enedis-facturation-acheminement", "cre-atrd7", "minefi-tva"],
 };
 

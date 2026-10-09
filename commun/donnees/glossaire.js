@@ -395,8 +395,9 @@ export const GLOSSAIRE = {
   },
   pci: {
     terme: "PCI",
-    def: "Pouvoir calorifique inférieur : l’énergie d’un combustible sans la chaleur qu’on récupérerait en condensant la vapeur d’eau des fumées. Le gaz se facture en PCS, environ 11 % au-dessus du PCI : un même facteur d’émission change donc selon la base.",
-    ex: "≈ 0,204 kg de CO2 par kWh de gaz facturé (PCS), soit ≈ 0,227 kg par kWh PCI.",
+    def: "Pouvoir calorifique inférieur : l’énergie d’un combustible sans la chaleur qu’on récupérerait en condensant la vapeur d’eau des fumées. Le gaz se facture en PCS : 1 kWh PCS vaut 0,90 kWh PCI. Un même facteur d’émission change donc selon la base.",
+    ex: "≈ 0,204 kg de CO2 par kWh de gaz facturé (PCS), soit 0,227 kg par kWh PCI.",
+    src: ["legifrance-arrete-tertiaire-2020"],
     etapes: [8],
   },
   talon: {
@@ -443,14 +444,16 @@ export const GLOSSAIRE = {
   },
   operat: {
     terme: "OPERAT",
-    def: "La plateforme de l’ADEME où les assujettis au décret tertiaire déclarent chaque année leurs consommations.",
+    def: "La plateforme de l’ADEME où les assujettis au décret tertiaire déclarent chaque année, au plus tard le 30 septembre, les consommations de l’année précédente.",
     ex: "La mairie déclare l’école (2 000 m²) sur OPERAT.",
+    src: ["legifrance-arrete-tertiaire-2020"],
     etapes: [8],
   },
   "decret-tertiaire": {
     terme: "Décret tertiaire",
-    def: "L’obligation, pour les bâtiments tertiaires d’au moins 1 000 m², de réduire leur consommation d’énergie finale : −40 % en 2030, −50 % en 2040 et −60 % en 2050 par rapport à une année de référence, ou d’atteindre un seuil en valeur absolue (à vérifier).",
+    def: "L’obligation, pour les bâtiments tertiaires d’au moins 1 000 m², de réduire leur consommation d’énergie finale : −40 % en 2030, −50 % en 2040 et −60 % en 2050 par rapport à une année de référence, ou d’atteindre un seuil en valeur absolue fixé par catégorie d’activité.",
     ex: "Avec 2 000 m², l’école est concernée.",
+    src: ["legifrance-cch-r174-22", "legifrance-arrete-tertiaire-2020", "ademe-operat-faq"],
     etapes: [1, 8],
   },
   iso50001: {

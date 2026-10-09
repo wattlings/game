@@ -20,6 +20,14 @@ export const SOURCES = {
     niveau: "officiel",
     vu: "2026-10-06",
   },
+  "ademe-operat-faq": {
+    t: "FAQ Éco Énergie Tertiaire (plateforme OPERAT)",
+    ed: "ADEME",
+    date: "mise à jour d’août 2026",
+    url: "https://operat.ademe.fr/public/faq",
+    niveau: "officiel",
+    vu: "2026-10-09",
+  },
   "panorama-enr-2025": {
     t: "Panorama de l’électricité renouvelable au 31 décembre 2025",
     ed: "Agence ORE, Enedis, RTE, SER",
@@ -579,6 +587,22 @@ export const SOURCES = {
     url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000031749067",
     niveau: "officiel",
     vu: "2026-10-06",
+  },
+  "legifrance-cch-r174-22": {
+    t: "Code de la construction et de l’habitation, article R. 174-22 (champ d’application de l’obligation de réduction des consommations dans les bâtiments tertiaires)",
+    ed: "Légifrance",
+    date: "1er juillet 2021",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000043819501",
+    niveau: "officiel",
+    vu: "2026-10-09",
+  },
+  "legifrance-arrete-tertiaire-2020": {
+    t: "Arrêté du 10 avril 2020 relatif aux obligations d’actions de réduction des consommations d’énergie finale dans des bâtiments à usage tertiaire (« arrêté méthode »), version en vigueur au 9 octobre 2026",
+    ed: "Légifrance",
+    date: "3 mai 2020, dernière mise à jour le 20 août 2026",
+    url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000041842389",
+    niveau: "officiel",
+    vu: "2026-10-09",
   },
   "ministere-autoconsommation": {
     t: "Systèmes d’autoconsommation",

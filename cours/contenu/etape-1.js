@@ -129,7 +129,7 @@ export default {
         type: "texte",
         titre: "L’objectif décide des données",
         paragraphes: [
-          "**Économie** : on cherche le gaspillage, il faut la courbe de charge et un historique. **Budget** : on prévoit les dépenses, les factures suffisent. **Réglementation** : le {{decret-tertiaire}} impose aux bâtiments tertiaires d’au moins 1 000 m² de réduire leur consommation et de la déclarer sur {{operat}} ; il faut des consommations annuelles fiables et une surface. **Climat** : on convertit les kWh en {{tco2}}.",
+          "**Économie** : on cherche le gaspillage, il faut la courbe de charge et un historique. **Budget** : on prévoit les dépenses, les factures suffisent. **Réglementation** : le {{decret-tertiaire}} impose aux bâtiments tertiaires d’au moins 1 000 m² de réduire leur consommation et de la déclarer sur {{operat}}[[legifrance-cch-r174-22,legifrance-arrete-tertiaire-2020]] ; il faut des consommations annuelles fiables et une surface. **Climat** : on convertit les kWh en {{tco2}}.",
         ],
       },
       {

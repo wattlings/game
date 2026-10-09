@@ -1332,3 +1332,22 @@ Reste : 25 (l'Approfondir de l'étape 2 reste long, seuls les encadrés « Pour 
 | Lien « Le cycle » → « Accueil » | Barre du haut et lien « Retour » de l'étape 1. | `cours/principal.js`, `cours/pages/etape.js` |
 
 Vérification : `node outils/verifier.mjs` donne 360 réussites et 0 échec.
+
+### Lot 5 (9 octobre 2026) : sources officielles de l'étape 8
+
+Textes lus (fournis par l'auteur, les sites officiels refusant la machine de travail) : article R. 174-22 du code de la construction et de l'habitation, arrêté du 10 avril 2020 dans sa version en vigueur au 9 octobre 2026, FAQ Éco Énergie Tertiaire d'OPERAT (mise à jour d'août 2026). Ils sont au registre (`legifrance-cch-r174-22`, `legifrance-arrete-tertiaire-2020`, `ademe-operat-faq`) et le relevé `outils/sources/releve-cours-etape-8.json` garde, pour chaque affirmation, le passage lu et l'article.
+
+| Affirmation | Verdict |
+|---|---|
+| Seuil de 1 000 m² cumulés sur le site | Confirmé (R. 174-22, II) |
+| −40 % / −50 % / −60 % en 2030 / 2040 / 2050 | Confirmé (L. 174-1, cité par la FAQ OPERAT) |
+| Objectif alternatif en valeur absolue par catégorie | Confirmé (arrêté, art. 2 et 4) |
+| Année de référence : 12 mois consécutifs entre 2010 et 2022 | Confirmé ; l'historique « repoussée de 2019 à 2022 en 2024 » est retiré, faute de source |
+| Déclaration sur OPERAT | Corrigé : « au plus tard le 30 septembre » (arrêté, art. 13) |
+| Ajustement climatique et attestation annuelle | Confirmé (arrêté, art. 5 et 13), précisé : DJU d'une station Météo-France |
+| Modulations des objectifs | Corrigé : ajout du volume d'activité et des contraintes patrimoniales |
+| Sanctions | Corrigé : amende par infraction (7 500 € personne morale, 1 500 € personne physique), après mise en demeure, et publication du nom |
+| Facteur du gaz 0,227 kgCO2e/kWh PCI, 1 kWh PCS = 0,90 kWh PCI | Confirmé (arrêté, annexes VII et I) |
+| Facteur de l'électricité 0,052 kgCO2e/kWh | **À corriger, en attente de décision** : l'arrêté fixe 0,064 pour le dispositif tertiaire |
+
+Citations ajoutées : étape 8 (Approfondir et tableau), étape 1 (Comprendre), glossaire (décret tertiaire, OPERAT, PCI), démo « trajectoire du décret tertiaire ».

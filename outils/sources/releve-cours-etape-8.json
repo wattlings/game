@@ -1,0 +1,201 @@
+[
+ {
+  "id": "ce8-001",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › Le décret tertiaire › §1",
+  "texte": "activités tertiaires sur au moins **1 000 m²** de surface de plancher (surfaces cumulées sur le site)",
+  "affirmation": "Sont concernés les bâtiments, parties de bâtiments ou ensembles de bâtiments d’un même site accueillant au moins 1 000 m² d’activités tertiaires.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ]
+ },
+ {
+  "id": "ce8-002",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › Le décret tertiaire › §2",
+  "texte": "**−40 % en 2030, −50 % en 2040, −60 % en 2050**, par rapport à une année de référence",
+  "affirmation": "Objectifs : −40 % en 2030, −50 % en 2040, −60 % en 2050.",
+  "type": "regle",
+  "verdict": "confirme",
+  "note": "La loi (article L. 174-1 du CCH, cité par la FAQ OPERAT) dit « par rapport à 2010 » ; l'arrêté du 10 avril 2020 (art. 3) permet de choisir l'année de référence entre 2010 et 2022 : la formule « par rapport à une année de référence » reste juste.",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": true,
+    "page": "G2 – Textes régissant le dispositif"
+   }
+  ]
+ },
+ {
+  "id": "ce8-003",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › Le décret tertiaire › §2",
+  "texte": "ou bien atteindre un **seuil en valeur absolue** (kWh/m²/an) fixé par catégorie d’activité",
+  "affirmation": "Alternative : un niveau de consommation en valeur absolue, par catégorie d’activité.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Le niveau de consommation exprimé en valeur absolue (noté Cabs), l'objectif défini au I-2° de l'article L. 174-1 du code de la construction et de l'habitation. L'article 4 du présent arrêté précise les modalités de détermination de ce niveau",
+    "relu": true,
+    "page": "article 2, m)"
+   }
+  ]
+ },
+ {
+  "id": "ce8-004",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › Le décret tertiaire › §2",
+  "texte": "L’année de référence est une période de 12 mois consécutifs entre **2010 et 2022**.",
+  "avant": "L’année de référence est une période de 12 mois consécutifs entre **2010 et 2022** (la borne haute a été repoussée de 2019 à 2022 en 2024).",
+  "affirmation": "L’année de référence : 12 mois consécutifs, entre 2010 et 2022.",
+  "type": "regle",
+  "verdict": "corrige",
+  "note": "Le texte lu ne donne que la version en vigueur : l’historique « repoussée de 2019 à 2022 en 2024 » n’y figure pas ; il est retiré faute de source.",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "L'année de référence est comprise entre 2010 et 2022, ou correspond à la première année pleine d'exploitation dont les consommations énergétiques sont remontées sur la plateforme OPERAT. […] L'année de référence comporte 12 mois consécutifs.",
+    "relu": true,
+    "page": "article 3, I"
+   }
+  ]
+ },
+ {
+  "id": "ce8-005",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › Le décret tertiaire › §3",
+  "texte": "**au plus tard le 30 septembre**",
+  "avant": "**avant le 30 septembre**",
+  "affirmation": "Déclaration annuelle sur OPERAT au plus tard le 30 septembre, pour l’année précédente.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ]
+ },
+ {
+  "id": "ce8-006",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › Le décret tertiaire › §3",
+  "texte": "La plateforme ajuste les consommations du climat (avec les {{dju|DJU}} d’une station Météo-France) et délivre une attestation annuelle",
+  "affirmation": "Ajustement climatique automatique (DJU, station Météo-France) et attestation numérique annuelle.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Sur la base de ces données corrigées, la plateforme OPERAT génère l'attestation numérique annuelle",
+    "relu": true,
+    "page": "article 13, III"
+   }
+  ]
+ },
+ {
+  "id": "ce8-007",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › Le décret tertiaire › §3",
+  "texte": "Les objectifs peuvent être modulés selon le volume d’activité, des contraintes techniques, architecturales ou patrimoniales, ou des coûts manifestement disproportionnés",
+  "avant": "des modulations des objectifs sont possibles sur dossier technique (contraintes techniques, architecturales, coût disproportionné)",
+  "affirmation": "Les objectifs peuvent être modulés.",
+  "type": "regle",
+  "verdict": "corrige",
+  "note": "Ajout du volume d’activité et des contraintes patrimoniales, absents de la version précédente.",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "Les objectifs peuvent être modulés en fonction : du type et du volume d’activité exercée, de contraintes techniques, architecturales ou patrimoniales ou de coûts manifestement disproportionnés. (L174-1 du CCH).",
+    "relu": true,
+    "page": "MO1 – Les différentes modulations des objectifs"
+   }
+  ]
+ },
+ {
+  "id": "ce8-008",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › Le décret tertiaire › §3",
+  "texte": "une amende par infraction, jusqu’à 7 500 € pour une personne morale (1 500 € pour une personne physique), et la publication du nom de l’assujetti",
+  "avant": "les sanctions prévues vont jusqu’à 7 500 € d’amende pour une personne morale, avec publication",
+  "affirmation": "Sanctions : amende de 1 500 € (personne physique) ou 7 500 € (personne morale) par infraction, publication du nom.",
+  "type": "regle",
+  "verdict": "corrige",
+  "note": "L’amende s’applique à chaque infraction : le cumul peut dépasser 7 500 €. Elle intervient après mise en demeure restée sans effet.",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "L'application de la sanction financière (amende de 5ème classe […]) est de 1 500 € pour une personne physique […] Le taux maximum de l'amende applicable aux personnes morales est égale au quintuple de celui prévu pour les personnes physiques soit 7 500 €. L'amende est applicable à chaque infraction.",
+    "relu": true,
+    "page": "CS4 – Q1 – Sanctions financières"
+   },
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "il y aura publication de leur identité sur un site internet des services de l'Etat (Name & Shame)",
+    "relu": true,
+    "page": "CS4 – Q2 – Publication « Name & Shame »"
+   }
+  ]
+ },
+ {
+  "id": "ce8-009",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › tableau « Les indicateurs clés » › tCO2e",
+  "texte": "soit 0,227 kg par kWh PCI (le gaz se facture en PCS : 1 kWh PCS = 0,90 kWh PCI)",
+  "affirmation": "Facteur d’émission du gaz de réseau : 0,227 kgCO2e par kWh PCI ; 1 kWh PCS = 0,90 kWh PCI.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   }
+  ]
+ },
+ {
+  "id": "ce8-010",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › tableau « Les indicateurs clés » › tCO2e",
+  "texte": "≈ 0,052 kg/kWh (élec, mix moyen)",
+  "affirmation": "Facteur d’émission de l’électricité : 0,052 kgCO2e/kWh.",
+  "type": "fait",
+  "verdict": "a-corriger",
+  "attente": "Pour le dispositif tertiaire, l’arrêté fixe 0,064 kgCO2e/kWh pour l’électricité (hors autoconsommation, tous usages).",
+  "correction": "≈ 0,064 kg/kWh (élec, valeur du dispositif tertiaire)",
+  "note": "Décision de l’auteur attendue : 0,052 (mix moyen, source à lire) ou 0,064 (valeur réglementaire de l’attestation OPERAT). Changer la valeur modifie les tonnes de CO2 affichées dans le cours et le jeu.",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   }
+  ]
+ }
+]

@@ -104,7 +104,7 @@ export default {
           [
             "tCO2e",
             "≈ 4,5 t (élec) + 42 t (gaz)",
-            "Facteurs ADEME à vérifier : ≈ 0,052 kg/kWh (élec, mix moyen) ; gaz ≈ 0,204 kg par kWh facturé, soit ≈ 0,227 kg par kWh PCI (le gaz se facture en PCS, environ 11 % au-dessus du PCI)",
+            "Facteurs ADEME à vérifier : ≈ 0,052 kg/kWh (élec, mix moyen) ; gaz ≈ 0,204 kg par kWh facturé, soit 0,227 kg par kWh PCI (le gaz se facture en PCS : 1 kWh PCS = 0,90 kWh PCI)[[legifrance-arrete-tertiaire-2020]]",
           ],
         ],
       },
@@ -112,9 +112,9 @@ export default {
         type: "texte",
         titre: "Le décret tertiaire (dispositif Éco Énergie Tertiaire)",
         paragraphes: [
-          "Il concerne les bâtiments, parties de bâtiments ou ensembles de bâtiments d’un même site accueillant des activités tertiaires sur au moins **1 000 m²** (surfaces cumulées sur le site). L’école, avec 2 000 m², est concernée.",
-          "Objectifs de réduction de la consommation d’{{energie-finale|énergie finale}} : **−40 % en 2030, −50 % en 2040, −60 % en 2050**, par rapport à une année de référence ; ou bien atteindre un **seuil en valeur absolue** (kWh/m²/an) fixé par catégorie d’activité. L’année de référence est une période de 12 mois consécutifs entre **2010 et 2022** (la borne haute a été repoussée de 2019 à 2022 en 2024).",
-          "Chaque année, les consommations de l’année précédente sont déclarées sur la plateforme {{operat}} de l’ADEME, **avant le 30 septembre**. Les consommations sont ajustées du climat ; des modulations des objectifs sont possibles sur dossier technique (contraintes techniques, architecturales, coût disproportionné). Une attestation annuelle est délivrée ; en cas de manquement, les sanctions prévues vont jusqu’à 7 500 € d’amende pour une personne morale, avec publication.",
+          "Il concerne les bâtiments, parties de bâtiments ou ensembles de bâtiments d’un même site accueillant des activités tertiaires sur au moins **1 000 m²** de surface de plancher (surfaces cumulées sur le site)[[legifrance-cch-r174-22]]. L’école, avec 2 000 m², est concernée.",
+          "Objectifs de réduction de la consommation d’{{energie-finale|énergie finale}} : **−40 % en 2030, −50 % en 2040, −60 % en 2050**, par rapport à une année de référence[[ademe-operat-faq]] ; ou bien atteindre un **seuil en valeur absolue** (kWh/m²/an) fixé par catégorie d’activité[[legifrance-arrete-tertiaire-2020]]. L’année de référence est une période de 12 mois consécutifs entre **2010 et 2022**[[legifrance-arrete-tertiaire-2020]].",
+          "Chaque année, les consommations de l’année précédente sont déclarées sur la plateforme {{operat}} de l’ADEME, **au plus tard le 30 septembre**[[legifrance-arrete-tertiaire-2020]]. La plateforme ajuste les consommations du climat (avec les {{dju|DJU}} d’une station Météo-France) et délivre une attestation annuelle[[legifrance-arrete-tertiaire-2020]]. Les objectifs peuvent être modulés selon le volume d’activité, des contraintes techniques, architecturales ou patrimoniales, ou des coûts manifestement disproportionnés[[ademe-operat-faq]]. En cas de manquement, après mise en demeure restée sans effet : une amende par infraction, jusqu’à 7 500 € pour une personne morale (1 500 € pour une personne physique), et la publication du nom de l’assujetti[[ademe-operat-faq]].",
         ],
       },
       {
@@ -122,7 +122,7 @@ export default {
         ton: "verifier",
         titre: "À revérifier régulièrement",
         texte:
-          "Seuils en valeur absolue, bornes de l’année de référence, date limite OPERAT, montants des sanctions : ces paramètres ont déjà été modifiés par arrêté. Vérifier sur les textes officiels (Légifrance) et le site OPERAT avant de coder une règle.",
+          "Seuils en valeur absolue, bornes de l’année de référence, date limite OPERAT, facteurs d’émission : l’arrêté du 10 avril 2020 a déjà été modifié plusieurs fois (en dernier lieu en 2025). Vérifier la version en vigueur sur Légifrance et la FAQ OPERAT avant de coder une règle.",
       },
       {
         type: "tableau",
@@ -182,7 +182,7 @@ export default {
       q: "Où déclare-t-on les consommations au titre du décret tertiaire ?",
       choix: ["Sur OPERAT (ADEME)", "Sur l’espace client Enedis", "Dans la facture du fournisseur"],
       bonne: 0,
-      explication: "La plateforme OPERAT, chaque année avant le 30 septembre pour l’année précédente.",
+      explication: "La plateforme OPERAT, chaque année au plus tard le 30 septembre pour l’année précédente.",
     },
     {
       q: "Pour l’école, quel indicateur fait le plus ressortir le gaz ?",
