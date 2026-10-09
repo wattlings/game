@@ -21,7 +21,7 @@ const SOURCES = {
     ico: "courbe",
     sous: "Courbe de charge",
     fiche: {
-      Fréquence: "10 min (élec), 1 jour (gaz)",
+      Fréquence: "10 min pour l’école (5 à 30 min selon le compteur), 1 jour (gaz)",
       Délai: "le lendemain (élec), 1 à 3 jours (gaz)",
       Finesse: 5,
       Fiabilité: 3,

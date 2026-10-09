@@ -10,6 +10,12 @@ import { sourcesEnergie } from "./sources.js";
 export default {
   ...etapeDeBase(8),
   question: "L’action a-t-elle marché ? On recommence ?",
+  // ce que l’apprenant saura faire à la fin de l’étape (affiché sous la question)
+  objectifs: [
+    "comparer avant et après, à conditions égales",
+    "corriger une économie de l’effet de la météo",
+    "dire ce que demande le décret tertiaire",
+  ],
   phrase:
     "On vérifie que l’action a vraiment marché, à conditions comparables, puis on repart au début de la boucle.",
   retenir: [

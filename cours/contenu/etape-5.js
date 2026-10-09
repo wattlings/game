@@ -10,6 +10,12 @@ import { sourcesEnergie } from "./sources.js";
 export default {
   ...etapeDeBase(5),
   question: "Comment le bâtiment consomme-t-il ?",
+  // ce que l’apprenant saura faire à la fin de l’étape (affiché sous la question)
+  objectifs: [
+    "lire une courbe de charge : quand le bâtiment consomme, et combien",
+    "trouver le talon, ce que le bâtiment consomme quand il est vide",
+    "expliquer pourquoi le chauffage suit la météo",
+  ],
   phrase:
     "On lit la consommation pour comprendre quand le bâtiment consomme, combien il consomme à vide, et comment il réagit au froid.",
   retenir: [

@@ -10,6 +10,12 @@ import { sourcesEnergie } from "./sources.js";
 export default {
   ...etapeDeBase(6),
   question: "Où y a-t-il gaspillage ou dérive ?",
+  // ce que l’apprenant saura faire à la fin de l’étape (affiché sous la question)
+  objectifs: [
+    "comparer la consommation à une référence",
+    "régler une alerte : ni trop sensible, ni trop tardive",
+    "reconnaître une dérive, comme un talon qui monte",
+  ],
   phrase:
     "On compare la consommation réelle à ce qu’elle devrait être, pour repérer gaspillages et dérives et estimer leur coût.",
   retenir: [

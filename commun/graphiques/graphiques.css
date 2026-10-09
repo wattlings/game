@@ -158,3 +158,13 @@
     display: none;
   }
 }
+
+/* le résumé des données d'une courbe trop longue pour un tableau (cours/blocs/graphique.js) */
+.chart-resume {
+  margin: 8px 0 0;
+  padding-left: 1.2em;
+  font-size: var(--t-s, 0.9rem);
+}
+.chart-resume li + li {
+  margin-top: 4px;
+}

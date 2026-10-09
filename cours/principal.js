@@ -84,7 +84,11 @@ function majNavigation() {
   document.querySelectorAll(".nav a, .steps-strip a").forEach((n) => n.removeAttribute("aria-current"));
   const e = routeCourante.match(/^etape-(\d)/);
   if (e) {
-    document.querySelector(`.steps-strip a[data-num="${e[1]}"]`)?.setAttribute("aria-current", "page");
+    const lien = document.querySelector(`.steps-strip a[data-num="${e[1]}"]`);
+    lien?.setAttribute("aria-current", "page");
+    // sur un petit écran, le bandeau défile jusqu'à l'étape en cours
+    const bandeau = un("#strip");
+    if (lien && bandeau.scrollWidth > bandeau.clientWidth) bandeau.scrollLeft += lien.getBoundingClientRect().left - bandeau.getBoundingClientRect().left - (bandeau.clientWidth - lien.offsetWidth) / 2;
   } else {
     document
       .querySelector(`.nav a[data-route="${routeCourante || "accueil"}"]`)
@@ -185,6 +189,19 @@ function fermerMenu() {
   un(".topbar").classList.remove("menu-ouvert");
   un("#btn-menu").setAttribute("aria-expanded", "false");
 }
+// sur téléphone, la barre du haut s'efface quand on descend et revient dès qu'on remonte
+let dernierY = scrollY;
+addEventListener(
+  "scroll",
+  () => {
+    const y = scrollY;
+    if (Math.abs(y - dernierY) < 8) return;
+    un(".topbar").classList.toggle("cachee", y > dernierY && y > 140);
+    dernierY = y;
+  },
+  { passive: true },
+);
+un(".topbar").addEventListener("focusin", () => un(".topbar").classList.remove("cachee"));
 un("#btn-menu").addEventListener("click", () => {
   const ouvert = un(".topbar").classList.toggle("menu-ouvert");
   un("#btn-menu").setAttribute("aria-expanded", String(ouvert));

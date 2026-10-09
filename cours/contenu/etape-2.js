@@ -11,10 +11,16 @@ import { etapeDeBase } from "../../commun/donnees/etapes.js";
 export default {
   ...etapeDeBase(2),
   question: "D’où viennent les données et sous quelle forme ?",
+  // ce que l’apprenant saura faire à la fin de l’étape (affiché sous la question)
+  objectifs: [
+    "citer les trois canaux de données : le télérelevé, les index et les factures",
+    "dire à quoi sert chacun : analyser, contrôler, chiffrer",
+    "expliquer pourquoi l’accord du titulaire est indispensable",
+  ],
   phrase:
     "La donnée d’énergie arrive par trois canaux : le télérelevé, les index et les factures. Même énergie, trois formes différentes.",
   retenir: [
-    "Le {{telereleve}} est fin et rapide : une {{courbe-de-charge}} au {{pas-de-temps}} de 10 min pour l’électricité, un volume par jour pour le gaz ({{gazpar}})[[grdf-adict-faq,mne-compteurs-communicants]].",
+    "Le {{telereleve}} est fin et rapide : une {{courbe-de-charge}} pour l’électricité (au {{pas-de-temps}} de 10 min pour l’école ; 5 min pour la plupart des sites de plus de 36 kVA, 30 min pour un compteur Linky)[[enedis-nmo-cf-077e,enedis-nmo-cf-016e]], un volume par jour pour le gaz ({{gazpar}})[[grdf-adict-faq,mne-compteurs-communicants]].",
     "L’{{index}} est le compteur qui tourne : on soustrait deux relevés pour obtenir une consommation[[mne-releve-compteur]].",
     "La facture donne le coût en euros, avec du retard et sur des périodes qui ne suivent pas les mois.",
   ],
@@ -134,7 +140,7 @@ export default {
         lignes: [
           [
             "Finesse",
-            "10 min (élec), 1 jour (gaz)",
+            "5 à 30 min selon le compteur (10 min pour l’école), 1 jour (gaz)",
             "1 relevé par mois et par cadran",
             "1 montant par période de facturation",
           ],

@@ -1286,3 +1286,16 @@ Les tableaux détaillés de chaque axe (section 3) gardent la numérotation prop
 | 12 | Étape « faite » = « manipulée » : l'Essentiel a été réellement affiché et sa démo menée jusqu'au résultat (Cadrer : toutes les étiquettes placées puis vérifiées ; Analyser : estimation vérifiée ; les autres démos, à la première manipulation). Les démos de Comprendre et d'Approfondir ne comptent plus. Le message « Étape N terminée » est annoncé. La mention ★ « maîtrisée » s'affiche dans le bandeau et le tableau si le mini-quiz est réussi à 80 %. La règle est écrite au-dessus du tableau de progression. | `cours/pages/etape.js`, `cours/coquille/etat.js`, `cours/demos/cadrer.js`, `cours/demos/analyser.js`, `cours/principal.js`, `cours/pages/accueil.js` |
 
 Vérification : `node outils/verifier.mjs` donne 360 réussites et 0 échec. Un test navigateur dédié a contrôlé chaque correction.
+
+### Lot 2 (9 octobre 2026) : priorité 2, points 13 à 16
+
+| # | Correction | Fichiers |
+|---|---|---|
+| 16 | Pas de temps : l'école garde 10 min, et le texte le dit (« au pas de 10 min pour l'école ; 5 min pour la plupart des sites de plus de 36 kVA, 30 min pour un compteur Linky »), avec les sources Enedis déjà lues. Les 3 lignes « à corriger » du relevé de l'étape 2 passent à « corrigé ». | `cours/contenu/etape-2.js`, `cours/demos/collecter.js`, `outils/sources/releve-cours-etape-2.json` |
+| 14 | Téléphone : la barre du haut s'efface quand on descend et revient dès qu'on remonte. Le bandeau centre l'étape en cours. « N/8 étapes » reste affiché. | `cours/styles/petits-ecrans.css`, `cours/principal.js` |
+| 15 | Courbes trop longues pour un tableau : un « Résumé des données » (nombre de valeurs, minimum et maximum avec leur date, moyenne, lignes repères, points signalés, zones). Les valeurs lues aux flèches sont annoncées aux lecteurs d'écran. Échap ferme l'infobulle. Le graphique indique comment s'en servir au clavier. | `cours/blocs/graphique.js`, `commun/graphiques/graphiques.css` |
+| 13 | Chaque étape annonce « À la fin de cette étape, tu sauras… » (3 objectifs observables) sous sa question. | `cours/contenu/etape-*.js` (`objectifs`), `cours/pages/etape.js`, `cours/styles/etape.css` |
+
+Reste en priorité 2 : le point 11, les sources officielles de l'étape 8 (décret tertiaire, OPERAT, sanctions). Il demande de lire les textes, et le réseau de la session de travail les bloque.
+
+Vérification : `node outils/verifier.mjs` donne 360 réussites et 0 échec. Un test navigateur sur téléphone et sur ordinateur a contrôlé la barre, le bandeau, le résumé, l'annonce au clavier et la touche Échap.

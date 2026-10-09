@@ -35,7 +35,11 @@ export function graphique(conteneur, configInitiale) {
   o.hidden = true;
   const d = document.createElement("details");
   d.className = "chart-table";
-  conteneur.replaceChildren(a, c, d);
+  // ce que lit un lecteur d'écran quand on parcourt le graphique aux flèches
+  const ann = document.createElement("p");
+  ann.className = "sr";
+  ann.setAttribute("aria-live", "polite");
+  conteneur.replaceChildren(a, c, d, ann);
   c.appendChild(o);
   let u = null;
   let l = null;
@@ -192,7 +196,7 @@ export function graphique(conteneur, configInitiale) {
     u.setAttribute("height", j);
     u.setAttribute("role", "img");
     u.setAttribute("tabindex", "0");
-    u.setAttribute("aria-label", t.description || "Graphique");
+    u.setAttribute("aria-label", `${t.description || "Graphique"}.${t.pasDeSurvol ? "" : " Flèches gauche et droite pour lire les valeurs, Échap pour fermer."}`);
     u.innerHTML = F.join("");
     c.insertBefore(u, o);
     a.innerHTML =
@@ -218,12 +222,37 @@ export function graphique(conteneur, configInitiale) {
       ).join("")}</tbody></table></div>`;
       d.open = C;
       d.hidden = false;
+    } else if (Xe.length && t.x.label) {
+      // trop de points pour un tableau (une courbe de charge) : un résumé, série par série, plus les seuils et les repères
+      const C = d.open;
+      const S = (U, J) => (U.format || t.y?.format || ((ae) => `${nombre(ae, 1)} ${t.y?.unite || ""}`))(J);
+      const lignes = Xe.map((U) => {
+        const v = U.valeurs.map((J, i) => [J, i]).filter(([J]) => J != null && isFinite(J));
+        if (!v.length) return `<li>${echapper(U.nom)} : aucune valeur</li>`;
+        const [mn, imn] = v.reduce((x, y) => (y[0] < x[0] ? y : x));
+        const [mx, imx] = v.reduce((x, y) => (y[0] > x[0] ? y : x));
+        const moy = v.reduce((x, [J]) => x + J, 0) / v.length;
+        return `<li><b>${echapper(U.nom)}</b> : ${v.length} valeurs, de ${echapper(S(U, mn))} (${echapper(t.x.label(imn))}) à ${echapper(S(U, mx))} (${echapper(t.x.label(imx))}), moyenne ${echapper(S(U, moy))}.</li>`;
+      });
+      for (const L of t.lignesH || []) if (L.texte) lignes.push(`<li>Ligne repère : ${echapper(L.texte)}${/\d/.test(L.texte) ? "" : ` (${echapper(S({}, L.y))})`}.</li>`);
+      for (const M of t.marqueurs || []) if (M.texte) lignes.push(`<li>Point signalé : ${echapper(M.texte)}${t.x.label ? `, ${echapper(t.x.label(M.i))}` : ""}.</li>`);
+      // une zone sans texte qui prolonge la précédente (le dimanche après le samedi) la complète
+      const zs = [];
+      for (const Z of t.zones || []) {
+        const prec = zs[zs.length - 1];
+        if (!Z.texte && prec && Z.i0 <= prec.i1 + 1) prec.i1 = Math.max(prec.i1, Z.i1);
+        else if (Z.texte) zs.push({ texte: Z.texte, i0: Z.i0, i1: Z.i1 });
+      }
+      for (const Z of zs) lignes.push(`<li>Zone : ${echapper(Z.texte)}, de ${echapper(t.x.label(Z.i0))} à ${echapper(t.x.label(Math.min(Z.i1, t.x.n - 1)))}.</li>`);
+      d.innerHTML = `<summary>Résumé des données</summary><ul class="chart-resume">${lignes.join("")}</ul>`;
+      d.open = C;
+      d.hidden = false;
     } else {
       d.hidden = true;
     }
     f();
   }
-  function i(v) {
+  function i(v, auClavier = false) {
     if (!s || t.x.n === 0) {
       return;
     }
@@ -248,6 +277,7 @@ export function graphique(conteneur, configInitiale) {
     o.style.left = `${Math.min(Math.max(j, q / 2 + 2), s.W - q / 2 - 2)}px`;
     o.style.top = `${MARGES.h + 6}px`;
     o.style.transform = "translate(-50%, 0)";
+    if (auClavier) ann.textContent = [...o.children].map((x) => x.textContent.trim()).filter(Boolean).join(" ; ");
     t.onSurvol?.(v);
   }
   function p() {
@@ -272,12 +302,16 @@ export function graphique(conteneur, configInitiale) {
       u.addEventListener("keydown", (v) => {
         const j = v.shiftKey ? Math.max(1, Math.round(t.x.n / 20)) : 1;
         if (v.key === "ArrowRight") {
-          i((l ?? -1) + j);
+          i((l ?? -1) + j, true);
           v.preventDefault();
         }
         if (v.key === "ArrowLeft") {
-          i((l ?? 1) - j);
+          i((l ?? 1) - j, true);
           v.preventDefault();
+        }
+        if (v.key === "Escape" && !o.hidden) {
+          p();
+          v.stopPropagation();
         }
         if (v.key === "Enter" && l != null) {
           t.onClic?.(l);

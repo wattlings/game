@@ -24,8 +24,13 @@
   :root {
     --t-xl: 1.45rem;
   }
+  /* la barre reste accessible : elle s'efface quand on descend et revient dès qu'on remonte (principal.js) */
   .topbar {
-    position: static;
+    position: sticky;
+    transition: transform 0.2s ease;
+  }
+  .topbar.cachee:not(.menu-ouvert) {
+    transform: translateY(-110%);
   }
   /* une ligne : le logo, le compte, le thème et « Menu » ; la navigation se déplie dessous */
   .topbar-in {
@@ -43,8 +48,12 @@
   .btn-compte span {
     display: none;
   }
-  .steps-row .progress {
+  /* l'avancement reste lisible : « 3/8 » sans la barre */
+  .steps-row .progress-bar {
     display: none;
+  }
+  .steps-row .progress {
+    flex: none;
   }
   /* les trois niveaux tiennent sur une ligne */
   .tabs {
@@ -59,9 +68,6 @@
   }
   .nav {
     display: none;
-  }
-  .topbar {
-    position: relative;
   }
   .topbar.menu-ouvert .nav {
     display: grid;

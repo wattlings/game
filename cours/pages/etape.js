@@ -57,6 +57,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
         <div class="row">${badgeFamille(a.famille)}${a.aussi ? badgeFamille(a.aussi, true) : ""}<span class="eyebrow">Étape ${a.num} sur 8</span></div>
         <h1><span class="accent-txt num">${String(a.num).padStart(2, "0")}</span> ${echapper(a.titre)}</h1>
         <p class="question">${echapper(a.question)}</p>
+        ${a.objectifs?.length ? `<div class="objectifs"><span class="eyebrow">À la fin de cette étape, tu sauras</span><ul>${a.objectifs.map((m) => `<li>${echapper(m)}</li>`).join("")}</ul></div>` : ""}
       </div>
     </header>
 

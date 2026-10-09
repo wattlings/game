@@ -10,6 +10,12 @@ import { sourcesEnergie } from "./sources.js";
 export default {
   ...etapeDeBase(7),
   question: "Que fait-on concrètement pour consommer mieux ?",
+  // ce que l’apprenant saura faire à la fin de l’étape (affiché sous la question)
+  objectifs: [
+    "classer les actions, de la moins chère à la plus lourde",
+    "estimer l’économie et le temps de retour d’une action",
+    "ajuster la puissance souscrite au besoin réel",
+  ],
   phrase: "On passe à l’action, du moins cher au plus lourd : régler, optimiser le contrat, puis investir.",
   retenir: [
     "**Sobriété** d’abord : régler les horaires, baisser la consigne, éteindre. Coût quasi nul.",

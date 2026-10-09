@@ -10,6 +10,12 @@ import { sourcesData } from "./sources.js";
 export default {
   ...etapeDeBase(4),
   question: "Comment organiser les données pour les exploiter ?",
+  // ce que l’apprenant saura faire à la fin de l’étape (affiché sous la question)
+  objectifs: [
+    "ranger les données du site jusqu’aux mesures du compteur",
+    "changer le pas de temps sans perdre d’énergie",
+    "éviter de compter deux fois un sous-compteur",
+  ],
   phrase:
     "On range les données dans un modèle commun, à la même unité et au bon pas de temps, pour pouvoir les comparer et les additionner.",
   retenir: [

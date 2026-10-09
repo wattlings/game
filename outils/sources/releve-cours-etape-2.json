@@ -15,13 +15,13 @@
   "id": "ce2-002",
   "fichier": "cours/contenu/etape-2.js",
   "repere": "retenir › 1 (électricité)",
-  "texte": "une {{courbe-de-charge}} au {{pas-de-temps}} de 10 min pour l’électricité",
+  "texte": "une {{courbe-de-charge}} pour l’électricité (au {{pas-de-temps}} de 10 min pour l’école ; 5 min pour la plupart des sites de plus de 36 kVA, 30 min pour un compteur Linky)",
   "affirmation": "Le télérelevé électrique fournit une courbe de charge au pas de 10 minutes.",
   "type": "fait",
-  "verdict": "a-corriger",
+  "verdict": "corrige",
   "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "Le {{telereleve}} est fin et rapide : une {{courbe-de-charge}} au {{pas-de-temps}} de 5 ou 10 min pour un site de plus de 36 kVA comme l’école (30 min pour un compteur Linky), un volume par jour pour le gaz ({{gazpar}}).",
-  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes.",
+  "correction": "une {{courbe-de-charge}} pour l’électricité (au {{pas-de-temps}} de 10 min pour l’école ; 5 min pour la plupart des sites de plus de 36 kVA, 30 min pour un compteur Linky)",
+  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes. Choix du cours : l'école garde le pas de 10 minutes (cas d'école, assumé), et le texte le dit, avec les pas courants des vrais compteurs.",
   "sources": [
    {
     "cle": "enedis-nmo-cf-077e",
@@ -41,7 +41,8 @@
     "relu": false,
     "page": "§ 4.1.2"
    }
-  ]
+  ],
+  "avant": "une {{courbe-de-charge}} au {{pas-de-temps}} de 10 min pour l’électricité"
  },
  {
   "id": "ce2-003",
@@ -1083,13 +1084,13 @@
   "id": "ce2-046",
   "fichier": "cours/contenu/etape-2.js",
   "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Finesse / Télérelevé",
-  "texte": "10 min (élec), 1 jour (gaz)",
+  "texte": "5 à 30 min selon le compteur (10 min pour l’école), 1 jour (gaz)",
   "affirmation": "Finesse du télérelevé : 10 minutes en électricité.",
   "type": "fait",
-  "verdict": "a-corriger",
+  "verdict": "corrige",
   "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "5 ou 10 min (élec, au-delà de 36 kVA), 1 jour (gaz)",
-  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes.",
+  "correction": "5 à 30 min selon le compteur (10 min pour l’école), 1 jour (gaz)",
+  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes. Choix du cours : l'école garde le pas de 10 minutes (cas d'école, assumé), et le texte le dit, avec les pas courants des vrais compteurs.",
   "sources": [
    {
     "cle": "enedis-nmo-cf-077e",
@@ -1103,13 +1104,14 @@
     "relu": true,
     "page": "p. 5"
    }
-  ]
+  ],
+  "avant": "10 min (élec), 1 jour (gaz)"
  },
  {
   "id": "ce2-047",
   "fichier": "cours/contenu/etape-2.js",
   "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Finesse / Télérelevé (gaz)",
-  "texte": "10 min (élec), 1 jour (gaz)",
+  "texte": "5 à 30 min selon le compteur (10 min pour l’école), 1 jour (gaz)",
   "affirmation": "Finesse du télérelevé : 1 jour en gaz.",
   "type": "fait",
   "verdict": "confirme",
@@ -1651,13 +1653,13 @@
   "id": "ce2-075",
   "fichier": "cours/demos/collecter.js",
   "repere": "SOURCES.tele.fiche › Fréquence (électricité)",
-  "texte": "Fréquence: \"10 min (élec), 1 jour (gaz)\"",
+  "texte": "Fréquence: \"10 min pour l’école (5 à 30 min selon le compteur), 1 jour (gaz)\"",
   "affirmation": "Fréquence du télérelevé : 10 minutes en électricité.",
   "type": "fait",
-  "verdict": "a-corriger",
+  "verdict": "corrige",
   "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "5 ou 10 min (élec), 1 jour (gaz)",
-  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes.",
+  "correction": "Fréquence: \"10 min pour l’école (5 à 30 min selon le compteur), 1 jour (gaz)\"",
+  "note": "Le pas de 10 minutes était celui des compteurs > 36 kVA ; Enedis a reprogrammé la relève des courbes de charge au pas de 5 minutes pour les sites HTA et BT > 36 kVA (il reste quelques compteurs à 10 minutes). Pour un Linky, le pas collecté est de 30 minutes. Choix du cours : l'école garde le pas de 10 minutes (cas d'école, assumé), et le texte le dit, avec les pas courants des vrais compteurs.",
   "sources": [
    {
     "cle": "enedis-nmo-cf-077e",
@@ -1671,13 +1673,14 @@
     "relu": true,
     "page": "p. 5"
    }
-  ]
+  ],
+  "avant": "Fréquence: \"10 min (élec), 1 jour (gaz)\""
  },
  {
   "id": "ce2-076",
   "fichier": "cours/demos/collecter.js",
   "repere": "SOURCES.tele.fiche › Fréquence (gaz)",
-  "texte": "Fréquence: \"10 min (élec), 1 jour (gaz)\"",
+  "texte": "Fréquence: \"10 min pour l’école (5 à 30 min selon le compteur), 1 jour (gaz)\"",
   "affirmation": "Fréquence du télérelevé : 1 jour en gaz.",
   "type": "fait",
   "verdict": "confirme",

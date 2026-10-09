@@ -10,6 +10,12 @@ import { sourcesData } from "./sources.js";
 export default {
   ...etapeDeBase(3),
   question: "Peut-on faire confiance à ces données ?",
+  // ce que l’apprenant saura faire à la fin de l’étape (affiché sous la question)
+  objectifs: [
+    "repérer une donnée suspecte : un trou, un doublon, un pic, une valeur négative",
+    "vérifier qu’une journée est complète, même au changement d’heure",
+    "choisir quoi faire d’une donnée fausse, sans jamais l’effacer",
+  ],
   phrase:
     "Avant d’analyser, on vérifie que la donnée est juste : complète, sans doublon, plausible et cohérente entre sources.",
   retenir: [

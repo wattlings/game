@@ -286,3 +286,17 @@
 .termes .terme:hover {
   background: var(--line);
 }
+
+/* « À la fin de cette étape, tu sauras… », sous la question */
+.objectifs {
+  margin-top: 12px;
+}
+.objectifs ul {
+  margin: 4px 0 0;
+  padding-left: 1.2em;
+  color: var(--muted);
+  font-size: var(--t-s);
+}
+.objectifs li + li {
+  margin-top: 2px;
+}

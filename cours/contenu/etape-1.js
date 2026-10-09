@@ -10,6 +10,12 @@ import { sourcesData } from "./sources.js";
 export default {
   ...etapeDeBase(1),
   question: "Qu'est-ce qu'on mesure, où, et pourquoi ?",
+  // ce que l’apprenant saura faire à la fin de l’étape (affiché sous la question)
+  objectifs: [
+    "dire ce qu’on suit (un site, un bâtiment, un usage) et pourquoi",
+    "reconnaître l’identifiant d’un compteur d’électricité (PDL) et de gaz (PCE)",
+    "relier un objectif (économies, budget, réglementation) aux données à suivre",
+  ],
   phrase: "Avant de mesurer quoi que ce soit, on décide quoi suivre, où, et dans quel but.",
   retenir: [
     "On délimite un **périmètre** : un site, un bâtiment, parfois un usage (chauffage, éclairage…).",
