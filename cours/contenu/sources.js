@@ -4,8 +4,10 @@
  * Le registre de toutes les références est dans commun/donnees/sources.js ; un texte du cours cite une source avec [[cle]].
  * Ici :
  *  - SOURCES_DEMOS : les sources de chaque démo (ses textes sont écrits dans son fichier, la liste s'affiche sous la démo) ;
- *  - sourcesData et sourcesEnergie : les anciennes listes de liens en bas du niveau « Approfondir », gardées pour les étapes
- *    qui ne sont pas encore référencées information par information (l'étape 2 l'est : elle n'utilise plus sourcesData).
+ *  - sourcesData et sourcesEnergie : des pistes de lecture pour référencer plus tard les étapes 1 et 3 à 8, fait par fait.
+ *    Elles ne sont plus affichées : ce sont des liens bruts, non vérifiés, dont plusieurs sites commerciaux. Pour référencer
+ *    une étape, on lit la source d'origine (texte officiel, régulateur, gestionnaire de réseau, organisme public), on l'ajoute
+ *    au registre commun/donnees/sources.js, puis on la cite avec [[cle]] et on note le passage lu dans outils/sources/.
  */
 
 /** Pour chaque démo (son identifiant dans demos/index.js) : les clés des sources de ce qu'elle affirme. */

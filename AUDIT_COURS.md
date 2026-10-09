@@ -1317,3 +1317,18 @@ Vérification : `node outils/verifier.mjs` donne 360 réussites et 0 échec. Un 
 | 29 | Page Glossaire : index de A à Z, filtre par étape, nombre de résultats annoncé, termes rangés par lettre. | `cours/pages/glossaire.js`, `cours/styles/glossaire.css` |
 
 Reste : 25 (l'Approfondir de l'étape 2 reste long, seuls les encadrés « Pour tester » sont repliés) et 28 (sources, après décision).
+
+### Lot 4 (9 octobre 2026) : décisions de l'auteur
+
+| Décision | Ce qui a été fait | Fichiers |
+|---|---|---|
+| Sources des étapes non référencées : « le plus pratique pour les alimenter plus tard » | Les anciennes listes de liens restent dans le code comme pistes de lecture, non affichées (l'étape 8 ne montre plus sa liste provisoire). La méthode pour référencer une étape est écrite en tête du fichier. | `cours/contenu/sources.js`, `cours/contenu/etape-*.js`, `cours/pages/sources.js` |
+| Sources officielles de l'étape 8 | En attente de l'ouverture du réseau (domaines à autoriser : legifrance.gouv.fr, operat.ademe.fr, base-empreinte.ademe.fr, ecologie.gouv.fr, enedis.fr). | — |
+| Médias : illustrations dessinées | Deux illustrations SVG génériques : les compteurs électricité et gaz (étape 1, Comprendre) et une facture type numérotée (étape 2, Comprendre). Montants et numéros fictifs. | `cours/schemas/compteurs.js`, `cours/schemas/facture.js`, `cours/contenu/etape-1.js`, `cours/contenu/etape-2.js` |
+| Patrimoine : bonus hors progression | Ligne « Bonus · Piloter un patrimoine » (vu / à découvrir) dans le tableau de progression ; « Effacer ma progression » la remet à zéro avec le point de reprise. | `cours/pages/patrimoine.js`, `cours/pages/accueil.js`, `cours/coquille/etat.js` |
+| Étape 2 : replier le technique | Quatre détails techniques (accès Enedis, changement Data Connect, accès GRDF, taux 2026) sont repliés, titre visible. Nouveau marqueur `replie: true` pour tout bloc. | `cours/contenu/etape-2.js`, `cours/blocs/blocs.js`, `cours/styles/niveaux.css` |
+| « Energy Management » = nom propre | Rien à changer (critère 8.7 considéré conforme). | — |
+| Tests apprenants : protocole | Protocole de 30 minutes, 8 tâches, grille de notes et règles de lecture. | `PROTOCOLE_TEST_COURS.md` |
+| Lien « Le cycle » → « Accueil » | Barre du haut et lien « Retour » de l'étape 1. | `cours/principal.js`, `cours/pages/etape.js` |
+
+Vérification : `node outils/verifier.mjs` donne 360 réussites et 0 échec.

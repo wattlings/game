@@ -153,7 +153,8 @@ export function pageAccueil(conteneur) {
       return `<tr><th scope="row"><a href="#etape-${f.num}" class="fam-${f.famille}" style="display:inline-flex;gap:8px;align-items:center;text-decoration:none;color:var(--ink)"><span class="pastille">${f.num}</span>${f.titre}</a> <span class="sr">(${FAMILLES[f.famille].nom})</span></th>
         <td>${m(h.essentiel, "Essentiel")}</td><td>${m(h.demo, "Démo")}</td><td>${m(h.comprendre, "Comprendre")}</td><td>${m(h.approfondir, "Approfondir")}</td>
         <td>${x != null ? `<span class="num">${x} / ${f.quiz?.length ?? "?"}</span>${maitrisee(f.num) ? ' <span class="etoile" aria-hidden="true">★</span><span class="sr">, étape maîtrisée</span>' : ""}` : '<span class="muted">—</span>'}</td></tr>`;
-    }).join("");
+    }).join("") +
+      `<tr class="bonus"><th scope="row"><a href="#patrimoine" style="text-decoration:none;color:var(--ink)">Bonus · Piloter un patrimoine</a></th><td colspan="5">${p.patrimoineVu ? `<span class="badge ok">${icone("ok")}<span class="sr">Bonus : </span>vu</span>` : '<span class="muted">À découvrir après l’étape 8 (hors progression)</span>'}</td></tr>`;
   };
   r();
   let i = false;

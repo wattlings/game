@@ -61,6 +61,12 @@ export default {
         ],
       },
       {
+        type: "schema",
+        id: "facture",
+        legende:
+          "Une facture type : 1. le titulaire et le PDL ; 2. la période et le type de relevé, réel ou estimé ; 3. la consommation, tirée de deux index ; 4. le prix, en trois lignes : fourniture, abonnement, acheminement ; 5. les taxes ; 6. le total TTC. Montants fictifs, sans fournisseur réel : la démo « Anatomie d’une facture » détaille chaque ligne.",
+      },
+      {
         type: "demo",
         id: "consentement",
         titre: "Signe un consentement (simulé)",
@@ -89,6 +95,7 @@ export default {
       {
         type: "texte",
         titre: "Électricité : accès aux données Enedis",
+        replie: true, // détail technique, replié pour ne pas alourdir la lecture
         paragraphes: [
           "**Jusqu’à 36 kVA (segment C5, compteur {{linky}})**[[enedis-segments-c1-c5]] : la {{courbe-de-charge}} est au pas de 30 minutes ; son enregistrement fin se fait avec l’accord du client[[enedis-nmo-cf-016e,cnil-linky-gazpar]]. Les tiers y accèdent par {{data-connect}}, une API où le client donne son consentement sur son espace Enedis, pour une durée demandée par le tiers et limitée à 3 ans[[enedis-contrat-data-connect]].",
           "**Au-delà de 36 kVA (segments C1 à C4, comme l’école)**[[enedis-segments-c1-c5]] : les compteurs professionnels sont télérelevés et mesurent une courbe de charge plus fine. Enedis la relève au pas de 5 minutes depuis fin 2025 ; on en reconstitue des pas de 10 ou 15 minutes[[enedis-nmo-cf-015e]] (10 minutes pour l’école). Les tiers y accèdent par le {{sge|SGE}} d’Enedis (système de gestion des échanges, en web services), avec une autorisation expresse du client, de forme libre mais conservée et limitée dans le temps[[enedis-contrat-sge,enedis-nmo-cf-015e]]. La mise en place prend de plusieurs semaines à plusieurs mois[[enedis-contrat-sge,consometers-sge-tiers]].",
@@ -98,12 +105,14 @@ export default {
         type: "encadre",
         ton: "verifier",
         titre: "Changement récent chez Enedis",
+        replie: true, // détail technique, replié pour ne pas alourdir la lecture
         texte:
           "Data Connect a basculé vers une nouvelle version le 28 septembre 2026 : nouvelle adresse d’autorisation (v2) et nouvelles API de mesure et de contrat ; les anciennes API v5 doivent être arrêtées environ deux semaines plus tard[[github-bascule-data-connect,github-eddie-data-connect]]. Information issue de projets open source : **à confirmer dans la documentation officielle Enedis** avant tout développement.",
       },
       {
         type: "texte",
         titre: "Gaz : accès aux données GRDF",
+        replie: true, // détail technique, replié pour ne pas alourdir la lecture
         paragraphes: [
           "GRDF met à disposition les données par l’API {{adict}} : consommations quotidiennes, mensuelles et semestrielles, données techniques du compteur et données contractuelles, avec le consentement du client[[grdf-adict-faq,datagouv-grdf-adict]]. Le compteur {{gazpar}} transmet chaque jour[[mne-compteurs-communicants]] : la consommation d’un jour J est disponible avec un décalage de 1 à 3 jours[[grdf-adict-faq]].",
           "Le compteur mesure un **volume** (m³). La consommation en énergie s’obtient avec le {{coef-conversion}} : **kWh = m³ × coefficient**[[mne-coefficient-conversion]]. Ce coefficient combine le {{pcs}} du gaz livré et une correction liée aux conditions de livraison (altitude, pression, température)[[grdf-guide-donnees-2026]]. Il change selon la commune et le mois[[grdf-coefficient-conversion]], entre 9 et 12,5 kWh/m³[[mne-coefficient-conversion]].",
@@ -127,6 +136,7 @@ export default {
         type: "encadre",
         ton: "verifier",
         titre: "Taux relevés en septembre 2026",
+        replie: true, // détail technique, replié pour ne pas alourdir la lecture
         texte: [
           "Accise sur l’électricité au 1er août 2026 : 26,35 €/MWh au-delà de 36 kVA (catégories « PME » et « haute puissance »), 30,62 €/MWh pour les ménages et les sites jusqu’à 36 kVA[[ministere-guide-fiscalite-2026]]. La catégorie exacte de l’école reste à vérifier. Accise sur le gaz naturel : 16,66 €/MWh à la même date[[ministere-guide-fiscalite-2026]].",
           "CTA : 15 % de la part fixe du TURPE depuis le 1er février 2026 (21,93 % avant)[[cnieg-cta-2026]] ; pour le gaz, 20,80 % de la part fixe de distribution, plus une quote-part liée au transport[[cnieg-cta-note,mne-taxes-facture]]. TVA : 20 % sur tous les postes[[mne-taxes-facture]]. TURPE 7 : +3,04 % en moyenne au 1er août 2026[[cre-deliberation-2026-105]].",

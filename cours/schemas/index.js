@@ -10,6 +10,8 @@ import detecter from "./detecter.js";
 import agir from "./agir.js";
 import mesurer from "./mesurer.js";
 import modele from "./modele.js";
+import compteurs from "./compteurs.js";
+import facture from "./facture.js";
 
 export const SCHEMAS = {
   cadrer,
@@ -21,4 +23,6 @@ export const SCHEMAS = {
   agir,
   mesurer,
   modele,
+  compteurs,
+  facture,
 };

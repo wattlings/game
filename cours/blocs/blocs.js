@@ -72,10 +72,16 @@ function rendreBloc(bloc, indice) {
   }
 }
 
+/** Un bloc marqué replie: true (détail technique) se lit en dépliant : son titre reste visible. */
+function rendreBlocOuReplie(bloc, indice) {
+  if (!bloc.replie) return rendreBloc(bloc, indice);
+  return `<details class="bloc-replie"><summary><b>${texteRiche(bloc.titre || "Détails")}</b> <span class="muted">· détail technique, pour aller plus loin</span></summary>${rendreBloc({ ...bloc, titre: "" }, indice)}</details>`;
+}
+
 /** Affiche une suite de blocs dans `conteneur`, puis branche les démos, les exemples pas à pas et le quiz.
  * Renvoie la fonction qui démonte le tout quand on quitte la page. */
 export function monterBlocs(conteneur, blocs, { num: t, quiz: a, toucher: c, marquerQuiz: o }) {
-  conteneur.innerHTML = `<div class="stack" style="gap:28px">${blocs.map(rendreBloc).join("")}</div>`;
+  conteneur.innerHTML = `<div class="stack" style="gap:28px">${blocs.map(rendreBlocOuReplie).join("")}</div>`;
   const d = [];
   tous("[data-demo]", conteneur).forEach((l) => {
     const s = DEMOS[l.dataset.demo];

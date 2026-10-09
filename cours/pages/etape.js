@@ -142,7 +142,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
     <section class="bloc sources" data-notes hidden></section>
 
     <nav class="pager" aria-label="Étapes voisines">
-      ${c ? `<a href="#etape-${c.num}"><small>← Étape précédente</small><b>${c.num}. ${echapper(c.titre)}</b></a>` : '<a href="#accueil"><small>← Retour</small><b>Le cycle</b></a>'}
+      ${c ? `<a href="#etape-${c.num}"><small>← Étape précédente</small><b>${c.num}. ${echapper(c.titre)}</b></a>` : '<a href="#accueil"><small>← Retour</small><b>Accueil</b></a>'}
       ${o ? `<a class="next" href="#etape-${o.num}"><small>Étape suivante →</small><b>${o.num}. ${echapper(o.titre)}</b></a>` : '<a class="next" href="#etape-1"><small>On boucle →</small><b>1. Cadrer</b></a>'}
     </nav>
   </div>`;

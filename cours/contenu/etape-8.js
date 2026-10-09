@@ -5,7 +5,6 @@
  * - quiz : le mini-quiz en fin d'Approfondir
  */
 import { etapeDeBase } from "../../commun/donnees/etapes.js";
-import { sourcesEnergie } from "./sources.js";
 
 export default {
   ...etapeDeBase(8),
@@ -154,7 +153,6 @@ export default {
         texte:
           "Cas utiles : année de référence hors bornes, 12 mois non consécutifs, surface qui change entre la référence et l’année courante, DJU manquants, objectif déjà atteint, consommation en PCS comparée à un facteur CO2 en PCI.",
       },
-      sourcesEnergie,
     ],
   },
   quiz: [

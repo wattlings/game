@@ -35,7 +35,7 @@ racine.innerHTML = `
       </a>
       <button class="icon-btn btn-menu" id="btn-menu" type="button" aria-expanded="false" aria-controls="nav-principale">${icone("menu")}<span>Menu</span></button>
       <nav class="nav" id="nav-principale" aria-label="Navigation principale">
-        <a href="#accueil" data-route="accueil">Le cycle</a>
+        <a href="#accueil" data-route="accueil">Accueil</a>
         <a href="#ecole" data-route="ecole">L’école</a>
         <a href="#patrimoine" class="qk-nav-p" data-route="patrimoine">Patrimoine</a>
         <a href="#quiz-final" data-route="quiz-final">Quiz final</a>

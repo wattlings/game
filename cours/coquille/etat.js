@@ -78,6 +78,8 @@ export const magasin = {
   reinitialiser() {
     magasin.set({
       progression: {},
+      derniere: null,
+      patrimoineVu: false,
     });
   },
 };

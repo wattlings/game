@@ -5,7 +5,6 @@
  * - quiz : le mini-quiz en fin d'Approfondir
  */
 import { etapeDeBase } from "../../commun/donnees/etapes.js";
-import { sourcesData } from "./sources.js";
 
 export default {
   ...etapeDeBase(1),
@@ -57,6 +56,12 @@ export default {
           "Un energy manager ne suit jamais « l’énergie » en général. Il suit des objets emboîtés : un **patrimoine** (toutes les écoles d’une ville), des **sites**, des **bâtiments**, et pour chacun des {{point-de-comptage|points de comptage}}.",
           "L’école Jean-Jaurès est un site, avec un bâtiment de 2 000 m² et deux points de comptage : un pour l’électricité, un pour le gaz. Tout ce que le logiciel affichera ensuite sera rattaché à l’un de ces objets.",
         ],
+      },
+      {
+        type: "schema",
+        id: "compteurs",
+        legende:
+          "Ce qu’on lit sur les compteurs : 1. l’index (kWh pour l’électricité, m³ pour le gaz) ; 2. l’identifiant du point de livraison, PDL ou PCE, à 14 chiffres ; 3. le voyant qui clignote avec la consommation ; 4. le module radio du compteur gaz, qui transmet un relevé par jour. Dessin générique, numéros fictifs de l’école.",
       },
       {
         type: "demo",

@@ -5,7 +5,6 @@
  * - quiz : le mini-quiz en fin d'Approfondir
  */
 import { etapeDeBase } from "../../commun/donnees/etapes.js";
-import { sourcesData } from "./sources.js";
 
 export default {
   ...etapeDeBase(3),

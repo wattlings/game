@@ -16,6 +16,7 @@ import {
 } from "../../commun/donnees/patrimoine.js";
 import { benchHTML, paretoHTML, tipify } from "../../commun/graphiques/barres.js";
 import { esc, fmt } from "../../commun/texte.js";
+import { magasin } from "../coquille/etat.js";
 
 /** Les couleurs des graphiques, prises dans les jetons du cours. */
 const SC = {
@@ -30,6 +31,7 @@ const SC = {
   good: "var(--ok)",
 };
 export function pagePatrimoine(c) {
+  if (!magasin.get().patrimoineVu) magasin.set({ patrimoineVu: true }); // le bonus apparaît « vu » dans le tableau de progression
   const P = pareto("mwh"),
     G = PSITES.slice().sort((a, b) => gis(b) - gis(a)),
     GT = PSITES.reduce((a, s) => a + gis(s), 0),
