@@ -53,6 +53,7 @@ function enterDoor(x,y){
   const b=BLD.find(b=>b.door[0]===x&&b.door[1]===y);if(!b)return;
   if(b.arena){enterArena(b.arena);return}
   if(b.id==='office'){warp('office',5,7,'up');return}
+  if(b.id==='etage'){etageEntrer();return}   // « Bureau » : l'étage de bureaux (monde/etage.js)
   if(LOCALS[b.id]){S.inside=b.id;warp('local',5,6,'up');toast(LOCALS[b.id].name);return}
   if(b.id==='gare'){if(voyOuvert()){gareEntrer();return}say([{t:"Gare d'Ampère-sur-Loire. Les portes sont closes. Une affiche : « Gare fermée. Réouverture prochaine. »"},{t:"Sous l'affiche, le tableau des départs est vide. Quelqu'un a écrit à la craie : « D'autres villes, bientôt. »"}]);return}
   if(b.id==='mairie'){if(S.ch>=10)warp('mairie',6,8,'up');else say([{t:"Hôtel de ville. Un panneau : « Le maire est en réunion. » Le panneau semble dater de 2019."},{t:"Tu reviendras quand tu géreras un patrimoine entier."}]);return}

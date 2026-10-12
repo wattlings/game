@@ -3,8 +3,9 @@
 
 /* ================= CARTES ================= */
 const TS=16;let VW=15,VH=11;
-const BLD=['office','ecole','bureau','boulangerie','mairie','gare','enedis','grdf','voltco','media','cabinet','pharma','maison','villa'].map(id=>({id,...L[id]}));
+const BLD=['office','ecole','bureau','boulangerie','mairie','gare','enedis','grdf','voltco','media','cabinet','pharma','maison','villa','etage'].map(id=>({id,...L[id]}));
 Object.assign(BLD[0],{roof:'#5a6b8c',wall:'#e6e2d8'});Object.assign(BLD[4],{roof:'#5b4a7a',wall:'#efe6d2'});Object.assign(BLD[5],{roof:'#7a4a3a',wall:'#f1e6d0'});
+Object.assign(BLD.find(b=>b.id==='etage'),{roof:'#46536e',wall:'#e9e6de'});
 BLD.forEach(b=>{if(SITES[b.id]){b.roof=SITES[b.id].roof;b.wall=SITES[b.id].wall}if(typeof LOCALS!=='undefined'&&LOCALS[b.id]){b.roof=LOCALS[b.id].roof;b.wall=LOCALS[b.id].wall}});
 function grid(w,h,ch){return Array.from({length:h},()=>Array(w).fill(ch))}
 function rect(g,x0,y0,x1,y1,ch){for(let y=y0;y<=y1;y++)for(let x=x0;x<=x1;x++)if(g[y]&&g[y][x]!==undefined)g[y][x]=ch}

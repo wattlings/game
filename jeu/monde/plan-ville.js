@@ -36,6 +36,7 @@ const L={
   maison:{x:5,y:27,w:5,h:4,door:[7,30]},
   pharma:{x:36,y:16,w:5,h:4,door:[38,19]},
   villa:{x:4,y:62,w:6,h:4,door:[7,65]},
+  etage:{x:60,y:35,w:7,h:4,door:[63,38]},             // « Bureau » : l'étage de bureaux (monde/etage.js)
   arena:[null,{x:63,y:15,w:6,h:5,door:[66,19]},{x:80,y:34,w:6,h:5,door:[83,38]},{x:77,y:48,w:6,h:5,door:[80,52]},{x:61,y:52,w:6,h:5,door:[64,56]},
     {x:23,y:52,w:6,h:5,door:[26,56]},{x:6,y:44,w:6,h:5,door:[9,48]},{x:6,y:33,w:6,h:5,door:[9,37]},{x:26,y:15,w:7,h:5,door:[29,19]}],
   park:{x0:74,y0:61,x1:84,y1:70,gate:[79,61]},        // Parc des Données (hautes herbes clôturées)
@@ -52,7 +53,7 @@ const L={
 /* chaque élément est déplacé d'un bloc par la déformation (les bâtiments restent rectangulaires) */
 {const sh=(o,ax,ay)=>{const [nx,ny]=LW(ax,ay);return [nx-ax,ny-ay]};
   const bld=o=>{const [dx,dy]=sh(o,o.door[0],o.door[1]);o.x+=dx;o.y+=dy;o.door=[o.door[0]+dx,o.door[1]+dy]};
-  ['office','ecole','bureau','boulangerie','mairie','gare','cabinet','enedis','grdf','voltco','media','maison','pharma','villa'].forEach(k=>bld(L[k]));L.arena.forEach(a=>a&&bld(a));
+  ['office','ecole','bureau','boulangerie','mairie','gare','cabinet','enedis','grdf','voltco','media','maison','pharma','villa','etage'].forEach(k=>bld(L[k]));L.arena.forEach(a=>a&&bld(a));
   const box=(o,g)=>{const [dx,dy]=sh(o,g?g[0]:(o.x0+o.x1)>>1,g?g[1]:(o.y0+o.y1)>>1);o.x0+=dx;o.x1+=dx;o.y0+=dy;o.y1+=dy;if(o.gate)o.gate=[o.gate[0]+dx,o.gate[1]+dy]};
   box(L.park,L.park.gate);box(L.pool);box(L.meteo,L.meteo.gate);
   L.pondL=Object.assign({},L.pond);                                   // l'étang garde ses coordonnées logiques : il est dessiné déformé

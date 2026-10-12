@@ -15,7 +15,7 @@ function buildMapCanvas(id){
   mapOver[id]=null;
   if(id==='town'){artInit();const o=mkc(W*TS,H*TS),xo=o.getContext('2d');
     for(let y=0;y<H;y++)for(let x=0;x<W;x++){const ch=m.g[y][x];if(ch==='T'||ch==='u'||ch==='k'||ch==='h'||ch==='f'||ch==='P'||ch==='m'){const at=(dx,dy)=>m.g[y+dy]&&m.g[y+dy][x+dx];artProp(x2,xo,ch,x,y,at);if(SEA.snow)snowProp(x2,ch,x,y,at);else if(WEAR&&x<WIND0)wearProp(x2,ch,x,y,at)}}
-    BLD.forEach(b=>{drawBuilding(x2,b);if(b.arena)drawArenaFacade(x2,b);if(b.id==='gare')drawStationFacade(x2,b)});
+    BLD.forEach(b=>{drawBuilding(x2,b);if(b.arena)drawArenaFacade(x2,b);if(b.id==='gare')drawStationFacade(x2,b);if(b.id==='etage')etageFacade(x2,b)});
     mapOver[id]=o}
   mapCache[id]=c;
 }
