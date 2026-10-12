@@ -81,5 +81,5 @@ function update(k){
   if(!P.moving&&!blocked()&&!P.rolling){for(const d of ['up','down','left','right'])if(keys[d]){tryMove(d);break}}
   if(!P.moving&&!Object.values(keys).some(Boolean)){P.frame=0;P.dist=0}
   P.puffs=P.puffs.filter(q=>(q.t+=k)<18);
-  updateGuard(k);arenaUpdate(k);lifeUpdate(k);
+  updateGuard(k);arenaUpdate(k);lifeUpdate(k);etageStep(k);
 }
