@@ -5,7 +5,7 @@
    Le dessin (sols, murs, mobilier) est dans rendu/etage.js. */
 
 /* ---- le plan : 107 cases sur 33, une chaîne par rangée ----
-   On marche sur : o moquette   c carrelage   d porte ouverte   g porte coulissante du sas (il faut badger)
+   On marche sur : o moquette   c carrelage   q parquet flottant   d porte ouverte   g porte coulissante du sas (il faut badger)
    On bute contre : W mur   w mur avec fenêtre   f cloison vitrée   h porte fermée à clé   P porte d'ascenseur
                     B gaine d'ascenseur   r escalier de secours   x dehors (au-delà de la façade) */
 const ETAGE_PLAN=[
@@ -33,63 +33,70 @@ const ETAGE_PLAN=[
 'xxxxxxWWooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooW',
 'xxxxxWWoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooW',
 'xxxxxWoooooooooooooWWWWdWfffffffddfffffffffWoooooooooWWWdWWWWdWWdWWWWooooooooooooooooooWWWWdWdWWWWoooooooow',
-'xxxxWWoooooooooooooWooooWccccccccccccccccccWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
-'xxxWWooooooooooooooWooooWccccccccccccccccccWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
-'xxxWoooooooooooooooWooooWccccccccccccccccccWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWooooooooW',
-'xxWWoooooooooooooooWooooWccccccccccccccccccWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWooooooooW',
-'xxWooooooooooooooooWooooWccccccccccccccccccWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
-'xWWooooooooooooooooWooooWccccccccccccccccccWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
-'WWoooooooooooooooooWooooWccccccccccccccccccWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
-'WooooooooooooooooooWooooWccccccccccccccccccWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWooooooooW',
+'xxxxWWoooooooooooooWooooWqqqqqqqqqqqqqqqqqqWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
+'xxxWWooooooooooooooWooooWqqqqqqqqqqqqqqqqqqWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
+'xxxWoooooooooooooooWooooWqqqqqqqqqqqqqqqqqqWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWooooooooW',
+'xxWWoooooooooooooooWooooWqqqqqqqqqqqqqqqqqqWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWooooooooW',
+'xxWooooooooooooooooWooooWqqqqqqqqqqqqqqqqqqWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
+'xWWooooooooooooooooWooooWqqqqqqqqqqqqqqqqqqWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
+'WWoooooooooooooooooWooooWqqqqqqqqqqqqqqqqqqWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWoooooooow',
+'WooooooooooooooooooWooooWqqqqqqqqqqqqqqqqqqWoooooooooWooooWooooWooooWooooooooooooooooooWooooWooooWooooooooW',
 'WWWwwwWWWwwwWWwwwWWWWwwWWWwwwWwwWWWwwWWwwwWWWwwWWwwWWWWwwWWWwwWWWwwWWWwwwWwwwWWwwwWwwwWWWwwWWWwwWWWwwWWwwWW'];
 
 /* ---- le mobilier ----
    Chaque meuble : k (sa nature), x, y (la case en haut à gauche), w, h (sa taille en cases), d (là où il regarde).
-   Un poste de travail : la chaise est sur sa case, la table (deux écrans, clavier, souris) sur la case qu'elle regarde. */
+   Un poste de travail : la chaise est sur sa case ; devant elle, la table sur deux cases de profondeur
+   (le clavier sur la première, les deux écrans au fond de la seconde). */
 function etageMeubles(){
   const M=[],m=(k,x,y,o)=>M.push(Object.assign({k,x,y,w:1,h:1},o||{}));
   const poste=(x,y,d)=>m('poste',x,y,{d});
-  // un îlot de bureaux : une table en bois (2 cases de large) et un poste de chaque côté, aux rangées données
-  const ilot=(x,y0,y1,rangs)=>{m('table',x,y0,{w:2,h:y1-y0+1,bois:1});rangs.forEach(y=>{poste(x-1,y,'right');poste(x+2,y,'left')})};
-  // une salle de réunion : une table blanche, des chaises tout autour sauf côté écran
-  const chaises=(xs,ys,d,st)=>xs.forEach(x=>ys.forEach(y=>m('chaise',x,y,{d,st})));
-  const rg=(a,b)=>Array.from({length:b-a+1},(_,i)=>a+i);
+  // un îlot : une table en bois de 4 cases de large (2 par côté), les postes face à face aux rangées données
+  const ilot=(x,y0,y1,rangs)=>{m('table',x,y0,{w:4,h:y1-y0+1,bois:1});rangs.forEach(y=>{poste(x-1,y,'right');poste(x+4,y,'left')})};
+  // le même îlot avec une table de 3 cases (là où il faut garder un passage entre les îlots)
+  const ilot3=(x,y0,y1,rangs)=>{m('table',x,y0,{w:3,h:y1-y0+1,bois:1});rangs.forEach(y=>{poste(x-1,y,'right');poste(x+3,y,'left')})};
+  // un bureau seul : une table de 3 cases sur 2, la chaise au milieu
+  const seul=(x,y,d)=>{const T={up:[x-1,y-2,3,2],down:[x-1,y+1,3,2],left:[x-2,y-1,2,3],right:[x+1,y-1,2,3]}[d];m('table',T[0],T[1],{w:T[2],h:T[3],bois:1});poste(x,y,d)};
+  const chaises=(pos,d,st)=>pos.forEach(([x,y])=>m('chaise',x,y,{d,st}));
 
   // ---- espaces de bureaux (89 postes)
-  ilot(22,3,7,[3,5,7]);ilot(28,3,7,[3,5,7]);                                  // nord-ouest
-  ilot(41,2,6,[2,4,6]);ilot(47,2,6,[2,4,6]);ilot(53,2,6,[2,4,6]);              // nord
-  m('table',61,3,{bois:1});poste(61,2,'down');                                // le bureau fermé
-  m('table',67,2,{w:2,h:3,bois:1});[2,4].forEach(y=>{poste(66,y,'right');poste(69,y,'left')});m('table',65,7,{bois:1});poste(65,8,'up');   // bureau violet
-  m('table',76,2,{w:2,h:3,bois:1});[2,4].forEach(y=>{poste(75,y,'right');poste(78,y,'left')});m('table',80,7,{bois:1});poste(80,8,'up');   // bureau rose
-  ilot(94,3,5,[3,5]);ilot(100,3,5,[3,5]);                                      // nord-est
-  [7,14].forEach(x=>{m('table',x,26,{w:2,h:5,bois:1});[28,30].forEach(y=>{poste(x-1,y,'right');poste(x+2,y,'left')});poste(x+1,25,'down')});   // sud-ouest
-  m('table',45,25,{w:2,h:2,bois:1});poste(45,24,'down');poste(47,26,'left');  // espace calme
-  m('table',50,25,{w:2,h:2,bois:1});poste(51,24,'down');poste(49,26,'right');
-  m('table',47,29,{bois:1});poste(47,30,'up');m('table',50,29,{bois:1});poste(50,30,'up');
-  ilot(70,25,29,[25,27,29]);ilot(76,25,29,[25,27,29]);ilot(82,25,29,[25,27,29]);   // sud
-  m('table',101,25,{w:2,h:6,bois:1});[26,28].forEach(y=>{poste(100,y,'right');poste(103,y,'left')});poste(101,24,'down');poste(102,31,'up');   // sud-est
+  ilot(20,3,7,[3,5,7]);ilot(27,3,7,[3,5,7]);                                  // nord-ouest
+  ilot(40,2,6,[2,4,6]);ilot(46,2,6,[2,4,6]);ilot(52,2,6,[2,4,6]);              // nord
+  seul(61,2,'down');                                                           // le bureau fermé
+  ilot(65,2,4,[2,4]);seul(65,8,'up');                                          // bureau violet
+  ilot(74,2,4,[2,4]);seul(79,8,'up');                                          // bureau rose
+  ilot(92,3,5,[3,5]);ilot(99,3,5,[3,5]);                                       // nord-est
+  [6,13].forEach(x=>{m('table',x,26,{w:4,h:5,bois:1});[28,30].forEach(y=>{poste(x-1,y,'right');poste(x+4,y,'left')});poste(x+1,25,'down')});   // sud-ouest
+  m('table',44,25,{w:3,h:2,bois:1});poste(44,24,'down');poste(47,26,'left');  // espace calme
+  m('table',49,25,{w:3,h:2,bois:1});poste(51,24,'down');poste(48,26,'right');
+  seul(47,31,'up');seul(50,31,'up');
+  ilot3(70,25,29,[25,27,29]);ilot3(76,25,29,[25,27,29]);ilot3(82,25,29,[25,27,29]);   // sud (un passage entre chaque îlot)
+  m('table',100,25,{w:4,h:6,bois:1});[27,28].forEach(y=>{poste(99,y,'right');poste(104,y,'left')});poste(101,24,'down');poste(102,31,'up');   // sud-est
 
-  // ---- salles de réunion (nom, table, chaises, écran)
-  m('table',34,2,{w:3,h:2});chaises([34,35,36],[1],'down');chaises([35,36],[4],'up');chaises([33],[2,3],'right');m('ecran',38,2,{h:2,mur:'e'});   // Bali
-  m('table',84,3,{w:4,h:4});chaises(rg(84,87),[2],'down');chaises(rg(84,87),[7],'up');chaises([88],rg(3,6),'left');m('ecran',81,4,{h:2,mur:'w'});   // Jouzel
-  m('table',99,11,{w:5,h:2});chaises(rg(99,103),[10],'down');chaises([98],[11,12],'right');chaises([104],[11,12],'left');m('ecran',100,15,{w:3,mur:'s'});   // Plass
-  m('table',99,17,{w:5,h:2});chaises(rg(99,103),[16],'down','haute');chaises([98],[17,18],'right','haute');chaises([104],[17,18],'left','haute');m('ecran',100,20,{w:3,mur:'s'});   // Cancun
+  // ---- salles de réunion : une table blanche, quelques chaises, l'écran au mur indiqué
+  m('table',34,2,{w:3,h:2});chaises([[34,1],[36,1]],'down');chaises([[33,2],[33,3]],'right');m('ecran',38,2,{h:2,mur:'e'});   // Voltaire
+  m('table',84,3,{w:4,h:4});chaises([[85,2],[86,2]],'down');chaises([[85,7],[86,7]],'up');chaises([[88,4],[88,5]],'left');m('ecran',81,4,{h:2,mur:'w'});   // Watterloo
+  m('table',99,11,{w:5,h:2});chaises([[100,10],[102,10]],'down');chaises([[98,11]],'right');chaises([[104,11]],'left');m('ecran',100,15,{w:3,mur:'s'});   // Jouliette
+  m('table',99,17,{w:5,h:2});chaises([[100,16],[102,16]],'down','haute');chaises([[98,17]],'right','haute');chaises([[104,17]],'left','haute');m('ecran',100,20,{w:3,mur:'s'});   // Ampérium
   const salle=(x,mur,st)=>{   // les salles du sud : 4 cases de large, table au milieu, écran à l'est ou à l'ouest
-    m('table',x+1,26,{w:2,h:4});chaises([x+1,x+2],[25],'down',st);chaises([x+1,x+2],[30],'up',st);
-    if(mur==='e'){chaises([x],rg(26,29),'right',st);m('ecran',x+4,27,{h:2,mur:'e'})}else{chaises([x+3],rg(26,29),'left',st);m('ecran',x-1,27,{h:2,mur:'w'})}};
-  salle(20,'w','haute');salle(54,'e');salle(64,'e');salle(88,'w');salle(93,'e');   // Tyndall, Brainstorming, Copenhague, Newton, Paris
-  // Repos : pas de table, pas d'écran
+    m('table',x+1,26,{w:2,h:4});chaises([[x+1,25]],'down',st);chaises([[x+2,30]],'up',st);
+    if(mur==='e'){chaises([[x,26],[x,28]],'right',st);m('ecran',x+4,27,{h:2,mur:'e'})}else{chaises([[x+3,26],[x+3,28]],'left',st);m('ecran',x-1,27,{h:2,mur:'w'})}};
+  salle(20,'w','haute');salle(54,'e');salle(64,'e');salle(88,'w');salle(93,'e');   // Ohméga, Tempête, Bobine, Dynamo, Pile Poil
+  // Veille (le repos) : pas de table, pas d'écran
   m('canape',59,31,{w:3,d:'up',col:'#9ba0aa'});m('fatboy',59,26);m('pouf',60,28,{col:'#e2573b'});m('pouf',62,29,{col:'#f2c12e'});m('ballon',62,25);
-  // les deux alcôves : écran au mur, table blanche, une banquette de chaque côté
+  // le Nid et le Terrier (les alcôves) : écran au mur, table blanche, une banquette de chaque côté
   m('table',86,13,{w:2,h:2});m('banquette',86,12,{w:2,d:'down'});m('banquette',86,15,{w:2,d:'up'});m('ecran',85,13,{h:2,mur:'w'});
   m('table',86,18,{w:2});m('banquette',86,17,{w:2,d:'down'});m('banquette',86,19,{w:2,d:'up'});m('ecran',85,18,{mur:'w'});
 
-  // ---- cafétéria
-  m('frigo',42,24);m('vaisselle',42,25);m('evier',42,26);m('microondes',42,27);m('cafe',42,28);m('cafe',42,29);
-  m('table',38,31,{w:4,bois:1});chaises(rg(38,41),[30],'down');m('chaise',37,31,{d:'right'});m('chaise',42,31,{d:'left'});
+  // ---- le Perco (la cafétéria)
+  // la cuisine occupe tout le mur est, du nord au sud
+  m('frigo',42,24);m('comptoir',42,25);m('vaisselle',42,26);m('evier',42,27);m('comptoir',42,28);m('microondes',42,29);m('cafe',42,30);m('cafe',42,31);
+  // la grande table en bois, dans le sens nord-sud, un bout contre le mur sud ; on longe la cuisine par la colonne 41
+  m('table',38,28,{w:2,h:4,bois:1});chaises([[37,28],[37,29],[37,30],[37,31]],'right');chaises([[40,28],[40,29],[40,30],[40,31]],'left');
   m('armoire',31,31,{w:3});
-  [28,32,36].forEach(x=>{m('rond',x,28);m('chaise',x,27,{d:'down'});m('chaise',x,29,{d:'up'});m('chaise',x-1,28,{d:'right'});m('chaise',x+1,28,{d:'left'})});
-  m('canape',25,31,{w:3,d:'up',col:'#9ba0aa'});m('tbasse',26,30);m('chaise',25,29,{d:'down',st:'verte'});m('chaise',27,29,{d:'down',st:'verte'});
+  // trois tables rondes alignées sur l'armoire, un passage entre elles (la dernière n'a pas de chaise côté est : la grande table est là)
+  [28,32,36].forEach(x=>{m('rond',x,28);chaises([[x,27]],'down');chaises([[x,29]],'up');chaises([[x-1,28]],'right');if(x<36)chaises([[x+1,28]],'left')});
+  // le coin salon, contre le mur ouest : canapé, table basse, deux fauteuils verts en face ; plus au nord l'écran et le babyfoot
+  m('canape',25,29,{h:3,d:'right',col:'#9ba0aa'});m('tbasse',26,30);chaises([[27,29],[27,31]],'left','verte');
   m('ecran',24,25,{h:2,mur:'w'});m('babyfoot',26,25,{w:2});
 
   // ---- sanitaires
@@ -110,9 +117,15 @@ function etageMeubles(){
   return M;
 }
 
+/* ---- les salles et les open spaces (moquette claire) ; tout le reste de la moquette est couloir (moquette foncée) ---- */
+const ETAGE_SALLES=[[0,1,31,8],[33,1,37,4],[36,6,37,8],[39,1,57,8],[59,1,62,8],[64,1,71,8],[73,1,80,8],[82,1,89,8],[91,1,105,8],
+  [0,10,18,12],[0,14,18,16],[0,18,18,19],[23,16,33,18],[86,12,89,15],[86,17,89,19],[91,14,93,19],[82,17,84,19],[97,10,105,14],[97,16,105,19],
+  [0,23,18,31],[20,24,23,31],[44,23,52,31],[54,24,57,31],[59,24,62,31],[64,24,67,31],[69,23,86,31],[88,24,91,31],[93,24,96,31],[98,23,105,31]];
+const etageSalle=(x,y)=>ETAGE_SALLES.some(([a,b,c,d])=>x>=a&&x<=c&&y>=b&&y<=d);
+
 /* ---- les plaques de porte ---- */
-const ETAGE_PLAQUES=[['BALI',33,5],['JOUZEL',86,9],['PLASS',96,12],['CANCUN',96,18],['TYNDALL',20,23],['CAFETERIA',25,23],['BRAINSTORMING',53,23],['REPOS',59,23],['COPENHAGUE',65,23],['NEWTON',88,23],['PARIS',94,23],
-  ['WC',41,20],['WC',48,20],['WC',78,11],['ALCOVE',86,11],['ALCOVE',86,20],['RGT',93,20]];
+const ETAGE_PLAQUES=[['VOLTAIRE',35,5],['WATTERLOO',82,9],['JOULIETTE',96,12],['AMPERIUM',96,18],['OHMEGA',20,23],['LE PERCO',25,23],['TEMPETE',53,23],['VEILLE',59,23],['BOBINE',65,23],['DYNAMO',88,23],['PILE POIL',94,23],
+  ['WC',41,20],['WC',48,20],['WC',78,11],['NID',86,11],['TERRIER',86,20],['RGT',93,20]];
 
 /* ---- l'état de la visite : le badge (remis à zéro à chaque arrivée) ---- */
 const ETG={badge:false,ouv:0};

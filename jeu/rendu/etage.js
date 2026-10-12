@@ -5,7 +5,7 @@
 /* lettres qui manquaient à la petite police 3×5 (rendu/decor-velos.js), pour les plaques de porte */
 Object.assign(F35,{J:'001001001101111',K:'101110100110101',Q:'111101101111001',W:'101101101111101',X:'101101010101101',Y:'101101010010010',Z:'111001010100111'});
 
-const ETC={moq:['#7e8ba1','#7a879d'],moqP:['#74819a','#8a96ab'],carr:'#ebe9e3',joint:'#d6d3cb',dessus:'#3d4252',face:'#e9e6de',plinthe:'#a3a9b5',
+const ETC={moqS:['#93a9cf','#8ea4ca'],moqSP:['#869cc3','#a1b5d8'],moqC:['#55678f','#516289'],moqCP:['#4a5b82','#61739b'],parq:['#dcc49a','#d4ba8d','#e2cca4'],parqJ:'#b99c6d',carr:'#ebe9e3',joint:'#d6d3cb',dessus:'#3d4252',face:'#e9e6de',plinthe:'#a3a9b5',
   vitre:'#a9d8f0',reflet:'#e2f4fc',cadre:'#59627a',dehors:'#e3e7ee',point:'#c7cdd8',bois:'#c89b63',boisB:'#9a6f3e',boisV:'#b98c55',blanc:'#f3f2ee',blancB:'#c9c6bd',noir:'#2b2c33',noirD:'#1e1f25'};
 /* la façade en biais, en cases : de (20,45 ; 0) à (0 ; 32,27) ; ses deux fenêtres côté ouest (rangées) */
 const ETAGE_BIAIS=[20.45,32.27],ETAGE_BIAIS_FEN=[[2.2,5.6],[22.6,25.2],[27.4,30.2]];
@@ -16,9 +16,11 @@ function etagePeindre(c,dessus,m){
   const biais=(x,y)=>y>0&&y<H-1&&x<=21&&at(x,y)==='W'&&x<etBiaisX(y)+.001&&x+1>etBiaisX(y+1)-.001;
   const plein=(x,y)=>{const t=at(x,y);return t!==undefined&&'WwhPBf'.includes(t)};   // ce qui se raccorde à un mur
   // le sol d'une case : o moquette, c carrelage, x dehors ; null pour un mur
-  const sol=(x,y)=>{const t=at(x,y);if(t===undefined||t==='x')return 'x';if(biais(x,y))return 'o';if(t==='c')return 'c';
-    if(t==='d')return [[0,1],[0,-1],[1,0],[-1,0]].some(([a,b])=>at(x+a,y+b)==='c')?'c':'o';return 'ogkr'.includes(t)?'o':null};
-  const peindreSol=(k,X,Y,x,y)=>k==='c'?etCarrelage(c,X,Y):k==='x'?etDehors(c,X,Y):etMoquette(c,X,Y,x,y);
+  // le sol d'une case : s moquette claire (salles), o moquette foncée (couloirs), c carrelage, p parquet, x dehors ; null pour un mur
+  const moq=(x,y)=>etageSalle(x,y)?'s':'o';
+  const sol=(x,y)=>{const t=at(x,y);if(t===undefined||t==='x')return 'x';if(biais(x,y))return moq(x,y);if(t==='c')return 'c';if(t==='q')return 'p';
+    if(t==='d'){const v=[[0,1],[0,-1],[1,0],[-1,0]].map(([a,b])=>at(x+a,y+b));return v.includes('c')?'c':'o'}return 'ogkr'.includes(t)?moq(x,y):null};
+  const peindreSol=(k,X,Y,x,y)=>k==='c'?etCarrelage(c,X,Y):k==='p'?etParquet(c,X,Y,x,y):k==='x'?etDehors(c,X,Y):etMoquette(c,X,Y,x,y,k==='s');
   // 1. les sols, y compris sous les murs : chaque quart de case prend le sol du voisin le plus proche
   for(let y=0;y<H;y++)for(let x=0;x<W;x++){
     const X=x*16,Y=y*16,k=sol(x,y);if(k){peindreSol(k,X,Y,x,y);continue}
@@ -64,10 +66,15 @@ function etagePeindre(c,dessus,m){
 }
 
 /* ---- sols et murs ---- */
-function etMoquette(c,X,Y,x,y){
-  R(c,X,Y,16,16,ETC.moq[((x>>1)+(y>>1))%2]);
-  const h=hash(x,y);R(c,X+((h*13)|0)%15,Y+((h*71)|0)%15,1,1,ETC.moqP[0]);R(c,X+((h*37)|0)%15,Y+((h*53)|0)%15,1,1,ETC.moqP[1]);
-  if(h>.5)R(c,X+((h*91)|0)%15,Y+((h*29)|0)%15,1,1,ETC.moqP[1]);
+function etMoquette(c,X,Y,x,y,salle){
+  const B=salle?ETC.moqS:ETC.moqC,P=salle?ETC.moqSP:ETC.moqCP;R(c,X,Y,16,16,B[((x>>1)+(y>>1))%2]);
+  const h=hash(x,y);R(c,X+((h*13)|0)%15,Y+((h*71)|0)%15,1,1,P[0]);R(c,X+((h*37)|0)%15,Y+((h*53)|0)%15,1,1,P[1]);
+  if(h>.5)R(c,X+((h*91)|0)%15,Y+((h*29)|0)%15,1,1,P[1]);
+}
+/* parquet flottant : des lames est-ouest de 4 px, joints décalés d'une rangée à l'autre */
+function etParquet(c,X,Y,x,y){
+  for(let r=0;r<4;r++){const yy=Y+r*4,k=(y*4+r),o=((k*7)%4)*4;R(c,X,yy,16,4,ETC.parq[(k+x)%3]);R(c,X,yy+3,16,1,ETC.parqJ);
+    const j=((k*11+x*16+o)%32);if(j<16)R(c,X+j,yy,1,3,ETC.parqJ);if(hash(x*4+r,y)>.7)R(c,X+((hash(y,x+r)*12)|0)+2,yy+1,3,1,'#c8ad80')}
 }
 function etCarrelage(c,X,Y){R(c,X,Y,16,16,ETC.carr);R(c,X,Y+7,16,1,ETC.joint);R(c,X,Y+15,16,1,ETC.joint);R(c,X+7,Y,1,16,ETC.joint);R(c,X+15,Y,1,16,ETC.joint)}
 function etDehors(c,X,Y){R(c,X,Y,16,16,ETC.dehors);R(c,X+4,Y+4,1,1,ETC.point);R(c,X+12,Y+12,1,1,ETC.point)}
@@ -86,13 +93,15 @@ function etMeuble(c,f){
     case 'table':etOmbre(c,X+2,Y+Hp-2,Wp-2,2);
       if(f.bois){R(c,X+1,Y+1,Wp-2,Hp-3,ETC.bois);R(c,X+1,Y+Hp-3,Wp-2,2,ETC.boisB);for(let j=0;j<f.h;j++)R(c,X+3,Y+j*16+6,Wp-6,1,ETC.boisV);if(f.w===2&&f.h>1)R(c,X+15,Y+1,2,Hp-4,'#a97e4a')}
       else{R(c,X+1,Y+1,Wp-2,Hp-3,ETC.blancB);R(c,X+2,Y+2,Wp-4,Hp-6,ETC.blanc);R(c,X+1,Y+Hp-3,Wp-2,2,'#b3b0a7')}break;
-    case 'poste':{const [dx,dy]=DIRS[f.d];etEcrans(c,X+dx*16,Y+dy*16,f.d);etChaise(c,X,Y,f.d,'bureau');break}
+    case 'poste':{const [dx,dy]=DIRS[f.d];etClavier(c,X+dx*16,Y+dy*16,f.d);etEcrans(c,X+dx*32,Y+dy*32,f.d);etChaise(c,X,Y,f.d,'bureau');break}
     case 'chaise':etChaise(c,X,Y,f.d,f.st||'blanche');break;
     case 'rond':etOmbre(c,X+3,Y+12,11,3);c.fillStyle=ETC.blancB;c.beginPath();c.arc(X+8,Y+8,7,0,7);c.fill();c.fillStyle=ETC.blanc;c.beginPath();c.arc(X+8,Y+7.5,6,0,7);c.fill();R(c,X+5,Y+5,2,1,'#ffffff');break;
     case 'ecran':etEcranMural(c,f);break;
-    case 'canape':{const col=f.col,fonce='#6d727c',clair='#b9bec7';etOmbre(c,X,Y+14,Wp,2);
-      if(f.d==='up'){R(c,X,Y+2,Wp,13,fonce);R(c,X+3,Y+3,Wp-6,8,col);for(let i=0;i<f.w;i++){R(c,X+3+i*((Wp-6)/f.w),Y+3,(Wp-6)/f.w-1,8,clair);R(c,X+4+i*((Wp-6)/f.w),Y+4,(Wp-6)/f.w-3,1,'#d3d7de')}R(c,X+1,Y+11,Wp-2,4,col);R(c,X,Y+2,3,13,'#80858f');R(c,X+Wp-3,Y+2,3,13,'#80858f')}
+    case 'canape':{const col=f.col,fonce='#6d727c',clair='#b9bec7';etOmbre(c,X,Y+Hp-2,Wp,2);
+      if(f.d==='up'){R(c,X,Y+2,Wp,13,fonce);for(let i=0;i<f.w;i++){R(c,X+3+i*((Wp-6)/f.w),Y+3,(Wp-6)/f.w-1,8,clair);R(c,X+4+i*((Wp-6)/f.w),Y+4,(Wp-6)/f.w-3,1,'#d3d7de')}R(c,X+1,Y+11,Wp-2,4,col);R(c,X,Y+2,3,13,'#80858f');R(c,X+Wp-3,Y+2,3,13,'#80858f')}
+      else if(f.d==='right'){R(c,X+1,Y,14,Hp,fonce);R(c,X+1,Y+1,4,Hp-2,col);for(let j=0;j<f.h;j++){R(c,X+5,Y+3+j*((Hp-6)/f.h),9,(Hp-6)/f.h-1,clair);R(c,X+6,Y+4+j*((Hp-6)/f.h),1,(Hp-6)/f.h-3,'#d3d7de')}R(c,X+1,Y,14,3,'#80858f');R(c,X+1,Y+Hp-3,14,3,'#80858f')}
       else{R(c,X,Y+1,Wp,13,fonce);R(c,X+1,Y+1,Wp-2,4,col);for(let i=0;i<f.w;i++)R(c,X+3+i*((Wp-6)/f.w),Y+5,(Wp-6)/f.w-1,8,clair)}break}
+    case 'comptoir':etComptoir(c,X,Y);R(c,X+6,Y+4,6,1,'#c9c4b9');R(c,X+5,Y+10,4,3,'#e2573b');R(c,X+10,Y+9,3,4,'#f7f5ee');break;
     case 'tbasse':etOmbre(c,X+2,Y+12,12,2);R(c,X+2,Y+4,12,8,'#7a5230');R(c,X+3,Y+5,10,6,'#a0764a');R(c,X+5,Y+6,3,2,'#f3f2ee');break;
     case 'babyfoot':{etOmbre(c,X+2,Y+14,28,2);R(c,X+1,Y+2,30,12,'#6b4a2b');R(c,X+3,Y+4,26,8,'#3f9a4a');R(c,X+16,Y+4,1,8,'#e8f5e0');R(c,X+3,Y+6,1,4,'#e8f5e0');R(c,X+28,Y+6,1,4,'#e8f5e0');
       [6,10,14,18,22,26].forEach((rx,i)=>{R(c,X+rx,Y+1,1,14,'#c9ccd2');R(c,X+rx-1,Y+6+(i%2)*2,3,2,i<3?'#c43d3d':'#2f6db5')});R(c,X+15,Y+7,2,2,'#ffffff');break}
@@ -140,13 +149,21 @@ function etChaise(c,X,Y,d,st){
   else if(d==='left'){R(c,X+11,Y+3,e,10,ETC.noirD);R(c,X+11,Y+3,1,10,'#44464f')}
   else{R(c,X+1-(hb?1:0),Y+3,e,10,ETC.noirD);R(c,X+e-(hb?1:0),Y+3,1,10,'#44464f')}
 }
-/* les deux écrans, le clavier et la souris d'un poste, sur la case de table qu'il regarde */
+/* le clavier et la souris d'un poste, sur la première case de table devant la chaise */
+function etClavier(c,X,Y,d){
+  const k='#d6d9de',t='#b8bcc4';
+  if(d==='up'){R(c,X+3,Y+8,9,3,t);R(c,X+3,Y+8,9,2,k);R(c,X+13,Y+8,2,3,k)}
+  else if(d==='down'){R(c,X+4,Y+5,9,3,t);R(c,X+4,Y+5,9,2,k);R(c,X+1,Y+5,2,3,k)}
+  else if(d==='left'){R(c,X+6,Y+3,3,9,t);R(c,X+6,Y+3,2,9,k);R(c,X+6,Y+13,3,2,k)}
+  else{R(c,X+7,Y+4,3,9,t);R(c,X+8,Y+4,2,9,k);R(c,X+7,Y+1,3,2,k)}
+}
+/* les deux écrans d'un poste, au fond de la seconde case de table (dos à dos avec le poste d'en face) */
 function etEcrans(c,X,Y,d){
-  const cadre='#1c1f26',ecr='#5b8fd9',dos='#3a3e48',clav='#d6d9de';
-  if(d==='up'){[1,9].forEach(a=>{R(c,X+a,Y+1,6,5,cadre);R(c,X+a+1,Y+2,4,3,ecr);R(c,X+a+1,Y+2,1,1,'#a9c8f5');R(c,X+a+2,Y+6,2,1,'#3a3d46')});R(c,X+4,Y+10,8,2,clav);R(c,X+13,Y+10,2,2,clav)}
-  else if(d==='down'){[1,9].forEach(a=>{R(c,X+a,Y+9,6,5,dos);R(c,X+a+1,Y+10,4,1,'#4a4f5c');R(c,X+a+2,Y+8,2,1,'#3a3d46')});R(c,X+4,Y+3,8,2,clav);R(c,X+13,Y+3,2,2,clav)}
-  else if(d==='left'){[1,9].forEach(b=>{R(c,X+2,Y+b,2,6,cadre);R(c,X+4,Y+b+1,1,4,ecr)});R(c,X+10,Y+4,2,8,clav);R(c,X+10,Y+13,2,2,clav)}
-  else{[1,9].forEach(b=>{R(c,X+12,Y+b,2,6,cadre);R(c,X+11,Y+b+1,1,4,ecr)});R(c,X+4,Y+4,2,8,clav);R(c,X+4,Y+13,2,2,clav)}
+  const cadre='#1c1f26',ecr='#5b8fd9',dos='#3a3e48',pied='#3a3d46';
+  if(d==='up'){[0,8].forEach(a=>{R(c,X+a+1,Y+1,7,6,cadre);R(c,X+a+2,Y+2,5,4,ecr);R(c,X+a+2,Y+2,2,1,'#a9c8f5');R(c,X+a+3,Y+7,3,1,pied)})}
+  else if(d==='down'){[0,8].forEach(a=>{R(c,X+a+1,Y+9,7,6,dos);R(c,X+a+2,Y+10,5,1,'#4a4f5c');R(c,X+a+3,Y+8,3,1,pied)})}
+  else if(d==='left'){[0,8].forEach(b=>{R(c,X+1,Y+b+1,3,7,cadre);R(c,X+4,Y+b+2,1,5,ecr);R(c,X+5,Y+b+3,1,3,pied)})}
+  else{[0,8].forEach(b=>{R(c,X+12,Y+b+1,3,7,cadre);R(c,X+11,Y+b+2,1,5,ecr);R(c,X+10,Y+b+3,1,3,pied)})}
 }
 /* un écran de présentation accroché au mur (vu de dessus : une barre sombre, la lumière côté salle) */
 function etEcranMural(c,f){
