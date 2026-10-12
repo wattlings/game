@@ -1,5 +1,5 @@
 /* Wattlings · jeu/rendu/etage.js
-   Dessin de l'étage « Bureau » (monde/etage.js) : sols, murs, fenêtres, puis tout le mobilier, peints une fois pour toutes.
+   Dessin des étages du bâtiment « Bureau » (monde/etage.js) : sols, murs, fenêtres, puis tout le mobilier, peints une fois pour toutes.
    Seules les portes coulissantes du sas et le voyant du lecteur de badge sont redessinés à chaque image. */
 
 /* lettres qui manquaient à la petite police 3×5 (rendu/decor-velos.js), pour les plaques de porte */
@@ -7,17 +7,16 @@ Object.assign(F35,{J:'001001001101111',K:'101110100110101',Q:'111101101111001',W
 
 const ETC={moqS:['#93a9cf','#8ea4ca'],moqSP:['#869cc3','#a1b5d8'],moqC:['#55678f','#516289'],moqCP:['#4a5b82','#61739b'],parq:['#dcc49a','#d4ba8d','#e2cca4'],parqJ:'#b99c6d',carr:'#ebe9e3',joint:'#d6d3cb',dessus:'#3d4252',face:'#e9e6de',plinthe:'#a3a9b5',
   vitre:'#a9d8f0',reflet:'#e2f4fc',cadre:'#59627a',dehors:'#e3e7ee',point:'#c7cdd8',bois:'#c89b63',boisB:'#9a6f3e',boisV:'#b98c55',blanc:'#f3f2ee',blancB:'#c9c6bd',noir:'#2b2c33',noirD:'#1e1f25'};
-/* la façade en biais, en cases : de (20,45 ; 0) à (0 ; 32,27) ; ses deux fenêtres côté ouest (rangées) */
-const ETAGE_BIAIS=[20.45,32.27],ETAGE_BIAIS_FEN=[[2.2,5.6],[22.6,25.2],[27.4,30.2]];
-const etBiaisX=y=>ETAGE_BIAIS[0]*(1-y/ETAGE_BIAIS[1]);
+/* distance d'un point à un segment (en cases) : sert aux murs en biais */
+function etDistSeg(px,py,[ax,ay],[bx,by]){const dx=bx-ax,dy=by-ay,t=Math.max(0,Math.min(1,((px-ax)*dx+(py-ay)*dy)/(dx*dx+dy*dy)));return Math.hypot(px-ax-t*dx,py-ay-t*dy)}
 
 function etagePeindre(c,dessus,m){
   const S0=m.sol,H=S0.length,W=S0[0].length,at=(x,y)=>S0[y]&&S0[y][x];
-  const biais=(x,y)=>y>0&&y<H-1&&x<=21&&at(x,y)==='W'&&x<etBiaisX(y)+.001&&x+1>etBiaisX(y+1)-.001;
+  // un mur en biais (m.biais : des segments en cases) est peint comme un trait ; ses cases sont peintes comme du sol
+  const BI=m.biais||[],biais=(x,y)=>at(x,y)==='W'&&BI.some(b=>etDistSeg(x+.5,y+.5,b.a,b.b)<=.75);
   const plein=(x,y)=>{const t=at(x,y);return t!==undefined&&'WwhPBf'.includes(t)};   // ce qui se raccorde à un mur
-  // le sol d'une case : o moquette, c carrelage, x dehors ; null pour un mur
   // le sol d'une case : s moquette claire (salles), o moquette foncée (couloirs), c carrelage, p parquet, x dehors ; null pour un mur
-  const moq=(x,y)=>etageSalle(x,y)?'s':'o';
+  const moq=(x,y)=>m.salle(x,y)?'s':'o';
   const sol=(x,y)=>{const t=at(x,y);if(t===undefined||t==='x')return 'x';if(biais(x,y))return moq(x,y);if(t==='c')return 'c';if(t==='q')return 'p';
     if(t==='d'){const v=[[0,1],[0,-1],[1,0],[-1,0]].map(([a,b])=>at(x+a,y+b));return v.includes('c')?'c':'o'}return 'ogkr'.includes(t)?moq(x,y):null};
   const peindreSol=(k,X,Y,x,y)=>k==='c'?etCarrelage(c,X,Y):k==='p'?etParquet(c,X,Y,x,y):k==='x'?etDehors(c,X,Y):etMoquette(c,X,Y,x,y,k==='s');
@@ -27,6 +26,9 @@ function etagePeindre(c,dessus,m){
     const N=sol(x,y-1),Su=sol(x,y+1),O=sol(x-1,y),E=sol(x+1,y),df=Su||N||O||E||'o';
     [[0,0,N||O],[8,0,N||E],[0,8,Su||O],[8,8,Su||E]].forEach(([a,b,q])=>{c.save();c.beginPath();c.rect(X+a,Y+b,8,8);c.clip();peindreSol(q||df,X,Y,x,y);c.restore()});
   }
+  // le dehors, au-delà des façades en biais (m.dehors : des polygones, en cases)
+  (m.dehors||[]).forEach(P=>{c.save();c.beginPath();P.forEach(([x,y],i)=>i?c.lineTo(x*16,y*16):c.moveTo(x*16,y*16));c.closePath();c.clip();
+    const xs=P.map(p=>p[0]),ys=P.map(p=>p[1]);for(let y=Math.floor(Math.min(...ys));y<Math.ceil(Math.max(...ys));y++)for(let x=Math.floor(Math.min(...xs));x<Math.ceil(Math.max(...xs));x++)etDehors(c,x*16,y*16);c.restore()});
   // 2. les murs : une bande de 8 px au milieu de la case, raccordée aux murs voisins ; vue de face (8 px de haut) quand une pièce est au sud
   for(let y=0;y<H;y++)for(let x=0;x<W;x++){
     const t=at(x,y),X=x*16,Y=y*16;
@@ -53,16 +55,14 @@ function etagePeindre(c,dessus,m){
     if(t==='w'){if(up||dn){R(c,X+5,Y,6,16,ETC.cadre);R(c,X+6,Y,4,16,ETC.vitre);R(c,X+7,Y+((y*7)%9)+2,1,4,ETC.reflet)}else{R(c,X,Y+5,16,6,ETC.cadre);R(c,X,Y+6,16,4,ETC.vitre);R(c,X+((x*7)%9)+2,Y+7,4,1,ETC.reflet)}}
     if(t==='h'){if(up||dn){R(c,X+4,Y+1,8,14,'#8a5f36');R(c,X+4,Y+1,1,14,'#5a3a22');R(c,X+10,Y+7,1,2,'#d9c79a')}else{R(c,X+1,Y+4,14,8,'#8a5f36');R(c,X+1,Y+4,14,1,'#5a3a22')}}
   }
-  // la façade en biais : le dehors, la ligne de façade, ses fenêtres
-  const [bx,by]=ETAGE_BIAIS;
-  c.save();c.beginPath();c.moveTo(0,0);c.lineTo(bx*16,0);c.lineTo(0,by*16);c.closePath();c.clip();
-  for(let y=0;y<Math.ceil(by);y++)for(let x=0;x<Math.ceil(bx);x++)etDehors(c,x*16,y*16);c.restore();
-  const seg=(a,b,w,col)=>{c.strokeStyle=col;c.lineWidth=w;c.beginPath();c.moveTo(etBiaisX(a)*16+w/2-1,a*16);c.lineTo(etBiaisX(b)*16+w/2-1,b*16);c.stroke()};
-  seg(0.6,by-.2,4,ETC.dessus);ETAGE_BIAIS_FEN.forEach(([a,b])=>{seg(a,b,3,ETC.cadre);seg(a,b,1.5,ETC.vitre)});
+  // les murs en biais : un trait, et leurs fenêtres (fen : des morceaux du segment, de 0 à 1)
+  BI.forEach(b=>{const [ax,ay]=b.a,[bx,by]=b.b,pt=t=>[(ax+(bx-ax)*t)*16,(ay+(by-ay)*t)*16];
+    const seg=(t0,t1,w,col)=>{const [x0,y0]=pt(t0),[x1,y1]=pt(t1);c.strokeStyle=col;c.lineWidth=w;c.beginPath();c.moveTo(x0,y0);c.lineTo(x1,y1);c.stroke()};
+    seg(0,1,4,ETC.dessus);(b.fen||[]).forEach(([t0,t1])=>{seg(t0,t1,3,ETC.cadre);seg(t0,t1,1.5,ETC.vitre)})});
   // le mobilier : d'abord les tables (les écrans se posent dessus), puis le reste, du nord au sud
   const M=m.meubles.slice().sort((a,b)=>(a.k==='table'?0:1)-(b.k==='table'?0:1)||a.y-b.y||a.x-b.x);
   M.forEach(f=>etMeuble(c,f));
-  ETAGE_PLAQUES.forEach(([txt,x,y])=>{const k=sol(x,y+1);etPlaque(c,txt,x,y,!!k&&k!=='x'&&plein(x,y))});
+  (m.plaques||[]).forEach(([txt,x,y])=>{const k=sol(x,y+1);etPlaque(c,txt,x,y,!!k&&k!=='x'&&plein(x,y))});
 }
 
 /* ---- sols et murs ---- */
@@ -130,6 +130,24 @@ function etMeuble(c,f){
       for(let i=1;i<f.w;i++)R(c,X+i*16,Y+(f.d==='down'?6:2),1,8,dos);break}
     case 'pouf':etOmbre(c,X+3,Y+12,10,3);c.fillStyle='#00000030';c.beginPath();c.arc(X+8,Y+9,6,0,7);c.fill();c.fillStyle=f.col;c.beginPath();c.arc(X+8,Y+8,6,0,7);c.fill();R(c,X+5,Y+5,3,1,'rgba(255,255,255,.5)');break;
     case 'fatboy':etOmbre(c,X+1,Y+12,15,3);c.fillStyle='#c46a1e';c.beginPath();c.ellipse(X+8,Y+9,8,6,0,0,7);c.fill();c.fillStyle='#e58a2e';c.beginPath();c.ellipse(X+8,Y+8,7,5,-.3,0,7);c.fill();R(c,X+4,Y+6,5,1,'#f2a85a');R(c,X+9,Y+9,3,1,'#c46a1e');break;
+    case 'ilotBiais':etIlotBiais(c,f);break;
+    case 'etabli':{etOmbre(c,X+1,Y+Hp-2,Wp-2,2);R(c,X+1,Y+1,Wp-2,Hp-2,'#6b7280');R(c,X+2,Y+2,Wp-4,Hp-5,'#aab2bc');
+      for(let j=0;j<f.h;j++)for(let i=0;i<f.w;i++)etCapteur(c,X+i*16,Y+j*16,(f.x+i*3+f.y*5+j*7)%5);break}
+    case 'panneauCapteurs':{R(c,X+1,Y-7,Wp-2,13,'#2b2f3a');R(c,X+2,Y-6,Wp-4,11,'#3a3f4a');
+      for(let i=0;i<f.w;i++){const bx=X+i*16+3;if(i%3===0){R(c,bx,Y-5,9,9,'#cfe6a8');R(c,bx+1,Y-4,7,3,'#20303a');R(c,bx+2,Y-3,4,1,'#b6f0c0');R(c,bx+3,Y+1,2,1,'#f2c12e')}
+        else if(i%3===1){R(c,bx,Y-5,10,7,'#0f1622');c.strokeStyle='#3be07a';c.lineWidth=1;c.beginPath();c.moveTo(bx+1,Y-1);c.lineTo(bx+3,Y-3);c.lineTo(bx+5,Y-2);c.lineTo(bx+7,Y-4);c.lineTo(bx+9,Y-3);c.stroke()}
+        else{R(c,bx+1,Y-5,7,5,'#f4f6f8');R(c,bx+6,Y-4,1,1,'#3be07a');R(c,bx+2,Y-4,3,1,'#9aa1ab')}
+        R(c,bx+4,Y+5,1,4,'#1c1f26')}break}
+    case 'gradins':{const top=['#e4e2db','#eceae4','#f5f4f0'],cous=['#2f7d7a','#e58a2e','#f2c12e','#8a3b8f'];etOmbre(c,X,Y+Hp-2,Wp,2);
+      for(let j=0;j<f.h;j++){const yy=Y+j*16;R(c,X,yy,Wp,16,top[j%3]);R(c,X,yy+12,Wp,4,'#c9c7bf');R(c,X,yy+12,Wp,1,'#b3b1a9');
+        for(let i=0;i<f.w;i++)if((i+j)%2===0){const cx=X+i*16+3,cy=yy+3;R(c,cx,cy,10,7,cous[(i+j*3)%4]);R(c,cx+1,cy+1,8,1,'rgba(255,255,255,.35)');R(c,cx,cy+6,10,1,'rgba(0,0,0,.18)')}}
+      R(c,X,Y,2,Hp,'#bdbbb3');R(c,X+Wp-2,Y,2,Hp,'#bdbbb3');break}
+    case 'douche':{R(c,X,Y,Wp,Hp,'#c3cbd4');R(c,X+1,Y+1,Wp-2,Hp-2,'#dfe6ec');for(let i=8;i<Wp;i+=8)R(c,X+i,Y+1,1,Hp-2,'#ccd5de');for(let j=8;j<Hp;j+=8)R(c,X+1,Y+j,Wp-2,1,'#ccd5de');
+      R(c,X+(Wp>>1)-2,Y+(Hp>>1)-2,4,4,'#9aa1ab');R(c,X+(Wp>>1)-4,Y+1,8,3,'#9aa1ab');R(c,X+(Wp>>1)-1,Y+4,2,2,'#7d858f');
+      [[6,9],[11,14],[17,8],[22,12],[9,19]].forEach(([a,b])=>R(c,X+a,Y+b,1,2,'#8ec9e8'));c.fillStyle='rgba(185,225,244,.45)';c.fillRect(X,Y,3,Hp);R(c,X,Y,3,1,'#9aa1ab');break}
+    case 'banc':etOmbre(c,X+3,Y+Hp-2,10,2);R(c,X+3,Y+1,10,Hp-3,'#7a5230');for(let j=0;j<Hp-4;j+=3)R(c,X+4,Y+2+j,8,2,'#a0764a');R(c,X+12,Y+4,2,Hp-8,'#f4f6f8');break;
+    case 'affichage':{const fy=Y+8;R(c,X+1,fy,Wp-2,7,'#7a5230');R(c,X+2,fy+1,Wp-4,5,'#c9a26e');
+      [['#ffffff',3,1,4,3],['#f7e36b',9,2,4,3],['#f7c8dc',15,1,3,4],['#ffffff',20,2,5,3],['#8ec9e8',27,1,3,3]].forEach(([col,a,b,w,h])=>{if(a+w<Wp-2){R(c,X+a,fy+b,w,h,col);R(c,X+a+1,fy+b,1,1,'#c43d3d')}});break}
     case 'ballon':etOmbre(c,X+3,Y+12,10,3);c.fillStyle='#2f5fb0';c.beginPath();c.arc(X+8,Y+7,6,0,7);c.fill();c.fillStyle='#4a86e0';c.beginPath();c.arc(X+7,Y+6,4.5,0,7);c.fill();R(c,X+5,Y+3,2,2,'#cfe2ff');break;
   }
 }
@@ -138,6 +156,7 @@ function etChaise(c,X,Y,d,st){
   etOmbre(c,X+3,Y+13,10,2);
   if(st==='verte'){const a='#2f7a4f',b='#3f9a62';R(c,X+2,Y+2,12,12,a);R(c,X+4,Y+4,8,8,b);
     if(d==='down')R(c,X+2,Y+2,12,4,'#245f3e');else if(d==='up')R(c,X+2,Y+10,12,4,'#245f3e');else if(d==='left')R(c,X+10,Y+2,4,12,'#245f3e');else R(c,X+2,Y+2,4,12,'#245f3e');return}
+  if(st==='tabouret'){c.fillStyle='#2b2c33';c.beginPath();c.arc(X+8,Y+9,5,0,7);c.fill();c.fillStyle='#44464f';c.beginPath();c.arc(X+8,Y+8,4,0,7);c.fill();R(c,X+6,Y+6,2,1,'#5d606b');return}
   if(st==='blanche'){R(c,X+3,Y+4,10,9,'#c4c4bc');R(c,X+4,Y+5,8,7,'#f6f6f2');[[3,4],[12,4],[3,12],[12,12]].forEach(([a,b])=>R(c,X+a,Y+b,1,1,'#8f8f8f'));
     if(d==='down')R(c,X+3,Y+2,10,3,'#dcdcd5');else if(d==='up')R(c,X+3,Y+12,10,3,'#dcdcd5');else if(d==='left')R(c,X+12,Y+4,3,9,'#dcdcd5');else R(c,X+1,Y+4,3,9,'#dcdcd5');return}
   // fauteuil de bureau noir à roulettes (« haute » : dossier plus grand, appui-tête)
@@ -156,6 +175,23 @@ function etClavier(c,X,Y,d){
   else if(d==='down'){R(c,X+4,Y+5,9,3,t);R(c,X+4,Y+5,9,2,k);R(c,X+1,Y+5,2,3,k)}
   else if(d==='left'){R(c,X+6,Y+3,3,9,t);R(c,X+6,Y+3,2,9,k);R(c,X+6,Y+13,3,2,k)}
   else{R(c,X+7,Y+4,3,9,t);R(c,X+8,Y+4,2,9,k);R(c,X+7,Y+1,3,2,k)}
+}
+/* un îlot de 4 postes posé en biais (cx, cy : son centre en cases ; ang : son angle en degrés) */
+function etIlotBiais(c,f){
+  const Wp=f.w*16,Hp=f.h*16;c.save();c.translate(Math.round(f.cx*16),Math.round(f.cy*16));c.rotate(f.ang*Math.PI/180);
+  etOmbre(c,-Wp/2+2,Hp/2-2,Wp-2,2);R(c,-Wp/2+1,-Hp/2+1,Wp-2,Hp-3,ETC.bois);R(c,-Wp/2+1,Hp/2-3,Wp-2,2,ETC.boisB);R(c,-Wp/2+3,-1,Wp-6,2,'#a97e4a');
+  [-Wp/4,Wp/4].forEach(x=>{const tx=Math.round(x-8);
+    etClavier(c,tx,-Hp/2,'down');etEcrans(c,tx,-Hp/2+16,'down');etChaise(c,tx,-Hp/2-16,'down','bureau');
+    etClavier(c,tx,Hp/2-16,'up');etEcrans(c,tx,Hp/2-32,'up');etChaise(c,tx,Hp/2,'up','bureau')});
+  c.restore();
+}
+/* un capteur en test sur un établi : boîtier, sonde de température, pince ampèremétrique, carte électronique, ordinateur */
+function etCapteur(c,X,Y,k){
+  if(k===0){R(c,X+4,Y+4,8,6,'#f4f6f8');R(c,X+4,Y+9,8,1,'#c9ced6');R(c,X+10,Y+5,1,1,'#3be07a');R(c,X+6,Y+6,3,1,'#9aa1ab')}
+  else if(k===1){R(c,X+3,Y+7,9,2,'#d6d9de');R(c,X+11,Y+6,3,4,'#c43d3d');R(c,X+4,Y+10,1,3,'#1c1f26')}
+  else if(k===2){R(c,X+5,Y+3,6,8,'#f2c12e');R(c,X+6,Y+4,4,2,'#20303a');R(c,X+5,Y+11,2,3,'#1c1f26');R(c,X+9,Y+11,2,3,'#c43d3d')}
+  else if(k===3){R(c,X+3,Y+4,10,7,'#2f7d46');R(c,X+5,Y+6,2,2,'#1c1f26');R(c,X+9,Y+5,2,1,'#d9c79a');R(c,X+9,Y+8,2,1,'#d9c79a');R(c,X+4,Y+10,1,1,'#3be07a')}
+  else{R(c,X+2,Y+3,12,8,'#3a3d44');R(c,X+3,Y+4,10,6,'#0f1622');c.strokeStyle='#5b8fd9';c.lineWidth=1;c.beginPath();c.moveTo(X+3,Y+8);c.lineTo(X+6,Y+6);c.lineTo(X+9,Y+7);c.lineTo(X+12,Y+5);c.stroke();R(c,X+2,Y+11,12,2,'#9aa1ab')}
 }
 /* les deux écrans d'un poste, au fond de la seconde case de table (dos à dos avec le poste d'en face) */
 function etEcrans(c,X,Y,d){
@@ -203,14 +239,14 @@ function etLavabos(c,f){
   for(let i=0;i<n;i++){const by=Y+i*32+2;R(c,x0+1,by,8,11,'#f4f6f8');R(c,x0+2,by+2,6,7,'#cfd6de');R(c,e?x0+8:x0,by+5,2,2,'#7d858f');
     if(sav&&i<n-1){const sy=by+21;R(c,e?x0+7:x0,sy,3,5,'#ffffff');R(c,e?x0+7:x0,sy,3,1,'#9aa1ab')}}
 }
-/* les portes coulissantes du sas (cases 28 à 30, rangée 19), vitrées : elles s'écartent quand on a badgé */
-function etageDessinerPorteSas(c,X,Y,x){
-  if(x!==28)return;const off=Math.round(ETG.ouv*22),L=48;
+/* les portes coulissantes du sas (n cases), vitrées : elles s'écartent quand on a badgé ; le lecteur de badge est dl cases plus à droite */
+function etageDessinerPorteSas(c,X,Y,n,dl){
+  const L=n*16,dm=L>>1,off=Math.round(ETG.ouv*(dm-2));
   R(c,X,Y+5,L,3,'#4a4f60');c.save();c.beginPath();c.rect(X,Y+8,L,8);c.clip();
-  [[X-off,0],[X+24+off,1]].forEach(([px,i])=>{R(c,px,Y+8,24,8,'#7a8292');c.fillStyle='rgba(191,227,242,.85)';c.fillRect(px+1,Y+9,22,6);R(c,px+(i?2:20),Y+10,1,4,'#5b6478');R(c,px+5,Y+9,1,4,'rgba(255,255,255,.8)')});
+  [[X-off,0],[X+dm+off,1]].forEach(([px,i])=>{R(c,px,Y+8,dm,8,'#7a8292');c.fillStyle='rgba(191,227,242,.85)';c.fillRect(px+1,Y+9,dm-2,6);R(c,px+(i?2:dm-4),Y+10,1,4,'#5b6478');R(c,px+5,Y+9,1,4,'rgba(255,255,255,.8)')});
   c.restore();R(c,X,Y+15,L,1,'#5b6478');
-  // le lecteur de badge, sur le mur à droite (case 31)
-  const lx=X+3*16;R(c,lx+5,Y+7,6,8,'#2b2f3a');R(c,lx+6,Y+8,4,3,'#4a4f5c');R(c,lx+7,Y+12,2,2,ETG.badge?'#3be07a':'#e2573b');
+  // le lecteur de badge, sur le mur à droite des portes
+  const lx=X+dl*16;R(c,lx+5,Y+7,6,8,'#2b2f3a');R(c,lx+6,Y+8,4,3,'#4a4f5c');R(c,lx+7,Y+12,2,2,ETG.badge?'#3be07a':'#e2573b');
 }
 
 /* ---- en ville : l'enseigne « BUREAU » au-dessus de la porte ---- */
