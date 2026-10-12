@@ -21,15 +21,15 @@ const ETAGE_PLAN=[
 'xxxxxxxxxxxxxxWWWWWWoooooooooooooooWoWWoooooooooooooooooooWWhWWWoooooooooooooooooWWWWWWWWdWoooooWWWWWWWWWWW',
 'xxxxxxxxxxxxxWWooooWooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooWoooooooooW',
 'xxxxxxxxxxxxWWooooodooBBBBBBBBBBBBBBBoWWWWWWWWWWWWWWWWdWWWWWWWWWWWBBBBBBoWWWWWWooWWWWWWWdWWoooooWooooooooow',
-'xxxxxxxxxxxxWooooooWooBBBBBBBBBBBBBBBoWccccccWcccccccWoorrrrrrrrooBBBBBBoWcccccWcWcccWooooWoooooWooooooooow',
-'xxxxxxxxxxxWWWWWWWWWooBBBBBBBBBBBBBBBoWccccccWcccccccWoorrrrrrrrooBBBBBBoWcccccWcWcccWooooWWWWWoWooooooooow',
-'xxxxxxxxxxWWoooooooWooBBBBBBBBBBBBBBBoWccccccWcccccccWoWWWWWWWWWooBBBBBBoWcccccWcWcccWooooWoooWodoooooooooW',
-'xxxxxxxxxxWoooooooohooBBPPBBPPBBPPBBBoWccccccWcccccccWoWrrrrrrrrooBBBBBBoWcccccdcdcccWooooWoooWoWWWWWWWWWWW',
-'xxxxxxxxxWWooooooooWooWoooooooooooWoooWccccccWcccccccWoWrrrrrrrrooBBPPBBoWWWWWWWdWWWWWWWWWWoooWoWoooooooooW',
-'xxxxxxxxWWWWWWWWWWWWooWoooooooooooWoooWccccccWcccccccWoWWWWWWWWWWoWooooWoWcccccccWoooWooooWoooWodooooooooow',
-'xxxxxxxxWWooooooooodooWoooooooooooWoooWccccccWcccccccWooooooooooooWooooWoWcccccccWoooWooooWoooWoWooooooooow',
-'xxxxxxxWWooooooooooWooWWWWWWgggWWWWoooWccccccWcccccccWooooooooooooWooooWoWcccccccWoooWooooWoooWoWoooooooooW',
-'xxxxxxWWWWWWWWWWWWWWooooooooooooooooooWWWWdWWWWdWWWWWWWWWWWWWWWWWoWoooWooWWWWWWWWWoWWWWWdWWWhWWoWWWWWWWWWWW',
+'xxxxxxxxxxxxWooooooWooBBBBBBBBBBBBBBBoWccccccccccccccWoorrrrrrrrooBBBBBBoWcccccWcWcccWooooWoooooWooooooooow',
+'xxxxxxxxxxxWWWWWWWWWooBBBBBBBBBBBBBBBoWccccccccccccccWoorrrrrrrrooBBBBBBoWcccccWcWcccWooooWWWWWoWooooooooow',
+'xxxxxxxxxxWWoooooooWooBBBBBBBBBBBBBBBoWccccccccccccccWoWWWWWWWWWooBBBBBBoWcccccWcWcccWooooWoooWodoooooooooW',
+'xxxxxxxxxxWoooooooohooBBPPBBPPBBPPBBBoWccccccccccccccWoWrrrrrrrrooBBBBBBoWcccccdcdcccWooooWoooWoWWWWWWWWWWW',
+'xxxxxxxxxWWooooooooWooWoooooooooooWoooWccccccccccccccWoWrrrrrrrrooBBPPBBoWWWWWWWdWWWWWWWWWWoooWoWoooooooooW',
+'xxxxxxxxWWWWWWWWWWWWooWoooooooooooWoooWccccccccccccccWoWWWWWWWWWWoWooooWoWcccccccWoooWooooWoooWodooooooooow',
+'xxxxxxxxWWooooooooodooWoooooooooooWoooWccccccccccccccWooooooooooooWooooWoWcccccccWoooWooooWoooWoWooooooooow',
+'xxxxxxxWWooooooooooWooWWWWWWgggWWWWoooWccccccccccccccWooooooooooooWooooWoWcccccccWoooWooooWoooWoWoooooooooW',
+'xxxxxxWWWWWWWWWWWWWWooooooooooooooooooWWWWWWWddWWWWWWWWWWWWWWWWWWoWoooWooWWWWWWWWWoWWWWWdWWWhWWoWWWWWWWWWWW',
 'xxxxxxWWooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooW',
 'xxxxxWWoooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooW',
 'xxxxxWoooooooooooooWWWWdWfffffffddfffffffffWoooooooooWWWdWWWWdWWdWWWWooooooooooooooooooWWWWdWdWWWWoooooooow',
@@ -100,8 +100,10 @@ function etageMeubles(){
   m('ecran',24,25,{h:2,mur:'w'});m('babyfoot',26,25,{w:2});
 
   // ---- sanitaires
-  m('cabine',39,12,{w:2,h:2,porte:'s'});m('cabine',41,12,{w:2,h:2,porte:'s'});m('lavabos',44,14,{h:5,mur:'e',n:3});m('serviettes',39,17,{mur:'w'});m('poubelle',39,19);   // femmes
-  m('urinoir',47,12);m('cabine',49,12,{w:2,h:2,porte:'s'});m('cabine',51,12,{w:2,h:2,porte:'s'});m('lavabos',46,14,{h:5,mur:'w',n:3});m('serviettes',52,16,{mur:'e'});m('poubelle',52,18);   // hommes
+  // le bloc central (d'après le croquis) : un petit hall commun au sud ; de chaque côté une cabine au nord, une cabine en long
+  // au centre qui ouvre sur ses toilettes, et les lavabos le long du mur extérieur
+  m('cabine',41,12,{w:3,h:2,porte:'s'});m('cabine',44,12,{w:2,h:5,porte:'w'});m('lavabos',39,14,{h:5,mur:'w',n:3});m('serviettes',39,13,{mur:'w'});m('poubelle',39,19);   // femmes
+  m('cabine',46,12,{w:2,h:5,porte:'e'});m('cabine',48,12,{w:3,h:2,porte:'s'});m('urinoir',51,12);m('lavabos',52,14,{h:5,mur:'e',n:3});m('serviettes',52,13,{mur:'e'});m('poubelle',52,19);   // hommes
   m('cabine',74,12,{w:2,h:2,porte:'s'});m('urinoir',77,12);m('lavabos',75,15,{w:2,mur:'s',n:2,savon:0});   // hommes (est)
   m('pmr',83,12);                                                                                      // PMR
   m('cabine',74,18,{w:2,h:2,porte:'n'});m('cabine',76,18,{w:2,h:2,porte:'n'});                       // femmes (est)
@@ -125,7 +127,7 @@ const etageSalle=(x,y)=>ETAGE_SALLES.some(([a,b,c,d])=>x>=a&&x<=c&&y>=b&&y<=d);
 
 /* ---- les plaques de porte ---- */
 const ETAGE_PLAQUES=[['VOLTAIRE',35,5],['WATTERLOO',82,9],['JOULIETTE',96,12],['AMPERIUM',96,18],['OHMEGA',20,23],['LE PERCO',25,23],['TEMPETE',53,23],['VEILLE',59,23],['BOBINE',65,23],['DYNAMO',88,23],['PILE POIL',94,23],
-  ['WC',41,20],['WC',48,20],['WC',78,11],['NID',86,11],['TERRIER',86,20],['RGT',93,20]];
+  ['WC F',42,20],['WC H',47,20],['WC',78,11],['NID',86,11],['TERRIER',86,20],['RGT',93,20]];
 
 /* ---- l'état de la visite : le badge (remis à zéro à chaque arrivée) ---- */
 const ETG={badge:false,ouv:0};

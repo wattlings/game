@@ -32,7 +32,7 @@ function etagePeindre(c,dessus,m){
     const t=at(x,y),X=x*16,Y=y*16;
     if(t==='r'){R(c,X,Y,16,16,'#bdb9b0');for(let i=0;i<4;i++){R(c,X+i*4,Y,4,16,i%2?'#cfccc4':'#c4c0b7');R(c,X+i*4,Y,1,16,'#9e9a90')}
       if(at(x,y-1)!=='r'){R(c,X,Y,16,2,'#7a8292');R(c,X,Y+2,16,1,'#d9d6cf')}if(at(x,y+1)!=='r')R(c,X,Y+14,16,2,'#7a8292');continue}
-    if(t==='d'){const horiz=plein(x-1,y)||plein(x+1,y);if(horiz){R(c,X,Y+6,2,10,'#6b7287');R(c,X+14,Y+6,2,10,'#6b7287');R(c,X+2,Y+15,12,1,'rgba(40,46,64,.35)')}else{R(c,X+4,Y,8,2,'#6b7287');R(c,X+4,Y+14,8,2,'#6b7287')}continue}
+    if(t==='d'){const horiz=plein(x-1,y)||plein(x+1,y);if(horiz){if(at(x-1,y)!=='d')R(c,X,Y+6,2,10,'#6b7287');if(at(x+1,y)!=='d')R(c,X+14,Y+6,2,10,'#6b7287');R(c,X,Y+15,16,1,'rgba(40,46,64,.35)')}else{R(c,X+4,Y,8,2,'#6b7287');R(c,X+4,Y+14,8,2,'#6b7287')}continue}
     if(!plein(x,y)||biais(x,y))continue;
     const sud=sol(x,y+1),face=!!sud&&sud!=='x';
     if(t==='P'){R(c,X,Y,16,16,ETC.face);const g=at(x-1,y)!=='P';R(c,X,Y,16,3,'#2b2f3a');
@@ -182,12 +182,18 @@ function etCasiers(c,f){
   else{const x0=f.d==='right'?X+1:X+3;R(c,x0,Y-4,12,Hp+3,l);R(c,x0+1,Y-3,10,Hp+1,b);const xp=f.d==='right'?x0+10:x0;
     for(let j=0;j<f.h*2;j++){R(c,x0+1,Y-3+j*8+7,10,1,l);R(c,xp,Y-2+j*8+3,1,1,k)}}
 }
-/* une cabine de WC (2×2 cases) : les cloisons, la cuvette au fond, la porte côté passage */
+/* une cabine de WC : les cloisons, la cuvette contre le fond, la porte du côté du passage (porte : s, n, e ou w) */
 function etCabine(c,f){
-  const X=f.x*16,Y=f.y*16,s=f.porte==='s',cl='#c7ccd6',bd='#9aa1ae';
-  R(c,X,Y,32,32,'#e1dfd8');R(c,X,Y,2,32,bd);R(c,X+30,Y,2,32,bd);
-  const ty=s?Y+3:Y+20;R(c,X+11,ty,10,3,'#e9ecf0');R(c,X+12,s?ty+3:ty-7,8,7,'#c9ced6');R(c,X+13,s?ty+4:ty-6,6,5,'#f4f6f8');R(c,X+14,s?ty+5:ty-5,4,2,'#dfe3e8');
-  const py=s?Y+22:Y;R(c,X,py,32,10,cl);R(c,X,s?py:py+8,32,2,bd);R(c,X+8,py+1,16,8,'#b3bac6');R(c,X+9,py+2,14,6,'#bfc5d0');R(c,X+21,py+4,1,2,'#3be07a');
+  const X=f.x*16,Y=f.y*16,W=f.w*16,H=f.h*16,p=f.porte,cl='#c7ccd6',bd='#9aa1ae',cx=X+(W>>1),cy=Y+(H>>1);
+  R(c,X,Y,W,H,'#e1dfd8');R(c,X,Y,W,2,bd);R(c,X,Y,2,H,bd);R(c,X+W-2,Y,2,H,bd);R(c,X,Y+H-2,W,2,bd);
+  const blanc='#f4f6f8',gris='#c9ced6',eau='#dfe3e8';
+  if(p==='s'){R(c,cx-5,Y+3,10,3,'#e9ecf0');R(c,cx-4,Y+6,8,7,gris);R(c,cx-3,Y+7,6,5,blanc);R(c,cx-2,Y+8,4,2,eau)}
+  else if(p==='n'){R(c,cx-5,Y+H-6,10,3,'#e9ecf0');R(c,cx-4,Y+H-13,8,7,gris);R(c,cx-3,Y+H-12,6,5,blanc);R(c,cx-2,Y+H-10,4,2,eau)}
+  else if(p==='w'){R(c,X+W-6,cy-5,3,10,'#e9ecf0');R(c,X+W-13,cy-4,7,8,gris);R(c,X+W-12,cy-3,5,6,blanc);R(c,X+W-10,cy-2,2,4,eau)}
+  else{R(c,X+3,cy-5,3,10,'#e9ecf0');R(c,X+6,cy-4,7,8,gris);R(c,X+7,cy-3,5,6,blanc);R(c,X+8,cy-2,2,4,eau)}
+  const porte='#b3bac6',porteC='#bfc5d0',vert='#3be07a';
+  if(p==='s'||p==='n'){const py=p==='s'?Y+H-10:Y;R(c,X,py,W,10,cl);R(c,X,p==='s'?py:py+8,W,2,bd);R(c,cx-8,py+1,16,8,porte);R(c,cx-7,py+2,14,6,porteC);R(c,cx+5,py+4,1,2,vert)}
+  else{const px=p==='w'?X:X+W-8;R(c,px,Y,8,H,cl);R(c,p==='w'?px:px+6,Y,2,H,bd);R(c,px+1,cy-8,6,16,porte);R(c,px+2,cy-7,4,14,porteC);R(c,px+3,cy+5,2,1,vert)}
 }
 /* une rangée de lavabos le long d'un mur, avec les distributeurs de savon entre eux */
 function etLavabos(c,f){
