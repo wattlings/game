@@ -342,7 +342,7 @@
   "sources": [
    {
     "cle": "dtu-betz-joukowsky",
-    "passage": "it is impossible to stop a wind/fluid motion in the stream tube to take 100 % efficiency […] because this implies a full blockage of the flow downstream of the disc.",
+    "passage": "is impossible to stop a wind/fluid motion in the stream tube to take 100 % efficiency […] because this implies a full blockage of the flow downstream of the disc.",
     "relu": true,
     "page": "p. 1-2"
    }
@@ -690,7 +690,7 @@
    },
    {
     "cle": "ademe-eolien-tout-comprendre",
-    "passage": "90 % D’ACIER ET BÉTON, 6 % DE RÉSINE ET FIBRES DE VERREOU DE CARBONE (contenues dans les pales) et 3 % DE CUIVRE ET ALUMINIUM",
+    "passage": "90 % D’ACIER ET BÉTON, 6 % DE RÉSINE ET FIBRES DE VERRE OU DE CARBONE (contenues dans les pales) et 3 % DE CUIVRE ET ALUMINIUM",
     "relu": true,
     "page": "p. 14"
    },
