@@ -10,7 +10,7 @@ function renderDash(view){
   if(t==='bench'){h=`<div class="seg" role="group" aria-label="Vue">${[['ecart','Écart à la référence'],['act','Par activité'],['gis','Gisements']].map(([k,l])=>`<button type="button" data-bm="${k}" class="${DSH.bm===k?'on':''}">${l}</button>`).join('')}</div>`;
     if(DSH.bm==='act')h+=`<div class="seg">${Object.keys(ACT).map(a=>`<button type="button" data-act="${a}" class="${DSH.act===a?'on':''}">${ACT[a].lab}</button>`).join('')}</div>`+benchHTML(DSH.act,GC);
     else if(DSH.bm==='gis')h+=gisHTML(GC);else h+=ecartHTML(GC);
-    h+=`<p class="dnote">Références nationales : ordres de grandeur par activité (enquête ADEME « Énergie et patrimoine communal », EHPAD : ordre de grandeur publié), corrigés du climat. À actualiser avec les données OPERAT.</p>`}
+    h+=`<p class="dnote">Références nationales : moyennes par activité de l’enquête ADEME « Énergie et patrimoine communal » (2005, corrigées du climat) ; résidence seniors : moyenne OPERAT des établissements médico-sociaux (2021, non corrigée du climat). À actualiser avec les données OPERAT.</p>`}
   view.innerHTML=h;
   view.querySelectorAll('[data-ind]').forEach(b=>b.onclick=()=>{DSH.ind=b.dataset.ind;sfx('select');renderDash(view)});
   view.querySelectorAll('[data-bm]').forEach(b=>b.onclick=()=>{DSH.bm=b.dataset.bm;sfx('select');renderDash(view)});
