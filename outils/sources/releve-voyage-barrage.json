@@ -1,0 +1,1709 @@
+[
+ {
+  "id": "vb-001",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "déclaration › accroche",
+  "texte": "Un lac, un mur, une chute. La seule batterie de France qui se remplit quand il pleut.",
+  "affirmation": "Clin d'œil : un lac de barrage est un stock d'énergie rempli par la pluie.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-002",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "déclaration › bravo",
+  "texte": "Tu sais multiplier un débit par une hauteur, reconnaître une turbine, et gagner de l'argent en remontant de l'eau.",
+  "affirmation": "Résumé des acquis visés par le site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-003",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "déclaration › annonces",
+  "texte": "Val-Turbine, terminus. Altitude : mille mètres. Le barrage est six cents mètres plus haut.",
+  "affirmation": "Géographie du site inventé (halte à 1 000 m, barrage 600 m plus haut).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-004",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "déclaration › annonces / annoncesRetour",
+  "texte": "Le train n'utilise pas ses moteurs dans la descente. Il aimerait qu'on le félicite.",
+  "affirmation": "Plaisanterie sur le train qui descend par gravité.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-005",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info formule › x",
+  "texte": "La puissance d'une chute tient en une ligne : 9,81 × le débit (en m³ par seconde) × la hauteur (en mètres) × le rendement, et l'on obtient des kilowatts.",
+  "affirmation": "P (kW) = g × Q × H × rendement, avec g = 9,81 m/s² et l'eau à 1 000 kg/m³.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cde-hydroelectricite",
+    "passage": "P = Q × ρ × H × g × r Avec : P : puissance (exprimée en W) ; Q : débit moyen mesuré en mètres cube par seconde ; ρ : masse volumique de l'eau, soit 1 000 kg/m 3 ; H : hauteur de chute en mètres ; g : constante de gravité, soit près de 9,81 (m/s/s)",
+    "relu": true
+   }
+  ],
+  "note": "Avec ρ = 1 000 kg/m³, la formule en W divisée par 1 000 donne bien 9,81 × Q × H × r en kW. Source secondaire (EDF, qui publie la même formule, était inaccessible le 13/10/2026)."
+ },
+ {
+  "id": "vb-006",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info formule › x",
+  "texte": "Ici : 80 m³/s tombant de 600 m, avec 90 % de rendement, soit 420 MW.",
+  "affirmation": "9,81 × 80 × 600 × 0,9 = 423 800 kW ≈ 420 MW.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Les valeurs (80 m³/s, 600 m) sont celles du site inventé ; 90 % est dans la fourchette 0,6-0,9 de la fiche Connaissance des Énergies."
+ },
+ {
+  "id": "vb-007",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info formule › x",
+  "texte": "Un mètre cube d'eau qui descend de 367 mètres libère 1 kWh, pas davantage",
+  "affirmation": "1 000 kg × 9,81 × 367 m = 3,6 MJ = 1 kWh (énergie brute, sans rendement).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Calcul exact : 1 000 × 9,81 × 367 = 3 600 270 J."
+ },
+ {
+  "id": "vb-008",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info formule › retiens",
+  "texte": "Puissance = 9,81 × débit × hauteur × rendement. Peu de hauteur ? Il faut énormément d'eau.",
+  "affirmation": "Reprise de la formule.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-009",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info types › x",
+  "texte": "Au fil de l'eau : pas de réserve, on turbine ce que le fleuve apporte, jour et nuit.",
+  "affirmation": "Les centrales au fil de l'eau n'ont pas de réserve et turbinent le débit du cours d'eau en continu.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "les installations dites « au fil de l’eau » , qui turbinent tout ou partie du débit d’un cours d’eau en continu",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "hauteur et ont une durée de remplissage inférieure à 2 heures.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-010",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info types › x",
+  "texte": "L'éclusée : un petit bassin, de quoi décaler la production de quelques heures à quelques jours.",
+  "affirmation": "Les centrales d'éclusée stockent entre 2 et 400 heures de production : modulation journalière ou hebdomadaire.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "qui disposent d’une petite capacité de stockage, typiquement comprise entre 2 heures et 400 heures de production. Ces installations permettent une modulation journalière ou hebdomadaire de la production",
+    "relu": true
+   }
+  ],
+  "note": "« quelques heures » sous-estimait : 2 à 400 heures (jusqu'à plus de deux semaines), modulation journalière ou hebdomadaire.",
+  "avant": "L'éclusée : un petit bassin, de quoi décaler la production de quelques heures."
+ },
+ {
+  "id": "vb-011",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info types › x",
+  "texte": "Le lac : des semaines ou des mois de réserve, pour produire quand il le faut. La STEP : deux bassins, et l'on remonte l'eau pour la faire resservir.",
+  "affirmation": "Centrales de lac : plus de 400 h de réserve, stockage saisonnier ; STEP : deux bassins, pompage puis turbinage.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "de remplissage de réservoir supérieure à 400 heures et permettent un stockage saisonnier.",
+    "relu": true
+   },
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "Les STEP(4) sont formées de deux bassins situés à des",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-012",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info types › x",
+  "texte": "En France : 25,7 GW au total, dont 10 GW de lacs et 5 GW de STEP.",
+  "affirmation": "Parc hydraulique français : 25,7 GW fin 2025, dont environ 10 GW de lacs et 5 GW de STEP.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Hydraulique 25,7 GW / +0,0 GW",
+    "relu": true
+   },
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "Lac 10.3 15 STEP 4,6 4",
+    "relu": true
+   },
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "Les STEP en France représentent 5 GW en production (et 4,2 GW en",
+    "relu": true
+   }
+  ],
+  "note": "Lacs 10,3 GW et STEP 4,6 GW selon le ministère, 5 GW en turbinage selon l'OPECST : arrondis corrects. Le passage RTE est celui déjà relevé pour vs-077."
+ },
+ {
+  "id": "vb-013",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info types › retiens",
+  "texte": "Fil de l'eau, éclusée, lac, STEP : ce qui les distingue, c'est la taille de la réserve.",
+  "affirmation": "Les familles se distinguent par la durée de remplissage du réservoir.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "On distingue plusieurs types d’installations hydroélectriques en fonction de la durée de remplissage de leur réservoir",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-014",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info flexible › x",
+  "texte": "Une centrale de lac passe de l'arrêt à la pleine puissance en quelques minutes",
+  "affirmation": "Les centrales à grande retenue mobilisent de grandes puissances en quelques minutes.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "ces installations peuvent fournir de grandes puissances très rapidement mobilisables (quelques minutes)",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-015",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info flexible › x",
+  "texte": "La plus puissante STEP de France, Grand'Maison, livre 1 800 MW en trois minutes. Peu de moyens de production réagissent aussi vite à cette échelle",
+  "affirmation": "Grand'Maison, la plus puissante STEP française, mobilise 1 800 MW en trois minutes.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "la STEP de Grand’Maison, en Isère, visitée dans le cadre de la mission, peut mobiliser jusqu’à 1 800 MW en seulement trois minutes.",
+    "relu": true
+   },
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "On en dénombre six de forte puissance : Grand’Maison en Isère (puissance en turbine de 1 790 MW)",
+    "relu": true
+   }
+  ],
+  "note": "Grand'Maison est une STEP (la plus puissante des six), pas une simple centrale de lac ; « aucun autre moyen » était un superlatif non sourcé, ramené à « peu de moyens ».",
+  "avant": "La plus grande de France, Grand'Maison, livre 1 800 MW en trois minutes. Aucun autre moyen de production ne réagit aussi vite à cette échelle"
+ },
+ {
+  "id": "vb-016",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info flexible › x",
+  "texte": "c'est l'hydraulique qui rattrape les écarts du réseau, à la pointe comme en cas de panne ailleurs.",
+  "affirmation": "Les grands barrages fournissent très vite de la puissance quand la demande est forte ou que d'autres moyens sont à l'arrêt.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "De fait, quand la demande électrique est très forte, ou que les autres productions électriques sont à l’arrêt (comme une partie du parc nucléaire en 2022), les grands barrages, ou même les STEP, permettent de fournir très rapidement de grandes puissances électriques.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-017",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info flexible › retiens",
+  "texte": "L'hydraulique de lac démarre en minutes : c'est le pompier du réseau.",
+  "affirmation": "Reprise imagée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-018",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info stock › x",
+  "texte": "Le lac de Val-Turbine retient 180 millions de mètres cubes, 600 mètres au-dessus de l'usine : 265 GWh en réserve, de quoi tourner à pleine puissance pendant 26 jours.",
+  "affirmation": "180 Mm³ × 600 m × 9,81 × 0,9 / 3 600 = 265 GWh ; 265 GWh / 420 MW = 631 h ≈ 26 jours.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Volumes du site inventé ; le calcul est juste (rendement 90 %)."
+ },
+ {
+  "id": "vb-019",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info stock › x",
+  "texte": "Il se remplit au printemps, avec les pluies et la fonte des neiges, et se vide en hiver, quand le pays en a besoin.",
+  "affirmation": "Les grands lacs se remplissent au printemps et sont turbinés en hiver.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "Les grands barrages lac sont prioritairement affectés au stockage inter-saisonnier (remplissage au printemps, turbinage en hiver)",
+    "relu": true
+   }
+  ],
+  "note": "Le rôle des pluies et de la fonte n'est pas écrit mot pour mot dans le rapport, mais c'est le remplissage printanier qu'il décrit."
+ },
+ {
+  "id": "vb-020",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info stock › x",
+  "texte": "C'est le seul grand stock d'électricité que l'on sache garder d'une saison à l'autre.",
+  "affirmation": "Le stockage hydraulique est la seule technologie de stockage viable à grande échelle, et les lacs stockent d'une saison à l'autre.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "Le stockage hydraulique est même la seule technologie de stockage aujourd’hui viable et disponible à grande échelle",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "de remplissage de réservoir supérieure à 400 heures et permettent un stockage saisonnier.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-021",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info step › x",
+  "texte": "Deux des quatre groupes de l'usine sont réversibles",
+  "affirmation": "Équipement du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-022",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info step › x",
+  "texte": "quand l'électricité abonde, la nuit ou en plein midi solaire, ils pompent l'eau du bassin aval vers le lac. À la pointe, elle redescend.",
+  "affirmation": "Une STEP pompe aux heures creuses vers le bassin haut et turbine aux pics de consommation.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "permettent de pomper pendant les périodes de moindre consommation d’électricité vers un réservoir haut des volumes d’eau pour les turbiner pendant les pics de consommation",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "negative prices mainly occurred in the middle of the day between April and August",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-023",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info step › x",
+  "texte": "On récupère environ 80 % de l'énergie dépensée.",
+  "affirmation": "Rendement d'une STEP : environ 80 %.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "Le rendement d’une STEP atteint 70 à 85 %.",
+    "relu": true
+   }
+  ],
+  "note": "80 % est dans la fourchette 70-85 % de l'OPECST."
+ },
+ {
+  "id": "vb-024",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info step › x",
+  "texte": "La France compte six grandes STEP, 5 GW en tout ; elles ont pompé 8,1 TWh en 2025.",
+  "affirmation": "Six STEP de forte puissance, 5 GW ; consommation du pompage 8,1 TWh en 2025.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "Les STEP en France représentent 5 GW en production (et 4,2 GW en pompage). On en dénombre six de forte puissance",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "du pompage […] 547,5 TWh 8,1 TWh",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-025",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info step › retiens",
+  "texte": "Pomper quand l'électricité abonde, turbiner quand elle manque : on perd 20 %, et on y gagne.",
+  "affirmation": "Reprise (pertes d'environ 20 %).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-026",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info pointe › x",
+  "texte": "Les jours d'hiver, la consommation française a deux pointes, le matin et le soir entre 18 h et 20 h",
+  "affirmation": "En hiver, deux pics de consommation : le matin (7-11 h) et le soir (18-20 h).",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-vague-froid-2024",
+    "passage": "une journée hivernale comporte en général deux pics de consommation : de 7 à 11 heures du matin, cela coïncide avec le début de l'activité économique ; de 18 à 20 heures",
+    "relu": true
+   },
+   {
+    "cle": "rte-eco2mix-chiffres-cles",
+    "passage": "87 713MW 14/01/2025 09:00",
+    "relu": true
+   }
+  ],
+  "note": "Le texte disait que la consommation culmine le soir ; RTE décrit deux pics, et la pointe 2025 a eu lieu un matin (14 janvier, 9 h).",
+  "avant": "La consommation française culmine les soirs d'hiver, entre 18 h et 20 h"
+ },
+ {
+  "id": "vb-027",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info pointe › x",
+  "texte": "102 GW au record de février 2012, à 19 h, et 2,4 GW de plus par degré en moins.",
+  "affirmation": "Record historique 102 098 MW le 8/02/2012 à 19 h ; +2,4 GW par degré perdu en hiver.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-eco2mix-chiffres-cles",
+    "passage": "102 098MW 08/02/2012 19:00 UPDATED MONDAY 12 OCTOBER 2026 Historical maximum consumption",
+    "relu": true
+   },
+   {
+    "cle": "rte-vague-froid-2024",
+    "passage": "En hiver, chaque baisse de 1 °C se traduit par une demande supplémentaire de 2,4 GW",
+    "relu": true
+   }
+  ],
+  "note": "L'heure (19 h) a été ajoutée au texte pour relier le record à la pointe du soir."
+ },
+ {
+  "id": "vb-028",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info pointe › x",
+  "texte": "en 2025, l'écart moyen entre l'heure la moins chère et la plus chère d'une même journée a atteint 90 €/MWh.",
+  "affirmation": "Amplitude journalière moyenne des prix spot 2025 : 89,7 €/MWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "(89,7 €/MWh en 2025 contre 76,4 €/MWh en 2024",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "L’amplitude journalière moyenne est calculée comme la moyenne de l’écart entre le prix maximal et le prix minimal de chaque jour.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-029",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info pointe › x",
+  "texte": "Un bâtiment qui décale ses usages hors de la pointe, ou qui chauffe son eau à midi, rend au réseau le même service qu'un petit barrage.",
+  "affirmation": "Décaler une consommation hors de la pointe soulage le réseau.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Conseil du cours ; RTE recommande de « décaler l'utilisation d'appareils énergivores en dehors des heures de pointe » (rte-vague-froid-2024)."
+ },
+ {
+  "id": "vb-030",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info turbines › x",
+  "texte": "La Pelton, une roue à augets frappée par un jet, pour les très hautes chutes et les petits débits.",
+  "affirmation": "Pelton : jet sur des augets, très hautes chutes, faibles débits.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "doe-types-turbines",
+    "passage": "A Pelton wheel has one or more free jets discharging water into an aerated space and impinging on the buckets of a runner. Pelton turbines are generally used for very high heads and low flows.",
+    "relu": true
+   }
+  ],
+  "note": "Le seuil « au-delà de 300 mètres » n'est pas une frontière : les domaines Pelton et Francis se chevauchent (Francis jusqu'à 600 m environ).",
+  "avant": "La Pelton, une roue à augets frappée par un jet, pour les hautes chutes : au-delà de 300 mètres."
+ },
+ {
+  "id": "vb-031",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info turbines › x",
+  "texte": "La Francis, une roue noyée, pour les chutes moyennes à hautes : de 40 à 600 mètres environ.",
+  "affirmation": "Francis : chutes moyennes à hautes, environ 40 à 600 m.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "doe-types-turbines",
+    "passage": "Francis turbines are commonly used for medium- to high-head (130- to 2,000-foot) situations though they have been used for lower heads as well.",
+    "relu": true
+   }
+  ],
+  "note": "130 à 2 000 pieds = 40 à 610 m ; l'ancien « de 30 à 300 mètres » coupait la moitié haute de son domaine.",
+  "avant": "La Francis, une roue noyée, pour les chutes moyennes : de 30 à 300 mètres."
+ },
+ {
+  "id": "vb-032",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info turbines › x",
+  "texte": "La Kaplan, une hélice à pales orientables, pour les basses chutes et les gros débits : jusqu'à une cinquantaine de mètres. Les domaines se chevauchent.",
+  "affirmation": "Kaplan : hélice à pales réglables, basses chutes (5 à 50 m) et gros débits.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "doe-types-turbines",
+    "passage": "Kaplan Turbine: Both the blades and the wicket gates are adjustable",
+    "relu": true
+   },
+   {
+    "cle": "cde-hydroelectricite",
+    "passage": "pour les faibles chutes (5 à 50 mètres) et les débits importants, la turbine Kaplan",
+    "relu": true
+   }
+  ],
+  "note": "« moins de 30 mètres » → « jusqu'à une cinquantaine de mètres » (5 à 50 m) ; ajout du chevauchement des domaines.",
+  "avant": "La Kaplan, une hélice à pales orientables, pour les basses chutes et les gros débits : moins de 30 mètres."
+ },
+ {
+  "id": "vb-033",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info turbines › x",
+  "texte": "Ici, 600 mètres et un débit modeste : des Pelton, et des pompes-turbines pour les deux groupes qui remontent l'eau.",
+  "affirmation": "Équipement du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-034",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info turbines › retiens",
+  "texte": "Pelton pour la hauteur, Kaplan pour le débit, Francis entre les deux.",
+  "affirmation": "Le choix de la turbine dépend de la hauteur de chute et du débit.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "doe-types-turbines",
+    "passage": "The type of hydropower turbine selected for a project is based on the height of standing water—referred to as \"head\"—and the flow",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-035",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info conduite › x",
+  "texte": "Un tuyau d'acier descend du lac à l'usine : 600 mètres de dénivelé. En bas, l'eau pousse à 60 bars, soit soixante fois la pression de l'air.",
+  "affirmation": "600 m d'eau ≈ 59 bars (ρgh = 5,9 MPa) ≈ 60 fois la pression atmosphérique.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Pression statique arrondie."
+ },
+ {
+  "id": "vb-036",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info conduite › x",
+  "texte": "C'est cette pression, et non la vitesse de l'eau dans le tuyau, qui fait la puissance.",
+  "affirmation": "L'énergie disponible vient de la hauteur (charge de pression), pas de la vitesse dans la conduite.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Conséquence de la formule ρ g Q H : la puissance ne dépend que du débit et de la hauteur."
+ },
+ {
+  "id": "vb-037",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info conduite › x",
+  "texte": "Tout en haut, une cheminée d'équilibre absorbe les à-coups quand on ferme la vanne.",
+  "affirmation": "Une cheminée d'équilibre, à l'entrée de la conduite forcée, amortit les coups de bélier.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "gunt-ecoulement-non-stationnaire",
+    "passage": "l’effet des coups de bélier peut être réduit ou éliminé en commandant lentement la vanne à obturateur ou en installant des cheminées d’équilibre à l’entrée des conduites forcées",
+    "relu": true
+   }
+  ],
+  "note": "Source secondaire (fabricant de bancs pédagogiques)."
+ },
+ {
+  "id": "vb-038",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info conduite › retiens",
+  "texte": "10 mètres de chute, c'est 1 bar. La hauteur se transforme en pression.",
+  "affirmation": "1 000 × 9,81 × 10 = 98 kPa ≈ 1 bar.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-039",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info surete › x",
+  "texte": "Un barrage bouge : il se dilate l'été, se contracte l'hiver, s'incline de quelques centimètres selon le niveau du lac.",
+  "affirmation": "Un barrage se déplace et se déforme, ce que mesure son auscultation (avec la cote de la retenue).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dreal-aura-surveiller-barrage",
+    "passage": "Les principaux types de mesures sont : ➢ la mesure des déplacements ➢ la mesure de la cote de la retenue ➢ la mesure des débits ➢ la mesure de la piézométrie ➢ la mesure des déformations",
+    "relu": true
+   }
+  ],
+  "note": "La source établit qu'on mesure déplacements et déformations ; l'effet saisonnier précis n'y est pas chiffré."
+ },
+ {
+  "id": "vb-040",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info surete › x",
+  "texte": "la loi impose à tout barrage ses appareils d'auscultation. Tous les dix ans au moins, les plus grands passent un diagnostic complet.",
+  "affirmation": "Code de l'environnement : auscultation obligatoire ; étude de dangers et diagnostic exhaustif au moins tous les 10 ans (classe A).",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "dreal-aura-surveiller-barrage",
+    "passage": "Tous les barrages, quelle que soit leur classe et sauf autorisation du préfet, doivent obligatoirement dis- poser d'appareils d'auscultation.",
+    "relu": true
+   },
+   {
+    "cle": "dreal-aura-surveiller-barrage",
+    "passage": "Étude de dangers et diagnostic exhaustif OUI OUI mise à jour au moins tous mise à jour au moins NON les 10 ans tous les 15 ans",
+    "relu": true
+   }
+  ],
+  "note": "Le chiffre EDF (90 000 capteurs, 400 ouvrages) n'a pas pu être lu (edf.fr inaccessible) : remplacé par la règle. « Parfois lac vidé » retiré (non sourcé).",
+  "avant": "EDF en compte 90 000 sur 400 ouvrages. Tous les dix ans, les grands barrages subissent un examen complet, parfois lac vidé."
+ },
+ {
+  "id": "vb-041",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info aval › x",
+  "texte": "En aval d'un barrage, le niveau de la rivière peut monter vite, sans délai, à tout moment, même par grand beau temps",
+  "affirmation": "Les manœuvres d'une usine peuvent faire monter le niveau sans délai, à tout moment, même par beau temps.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "cnr-prudence-zones-interdites",
+    "passage": "des manœuvres qui peuvent quelquefois faire monter rapidement le niveau d’eau sans délai et à tout moment, même par beau temps.",
+    "relu": true
+   }
+  ],
+  "note": "« Le débit peut être multiplié par cent » retiré : non trouvé (le dépliant EDF cité n'était pas accessible). Formulation alignée sur la CNR.",
+  "avant": "En aval d'un barrage, le niveau de la rivière peut monter en quelques minutes, à tout moment, même par grand beau temps : l'usine démarre quand le réseau l'appelle, pas quand il pleut. Le débit peut être multiplié par cent."
+ },
+ {
+  "id": "vb-042",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info aval › x",
+  "texte": "D'où les panneaux jaunes le long des berges : on ne s'installe pas dans le lit du torrent.",
+  "affirmation": "Des panneaux avertissent le long des berges ; le lit et les bancs de graviers sont des zones dangereuses.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cnr-prudence-zones-interdites",
+    "passage": "Plus de 300 panneaux sont installés pour vous avertir des zones où il est interdit de se rendre.",
+    "relu": true
+   },
+   {
+    "cle": "cnr-prudence-zones-interdites",
+    "passage": "berges, îles, bancs de graviers, lit du fleuve",
+    "relu": true
+   }
+  ],
+  "note": "La couleur jaune n'est pas dans la source (détail du décor)."
+ },
+ {
+  "id": "vb-043",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info reserve › x",
+  "texte": "La loi lui impose de laisser passer en permanence au moins un dixième du débit moyen de la rivière : c'est le débit réservé, qui maintient la vie en aval.",
+  "affirmation": "Débit réservé : au moins 1/10 du module (débit moyen interannuel).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "Ce débit réservé représente au moins le dixième du module du cours d’eau sur lequel le seuil ou le barrage est installé, le module étant le débit moyen interannuel du cours d’eau.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-044",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info reserve › x",
+  "texte": "S'y ajoutent des passes pour que les poissons franchissent l'ouvrage, et une gestion qui laisse passer les sédiments.",
+  "affirmation": "Continuité écologique : passes à poissons et gestion des sédiments.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "Préservant des passages ou des modes de gestion pour les espèces (poissons migrateurs) et pour les sédiments, par exemple par l’installation de passes à poissons",
+    "relu": true
+   }
+  ],
+  "note": "« des chasses pour les sédiments » → « une gestion qui laisse passer les sédiments » (le ministère parle de modes de gestion, pas précisément de chasses).",
+  "avant": "S'y ajoutent des passes pour que les poissons franchissent l'ouvrage, et des chasses pour les sédiments."
+ },
+ {
+  "id": "vb-045",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info usages › x",
+  "texte": "Il irrigue les cultures, fournit l'eau potable, soutient le débit des rivières en été, retient les crues et fait vivre le tourisme.",
+  "affirmation": "L'eau des barrages sert aussi à l'eau potable, l'irrigation, le soutien d'étiage, la gestion des crues et les loisirs.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "elle constitue aussi un enjeu en termes d’eau potable, de gestion des crues, de milieux aquatiques et de préservation de la biodiversité, d’irrigation pour l’agriculture, de navigation fluviale, d’activités de loisirs comme le tourisme ou la pêche, etc.",
+    "relu": true
+   },
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "pour garantir le soutien d’étiage, en particulier l’été",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-046",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info usages › x",
+  "texte": "En Provence, l'eau de la Durance alimente ainsi deux à trois millions de personnes en eau potable.",
+  "affirmation": "La Durance alimente en eau potable 2 à 3 millions d'habitants de PACA.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "smavd-usages-durance",
+    "passage": "L’eau de la Durance assure l’alimentation en eau potable de la moitié de la population de la région PACA, soit entre 2 et 3 millions d’habitants.",
+    "relu": true
+   }
+  ],
+  "note": "« trois millions » → « deux à trois millions » (fourchette du syndicat de la Durance).",
+  "avant": "En Provence, la chaîne de la Durance alimente ainsi trois millions de personnes en eau potable."
+ },
+ {
+  "id": "vb-047",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info usages › x",
+  "texte": "En été, le niveau du lac se négocie entre l'électricien, l'agriculteur et le loueur de pédalos.",
+  "affirmation": "Les usages touristiques, agricoles et énergétiques de l'eau se concilient.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "Le lac de Serre-Ponçon, situé à cheval entre les Hautes-Alpes et les Alpes-de-Haute-Provence, est également emblématique de cette conciliation des usages touristiques et énergétiques de l’eau.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-048",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info carbone › x",
+  "texte": "L'hydroélectricité émet environ 6 g de CO₂e par kWh sur tout son cycle de vie, et rien à la sortie de l'usine : elle ne brûle rien.",
+  "affirmation": "Facteur d'émission hydraulique : 0 g direct, 6 gCO2éq/kWh sur le cycle de vie.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "6 gCO2éq/kWh pour l’hydraulique",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Hydro - réservoir 0 6",
+    "relu": true
+   }
+  ],
+  "note": "« presque tout à la construction » n'est pas dans la source : RTE donne 0 g en émissions directes et 6 g sur le cycle de vie.",
+  "avant": "L'hydroélectricité émet environ 6 g de CO₂e par kWh, presque tout à la construction."
+ },
+ {
+  "id": "vb-049",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info carbone › x",
+  "texte": "Un barrage dure un siècle et davantage ; l'âge moyen du parc français tourne autour de soixante ans.",
+  "affirmation": "Parc hydraulique : moyenne d'âge d'une soixantaine d'années, plus de 100 ans pour certains ouvrages.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "la préservation des capacités existantes, qui ont une moyenne d’âge d’une soixantaine d’années, et plus de 100 ans pour certains ouvrages.",
+    "relu": true
+   }
+  ],
+  "note": "« approche 70 ans » → « autour de soixante ans ».",
+  "avant": "l'âge moyen du parc français approche 70 ans."
+ },
+ {
+  "id": "vb-050",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info carbone › x",
+  "texte": "C'est la première source d'électricité renouvelable du pays, et la deuxième source tout court.",
+  "affirmation": "En 2025, hydraulique 62,4 TWh, derrière le nucléaire (373 TWh), devant l'éolien (49,6) et le solaire (32,9).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "32,9 TWh / 6,0 % 49,6 TWh / 9,1 % 62,4 TWh / 11,4 %",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "373,0 TWh / 68,1 %",
+    "relu": true
+   }
+  ],
+  "note": "Ordre des colonnes de RTE : solaire, éolien, hydraulique."
+ },
+ {
+  "id": "vb-051",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info france › x",
+  "texte": "Environ 2 500 installations, 25,7 GW.",
+  "affirmation": "Près de 2 500 installations hydroélectriques ; 25,7 GW fin 2025.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cde-hydroelectricite",
+    "passage": "Au total, le parc hydraulique français comprend près de 2 500 installations de toutes tailles",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Hydraulique 25,7 GW / +0,0 GW",
+    "relu": true
+   }
+  ],
+  "note": "Le nombre d'installations vient d'une source secondaire."
+ },
+ {
+  "id": "vb-052",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info france › x",
+  "texte": "En 2025, elles ont produit 62,4 TWh, soit 11 % de l'électricité du pays.",
+  "affirmation": "Production hydraulique 2025 : 62,4 TWh, 11,4 % du mix.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "62,4 TWh / 11,4 %",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-053",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info france › x",
+  "texte": "En 2024, année très pluvieuse : 75 TWh.",
+  "affirmation": "2024 : l'une des dix années les plus pluvieuses ; production 62,4 + 12,9 = 75,3 TWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "(-12,9 TWh/- […] 17,2 %), atteignant 62,4 TWh",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "alors que l’année 2024 avait été l’une des dix années […] les plus pluvieuses depuis 1959",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-054",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "info france › x",
+  "texte": "D'une année à l'autre, la production suit la pluie et la neige",
+  "affirmation": "La production effective varie fortement selon les conditions hydrologiques.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "La production effective varie fortement selon les années en fonction des conditions hydrologiques",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-055",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › newton[0]",
+  "texte": "Ici, la pomme pèse quatre-vingts tonnes par seconde et tombe de six cents mètres.",
+  "affirmation": "80 m³/s = 80 t/s d'eau sur 600 m (site inventé).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-056",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › vanne[0]",
+  "texte": "Quand le réseau a besoin de 400 mégawatts, le téléphone sonne, j'ouvre, et trois minutes plus tard c'est fait.",
+  "affirmation": "Démarrage en quelques minutes (personnage inventé).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "ces installations peuvent fournir de grandes puissances très rapidement mobilisables (quelques minutes)",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-057",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › vanne[0]",
+  "texte": "Une panne dans une centrale à l'autre bout du pays ? Dans les minutes qui suivent, c'est une vanne comme la mienne qui rattrape l'écart.",
+  "affirmation": "L'hydraulique compense en quelques minutes la perte d'un autre moyen de production.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "De fait, quand la demande électrique est très forte, ou que les autres productions électriques sont à l’arrêt (comme une partie du parc nucléaire en 2022), les grands barrages, ou même les STEP, permettent de fournir très rapidement de grandes puissances électriques.",
+    "relu": true
+   },
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "ces installations peuvent fournir de grandes puissances très rapidement mobilisables (quelques minutes)",
+    "relu": true
+   }
+  ],
+  "note": "« Dans la minute » → « Dans les minutes qui suivent » (cohérent avec la question 3 et la source).",
+  "avant": "Une panne dans une centrale à l'autre bout du pays ? Dans la minute, c'est une vanne comme la mienne qui rattrape l'écart."
+ },
+ {
+  "id": "vb-058",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › pelton[0]",
+  "texte": "Cette roue vient du groupe 2 : vingt augets, trois mètres de diamètre.",
+  "affirmation": "Roue du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-059",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › pelton[0]",
+  "texte": "Un jet d'eau la frappe à plus de trois cents kilomètres à l'heure.",
+  "affirmation": "Vitesse du jet √(2gh) = √(2 × 9,81 × 600) = 108 m/s ≈ 390 km/h.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-060",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › reflux[0]",
+  "texte": "La nuit dernière, j'ai remonté un million de mètres cubes dans le lac.",
+  "affirmation": "Exploitation du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-061",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › reflux[0]",
+  "texte": "Je dépense dix, je récupère huit.",
+  "affirmation": "Rendement d'une STEP d'environ 80 %.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "Le rendement d’une STEP atteint 70 à 85 %.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-062",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › reflux[1]",
+  "texte": "Six stations comme la mienne en France, cinq gigawatts.",
+  "affirmation": "Six grandes STEP, 5 GW.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "Les STEP en France représentent 5 GW en production (et 4,2 GW en pompage). On en dénombre six de forte puissance",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-063",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › spot[0]",
+  "texte": "À midi, presque rien : le soleil brade. À 19 h, c'est le sommet : tout le monde rentre, allume, chauffe et cuisine en même temps.",
+  "affirmation": "Prix bas à midi (solaire), pointe du soir liée au retour à la maison, au chauffage et à la cuisson.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "negative prices mainly occurred in the middle of the day between April and August",
+    "relu": true
+   },
+   {
+    "cle": "rte-vague-froid-2024",
+    "passage": "de 18 à 20 heures, cela correspond au retour des Français chez eux, avec une remontée du chauffage électrique et l'utilisation d'appareils électriques tels que ceux de cuisson est plus importante.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-064",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › spot[0]",
+  "texte": "Mon travail : garder l'eau pour 19 h. Le tien, si tu gères des bâtiments : ne pas avoir besoin de mon eau à 19 h.",
+  "affirmation": "Conseil : effacer la consommation à la pointe.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-065",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › spot[1]",
+  "texte": "Cinq cent treize heures à prix négatif l'an dernier. On me payait pour consommer.",
+  "affirmation": "513 heures à prix spot négatif en 2025.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "The hourly spot price was negative for 513 hours in 2025, a higher number of occurrences than the previous year (352 in 2024)",
+    "relu": true
+   }
+  ],
+  "note": "Passage déjà relevé (vs-072). « L'an dernier » = 2025 à la date du jeu (2026)."
+ },
+ {
+  "id": "vb-066",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › truite[0]",
+  "texte": "La rivière garde toujours au moins un dixième de son débit moyen, barrage ou pas : c'est la loi",
+  "affirmation": "Débit réservé : au moins 1/10 du module.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "Ce débit réservé représente au moins le dixième du module du cours d’eau sur lequel le seuil ou le barrage est installé, le module étant le débit moyen interannuel du cours d’eau.",
+    "relu": true
+   }
+  ],
+  "note": "Précision : le dixième porte sur le débit moyen (module), et c'est un minimum.",
+  "avant": "La rivière garde toujours un dixième de son débit, barrage ou pas : c'est la loi"
+ },
+ {
+  "id": "vb-067",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › truite[0]",
+  "texte": "Tu vois les marches, là, le long du seuil ? C'est une passe à poissons.",
+  "affirmation": "Les passes à poissons permettent la montaison.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "par l’installation de passes à poissons pour leur permettre la montaison et la dévalaison des cours d’eau",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-068",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › anselme[0]",
+  "texte": "L'ancien hameau est sous le lac. On a déménagé l'église pierre par pierre",
+  "affirmation": "Histoire du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-069",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › anselme[0]",
+  "texte": "Demande aux maraîchers de la plaine : sans lui, pas de salades en août.",
+  "affirmation": "Les barrages servent aussi l'irrigation.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "d’irrigation pour l’agriculture",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-070",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › plaqueConduite[0]",
+  "texte": "« Conduite forcée. Dénivelé : 600 m. Pression en pied : 60 bars. Ne pas percer. »",
+  "affirmation": "600 m ≈ 60 bars.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-071",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › jaune[0]",
+  "texte": "« DANGER. Montée brutale des eaux, même par beau temps. Ne stationnez pas dans le lit de la rivière. »",
+  "affirmation": "Le niveau peut monter rapidement même par beau temps ; le lit est une zone dangereuse.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cnr-prudence-zones-interdites",
+    "passage": "des manœuvres qui peuvent quelquefois faire monter rapidement le niveau d’eau sans délai et à tout moment, même par beau temps.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-072",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › jaune[0]",
+  "texte": "« Testé. Mes chaussures sont à Avignon. »",
+  "affirmation": "Plaisanterie.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-073",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › affiche[1]",
+  "texte": "Onze pour cent de l'électricité, les bonnes années un peu plus.",
+  "affirmation": "Hydraulique ≈ 11 % du mix (2025), davantage les années pluvieuses.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "62,4 TWh / 11,4 %",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-074",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › table[0]",
+  "texte": "Sur le pourtour, quatre dessins : un fleuve, un petit bassin, un grand lac, et deux lacs reliés par une flèche qui monte et qui descend.",
+  "affirmation": "Rappel des quatre familles (décor).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-075",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › stock[0]",
+  "texte": "Aujourd'hui, le lac est à la cote 1 592. Chaque centimètre vaut de l'électricité pour un gros village pendant un jour.",
+  "affirmation": "Données du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-076",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › stock[1]",
+  "texte": "Il faudrait plus de quatre millions de batteries de voiture électrique pour en garder autant.",
+  "affirmation": "265 GWh / 60 kWh ≈ 4,4 millions de batteries.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Hypothèse d'une batterie de 60 kWh."
+ },
+ {
+  "id": "vb-077",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › capteur[0]",
+  "texte": "En été, il penche de trois centimètres vers l'amont. Je le sais parce qu'un pendule de cent mètres me le dit.",
+  "affirmation": "Mesure du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-078",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › capteur[0]",
+  "texte": "Pas de barrage sans appareils d'auscultation : c'est la loi. Celui-ci a six cents capteurs.",
+  "affirmation": "Auscultation obligatoire pour tout barrage (le nombre de capteurs est inventé).",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "dreal-aura-surveiller-barrage",
+    "passage": "Tous les barrages, quelle que soit leur classe et sauf autorisation du préfet, doivent obligatoirement dis- poser d'appareils d'auscultation.",
+    "relu": true
+   }
+  ],
+  "note": "Le chiffre EDF « 90 000 capteurs » n'a pas pu être vérifié (edf.fr inaccessible) : remplacé par la règle.",
+  "avant": "Quatre-vingt-dix mille capteurs sur les ouvrages du pays. Celui-ci en a six cents."
+ },
+ {
+  "id": "vb-079",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › capteur[1]",
+  "texte": "Tous les dix ans, diagnostic complet, et l'État relit tout.",
+  "affirmation": "Diagnostic exhaustif au moins tous les 10 ans (classe A), transmis au service de contrôle.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "dreal-aura-surveiller-barrage",
+    "passage": "Étude de dangers et diagnostic exhaustif OUI OUI mise à jour au moins tous mise à jour au moins NON les 10 ans tous les 15 ans",
+    "relu": true
+   },
+   {
+    "cle": "dreal-aura-surveiller-barrage",
+    "passage": "est intégré au rapport de surveillance pour transmission au service de l’État chargé du",
+    "relu": true
+   }
+  ],
+  "note": "« On inspecte tout, parfois lac vidé » : la vidange n'est pas systématique et n'a pas été sourcée ; remplacée par la règle.",
+  "avant": "Tous les dix ans, examen complet. On inspecte tout, parfois lac vidé."
+ },
+ {
+  "id": "vb-080",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › plaque1957[0]",
+  "texte": "« Barrage de Val-Turbine. Mis en eau en 1957. Hauteur : 130 mètres. 900 000 m³ de béton. »",
+  "affirmation": "Données du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-081",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › randonneur",
+  "texte": "avec mes quatre-vingts kilos, j'ai stocké 0,13 kWh d'énergie potentielle.",
+  "affirmation": "80 × 9,81 × 600 = 471 kJ = 0,13 kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-082",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › marmotte / vache / pedalo / longuevue / roue / ecran / passe / chefHalte",
+  "texte": "Elle siffle. Dans la vallée, c'est le seul système d'alerte qui n'a jamais eu besoin de maintenance.",
+  "affirmation": "Répliques d'ambiance.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-083",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › pedalo",
+  "texte": "La cote du lac peut varier de 40 mètres dans l'année.",
+  "affirmation": "Marnage du lac inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-084",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.dit › lachuteApres",
+  "texte": "Si un jour tu installes un ballon d'eau chaude qui chauffe à midi au lieu de 19 h, envoie-moi une carte postale.",
+  "affirmation": "Conseil : déplacer la chauffe de l'eau hors de la pointe.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-085",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.questions › Q1",
+  "texte": "9,81 × 50 × 100 × 0,9 = 44 145 kW.",
+  "affirmation": "Application de la formule.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-086",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.questions › Q2",
+  "texte": "C'est souvent l'inverse : le fil de l'eau tourne presque tout le temps.",
+  "affirmation": "À puissance égale, le fil de l'eau produit plus d'énergie annuelle que les lacs.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "Fil de l’eau 6,7 30",
+    "relu": true
+   },
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "Lac 10.3 15",
+    "relu": true
+   }
+  ],
+  "note": "Ministère : 6,7 GW au fil de l'eau → 30 TWh ; 10,3 GW de lacs → 15 TWh."
+ },
+ {
+  "id": "vb-087",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.questions › Q3",
+  "texte": "De l'arrêt à la pleine puissance en quelques minutes : peu de moyens sont aussi rapides à cette échelle.",
+  "affirmation": "Démarrage en quelques minutes.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "ces installations peuvent fournir de grandes puissances très rapidement mobilisables (quelques minutes)",
+    "relu": true
+   }
+  ],
+  "note": "« rien d'autre n'est aussi rapide » (superlatif non sourcé) → « peu de moyens ».",
+  "avant": "De l'arrêt à la pleine puissance en quelques minutes : rien d'autre n'est aussi rapide à cette échelle."
+ },
+ {
+  "id": "vb-088",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.questions › Q3",
+  "texte": "À 19 h en janvier, ils dorment depuis deux heures.",
+  "affirmation": "Le soleil se couche vers 17 h en janvier.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-089",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.questions › Q4",
+  "texte": "80 % de rendement sur un aller-retour. On perd 2 MWh, et on déplace 8 MWh vers l'heure où ils valent cher.",
+  "affirmation": "Rendement STEP ≈ 80 %.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "Le rendement d’une STEP atteint 70 à 85 %.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-090",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.questions › Q5",
+  "texte": "Au printemps, avec la fonte des neiges et les pluies",
+  "affirmation": "Les lacs se remplissent au printemps, se vident en hiver.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "an-rapport-hydroelectricite-2025",
+    "passage": "Les grands barrages lac sont prioritairement affectés au stockage inter-saisonnier (remplissage au printemps, turbinage en hiver)",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-091",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.questions › Q6",
+  "texte": "Décaler hors de 18 h-20 h, en hiver, ce qui peut attendre",
+  "affirmation": "Effacer la consommation à la pointe du soir.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Cohérent avec RTE (rte-vague-froid-2024) : décaler les usages hors des heures de pointe."
+ },
+ {
+  "id": "vb-092",
+  "fichier": "jeu/voyages/barrage/textes.js",
+  "repere": "BAR.questions › Q6",
+  "texte": "C'est l'heure où l'électricité abonde : c'est justement là qu'il vaut mieux consommer.",
+  "affirmation": "À 13 h en été, l'électricité abonde (prix bas voire négatifs).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "negative prices mainly occurred in the middle of the day between April and August",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-093",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "BAR_CHUTE › turbine",
+  "texte": "turbine:h=>h>300?'Pelton':h>=30?'Francis':'Kaplan'",
+  "affirmation": "Règle simplifiée du pupitre : Pelton > 300 m, Francis 30-300 m, Kaplan < 30 m.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Simplification assumée et désormais signalée dans le message de Mlle Pelton (les domaines réels se chevauchent)."
+ },
+ {
+  "id": "vb-094",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "Mission 1 › bravo",
+  "texte": "Au pied de la conduite, la pression atteint 60 bars. Et chaque mètre cube ne rend qu'un kilowattheure et demi",
+  "affirmation": "9,81 × 600 × 0,9 / 3 600 = 1,47 kWh/m³ ; 600 m ≈ 60 bars.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-095",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "Mission 2 › bravo",
+  "texte": "500 m³ par seconde : une piscine olympique toutes les cinq secondes.",
+  "affirmation": "Bassin olympique ≈ 2 500 m³ (50 × 25 × 2 m).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-096",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "Mission 2 › bravo",
+  "texte": "C'est l'autre façon de faire de l'hydraulique, avec des turbines Kaplan, de grosses hélices.",
+  "affirmation": "Basse chute et gros débit : turbines Kaplan.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cde-hydroelectricite",
+    "passage": "pour les faibles chutes (5 à 50 mètres) et les débits importants, la turbine Kaplan",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-097",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "Mission 3 › bravo",
+  "texte": "400 mètres : plus haut que la tour Eiffel, pour un seul kilowattheure par tonne d'eau.",
+  "affirmation": "9,81 × 400 × 0,9 / 3 600 = 0,98 kWh ; la tour Eiffel mesure environ 330 m.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Texte retouché : « soit une vingtaine de centimes » a été retiré (prix au détail non sourcé, sans rapport avec la valeur de gros de ce kWh). Ancien texte : « 400 mètres : plus haut que la tour Eiffel, pour un seul kilowattheure par tonne d'eau, soit une vingtaine de centimes. »"
+ },
+ {
+  "id": "vb-098",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "Quelle turbine ? › options",
+  "texte": "bonne==='F'?'Chute moyenne, débit moyen : c\\'est son domaine.':bonne==='P'?'Elle monte jusque vers 600 mètres, mais avec un débit modéré, le jet d\\'une Pelton fait mieux.':'Elle est faite pour les chutes moyennes à hautes : 10 mètres, c\\'est trop peu.'",
+  "affirmation": "Francis : chutes moyennes à hautes, jusque vers 600 m.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "doe-types-turbines",
+    "passage": "Francis turbines are commonly used for medium- to high-head (130- to 2,000-foot) situations though they have been used for lower heads as well.",
+    "relu": true
+   }
+  ],
+  "note": "« la turbine la plus répandue au monde » non sourcé (le DOE ne le dit que des turbines à réaction aux États-Unis) ; « entre 30 et 300 mètres » → domaine réel.",
+  "avant": "bonne==='F'?'Chute moyenne : c\\'est la turbine la plus répandue au monde.':'Elle est faite pour les chutes moyennes, entre 30 et 300 mètres.'"
+ },
+ {
+  "id": "vb-099",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "Quelle turbine ? › options",
+  "texte": "'Une hélice est faite pour les basses chutes et les gros débits.'",
+  "affirmation": "Kaplan : basses chutes, gros débits.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "cde-hydroelectricite",
+    "passage": "pour les faibles chutes (5 à 50 mètres) et les débits importants, la turbine Kaplan",
+    "relu": true
+   }
+  ],
+  "note": "« ne résisterait pas à une haute chute » non sourcé, remplacé par le domaine d'emploi.",
+  "avant": "'Une hélice ne résisterait pas à une haute chute.'"
+ },
+ {
+  "id": "vb-100",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "Quelle turbine ? › okMsg",
+  "texte": "C'est la hauteur de chute qui décide d'abord, le débit ensuite : en haut une Pelton, en bas une Kaplan, une Francis entre les deux. Les domaines se chevauchent ; le pupitre de M. Newton, lui, tranche à 30 et 300 mètres.",
+  "affirmation": "Le choix dépend de la hauteur puis du débit ; les domaines se chevauchent.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "doe-types-turbines",
+    "passage": "The type of hydropower turbine selected for a project is based on the height of standing water—referred to as \"head\"—and the flow",
+    "relu": true
+   }
+  ],
+  "note": "Les seuils 30/300 m étaient présentés comme une règle ; ils sont désormais donnés comme la simplification du pupitre.",
+  "avant": "C'est la hauteur de chute qui décide : au-delà de 300 mètres une Pelton, en dessous de 30 une Kaplan, une Francis entre les deux."
+ },
+ {
+  "id": "vb-101",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "24 heures de STEP › BAR_STEP",
+  "texte": "prix:[40,35,95,60,5,30,140,80],        // prix de l'électricité, en €/MWh, pour chaque tranche de 3 heures",
+  "affirmation": "Prix inventés pour l'épreuve.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-102",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "24 heures de STEP › bravo",
+  "texte": "Tu as acheté ${fmt(b.achete)} MWh et tu n'en as revendu que ${fmt(b.vendu)} : un cinquième s'est perdu en route.",
+  "affirmation": "480/600 = 80 % ; 140/5 = 28.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-103",
+  "fichier": "jeu/voyages/barrage/simulations.js",
+  "repere": "24 heures de STEP › bravo",
+  "texte": "Une STEP ne produit pas d'énergie : elle la déplace vers l'heure où elle manque.",
+  "affirmation": "Une STEP stocke (pompe aux heures creuses, turbine aux pointes).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "opecst-stockage-electricite",
+    "passage": "Le bassin supérieur est alimenté par pompage de l’eau du bassin inférieur quand le prix de l’électricité est bas.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-104",
+  "fichier": "jeu/voyages/barrage/carte.js",
+  "repere": "zones › Le mur du barrage",
+  "texte": "Neuf cent mille mètres cubes de béton en travers de la vallée. Il retient le lac depuis 1957.",
+  "affirmation": "Données du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-105",
+  "fichier": "jeu/voyages/barrage/carte.js",
+  "repere": "zones › Le bassin aval",
+  "texte": "La nuit, des pompes peuvent la remonter au lac : c'est ce qui fait du site une batterie.",
+  "affirmation": "Une STEP pompe aux heures creuses vers la retenue amont.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "puisent aux heures creuses de l'eau dans un bassin inférieur afin de remplir une retenue en amont",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-106",
+  "fichier": "jeu/voyages/barrage/carte.js",
+  "repere": "zones › Le torrent",
+  "texte": "Il coule toujours un peu : le barrage n'a pas le droit de garder toute l'eau pour lui.",
+  "affirmation": "Débit réservé obligatoire.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-hydroelectricite",
+    "passage": "Ce débit réservé représente au moins le dixième du module du cours d’eau sur lequel le seuil ou le barrage est installé, le module étant le débit moyen interannuel du cours d’eau.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vb-107",
+  "fichier": "jeu/voyages/barrage/carte.js",
+  "repere": "objets › grand panneau de la halte",
+  "texte": "« Aménagement de Val-Turbine · Barrage de 130 m · Chute de 600 m · 420 MW · dont 200 MW de pompage ».",
+  "affirmation": "Caractéristiques du site inventé.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vb-108",
+  "fichier": "jeu/voyages/barrage/carte.js",
+  "repere": "objets › échelle du lac / pendule",
+  "texte": "Un fil à plomb de cent mètres descend dans le béton ; un capteur mesure de combien il s'écarte.",
+  "affirmation": "Le pendule mesure les déplacements du barrage (valeurs inventées).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dreal-aura-surveiller-barrage",
+    "passage": "Les principaux types de mesures sont : ➢ la mesure des déplacements",
+    "relu": true
+   }
+  ],
+  "note": null
+ }
+]

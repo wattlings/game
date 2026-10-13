@@ -101,7 +101,7 @@ voyCarte('eolien',{
     // le poste de livraison : Mme Suroît, Mme Origine, le transformateur
     gens(25,10,'Mme Suroît','down',{skin:'#e0ac7e',shirt:'#f7f0dc',pants:'#1c2440',coat:'#f2c12e',hair:'#3a2a1a',style:'carre',lash:1,hat:'#f2c12e',hatType:'bonnet',prop:'clipboard'},eolDefi,{still:1,chef:1,glow:!voyTampon(sid)&&!voyClesManquantes(sid).length});
     gens(20,11,'Mme Origine','right',{skin:'#c68a5c',shirt:'#f7f0dc',pants:'#2f3a5c',jacket:'#8a3b8f',hair:'#141216',style:'afro',lash:1,glasses:1,prop:'clipboard'},source('verte','origine','Mme Origine'),{glow:!vue('verte')});
-    pose(26,10,'vTransfo',{act:voyDire(null,["Le transformateur du parc de la lande : 20 000 volts en sortie, direction le réseau de distribution.","Il bourdonne à cinquante hertz. Le vent, lui, n'a jamais réussi à tenir une note."])});o.push({x:27,y:10,kind:'none',solid:1});
+    pose(26,10,'vTransfo',{act:voyDire(null,["Le transformateur du parc de la lande : 20 000 volts en sortie, direction le réseau de distribution.","Il bourdonne à cent hertz, deux fois la fréquence du réseau. Le vent, lui, n'a jamais réussi à tenir une note."])});o.push({x:27,y:10,kind:'none',solid:1});
 
     // ---- le vieux moulin, la pale, les menhirs
     pose(20,4,'vMoulin',{glow:!vue('betz'),act:source('betz','moulin')});o.push({x:21,y:4,kind:'none',solid:1,act:source('betz','moulin')});

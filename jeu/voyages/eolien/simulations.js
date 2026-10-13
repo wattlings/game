@@ -103,7 +103,7 @@ function eolSimChemin(fin){
 const EOL_MOIS={
   part:.3,objectif:4.5,                                                   // on vise 30 % de la consommation ; moins de 4,5 % de production mal placée
   conso:[52,46,44,36,33,31,33,30,32,37,43,50],                           // la consommation du territoire, mois par mois (profil français, hiver fort)
-  vent:[.33,.35,.28,.22,.17,.10,.13,.13,.17,.24,.28,.32],                 // facteur de charge de l'éolien, mois par mois
+  vent:[.31,.34,.31,.22,.19,.14,.15,.14,.18,.25,.28,.32],                 // facteur de charge de l'éolien, mois par mois (moyennes RTE 2016-2025)
   soleil:[60,79,118,139,160,174,190,177,138,100,64,52],                   // production d'un kWc de solaire, mois par mois
   mois:['J','F','M','A','M','J','J','A','S','O','N','D']
 };
@@ -125,7 +125,7 @@ const EOL_MOIS_ATELIER={
   missions:[{t:'Dernière épreuve · Douze mois',bouton:'Valider le dosage',xp:25,
     html:`<b>Mme Suroît :</b> « La région veut couvrir 30 % de sa consommation avec du vent et du soleil. Tu as un seul curseur : la part de chacun. Trouve le dosage qui colle le mieux aux besoins, mois après mois. Je veux moins de <b>${String(EOL_MOIS.objectif).replace('.',',')} %</b> de production au mauvais moment. »`,
     ok:b=>b.malPlace<=EOL_MOIS.objectif,
-    bravo:(b,e)=>`${e.a} % d'éolien, ${100-e.a} % de solaire : l'un donne l'hiver, l'autre l'été. Seul, le solaire ne couvre que 43 % des besoins d'hiver et déborde de 85 % en été ; seul, l'éolien manque de moitié en juin. Reste un problème que ce graphique ne montre pas : la semaine de janvier sans vent ni soleil. Celle-là, ce sont les barrages et les centrales qui la passent. Il y a un train pour ça.`,
+    bravo:(b,e)=>`${e.a} % d'éolien, ${100-e.a} % de solaire : l'un donne l'hiver, l'autre l'été. Seul, le solaire ne couvre que 43 % des besoins d'hiver et déborde de 85 % en été ; seul, l'éolien manque d'un quart en juin. Reste un problème que ce graphique ne montre pas : la semaine de janvier sans vent ni soleil. Celle-là, ce sont les barrages et les centrales qui la passent. Il y a un train pour ça.`,
     indice:(b,e)=>b.ete>b.hiver?`${b.malPlace.toFixed(1).replace('.',',')} % : trop de production en été, pas assez en hiver. Qui produit l'hiver ?`:`${b.malPlace.toFixed(1).replace('.',',')} % : l'hiver est couvert, mais l'été manque. Remets un peu de solaire.`}]
 };
 function eolDefi(){

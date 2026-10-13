@@ -3,7 +3,7 @@
    - la fiche du site et ses informations à collecter (infos) : un titre (t), un texte (x), une phrase à retenir, l'indice (ou) ;
    - les répliques des personnages et des objets (EOL.dit) ;
    - les questions du défi final (EOL.questions).
-   Le site est inventé ; les ordres de grandeur sont réels (sources en bas de la fiche, affichées dans le passeport). */
+   Le site est inventé ; les ordres de grandeur sont réels (chaque information porte ses sources, affichées dans le passeport). */
 
 voyDeclarer('eolien',{
   nom:'Parc éolien de Port-Rafale',
@@ -28,59 +28,53 @@ voyDeclarer('eolien',{
     "Prochain arrêt : Ampère-sur-Loire. Si vos cheveux ont changé de côté, c'est normal."],
 
   infos:[
-    {id:'cube',ou:"le mât de mesure, sur la lande",cle:1,t:"Le vent au cube",
+    {id:'cube',refs:['irena-wind-brief','ademe-eolien-tout-comprendre'],ou:"le mât de mesure, sur la lande",cle:1,t:"Le vent au cube",
       x:"La puissance du vent varie comme le cube de sa vitesse : deux fois plus de vent, huit fois plus de puissance. Entre un site à 6 m/s et un site à 7 m/s de moyenne, l'écart de production approche 50 %. C'est pour cela qu'on mesure le vent pendant un an, à hauteur de nacelle, avant de couler le moindre mètre cube de béton.",
       retiens:"Double de vent, huit fois plus de puissance. Un mètre par seconde change tout."},
-    {id:'courbe',ou:"le pupitre de M. Rafale, au pied de l'éolienne n° 1",cle:1,t:"La courbe de puissance",
+    {id:'courbe',refs:['nordex-n117','ademe-eolien-tout-comprendre','irena-wind-brief'],ou:"le pupitre de M. Rafale, au pied de l'éolienne n° 1",cle:1,t:"La courbe de puissance",
       x:"Une éolienne de 3 MW démarre vers 3 m/s (11 km/h), atteint sa pleine puissance vers 13 m/s (47 km/h) et s'arrête à 25 m/s (90 km/h) pour se protéger. Entre le démarrage et la pleine puissance, la production grimpe très vite ; au-delà, les pales pivotent pour laisser filer le vent en trop, et la courbe devient un plateau.",
       retiens:"Trois vitesses à connaître : démarrage, nominale, coupure."},
-    {id:'charge',ou:"Mme Bourrasque, près du mât de mesure",cle:1,t:"Le facteur de charge",
-      x:"Le parc de la lande : 12 éoliennes de 3 MW, soit 36 MW. Il ne les produit que lorsque le vent dépasse 47 km/h. Sur une année, il fournit environ 24 % de ce maximum : 76 GWh. C'est le facteur de charge. En France, il tourne entre 22 et 26 % à terre (21,4 % en 2025, année peu ventée), et approche 40 % en mer.",
+    {id:'charge',refs:['rte-be2025-rapport','ademe-eolien-tout-comprendre'],ou:"Mme Bourrasque, près du mât de mesure",cle:1,t:"Le facteur de charge",
+      x:"Le parc de la lande : 12 éoliennes de 3 MW, soit 36 MW. Il ne les produit que lorsque le vent dépasse 47 km/h. Sur une année, il fournit environ 24 % de ce maximum : 76 GWh. C'est le facteur de charge. En France, il tourne entre 21 et 27 % à terre selon les années (21,4 % en 2025, année peu ventée), et approche 40 % en mer.",
       retiens:"Énergie annuelle = puissance × 8 760 heures × facteur de charge."},
-    {id:'anatomie',ou:"la plaque au pied de l'éolienne n° 2",t:"Cent mètres de mât",
+    {id:'anatomie',refs:['nordex-n117','irena-wind-brief'],ou:"la plaque au pied de l'éolienne n° 2",t:"Cent mètres de mât",
       x:"Un mât d'une centaine de mètres, trois pales de 57 m, un rotor de 117 m de diamètre. Dans la nacelle, la génératrice. Le rotor tourne à 14 tours par minute au plus : cela semble lent, mais le bout de la pale file à plus de 300 km/h. Plus on monte, plus le vent est fort et régulier : c'est la raison de la hauteur.",
       retiens:"Lente au centre, très rapide au bout : 14 tours par minute, 300 km/h en bout de pale."},
-    {id:'betz',ou:"le vieux moulin de Kerwatt",t:"La limite de Betz",
-      x:"Même parfaite, une éolienne ne peut pas prendre toute l'énergie du vent : si elle l'arrêtait net, l'air s'entasserait derrière elle et plus rien ne passerait. Le maximum théorique est de 16/27, soit 59,3 % : c'est la limite de Betz, établie en 1919. Les meilleures machines atteignent environ 45 %.",
+    {id:'betz',refs:['dtu-betz-joukowsky','irena-wind-brief'],ou:"le vieux moulin de Kerwatt",t:"La limite de Betz",
+      x:"Même parfaite, une éolienne ne peut pas prendre toute l'énergie du vent : si elle l'arrêtait net, l'air s'entasserait derrière elle et plus rien ne passerait. Le maximum théorique est de 16/27, soit 59,3 % : c'est la limite de Betz, publiée en 1920. Les meilleures machines atteignent environ 45 %.",
       retiens:"Au mieux 59 % de l'énergie du vent : il faut bien que l'air ressorte."},
-    {id:'saison',ou:"Yann, le pêcheur, sur la grève",t:"Le vent d'hiver",
-      x:"En France, il y a plus de vent en hiver qu'en été : le facteur de charge de l'éolien passe d'environ 10 % en juin à 35 % en février. En 2025, six dixièmes de la production sont tombés en automne et en hiver, au moment où le pays se chauffe. Le solaire fait l'inverse : les deux se complètent sur l'année.",
+    {id:'saison',refs:['rte-fc-mensuels-eolien-solaire','sdes-eolien-t1-2025','sdes-eolien-t2-2025','sdes-eolien-t3-2025','sdes-eolien-t4-2025','ademe-eolien-tout-comprendre'],ou:"Yann, le pêcheur, sur la grève",t:"Le vent d'hiver",
+      x:"En France, il y a plus de vent en hiver qu'en été : le facteur de charge de l'éolien passe d'environ 14 % en juin à 34 % en février, en moyenne sur dix ans. En 2025, six dixièmes de la production sont tombés en automne et en hiver, au moment où le pays se chauffe. Le solaire fait l'inverse : les deux se complètent sur l'année.",
       retiens:"L'éolien produit surtout en hiver, le solaire surtout en été."},
-    {id:'voisins',ou:"Mme Le Goff, à la crêperie",t:"Cinq cents mètres",
+    {id:'voisins',refs:['ademe-eolien-tout-comprendre','ecologie-eolien-terrestre','cde-bruit-eoliennes'],ou:"Mme Le Goff, à la crêperie",t:"Cinq cents mètres",
       x:"En France, une éolienne s'installe à 500 mètres au moins des habitations. À cette distance, elle s'entend à environ 35 décibels : moins qu'une conversation à voix basse. Au pied du mât, comptez 55 décibels. La réglementation limite surtout le bruit qu'elle ajoute au bruit ambiant : 5 décibels le jour, 3 la nuit.",
       retiens:"500 m des maisons, environ 35 dB à cette distance."},
-    {id:'bridage',ou:"Loïc, au pied de l'éolienne arrêtée",t:"Arrêtée exprès",
+    {id:'bridage',refs:['ademe-infos-eolien-2023','ademe-eolien-tout-comprendre','rte-be2025-prix','rte-be2025-rapport'],ou:"Loïc, au pied de l'éolienne arrêtée",t:"Arrêtée exprès",
       x:"Une éolienne immobile n'est pas forcément en panne. On la bride la nuit pour les chauves-souris, par vent précis pour le bruit, et de plus en plus souvent parce qu'il y a trop d'électricité : en 2025, les prix ont été négatifs 513 heures en France, et environ 1,3 TWh d'éolien terrestre a été volontairement retenu.",
       retiens:"Une éolienne à l'arrêt par bon vent, c'est souvent une décision, pas une panne."},
-    {id:'carbone',ou:"la pale posée au bord du chemin",t:"Bilan carbone et fin de vie",
-      x:"Fabrication, transport, chantier et démontage compris, l'éolien émet environ 14 g de CO₂e par kWh à terre et 16 g en mer. Une éolienne « rembourse » en un an l'énergie qu'elle a coûtée, puis tourne 20 à 25 ans. Environ 90 % de sa masse se recycle : acier, béton, cuivre. Les pales, en composite, restent le point dur.",
-      retiens:"Environ 15 g de CO₂e par kWh, un an pour rembourser l'énergie de fabrication."},
-    {id:'verte',ou:"Mme Origine, devant le poste de livraison",cle:1,t:"L'offre verte et la garantie d'origine",
+    {id:'carbone',refs:['rte-be2025-rapport','ademe-eolien-terrestre-territoire','ademe-eolien-tout-comprendre','ademe-defi-eolien-2020'],ou:"la pale posée au bord du chemin",t:"Bilan carbone et fin de vie",
+      x:"Fabrication, transport, chantier et démontage compris, l'éolien émet environ 16 g de CO₂e par kWh à terre et 17 g en mer. Une éolienne « rembourse » en un an l'énergie qu'elle a coûtée, puis tourne 20 à 25 ans. Environ 90 % de sa masse se recycle : acier, béton, cuivre. Les pales, en composite, restent le point dur.",
+      retiens:"Environ 16 g de CO₂e par kWh, un an pour rembourser l'énergie de fabrication."},
+    {id:'verte',refs:['energie-info-offre-verte','cre-deliberation-2023-294','cre-observatoire-ppa-2025'],ou:"Mme Origine, devant le poste de livraison",cle:1,t:"L'offre verte et la garantie d'origine",
       x:"Une garantie d'origine certifie qu'un MWh renouvelable a été injecté quelque part sur le réseau. Un fournisseur d'« offre verte » en achète autant que tu consommes. Dans tes prises, rien ne change : les électrons sont les mêmes pour tout le monde. Ce que tu choisis, c'est à qui va une partie de ton argent. Un contrat direct avec un producteur, sur 15 à 20 ans, s'appelle un PPA.",
       retiens:"Une offre verte change la destination de l'argent, pas le courant qui sort de la prise."},
-    {id:'mer',ou:"la longue-vue du poste en mer",cle:1,t:"Pourquoi aller en mer",
+    {id:'mer',refs:['ademe-eolien-tout-comprendre','irena-wind-brief','siemensgamesa-sg8-167','rte-be2025-rapport'],ou:"la longue-vue du poste en mer",cle:1,t:"Pourquoi aller en mer",
       x:"Au large, rien ne freine le vent : il est plus fort et plus régulier. Les machines y sont géantes : 8 MW pièce ici, des pales de 81 mètres, 207 mètres du bas au sommet. Quarante éoliennes, 320 MW, environ 1 100 GWh par an : un facteur de charge proche de 40 %. Le revers : un chantier en mer, du sel partout, et un bateau pour chaque tournevis oublié.",
       retiens:"En mer : plus de vent, plus régulier, des machines bien plus grandes. Et tout coûte plus cher."},
-    {id:'cable',ou:"Mlle Alizé, sur le poste en mer",cle:1,t:"Du large à la prise",
+    {id:'cable',refs:['rte-raccordement-dunkerque','rte-raccordement-yeu-noirmoutier'],ou:"Mlle Alizé, sur le poste en mer",cle:1,t:"Du large à la prise",
       x:"Chaque éolienne en mer sort son courant à 66 000 volts. Des câbles posés au fond le rassemblent au poste électrique en mer, qui l'élève à 225 000 volts. Deux liaisons sous-marines, puis souterraines, le ramènent à terre. En France, c'est RTE qui construit ce raccordement.",
       retiens:"Éolienne → câble → poste en mer → 225 000 V → liaison sous-marine → réseau."},
-    {id:'fondations',ou:"la maquette du poste en mer",t:"Tenir debout dans l'eau",
-      x:"Quatre façons de planter une éolienne en mer. Le monopieu : un tube d'acier enfoncé dans le fond (Saint-Nazaire). Le jacket : un treillis à plusieurs pieds (Saint-Brieuc). La fondation gravitaire : 5 000 tonnes de béton simplement posées (Fécamp). Et le flotteur, ancré par des chaînes, pour les grands fonds : trois fermes pilotes tournent en Méditerranée.",
+    {id:'fondations',refs:['cndp-fiche-33-eolien-mer','ademe-eolien-tout-comprendre'],ou:"la maquette du poste en mer",t:"Tenir debout dans l'eau",
+      x:"Quatre façons de planter une éolienne en mer. Le monopieu : un tube d'acier enfoncé dans le fond (Saint-Nazaire). Le jacket : un treillis à plusieurs pieds (Saint-Brieuc). La fondation gravitaire : 5 000 tonnes de béton simplement posées (Fécamp). Et le flotteur, ancré par des chaînes, pour les grands fonds : trois fermes pilotes ont été construites en Méditerranée.",
       retiens:"Monopieu, jacket, gravitaire, flottant : le fond de la mer décide."},
-    {id:'france',ou:"l'affiche de la halte",t:"L'éolien en France",
+    {id:'france',refs:['rte-be2025-rapport','rte-be2025-production'],ou:"l'affiche de la halte",t:"L'éolien en France",
       x:"Fin 2025, la France comptait 23,9 GW d'éolien à terre et 1,9 GW en mer. Production 2025 : 49,6 TWh, soit 9 % de l'électricité du pays, dont 5,7 TWh venus de la mer. Quatre grands parcs en mer sont en service : Saint-Nazaire, Fécamp, Saint-Brieuc, Yeu-Noirmoutier.",
       retiens:"Environ 9 % de l'électricité française, surtout à terre pour l'instant."}
   ],
 
-  sources:[
-    ["RTE, Bilan électrique 2025 (puissances, productions, facteurs de charge, prix négatifs)","https://analysesetdonnees.rte-france.com/bilan-electrique-2025/production"],
-    ["SDES, tableau de bord de l'éolien, quatrième trimestre 2025","https://www.statistiques.developpement-durable.gouv.fr/tableau-de-bord-eolien-quatrieme-trimestre-2025"],
-    ["ADEME, « Le défi éolien en 10 questions » (bruit, durée de vie, recyclage)","https://energiesrenouvelables.cnr.tm.fr/wp-content/uploads/2023/05/guide-defi-eolien-10-questions.pdf"],
-    ["Ministère, fiche « L'éolien terrestre » (distance, saisonnalité)","https://concertation-strategie-energie-climat.gouv.fr/fiche-thematique-ndeg2-leolien-terrestre"],
-    ["Siemens Gamesa, éolienne en mer SG 8.0-167 DD","https://www.siemensgamesa.com/global/en/home/products-and-services/offshore/wind-turbine-sg-8-0-167-dd.html"],
-    ["énergie-info (Médiateur de l'énergie) : qu'est-ce qu'une offre verte ?","https://www.energie-info.fr/fiche_pratique/quest-ce-quune-offre-delectricite-verte/"],
-    ["RTE, raccordement d'un parc éolien en mer","https://www.rte-france.com/projets/nos-projets/raccordement-du-parc-eolien-en-mer-des-iles-dyeu-et-de-noirmoutier"]
-  ]
+  /* les références : chaque information porte les siennes (refs, ci-dessus) ; celles-ci appuient ce que disent les habitants,
+     les panneaux et les simulations. Les clés sont celles du registre commun/donnees/sources.js. */
+  refs:['rte-infrastructures-transport','rte-dmo-sud-bretagne-raccordement','enedis-technologies-enr','rex-transformateur-bourdonnement','cnrtl-noroit','cmn-carnac-histoire','rte-fc-mensuels-eolien-solaire','ademe-eolien-tout-comprendre']
 });
 
 /* ================= CE QUE DISENT LES GENS ET LES CHOSES =================

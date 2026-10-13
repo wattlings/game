@@ -55,7 +55,7 @@ const nucArretUrgence=(el,suite)=>{
   const boucle=()=>{if(!el.isConnected||fini)return;
     if(t>=0){t+=.1;P=t<2?100-(100-C.residuelle)*(t/2):Math.max(3,C.residuelle*Math.pow(t-1,-.28))}
     hist.push(P);hist.shift();dessiner();
-    if(t>=9){fini=true;gainXP(10);fbz.innerHTML=`<div class="fb ok">✔ Deux secondes : les barres sont tombées, la réaction en chaîne est arrêtée. Mais regarde la courbe : le cœur dégage encore ${C.residuelle} % de sa chaleur, puis de moins en moins, pendant des jours. C'est la puissance résiduelle. Un réacteur arrêté doit continuer à être refroidi : c'est pour cela qu'il a des pompes de secours, des diesels de secours, et des secours de secours.</div>`;contBtn(fbz,suite);voyMontrer(fbz);return}
+    if(t>=9){fini=true;gainXP(10);fbz.innerHTML=`<div class="fb ok">✔ Les barres sont tombées d'un coup : la réaction en chaîne s'est arrêtée presque instantanément. Mais regarde la courbe : le cœur dégage encore ${C.residuelle} % de sa chaleur, puis de moins en moins, pendant des jours. C'est la puissance résiduelle. Un réacteur arrêté doit continuer à être refroidi : c'est pour cela qu'il a des pompes de secours, des diesels de secours, et des secours de secours.</div>`;contBtn(fbz,suite);voyMontrer(fbz);return}
     qkTimeout(boucle,100)};
   bt.onclick=()=>{if(t<0){t=0;bt.remove();sfx('door')}};
   dessiner();boucle();
@@ -67,14 +67,14 @@ function nucSimConduite(fin){
     nucManoeuvre({t:'Manœuvre 1 · Le matin',depart:30,consigne:100,x:"6 h. Le pays se réveille, le réseau demande tout. Le réacteur est à 30 % : amène-le à 100 %, et tiens-le trois secondes dans la bande verte. Par paliers.",
       bravo:"Pleine puissance, 1 300 MW, sans rien déclencher. Tu as sorti les barres par paliers et laissé le cœur suivre : c'est exactement le geste. Dans la réalité, cette montée prend une bonne demi-heure."}),
     nucManoeuvre({t:'Manœuvre 2 · Midi',depart:100,consigne:60,x:"13 h, grand soleil sur tout le pays. Les panneaux produisent à plein, les prix s'effondrent : le réseau demande 60 %. Descends, et tiens trois secondes.",
-      bravo:"60 %. Tu viens de faire du suivi de charge : laisser la place au solaire à midi, remonter le soir. Les réacteurs français font cela presque tous les jours, et de plus en plus souvent."}),
+      bravo:"60 %. Tu viens de faire du suivi de charge : laisser la place au solaire à midi, remonter le soir. Les réacteurs français le font surtout les après-midi, d'avril à octobre, et particulièrement le week-end."}),
     nucArretUrgence,
-    info(`<h3>Ce que dit M. Bore</h3><p><b>M. Bore :</b> « Trois choses à retenir. Un : la puissance se règle, avec des barres et de la patience. Deux : si quoi que ce soit sort des clous, le réacteur s'arrête tout seul, en deux secondes, sans demander l'avis de personne. Trois : arrêté ne veut pas dire froid. »</p><p>« Les gens imaginent une salle de commande avec des alarmes partout. En vrai, une bonne journée, c'est une journée où il ne se passe rien. J'ai eu beaucoup de bonnes journées. »</p>`,'Rendre le pupitre')
+    info(`<h3>Ce que dit M. Bore</h3><p><b>M. Bore :</b> « Trois choses à retenir. Un : la puissance se règle, avec des barres et de la patience. Deux : si quoi que ce soit sort des clous, le réacteur s'arrête tout seul, presque instantanément, sans demander l'avis de personne. Trois : arrêté ne veut pas dire froid. »</p><p>« Les gens imaginent une salle de commande avec des alarmes partout. En vrai, une bonne journée, c'est une journée où il ne se passe rien. J'ai eu beaucoup de bonnes journées. »</p>`,'Rendre le pupitre')
   ],()=>{voyEtat().faits['nucleaire.conduite']=1;save();if(fin)fin()},{plusTard:true});
 }
 
 /* ================= 2. DU NEUTRON À LA PRISE ================= */
-const NUC_CHAINE=["Un neutron casse un noyau d'uranium : de la chaleur","L'eau du circuit primaire s'échauffe à 320 °C, sous 155 bars","Dans le générateur de vapeur, elle fait bouillir l'eau du circuit secondaire","La vapeur fait tourner la turbine","L'alternateur produit le courant, à 1 500 tours par minute","Le transformateur l'élève à 400 000 volts","L'eau de mer refroidit la vapeur, qui redevient de l'eau"];
+const NUC_CHAINE=["Un neutron casse un noyau d'uranium : de la chaleur","L'eau du circuit primaire s'échauffe à plus de 300 °C, sous 155 bars","Dans le générateur de vapeur, elle fait bouillir l'eau du circuit secondaire","La vapeur fait tourner la turbine","L'alternateur produit le courant, à 1 500 tours par minute","Le transformateur l'élève à 400 000 volts","L'eau de mer refroidit la vapeur, qui redevient de l'eau"];
 function nucSimChaine(fin){
   trk('voyage_sim',{site:'nucleaire',sim:'chaine'});
   voyEtapes('Du neutron à la prise',[

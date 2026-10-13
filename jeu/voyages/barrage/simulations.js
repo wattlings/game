@@ -36,7 +36,7 @@ const BAR_ATELIER={
       indice:r=>r.h!==10?"La chute ne fait que 10 mètres : règle d'abord la hauteur.":`${barMW(r.p)} : pas encore. Avec si peu de hauteur, il faut ouvrir en grand.`},
     {t:'Mission 3 · Un kilowattheure',x:"Dernière question de M. Newton : de quelle hauteur un mètre cube d'eau doit-il tomber pour rendre 1 kWh, à 5 % près ? Le débit n'y change rien : regarde le deuxième chiffre.",
       ok:r=>Math.abs(r.kwh-1)<=.05,
-      bravo:"400 mètres : plus haut que la tour Eiffel, pour un seul kilowattheure par tonne d'eau, soit une vingtaine de centimes. C'est le chiffre à garder en tête quand on parle de stocker de l'électricité avec de l'eau : ça marche, à condition d'avoir une montagne.",
+      bravo:"400 mètres : plus haut que la tour Eiffel, pour un seul kilowattheure par tonne d'eau. C'est le chiffre à garder en tête quand on parle de stocker de l'électricité avec de l'eau : ça marche, à condition d'avoir une montagne.",
       indice:r=>r.kwh<1?`${r.kwh.toFixed(2).replace('.',',')} kWh par mètre cube : il faut tomber de plus haut.`:`${r.kwh.toFixed(2).replace('.',',')} kWh : c'est plus qu'il n'en faut. Redescends un peu.`}]
 };
 function barSimChute(fin){trk('voyage_sim',{site:'barrage',sim:'chute'});Object.assign(BAR_ATELIER.etat,{ih:3,iq:3});voyAtelier('Débit × hauteur',BAR_ATELIER,()=>{voyEtat().faits['barrage.chute']=1;save();if(fin)fin()})}
@@ -56,10 +56,10 @@ function barCroquis(cv,r){
 /* ================= 2. QUELLE TURBINE ? ================= */
 function barSimTurbines(fin){
   trk('voyage_sim',{site:'barrage',sim:'turbines'});
-  const T=bonne=>[['Pelton : une roue à augets, frappée par un jet',bonne==='P',bonne==='P'?'Haute chute, débit modéré : le jet fait tout.':'Il lui faut un jet à très haute pression : une haute chute.'],['Francis : une roue noyée dans une bâche en spirale',bonne==='F',bonne==='F'?'Chute moyenne : c\'est la turbine la plus répandue au monde.':'Elle est faite pour les chutes moyennes, entre 30 et 300 mètres.'],['Kaplan : une grande hélice à pales orientables',bonne==='K',bonne==='K'?'Basse chute, gros débit : on avale le fleuve.':'Une hélice ne résisterait pas à une haute chute.']];
+  const T=bonne=>[['Pelton : une roue à augets, frappée par un jet',bonne==='P',bonne==='P'?'Haute chute, débit modéré : le jet fait tout.':'Il lui faut un jet à très haute pression : une haute chute.'],['Francis : une roue noyée dans une bâche en spirale',bonne==='F',bonne==='F'?'Chute moyenne, débit moyen : c\'est son domaine.':bonne==='P'?'Elle monte jusque vers 600 mètres, mais avec un débit modéré, le jet d\'une Pelton fait mieux.':'Elle est faite pour les chutes moyennes à hautes : 10 mètres, c\'est trop peu.'],['Kaplan : une grande hélice à pales orientables',bonne==='K',bonne==='K'?'Basse chute, gros débit : on avale le fleuve.':'Une hélice est faite pour les basses chutes et les gros débits.']];
   voyEtapes('Quelle turbine ?',[form({title:'Trois chantiers sur le bureau de Mlle Pelton',ctx:"<b>Mlle Pelton :</b> « Regarde la hauteur d'abord, le débit ensuite. »",
     fields:[{label:'Val-Turbine : 600 m de chute, 80 m³/s',opts:T('P')},{label:'Un barrage de moyenne montagne : 90 m de chute, 200 m³/s',opts:T('F')},{label:'Une usine sur le fleuve : 10 m de chute, 500 m³/s',opts:T('K')}],
-    okMsg:"Trois sur trois. C'est la hauteur de chute qui décide : au-delà de 300 mètres une Pelton, en dessous de 30 une Kaplan, une Francis entre les deux."})],
+    okMsg:"Trois sur trois. C'est la hauteur de chute qui décide d'abord, le débit ensuite : en haut une Pelton, en bas une Kaplan, une Francis entre les deux. Les domaines se chevauchent ; le pupitre de M. Newton, lui, tranche à 30 et 300 mètres."})],
     ()=>{voyEtat().faits['barrage.turbines']=1;save();if(fin)fin()},{plusTard:true});
 }
 
