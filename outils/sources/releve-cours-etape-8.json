@@ -183,7 +183,7 @@
   "fichier": "cours/contenu/etape-8.js",
   "repere": "niveaux.approfondir › tableau « Les indicateurs clés » › tCO2e",
   "texte": "0,064 kg/kWh (élec, hors autoconsommation)",
-  "affirmation": "Facteur d’émission de l’électricité : 0,052 kgCO2e/kWh.",
+  "affirmation": "Facteur d’émission de l’électricité : 0,064 kgCO2e/kWh (0,052 avant correction).",
   "type": "fait",
   "verdict": "corrige",
   "correction": "0,064 kg/kWh (élec, hors autoconsommation)",

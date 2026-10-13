@@ -12,7 +12,7 @@
     "cle": "iea-energy-ai",
     "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
     "relu": true,
-    "page": "p. 246, encadré 5.5"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -96,7 +96,7 @@
     "cle": "iea-energy-ai",
     "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
     "relu": true,
-    "page": "p. 246, encadré 5.5"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -125,13 +125,13 @@
     "cle": "iea-energy-ai",
     "passage": "Cooling and environmental controls consist of equipment that regulates temperature and humidity to keep IT equipment operating at optimal conditions.",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 53 du PDF"
    },
    {
     "cle": "iea-energy-ai",
     "passage": "Uninterruptible power supply batteries and backup power generators keep the data centre powered during outages.",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 53 du PDF"
    }
   ],
   "note": null
@@ -149,7 +149,7 @@
     "cle": "iea-energy-ai",
     "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -167,7 +167,7 @@
     "cle": "iea-energy-ai",
     "passage": "Power usage effectiveness (PUE) is the ratio of total facility electricity consumption to the electricity consumption of the IT equipment (PUE = total consumption/IT consumption).",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 54 du PDF"
    },
    {
     "cle": "arcep-numerique-soutenable-2026",
@@ -238,7 +238,7 @@
     "cle": "iea-energy-ai",
     "passage": "This measure can vary widely from around 2 (meaning 1 kilowatt hour [kWh] of electricity used for cooling and auxiliary equipment for every 1 kWh of electricity used by IT equipment) for enterprise data centres to just under 1.15 for hyperscale data centres",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": null
@@ -256,7 +256,7 @@
     "cle": "iea-energy-ai",
     "passage": "This measure can vary widely from around 2 (meaning 1 kilowatt hour [kWh] of electricity used for cooling and auxiliary equipment for every 1 kWh of electricity used by IT equipment) for enterprise data centres to just under 1.15 for hyperscale data centres",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": null
@@ -274,7 +274,7 @@
     "cle": "iea-energy-ai",
     "passage": "Power usage effectiveness (PUE) is the ratio of total facility electricity consumption to the electricity consumption of the IT equipment (PUE = total consumption/IT consumption).",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 54 du PDF"
    },
    {
     "cle": "arcep-numerique-soutenable-2026",
@@ -348,7 +348,7 @@
     "cle": "iea-energy-ai",
     "passage": "For additional redundancy, data centre operators also usually request a minimum of two lines to connect their facilities to the electricity grid.",
     "relu": true,
-    "page": "p. 89, encadré 2.7"
+    "page": "p. 90 du PDF"
    }
   ],
   "note": null
@@ -366,7 +366,7 @@
     "cle": "iea-energy-ai",
     "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
     "relu": true,
-    "page": "p. 89-90, encadré 2.7"
+    "page": "p. 90 du PDF"
    }
   ],
   "note": "L'AIE donne « de quelques minutes à une heure » ; la dizaine de minutes devient la valeur du site fictif. Le délai de démarrage des groupes (« dix à trente secondes ») n'a pas été trouvé dans une source lisible : retiré de l'information (il reste un paramètre du scénario fictif).",
@@ -397,7 +397,7 @@
     "cle": "iea-energy-ai",
     "passage": "These are rarely used but are necessary to ensure the extremely high levels of reliability that data centres must meet.",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 53 du PDF"
    }
   ],
   "note": null
@@ -415,7 +415,7 @@
     "cle": "iea-energy-ai",
     "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
     "relu": true,
-    "page": "p. 89-90"
+    "page": "p. 90 du PDF"
    }
   ],
   "note": null
@@ -438,7 +438,7 @@
     "cle": "iea-energy-ai",
     "passage": "Air-cooled systems often require a heat pump to upgrade the heat to a usable temperature, but liquid cooling systems can provide higher-temperature heat – from 40 °C to 80 °C – which can directly supply existing district heating networks.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": "Le chiffre « 30-35 °C » pour l'air n'a pas de source ; à Saint-Denis l'eau est récupérée à 28 °C. Formulation élargie et sourcée.",
@@ -492,7 +492,7 @@
     "cle": "iea-energy-ai",
     "passage": "establishing firm offtake agreements with clear tariff structures",
     "relu": true,
-    "page": "p. 246-247"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -510,7 +510,7 @@
     "cle": "iea-energy-ai",
     "passage": "This measure can vary widely from around 2 (meaning 1 kilowatt hour [kWh] of electricity used for cooling and auxiliary equipment for every 1 kWh of electricity used by IT equipment) for enterprise data centres to just under 1.15 for hyperscale data centres",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": null
@@ -665,7 +665,7 @@
     "cle": "iea-energy-ai",
     "passage": "Smaller and less-efficient enterprise data centres have average utilisation rates below 20%, while hyperscale data centres with optimised loads can have average utilisation rates of up to 50%.",
     "relu": true,
-    "page": "p. 54"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": "« 12 à 18 % » n'a pas été retrouvé ; l'AIE dit « below 20% ».",
@@ -708,7 +708,7 @@
     "cle": "iea-energy-ai",
     "passage": "Idle power has improved from around 60% in 2010 to around 35% of rated power in modern servers.",
     "relu": true,
-    "page": "p. 54"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": "« Près de la moitié » valait vers 2010 (60 %) ; aujourd'hui environ 35 %.",
@@ -733,7 +733,7 @@
     "cle": "iea-energy-ai",
     "passage": "increase utilisation rates and reduce the number of physical servers needed.",
     "relu": true,
-    "page": "p. 66"
+    "page": "p. 70 du PDF"
    }
   ],
   "note": null
@@ -751,7 +751,7 @@
     "cle": "iea-energy-ai",
     "passage": "Idle power has improved from around 60% in 2010 to around 35% of rated power in modern servers.",
     "relu": true,
-    "page": "p. 54"
+    "page": "p. 54 du PDF"
    },
    {
     "cle": "jrc-code-conduite-datacentres-2025",
@@ -824,13 +824,13 @@
     "cle": "iea-energy-ai",
     "passage": "Air-cooled systems often require a heat pump to upgrade the heat to a usable temperature, but liquid cooling systems can provide higher-temperature heat – from 40 °C to 80 °C – which can directly supply existing district heating networks.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    },
    {
     "cle": "iea-energy-ai",
     "passage": "reducing energy use for cooling, e.g. liquid cooling systems (direct-to-chip, immersion).",
     "relu": true,
-    "page": "p. 66"
+    "page": "p. 69 du PDF"
    }
   ],
   "note": "L'AIE donne 40 à 80 °C ; 45-60 °C est dans la fourchette."
@@ -848,7 +848,7 @@
     "cle": "iea-energy-ai",
     "passage": "Text generation using a small language model takes around 0.3 Wh. Using a medium-sized language model consumes around 5 Wh.",
     "relu": true,
-    "page": "p. 45"
+    "page": "p. 46 du PDF"
    },
    {
     "cle": "rte-data-centers",
@@ -883,7 +883,7 @@
     "cle": "iea-energy-ai",
     "passage": "Global electricity consumption by data centres is projected to reach around 945 TWh by 2030 in the Base Case, representing just under 3% of total global electricity consumption in 2030. This is more than double the estimated approximately 415 TWh for 2024 (Figure 2.10), which accounted for around 1.5% of today’s global electricity demand.",
     "relu": true,
-    "page": "p. 70"
+    "page": "p. 63 du PDF"
    }
   ],
   "note": null
@@ -901,7 +901,7 @@
     "cle": "rte-be2025-rapport",
     "passage": "En 2025, la consommation électrique en France métropolitaine1, corrigée des aléas météorologiques et des effets calendaires) est restée stable par rapport à celle de l’année précédente, atteignant 451 TWh (+0,4 % par rapport à 2024).",
     "relu": true,
-    "page": "p. 12"
+    "page": "p. 6"
    }
   ],
   "note": null
@@ -919,7 +919,7 @@
     "cle": "iea-energy-ai",
     "passage": "Global electricity consumption by data centres is projected to reach around 945 TWh by 2030 in the Base Case, representing just under 3% of total global electricity consumption in 2030. This is more than double the estimated approximately 415 TWh for 2024 (Figure 2.10), which accounted for around 1.5% of today’s global electricity demand.",
     "relu": true,
-    "page": "p. 70"
+    "page": "p. 63 du PDF"
    }
   ],
   "note": null
@@ -1033,7 +1033,7 @@
     "cle": "iea-energy-ai",
     "passage": "These are rarely used but are necessary to ensure the extremely high levels of reliability that data centres must meet.",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 53 du PDF"
    }
   ],
   "note": null
@@ -1320,7 +1320,7 @@
     "cle": "iea-energy-ai",
     "passage": "Global electricity consumption by data centres is projected to reach around 945 TWh by 2030 in the Base Case, representing just under 3% of total global electricity consumption in 2030. This is more than double the estimated approximately 415 TWh for 2024 (Figure 2.10), which accounted for around 1.5% of today’s global electricity demand.",
     "relu": true,
-    "page": "p. 70"
+    "page": "p. 63 du PDF"
    }
   ],
   "note": null
@@ -1371,13 +1371,13 @@
     "cle": "iea-energy-ai",
     "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    },
    {
     "cle": "iea-energy-ai",
     "passage": "Servers are computers that process and store data.",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 52 du PDF"
    }
   ],
   "note": "L'étiquette laissait croire que seul le déplacement des données chauffe ; serveurs, stockage et réseau consomment tous.",
@@ -1469,7 +1469,7 @@
     "cle": "iea-energy-ai",
     "passage": "Air-cooled systems often require a heat pump to upgrade the heat to a usable temperature, but liquid cooling systems can provide higher-temperature heat – from 40 °C to 80 °C – which can directly supply existing district heating networks.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -1487,7 +1487,7 @@
     "cle": "iea-energy-ai",
     "passage": "Text generation using a small language model takes around 0.3 Wh. Using a medium-sized language model consumes around 5 Wh.",
     "relu": true,
-    "page": "p. 45"
+    "page": "p. 46 du PDF"
    }
   ],
   "note": null,
@@ -1517,7 +1517,7 @@
     "cle": "iea-energy-ai",
     "passage": "with a focus on minimising infrastructure electricity consumption (such as cooling and lighting) compared to the electricity consumption of IT equipment.",
     "relu": true,
-    "page": "p. 54"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": null
@@ -1590,7 +1590,7 @@
     "cle": "iea-energy-ai",
     "passage": "Air-cooled systems often require a heat pump to upgrade the heat to a usable temperature, but liquid cooling systems can provide higher-temperature heat – from 40 °C to 80 °C – which can directly supply existing district heating networks.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -1608,7 +1608,7 @@
     "cle": "iea-energy-ai",
     "passage": "While the technology to recover heat from data centres already exists, there are notable obstacles to overcome.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -1777,7 +1777,7 @@
     "cle": "iea-energy-ai",
     "passage": "These are rarely used but are necessary to ensure the extremely high levels of reliability that data centres must meet.",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 53 du PDF"
    }
   ],
   "note": null
@@ -1894,7 +1894,7 @@
     "cle": "iea-energy-ai",
     "passage": "Power usage effectiveness (PUE) is the ratio of total facility electricity consumption to the electricity consumption of the IT equipment (PUE = total consumption/IT consumption).",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": null
@@ -1912,7 +1912,7 @@
     "cle": "iea-energy-ai",
     "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -1930,7 +1930,7 @@
     "cle": "iea-energy-ai",
     "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
@@ -1959,7 +1959,7 @@
     "cle": "iea-energy-ai",
     "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
     "relu": true,
-    "page": "p. 89-90"
+    "page": "p. 90 du PDF"
    }
   ],
   "note": "« pour une dizaine de minutes au plus » contredisait l'AIE (de quelques minutes à une heure).",
@@ -2042,7 +2042,7 @@
     "cle": "iea-energy-ai",
     "passage": "Idle power has improved from around 60% in 2010 to around 35% of rated power in modern servers.",
     "relu": true,
-    "page": "p. 54"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": null,
@@ -2061,7 +2061,7 @@
     "cle": "iea-energy-ai",
     "passage": "Idle power has improved from around 60% in 2010 to around 35% of rated power in modern servers.",
     "relu": true,
-    "page": "p. 54"
+    "page": "p. 54 du PDF"
    }
   ],
   "note": null,
@@ -2199,7 +2199,7 @@
     "cle": "iea-energy-ai",
     "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
     "relu": true,
-    "page": "p. 89-90"
+    "page": "p. 90 du PDF"
    }
   ],
   "note": null
@@ -2228,7 +2228,7 @@
     "cle": "iea-energy-ai",
     "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
     "relu": true,
-    "page": "p. 89-90"
+    "page": "p. 90 du PDF"
    }
   ],
   "note": null
@@ -2285,7 +2285,7 @@
     "cle": "iea-energy-ai",
     "passage": "These are rarely used but are necessary to ensure the extremely high levels of reliability that data centres must meet.",
     "relu": true,
-    "page": "p. 53"
+    "page": "p. 53 du PDF"
    }
   ],
   "note": null
@@ -2303,7 +2303,7 @@
     "cle": "iea-energy-ai",
     "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
     "relu": true,
-    "page": "p. 89-90"
+    "page": "p. 90 du PDF"
    }
   ],
   "note": null
@@ -2361,7 +2361,7 @@
     "cle": "iea-energy-ai",
     "passage": "all essentially involve using a heat exchanger to heat a working fluid, increasing the temperature using a heat pump if necessary and then piping it to an offtaker, such as a district heat network or nearby industrial facility.",
     "relu": true,
-    "page": "p. 246"
+    "page": "p. 247 du PDF"
    }
   ],
   "note": null
