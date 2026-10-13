@@ -1,0 +1,615 @@
+[
+ {
+  "id": "pa-001",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Essentiel › phrase clé",
+  "texte": "À l’échelle d’un patrimoine, on ne lit plus une courbe : on classe, on compare et on priorise",
+  "affirmation": "Démarche du cours à l’échelle d’un patrimoine.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-002",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Essentiel › à retenir 1",
+  "texte": "Une minorité de sites fait souvent l’essentiel : la « règle des 80/20 » est un ordre de grandeur, pas une loi.",
+  "affirmation": "Le Pareto, un ordre de grandeur.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-003",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Essentiel › à retenir 2",
+  "texte": "En euros, l’électricité pèse plus (≈ 186 €/MWh contre ≈ 89 €/MWh pour le gaz).",
+  "affirmation": "Prix moyens du kWh électrique et gaz du cas d’école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "PRIX_KWH_ELEC et PRIX_KWH_GAZ de commun/donnees/references.js (fourniture et acheminement fictifs, accise sourcée à l’étape 2)."
+ },
+ {
+  "id": "pa-004",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Essentiel › à retenir 2",
+  "texte": "En CO₂, c’est le gaz (≈ 0,204 contre ≈ 0,064 tCO₂e/MWh).",
+  "affirmation": "Facteurs d’émission : 0,064 kgCO2e/kWh pour l’électricité, ≈ 0,204 pour le gaz (par kWh PCS facturé).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   }
+  ],
+  "note": "Valeurs de l’arrêté du 10 avril 2020 (attestation OPERAT) : 0,227 par kWh PCI × 0,90 = 0,204 par kWh PCS (mêmes passages que ce8-009, ce8-010)."
+ },
+ {
+  "id": "pa-005",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Essentiel › à retenir 3",
+  "texte": "On rapporte la consommation à la surface (kWh/m²) et on compare à des bâtiments de <strong>même activité</strong>",
+  "affirmation": "Comparer des ratios kWh/m² entre bâtiments de même activité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-006",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Essentiel › à retenir 4",
+  "texte": "Le <strong>gisement</strong> = (ratio − référence) × surface.",
+  "affirmation": "Définition du gisement propre au cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-007",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Analogie",
+  "texte": "Le ticket de caisse",
+  "affirmation": "Analogie.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-008",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "KPI",
+  "texte": "Ampère-sur-Loire (fictif) : 20 bâtiments municipaux, électricité et gaz.",
+  "affirmation": "Patrimoine fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-009",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Exemple chiffré › gisement de l’école Pasteur",
+  "texte": "Gisement si l’école revenait à la référence :",
+  "affirmation": "Calcul du gisement de l’école Pasteur.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-010",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Pièges › bonne surface",
+  "texte": "Une piscine se compare en kWh par m² de <em>bassin</em>",
+  "affirmation": "Les références de piscines s’expriment par m² de bassin.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "kWh/m2 de bassin Euro/m2 de bassin […] Couverte 3249 146",
+    "relu": true,
+    "page": "p. 9, « Consommation unitaire des piscines par type »"
+   }
+  ]
+ },
+ {
+  "id": "pa-011",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Pièges › petits groupes",
+  "texte": "Une médiane calculée sur deux crèches n’a pas de sens : on s’appuie alors sur la référence nationale.",
+  "affirmation": "Conseil de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-012",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Pièges › climat",
+  "texte": "Face à une référence nationale, on corrige du climat (DJU).",
+  "affirmation": "Les références nationales de l’enquête ADEME sont ramenées à un climat moyen par les DJU.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "Les consommations des bâtiments en kWh par m2 chauffé tiennent compte pour 2005 du climat local (degrés-jours du département auquel appartient la commune). Elles sont ensuite ramenées pour toutes les communes à 2494 Dju",
+    "relu": true,
+    "page": "p. 23, glossaire « Corrections climatiques »"
+   }
+  ],
+  "note": "L’enquête ADEME ramène toutes les consommations à 2 494 DJU ; la référence OPERAT des résidences seniors, elle, n’est pas corrigée (la page le précise)."
+ },
+ {
+  "id": "pa-013",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Pièges › périmètre",
+  "texte": "Un bâtiment privé de la ville (la boulangerie) n’entre pas dans le patrimoine",
+  "affirmation": "Périmètre du patrimoine (exemple fictif).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-014",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Pièges › contexte",
+  "texte": "Un ratio se lit toujours avec l’activité et les horaires.",
+  "affirmation": "Conseil de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-015",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Note des références",
+  "texte": "moyennes par famille de bâtiments de l’enquête ADEME « Énergie et patrimoine communal » de 2005 (données anciennes, corrigées du climat)",
+  "affirmation": "Les références viennent de l’enquête ADEME 2005, corrigées du climat.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "156 Bâtiments administratifs […] 155 Ecoles […] 145 Equipements sportifs (2) […] 143 Equipements socio-culturels […] (1) Consommation corrigée du climat (voir le glossaire page 23) (2) En dehors des piscines",
+    "relu": true,
+    "page": "p. 9, « Consommation et dépense unitaire par m2 pour quelques grandes familles de bâtiments »"
+   },
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "Les consommations des bâtiments en kWh par m2 chauffé tiennent compte pour 2005 du climat local (degrés-jours du département auquel appartient la commune). Elles sont ensuite ramenées pour toutes les communes à 2494 Dju",
+    "relu": true,
+    "page": "p. 23, glossaire « Corrections climatiques »"
+   }
+  ],
+  "note": "Avant : « ordres de grandeur par activité issus de la synthèse de l’enquête ADEME… ». Précisé : ce sont les moyennes par famille de l’enquête 2005 (publiée en 2007).",
+  "avant": "ordres de grandeur par activité issus de la synthèse de l’enquête ADEME « Énergie et patrimoine communal » (données anciennes, corrigées du climat)"
+ },
+ {
+  "id": "pa-016",
+  "fichier": "cours/pages/patrimoine.js",
+  "repere": "Note des références",
+  "texte": "pour la résidence seniors, la moyenne des établissements médico-sociaux déclarés sur OPERAT (consommations 2021, non corrigées du climat)",
+  "affirmation": "Référence des résidences seniors : moyenne OPERAT des établissements médico-sociaux, non corrigée du climat.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ademe-operat-bilan-2022-2023",
+    "passage": "Santé - EMS 7 874 177 80 128 171 216 264",
+    "relu": true,
+    "page": "p. 33, annexe « Tableau des données » (colonnes : Nb EFA, Moy, D1, Q1, Médiane, Q3, D9 en kWh/m²/an ; consommations 2021)"
+   },
+   {
+    "cle": "ademe-operat-bilan-2022-2023",
+    "passage": "EMS : Etablissements médico-sociaux",
+    "relu": true,
+    "page": "p. 29, annexe « Définition des métacatégories d’activité »"
+   },
+   {
+    "cle": "ademe-operat-bilan-2022-2023",
+    "passage": "(rappel : les consommations ne sont pas ajustées du climat)",
+    "relu": true,
+    "page": "p. 8"
+   }
+  ],
+  "note": "Avant : « pour les EHPAD, un ordre de grandeur publié d’environ 250 kWh/m²/an », tiré d’un blog commercial (lsmart.co). Le bilan OPERAT de l’ADEME donne 177 kWh/m²/an en moyenne (médiane 171) pour les établissements médico-sociaux (consommations 2021). Les données ouvertes OPERAT (data.ademe.fr, consommations 2024) donnent un ordre de grandeur voisin pour les EHPAD : 2 651 GWh pour 15,7 millions de m², soit environ 169 kWh/m².",
+  "avant": "pour les EHPAD, un ordre de grandeur publié d’environ 250 kWh/m²/an"
+ },
+ {
+  "id": "pa-017",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "ACT › ens",
+  "texte": "ens: { lab: \"Enseignement\", ref: 155 }",
+  "affirmation": "Référence nationale des écoles : 155 kWh/m²/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "156 Bâtiments administratifs […] 155 Ecoles […] 145 Equipements sportifs (2) […] 143 Equipements socio-culturels […] (1) Consommation corrigée du climat (voir le glossaire page 23) (2) En dehors des piscines",
+    "relu": true,
+    "page": "p. 9, « Consommation et dépense unitaire par m2 pour quelques grandes familles de bâtiments »"
+   }
+  ]
+ },
+ {
+  "id": "pa-018",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "ACT › pe",
+  "texte": "pe: { lab: \"Petite enfance\", ref: 160 }",
+  "affirmation": "Référence nationale des crèches : 160 kWh/m²/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "160 Crèche, halte-garderie",
+    "relu": true,
+    "page": "p. 9, « Consommation et dépense unitaire par m2 pour quelques équipements »"
+   }
+  ]
+ },
+ {
+  "id": "pa-019",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "ACT › sport",
+  "texte": "sport: { lab: \"Sport (hors piscine)\", ref: 145 }",
+  "affirmation": "Référence nationale des équipements sportifs hors piscines : 145 kWh/m²/an.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "156 Bâtiments administratifs […] 155 Ecoles […] 145 Equipements sportifs (2) […] 143 Equipements socio-culturels […] (1) Consommation corrigée du climat (voir le glossaire page 23) (2) En dehors des piscines",
+    "relu": true,
+    "page": "p. 9, « Consommation et dépense unitaire par m2 pour quelques grandes familles de bâtiments »"
+   }
+  ],
+  "note": "148 est la valeur des seuls gymnases ; pour la famille « équipements sportifs en dehors des piscines » (gymnases et dojo du patrimoine), l’enquête donne 145.",
+  "avant": "sport: { lab: \"Sport (hors piscine)\", ref: 148 }"
+ },
+ {
+  "id": "pa-020",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "ACT › pisc",
+  "texte": "pisc: { lab: \"Piscine\", ref: 3249, unit: \"kWh/m² de bassin\" }",
+  "affirmation": "Référence des piscines couvertes : 3 249 kWh/m² de bassin.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "kWh/m2 de bassin Euro/m2 de bassin […] Couverte 3249 146",
+    "relu": true,
+    "page": "p. 9, « Consommation unitaire des piscines par type »"
+   }
+  ]
+ },
+ {
+  "id": "pa-021",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "ACT › adm",
+  "texte": "adm: { lab: \"Administratif\", ref: 156 }",
+  "affirmation": "Référence nationale des bâtiments administratifs : 156 kWh/m²/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "156 Bâtiments administratifs […] 155 Ecoles […] 145 Equipements sportifs (2) […] 143 Equipements socio-culturels […] (1) Consommation corrigée du climat (voir le glossaire page 23) (2) En dehors des piscines",
+    "relu": true,
+    "page": "p. 9, « Consommation et dépense unitaire par m2 pour quelques grandes familles de bâtiments »"
+   }
+  ]
+ },
+ {
+  "id": "pa-022",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "ACT › cult",
+  "texte": "cult: { lab: \"Culture et vie sociale\", ref: 143 }",
+  "affirmation": "Référence nationale des équipements socio-culturels : 143 kWh/m²/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "156 Bâtiments administratifs […] 155 Ecoles […] 145 Equipements sportifs (2) […] 143 Equipements socio-culturels […] (1) Consommation corrigée du climat (voir le glossaire page 23) (2) En dehors des piscines",
+    "relu": true,
+    "page": "p. 9, « Consommation et dépense unitaire par m2 pour quelques grandes familles de bâtiments »"
+   }
+  ]
+ },
+ {
+  "id": "pa-023",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "ACT › ehpad",
+  "texte": "ehpad: { lab: \"Résidence seniors\", ref: 177 }",
+  "affirmation": "Référence des résidences seniors : 177 kWh/m²/an.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ademe-operat-bilan-2022-2023",
+    "passage": "Santé - EMS 7 874 177 80 128 171 216 264",
+    "relu": true,
+    "page": "p. 33, annexe « Tableau des données » (colonnes : Nb EFA, Moy, D1, Q1, Médiane, Q3, D9 en kWh/m²/an ; consommations 2021)"
+   },
+   {
+    "cle": "ademe-operat-bilan-2022-2023",
+    "passage": "EMS : Etablissements médico-sociaux",
+    "relu": true,
+    "page": "p. 29, annexe « Définition des métacatégories d’activité »"
+   }
+  ],
+  "note": "Avant : 250 (blog commercial). Remplacé par la moyenne OPERAT des établissements médico-sociaux (177 kWh/m²/an, consommations 2021).",
+  "avant": "ehpad: { lab: \"Résidence seniors\", ref: 250 }"
+ },
+ {
+  "id": "pa-024",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "PSITES › Résidence Les Glycines",
+  "texte": "[\"Résidence Les Glycines\", \"ehpad\", 4200, 255, 520]",
+  "affirmation": "Consommations fictives de la résidence.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Ajusté (330/720 → 255/520 MWh) pour que la résidence reste « dans la référence » (≈ 185 kWh/m², +4 %) avec la référence corrigée, comme le dit l’épreuve du jeu ; elle reste 2e du Pareto.",
+  "avant": "[\"Résidence Les Glycines\", \"ehpad\", 4200, 330, 720]"
+ },
+ {
+  "id": "pa-025",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "PSITES",
+  "texte": "[\"École Pasteur\", \"ens\", 2400, 95, 470]",
+  "affirmation": "Les 20 sites et leurs consommations sont inventés.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-026",
+  "fichier": "commun/donnees/patrimoine.js",
+  "repere": "PX, CX",
+  "texte": "Prix moyens en €/MWh et émissions en tCO2e/MWh : tirés des références du cours.",
+  "affirmation": "Prix et facteurs repris de commun/donnees/references.js.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-027",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 1 › périmètre",
+  "texte": "Un patrimoine, c\\'est ce que le propriétaire gère et paie.",
+  "affirmation": "Définition du périmètre (méthode).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-028",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 1 › piscine",
+  "texte": "Les références de piscines s\\'expriment en kWh par m² de bassin.",
+  "affirmation": "Les références de piscines s’expriment par m² de bassin.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "kWh/m2 de bassin Euro/m2 de bassin […] Couverte 3249 146",
+    "relu": true,
+    "page": "p. 9, « Consommation unitaire des piscines par type »"
+   }
+  ]
+ },
+ {
+  "id": "pa-029",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 2 › Pareto",
+  "texte": "Une piscine, c'est souvent autant que plusieurs écoles.",
+  "affirmation": "Une piscine pèse lourd dans le bilan d’une commune.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "Les piscines connaissent une situation particulière. Peu nombreuses relativement aux autres équipe- ments sportifs, elles représentent en raison d’un haut niveau de consommation unitaire, une part importante du bilan énergétique des communes qui en sont équipées.",
+    "relu": true,
+    "page": "p. 9"
+   }
+  ],
+  "note": "L’enquête ADEME : les piscines représentent « une part importante du bilan énergétique » des communes qui en ont ; 3 249 kWh/m² de bassin contre 155 kWh/m² pour une école."
+ },
+ {
+  "id": "pa-030",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 2 › 80/20",
+  "texte": "La « règle des 80/20 » est un ordre de grandeur, pas une loi.",
+  "affirmation": "Le Pareto, un ordre de grandeur.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-031",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 3 › info",
+  "texte": "En euros, l'électricité pèse plus lourd (≈ 186 €/MWh contre ≈ 89 €/MWh pour le gaz).",
+  "affirmation": "Prix moyens du cas d’école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Voir la ligne correspondante de la page du cours."
+ },
+ {
+  "id": "pa-032",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 3 › info",
+  "texte": "En CO₂, c'est l'inverse (≈ 0,064 t/MWh contre ≈ 0,204 t/MWh).",
+  "affirmation": "Facteurs d’émission électricité et gaz.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   }
+  ],
+  "note": "0,227 par kWh PCI × 0,90 = 0,204 par kWh PCS."
+ },
+ {
+  "id": "pa-033",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 3 › questions",
+  "texte": "La facture, le CO₂, ou les kWh du décret tertiaire ?",
+  "affirmation": "Choix de l’indicateur avant tout Pareto.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-034",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 4 › ratio",
+  "texte": "On neutralise la taille. Et on compare une école à des écoles, pas à une piscine.",
+  "affirmation": "Conseil de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-035",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 5 › info",
+  "texte": "Chaque site est comparé à la référence nationale de son activité (en kWh/m²/an).",
+  "affirmation": "Comparaison à la référence nationale de l’activité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Avant : « (en kWh/m²/an, climat corrigé) » ; la mention a été retirée car la référence OPERAT des résidences seniors n’est pas corrigée du climat.",
+  "avant": "Chaque site est comparé à la référence nationale de son activité (en kWh/m²/an, climat corrigé)."
+ },
+ {
+  "id": "pa-036",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 5 › Glycines",
+  "texte": "Gros ne veut pas dire inefficace. Le Pareto dit où regarder, le benchmark dit s\\'il y a un problème.",
+  "affirmation": "Conseil de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-037",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 5 › petits groupes",
+  "texte": "Avec 2 sites, la médiane interne est fragile : on s\\'appuie sur la référence nationale",
+  "affirmation": "Conseil de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-038",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 5 › climat",
+  "texte": "Les références de l\\'enquête ADEME sont corrigées du climat : on compare à conditions égales.",
+  "affirmation": "Les références de l’enquête ADEME sont ramenées à un climat moyen.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ademe-epc-2005",
+    "passage": "Les consommations des bâtiments en kWh par m2 chauffé tiennent compte pour 2005 du climat local (degrés-jours du département auquel appartient la commune). Elles sont ensuite ramenées pour toutes les communes à 2494 Dju",
+    "relu": true,
+    "page": "p. 23, glossaire « Corrections climatiques »"
+   }
+  ],
+  "note": "Avant : « Les références nationales sont corrigées du climat » ; vrai pour l’enquête ADEME, pas pour la moyenne OPERAT des résidences seniors.",
+  "avant": "Les références nationales sont corrigées du climat : on compare à conditions égales."
+ },
+ {
+  "id": "pa-039",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 6 › plan",
+  "texte": "Sobriété sur tout le patrimoine, puis audits sur les plus gros gisements assujettis au décret tertiaire",
+  "affirmation": "Démarche de priorisation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-040",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Mission 6 › piscine",
+  "texte": "Politiquement explosif, et ce n\\'est pas le rôle de l\\'energy manager.",
+  "affirmation": "Clin d’œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "pa-041",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Fin › Mme Joule",
+  "texte": "pense à renouveler les mandats Enedis avant qu'ils expirent.",
+  "affirmation": "Les autorisations d’accès aux données ont une durée limitée.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-contrat-data-connect",
+    "passage": "demander un consentement pour une durée maximale de trois années",
+    "relu": true,
+    "page": "art. 3.2"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "À défaut de précision sur la durée de validité de l'autorisation, les parties conviennent que cette-dernière n'est pas valable.",
+    "relu": true,
+    "page": "art. 3.1"
+   }
+  ]
+ },
+ {
+  "id": "pa-042",
+  "fichier": "jeu/epreuves/patrimoine.js",
+  "repere": "Maire",
+  "texte": "Si le Pareto dit que la piscine consomme beaucoup, on peut changer le Pareto ?",
+  "affirmation": "Répliques humoristiques du maire.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

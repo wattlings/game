@@ -142,6 +142,18 @@
     "page": "p. 20, § 3.4.3.1"
    },
    {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le matricule et/ou numéro de série du compteur est inexploité.",
+    "relu": true,
+    "page": "§ 2.2"
+   },
+   {
     "cle": "enedis-cg-raccordement-bt",
     "passage": "En amont du PRM, les Ouvrages de Raccordement, y compris ceux éventuellement situés sur l’Unité Foncière du Demandeur, font partie du RPD ; ils sont exploités, entretenus, dépannés et renouvelés par Enedis.",
     "relu": true,
@@ -160,7 +172,7 @@
     "page": "p. 43 (données techniques rattachées au PCE)"
    }
   ],
-  "note": "Enedis définit le PDL/PRM comme le « point frontière ou de raccordement », identifié par un numéro unique, et précise que les ouvrages en amont (dont le compteur) sont renouvelés par Enedis : le numéro désigne le point, pas l’appareil. Aucun document Enedis lu ne dit en toutes lettres que le numéro survit au remplacement du compteur ; un guide secondaire le dit explicitement. Côté gaz, le guide GRDF montre qu’un changement de compteur (motif CCP) est une simple relève dans l’historique du même PCE, le matricule du compteur étant une donnée distincte."
+  "note": "Enedis définit le PDL/PRM comme le « point frontière ou de raccordement », identifié par un numéro unique, et précise que les ouvrages en amont (dont le compteur) sont renouvelés par Enedis : le numéro désigne le point, pas l’appareil. Aucun document Enedis lu ne dit en toutes lettres que le numéro survit au remplacement du compteur ; un guide secondaire le dit explicitement. Côté gaz, le guide GRDF montre qu’un changement de compteur (motif CCP) est une simple relève dans l’historique du même PCE, le matricule du compteur étant une donnée distincte. La note Enedis-NMO-CF_022E confirme que le PRM identifie un point de connexion, distinct du matricule ou numéro de série du compteur."
  },
  {
   "id": "ce4-012",

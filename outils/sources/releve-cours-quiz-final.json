@@ -43,6 +43,18 @@
     "page": "p. 20, § 3.4.3.1"
    },
    {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le matricule et/ou numéro de série du compteur est inexploité.",
+    "relu": true,
+    "page": "§ 2.2"
+   },
+   {
     "cle": "enedis-cg-raccordement-bt",
     "passage": "En amont du PRM, les Ouvrages de Raccordement, y compris ceux éventuellement situés sur l’Unité Foncière du Demandeur, font partie du RPD ; ils sont exploités, entretenus, dépannés et renouvelés par Enedis.",
     "relu": true,
@@ -55,7 +67,7 @@
     "page": "encadré « Bon à savoir »"
    }
   ],
-  "note": "Même sources que ce1-016 : la définition Enedis (point de raccordement, ouvrages amont renouvelés par Enedis) et un guide secondaire qui dit explicitement que le PDL/PRM reste inchangé au remplacement du compteur."
+  "note": "Même sources que ce1-016 : la définition Enedis (point de raccordement, ouvrages amont renouvelés par Enedis) et un guide secondaire qui dit explicitement que le PDL/PRM reste inchangé au remplacement du compteur. La note Enedis-NMO-CF_022E confirme que le PRM identifie un point de connexion, distinct du matricule ou numéro de série du compteur."
  },
  {
   "id": "qf-004",
@@ -86,6 +98,12 @@
     "cle": "grdf-adict-faq",
     "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
     "relu": true
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Le Tiers Autorisé doit disposer de l'autorisation expresse préalable du client",
+    "relu": true,
+    "page": "art. 3.1"
    }
   ],
   "note": "Passages déjà lus (ce2-012)."
