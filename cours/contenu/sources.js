@@ -19,6 +19,9 @@ export const SOURCES_DEMOS = {
   anatomieFacture: ["ministere-guide-fiscalite-2026", "enedis-turpe7-brochure", "cnieg-cta-note", "mne-elements-facture", "mne-prix-pro", "enedis-facturation-acheminement", "cre-atrd7", "minefi-tva"],
 };
 
+/** Les sources de la page « Piloter un patrimoine » (références nationales, ratios) : la liste s'affiche sur la page. */
+export const SOURCES_PATRIMOINE = [];
+
 export const sourcesData = {
   type: "sources",
   date: "septembre 2026",

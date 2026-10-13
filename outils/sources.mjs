@@ -47,6 +47,9 @@ function citations() {
   // les démos : SOURCES_DEMOS dans cours/contenu/sources.js
   const demos = lire("cours/contenu/sources.js").match(/SOURCES_DEMOS = \{([\s\S]*?)\n\};/);
   if (demos) for (const m of demos[1].matchAll(/(\w+): \[([^\]]*)\]/g)) noter("demo:" + m[1], cles(m[2]));
+  // la page Patrimoine : SOURCES_PATRIMOINE dans cours/contenu/sources.js
+  const patri = lire("cours/contenu/sources.js").match(/SOURCES_PATRIMOINE = \[([^\]]*)\]/);
+  if (patri) noter("patrimoine", cles(patri[1]));
   // le glossaire : src:[…] sur un terme
   for (const m of lire("commun/donnees/glossaire.js").matchAll(/\n  "?([a-z0-9-]+)"?: \{\n((?:    .*\n)*?)  \},/g)) {
     const src = m[2].match(/src: \[([^\]]*)\]/);
@@ -67,6 +70,8 @@ function affichees(ligne, C, nomReleve) {
   const f = ligne.fichier, U = new Set(), ajoute = (ou) => (C[ou] || []).forEach((k) => U.add(k));
   if (f.startsWith("cours/contenu/")) ajoute(f);
   else if (f.startsWith("cours/demos/")) ajoute("demo:" + path.basename(f, ".js").replace(/-(\w)/g, (m, c) => c.toUpperCase()));
+  else if (["cours/pages/patrimoine.js", "commun/donnees/patrimoine.js"].includes(f)) ajoute("patrimoine");
+  else if (f === "jeu/epreuves/patrimoine.js") { ajoute("patrimoine"); ajoute("jeu:etape-P"); }
   else if (f === "commun/donnees/glossaire.js") { const m = ligne.repere.match(/glossaire › ([a-z0-9-]+)/); if (m) ajoute("glossaire:" + m[1]); }
   else if (f === "commun/donnees/references.js") Object.keys(C).filter((k) => k.startsWith("demo:") || k.startsWith("cours/")).forEach(ajoute);
   else if (f.startsWith("jeu/voyages/")) Object.keys(C).filter((k) => k.startsWith(path.dirname(f) + "/")).forEach(ajoute);
