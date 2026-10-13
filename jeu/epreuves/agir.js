@@ -31,6 +31,6 @@ function gameAgir(done){
     planStep,
     choice({q:'Deux actions de 10 % chacune sur le chauffage donnent au total…',opts:[['19 %',1,'La seconde s\'applique à ce qui reste : 1 − 0,9 × 0,9 = 19 %.'],['20 %',0,'Les pourcentages se multiplient, ils ne s\'additionnent pas.'],['10 %',0,'La seconde action compte aussi.']]}),
     choice({q:'Un investissement de 30 000 € économise 2 500 € par an. Temps de retour simple ?',opts:[['12 ans',1,'30 000 / 2 500 = 12 ans. C\'est un premier filtre : il ignore la hausse des prix, la durée de vie et les aides (CEE).'],['8 ans',0,'Refais la division.'],['75 ans',0,'On divise l\'investissement par l\'économie annuelle.']]}),
-    choice({q:'Baisser la puissance souscrite réduit surtout…',opts:[['La part fixe de l\'acheminement (et la CTA)',1,'Elle agit sur la part fixe, pas sur les kWh consommés.'],['Les kWh consommés',0,'La puissance souscrite ne change pas les kWh.'],['L\'abonnement du fournisseur',0,'Celui-là ne bouge pas.']]})
+    choice({q:'Baisser la puissance souscrite réduit surtout…',opts:[['La part fixe de l\'acheminement (et la CTA)',1,'Elle agit sur la part fixe, pas sur les kWh consommés.'],['Les kWh consommés',0,'La puissance souscrite ne change pas les kWh.'],['L\'abonnement du fournisseur',0,'Il peut baisser aussi, mais parce qu\'il contient la part fixe de l\'acheminement.']]})
   ],done);
 }

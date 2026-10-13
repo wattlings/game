@@ -3,7 +3,7 @@
    en réglant le talon gaz (a) et la pente (b). L'EMS calcule ensuite la régression, pour comparer.
    La droite obtenue est la référence qui sert à détecter (étape 6) et à prouver (étape 8). */
 
-/* DJU mensuels d'une année type à Orléans-Bricy (base 18 °C), de septembre à août */
+/* DJU mensuels d'une année type inventée pour Ampère-sur-Loire (base 18 °C), de septembre à août */
 const SIG_MOIS=['sept.','oct.','nov.','déc.','janv.','févr.','mars','avr.','mai','juin','juil.','août'];
 const SIG_DJU=[60,190,330,410,430,360,300,200,110,30,5,10];
 function sigPoints(sid){

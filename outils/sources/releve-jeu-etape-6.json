@@ -1,0 +1,766 @@
+[
+ {
+  "id": "ja6-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6p › x",
+  "texte": "On compare la consommation réelle à ce qu’elle devrait être, pour repérer gaspillages et dérives et estimer leur coût.",
+  "affirmation": "Principe de la détection.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6p › say (Veilleur de nuit)",
+  "texte": "Je ne cherche pas ce qui est allumé : je cherche ce qui ne devrait pas l’être.",
+  "affirmation": "Chercher l'écart au normal.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-003",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6r1 › x",
+  "texte": "Sans baseline (référence), pas de détection : il faut savoir ce qui est « normal ».",
+  "affirmation": "Il faut une référence pour détecter.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Même notion que ce6-001."
+ },
+ {
+  "id": "ja6-004",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6r1 › say (rayon Statistiques)",
+  "texte": "« Pour trouver l’anormal, définis d’abord le normal. »",
+  "affirmation": "Même idée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-005",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6r2 › x",
+  "texte": "Les dérives classiques : talon qui monte, chauffage le week-end ou l’été, dépassement de puissance.",
+  "affirmation": "Liste des dérives classiques.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Découpage du cours (ce6-002). Chacune est sourcée là où le jeu la montre : dépassement facturé (ja5, TURPE 7), chauffage réduit hors occupation (ja6, noterDerive)."
+ },
+ {
+  "id": "ja6-006",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6r2 › say (affiche)",
+  "texte": "L’affiche liste trois suspects habituels, avec leur photo d’identité.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-007",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6r3 › x",
+  "texte": "Une alerte sur une donnée fausse fait perdre du temps : la détection dépend de l’étape Fiabiliser.",
+  "affirmation": "Détecter sur des données fiabilisées.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-008",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6r3 › say (Technicien)",
+  "texte": "Tu te souviens de Picatron ?",
+  "affirmation": "Rappel de la créature de l'étape 4.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-009",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s6a › x",
+  "texte": "Une nuit où personne ne tire d’eau, le compteur d’eau devrait être immobile.",
+  "affirmation": "Analogie de la fuite d'eau.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-010",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "cIntro",
+  "texte": "Je vois tout ce qui consomme quand personne ne regarde.",
+  "affirmation": "Introduction de la championne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-011",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "crea",
+  "texte": "crea:['thermoclash','pointezilla','veillotron']",
+  "affirmation": "Créatures des dresseurs.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-012",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Rondier Basile › question 1 › explication",
+  "texte": "On cherche l'écart au normal, puis on estime son coût.",
+  "affirmation": "Principe de la détection.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-013",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Rondier Basile › question 1 › mauvaise réponse 2",
+  "texte": "La facture arrive trop tard et ne dit pas quand.",
+  "affirmation": "La facture ne suffit pas à détecter.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-014",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Rondier Basile › question 2",
+  "texte": "Il est 2 h du matin, personne ne tire d'eau, et le compteur d'eau tourne. Conclusion ?",
+  "affirmation": "Analogie de la fuite.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-015",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Guetteuse Nour › question 1 › explication",
+  "texte": "La référence « apprend » la nouvelle consommation : l'écart disparaît alors que le gaspillage continue.",
+  "affirmation": "Une moyenne glissante absorbe la dérive.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-016",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Guetteuse Nour › question 2 › explication",
+  "texte": "En été et le week-end, la chaudière ne devrait pas tourner : une règle simple suffit.",
+  "affirmation": "Règle calendrier pour la chaudière.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Même ligne que ce6-012. Juste pour le chauffage un samedi de juillet ; une chaudière qui produit aussi l'eau chaude peut tourner l'été, et l'hiver le week-end un réduit à 16 °C reste admis (voir la ligne de la ronde, noterDerive)."
+ },
+ {
+  "id": "ja6-017",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Guetteuse Nour › question 2 › mauvaise réponse 1",
+  "texte": "La chaudière brûle du gaz.",
+  "affirmation": "La chaudière du site est au gaz.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-018",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Vigie Oscar › question 1",
+  "texte": "C'est le fonctionnement normal d'un bâtiment occupé.",
+  "affirmation": "Une pointe à midi n'est pas une dérive ; un talon qui monte en est une.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-019",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Vigie Oscar › question 2",
+  "texte": "Pour trouver l'anormal, on définit d'abord le normal.",
+  "affirmation": "Il faut une référence.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-020",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "Vigie Oscar › question 3 › explication",
+  "texte": "Trop de fausses alertes, et plus personne ne les lit.",
+  "affirmation": "Les fausses alertes ruinent la détection.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-021",
+  "fichier": "jeu/recit/arenes/arene-6.js",
+  "repere": "cWin",
+  "texte": "Le jour se lève sur Ampère-sur-Loire.",
+  "affirmation": "Fin de l'arène.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-022",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "gameDetect › info",
+  "texte": "Les trois dérives électriques font monter le talon de <b>3 kW</b> au total.",
+  "affirmation": "Les trois dérives électriques du site totalisent 3 kW.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "0,5 kW d'éclairage + dérives du site (école 1,6 + 0,9 ; bureaux 1,3 + 1,2 ; boulangerie 1,7 + 0,8) = 3 kW pour chaque site."
+ },
+ {
+  "id": "ja6-023",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "gameDetect › info (contexte)",
+  "texte": "Heures « bâtiment vide » sur un an (nuits, week-ends, vacances) : environ",
+  "affirmation": "Heures d'inoccupation sur un an : environ 7 240 h.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Calendrier fictif de l'école (ce6-005). Le même chiffre est montré pour les bureaux et la boulangerie, dont les horaires diffèrent : ordre de grandeur seulement pour ces deux sites."
+ },
+ {
+  "id": "ja6-024",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix énergie gaspillée",
+  "texte": "3 kW × 7 240 h = 21 720 kWh, soit environ 21,7 MWh.",
+  "affirmation": "Calcul de l'énergie gaspillée.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-025",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix énergie gaspillée › mauvaise réponse",
+  "texte": "Des kW multipliés par des heures donnent des kWh.",
+  "affirmation": "Énergie = puissance × durée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-026",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix coût › contexte",
+  "texte": "Prix du kWh électrique évité : environ",
+  "affirmation": "Prix du kWh évité ≈ 0,186 € HT.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Prix moyen de la part variable dans le modèle du cours (ce6-007)."
+ },
+ {
+  "id": "ja6-027",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix coût › bonne réponse",
+  "texte": "21 720 × 0,186 ≈ 4 040 €.",
+  "affirmation": "Calcul du coût.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-028",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix Régler les alertes › bonne réponse",
+  "texte": "Une régression sur DJU, occupation et calendrier",
+  "affirmation": "Une bonne référence est ajustée aux conditions (climat, occupation, calendrier).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "La consommation CVC correspond ainsi à la consommation d’énergie qui aurait été observée si le nombre de DJU avait été égal à la moyenne enregistrée sur une période de référence et un territoire spécifique.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ],
+  "note": "L'IPMVP compare à une référence ajustée aux changements de conditions ; le SDES décrit l'ajustement au climat (consommation qui aurait été observée à DJU moyens)."
+ },
+ {
+  "id": "ja6-029",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix Régler les alertes › mauvaise réponse 1",
+  "texte": "Elle apprend la dérive et finit par la cacher.",
+  "affirmation": "La moyenne glissante absorbe la dérive.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-030",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix Régler les alertes › mauvaise réponse 2",
+  "texte": "Météo et calendrier différents.",
+  "affirmation": "Le même mois l'an dernier n'est pas comparable sans ajustement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-031",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix 999,9 kW › bonne réponse",
+  "texte": "Un faux positif dû à la qualité des données",
+  "affirmation": "Une valeur aberrante produit un faux positif.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-032",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "choix 999,9 kW › mauvaise réponse 2",
+  "texte": "Un faux négatif, c\\'est un vrai problème sans alerte.",
+  "affirmation": "Définition du faux négatif.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-033",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "noterDerive › éclairage",
+  "texte": "Éclairage des circulations resté allumé toute la nuit",
+  "affirmation": "Un éclairage allumé dans des locaux vides est une dérive.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "education-sobriete-ecoles-2022",
+    "passage": "Il est indispensable d’éteindre l’éclairage lorsque les locaux ne sont pas occupés.",
+    "relu": true,
+    "page": "p. 4"
+   }
+  ],
+  "note": "Hors éclairage de sécurité. La valeur 0,5 kW est fictive."
+ },
+ {
+  "id": "ja6-034",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "noterDerive › chaudière",
+  "texte": "La chaudière tourne à plein régime un samedi soir, bâtiment vide ! Dérive gaz : le réduit de week-end n'est pas programmé.",
+  "affirmation": "Hors occupation, le chauffage doit passer en réduit (16 °C le week-end, 8 °C au-delà de 48 h).",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "education-sobriete-ecoles-2022",
+    "passage": "16 °C en moyenne le week-end et lorsque l’inoccupation est comprise entre 24 et 48 heures ;",
+    "relu": true,
+    "page": "p. 3 (art. R. 241-26 et R. 241-27 du code de l’énergie)"
+   },
+   {
+    "cle": "ademe-10-gestes-entreprises",
+    "passage": "19 °C pour les pièces occupées, 16 °C hors période d’occupation, 8 °C si les lieux sont inoccupés plus de deux jours.",
+    "relu": true,
+    "page": "geste 1"
+   }
+  ],
+  "note": "Les textes lus prévoient un chauffage réduit, pas arrêté, le week-end : une chaudière qui tourne un samedi d'hiver peut être normale. C'est le fonctionnement « à plein régime » qui trahit l'absence de réduit.",
+  "avant": "La chaudière tourne un samedi soir, bâtiment vide ! Dérive gaz : le réduit de week-end n'est pas programmé."
+ },
+ {
+  "id": "ja6-035",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "noterDerive › chaudière (2e réplique)",
+  "texte": "Une règle métier liée au calendrier (« chaudière en marche le week-end ») la repère tout de suite.",
+  "affirmation": "Règle calendrier.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-036",
+  "fichier": "jeu/epreuves/detecter.js",
+  "repere": "noterDerive › autres dérives",
+  "texte": "kW sur le talon, toutes les nuits et tous les week-ends.",
+  "affirmation": "Chaque dérive ajoute sa puissance au talon.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-037",
+  "fichier": "jeu/monde/sites.js",
+  "repere": "SITES.ecole.derRdc",
+  "texte": "Tableau numérique et PC de la salle info restés en veille tout le week-end",
+  "affirmation": "Des équipements numériques en veille dans une école vide sont une dérive.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "education-sobriete-ecoles-2022",
+    "passage": "Il est fortement recommandé d’éteindre les équipements numériques (ordinateurs, smartphones, écrans, affichage numérique, etc.) lorsqu’ils ne sont pas utilisés.",
+    "relu": true,
+    "page": "p. 4"
+   },
+   {
+    "cle": "education-sobriete-ecoles-2022",
+    "passage": "appareils électriques en veille sont à l’origine de 10 à 15 % de la consommation d’électricité",
+    "relu": true,
+    "page": "p. 4"
+   }
+  ],
+  "note": "Puissance (1,6 kW) fictive."
+ },
+ {
+  "id": "ja6-038",
+  "fichier": "jeu/monde/sites.js",
+  "repere": "SITES.ecole.derCave",
+  "texte": "Chauffe-eau électrique en marche pendant les vacances",
+  "affirmation": "Un ballon d'eau chaude laissé en marche pendant les vacances scolaires est une dérive.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "education-sobriete-ecoles-2022",
+    "passage": "Il est souhaitable de couper l’alimentation des ballons d’eau chaude pendant les vacances scolaires",
+    "relu": true,
+    "page": "p. 8"
+   }
+  ],
+  "note": "Puissance (0,9 kW) fictive. Le recueil rappelle les règles légionelles si la coupure dure plusieurs semaines."
+ },
+ {
+  "id": "ja6-039",
+  "fichier": "jeu/monde/sites.js",
+  "repere": "SITES.bureau.derRdc",
+  "texte": "Écrans, imprimantes et machine à café en veille toute la nuit",
+  "affirmation": "Des équipements en veille la nuit sont une dérive.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-10-gestes-entreprises",
+    "passage": "éteindre les écrans et ordinateurs la nuit",
+    "relu": true,
+    "page": "geste 5"
+   },
+   {
+    "cle": "education-sobriete-ecoles-2022",
+    "passage": "appareils électriques en veille sont à l’origine de 10 à 15 % de la consommation d’électricité",
+    "relu": true,
+    "page": "p. 4"
+   }
+  ],
+  "note": "Puissance (1,3 kW) fictive."
+ },
+ {
+  "id": "ja6-040",
+  "fichier": "jeu/monde/sites.js",
+  "repere": "SITES.bureau.derCave",
+  "texte": "Centrale de ventilation qui tourne 24 h/24",
+  "affirmation": "Une ventilation mécanique qui tourne hors occupation est une dérive.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "education-sobriete-ecoles-2022",
+    "passage": "celle-ci est arrêtée hors occupation des locaux, en fonction des horaires et des jours de fonctionnement de l’établissement",
+    "relu": true,
+    "page": "p. 8"
+   }
+  ],
+  "note": "Le texte lu vise les établissements scolaires ; le principe (arrêt hors occupation, par horloge) vaut pour des bureaux. Puissance (1,2 kW) fictive."
+ },
+ {
+  "id": "ja6-041",
+  "fichier": "jeu/monde/sites.js",
+  "repere": "SITES.boulangerie.derRdc",
+  "texte": "Vitrine réfrigérée ouverte, sans rideau de nuit",
+  "affirmation": "Une vitrine réfrigérée ouverte la nuit gaspille du froid.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-10-gestes-entreprises",
+    "passage": "installer des portes sur les meubles frigorifiques",
+    "relu": true,
+    "page": "geste 2"
+   }
+  ],
+  "note": "L'ADEME recommande de fermer les meubles frigorifiques ; puissance (1,7 kW) fictive."
+ },
+ {
+  "id": "ja6-042",
+  "fichier": "jeu/monde/sites.js",
+  "repere": "SITES.boulangerie.derCave",
+  "texte": "Chambre froide dont la porte ferme mal",
+  "affirmation": "Dérive de la boulangerie.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-043",
+  "fichier": "jeu/epreuves/ems-seuil.js",
+  "repere": "seuilStep › consigne",
+  "texte": "Trop bas, tout sonne. Trop haut, rien ne sonne.",
+  "affirmation": "Effet du seuil.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-044",
+  "fichier": "jeu/epreuves/ems-seuil.js",
+  "repere": "SEU_EVT",
+  "texte": "la kermesse de l’école, sono et barbe à papa comprises",
+  "affirmation": "Événements isolés des sites.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-045",
+  "fichier": "jeu/epreuves/ems-seuil.js",
+  "repere": "seuilStep › réussite",
+  "texte": "La ronde dit <i>quoi</i>.",
+  "affirmation": "L'alerte chiffre, la visite explique.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-046",
+  "fichier": "jeu/epreuves/ems-seuil.js",
+  "repere": "emsTransfert",
+  "texte": "Régler ce seuil est un choix humain : trop sensible, plus personne ne lit les alertes ; trop large, la dérive coûte des mois de facture avant d’être vue.",
+  "affirmation": "Compromis du seuil d'alerte.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-047",
+  "fichier": "jeu/epreuves/ems-seuil.js",
+  "repere": "seuilStep › échec",
+  "texte": "l'équipe technique crée une règle qui envoie tes alertes à la corbeille",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-048",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[6] › énigme",
+  "texte": "Ils ne consomment presque rien. Ensemble, si.",
+  "affirmation": "Les veilles, cumulées, pèsent dans la consommation d'électricité.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "education-sobriete-ecoles-2022",
+    "passage": "appareils électriques en veille sont à l’origine de 10 à 15 % de la consommation d’électricité",
+    "relu": true,
+    "page": "p. 4"
+   }
+  ]
+ },
+ {
+  "id": "ja6-049",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[6] › panneau du vestibule",
+  "texte": "Manoir de la Nuit. Ici, tout ce qui consomme brille. Ouvre l'œil.",
+  "affirmation": "Décor.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-050",
+  "fichier": "jeu/epreuves/donjons.js",
+  "repere": "DG_DECOR › tele",
+  "texte": "Un téléviseur en veille. Un petit point rouge, depuis 2014.",
+  "affirmation": "Décor.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-051",
+  "fichier": "jeu/epreuves/donjons.js",
+  "repere": "DG_DECOR › chaudiere",
+  "texte": "La chaudière. Weekendragon dort dedans, le week-end compris.",
+  "affirmation": "Décor.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-052",
+  "fichier": "jeu/epreuves/donjons.js",
+  "repere": "voyant éteint",
+  "texte": "Éteint. Il ne consomme plus rien, et il boude.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-053",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[7]",
+  "texte": "Tout ce qui brille dans le noir consomme pour rien.",
+  "affirmation": "Indice de la ronde de nuit.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-054",
+  "fichier": "jeu/recit/objectifs.js",
+  "repere": "objectif S.ch===7",
+  "texte": "trouve les 4 dérives",
+  "affirmation": "Objectif de la ronde.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-055",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.depassement › idle (affiche de l'agence Enedis)",
+  "texte": "Votre talon monte ? Ce n’est pas la faute du compteur. (Enfin, rarement.)",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-056",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.veilleur › idle",
+  "texte": "Les veilles, elles, ne dorment jamais.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-057",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.rayonStat › idle",
+  "texte": "Un livre s’intitule « 101 façons de mentir avec une moyenne ».",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-058",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.plombier › idle",
+  "texte": "Les vôtres sont en kWh ? Pas mon rayon, mais je compatis.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-059",
+  "fichier": "jeu/recit/habitants-regions.js",
+  "repere": "Gardien du phare › 2e réplique",
+  "texte": "Une dérive, c'est ça : un rythme qui change sans prévenir.",
+  "affirmation": "Image de la dérive.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-060",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[6] › pourquoi",
+  "texte": "Une dérive vue en deux jours coûte deux jours ; vue sur la facture, elle coûte des mois.",
+  "affirmation": "Intérêt de la détection rapide.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-061",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[6] › erreur",
+  "texte": "Régler trop sensible : au bout de la troisième fausse alerte, plus personne ne les lit.",
+  "affirmation": "Compromis du seuil.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-062",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[6] › question 1",
+  "texte": "Physiquement impossible : c'est la donnée qui ment.",
+  "affirmation": "999,9 kW est impossible pour le site.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Sites de 36 à 150 kVA souscrits."
+ },
+ {
+  "id": "ja6-063",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[6] › question 2",
+  "texte": "Au prix d'une détection un peu plus lente.",
+  "affirmation": "Effet de la persistance.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja6-064",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[6] › question 3",
+  "texte": "Ce que le site aurait dû consommer, selon la météo et l'occupation",
+  "affirmation": "La référence est la consommation attendue, ajustée aux conditions.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "La consommation CVC correspond ainsi à la consommation d’énergie qui aurait été observée si le nombre de DJU avait été égal à la moyenne enregistrée sur une période de référence et un territoire spécifique.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ]
+ },
+ {
+  "id": "ja6-065",
+  "fichier": "jeu/interface/evolution-fin.js",
+  "repere": "DIP_SAVOIR › ligne 6",
+  "texte": "Référence, seuil et persistance d’une alerte ; faux positifs ; coût d’une dérive",
+  "affirmation": "Récapitulatif de l'étape 6.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

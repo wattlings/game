@@ -20,7 +20,7 @@ function mesPlan(){
 function mesChiffres(sid,ids){
   const y=enYear(sid,ids),s=SITES[sid],C0=Math.round(y.ref),chauf=s.gaz*1000*EN_PROF[sid].gHeat,adj=Math.round(C0+chauf*(MES_DJU1/MES_DJU0-1));
   const prevu=Math.round(y.kwh),reel=Math.round(prevu*MES_TENU),C1=adj-reel,elec=(y.by.veilles||0)+(y.by.led||0),gaz=prevu-elec;
-  return {C0,adj,C1,prevu,reel,eur:Math.round(y.eur*MES_TENU/10)*10,co2:Math.round((elec*.052+gaz*.227)*MES_TENU/100)/10,surf:s.surface};
+  return {C0,adj,C1,prevu,reel,eur:Math.round(y.eur*MES_TENU/10)*10,co2:Math.round((elec*.064+gaz*.204)*MES_TENU/100)/10,surf:s.surface};
 }
 function mvStep(el,next){
   const s=site(),ids=mesPlan(),M=mesChiffres(s.id,ids),pct=v=>(Math.round(v*1000)/10).toLocaleString('fr-FR'),brut=pct((M.C0-M.C1)/M.C0);let essais=0,ajuste=null;

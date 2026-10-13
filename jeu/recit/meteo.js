@@ -13,7 +13,7 @@ function meteoLines(){
   const T=Math.round(SKY.T),Tm=Math.round(SKY.Tm*10)/10,L=[`Bulletin d'Ampère-sur-Loire, ${skyHM()} : ${SKY.label.toLowerCase()}, ${T} °C.`];
   L.push(SKY.dju>0?`Température moyenne du jour : ${String(Tm).replace('.',',')} °C, soit ${djuTxt()} degrés-jours (base 18). C'est ce chiffre, pas le thermomètre de l'instant, qui explique la consommation de chauffage.`:`Température moyenne du jour : ${String(Tm).replace('.',',')} °C. Zéro degré-jour : aujourd'hui, aucune chaudière n'a d'excuse.`);
   if(SKY.snow>0||SKY.snowG)L.push("Quand il neige, tout le monde pense au chauffage. C'est pourtant la température, pas les flocons, qui fait tourner les chaudières.");
-  else if(skWet())L.push("Mon parapluie sert enfin à quelque chose. Note bien : la pluie ne chauffe ni ne refroidit un bâtiment. Ce qui compte, c'est la température.");
+  else if(skWet())L.push("Mon parapluie sert enfin à quelque chose. Note bien : la pluie n'entre pas dans les degrés-jours. Ce qui compte d'abord, c'est la température.");
   return L;
 }
 function relaisLines(){const v=Math.round(SKY.wind*62);return [`Relais météo d'Ampère-sur-Loire, ${skyHM()}. Température : ${Math.round(SKY.T)} °C. Vent : ${v} km/h. Ciel : ${SKY.label.toLowerCase()}.`,`Aujourd'hui : ${djuPhrase()}. Moral des chaudières : ${SKY.dju>8?'en berne, elles travaillent':SKY.dju>0?'correct':'excellent, elles dorment'}.`]}

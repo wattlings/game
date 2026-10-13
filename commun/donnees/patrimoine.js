@@ -10,11 +10,11 @@ import { FACTEURS_CO2, PRIX_KWH_ELEC, PRIX_KWH_GAZ } from "./references.js";
 export const ACT = {
   ens: { lab: "Enseignement", ref: 155 },
   pe: { lab: "Petite enfance", ref: 160 },
-  sport: { lab: "Sport (hors piscine)", ref: 148 },
+  sport: { lab: "Sport (hors piscine)", ref: 145 },
   pisc: { lab: "Piscine", ref: 3249, unit: "kWh/m² de bassin" },
   adm: { lab: "Administratif", ref: 156 },
   cult: { lab: "Culture et vie sociale", ref: 143 },
-  ehpad: { lab: "Résidence seniors", ref: 250 },
+  ehpad: { lab: "Résidence seniors", ref: 177 },
 };
 /** Les 20 sites : [nom, activité, surface m², électricité MWh/an, gaz MWh/an, surface de bassin]. */
 export const PSITES = [
@@ -37,7 +37,7 @@ export const PSITES = [
   ["École de musique", "cult", 500, 20, 50],
   ["Centre social", "cult", 800, 38, 80],
   ["Maison des associations", "cult", 600, 22, 60],
-  ["Résidence Les Glycines", "ehpad", 4200, 330, 720],
+  ["Résidence Les Glycines", "ehpad", 4200, 255, 520],
 ].map(([n, a, surf, e, g, bassin], i) => ({ i, n, a, surf, e, g, bassin }));
 /** Prix moyens en €/MWh et émissions en tCO2e/MWh : tirés des références du cours. */
 export const PX = { e: Math.round(PRIX_KWH_ELEC * 1000), g: Math.round(PRIX_KWH_GAZ * 10000) / 10 },

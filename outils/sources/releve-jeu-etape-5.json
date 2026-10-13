@@ -1,0 +1,894 @@
+[
+ {
+  "id": "ja5-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5p › x",
+  "texte": "On lit la consommation pour comprendre quand le bâtiment consomme, combien il consomme à vide, et comment il réagit au froid.",
+  "affirmation": "But de l'analyse : quand, combien à vide, réaction au froid.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5r1 › x",
+  "texte": "Le talon, c’est ce que le bâtiment consomme quand il est vide.",
+  "affirmation": "Définition du talon.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Définition propre au cours (même ligne que ce5-001)."
+ },
+ {
+  "id": "ja5-003",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5r1 › x (2e phrase)",
+  "texte": "Chez l’école, il pèse lourd dans le total.",
+  "affirmation": "Le talon de l'école pèse lourd dans sa consommation.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Modèle du jeu : talon ≈ 6 kW × 8 760 h ≈ 52 600 kWh sur 86 000 kWh d'électricité par an, soit environ 60 %."
+ },
+ {
+  "id": "ja5-004",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5r1 › say (Gardien de l'école)",
+  "texte": "j’entends encore les serveurs ronronner",
+  "affirmation": "Le gardien entend les serveurs le soir.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-005",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5r2 › x",
+  "texte": "Une journée de classe et une journée de vacances n’ont pas du tout le même profil.",
+  "affirmation": "Profils jour de classe / jour de vacances différents.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-006",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5r2 › say (Mme Dupuis)",
+  "texte": "En vacances, c’est le chaos, et le compteur aussi. Pour l’école, c’est l’inverse.",
+  "affirmation": "Clin d'œil sur les profils maison / école.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-007",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5r3 › x",
+  "texte": "Le chauffage suit la météo : on la mesure avec les DJU (degrés-jours unifiés).",
+  "affirmation": "Les besoins de chauffage suivent la rigueur du climat, mesurée par les DJU.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "La consommation d’énergie en France est très sensible aux températures extérieures, en raison principalement de la nécessité de chauffer les bâtiments lorsque les températures extérieures sont basses.",
+    "relu": true,
+    "page": "introduction"
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ils mesurent la rigueur des conditions climatiques et reflètent les besoins de chauffage sur une période et un territoire donnés. Plus le nombre de DJU est élevé, plus le besoin de chauffage est important.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Les Degrés-Jours Unifiés (DJU) permettent de qualifier la rigueur de la saison de chauffe",
+    "relu": true,
+    "page": "p. 1"
+   }
+  ]
+ },
+ {
+  "id": "ja5-008",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5r3 › say (Météorologue)",
+  "texte": "Un DJU, c’est 18 °C moins la température moyenne du jour. Plus il fait froid, plus il y en a.",
+  "affirmation": "DJU du jour = 18 °C − température moyenne ; plus il fait froid, plus il y en a.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ces degrés jours unifiés sont calculés comme la différence entre la température extérieure moyenne quotidienne et la température de base.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Ils sont définis comme les degrés-jours calculés pour la température de base de 18 °C.",
+    "relu": true,
+    "page": "p. 1"
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Si la température extérieure maximum de la journée <= 18°C (cas hiver)",
+    "relu": true,
+    "page": "p. 1 (méthode de calcul)"
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ils mesurent la rigueur des conditions climatiques et reflètent les besoins de chauffage sur une période et un territoire donnés. Plus le nombre de DJU est élevé, plus le besoin de chauffage est important.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ],
+  "note": "C'est la méthode simple (moyenne du jour). Le COSTIC calcule 18 − (Tmin + Tmax)/2 les jours où le maximum reste sous 18 °C, et une formule pondérée les jours qui franchissent 18 °C. La base 18 °C est une convention (le SDES retient 15 °C dans ses propres estimations)."
+ },
+ {
+  "id": "ja5-009",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5r3 › quiz",
+  "texte": "18 − 8 = 10 DJU.",
+  "affirmation": "Calcul des DJU d'un jour à 8 °C.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-010",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5a › x",
+  "texte": "Le cardiologue regarde le rythme au repos, les pics à l’effort et ce qui sort de l’ordinaire. Une courbe de charge se lit de la même façon.",
+  "affirmation": "Analogie de l'électrocardiogramme.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-011",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s5a › say (Dr Ohm)",
+  "texte": "le truc bizarre à 3 h du matin",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-012",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "cIntro",
+  "texte": "Ici, on lit une consommation comme un électrocardiogramme.",
+  "affirmation": "Introduction du champion.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-013",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Analyste Lina › question 1 › explication",
+  "texte": "Ce qui tourne quand il n'y a personne : veilles, serveurs, froid, ventilation.",
+  "affirmation": "Le talon regroupe les usages permanents.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-014",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Analyste Lina › question 2",
+  "texte": "L'école Jean-Jaurès consomme plus de la moitié de son électricité quand elle est…",
+  "affirmation": "L'école du jeu consomme plus de la moitié de son électricité bâtiment vide.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Avant : « Une école consomme plus de la moitié… », présenté comme une vérité générale sur les écoles, sans source trouvée (le recueil Éducation nationale/ADEME de 2022 ne donne pas ce chiffre). Ramené à l'école du jeu, où il se calcule : talon ≈ 6 kW × 8 760 h ≈ 52 600 kWh sur 86 000 kWh, environ 60 %."
+ },
+ {
+  "id": "ja5-015",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Analyste Lina › question 2 › explication",
+  "texte": "Le talon tourne 24 h/24 et l'école est vide plus de 80 % des heures de l'année.",
+  "affirmation": "Heures d'inoccupation de l'école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Environ 7 240 h vides sur 8 760 h (calendrier fictif de l'école), soit 83 %. Même ligne que ce5-017."
+ },
+ {
+  "id": "ja5-016",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Statisticien Marc › question 1 › explication",
+  "texte": "Il paie 43 kVA de puissance qu'il n'utilise jamais.",
+  "affirmation": "La puissance souscrite est facturée qu'on l'utilise ou non.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "les utilisateurs doivent choisir une option tarifaire ainsi qu’une puissance souscrite",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "P i désigne la puissance souscrite pour la ième plage temporelle, exprimée en kVA et Ei désigne l’énergie active soutirée pendant la ième plage temporelle, exprimée en kWh",
+    "relu": true,
+    "page": "p. 15 (BT > 36 kVA, composante annuelle de soutirage)"
+   }
+  ],
+  "note": "La part puissance du TURPE (BT > 36 kVA) est proportionnelle aux kVA souscrits, indépendamment de l'énergie soutirée. 100 − 57 = 43 kVA."
+ },
+ {
+  "id": "ja5-017",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Statisticien Marc › question 1 › mauvaise réponse 1",
+  "texte": "Un dépassement, c'est quand la pointe dépasse le souscrit.",
+  "affirmation": "Un dépassement est une puissance appelée au-delà de la puissance souscrite.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l’utilisateur au-delà de sa puissance souscrite",
+    "relu": true,
+    "page": "p. 7"
+   }
+  ]
+ },
+ {
+  "id": "ja5-018",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Statisticien Marc › question 2",
+  "texte": "Le ratio neutralise l'effet de taille. Le contexte reste à regarder.",
+  "affirmation": "Les ratios (kWh/m², kWh/élève) rendent comparables des bâtiments de tailles différentes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-019",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Cardiologue Ève › question 1",
+  "texte": "Un jour à 3 °C de moyenne compte combien de DJU (base 18 °C) ?",
+  "affirmation": "Calcul de DJU, base 18 °C.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "18 − 3 = 15 ; la base 18 °C est sourcée à la fiche s5r3."
+ },
+ {
+  "id": "ja5-020",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Cardiologue Ève › question 2",
+  "texte": "Le talon, les heures d'occupation, les pointes… et le truc bizarre à 3 h du matin.",
+  "affirmation": "Lecture d'une courbe de charge.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-021",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "Cardiologue Ève › question 3",
+  "texte": "D'où l'intérêt de comparer des jours comparables.",
+  "affirmation": "Comparer des jours comparables.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-022",
+  "fichier": "jeu/recit/arenes/arene-5.js",
+  "repere": "cWin",
+  "texte": "La nuit tombe. C'est l'heure où les bâtiments vides se trahissent.",
+  "affirmation": "Transition vers l'étape 6.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-023",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "talonStep › consigne",
+  "texte": "(pas de 30 min, du lundi au dimanche)",
+  "affirmation": "Courbe d'une semaine du site au pas de 30 min.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Courbe générée par le jeu (weekCurve)."
+ },
+ {
+  "id": "ja5-024",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "talonStep › bonne réponse (école)",
+  "texte": "éclairage de sécurité, informatique, ventilation, veilles",
+  "affirmation": "Composition du talon de l'école.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Liste indicative des usages permanents d'un bâtiment vide."
+ },
+ {
+  "id": "ja5-025",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "talonStep › bonne réponse (boulangerie)",
+  "texte": "froid (vitrines, chambre froide), veilles",
+  "affirmation": "Composition du talon de la boulangerie.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-026",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix part du talon",
+  "texte": "D'où l'intérêt d'analyser les nuits et les week-ends.",
+  "affirmation": "La part du talon justifie d'analyser les heures vides.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-027",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Signature énergétique › contexte",
+  "texte": "DJU (degré-jour unifié) = 18 °C − température moyenne du jour",
+  "affirmation": "Définition simple des DJU (0 quand la moyenne dépasse 18 °C).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ces degrés jours unifiés sont calculés comme la différence entre la température extérieure moyenne quotidienne et la température de base.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Ils sont définis comme les degrés-jours calculés pour la température de base de 18 °C.",
+    "relu": true,
+    "page": "p. 1"
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Si la température extérieure minimum de la journée >= 18°C (cas été)",
+    "relu": true,
+    "page": "p. 1 (méthode de calcul)"
+   }
+  ],
+  "note": "Le « 0 s'il fait plus de 18 °C » est la règle de la méthode simple ; le COSTIC met 0 quand le minimum du jour atteint 18 °C, et compte une fraction les jours qui franchissent 18 °C."
+ },
+ {
+  "id": "ja5-028",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Signature énergétique › contexte (fin)",
+  "texte": "Le chauffage suit les DJU.",
+  "affirmation": "La consommation de chauffage suit les DJU.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ils mesurent la rigueur des conditions climatiques et reflètent les besoins de chauffage sur une période et un territoire donnés. Plus le nombre de DJU est élevé, plus le besoin de chauffage est important.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ]
+ },
+ {
+  "id": "ja5-029",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix signature E = a + b × DJU",
+  "texte": "E = a + b × DJU",
+  "affirmation": "La consommation de chauffage se modélise par une droite en fonction des DJU.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "La consommation réelle d’énergie est supposée dépendre linéairement du nombre de DJU, cette relation étant modélisée à travers un coefficient de thermosensibilité, qui exprime la sensibilité de la consommation d’énergie aux variations de température.",
+    "relu": true,
+    "page": "§ Une thermosensibilité qui varie"
+   }
+  ],
+  "note": "Le SDES modélise la consommation comme une fonction linéaire des DJU ; la pente est le coefficient de thermosensibilité."
+ },
+ {
+  "id": "ja5-030",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix signature › bonne réponse",
+  "texte": "Les kWh supplémentaires par degré-jour de froid (thermosensibilité)",
+  "affirmation": "b est la thermosensibilité, en kWh par DJU.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "La consommation réelle d’énergie est supposée dépendre linéairement du nombre de DJU, cette relation étant modélisée à travers un coefficient de thermosensibilité, qui exprime la sensibilité de la consommation d’énergie aux variations de température.",
+    "relu": true,
+    "page": "§ Une thermosensibilité qui varie"
+   }
+  ]
+ },
+ {
+  "id": "ja5-031",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix signature › explication",
+  "texte": "Si b augmente, le bâtiment chauffe moins bien : réglage, isolation, chaudière.",
+  "affirmation": "Une pente qui monte signale un bâtiment ou un chauffage qui se dégrade.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-032",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Puissance souscrite › contexte",
+  "texte": "Part fixe (fictive) : 13,50 €/kVA/an.",
+  "affirmation": "Prix de la part puissance du jeu.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Annoncé comme fictif dans le texte."
+ },
+ {
+  "id": "ja5-033",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Puissance souscrite › bonne réponse",
+  "texte": "Juste au-dessus de la pointe, avec une petite marge.",
+  "affirmation": "Règle de choix de la puissance souscrite.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-034",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Puissance souscrite › trop bas (sites de plus de 36 kVA)",
+  "texte": "Sous la pointe : dépassements et pénalités.",
+  "affirmation": "Au-delà de 36 kVA, les dépassements de puissance souscrite sont facturés.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l’utilisateur au-delà de sa puissance souscrite",
+    "relu": true,
+    "page": "p. 7"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "CMDPS = 12,79 x h (€)",
+    "relu": true,
+    "page": "p. 16 (BT > 36 kVA)"
+   }
+  ],
+  "note": "Composante mensuelle des dépassements (CMDPS) du TURPE 7 en BT > 36 kVA : école (80 kVA) et bureaux (150 kVA)."
+ },
+ {
+  "id": "ja5-035",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Puissance souscrite › trop bas (boulangerie, 36 kVA ou moins)",
+  "texte": "Sous la pointe : à 36 kVA ou moins, le Linky coupe le courant dès que tu dépasses. Pas de pénalité : le noir.",
+  "affirmation": "À 36 kVA ou moins, le compteur Linky limite la puissance au contrat : il disjoncte au lieu de facturer un dépassement.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "enedis-linky-puiss-depassee",
+    "passage": "Le compteur Linky disjoncte et affiche le message \"PUISS DEPASSEE\", que faire ?",
+    "relu": true,
+    "page": "titre"
+   },
+   {
+    "cle": "enedis-linky-puiss-depassee",
+    "passage": "Le compteur Linky assure un réglage conforme à votre contrat d’électricité",
+    "relu": true,
+    "page": "FAQ"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les dépassements sont sans objet pour les points de connexion dont la puissance souscrite est contrôlée par un disjoncteur et/ou un dispositif de comptage évolué",
+    "relu": true,
+    "page": "p. 7"
+   }
+  ],
+  "note": "Le TURPE ne facture pas de dépassement quand la puissance est contrôlée par un disjoncteur ou un compteur évolué : c'est le cas du Linky de la boulangerie (36 kVA), qui disjoncte.",
+  "avant": "Sous la pointe : dépassements et pénalités. (même réplique pour les trois sites, dont la boulangerie à 36 kVA)"
+ },
+ {
+  "id": "ja5-036",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Puissance souscrite › souscrit actuel",
+  "texte": "kVA que tu n'utilises jamais.",
+  "affirmation": "La puissance souscrite au-delà de la pointe est payée sans servir.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "P i désigne la puissance souscrite pour la ième plage temporelle, exprimée en kVA et Ei désigne l’énergie active soutirée pendant la ième plage temporelle, exprimée en kWh",
+    "relu": true,
+    "page": "p. 15 (BT > 36 kVA, composante annuelle de soutirage)"
+   }
+  ]
+ },
+ {
+  "id": "ja5-037",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Ratios › explication",
+  "texte": "Le ratio rend les bâtiments comparables, à lire avec leur contexte (horaires, usages).",
+  "affirmation": "Le ratio se lit avec son contexte.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-038",
+  "fichier": "jeu/epreuves/analyser.js",
+  "repere": "choix Ratios › mauvaise réponse",
+  "texte": "Attention aux MWh → kWh : ×1 000, pas ×10 000.",
+  "affirmation": "Conversion MWh → kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-039",
+  "fichier": "jeu/epreuves/ems-signature.js",
+  "repere": "commentaire SIG_DJU",
+  "texte": "DJU mensuels d'une année type inventée pour Ampère-sur-Loire (base 18 °C)",
+  "affirmation": "DJU mensuels de l'atelier.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Le commentaire disait « année type à Orléans-Bricy » sans source pour les douze valeurs (2 435 DJU au total) : ce sont des valeurs d'illustration, désormais dites inventées. Le COSTIC confirme qu'Orléans (Loiret, zone H1b) est une station de référence DJU, mais ses valeurs mensuelles ne sont pas en accès libre."
+ },
+ {
+  "id": "ja5-040",
+  "fichier": "jeu/epreuves/ems-signature.js",
+  "repere": "signatureStep › consigne",
+  "texte": "le gaz qui ne dépend pas du froid",
+  "affirmation": "a = consommation de gaz indépendante du froid ; b = coût de chaque degré-jour.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-041",
+  "fichier": "jeu/epreuves/ems-signature.js",
+  "repere": "signatureStep › réussite",
+  "texte": "L'EMS calcule la régression (en pointillés bleus)",
+  "affirmation": "L'outil calcule la droite par moindres carrés.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-042",
+  "fichier": "jeu/epreuves/ems-signature.js",
+  "repere": "signatureStep › réussite (école)",
+  "texte": "Le talon, c'est la cuisine de la cantine et l'eau chaude. Tout le reste suit le froid.",
+  "affirmation": "Usages gaz de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-043",
+  "fichier": "jeu/epreuves/ems-signature.js",
+  "repere": "signatureStep › réussite (boulangerie)",
+  "texte": "Le talon gaz est énorme : c'est le four, qui se moque bien de la météo.",
+  "affirmation": "Usages gaz de la boulangerie.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-044",
+  "fichier": "jeu/epreuves/ems-signature.js",
+  "repere": "signatureStep › réussite (bureaux)",
+  "texte": "Le talon gaz est presque nul : ici, tout le gaz sert à chauffer.",
+  "affirmation": "Usages gaz des bureaux.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-045",
+  "fichier": "jeu/epreuves/ems-signature.js",
+  "repere": "emsTransfert",
+  "texte": "Une signature faite sur des données sales, ou sur une année où le chauffage était en panne, donne une référence fausse, et des économies imaginaires.",
+  "affirmation": "Une référence mal construite fausse les économies.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-046",
+  "fichier": "jeu/recit/meteo.js",
+  "repere": "meteoLines › 2e réplique",
+  "texte": "C'est ce chiffre, pas le thermomètre de l'instant, qui explique la consommation de chauffage.",
+  "affirmation": "Les DJU du jour expliquent la consommation de chauffage.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ils mesurent la rigueur des conditions climatiques et reflètent les besoins de chauffage sur une période et un territoire donnés. Plus le nombre de DJU est élevé, plus le besoin de chauffage est important.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ces degrés jours unifiés sont calculés comme la différence entre la température extérieure moyenne quotidienne et la température de base.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ]
+ },
+ {
+  "id": "ja5-047",
+  "fichier": "jeu/recit/meteo.js",
+  "repere": "meteoLines › 2e réplique (jour sans DJU)",
+  "texte": "Zéro degré-jour : aujourd'hui, aucune chaudière n'a d'excuse.",
+  "affirmation": "Sans DJU, pas de besoin de chauffage.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "lorsque les températures extérieures sont élevées, les besoins de chauffage sont nuls.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ],
+  "note": "Avec la méthode COSTIC, un jour dont la moyenne dépasse 18 °C mais le minimum non peut compter une fraction de DJU."
+ },
+ {
+  "id": "ja5-048",
+  "fichier": "jeu/recit/meteo.js",
+  "repere": "meteoLines › neige",
+  "texte": "C'est pourtant la température, pas les flocons, qui fait tourner les chaudières.",
+  "affirmation": "Le besoin de chauffage dépend de la température extérieure.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "La consommation d’énergie en France est très sensible aux températures extérieures, en raison principalement de la nécessité de chauffer les bâtiments lorsque les températures extérieures sont basses.",
+    "relu": true,
+    "page": "introduction"
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Au-delà de la température extérieure le niveau d'ensoleillement, qui peut réchauffer naturellement les espaces, et la force du vent, qui peut augmenter les déperditions thermiques, peuvent également influer sur la demande énergétique. Si ces éléments ont peu d’impact sur les consommations annuelles et mensuelles d’énergie, une fois celles-ci corrigées avec les températures",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ]
+ },
+ {
+  "id": "ja5-049",
+  "fichier": "jeu/recit/meteo.js",
+  "repere": "meteoLines › pluie",
+  "texte": "Note bien : la pluie n'entre pas dans les degrés-jours. Ce qui compte d'abord, c'est la température.",
+  "affirmation": "Les DJU ne dépendent que de la température ; c'est elle qui pèse le plus.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Si la température extérieure maximum de la journée <= 18°C (cas hiver)",
+    "relu": true,
+    "page": "p. 1 (méthode de calcul)"
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Au-delà de la température extérieure le niveau d'ensoleillement, qui peut réchauffer naturellement les espaces, et la force du vent, qui peut augmenter les déperditions thermiques, peuvent également influer sur la demande énergétique. Si ces éléments ont peu d’impact sur les consommations annuelles et mensuelles d’énergie, une fois celles-ci corrigées avec les températures",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ],
+  "note": "Les DJU se calculent avec les seules températures. Le SDES rappelle que d'autres éléments du temps (soleil, vent) jouent aussi, un peu : « ce qui compte, c'est la température » devient « d'abord ». Rien de lu ne dit que la pluie n'a aucun effet thermique, d'où la nouvelle formulation.",
+  "avant": "Note bien : la pluie ne chauffe ni ne refroidit un bâtiment. Ce qui compte, c'est la température."
+ },
+ {
+  "id": "ja5-050",
+  "fichier": "jeu/recit/meteo.js",
+  "repere": "djuPhrase / relaisLines",
+  "texte": "degrés-jours (base 18)",
+  "affirmation": "Les DJU se comptent en base 18 °C.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Ils sont définis comme les degrés-jours calculés pour la température de base de 18 °C.",
+    "relu": true,
+    "page": "p. 1"
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ce seuil, fixé a priori, sans être nécessairement adapté au contexte, est en général de 18 °C dans la littérature économique.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ]
+ },
+ {
+  "id": "ja5-051",
+  "fichier": "jeu/recit/meteo.js",
+  "repere": "relaisLines › moral des chaudières",
+  "texte": "Moral des chaudières",
+  "affirmation": "Clin d'œil du relais météo.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-052",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[5] › énigme",
+  "texte": "Pose-toi sur le talon, le creux de la nuit, ce que le bâtiment consomme quand il dort.",
+  "affirmation": "Le talon se lit au creux de la nuit.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-053",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[5] › panneau de la coupole",
+  "texte": "Observatoire. Une courbe ne ment pas. Elle se laisse mal lire.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-054",
+  "fichier": "jeu/epreuves/donjons.js",
+  "repere": "énigme du talon › heure d'occupation",
+  "texte": "Le bâtiment travaille : c’est une heure d’occupation, pas le talon.",
+  "affirmation": "Les heures d'occupation ne sont pas le talon.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-055",
+  "fichier": "jeu/epreuves/donjons.js",
+  "repere": "DG_DECOR › thermometre",
+  "texte": "Un thermomètre géant gradué en DJU.",
+  "affirmation": "Décor.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-056",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[6]",
+  "texte": "Lis la courbe comme un électrocardiogramme : le repos, les pics, ce qui sort de l'ordinaire.",
+  "affirmation": "Indice de l'étape 5.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-057",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "Joggeuse du parc › 2e réplique",
+  "texte": "Mon cœur a un talon et des pics. Comme un bâtiment.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-058",
+  "fichier": "jeu/recit/habitants-regions.js",
+  "repere": "Friturier › réplique sous la pluie",
+  "texte": "C'est ma signature énergétique à moi.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-059",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.ecg › idle (panneau du parcours santé)",
+  "texte": "Le tracé ressemble étrangement à une courbe de charge.",
+  "affirmation": "Décor.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-060",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.meteo › idle (Météorologue)",
+  "texte": "Demain : couvert, avec des éclaircies de sobriété en fin de journée.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-061",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[5] › erreur",
+  "texte": "Lire une baisse sans regarder la météo : un hiver doux n'est pas une économie.",
+  "affirmation": "Il faut corriger le climat avant de conclure à une économie.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "les DJU jouent un rôle essentiel dans la correction des variations climatiques (CVC) des consommations d’énergie, en permettant de comparer la consommation d’énergie sur plusieurs périodes ou pour des territoires différents à climat constant.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "La consommation CVC correspond ainsi à la consommation d’énergie qui aurait été observée si le nombre de DJU avait été égal à la moyenne enregistrée sur une période de référence et un territoire spécifique.",
+    "relu": true,
+    "page": "§ Température de base et DJU"
+   }
+  ]
+ },
+ {
+  "id": "ja5-062",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[5] › ems",
+  "texte": "Il trace courbes, talon, signature et ratios, et compare le site aux sites semblables.",
+  "affirmation": "Ce que fait l'EMS à l'étape 5.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-063",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[5] › question 2",
+  "texte": "Le froid, ce sont les DJU ; la pente, c'est le bâtiment.",
+  "affirmation": "La pente de la signature reflète le bâtiment, les DJU le climat.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "La consommation réelle d’énergie est supposée dépendre linéairement du nombre de DJU, cette relation étant modélisée à travers un coefficient de thermosensibilité, qui exprime la sensibilité de la consommation d’énergie aux variations de température.",
+    "relu": true,
+    "page": "§ Une thermosensibilité qui varie"
+   }
+  ],
+  "note": "Le SDES appelle cette pente coefficient de thermosensibilité."
+ },
+ {
+  "id": "ja5-064",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[5] › question 3",
+  "texte": "Un ratio se lit avec son activité : un fournil n'est pas un bureau",
+  "affirmation": "On compare des bâtiments d'activité semblable.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja5-065",
+  "fichier": "jeu/interface/evolution-fin.js",
+  "repere": "DIP_SAVOIR › ligne 5",
+  "texte": "Talon, DJU, signature énergétique, puissance souscrite, ratios",
+  "affirmation": "Récapitulatif de l'étape 5.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

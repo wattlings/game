@@ -16,7 +16,7 @@ function actDerive(id){
 function noterDerive(id){
   const s=site(),D={light:['Éclairage des circulations resté allumé toute la nuit',0.5],rdc:s.derRdc,cave:s.derCave,boiler:null};
   S.derives[id]=1;save();gainXP(15);
-  const lines=id==='boiler'?[{t:"La chaudière tourne un samedi soir, bâtiment vide ! Dérive gaz : le réduit de week-end n'est pas programmé."},{t:"Une règle métier liée au calendrier (« chaudière en marche le week-end ») la repère tout de suite."}]:[{t:`Dérive trouvée : ${D[id][0]}.`},{t:`+${String(D[id][1]).replace('.',',')} kW sur le talon, toutes les nuits et tous les week-ends.`}];
+  const lines=id==='boiler'?[{t:"La chaudière tourne à plein régime un samedi soir, bâtiment vide ! Dérive gaz : le réduit de week-end n'est pas programmé."},{t:"Une règle métier liée au calendrier (« chaudière en marche le week-end ») la repère tout de suite."}]:[{t:`Dérive trouvée : ${D[id][0]}.`},{t:`+${String(D[id][1]).replace('.',',')} kW sur le talon, toutes les nuits et tous les week-ends.`}];
   const n=Object.keys(S.derives).length;
   say([...lines,{t:`Rapport de ronde : ${n}/4 dérives.`}],()=>{hud();if(n>=4)say(missingReq(7).length?[{t:"Ronde terminée ! Mais il te manque encore des notions avant l'arène."},...missingLines(7)]:[{t:"Ronde terminée ! Va présenter ton rapport à la Veilleuse, à l'Arène de la Nuit."}])});
 }
