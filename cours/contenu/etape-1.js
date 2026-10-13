@@ -107,7 +107,7 @@ export default {
         titre: "Les identifiants",
         paragraphes: [
           "Le {{pdl}} (Point De Livraison, appelé **PRM** par Enedis) identifie un raccordement électrique avec **14 chiffres**[[enedis-pdl]]. Le {{pce}} (Point de Comptage et d’Estimation) identifie un point de livraison de gaz chez GRDF, en général avec 14 chiffres ; certains sites anciens ont encore un identifiant « GI » suivi de 6 chiffres[[grdf-guide-donnees-2026]].",
-          "Un identifiant désigne un **point de raccordement**, pas un appareil : quand le compteur est remplacé, le PDL ou le PCE reste le même, mais le numéro de série du compteur change. Le logiciel doit donc distinguer « point » et « compteur ».",
+          "Un identifiant désigne un **point de raccordement**, pas un appareil : quand le compteur est remplacé, le PDL ou le PCE reste le même, mais le numéro de série du compteur change[[enedis-cg-raccordement-bt,grdf-guide-donnees-2026,fournisseurs-electricite-pdl-prm]]. Le logiciel doit donc distinguer « point » et « compteur ».",
         ],
       },
       {
@@ -161,7 +161,7 @@ export default {
       ],
       bonne: 1,
       explication:
-        "Le PDL (ou PRM) identifie le point de raccordement. Seul le numéro de série du compteur change.",
+        "Le PDL (ou PRM) identifie le point de raccordement. Seul le numéro de série du compteur change[[enedis-cg-raccordement-bt,fournisseurs-electricite-pdl-prm]].",
     },
     {
       q: "Lequel de ces identifiants a le bon format pour un PDL ?",

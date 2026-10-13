@@ -3,6 +3,8 @@
    Une question : Q("question", "bonne réponse", "explication", "mauvaise réponse 1", "pourquoi", "mauvaise réponse 2", "pourquoi"). */
 
 const ARENE_1={id:1,badge:'Cadrer',name:'Arène du Cadastre',champ:'Mme Périmètre',theme:'cadastre',col:'#2f6db5',wall:'#eef3f8',b:L.arena[1],
+  /* les références de ce qu'affirment les questions (registre commun/donnees/sources.js) : listées dans le menu, onglet Sources */
+  refs:['enedis-pdl','enedis-nmo-cf-022e','enedis-affichages-compteur','grdf-guide-donnees-2026'],
   cpal:{shirt:'#1c4f8f',pants:'#2c2c34',hair:'#ece6d6',style:'carre',tie:'#f2a33a',glasses:1,skin:'#7a4e30'},
   cIntro:["Bienvenue à l'Arène du Cadastre. Ici, on ne mesure rien avant d'avoir décidé quoi mesurer.","Mes dresseurs t'ont laissé passer ? Voyons si ton site est aussi bien cadré que mes parcelles. Sors ta fiche patrimoine, puis ton plan de comptage."],
   cWin:["Périmètre net, points de comptage identifiés : tu sais ce que tu suis, où, et pourquoi.","Voici le badge Cadrer."],

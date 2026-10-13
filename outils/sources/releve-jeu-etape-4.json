@@ -1,0 +1,638 @@
+[
+ {
+  "id": "ja4-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s4p › x",
+  "texte": "On range les données dans un modèle commun, à la même unité et au bon pas de temps, pour pouvoir les comparer et les additionner.",
+  "affirmation": "Modèle commun.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s4p › say",
+  "texte": "Tu ne peux pas additionner des pommes et des m³. Enfin si, mais tu obtiens une salade.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-003",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s4r1 › x",
+  "texte": "Un modèle simple : un site contient des compteurs, qui produisent des mesures.",
+  "affirmation": "Modèle site → compteurs → mesures.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-004",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s4r1 › quiz",
+  "texte": "Un usage n’est mesuré que s’il a un sous-compteur.",
+  "affirmation": "Sans sous-compteur, un usage est estimé.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-005",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s4r2 › x",
+  "texte": "Changer de pas de temps (agrégation) lisse la courbe mais ne change pas l’énergie totale.",
+  "affirmation": "L'agrégation conserve l'énergie.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Propriété de l'addition : la somme des énergies d'une journée ne dépend pas du découpage."
+ },
+ {
+  "id": "ja4-006",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s4r3 › x",
+  "texte": "Pour comparer le gaz et l’électricité, on convertit les m³ en kWh avec le coefficient de conversion.",
+  "affirmation": "Conversion m³ → kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Pour le gaz, la consommation se mesure en m3. Elle est convertie en kWh grâce à un coefficient de conversion.",
+    "relu": true
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "la quantité d’énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja4-007",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s4r3 › say",
+  "texte": "m³ × coefficient = kWh.",
+  "affirmation": "Formule de conversion.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "la quantité d’énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja4-008",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s4a › x",
+  "texte": "Le classement ne change pas les livres, mais il change ce que tu trouves facilement.",
+  "affirmation": "Analogie de la bibliothèque.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-009",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Magasinier Tom › question 1",
+  "texte": "Pour pouvoir les comparer et les additionner : même unité, bon pas de temps",
+  "affirmation": "Modèle commun.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Arène, championne et dresseurs : personnages du jeu."
+ },
+ {
+  "id": "ja4-010",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Magasinier Tom › question 2",
+  "texte": "La cuisine est déjà incluse dans le principal : on n'additionne pas un sous-compteur à son parent.",
+  "affirmation": "Pas de double compte.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-011",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Magasinier Tom › question 1, mauvaise réponse 2",
+  "texte": "C'est déjà le cas des fichiers « final_v2 ».",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-012",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Documentaliste Zoé › question 1",
+  "texte": "L'agrégation lisse la courbe : la puissance maximale visible baisse.",
+  "affirmation": "Agréger cache les pointes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-013",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Documentaliste Zoé › question 2",
+  "texte": "Chaque valeur dure 1/6 d'heure : E = somme des puissances / 6.",
+  "affirmation": "Une courbe de charge est une suite de puissances moyennes sur des pas égaux.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Ensemble de valeurs moyennes horodatées de la puissance active soutirée sur des périodes d’intégration consécutives et de même durée",
+    "relu": true,
+    "page": "note 4"
+   }
+  ],
+  "note": "Le calcul (÷ 6 au pas de 10 min) découle de cette définition."
+ },
+ {
+  "id": "ja4-014",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Documentaliste Zoé › question 2, mauvaise réponse 2",
+  "texte": "La moyenne donne des kW, pas des kWh.",
+  "affirmation": "Puissance ≠ énergie.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-015",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Classeur Aimé › question 1",
+  "texte": "m³ × coefficient = kWh. Ensuite seulement, on additionne.",
+  "affirmation": "Conversion avant addition.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "la quantité d’énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja4-016",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Classeur Aimé › question 2",
+  "texte": "500 × 11 = 5 500 kWh.",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-017",
+  "fichier": "jeu/recit/arenes/arene-4.js",
+  "repere": "Classeur Aimé › question 3",
+  "texte": "Le classement ne change pas les données : il change ce qu'on peut en faire.",
+  "affirmation": "Analogie de la bibliothèque.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-018",
+  "fichier": "jeu/epreuves/structurer.js",
+  "repere": "actArchives",
+  "texte": "1 site, 2 points de comptage, 3 compteurs, et des dizaines de milliers de mesures en vrac.",
+  "affirmation": "Inventaire du site.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-019",
+  "fichier": "jeu/epreuves/structurer.js",
+  "repere": "gameStructurer › info",
+  "texte": "On range les données dans un modèle commun, à la même unité et au bon pas de temps.",
+  "affirmation": "Modèle commun.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-020",
+  "fichier": "jeu/epreuves/structurer.js",
+  "repere": "gameStructurer › addition",
+  "texte": "additionner des énergies dans la même unité, sans les sous-compteurs.",
+  "affirmation": "Règle d'agrégation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-021",
+  "fichier": "jeu/epreuves/structurer.js",
+  "repere": "gameStructurer › facture à cheval",
+  "texte": "La facture couvre du 14 janvier au 13 février.",
+  "affirmation": "Exemple de période de facturation.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-022",
+  "fichier": "jeu/epreuves/structurer.js",
+  "repere": "gameStructurer › facture à cheval, bonne réponse",
+  "texte": "La courbe dit quelle part a vraiment été consommée en janvier.",
+  "affirmation": "Répartir une facture selon la courbe.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-023",
+  "fichier": "jeu/epreuves/structurer.js",
+  "repere": "gameStructurer › compteur gaz remplacé",
+  "texte": "Ajoute un nouveau compteur au même point, avec dates de pose et de dépose",
+  "affirmation": "Au changement de compteur, le point reste et le compteur change.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "catalogue de données, champ « Raison de relève »"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "catalogue de données, champ « Numéro de PCE »"
+   }
+  ],
+  "note": "Le PRM (PDL) identifie un point de connexion au réseau, distinct du numéro de série du compteur ; côté gaz, un changement de compteur apparaît comme un relevé « CCP » sur le même PCE."
+ },
+ {
+  "id": "ja4-024",
+  "fichier": "jeu/epreuves/structurer.js",
+  "repere": "gameStructurer › compteur gaz remplacé, explication",
+  "texte": "Le PCE reste le même.",
+  "affirmation": "Le PCE ne change pas avec le compteur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "catalogue de données, champ « Raison de relève »"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "catalogue de données, champ « Numéro de PCE »"
+   }
+  ],
+  "note": "Le PRM (PDL) identifie un point de connexion au réseau, distinct du numéro de série du compteur ; côté gaz, un changement de compteur apparaît comme un relevé « CCP » sur le même PCE."
+ },
+ {
+  "id": "ja4-025",
+  "fichier": "jeu/epreuves/structurer.js",
+  "repere": "gameStructurer › compteur gaz remplacé, explication",
+  "texte": "Tout ce qui change dans le temps porte des dates de validité.",
+  "affirmation": "Dates de validité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-026",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "strPieces › facture",
+  "texte": "La facture se rattache au contrat, pas à l'arbre de comptage.",
+  "affirmation": "Rangement de la facture.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-027",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "strPourquoi › point de comptage",
+  "texte": "Le point de comptage se rattache directement au site : c'est le raccordement au réseau, il ne dépend d'aucun appareil.",
+  "affirmation": "Le point de comptage est le raccordement, indépendant de l'appareil.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "Ce numéro correspond à la référence de votre logement ou de votre local ; c’est votre référence client. Composé de 14 chiffres il figure sur la facture d’électricité de votre fournisseur sous ce nom : numéro de PDL ou PRM.",
+    "relu": true,
+    "page": "p. 3, « Numéro de PRM »"
+   }
+  ],
+  "note": "Le PRM (PDL) identifie un point de connexion au réseau, distinct du numéro de série du compteur ; côté gaz, un changement de compteur apparaît comme un relevé « CCP » sur le même PCE."
+ },
+ {
+  "id": "ja4-028",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "strPourquoi › compteur",
+  "texte": "Un compteur se change, un point reste.",
+  "affirmation": "Le point reste, le compteur change.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "catalogue de données, champ « Raison de relève »"
+   }
+  ],
+  "note": "Le PRM (PDL) identifie un point de connexion au réseau, distinct du numéro de série du compteur ; côté gaz, un changement de compteur apparaît comme un relevé « CCP » sur le même PCE."
+ },
+ {
+  "id": "ja4-029",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "arbreStep › transfert",
+  "texte": "Quand le distributeur change le compteur, on ajoute un compteur sous le même point, avec ses dates : l’historique ne bouge pas.",
+  "affirmation": "Historique conservé sous le même point.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "catalogue de données, champ « Raison de relève »"
+   },
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   }
+  ],
+  "note": "Le PRM (PDL) identifie un point de connexion au réseau, distinct du numéro de série du compteur ; côté gaz, un changement de compteur apparaît comme un relevé « CCP » sur le même PCE."
+ },
+ {
+  "id": "ja4-030",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "conversionStep › méthode 1",
+  "texte": "Une puissance, c'est des kW : il faut la multiplier par la durée du pas.",
+  "affirmation": "La courbe donne des puissances moyennes par pas.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Ensemble de valeurs moyennes horodatées de la puissance active soutirée sur des périodes d’intégration consécutives et de même durée",
+    "relu": true,
+    "page": "note 4"
+   },
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "En puissance active, dont l’unité est le Watt (W).",
+    "relu": true,
+    "page": "§ 1.3.1"
+   }
+  ]
+ },
+ {
+  "id": "ja4-031",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "conversionStep › bonne réponse",
+  "texte": "E = Σ P × Δt.",
+  "affirmation": "Énergie = somme des puissances × durée du pas.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-032",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "conversionStep › gaz, division",
+  "texte": "Le gaz ne rétrécit pas à la conversion : on multiplie.",
+  "affirmation": "kWh = m³ × coefficient.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "la quantité d’énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja4-033",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "conversionStep › transfert",
+  "texte": "Un coefficient manquant, et le gaz disparaît des bilans ; un pas mal déclaré, et l’électricité est multipliée par six.",
+  "affirmation": "Conséquences d'une erreur de paramétrage.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-034",
+  "fichier": "jeu/epreuves/ems-structurer.js",
+  "repere": "strPieces › numéro de Mme Joule",
+  "texte": "Précieux, mais ce n'est pas une donnée d'énergie. Et Mme Joule tient à sa vie privée.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-035",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[4] › question 1",
+  "texte": "Reste : on ajoute le nouveau compteur sous le même point, avec ses dates",
+  "affirmation": "L'historique reste sous le même point.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "catalogue de données, champ « Raison de relève »"
+   },
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   }
+  ],
+  "note": "Le PRM (PDL) identifie un point de connexion au réseau, distinct du numéro de série du compteur ; côté gaz, un changement de compteur apparaît comme un relevé « CCP » sur le même PCE."
+ },
+ {
+  "id": "ja4-036",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[4] › question 1, explication",
+  "texte": "Le point ne change pas ; seul l'appareil change.",
+  "affirmation": "Le point ne change pas.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "Le numéro de série du compteur doit être le même que celui indiqué sur votre facture d’électricité.",
+    "relu": true,
+    "page": "« Numéro de série »"
+   }
+  ],
+  "note": "Le PRM (PDL) identifie un point de connexion au réseau, distinct du numéro de série du compteur ; côté gaz, un changement de compteur apparaît comme un relevé « CCP » sur le même PCE."
+ },
+ {
+  "id": "ja4-037",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[4] › question 2",
+  "texte": "On les additionne, puis on multiplie par 1/6 d'heure",
+  "affirmation": "Calcul de l'énergie.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-038",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[4] › question 3",
+  "texte": "On convertit d'abord le gaz en kWh, avec son coefficient",
+  "affirmation": "Conversion du gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "la quantité d’énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja4-039",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[4].erreur",
+  "texte": "Additionner des m³ et des kWh, ou compter deux fois un sous-compteur.",
+  "affirmation": "Erreurs à éviter.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-040",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.horloge › idle",
+  "texte": "Elle avance de 10 minutes. Ou plutôt : elle compte par pas de 10 minutes.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-041",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.biblio › idle",
+  "texte": "Sauf les fichiers Excel nommés « final_v2 ». Ceux-là, on les brûle.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-042",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "TOWNSFOLK › Étudiante",
+  "texte": "À la médiathèque, tout est rangé par site, par compteur, par date. Ça calme.",
+  "affirmation": "Rangement des données.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-043",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "WALKERS › Lecteur",
+  "texte": "À chaque donnée sa place, et une place pour chaque donnée.",
+  "affirmation": "Rangement des données.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-044",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[4] › énigme",
+  "texte": "du plus large en haut au plus fin en bas : Site, Point de comptage, Compteur, Mesures.",
+  "affirmation": "Arbre du modèle de données.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-045",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[5]",
+  "texte": "Des données justes, c'est bien. Des données bien rangées, c'est mieux.",
+  "affirmation": "Annonce de l'étape.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-046",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "MOBILIER.bureau",
+  "texte": "Trois onglets s'appellent « Feuil1 ». C'est ça, le système d'information énergie.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-047",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "secret étang",
+  "texte": "Aucun de vous deux ne sait convertir des m³ en kWh sans le coefficient de conversion.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja4-048",
+  "fichier": "jeu/interface/evolution-fin.js",
+  "repere": "DIP_SAVOIR[4]",
+  "texte": "Ranger site → point → compteur → mesures ; kW → kWh, m³ → kWh",
+  "affirmation": "Savoir-faire de l'étape.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

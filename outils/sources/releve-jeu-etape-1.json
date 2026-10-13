@@ -1,0 +1,1337 @@
+[
+ {
+  "id": "ja1-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1p › x",
+  "texte": "Avant de mesurer quoi que ce soit, on décide quoi suivre, où, et dans quel but.",
+  "affirmation": "Cadrer précède la mesure.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1p › say",
+  "texte": "Moi, avant de mesurer un terrain, je demande pourquoi on le mesure. Sinon je mesure des cailloux pour rien.",
+  "affirmation": "Même idée, par le géomètre.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-003",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r1 › x",
+  "texte": "On délimite un périmètre : un site, un bâtiment, parfois un usage (chauffage, éclairage…).",
+  "affirmation": "Définition du périmètre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-004",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r1 › say",
+  "texte": "Un périmètre, c’est ce qu’on suit. Le reste, on l’ignore poliment.",
+  "affirmation": "Même idée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-005",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r2 › x",
+  "texte": "Chaque énergie arrive par un point de comptage qui a un identifiant unique : le PDL (ou PRM) pour l’électricité, le PCE pour le gaz.",
+  "affirmation": "Chaque point de comptage a un identifiant unique : PDL (ou PRM) en électricité, PCE en gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky. Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "PRM signifie Point de Référence des Mesures / PDL signifie Point De Livraison. C’est la même référence à 14 chiffres.",
+    "relu": true,
+    "page": "p. 3"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "catalogue de données, champ « Numéro de PCE »"
+   }
+  ],
+  "note": "Déjà relevé en ja2-001 (étape 2) ; relu ici, la fiche appartient à l'étape 1."
+ },
+ {
+  "id": "ja1-006",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r2 › say (1re réplique)",
+  "texte": "Un compteur, ça se change. Le point où l’énergie entre dans le bâtiment, lui, reste : c’est le point de comptage.",
+  "affirmation": "Le point de comptage reste quand le compteur change.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "Ce numéro correspond à la référence de votre logement ou de votre local ; c’est votre référence client. Composé de 14 chiffres il figure sur la facture d’électricité de votre fournisseur sous ce nom : numéro de PDL ou PRM.",
+    "relu": true,
+    "page": "p. 3, « Numéro de PRM »"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "catalogue de données, champ « Raison de relève »"
+   }
+  ],
+  "note": "Le PDL désigne un point de connexion au réseau (un logement, un local), pas l'appareil : Enedis distingue le numéro de PRM du numéro de série du compteur. Le PCE suit la même logique côté gaz : quand GRDF pose un nouveau compteur, le PCE garde sa série de relevés, avec un relevé de changement de compteur (CCP). (ja2-003 l'avait classé en méthode ; la source est désormais trouvée.)"
+ },
+ {
+  "id": "ja1-007",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r2 › say (2e réplique)",
+  "texte": "Chez nous il s’appelle PDL, ou PRM : 14 chiffres. Chez GRDF, c’est le PCE.",
+  "affirmation": "PDL = PRM, 14 chiffres ; en gaz, PCE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky. Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "PRM signifie Point de Référence des Mesures / PDL signifie Point De Livraison. C’est la même référence à 14 chiffres.",
+    "relu": true,
+    "page": "p. 3"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "catalogue de données, champ « Numéro de PCE »"
+   }
+  ]
+ },
+ {
+  "id": "ja1-008",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1r3 › x",
+  "texte": "On fixe un objectif : baisser la facture, respecter le décret tertiaire, réduire le CO₂…",
+  "affirmation": "Trois objectifs possibles.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-009",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s1a › x",
+  "texte": "Avant les examens, le médecin décide qui il examine, quels examens il prescrit et ce qu’il cherche.",
+  "affirmation": "Analogie du bilan de santé.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-010",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "cIntro (Mme Périmètre)",
+  "texte": "Ici, on ne mesure rien avant d'avoir décidé quoi mesurer.",
+  "affirmation": "Cadrer avant de mesurer.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Arène, championne et dresseurs : personnages du jeu."
+ },
+ {
+  "id": "ja1-011",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Arpenteur Léo › question 1",
+  "texte": "Cadrer, c'est décider : sans objectif ni périmètre, on accumule des chiffres sans savoir quoi en faire.",
+  "affirmation": "Cadrer, c'est décider.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-012",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Arpenteur Léo › question 2",
+  "texte": "Ce qu'on choisit de suivre : un site, un bâtiment, parfois un usage",
+  "affirmation": "Définition du périmètre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-013",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Topographe Maëlle › question 1",
+  "texte": "Il reste le même : il désigne le raccordement, pas l'appareil",
+  "affirmation": "Le PDL ne change pas quand le compteur est remplacé.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "Ce numéro correspond à la référence de votre logement ou de votre local ; c’est votre référence client. Composé de 14 chiffres il figure sur la facture d’électricité de votre fournisseur sous ce nom : numéro de PDL ou PRM.",
+    "relu": true,
+    "page": "p. 3, « Numéro de PRM »"
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "Le numéro de série du compteur doit être le même que celui indiqué sur votre facture d’électricité.",
+    "relu": true,
+    "page": "« Numéro de série »"
+   }
+  ],
+  "note": "Le PDL désigne un point de connexion au réseau (un logement, un local), pas l'appareil : Enedis distingue le numéro de PRM du numéro de série du compteur. Le PCE suit la même logique côté gaz : quand GRDF pose un nouveau compteur, le PCE garde sa série de relevés, avec un relevé de changement de compteur (CCP)."
+ },
+ {
+  "id": "ja1-014",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Topographe Maëlle › question 2",
+  "texte": "Un PDL compte exactement 14 chiffres.",
+  "affirmation": "Format du PDL.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky. Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "PRM signifie Point de Référence des Mesures / PDL signifie Point De Livraison. C’est la même référence à 14 chiffres.",
+    "relu": true,
+    "page": "p. 3"
+   }
+  ]
+ },
+ {
+  "id": "ja1-015",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Topographe Maëlle › question 3",
+  "texte": "PDL (ou PRM) pour l'électricité, PCE pour le gaz.",
+  "affirmation": "Identifiants électricité et gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "PRM signifie Point de Référence des Mesures / PDL signifie Point De Livraison. C’est la même référence à 14 chiffres.",
+    "relu": true,
+    "page": "p. 3"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "catalogue de données, champ « Numéro de PCE »"
+   }
+  ]
+ },
+ {
+  "id": "ja1-016",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Stagiaire Hugo › question 1",
+  "texte": "Pour un budget, il faut des euros. La courbe fine sert à chercher des économies.",
+  "affirmation": "La source se choisit selon l'objectif.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "La mauvaise réponse « courbe de charge au pas de 10 minutes » n'affirme rien sur le pas réel (les pas de relève sont relevés à « actElec › type de compteur »)."
+ },
+ {
+  "id": "ja1-017",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Stagiaire Hugo › question 2",
+  "texte": "Sans sous-compteur sur l'éclairage, la valeur est calculée à partir d'hypothèses.",
+  "affirmation": "Sans sous-compteur, un usage est estimé.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-018",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Stagiaire Hugo › question 3",
+  "texte": "Baisser la facture, respecter le décret tertiaire ou réduire le CO₂",
+  "affirmation": "Objectifs possibles.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-019",
+  "fichier": "jeu/recit/arenes/arene-1.js",
+  "repere": "Stagiaire Hugo › question 3, mauvaise réponse 2",
+  "texte": "Je proteste.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-020",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actMailbox › 2e réplique",
+  "texte": "L'adresse donne la localisation : la commune, donc la station météo et la zone climatique. Elle servira à corriger la consommation de la météo.",
+  "affirmation": "La localisation détermine la station météo utilisée pour corriger le climat.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": null,
+    "page": "article 5, I"
+   },
+   {
+    "cle": "ecologie-zones-climatiques",
+    "passage": "Zone climatique H1 […] 45 Loiret",
+    "relu": true,
+    "page": "tableau, colonne « Zone climatique H1 »"
+   }
+  ],
+  "note": "Le décret tertiaire prend la station Météo-France la plus représentative du site ; la zone climatique se lit par département."
+ },
+ {
+  "id": "ja1-021",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actPanel › 2e réplique",
+  "texte": "La surface sert aux ratios (kWh/m²) et à savoir si le décret tertiaire s'applique.",
+  "affirmation": "Le seuil du décret tertiaire porte sur la surface.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": null,
+    "page": "article R174-22, II, 3°"
+   }
+  ]
+ },
+ {
+  "id": "ja1-022",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePatrimoine › info",
+  "texte": "Tout ce que le logiciel affichera ensuite sera rattaché à l'un de ces objets.",
+  "affirmation": "Modèle patrimoine → site → bâtiment → point.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-023",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePatrimoine › localisation › bonne réponse",
+  "texte": "Elle donne la météo locale (DJU), pour corriger la consommation de chauffage du climat",
+  "affirmation": "La localisation donne les DJU de la station météo.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": null,
+    "page": "article 5, I"
+   }
+  ]
+ },
+ {
+  "id": "ja1-024",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePatrimoine › localisation › mauvaise réponse 2",
+  "texte": "Le prix dépend surtout du contrat. En gaz, la localisation joue un peu, sur le transport et le stockage.",
+  "affirmation": "Le prix du kWh ne dépend pas (ou peu) de la commune.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "cre-prix-repere-gaz",
+    "passage": "En gaz, le coût du transport et du stockage dépend de la localisation géographique du consommateur.",
+    "relu": true,
+    "page": "« Différentes parts variables pour refléter les différences géographiques de coût de transport et stockage »"
+   }
+  ],
+  "note": "En électricité, le tarif d'acheminement est le même partout ; en gaz, la CRE publie une fourchette de prix parce que le transport et le stockage dépendent de la localisation : « pas de la commune » était trop absolu.",
+  "avant": "Le prix dépend du contrat, pas de la commune."
+ },
+ {
+  "id": "ja1-025",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePatrimoine › décret tertiaire › contexte",
+  "texte": "vise les bâtiments accueillant des activités tertiaires sur <b>au moins 1 000 m²</b> (surfaces cumulées sur le site)",
+  "affirmation": "Seuil de 1 000 m² de surface tertiaire cumulée sur le site.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": null,
+    "page": "article R174-22, II, 3°"
+   }
+  ],
+  "note": "« Éco Énergie Tertiaire » est le nom du dispositif (fiches du ministère, rt-re-batiment.developpement-durable.gouv.fr)."
+ },
+ {
+  "id": "ja1-026",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePatrimoine › décret tertiaire › bonne réponse (assujetti)",
+  "texte": "Il devra réduire sa consommation (−40 % en 2030) et la déclarer chaque année sur OPERAT.",
+  "affirmation": "Objectif −40 % en 2030 et déclaration annuelle sur OPERAT.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": null,
+    "page": "G2 – Textes régissant le dispositif"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": null,
+    "page": "article 13, II"
+   }
+  ]
+ },
+ {
+  "id": "ja1-027",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePatrimoine › décret tertiaire › bonne réponse (non assujetti)",
+  "texte": "obligation réglementaire, mais le suivi reste utile pour la facture et le climat.",
+  "affirmation": "Sous 1 000 m², pas d'obligation au titre du décret.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": null,
+    "page": "article R174-22, II, 3°"
+   }
+  ]
+ },
+ {
+  "id": "ja1-028",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePatrimoine › décret tertiaire › mauvaise réponse 3",
+  "texte": "Le décret ne vise que le tertiaire, à partir de 1 000 m².",
+  "affirmation": "Champ du décret.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": null,
+    "page": "article R174-22, II, 3°"
+   }
+  ]
+ },
+ {
+  "id": "ja1-029",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › PDL › question",
+  "texte": "Lequel est le PDL (Point De Livraison, appelé PRM chez Enedis) ?",
+  "affirmation": "PDL et PRM désignent la même référence.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky. Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "PRM signifie Point de Référence des Mesures / PDL signifie Point De Livraison. C’est la même référence à 14 chiffres.",
+    "relu": true,
+    "page": "p. 3"
+   }
+  ]
+ },
+ {
+  "id": "ja1-030",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › PDL › bonne réponse",
+  "texte": "Il identifie le point de raccordement au réseau.",
+  "affirmation": "Le PDL identifie le point de raccordement.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky. Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja1-031",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › PDL › numéro de série",
+  "texte": "c\\'est le numéro de série du compteur. Il désigne l\\'appareil, pas le point.",
+  "affirmation": "Le numéro de série désigne le compteur, distinct du PDL.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "Le numéro de série du compteur doit être le même que celui indiqué sur votre facture d’électricité.",
+    "relu": true,
+    "page": "« Numéro de série »"
+   },
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   }
+  ],
+  "note": "Le format à 12 chiffres du numéro de série est celui des données du jeu (monde/sites.js) ; Enedis affiche bien deux numéros distincts : PRM et numéro de série."
+ },
+ {
+  "id": "ja1-032",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › PDL › 13 chiffres",
+  "texte": "Un PDL en compte exactement 14.",
+  "affirmation": "Le PDL a 14 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky. Il s’agit d’une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja1-033",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › remplacement › bonne réponse",
+  "texte": "Seul le numéro de série change. Le logiciel doit donc distinguer « point de comptage » et « compteur ».",
+  "affirmation": "Au remplacement du compteur, seul le numéro de série change.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "Ce numéro correspond à la référence de votre logement ou de votre local ; c’est votre référence client. Composé de 14 chiffres il figure sur la facture d’électricité de votre fournisseur sous ce nom : numéro de PDL ou PRM.",
+    "relu": true,
+    "page": "p. 3, « Numéro de PRM »"
+   },
+   {
+    "cle": "enedis-affichages-compteur",
+    "passage": "Le numéro de série du compteur doit être le même que celui indiqué sur votre facture d’électricité.",
+    "relu": true,
+    "page": "« Numéro de série »"
+   }
+  ],
+  "note": "Le PDL désigne un point de connexion au réseau (un logement, un local), pas l'appareil : Enedis distingue le numéro de PRM du numéro de série du compteur. Le PCE suit la même logique côté gaz : quand GRDF pose un nouveau compteur, le PCE garde sa série de relevés, avec un relevé de changement de compteur (CCP)."
+ },
+ {
+  "id": "ja1-034",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › remplacement › mauvaise réponse 1",
+  "texte": "Le PDL est attaché au raccordement.",
+  "affirmation": "Le PDL est attaché au raccordement.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-022e",
+    "passage": "Le numéro de PRM est l’identifiant unique représentant un point de connexion au réseau public de distribution.",
+    "relu": true,
+    "page": "p. 4, note 3"
+   }
+  ]
+ },
+ {
+  "id": "ja1-035",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › type de compteur › réponse 2",
+  "texte": "Compteur professionnel télérelevé, courbe au pas de 5 ou 10 minutes",
+  "affirmation": "Au-delà de 36 kVA, la courbe est relevée à 5 min et publiée à 10 min.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s’est traduite par une reprogrammation du pas de relève des courbes de charge à 5’ pour les sites HTA et BT > 36 kVA. Les courbes au pas 5’ permettent de reconstituer des mesures au pas 10’ ou 15’ selon la nature des publications.",
+    "relu": true,
+    "page": "p. 4"
+   }
+  ],
+  "note": "Enedis relève à 5 min les sites HTA et BT > 36 kVA, et en reconstitue des courbes à 10 ou 15 min. On garde 10 min (le pas utilisé dans la suite du jeu) en ajoutant 5.",
+  "avant": "Compteur professionnel télérelevé, courbe au pas de 10 minutes"
+ },
+ {
+  "id": "ja1-036",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › type de compteur › réponse 1",
+  "texte": "Compteur Linky, courbe de charge au pas de 30 minutes",
+  "affirmation": "Jusqu'à 36 kVA, Linky, courbe au pas de 30 minutes.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "C5 : point de connexion raccordé en BT ≤ 36 kVA et auquel est associé un contrat unique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Modalités d’accès aux données collectées par le GRD relatives aux sites de consommation BT ≤ 36 kVA équipés d’un compteur communicant",
+    "relu": true,
+    "page": "titre, p. 1"
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L’activation de la collecte de la courbe de charge entraîne l’enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d’information du GRD.",
+    "relu": true
+   }
+  ],
+  "note": "L'enregistrement peut être réduit à 15 ou 10 min selon les services souscrits ; 30 min est le pas nominal."
+ },
+ {
+  "id": "ja1-037",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › type de compteur › explication réponse 2",
+  "texte": "Au-delà de 36 kVA (segments C1 à C4), compteur pro télérelevé, courbe plus fine.",
+  "affirmation": "Au-delà de 36 kVA : segments C1 à C4.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "C4 : point de connexion raccordé en BT > 36 kVA et auquel est associé un contrat unique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "C2 : point de connexion raccordé en HTA, auquel est associé un contrat unique et pour lequel la reconstitution des flux est assurée via la courbe de charge mesurée.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Pour Enedis, cette réforme s’est traduite par une reprogrammation du pas de relève des courbes de charge à 5’ pour les sites HTA et BT > 36 kVA. Les courbes au pas 5’ permettent de reconstituer des mesures au pas 10’ ou 15’ selon la nature des publications.",
+    "relu": true,
+    "page": "p. 4"
+   }
+  ],
+  "note": "C4 = BT > 36 kVA ; C2 et C3 = HTA ; C1 = contrat CARD (gros sites, HTA ou au-dessus)."
+ },
+ {
+  "id": "ja1-038",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actElec › type de compteur › mauvaise réponse 3",
+  "texte": "Les compteurs communicants sont télérelevés.",
+  "affirmation": "Les compteurs communicants sont relevés à distance.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "L’activation de la collecte de la courbe de charge entraîne l’enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d’information du GRD.",
+    "relu": true
+   },
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja1-039",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › PCE › question",
+  "texte": "(Point de Comptage et d\\'Estimation)",
+  "affirmation": "Signification de PCE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "PCE (Point de Comptage et d'Estimation) au compteur gaz",
+    "relu": true,
+    "page": "catalogue de données"
+   }
+  ]
+ },
+ {
+  "id": "ja1-040",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › PCE › bonne réponse",
+  "texte": "un format de PCE (on trouve aussi des PCE à 14 chiffres).",
+  "affirmation": "PCE : « GI » + 6 chiffres, ou 14 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "catalogue de données, champ « Numéro de PCE »"
+   }
+  ]
+ },
+ {
+  "id": "ja1-041",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › PCE › 5 chiffres",
+  "texte": "Seulement 5 chiffres après GI : il en faut 6.",
+  "affirmation": "Format « GI » + 6 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "catalogue de données, champ « Numéro de PCE »"
+   }
+  ]
+ },
+ {
+  "id": "ja1-042",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › PCE › index",
+  "texte": "le totalisateur du compteur, en m³.",
+  "affirmation": "L'index gaz est un totalisateur en m³.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Pour le gaz, la consommation se mesure en m3. Elle est convertie en kWh grâce à un coefficient de conversion.",
+    "relu": true
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d’énergie facturée sur la période.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja1-043",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › PCE › numéro de série",
+  "texte": "C\\'est le numéro de série du Gazpar : l\\'appareil, pas le point.",
+  "affirmation": "Le numéro de série désigne l'appareil.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "catalogue de données, champ « Numéro de PCE »"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "catalogue de données, champ « Raison de relève »"
+   }
+  ],
+  "note": "GRDF distingue le PCE du matricule du compteur, et note le changement de compteur sur le même PCE."
+ },
+ {
+  "id": "ja1-044",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › mesure › bonne réponse",
+  "texte": "Un volume en m³, converti en kWh avec un coefficient de conversion",
+  "affirmation": "Le compteur gaz mesure un volume, converti en kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Pour le gaz, la consommation se mesure en m3. Elle est convertie en kWh grâce à un coefficient de conversion.",
+    "relu": true
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "la quantité d’énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja1-045",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › mesure › explication",
+  "texte": "kWh = m³ × coefficient (entre 9 et 12,5 kWh/m³, variable selon la commune et le mois).",
+  "affirmation": "Coefficient de 9 à 12,5 kWh/m³, variable selon le lieu et le mois.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Le gestionnaire du réseau de distribution détermine la valeur du coefficient qui varie selon le lieu et le temps entre 9 et 12,5 kWh/m3",
+    "relu": true
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Le coefficient de conversion gaz est calculé une fois par mois pour les compteurs communicants et après chaque relevé pour les compteurs relevés tous les 6 mois.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "L'altitude de la commune dans laquelle est situé votre logement",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja1-046",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › mesure › mauvaise réponse 1",
+  "texte": "Le compteur mesure un volume.",
+  "affirmation": "Le compteur gaz mesure un volume.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Pour le gaz, la consommation se mesure en m3. Elle est convertie en kWh grâce à un coefficient de conversion.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja1-047",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › mesure › mauvaise réponse 2",
+  "texte": "Gazpar transmet un volume par jour.",
+  "affirmation": "Gazpar donne une consommation par jour.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-compteur-communicant",
+    "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
+    "relu": null
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Données quotidiennes A J+3",
+    "relu": true,
+    "page": "tableau du catalogue de données, PCE « 1M »"
+   }
+  ],
+  "note": "Le compteur émet deux fois par jour, mais la donnée est quotidienne (consommation de la veille)."
+ },
+ {
+  "id": "ja1-048",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actGas › conversion",
+  "texte": "4 000 × 11,2 = 44 800 kWh.",
+  "affirmation": "Calcul de conversion.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-049",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "actSub",
+  "texte": "Un sous-compteur est un « enfant » du compteur principal.",
+  "affirmation": "Le sous-compteur est inclus dans le principal.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-050",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePlan › question 1",
+  "texte": "Un point de comptage par énergie livrée.",
+  "affirmation": "Un point de comptage par énergie livrée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-051",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePlan › question 1, mauvaise réponse 2",
+  "texte": "Électricité et gaz arrivent par deux raccordements.",
+  "affirmation": "Deux énergies, deux raccordements.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-052",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePlan › question 2",
+  "texte": "Un site peut avoir plusieurs PDL, un PDL peut alimenter plusieurs bâtiments, et ça change avec le temps.",
+  "affirmation": "Lien plusieurs à plusieurs entre sites et points.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-053",
+  "fichier": "jeu/epreuves/cadrer.js",
+  "repere": "gamePlan › question 2, mauvaise réponse 2",
+  "texte": "Un identifiant inventé ne correspondra à aucune donnée.",
+  "affirmation": "Un faux PDL ne reçoit aucune donnée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-054",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "CAD_ZONES.ecole › éclairage de la cour",
+  "texte": "Il est branché sur le compteur de l'école : il est dans le périmètre, qu'on le veuille ou non.",
+  "affirmation": "Le périmètre suit le compteur.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-055",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "CAD_ZONES › lampadaires",
+  "texte": "Éclairage public : c'est le réseau de la ville, pas ton compteur.",
+  "affirmation": "L'éclairage public est hors du site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-056",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "CAD_ZONES.bureau › antenne",
+  "texte": "L'opérateur télécom a son compteur à lui. Il paie même un loyer pour être là.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-057",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "CAD_ZONES.boulangerie › appartement",
+  "texte": "Le four, oui. La douche du boulanger, non.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-058",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "CAD_OBJ.decret › indicateur",
+  "texte": "les kWh/m² par rapport à l’année de référence (−40 % en 2030)",
+  "affirmation": "Indicateur du décret : baisse de 40 % en 2030 par rapport à l'année de référence.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": null,
+    "page": "G2 – Textes régissant le dispositif"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "L'année de référence est comprise entre 2010 et 2022, ou correspond à la première année pleine d'exploitation dont les consommations énergétiques sont remontées sur la plateforme OPERAT. […] L'année de référence comporte 12 mois consécutifs.",
+    "relu": null,
+    "page": "article 3, I"
+   }
+  ]
+ },
+ {
+  "id": "ja1-059",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "ficheEmsStep › site créé",
+  "texte": "Ampère-sur-Loire (45), zone climatique H1",
+  "affirmation": "Le Loiret (45) est en zone climatique H1.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ecologie-zones-climatiques",
+    "passage": "Zone climatique H1 […] 45 Loiret",
+    "relu": true,
+    "page": "tableau, colonne « Zone climatique H1 »"
+   }
+  ],
+  "note": "La ville est inventée, le département est réel."
+ },
+ {
+  "id": "ja1-060",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "ficheEmsStep › site créé",
+  "texte": "station météo Orléans-Bricy",
+  "affirmation": "Station météo de référence du site.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Choix du jeu : Orléans-Bricy est une vraie station Météo-France du Loiret."
+ },
+ {
+  "id": "ja1-061",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "ficheEmsStep › site créé",
+  "texte": "C'est elle qui fournira les DJU pour corriger la consommation de l'hiver.",
+  "affirmation": "La station météo fournit les DJU de la correction climatique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": null,
+    "page": "article 5, I"
+   }
+  ]
+ },
+ {
+  "id": "ja1-062",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "ficheEmsStep › transfert",
+  "texte": "Une surface fausse, et tous les kWh/m² sont faux, sans que personne ne s’en aperçoive.",
+  "affirmation": "Importance de la surface.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-063",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "perimetreStep › transfert",
+  "texte": "le périmètre suit les compteurs, pas les murs.",
+  "affirmation": "Règle du périmètre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-064",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "objectifStep › décret refusé",
+  "texte": "il commence à 1 000 m²",
+  "affirmation": "Seuil du décret tertiaire.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": null,
+    "page": "article R174-22, II, 3°"
+   }
+  ]
+ },
+ {
+  "id": "ja1-065",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "objectifStep › décret choisi",
+  "texte": "L’objectif est fixé par la loi, l’indicateur aussi : les kWh/m², corrigés de la météo, par rapport à ton année de référence.",
+  "affirmation": "Objectif légal, consommation ajustée du climat, année de référence.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": null,
+    "page": "G2 – Textes régissant le dispositif"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "L'année de référence est comprise entre 2010 et 2022, ou correspond à la première année pleine d'exploitation dont les consommations énergétiques sont remontées sur la plateforme OPERAT. […] L'année de référence comporte 12 mois consécutifs.",
+    "relu": null,
+    "page": "article 3, I"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": null,
+    "page": "article 5, I"
+   }
+  ],
+  "note": "Le décret raisonne en consommation d'énergie finale ajustée du climat ; à surface constante, comparer des kWh/m² revient au même."
+ },
+ {
+  "id": "ja1-066",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "objectifStep › CO₂, gaz lourd",
+  "texte": "Un kWh de gaz émet environ trois fois plus qu’un kWh électrique en France.",
+  "affirmation": "Facteur CO₂ du gaz ≈ 3 fois celui de l'électricité.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": null,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": null
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": null
+   }
+  ],
+  "note": "0,227 × 0,90 ≈ 0,204 kg par kWh PCS facturé, contre 0,064 pour l'électricité : rapport ≈ 3,2 (même calcul que le cours, ce8-025)."
+ },
+ {
+  "id": "ja1-067",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "objectifStep › CO₂, gaz léger",
+  "texte": "le gaz émet environ trois fois plus que l’électricité française.",
+  "affirmation": "Même rapport.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": null,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": null
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": null
+   }
+  ],
+  "note": "Le texte disait « quatre fois », en contradiction avec la phrase voisine et avec les facteurs réglementaires (rapport ≈ 3,2).",
+  "avant": "le gaz émet environ quatre fois plus que l’électricité française."
+ },
+ {
+  "id": "ja1-068",
+  "fichier": "jeu/epreuves/ems-cadrer.js",
+  "repere": "objectifStep › transfert",
+  "texte": "on le choisit avant, pas après, sinon on choisit celui qui arrange.",
+  "affirmation": "L'objectif se choisit avant.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-069",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[1].ems",
+  "texte": "Il tient le référentiel du patrimoine : sites, bâtiments, surfaces, activités, points de comptage, et l'objectif de chacun.",
+  "affirmation": "Rôle de l'EMS à l'étape Cadrer.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-070",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[1] › question 2",
+  "texte": "L'adresse donne les DJU du lieu : sans eux, impossible de comparer deux hivers.",
+  "affirmation": "La localisation donne les DJU.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": null,
+    "page": "article 5, I"
+   }
+  ]
+ },
+ {
+  "id": "ja1-071",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[1] › question 1",
+  "texte": "Le périmètre suit les compteurs, pas les murs.",
+  "affirmation": "Règle du périmètre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-072",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[1] › question 3",
+  "texte": "Choisi après coup, on choisit celui qui arrange.",
+  "affirmation": "L'objectif se choisit avant.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-073",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.geometre › idle",
+  "texte": "Je mesure tout. Même la patience des gens qui me demandent de me pousser.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-074",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.planquartier › idle",
+  "texte": "Quelqu’un a entouré la piscine en rouge et écrit « gouffre ? ».",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-075",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.officeObj › idle",
+  "texte": "et arrêter de chauffer le parking",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-076",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.drOhm › idle",
+  "texte": "Je soigne les gens et, à mes heures perdues, les bâtiments. Les bâtiments se plaignent moins.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-077",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[1]",
+  "texte": "L'adresse est sur la boîte aux lettres, la surface sur la fiche technique près de la porte.",
+  "affirmation": "Où trouver les informations du site.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-078",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[2]",
+  "texte": "Le compteur électrique est dans un coffret au mur ; le gaz, c'est souvent à la cave.",
+  "affirmation": "Où sont les compteurs.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-079",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "office › plan de la ville",
+  "texte": "Trois sites y sont épinglés : l'école Jean-Jaurès, les bureaux Le Carré et la boulangerie du Moulin.",
+  "affirmation": "Les trois sites du jeu.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-080",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "cave › chaudière",
+  "texte": "Elle chauffe tout le bâtiment : c'est elle qui fait tourner le compteur gaz l'hiver.",
+  "affirmation": "Le gaz du site sert au chauffage.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-081",
+  "fichier": "jeu/monde/objets.js",
+  "repere": "cave › carton de 2003",
+  "texte": "PLAN DE COMPTAGE 2003",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-082",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "QUIPS › 5",
+  "texte": "Le décret tertiaire, c'est comme le sport : tout le monde a une année de référence où il était en meilleure forme.",
+  "affirmation": "Clin d'œil sur l'année de référence (choisie par l'assujetti).",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-083",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[1] › énigme",
+  "texte": "Le logement du gardien et le lampadaire restent dehors.",
+  "affirmation": "Ce qui a son propre compteur reste hors du périmètre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja1-084",
+  "fichier": "jeu/interface/evolution-fin.js",
+  "repere": "DIP_SAVOIR[1]",
+  "texte": "Délimiter un périmètre, créer la fiche du site, choisir un objectif",
+  "affirmation": "Savoir-faire de l'étape.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

@@ -12,7 +12,7 @@
 
 /** Pour chaque démo (son identifiant dans demos/index.js) : les clés des sources de ce qu'elle affirme. */
 export const SOURCES_DEMOS = {
-  collecter: ["enedis-nmo-cf-015e", "enedis-guide-flux-r6x", "grdf-adict-faq", "mne-coefficient-conversion", "mne-elements-facture", "ministere-guide-fiscalite-2026"],
+  collecter: ["enedis-nmo-cf-015e", "enedis-guide-flux-r6x", "grdf-adict-faq", "mne-coefficient-conversion", "mne-elements-facture", "ministere-guide-fiscalite-2026", "enedis-nmo-cf-077e", "grdf-guide-donnees-2026"],
   consentement: ["enedis-nmo-cf-015e", "enedis-contrat-data-connect"],
   casIndex: ["enedis-turpe7-brochure"],
   decretTertiaire: ["legifrance-arrete-tertiaire-2020", "ademe-operat-faq", "cerema-essentiels-batiments-publics"],

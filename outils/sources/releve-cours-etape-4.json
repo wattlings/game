@@ -133,9 +133,34 @@
   "texte": "Stable dans le temps, même si le compteur change",
   "affirmation": "Le point de comptage reste le même quand le compteur change.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Même réserve qu'à l'étape 1 (ce1-016) : à sourcer par une page Enedis ou GRDF explicite."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "Ce point frontière ou de raccordement est aussi appelé Point de Référence et de Mesure (ou PRM) ou Point de Livraison (ou PDL). Le Point de Référence et de Mesure (PRM) est caractérisé par un numéro unique à 14 chiffres.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   },
+   {
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "En amont du PRM, les Ouvrages de Raccordement, y compris ceux éventuellement situés sur l’Unité Foncière du Demandeur, font partie du RPD ; ils sont exploités, entretenus, dépannés et renouvelés par Enedis.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "p. 38 (catalogue de données, « Raison de relève » des données de consommation du PCE)"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Matricule du compteur Numéro de matricule du compteur",
+    "relu": true,
+    "page": "p. 43 (données techniques rattachées au PCE)"
+   }
+  ],
+  "note": "Enedis définit le PDL/PRM comme le « point frontière ou de raccordement », identifié par un numéro unique, et précise que les ouvrages en amont (dont le compteur) sont renouvelés par Enedis : le numéro désigne le point, pas l’appareil. Aucun document Enedis lu ne dit en toutes lettres que le numéro survit au remplacement du compteur ; un guide secondaire le dit explicitement. Côté gaz, le guide GRDF montre qu’un changement de compteur (motif CCP) est une simple relève dans l’historique du même PCE, le matricule du compteur étant une donnée distincte."
  },
  {
   "id": "ce4-012",
@@ -208,8 +233,27 @@
   "texte": "Le PCE reste le même ; on garde l’historique des compteurs successifs avec leurs dates de pose et de dépose.",
   "affirmation": "Le PCE reste le même quand le compteur est remplacé.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Même réserve que ce4-011."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "p. 38 (catalogue de données, « Raison de relève » des données de consommation du PCE)"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Matricule du compteur Numéro de matricule du compteur",
+    "relu": true,
+    "page": "p. 43 (données techniques rattachées au PCE)"
+   },
+   {
+    "cle": "cre-contrat-grd-f-gaz",
+    "passage": "Point de Comptage et d’Estimation (PCE) : point physique d’un Poste de Livraison auquel est associée une Quantité Acheminée et où est placé, sauf cas particulier, le Dispositif Local de Mesurage.",
+    "relu": true,
+    "page": "p. 9, Définitions"
+   }
+  ],
+  "note": "Le guide GRDF : un changement de compteur donne, dans les données du même PCE, un relevé de l’ancien compteur et un relevé du nouveau (motif CCP) ; le matricule du compteur est une donnée technique distincte du PCE. Le contrat GRD-F définit le PCE comme un point physique « où est placé » le dispositif de mesurage."
  }
 ]

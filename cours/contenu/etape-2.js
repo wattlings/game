@@ -154,7 +154,7 @@ export default {
             "1 relevé par mois et par cadran",
             "1 montant par période de facturation",
           ],
-          ["Délai", "Le lendemain (élec), 1 à 3 jours (gaz)[[enedis-nmo-cf-077e,grdf-adict-faq]]", "Quelques jours", "2 à 6 semaines"],
+          ["Délai", "Le lendemain (élec), 1 à 3 jours (gaz)[[enedis-nmo-cf-077e,grdf-adict-faq]]", "Le lendemain (élec), mensuel (gaz)[[enedis-nmo-cf-077e,grdf-guide-donnees-2026]]", "2 à 6 semaines (cas de l’école)"],
           ["Unité", "kW (puissance moyenne), m³ et kWh[[enedis-guide-flux-r6x]]", "kWh (élec), m³ (gaz)", "kWh et €"],
           [
             "Fiabilité",

@@ -111,7 +111,7 @@ export default {
           [
             "Point de comptage",
             "identifiant (PDL / PCE), énergie, site(s), dates de validité",
-            "Stable dans le temps, même si le compteur change",
+            "Stable dans le temps, même si le compteur change[[enedis-cg-raccordement-bt,grdf-guide-donnees-2026]]",
           ],
           [
             "Compteur",
@@ -219,7 +219,7 @@ export default {
       ],
       bonne: 1,
       explication:
-        "Le PCE reste le même ; on garde l’historique des compteurs successifs avec leurs dates de pose et de dépose.",
+        "Le PCE reste le même ; on garde l’historique des compteurs successifs avec leurs dates de pose et de dépose[[grdf-guide-donnees-2026,cre-contrat-grd-f-gaz]].",
     },
   ],
 };

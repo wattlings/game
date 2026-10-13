@@ -1,0 +1,694 @@
+[
+ {
+  "id": "ja3-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3p › x",
+  "texte": "Avant d’analyser, on vérifie que la donnée est juste : complète, sans doublon, plausible et cohérente entre sources.",
+  "affirmation": "Les quatre contrôles de base.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3r1 › x (1re partie)",
+  "texte": "Une journée au pas de 10 min doit avoir 144 points",
+  "affirmation": "6 points par heure × 24 h.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-003",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3r1 › x (2e partie)",
+  "texte": "sauf les jours de changement d’heure (138 ou 150 en heure locale)",
+  "affirmation": "Les jours de changement d'heure durent 23 h ou 25 h.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   },
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ],
+  "note": "Le changement d'heure a lieu à 1 h UTC le dernier dimanche de mars et d'octobre : 23 × 6 = 138, 25 × 6 = 150."
+ },
+ {
+  "id": "ja3-004",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3r1 › say",
+  "texte": "Aujourd’hui : 144 points sur 144. Record battu depuis hier.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-005",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3r2 › x",
+  "texte": "Un pic à 999,9 kW dans une école de 60 kVA, c’est un bug de mesure, pas une vraie consommation.",
+  "affirmation": "Contrôle de plausibilité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "60 kVA : puissance de l'école du cours (donnée inventée)."
+ },
+ {
+  "id": "ja3-006",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3r2 › say",
+  "texte": "Soit l’école avait construit un accélérateur de particules, soit c’était un bug. C’était un bug.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-007",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3r3 › x",
+  "texte": "On ne corrige jamais en silence : chaque valeur garde un statut (brute, corrigée, estimée).",
+  "affirmation": "Traçabilité des corrections.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-008",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3r3 › say",
+  "texte": "Une correction qu’on ne peut pas expliquer, c’est une rumeur.",
+  "affirmation": "Même idée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-009",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s3a › x",
+  "texte": "Si le thermomètre affiche 45 °C, on ne conclut pas à une fièvre mortelle : on vérifie d’abord le thermomètre.",
+  "affirmation": "Analogie du thermomètre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-010",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "cWin",
+  "texte": "Garde toujours la donnée brute, avec son statut.",
+  "affirmation": "Conserver la brute.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Arène, champion et dresseurs : personnages du jeu."
+ },
+ {
+  "id": "ja3-011",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "next",
+  "texte": "On détecte sur des données fiabilisées, et on garde toujours la brute.",
+  "affirmation": "Fiabiliser avant de détecter.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-012",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Laborantin Noé › question 1",
+  "texte": "Complète, sans doublon, plausible et cohérente entre sources",
+  "affirmation": "Les quatre contrôles.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-013",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Laborantin Noé › question 1, mauvaise réponse 2",
+  "texte": "Le fournisseur facture ; il ne contrôle pas tes mesures.",
+  "affirmation": "Le fournisseur facture, la mesure vient du distributeur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "Ce sont les gestionnaires de réseaux de distribution d'électricité et de gaz, également appelés « distributeurs », qui relèvent une à deux fois par an mes compteurs.",
+    "relu": null
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "me facture l'électricité ou le gaz consommés.",
+    "relu": null
+   }
+  ]
+ },
+ {
+  "id": "ja3-014",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Laborantin Noé › question 2",
+  "texte": "La journée dure 23 h : 23 × 6 = 138. Ce n'est pas un trou.",
+  "affirmation": "Le jour du passage à l'heure d'été dure 23 h.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ],
+  "note": "1 h UTC = 2 h à Paris, qui devient 3 h."
+ },
+ {
+  "id": "ja3-015",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Laborantin Noé › question 2, mauvaise réponse 2",
+  "texte": "Ça, c'est le passage à l'heure d'hiver.",
+  "affirmation": "150 mesures le jour du passage à l'heure d'hiver.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ],
+  "note": "La journée dure 25 h : 25 × 6 = 150."
+ },
+ {
+  "id": "ja3-016",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Contrôleuse Jade › question 1",
+  "texte": "La valeur est en W : 22,5 kW",
+  "affirmation": "Une puissance peut être livrée en W.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "En puissance active, dont l’unité est le Watt (W).",
+    "relu": true,
+    "page": "§ 1.3.1"
+   }
+  ]
+ },
+ {
+  "id": "ja3-017",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Contrôleuse Jade › question 1, explication",
+  "texte": "Pour un raccordement de 60 kVA, 22 500 kW est impossible. Toujours vérifier l'unité.",
+  "affirmation": "Contrôle de plausibilité par la puissance du raccordement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-018",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Contrôleuse Jade › question 2",
+  "texte": "24 kW × 10/60 h = 4 kWh.",
+  "affirmation": "Énergie = puissance × durée.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-019",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Contrôleuse Jade › question 3",
+  "texte": "Une valeur impossible physiquement : on ne l'analyse pas, on la rejette.",
+  "affirmation": "Rejeter l'impossible.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-020",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Contrôleuse Jade › question 3, mauvaise réponse 2",
+  "texte": "Même avec beaucoup de frites.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-021",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Archiviste Paul › question 1",
+  "texte": "La correction doit rester traçable et réversible.",
+  "affirmation": "Traçabilité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-022",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Archiviste Paul › question 2",
+  "texte": "En heure locale, 2 h 00 à 2 h 50 existe deux fois le jour du passage à l'heure d'hiver.",
+  "affirmation": "L'heure de 2 h à 3 h se répète au passage à l'heure d'hiver.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ],
+  "note": "1 h UTC = 3 h heure d'été, qui redevient 2 h."
+ },
+ {
+  "id": "ja3-023",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Archiviste Paul › question 2, mauvaise réponse 2",
+  "texte": "C'est surtout une question de bon sens.",
+  "affirmation": "Stocker en UTC est une bonne pratique, pas une obligation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-024",
+  "fichier": "jeu/recit/arenes/arene-3.js",
+  "repere": "Archiviste Paul › question 3",
+  "texte": "Une mauvaise mesure mène à un mauvais diagnostic.",
+  "affirmation": "Analogie du thermomètre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-025",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.doublon › data",
+  "texte": "le créneau 10 h – 11 h arrive deux fois (12 mesures au lieu de 6)",
+  "affirmation": "Une heure au pas de 10 min = 6 mesures.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-026",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.doublon › bonne réponse",
+  "texte": "Un doublon ressemblait à une surconsommation. Correction tracée et réversible.",
+  "affirmation": "Traitement d'un doublon.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-027",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.trou › bonne réponse",
+  "texte": "Le trou est comblé et marqué comme estimé. Il sera remplacé si la vraie donnée arrive.",
+  "affirmation": "Traitement d'un trou.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-028",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.trou › mauvaise réponse 1",
+  "texte": "Un trou ressemble alors à une économie !",
+  "affirmation": "Mettre 0 invente une économie.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-029",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.pic › bonne réponse",
+  "texte": "999,9 kW est physiquement impossible pour ce raccordement",
+  "affirmation": "Contrôle de plausibilité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-030",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.recule › data",
+  "texte": "Index HPB : 413 989 kWh le 1er mars, 404 989 kWh le 1er avril.",
+  "affirmation": "Exemple d'index qui recule.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Même exemple que le cours (étape 3). Le poste HPB ne tourne pas en mars (saison haute) : son index aurait dû rester stable, ce qui conforte l'erreur de saisie (voir ce3-009)."
+ },
+ {
+  "id": "ja3-031",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.recule › bonne réponse",
+  "texte": "Un index doit toujours croître.",
+  "affirmation": "Un index totalisateur ne recule pas.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les index totalisateurs permettent de comptabiliser l’énergie durant l’intégralité de la période de fonctionnement du compteur, toutes classes temporelles confondues.",
+    "relu": true,
+    "page": "§ 1.3.2.1"
+   }
+  ],
+  "note": "Un index totalisateur cumule l'énergie depuis la mise en service du compteur."
+ },
+ {
+  "id": "ja3-032",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.recule › mauvaise réponse 1",
+  "texte": "Une consommation négative est impossible.",
+  "affirmation": "Pas de consommation négative sur un compteur de consommation.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les index totalisateurs permettent de comptabiliser l’énergie durant l’intégralité de la période de fonctionnement du compteur, toutes classes temporelles confondues.",
+    "relu": true,
+    "page": "§ 1.3.2.1"
+   },
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d’énergie facturée sur la période.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ja3-033",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.boucle › bonne réponse",
+  "texte": "570 m³ : (100 000 − 99 850) + 420",
+  "affirmation": "Calcul du bouclage.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-034",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.boucle › explication",
+  "texte": "Le compteur a bouclé, comme un vieux compteur kilométrique.",
+  "affirmation": "Image du bouclage.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-035",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.unite › bonne réponse",
+  "texte": "C\\'est en W : 22,5 kW",
+  "affirmation": "Une puissance peut être livrée en W.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "En puissance active, dont l’unité est le Watt (W).",
+    "relu": true,
+    "page": "§ 1.3.1"
+   }
+  ]
+ },
+ {
+  "id": "ja3-036",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.unite › explication",
+  "texte": "W, kW, kVA, m³, kWh.",
+  "affirmation": "Vérifier l'unité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-037",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.unite › mauvaise réponse 3",
+  "texte": "pour passer de kW au pas 10 min à des kWh.",
+  "affirmation": "Diviser par 6 : puissances au pas 10 min → énergie.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-038",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.heure › data",
+  "texte": "29 mars 2026, au pas de 10 min : seulement 138 mesures au lieu de 144.",
+  "affirmation": "Le 29 mars 2026 est le jour du passage à l'heure d'été.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ],
+  "note": "Le 29 mars 2026 est le dernier dimanche de mars 2026."
+ },
+ {
+  "id": "ja3-039",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.heure › bonne réponse",
+  "texte": "journée de 23 h. Stocker en UTC",
+  "affirmation": "Journée de 23 h ; l'UTC ne change pas.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ]
+ },
+ {
+  "id": "ja3-040",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "ANOM.heure › explication",
+  "texte": "23 × 6 = 138. En UTC, chaque mesure a un horodatage unique.",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-041",
+  "fichier": "jeu/epreuves/fiabiliser.js",
+  "repere": "actTech",
+  "texte": "Les hautes herbes grouillent de données brutes sauvages.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-042",
+  "fichier": "jeu/epreuves/serie-brute.js",
+  "repere": "SB_ANOM.trou › mauvaise réponse 2",
+  "texte": "Une correction en silence. Dans six mois, personne ne saura pourquoi ce mercredi ressemble autant à mardi.",
+  "affirmation": "Traçabilité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-043",
+  "fichier": "jeu/epreuves/serie-brute.js",
+  "repere": "SB_ANOM.pic › mauvaise réponse 1",
+  "texte": "Un record que ton raccordement ne peut pas laisser passer. Le disjoncteur aurait sauté bien avant.",
+  "affirmation": "La puissance est plafonnée par le raccordement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-044",
+  "fichier": "jeu/epreuves/serie-brute.js",
+  "repere": "SB_ANOM.fige › bonne réponse",
+  "texte": "Un capteur bloqué répète sa dernière valeur. Aucun bâtiment occupé ne consomme pile la même chose pendant 14 heures.",
+  "affirmation": "Valeurs figées.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-045",
+  "fichier": "jeu/epreuves/serie-brute.js",
+  "repere": "sbLeurre › école, midi",
+  "texte": "Midi : la cantine chauffe. Ce n'est pas une anomalie, c'est le hachis parmentier.",
+  "affirmation": "Une donnée surprenante n'est pas forcément fausse.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-046",
+  "fichier": "jeu/epreuves/serie-brute.js",
+  "repere": "fin › note",
+  "texte": "Dans un EMS, c'est le travail des contrôles de qualité : ils repèrent et proposent. Mais c'est une personne qui choisit le traitement, et la donnée d'origine n'est jamais effacée.",
+  "affirmation": "Rôle des contrôles de qualité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-047",
+  "fichier": "jeu/epreuves/serie-brute.js",
+  "repere": "serieBruteStep › barre de l'EMS",
+  "texte": "électricité · pas de 30 min",
+  "affirmation": "Courbe de la semaine au pas de 30 min.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Série inventée du jeu."
+ },
+ {
+  "id": "ja3-048",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[3] › énigme, indice",
+  "texte": "Une consommation de ce site tourne autour de 18 kW à cette heure-là.",
+  "affirmation": "Donnée du jeu.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-049",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[3] › énigme",
+  "texte": "Un pic, un trou, un doublon, une valeur négative : la dalle s'effondre.",
+  "affirmation": "Anomalies à éviter.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-050",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[3].ems",
+  "texte": "Des contrôles de qualité signalent et marquent les valeurs (brute, corrigée, estimée, rejetée) ; une personne valide les traitements.",
+  "affirmation": "Rôle de l'EMS.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-051",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[3].erreur",
+  "texte": "Corriger en silence, ou mettre 0 dans un trou : on invente une économie.",
+  "affirmation": "Erreur à éviter.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-052",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[3] › question 2",
+  "texte": "Avant de corriger, on se demande ce que fait le bâtiment à cette heure-là.",
+  "affirmation": "Une donnée surprenante n'est pas forcément fausse.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-053",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "WALKERS › Chasseur de données",
+  "texte": "J'attrape des données sauvages ! Celle-là avait un trou de trois heures.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-054",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.panneauParc › idle",
+  "texte": "Les données qui ne passent pas sont priées de patienter à l’accueil.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-055",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.electricien › idle",
+  "texte": "J’ai vu des compteurs afficher des choses… Des choses que tu n’imagines pas.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-056",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "secret panneau du Parc",
+  "texte": "Interdiction d'extrapoler après 22 h. Les moyennes glissantes doivent être tenues en laisse.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-057",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "QUIPS › 1",
+  "texte": "Petit conseil : ne dis jamais « c'est la faute du compteur » avant d'avoir vérifié l'unité.",
+  "affirmation": "Vérifier l'unité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-058",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[4]",
+  "texte": "Les données brutes sont pleines d'anomalies.",
+  "affirmation": "Annonce de l'étape.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja3-059",
+  "fichier": "jeu/interface/evolution-fin.js",
+  "repere": "DIP_SAVOIR[3]",
+  "texte": "Repérer trous, doublons, pics, valeurs figées ; traiter sans effacer la donnée brute",
+  "affirmation": "Savoir-faire de l'étape.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

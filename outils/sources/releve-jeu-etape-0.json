@@ -1,0 +1,164 @@
+[
+ {
+  "id": "ja0-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche c0 › x",
+  "texte": "Les étapes 1 à 4 (Data) produisent une donnée fiable. Les étapes 5 à 8 (Énergie) s’en servent pour consommer moins.",
+  "affirmation": "Le cycle sépare quatre étapes « Data » et quatre étapes « Énergie ».",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Découpage propre au cours."
+ },
+ {
+  "id": "ja0-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche c0 › say",
+  "texte": "Cadrer, Collecter, Fiabiliser, Structurer, puis Analyser, Détecter, Agir, Mesurer.",
+  "affirmation": "Les huit étapes du cycle, dans l'ordre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Démarche du cours (proche du cycle PDCA de l'ISO 50001, sans en reprendre les termes)."
+ },
+ {
+  "id": "ja0-003",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "actJoule › chapitre 0, 3e réplique",
+  "texte": "Un energy manager ne suit jamais « l'énergie » en général. Il suit un patrimoine, des sites, des bâtiments, et des points de comptage.",
+  "affirmation": "Le suivi s'organise par objets emboîtés.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-004",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "actJoule › chapitre 0, 2e réplique",
+  "texte": "Ici, on transforme des kilowattheures en tableaux, et des tableaux en économies. Parfois même dans cet ordre.",
+  "affirmation": "Clin d'œil au métier.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-005",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "choisirSite › Mme Joule",
+  "texte": "La démarche compte 8 étapes : chacune a son quartier, ses informations à trouver et son arène.",
+  "affirmation": "Présentation du jeu.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-006",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "SITE_BLURB.ecole",
+  "texte": "Bâtiment public, 250 élèves. Chauffage gaz, cantine, vacances scolaires.",
+  "affirmation": "Description du site école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-007",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "SITE_BLURB.bureau",
+  "texte": "Tertiaire privé, 90 salariés. Grosse puissance, salle serveurs.",
+  "affirmation": "Description du site bureaux.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-008",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "SITE_BLURB.boulangerie",
+  "texte": "Petit commerce avec compteur Linky.",
+  "affirmation": "Un petit commerce (36 kVA dans le jeu) est équipé d'un Linky.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "C5 : point de connexion raccordé en BT ≤ 36 kVA et auquel est associé un contrat unique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Modalités d’accès aux données collectées par le GRD relatives aux sites de consommation BT ≤ 36 kVA équipés d’un compteur communicant",
+    "relu": true,
+    "page": "titre, p. 1"
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "relative au dispositif de comptage évolué Linky",
+    "relu": true,
+    "page": "§ 1"
+   }
+  ],
+  "note": "La boulangerie du jeu a 36 kVA (monde/sites.js) : segment C5 (BT ≤ 36 kVA), celui des compteurs communicants Linky."
+ },
+ {
+  "id": "ja0-009",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "actJoule › chapitre 10, 2e réplique",
+  "texte": "Pas la boulangerie : elle est privée, ce n'est pas à nous de payer ses croissants.",
+  "affirmation": "Le patrimoine de la mairie ne comprend pas les commerces privés.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-010",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[11]",
+  "texte": "Tu as bouclé la boucle. Et une boucle, ça recommence : nouvelles données, nouveaux objectifs !",
+  "affirmation": "Le cycle recommence.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-011",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.cycle › idle (affiche du cycle)",
+  "texte": "L’affiche du cycle en 8 étapes. Elle tourne en rond, comme les réunions.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-012",
+  "fichier": "jeu/interface/carte.js",
+  "repere": "WM_SPOTS › Rivière",
+  "texte": "Elle sépare la rive Data (à l’est, étapes 1 à 4) de la rive Énergie (à l’ouest, étapes 5 à 8).",
+  "affirmation": "La carte reprend le découpage du cycle.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Géographie de la ville du jeu."
+ },
+ {
+  "id": "ja0-013",
+  "fichier": "jeu/interface/carte.js",
+  "repere": "WM_SPOTS › Pont du Nord",
+  "texte": "Il referme la boucle : de la 8e étape, on revient à la 1re.",
+  "affirmation": "Le cycle est une boucle.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ja0-014",
+  "fichier": "jeu/interface/carte.js",
+  "repere": "WM_SPOTS › Pont du Sud",
+  "texte": "De la 4e à la 5e étape : la donnée fiable passe sur la rive Énergie.",
+  "affirmation": "Passage de la moitié Data à la moitié Énergie.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

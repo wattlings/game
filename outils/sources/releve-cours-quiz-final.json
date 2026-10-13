@@ -1,0 +1,322 @@
+[
+ {
+  "id": "qf-001",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q1 › énoncé et bonne réponse",
+  "texte": "Un point de raccordement électrique",
+  "affirmation": "Un PDL identifie un point de raccordement électrique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "Ce point frontière ou de raccordement est aussi appelé Point de Référence et de Mesure (ou PRM) ou Point de Livraison (ou PDL). Le Point de Référence et de Mesure (PRM) est caractérisé par un numéro unique à 14 chiffres.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   }
+  ],
+  "note": "Enedis : le PDL/PRM est le « point frontière ou de raccordement »."
+ },
+ {
+  "id": "qf-002",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q1 › choix",
+  "texte": "Un compteur précis, par son numéro de série",
+  "affirmation": "Mauvaise réponse : le PDL n’identifie pas l’appareil.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "qf-003",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q1 › explication",
+  "texte": "Le PDL (ou PRM) désigne le point de raccordement ; il reste le même si le compteur est remplacé",
+  "affirmation": "Le PDL désigne le point de raccordement et ne change pas quand le compteur est remplacé.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "Ce point frontière ou de raccordement est aussi appelé Point de Référence et de Mesure (ou PRM) ou Point de Livraison (ou PDL). Le Point de Référence et de Mesure (PRM) est caractérisé par un numéro unique à 14 chiffres.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   },
+   {
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "En amont du PRM, les Ouvrages de Raccordement, y compris ceux éventuellement situés sur l’Unité Foncière du Demandeur, font partie du RPD ; ils sont exploités, entretenus, dépannés et renouvelés par Enedis.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   },
+   {
+    "cle": "fournisseurs-electricite-pdl-prm",
+    "passage": "Si Enedis remplace votre compteur (passage au Linky, panne), votre numéro PDL / PRM reste inchangé. Seul le numéro de série du nouveau compteur change.",
+    "relu": true,
+    "page": "encadré « Bon à savoir »"
+   }
+  ],
+  "note": "Même sources que ce1-016 : la définition Enedis (point de raccordement, ouvrages amont renouvelés par Enedis) et un guide secondaire qui dit explicitement que le PDL/PRM reste inchangé au remplacement du compteur."
+ },
+ {
+  "id": "qf-004",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q2 › énoncé et explication",
+  "texte": "La facture est la référence financière ; le télérelevé sert à analyser, l’index à contrôler.",
+  "affirmation": "Rôle de chaque source de données dans la démarche du cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "qf-005",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q3 › bonne réponse",
+  "texte": "Le consentement du titulaire du contrat",
+  "affirmation": "Un tiers n’accède aux données d’un compteur qu’avec le consentement du titulaire.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Les GRD sont autorisés à communiquer à un fournisseur ou à un tiers les informations relatives à un client dès lors que ce dernier l'a expressément autorisé",
+    "relu": true,
+    "page": "p. 3 (citation de l'article R. 111-27 du code de l'énergie)"
+   },
+   {
+    "cle": "grdf-adict-faq",
+    "passage": "Les données de GRDF sont soumises au consentement du client titulaire du contrat de fourniture de gaz",
+    "relu": true
+   }
+  ],
+  "note": "Passages déjà lus (ce2-012)."
+ },
+ {
+  "id": "qf-006",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q3 › explication",
+  "texte": "Le tiers autorisé agit avec le consentement du client, pour un périmètre et une durée donnés",
+  "affirmation": "Le consentement vaut pour un périmètre et une durée donnés.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "Le Tiers Autorisé doit disposer de l'autorisation expresse préalable du client",
+    "relu": true,
+    "page": "art. 3.1"
+   },
+   {
+    "cle": "enedis-contrat-sge",
+    "passage": "À défaut de précision sur la durée de validité de l'autorisation, les parties conviennent que cette-dernière n'est pas valable.",
+    "relu": true,
+    "page": "art. 3.1"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Vous avez défini ensemble le périmètre de données qu'il souhaite partager avec vous",
+    "relu": false,
+    "page": "p. 6"
+   }
+  ],
+  "note": "Passages repris de ce2-203 / ce2-105."
+ },
+ {
+  "id": "qf-007",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q4 › choix et calcul",
+  "texte": "25 × 6 = 150",
+  "affirmation": "Une journée de 25 h au pas de 10 min compte 150 mesures.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "25 h × 6 mesures par heure."
+ },
+ {
+  "id": "qf-008",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q4 › explication",
+  "texte": "l’heure de 2 h à 3 h a eu lieu deux fois",
+  "affirmation": "Le jour du passage à l’heure d’hiver, l’heure de 2 h à 3 h (heure locale) a lieu deux fois.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ],
+  "note": "1 h UTC = 3 h en heure d’été française, ramenée à 2 h : la plage 2 h-3 h se répète (même source que ce3-024)."
+ },
+ {
+  "id": "qf-009",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q5 › énoncé",
+  "texte": "Un index passe de 413 989 à 404 989 kWh.",
+  "affirmation": "Relevés du cas d’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "qf-010",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q5 › explication",
+  "texte": "Un index ne recule pas : erreur de saisie, bouclage ou changement de compteur à vérifier.",
+  "affirmation": "Un index totalisateur ne peut que croître ; un recul signale une erreur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les index totalisateurs permettent de comptabiliser l'énergie durant l'intégralité de la période de fonctionnement du compteur",
+    "relu": true,
+    "page": "§ 1.3.2.1"
+   }
+  ],
+  "note": "Même source que ce3-008."
+ },
+ {
+  "id": "qf-011",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q6 › bonne réponse",
+  "texte": "de m³ en kWh avec le coefficient de conversion",
+  "affirmation": "On convertit les m³ de gaz en kWh avec le coefficient de conversion.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "en appliquant le coefficient de conversion au volume de gaz naturel mesuré en m3 par les index du compteur",
+    "relu": false
+   }
+  ],
+  "note": "Passage repris de ce2-033."
+ },
+ {
+  "id": "qf-012",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q6 › explication",
+  "texte": "kWh = m³ × coefficient (≈ 11 kWh/m³).",
+  "affirmation": "Le coefficient de conversion vaut environ 11 kWh/m³.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "varie selon le lieu et le temps entre 9 et 12,5 kWh/m3",
+    "relu": true
+   },
+   {
+    "cle": "grdf-coefficients-thermiques",
+    "passage": "Clients alimentés à la pression de 21 mbar - Gaz H - Moins de 200 mètres d'altitude : entre 10,3 et 12,4 kWh/m3",
+    "relu": true
+   }
+  ],
+  "note": "≈ 11 est au milieu des plages citées (passages repris de ce2-035)."
+ },
+ {
+  "id": "qf-013",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q7 › bonne réponse et explication",
+  "texte": "La puissance appelée la nuit, le week-end et en vacances : ce qui ne s’arrête jamais.",
+  "affirmation": "Définition du talon dans le cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "qf-014",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q8 › énoncé",
+  "texte": "DJU (base 18 °C)",
+  "affirmation": "Les DJU de chauffage se calculent en base 18 °C.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Ils sont définis comme les degrés-jours calculés pour la température de base de 18 °C.",
+    "relu": true
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ce seuil, fixé a priori, sans être nécessairement adapté au contexte, est en général de 18 °C dans la littérature économique.",
+    "relu": true
+   }
+  ],
+  "note": "Passages repris de ce5-010."
+ },
+ {
+  "id": "qf-015",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q8 › explication",
+  "texte": "18 − 3 = 15 DJU.",
+  "affirmation": "Un jour à 3 °C de moyenne compte 15 DJU.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "qf-016",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q9 › énoncé et explication",
+  "texte": "Détecter, c’est comparer au « normal ». Il faut donc d’abord définir ce normal.",
+  "affirmation": "Sans référence, pas de détection d’anomalie.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "qf-017",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q10 › explication",
+  "texte": "Environ 1 200 € par an pour un coût nul : la sobriété d’abord.",
+  "affirmation": "Baisser la consigne de 1 °C fait gagner environ 1 200 € par an à l’école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "13 730 kWh évités (7 % de 196 157 kWh, ce7-004) × 0,089 € HT ≈ 1 222 € : calcul du cas d’école."
+ },
+ {
+  "id": "qf-018",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q11 › explication",
+  "texte": "La météo explique une partie des écarts de chauffage ; on ne garde que l’effet de l’action.",
+  "affirmation": "On ajuste une comparaison avant/après de la météo pour isoler l’effet de l’action.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   }
+  ],
+  "note": "Passages repris de ce8-022 et ce5-012."
+ },
+ {
+  "id": "qf-019",
+  "fichier": "cours/contenu/quiz-final.js",
+  "repere": "QUESTIONS_QUIZ_FINAL › q12 › explication",
+  "texte": "C’est une boucle d’amélioration continue, comme dans ISO 50001.",
+  "affirmation": "ISO 50001 vise l’amélioration continue de la performance énergétique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "afnor-iso-50001",
+    "passage": "permettre à tout organisme de parvenir, par une démarche méthodique, à l''amélioration continue de sa performance énergétique",
+    "relu": true
+   }
+  ],
+  "note": "Passage repris de ce8-020."
+ }
+]

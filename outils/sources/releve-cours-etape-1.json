@@ -225,15 +225,34 @@
   "texte": "Un identifiant désigne un **point de raccordement**, pas un appareil : quand le compteur est remplacé, le PDL ou le PCE reste le même, mais le numéro de série du compteur change.",
   "affirmation": "L'identifiant reste le même quand le compteur est remplacé.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "sources": [
    {
-    "cle": "enedis-pdl",
-    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
-    "relu": true
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "Ce point frontière ou de raccordement est aussi appelé Point de Référence et de Mesure (ou PRM) ou Point de Livraison (ou PDL). Le Point de Référence et de Mesure (PRM) est caractérisé par un numéro unique à 14 chiffres.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   },
+   {
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "En amont du PRM, les Ouvrages de Raccordement, y compris ceux éventuellement situés sur l’Unité Foncière du Demandeur, font partie du RPD ; ils sont exploités, entretenus, dépannés et renouvelés par Enedis.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "CCP (Changement de compteur) : Un nouveau compteur a été posé : relevé du précédent, et relevé pour le nouveau",
+    "relu": true,
+    "page": "p. 38 (catalogue de données, « Raison de relève » des données de consommation du PCE)"
+   },
+   {
+    "cle": "fournisseurs-electricite-pdl-prm",
+    "passage": "Si Enedis remplace votre compteur (passage au Linky, panne), votre numéro PDL / PRM reste inchangé. Seul le numéro de série du nouveau compteur change.",
+    "relu": true,
+    "page": "encadré « Bon à savoir »"
    }
   ],
-  "note": "La FAQ Enedis dit que le PDL « identifie le logement sur le réseau électrique » (un point, pas un appareil), mais ne parle pas du remplacement du compteur. À sourcer : une page Enedis ou GRDF qui le dise explicitement."
+  "note": "Enedis définit le PDL/PRM comme le « point frontière ou de raccordement », identifié par un numéro unique, et précise que les ouvrages en amont (dont le compteur) sont renouvelés par Enedis : le numéro désigne le point, pas l’appareil. Aucun document Enedis lu ne dit en toutes lettres que le numéro survit au remplacement du compteur ; un guide secondaire le dit explicitement. Côté gaz, le guide GRDF montre qu’un changement de compteur (motif CCP) est une simple relève dans l’historique du même PCE, le matricule du compteur étant une donnée distincte."
  },
  {
   "id": "ce1-017",
@@ -308,15 +327,28 @@
   "texte": "Le PDL (ou PRM) identifie le point de raccordement. Seul le numéro de série du compteur change.",
   "affirmation": "Le PDL reste le même quand le compteur change.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "sources": [
    {
-    "cle": "enedis-pdl",
-    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
-    "relu": true
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "Ce point frontière ou de raccordement est aussi appelé Point de Référence et de Mesure (ou PRM) ou Point de Livraison (ou PDL). Le Point de Référence et de Mesure (PRM) est caractérisé par un numéro unique à 14 chiffres.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   },
+   {
+    "cle": "enedis-cg-raccordement-bt",
+    "passage": "En amont du PRM, les Ouvrages de Raccordement, y compris ceux éventuellement situés sur l’Unité Foncière du Demandeur, font partie du RPD ; ils sont exploités, entretenus, dépannés et renouvelés par Enedis.",
+    "relu": true,
+    "page": "p. 20, § 3.4.3.1"
+   },
+   {
+    "cle": "fournisseurs-electricite-pdl-prm",
+    "passage": "Si Enedis remplace votre compteur (passage au Linky, panne), votre numéro PDL / PRM reste inchangé. Seul le numéro de série du nouveau compteur change.",
+    "relu": true,
+    "page": "encadré « Bon à savoir »"
    }
   ],
-  "note": "Même réserve que ce1-016."
+  "note": "Même sources que ce1-016."
  },
  {
   "id": "ce1-022",

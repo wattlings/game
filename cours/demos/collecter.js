@@ -34,7 +34,7 @@ const SOURCES = {
     sous: "Relevés du compteur",
     fiche: {
       Fréquence: "1 relevé par mois",
-      Délai: "quelques jours",
+      Délai: "le lendemain (élec), mensuel (gaz)",
       Finesse: 2,
       Fiabilité: 4,
     },
@@ -46,7 +46,7 @@ const SOURCES = {
     sous: "Document du fournisseur",
     fiche: {
       Fréquence: "1 par période",
-      Délai: "2 à 6 semaines",
+      Délai: "2 à 6 semaines (cas de l’école)",
       Finesse: 1,
       Fiabilité: 4,
     },

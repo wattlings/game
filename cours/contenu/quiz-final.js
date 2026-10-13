@@ -12,7 +12,7 @@ export const QUESTIONS_QUIZ_FINAL = [
     ],
     bonne: 1,
     explication:
-      "Le PDL (ou PRM) désigne le point de raccordement ; il reste le même si le compteur est remplacé.",
+      "Le PDL (ou PRM) désigne le point de raccordement ; il reste le même si le compteur est remplacé[[enedis-cg-raccordement-bt,fournisseurs-electricite-pdl-prm]].",
   },
   {
     etape: 2,
@@ -32,28 +32,28 @@ export const QUESTIONS_QUIZ_FINAL = [
     ],
     bonne: 1,
     explication:
-      "Le tiers autorisé agit avec le consentement du client, pour un périmètre et une durée donnés.",
+      "Le tiers autorisé agit avec le consentement du client, pour un périmètre et une durée donnés[[enedis-contrat-sge,grdf-guide-donnees-2026]].",
   },
   {
     etape: 3,
     q: "Au pas de 10 min, une journée de 25 h compte…",
     choix: ["144 mesures", "150 mesures", "138 mesures"],
     bonne: 1,
-    explication: "25 × 6 = 150. Ce ne sont pas des doublons : l’heure de 2 h à 3 h a eu lieu deux fois.",
+    explication: "25 × 6 = 150. Ce ne sont pas des doublons : l’heure de 2 h à 3 h a eu lieu deux fois[[eurlex-directive-2000-84]].",
   },
   {
     etape: 3,
     q: "Un index passe de 413 989 à 404 989 kWh. Que fais-tu ?",
     choix: ["Tu comptes −9 000 kWh", "Tu rejettes et signales le relevé", "Tu ignores le signe"],
     bonne: 1,
-    explication: "Un index ne recule pas : erreur de saisie, bouclage ou changement de compteur à vérifier.",
+    explication: "Un index ne recule pas[[enedis-guide-flux-r6x]] : erreur de saisie, bouclage ou changement de compteur à vérifier.",
   },
   {
     etape: 4,
     q: "Pour additionner gaz et électricité, on convertit le gaz…",
     choix: ["de kWh en m³", "de m³ en kWh avec le coefficient de conversion", "en euros"],
     bonne: 1,
-    explication: "kWh = m³ × coefficient (≈ 11 kWh/m³).",
+    explication: "kWh = m³ × coefficient (≈ 11 kWh/m³)[[mne-coefficient-conversion,grdf-coefficients-thermiques]].",
   },
   {
     etape: 5,
@@ -64,7 +64,7 @@ export const QUESTIONS_QUIZ_FINAL = [
   },
   {
     etape: 5,
-    q: "Un jour à 3 °C de moyenne compte combien de DJU (base 18 °C) ?",
+    q: "Un jour à 3 °C de moyenne compte combien de DJU (base 18 °C)[[costic-plaquette-dju]] ?",
     choix: ["3", "15", "21"],
     bonne: 1,
     explication: "18 − 3 = 15 DJU.",
@@ -93,7 +93,7 @@ export const QUESTIONS_QUIZ_FINAL = [
     ],
     bonne: 0,
     explication:
-      "La météo explique une partie des écarts de chauffage ; on ne garde que l’effet de l’action.",
+      "La météo explique une partie des écarts de chauffage ; on ne garde que l’effet de l’action[[evo-ipmvp,legifrance-arrete-tertiaire-2020]].",
   },
   {
     etape: 8,
@@ -104,6 +104,6 @@ export const QUESTIONS_QUIZ_FINAL = [
       "On supprime les données",
     ],
     bonne: 1,
-    explication: "C’est une boucle d’amélioration continue, comme dans ISO 50001.",
+    explication: "C’est une boucle d’amélioration continue, comme dans ISO 50001[[afnor-iso-50001]].",
   },
 ];

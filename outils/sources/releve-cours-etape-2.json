@@ -1184,27 +1184,38 @@
   "id": "ce2-051",
   "fichier": "cours/contenu/etape-2.js",
   "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Délai / Index",
-  "texte": "\"Quelques jours\"",
-  "affirmation": "Les index sont disponibles en quelques jours.",
+  "texte": "Le lendemain (élec), mensuel (gaz)",
+  "affirmation": "Les index sont disponibles le lendemain pour l’électricité (index quotidiens) et une fois par mois pour le gaz.",
   "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
-  "correction": null,
-  "note": "Ordre de grandeur propre au cas d’école, sans source trouvée. Proposition : écrire « quelques jours (cas de l’école) », ou retirer.",
-  "sources": []
+  "verdict": "corrige",
+  "note": "Corrigé : « quelques jours » ne correspondait à aucune source. Enedis relève et envoie les index quotidiens en J+1 (compteurs > 36 kVA comme l’école) ; GRDF publie les données mensuelles des compteurs communicants (1M) à J+1 de la date de publication mensuelle.",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "Les index quotidiens correspondant à la consommation du jour J sont relevés en J + 1 (proche de minuit), datés de J + 1 et envoyés en J + 1",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Données mensuelles (1) […] Publication mensuelle […] à J+1 de la DPM […] DPM = Date de Publication Mensuelle",
+    "relu": true,
+    "page": "p. 37 (tableau des délais de publication, compteurs 1M)"
+   }
+  ],
+  "avant": "\"Quelques jours\""
  },
  {
   "id": "ce2-052",
   "fichier": "cours/contenu/etape-2.js",
   "repere": "niveaux.approfondir › tableau « Les trois sources comparées » › Délai / Facture",
-  "texte": "\"2 à 6 semaines\"",
-  "affirmation": "La facture arrive 2 à 6 semaines après la période.",
-  "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
-  "correction": null,
-  "note": "Ordre de grandeur propre au cas d’école, sans source trouvée. Proposition : écrire « plusieurs semaines (cas de l’école) ».",
-  "sources": []
+  "texte": "2 à 6 semaines (cas de l’école)",
+  "affirmation": "Dans le cas de l’école, la facture arrive 2 à 6 semaines après la période.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "note": "Aucun délai d’émission de la facture périodique n’est fixé dans les textes lus (energie-info.fr « La fréquence de facturation et les modes de paiement » ; « Relevé de compteur » : seuls un délai de remboursement de 15 jours et la limite de rattrapage de 14 mois sont cités). Le délai est donc présenté comme celui du cas de l’école (fictif).",
+  "sources": [],
+  "avant": "\"2 à 6 semaines\""
  },
  {
   "id": "ce2-053",
@@ -1759,14 +1770,26 @@
   "id": "ce2-081",
   "fichier": "cours/demos/collecter.js",
   "repere": "SOURCES.index.fiche › Délai",
-  "texte": "Délai: \"quelques jours\"",
-  "affirmation": "Les index sont disponibles en quelques jours.",
+  "texte": "Délai: \"le lendemain (élec), mensuel (gaz)\"",
+  "affirmation": "Les index sont disponibles le lendemain pour l’électricité et une fois par mois pour le gaz.",
   "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
-  "correction": null,
-  "note": "Même remarque que dans le tableau comparatif : ordre de grandeur du cas d’école, sans source.",
-  "sources": []
+  "verdict": "corrige",
+  "note": "Même correction que dans le tableau comparatif (ce2-051).",
+  "sources": [
+   {
+    "cle": "enedis-nmo-cf-077e",
+    "passage": "Les index quotidiens correspondant à la consommation du jour J sont relevés en J + 1 (proche de minuit), datés de J + 1 et envoyés en J + 1",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Données mensuelles (1) […] Publication mensuelle […] à J+1 de la DPM […] DPM = Date de Publication Mensuelle",
+    "relu": true,
+    "page": "p. 37 (tableau des délais de publication, compteurs 1M)"
+   }
+  ],
+  "avant": "Délai: \"quelques jours\""
  },
  {
   "id": "ce2-082",
@@ -1796,14 +1819,13 @@
   "id": "ce2-084",
   "fichier": "cours/demos/collecter.js",
   "repere": "SOURCES.facture.fiche › Délai",
-  "texte": "Délai: \"2 à 6 semaines\"",
-  "affirmation": "La facture arrive 2 à 6 semaines après la période.",
-  "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
-  "correction": null,
-  "note": "Même remarque que dans le tableau comparatif : ordre de grandeur du cas d’école, sans source.",
-  "sources": []
+  "texte": "Délai: \"2 à 6 semaines (cas de l’école)\"",
+  "affirmation": "Dans le cas de l’école, la facture arrive 2 à 6 semaines après la période.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "note": "Même traitement que ce2-052 : aucun délai réglementaire trouvé, présenté comme le cas de l’école.",
+  "sources": [],
+  "avant": "Délai: \"2 à 6 semaines\""
  },
  {
   "id": "ce2-085",

@@ -3,6 +3,8 @@
    Une question : Q("question", "bonne réponse", "explication", "mauvaise réponse 1", "pourquoi", "mauvaise réponse 2", "pourquoi"). */
 
 const ARENE_4={id:4,badge:'Structurer',name:'Arène des Archives',champ:'Mlle Hiérarchie',theme:'archives',col:'#8a3b8f',wall:'#f3ecf4',b:L.arena[4],
+  /* les références de ce qu'affirment les questions (registre commun/donnees/sources.js) : listées dans le menu, onglet Sources */
+  refs:['enedis-nmo-cf-016e','mne-releve-compteur'],
   cpal:{shirt:'#5a2560',pants:'#2c2c34',hair:'#2b1d14',style:'tresses',glasses:1,skin:'#9a6440',lash:1},
   cIntro:["Arène des Archives. Chaque chose à sa place : un site, des points, des compteurs, des mesures.","Montre-moi que tu sais ranger sans rien perdre ni compter deux fois."],
   cWin:["Rangé, converti, agrégé. Rien en double. Voici le badge Structurer.","Avec des données justes et bien rangées, tu changes de métier."],
