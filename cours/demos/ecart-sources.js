@@ -53,7 +53,7 @@ export function demoEcartSources(zone, options) {
         .join("")}
       </tbody></table></div>
       <p class="feedback ${s.length ? "bad" : "info"}">${icone(s.length ? "alerte" : "info")}<span>${texteRiche(s.length ? `${s.length} mois en alerte. Regarde si chaque alerte correspond à une anomalie réelle (vrai positif) ou si le seuil est trop bas (faux positif). ${t < 0.5 ? "Avec un seuil aussi bas, les arrondis des index suffisent presque à déclencher une alerte." : ""}` : `Aucune alerte. ${Object.values(d).some(Boolean) ? "Si une anomalie est active, le seuil est peut-être trop haut : l’anomalie passe inaperçue (faux négatif)." : "Active une anomalie pour voir l’écart apparaître."}`)}</span></p>
-      <p class="note">${icone("info")}<span>Un trou de 5 heures en novembre représente environ 0,5 % du mois ; une journée entière en février, environ 3 %. Le bon seuil dépend de ce qu’on veut attraper.</span></p>`;
+      <p class="note">${icone("info")}<span>Un trou de 5 heures en novembre représente environ 2 % du mois ; une journée de classe entière en février, plus de 5 %. Le bon seuil dépend de ce qu’on veut attraper.</span></p>`;
   }
   tous('input[type="checkbox"]', zone).forEach((o) =>
     o.addEventListener("change", () => {

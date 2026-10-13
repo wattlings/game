@@ -3,6 +3,8 @@
    Une question : Q("question", "bonne réponse", "explication", "mauvaise réponse 1", "pourquoi", "mauvaise réponse 2", "pourquoi"). */
 
 const ARENE_5={id:5,badge:'Analyser',name:'Arène des Courbes',champ:'Pr Talon',theme:'courbes',col:'#f2a33a',wall:'#fbf3e4',b:L.arena[5],
+  /* les références de ce qu'affirment les questions (registre commun/donnees/sources.js) : listées dans le menu, onglet Sources */
+  refs:['enedis-turpe7-brochure','costic-plaquette-dju','sdes-dju-conditions-meteo'],
   cpal:{shirt:'#c9791a',pants:'#1c2440',hair:'#ece6d6',style:'chauve',glasses:1,tie:'#1c2440',skin:'#a8714a'},
   cIntro:["Arène des Courbes. Ici, on lit une consommation comme un électrocardiogramme.","Trouve-moi le talon de ton site, puis on parlera degrés-jours, puissance et ratios."],
   cWin:["Tu sais lire le repos, les pics et le froid. Voici le badge Analyser.","La nuit tombe. C'est l'heure où les bâtiments vides se trahissent."],

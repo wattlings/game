@@ -25,7 +25,7 @@ const HEURES_DE_SOLEIL = [
   [8.6, 16.9],
 ];
 
-const PRIX_SURPLUS = 0.04;
+const PRIX_SURPLUS = 0.011;
 
 const COUT_KWC = 1400;
 
@@ -118,11 +118,11 @@ export function demoAutoconso(zone, options) {
       <div class="kpi"><span class="v">${nombre(s / 1000, 1)} MWh</span><span class="l">produits par an</span></div>
       <div class="kpi energie"><span class="v">${pourcent(r / s)}</span><span class="l">taux d’autoconsommation (part de la production consommée sur place)</span></div>
       <div class="kpi"><span class="v">${pourcent(r / i)}</span><span class="l">taux d’autoproduction (part des besoins couverts)</span></div>
-      <div class="kpi ok"><span class="v">${euros(Math.round(p / 10) * 10)}</span><span class="l">gain annuel HT (surplus vendu ${nombre(PRIX_SURPLUS, 2)} €/kWh)</span></div>
+      <div class="kpi ok"><span class="v">${euros(Math.round(p / 10) * 10)}</span><span class="l">gain annuel HT (surplus vendu ${nombre(PRIX_SURPLUS, 3)} €/kWh)</span></div>
       <div class="kpi"><span class="v">${nombre((t * COUT_KWC) / p, 1)} ans</span><span class="l">temps de retour (${euros(t * COUT_KWC)} à ${nombre(COUT_KWC)} €/kWc)</span></div>
       <div class="kpi"><span class="v">−${nombre((r * FACTEURS_CO2.elec) / 1000, 1)} t</span><span class="l">CO2e évité par l’autoconsommation</span></div>`;
     un("#ac-msg", zone).innerHTML =
-      `${icone("info")}<span>${texteRiche(`Le soleil produit surtout de mai à août… quand l’école est fermée. ${r / s < 0.6 ? "Une grande partie de la production est donc vendue au réseau, bien moins cher que le kWh acheté." : "À cette taille, presque toute la production est consommée sur place."} Plus l’installation est grande, plus le taux d’autoconsommation baisse. Valeurs fictives d’ordre de grandeur.`)}</span>`;
+      `${icone("info")}<span>${texteRiche(`Le soleil produit surtout de mai à août… et l’école est fermée en juillet et en août. ${r / s < 0.6 ? "Une grande partie de la production est donc vendue au réseau, bien moins cher que le kWh acheté." : "À cette taille, presque toute la production est consommée sur place."} Plus l’installation est grande, plus le taux d’autoconsommation baisse. Valeurs fictives d’ordre de grandeur.`)}</span>`;
   }
   un("#ac-kwc", zone).addEventListener("input", (u) => {
     t = +u.target.value;

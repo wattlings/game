@@ -55,7 +55,7 @@ export function demoIndicateurs(zone, options) {
           kwh: "En énergie, le gaz pèse plus des deux tiers : le chauffage domine.",
           m2: "Le ratio par m² permet de comparer l’école à d’autres bâtiments, quelle que soit leur taille. C’est aussi l’unité des seuils en valeur absolue du décret tertiaire.",
           eur: "En euros, l’électricité pèse beaucoup plus qu’en kWh : son kWh coûte environ deux fois plus cher que celui du gaz.",
-          co2: `En CO2, le gaz écrase tout : l’électricité française est peu carbonée (≈ ${nombre(FACTEURS_CO2.elec * 1000)} g/kWh, contre ≈ ${nombre(FACTEURS_CO2.gaz * 1000)} g/kWh pour le gaz). Facteurs à vérifier dans la Base Empreinte de l’ADEME.`,
+          co2: `En CO2, le gaz écrase tout : l’électricité française est peu carbonée (≈ ${nombre(FACTEURS_CO2.elec * 1000)} g/kWh, contre ≈ ${nombre(FACTEURS_CO2.gaz * 1000)} g/kWh pour le gaz). Facteurs de l’arrêté du 10 avril 2020 (décret tertiaire).`,
         }[t],
       )}</span></p>
       <p class="note">${icone("info")}<span>Le même bâtiment, quatre classements différents : l’indicateur choisi change les priorités. On le décide à l’étape Cadrer.</span></p>`;

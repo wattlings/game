@@ -28,7 +28,7 @@ function gamePatrimoine(done){
     choice({q:'Pourquoi la localisation est-elle importante pour un energy manager ?',opts:[
       ['Elle donne la météo locale (DJU), pour corriger la consommation de chauffage du climat',1,'Un hiver doux fait baisser le chauffage sans que personne n\'ait rien fait. Sans météo locale, impossible de comparer deux années.'],
       ['Elle sert uniquement à envoyer les factures',0,'La facture utilise l\'adresse, mais l\'energy manager s\'en sert surtout pour la météo.'],
-      ['Elle détermine le prix du kWh',0,'Le prix dépend du contrat, pas de la commune.']]}),
+      ['Elle détermine le prix du kWh',0,'Le prix dépend surtout du contrat. En gaz, la localisation joue un peu, sur le transport et le stockage.']]}),
     choice({title:'Décret tertiaire',ctx:`Le décret tertiaire (dispositif Éco Énergie Tertiaire) vise les bâtiments accueillant des activités tertiaires sur <b>au moins 1 000 m²</b> (surfaces cumulées sur le site). Ton site : <span class="num">${fmt(s.surface)} m²</span>.`,q:'Ton site est-il concerné ?',opts:[
       ['Oui, il a au moins 1 000 m² de surface tertiaire',assujetti(s),assujetti(s)?'Il devra réduire sa consommation (−40 % en 2030) et la déclarer chaque année sur OPERAT.':`${fmt(s.surface)} m², c'est sous le seuil.`],
       ['Non, il fait moins de 1 000 m²',!assujetti(s),!assujetti(s)?'Pas d\'obligation réglementaire, mais le suivi reste utile pour la facture et le climat.':`${fmt(s.surface)} m², c'est au-dessus du seuil.`],
@@ -56,7 +56,7 @@ function actElec(){
       ['Il est supprimé jusqu\'à la prochaine facture',0,'Le point de livraison ne disparaît pas.']]}),
     choice({ctx:`Puissance souscrite de ton site : <span class="num">${s.souscrit} kVA</span>.`,q:'Quel type de compteur et quel pas de temps ?',opts:[
       ['Compteur Linky, courbe de charge au pas de 30 minutes',s.souscrit<=36,s.souscrit<=36?'Jusqu\'à 36 kVA (segment C5), c\'est un Linky. Pas de 30 minutes.':'Linky, c\'est jusqu\'à 36 kVA.'],
-      ['Compteur professionnel télérelevé, courbe au pas de 10 minutes',s.souscrit>36,s.souscrit>36?'Au-delà de 36 kVA (segments C1 à C4), compteur pro télérelevé, courbe plus fine.':'Au-delà de 36 kVA seulement.'],
+      ['Compteur professionnel télérelevé, courbe au pas de 5 ou 10 minutes',s.souscrit>36,s.souscrit>36?'Au-delà de 36 kVA (segments C1 à C4), compteur pro télérelevé, courbe plus fine.':'Au-delà de 36 kVA seulement.'],
       ['Un compteur à relever à la main une fois par an',0,'Les compteurs communicants sont télérelevés.']]})
   ],()=>{S.flags.elec=true;S.notes.pdl=s.pdl;save();hud();say([{t:`Compteur électrique identifié : PDL ${s.pdl}.`}],checkCh2)});
 }

@@ -28,61 +28,53 @@ voyDeclarer('datacenter',{
     "Prochain arrêt : Ampère-sur-Loire, terminus. Cinq lignes, cinq façons de regarder un kilowattheure. La sixième, c'est votre prochain relevé de compteur."],
 
   infos:[
-    {id:'chaleur',ou:"la sonde de l'allée chaude, dans la salle des serveurs",cle:1,t:"Tout finit en chaleur",
+    {id:'chaleur',refs:['iea-energy-ai'],ou:"la sonde de l'allée chaude, dans la salle des serveurs",cle:1,t:"Tout finit en chaleur",
       x:"Un serveur ne fabrique rien de matériel : chaque kilowattheure qu'il consomme ressort en chaleur, intégralement. Dix mégawatts de serveurs, ce sont dix mégawatts de radiateurs allumés jour et nuit dans une pièce fermée. Tout le reste du bâtiment n'existe que pour évacuer cette chaleur, et pour que le courant n'y manque jamais.",
       retiens:"1 kWh d'informatique = 1 kWh de chaleur à évacuer."},
-    {id:'pue',ou:"Mme Ratio, en salle de contrôle",cle:1,t:"Le PUE",
+    {id:'pue',refs:['iea-energy-ai','uptime-survey-2025','arcep-numerique-soutenable-2026'],ou:"Mme Ratio, en salle de contrôle",cle:1,t:"Le PUE",
       x:"Le PUE compare toute l'électricité qui entre dans le bâtiment à celle qui arrive vraiment aux serveurs. Ici : 13 MW au compteur pour 10 MW d'informatique, soit 1,3. Les 3 MW de différence refroidissent, convertissent, éclairent. Moyenne mondiale : 1,54. Moyenne française : 1,42. Les meilleurs sites descendent vers 1,1. Un PUE de 2 signifie qu'un watt sur deux ne calcule rien.",
       retiens:"PUE = énergie totale ÷ énergie informatique. Plus il est proche de 1, mieux c'est."},
-    {id:'plate',ou:"M. Talon, en salle de contrôle",cle:1,t:"La courbe plate",
-      x:"Une école consomme le jour, en semaine, en hiver. Un data center consomme tout le temps : 13 MW à 3 h du matin comme à midi, le dimanche comme le mardi. Sur un an : 114 GWh, la consommation domestique d'une ville de 50 000 habitants. Sa courbe de charge est une ligne droite : il n'a pas de talon, il n'est que talon.",
+    {id:'plate',refs:['edf-consommation-chiffres','insee-bilan-demographique-2025'],ou:"M. Talon, en salle de contrôle",cle:1,t:"La courbe plate",
+      x:"Une école consomme le jour, en semaine, en hiver. Un data center consomme tout le temps : 13 MW à 3 h du matin comme à midi, le dimanche comme le mardi. Sur un an : 114 GWh, la consommation domestique d'une ville d'environ 45 000 habitants. Sa courbe de charge est une ligne droite : il n'a pas de talon, il n'est que talon.",
       retiens:"Une puissance modeste, tenue 8 760 heures, fait une énorme énergie."},
-    {id:'secours',ou:"Mmes Redondance, dans le local des batteries",cle:1,t:"Ne jamais s'arrêter",
-      x:"Deux arrivées électriques distinctes. Si le réseau tombe, des batteries prennent le relais instantanément et tiennent une dizaine de minutes : le temps que les groupes électrogènes démarrent, en dix à trente secondes, et se stabilisent. Les cuves de fioul donnent 72 heures d'autonomie. Tout est en double, parfois en triple : la disponibilité se paie en matériel qui attend.",
+    {id:'secours',refs:['iea-energy-ai'],ou:"Mmes Redondance, dans le local des batteries",cle:1,t:"Ne jamais s'arrêter",
+      x:"Deux arrivées électriques distinctes. Si le réseau tombe, des batteries prennent le relais instantanément et tiennent de quelques minutes à une heure (ici, une dizaine de minutes) : le temps que les groupes électrogènes démarrent et se stabilisent. Ici, les cuves de fioul donnent 72 heures d'autonomie. Tout est en double, parfois en triple : la disponibilité se paie en matériel qui attend.",
       retiens:"Réseau, puis batteries, puis groupes : la continuité se construit par couches."},
-    {id:'fatale',ou:"Mme Calorie, à l'échangeur, côté quai",cle:1,t:"La chaleur fatale",
-      x:"Dix mégawatts de chaleur s'échappent en permanence. Les jeter est un gâchis ; les récupérer, c'est chauffer un quartier. L'air sort des serveurs à 30-35 °C : une pompe à chaleur le remonte à la température d'un réseau de chaleur. Désormais, les sites de plus d'un mégawatt doivent valoriser leur chaleur ou justifier pourquoi ils ne le font pas. À Saint-Denis, un data center chauffe ainsi le centre aquatique olympique.",
+    {id:'fatale',refs:['iea-energy-ai','eurlex-directive-2023-1791','engie-equinix-saint-denis'],ou:"Mme Calorie, à l'échangeur, côté quai",cle:1,t:"La chaleur fatale",
+      x:"Dix mégawatts de chaleur s'échappent en permanence. Les jeter est un gâchis ; les récupérer, c'est chauffer un quartier. Elle sort tiède, autour de 30 °C : une pompe à chaleur la remonte à la température d'un réseau de chaleur. Désormais, les sites de plus d'un mégawatt doivent valoriser leur chaleur ou justifier pourquoi ils ne le font pas. À Saint-Denis, un data center chauffe ainsi le centre aquatique olympique.",
       retiens:"La chaleur d'un data center est une ressource, à condition d'avoir un voisin qui en veut."},
-    {id:'salle',ou:"M. Placard, en visite dans le hall",cle:1,t:"Et dans mon bâtiment ?",
+    {id:'salle',refs:['iea-energy-ai','ashrae-thermal-guidelines','jrc-code-conduite-datacentres-2025'],ou:"M. Placard, en visite dans le hall",cle:1,t:"Et dans mon bâtiment ?",
       x:"Beaucoup de mairies, d'écoles et de bureaux abritent un local serveur : une pièce climatisée à 18 °C toute l'année, des machines dont plus personne ne sait à quoi elles servent, un PUE proche de 2. Trois gestes : remonter la consigne vers 24-25 °C, éteindre ou regrouper les serveurs inutiles, fermer la porte. Et se souvenir que ce qui part « dans le cloud » consomme toujours, ailleurs, hors de la facture.",
       retiens:"Un local serveur est un talon à lui tout seul : consigne, extinction, regroupement."},
-    {id:'consigne',ou:"l'affichette du thermostat, dans la salle des serveurs",t:"Pas besoin d'un frigo",
-      x:"Les constructeurs de serveurs recommandent un air d'entrée entre 18 et 27 °C. Refroidir une salle à 18 °C ne protège rien de plus et coûte cher : chaque degré de consigne en plus allège le froid. On sépare aussi les allées : l'air froid arrive devant les machines, l'air chaud repart derrière, et les deux ne se mélangent pas.",
+    {id:'consigne',refs:['ashrae-thermal-guidelines','jrc-code-conduite-datacentres-2025'],ou:"l'affichette du thermostat, dans la salle des serveurs",t:"Pas besoin d'un frigo",
+      x:"L'ASHRAE, la référence des ingénieurs du froid, recommande un air d'entrée entre 18 et 27 °C. Refroidir une salle à 18 °C ne protège rien de plus et coûte cher : chaque degré de consigne en plus allège le froid. On sépare aussi les allées : l'air froid arrive devant les machines, l'air chaud repart derrière, et les deux ne se mélangent pas.",
       retiens:"Jusqu'à 27 °C en entrée des serveurs : inutile de climatiser comme une chambre froide."},
-    {id:'zombies',ou:"Mlle Octet, dans la salle des serveurs",t:"Les serveurs zombies",
-      x:"Dans les salles informatiques d'entreprise, un serveur ne travaille en moyenne qu'à 12 à 18 % de sa capacité. Une étude en a trouvé un quart « comateux » : aucune activité depuis six mois, mais toujours branchés. Or un serveur qui ne fait rien consomme encore près de la moitié de sa puissance maximale. Regrouper six machines sur une seule, c'est la virtualisation.",
-      retiens:"Un serveur au repos consomme encore la moitié de sa puissance maximale : celui qui ne sert à rien, on l'éteint."},
-    {id:'ia',ou:"M. Token, dans la salle de calcul",t:"Les baies qui chauffent",
-      x:"Une baie de serveurs classique appelle 3 à 10 kW. Une baie de calcul pour l'intelligence artificielle : 40 à plus de 100 kW, dans le même mètre carré. L'air ne suffit plus : de l'eau circule au contact des processeurs et ressort à 45-60 °C. Une réponse d'assistant consomme une fraction de wattheure ; c'est leur nombre qui pèse.",
+    {id:'zombies',refs:['iea-energy-ai','koomey-comatose-servers','jrc-code-conduite-datacentres-2025'],ou:"Mlle Octet, dans la salle des serveurs",t:"Les serveurs zombies",
+      x:"Dans les salles informatiques d'entreprise, un serveur travaille en moyenne à moins de 20 % de sa capacité. Une étude en a trouvé un quart « comateux » : aucune activité depuis six mois, mais toujours branchés. Or un serveur moderne qui ne fait rien consomme encore environ un tiers de sa puissance maximale. Regrouper six machines sur une seule, c'est la virtualisation.",
+      retiens:"Un serveur au repos consomme encore un bon tiers de sa puissance maximale : celui qui ne sert à rien, on l'éteint."},
+    {id:'ia',refs:['uptime-survey-2025','iea-energy-ai'],ou:"M. Token, dans la salle de calcul",t:"Les baies qui chauffent",
+      x:"Une baie de serveurs classique appelle 3 à 10 kW. Une baie de calcul pour l'intelligence artificielle : 40 à plus de 100 kW, dans le même mètre carré. L'air ne suffit plus : de l'eau circule au contact des processeurs et ressort à 45-60 °C. Une réponse d'assistant consomme de quelques dixièmes de wattheure à quelques wattheures ; c'est leur nombre qui pèse.",
       retiens:"Dix fois plus de puissance par baie : le refroidissement passe de l'air à l'eau."},
-    {id:'monde',ou:"le mur d'écrans, dans le hall",t:"Les ordres de grandeur",
-      x:"Dans le monde, les data centers ont consommé 415 TWh en 2024 : 1,5 % de l'électricité mondiale, presque autant que toute la France. L'Agence internationale de l'énergie attend environ 945 TWh en 2030. En France : une dizaine de TWh, soit 2 % de la consommation, en comptant les salles des entreprises ; 15 à 20 TWh attendus en 2030.",
+    {id:'monde',refs:['iea-energy-ai','rte-be2025-rapport','rte-data-centers'],ou:"le mur d'écrans, dans le hall",t:"Les ordres de grandeur",
+      x:"Dans le monde, les data centers ont consommé 415 TWh en 2024 : 1,5 % de l'électricité mondiale, presque autant que toute la France. L'Agence internationale de l'énergie attend environ 945 TWh en 2030. En France : une dizaine de TWh, soit environ 2 % de la consommation ; 15 à 20 TWh attendus en 2030.",
       retiens:"Environ 2 % de l'électricité aujourd'hui, et une croissance rapide."},
-    {id:'tier',ou:"M. Badge, à l'accueil",t:"Combien de minutes par an ?",
-      x:"La disponibilité d'un data center se classe en quatre niveaux. Au niveau III, on peut tout entretenir sans rien arrêter : on vise moins de deux heures d'interruption par an. Au niveau IV, une panne n'importe où ne doit rien couper : moins d'une demi-heure par an. Chaque « neuf » de plus après la virgule coûte une rangée de machines en double.",
+    {id:'tier',refs:['uptime-tiers'],ou:"M. Badge, à l'accueil",t:"Combien de minutes par an ?",
+      x:"La disponibilité d'un data center se classe en quatre niveaux. Au niveau III, on peut tout entretenir sans rien arrêter. Au niveau IV, en plus, une panne n'importe où ne doit rien couper : tout est en deux circuits séparés. Chaque « neuf » de plus après la virgule coûte une rangée de machines en double.",
       retiens:"La disponibilité s'achète avec de la redondance : du matériel qui consomme en attendant de servir."},
-    {id:'eau',ou:"les grosses conduites bleues, côté quai",t:"Refroidir sans climatiser",
+    {id:'eau',refs:['dcd-interxion-marseille','jrc-code-conduite-datacentres-2025'],ou:"les grosses conduites bleues, côté quai",t:"Refroidir sans climatiser",
       x:"Ce site ne fabrique presque pas de froid : il le pompe. Une ancienne galerie de mine lui fournit une eau à 15 °C toute l'année, qui traverse des échangeurs et repart tiédie. Des data centers marseillais font réellement ainsi, et économisent des milliers de MWh par an. Ailleurs, on utilise l'air extérieur dès qu'il est assez frais : c'est le « free cooling ».",
       retiens:"Le meilleur froid est celui qu'on ne produit pas : eau fraîche, air extérieur."},
-    {id:'cables',ou:"la trappe aux câbles, sur le quai",t:"Pourquoi Marseille",
-      x:"Une vingtaine de câbles sous-marins sortent de la mer à Marseille, venus d'Afrique, du Moyen-Orient et d'Asie : c'est l'un des tout premiers carrefours mondiaux de l'internet. Les data centers s'installent là où les câbles arrivent. L'un d'eux occupe même une ancienne base de sous-marins de 1943, sous un toit de plus de cinq mètres de béton.",
+    {id:'cables',refs:['telegeography-marseille','afp-mrs3-base-sous-marine','dcd-interxion-marseille'],ou:"la trappe aux câbles, sur le quai",t:"Pourquoi Marseille",
+      x:"Une quinzaine de câbles sous-marins sortent de la mer à Marseille, venus d'Afrique, du Moyen-Orient et d'Asie : c'est l'un des grands carrefours mondiaux de l'internet. Les data centers s'installent là où les câbles arrivent. L'un d'eux occupe même une ancienne base de sous-marins de la Seconde Guerre mondiale, sous un toit de plus de cinq mètres de béton.",
       retiens:"Un data center s'installe où arrivent les réseaux, et où il y a du courant."},
-    {id:'carbone',ou:"l'affiche de la halte",t:"Le même calcul, pas le même carbone",
-      x:"Un data center consomme la même chose où qu'il soit ; ce qu'il émet dépend du courant local. En 2025, l'électricité française a émis 19,6 g de CO₂ par kWh produit, contre 344 en Allemagne et plus de 600 en Pologne. En Irlande, les data centers absorbent déjà près d'un quart de l'électricité du pays.",
+    {id:'carbone',refs:['rte-be2025-emissions','rte-be2025-rapport','cso-data-centres-2024'],ou:"l'affiche de la halte",t:"Le même calcul, pas le même carbone",
+      x:"Un data center consomme la même chose où qu'il soit ; ce qu'il émet dépend du courant local. En 2025, l'électricité française a émis 19,6 g de CO₂ par kWh produit, contre 175 en moyenne dans l'Union européenne. En Irlande, les data centers absorbent déjà 22 % de l'électricité du pays.",
       retiens:"Le carbone d'un service numérique dépend du pays où tournent ses serveurs."}
   ],
 
-  sources:[
-    ["AIE, « Energy and AI », 2025 (415 TWh en 2024, 945 TWh en 2030)","https://www.iea.org/reports/energy-and-ai/executive-summary"],
-    ["RTE, l'essor des data centers en France","https://www.rte-france.com/bases-electricite/consommation-electricite/essor-data-centers-france"],
-    ["ARCEP, enquête « Pour un numérique soutenable », édition 2026 (PUE moyen en France)","https://www.arcep.fr/fileadmin/user_upload/observatoire/enquete-pns/edition-2026/enquete-annuelle-pour-un-numerique-soutenable_edition2026_mai2026.pdf"],
-    ["Uptime Institute, enquête mondiale 2025 (PUE moyen mondial)","https://datacenter.uptimeinstitute.com/rs/711-RIA-145/images/2025.Annual.Survey.Report.pdf?version=0"],
-    ["ASHRAE, températures recommandées pour les salles informatiques","https://xp20.ashrae.org/datacom1_4th/ReferenceCard.pdf"],
-    ["Anthesis et J. Koomey, « Comatose Servers Redux » (un quart de serveurs inactifs)","https://info.anthesisgroup.com/hubfs/Website%20PDFs/Comatose-Servers-Redux.pdf"],
-    ["Data Center Dynamics, le refroidissement par l'eau de galerie à Marseille","https://www.datacenterdynamics.com/en/news/interxion-switches-on-river-cooling-at-marseille-data-centers/"],
-    ["Engie Solutions, la chaleur d'un data center pour le centre aquatique olympique","https://www.engie-solutions.com/fr/presse/mise-en-service-equinix"],
-    ["RTE, Bilan électrique 2025, émissions de CO₂","https://analysesetdonnees.rte-france.com/en/annual-review-2025/ghg-emissions"]
-  ]
+  /* les références : chaque information porte les siennes (refs, ci-dessus) ; celles-ci appuient ce que disent les habitants,
+     les panneaux et les simulations. Les clés sont celles du registre commun/donnees/sources.js. */
+  refs:['iti-cbema-curve']
 });
 
 /* ================= CE QUE DISENT LES GENS ET LES CHOSES =================
@@ -105,7 +97,7 @@ DAT.dit={
 
   // --- la salle des serveurs
   sonde:[["Une sonde de température, au milieu de l'allée chaude : 34 °C. Derrière chaque armoire, un souffle tiède, régulier, comme celui d'un très gros sèche-cheveux réglé au minimum.",
-      "Une étiquette : « Tout ce que ces machines consomment ressort ici. Tout. Les données, elles, ne pèsent rien et ne chauffent pas : c'est de les déplacer qui chauffe. »"],
+      "Une étiquette : « Tout ce que ces machines consomment ressort ici. Tout. Les données, elles, ne pèsent rien et ne chauffent pas : c'est de les calculer, de les garder et de les déplacer qui chauffe. »"],
     ["La sonde de l'allée chaude. 34 degrés devant, 22 de l'autre côté des armoires. Le bâtiment entier sert à entretenir cet écart."]],
   thermostat:[["Sur le mur, un thermostat sous un capot verrouillé : 22 °C. À côté, une affichette plastifiée : « Consigne d'entrée d'air : entre 18 et 27 °C. Les serveurs ne sont pas des yaourts. »",
       "Plus bas, au stylo : « À celui qui a baissé à 16 pendant la canicule : on sait que c'est toi, Régis. »"],
@@ -117,7 +109,7 @@ DAT.dit={
   // --- la salle de calcul
   token:[["M. Token, salle de calcul. Ces armoires-là ne stockent rien : elles calculent. Quatre-vingts kilowatts chacune. Une seule consomme autant que seize armoires de la salle voisine, et elle est plus bruyante que les seize réunies.",
       "On ne les refroidit plus à l'air, il faudrait un ouragan. De l'eau passe directement sur les processeurs et ressort à 50 degrés. C'est une très bonne température pour chauffer une piscine. On y travaille."],
-    ["On me demande combien consomme une question posée à une IA. Une fraction de wattheure. Ensuite on me demande combien de questions sont posées par jour. Là, je change de sujet."]],
+    ["On me demande combien consomme une question posée à une IA. Quelques dixièmes de wattheure, parfois quelques wattheures. Ensuite on me demande combien de questions sont posées par jour. Là, je change de sujet."]],
 
   // --- la salle de contrôle
   ratio:[["Mme Ratio, efficacité énergétique. J'ai un seul chiffre sur mon badge, sur mon écran et sur ma tasse : le PUE. 1,3 ici. Le jour où il passe à 1,29, j'apporte des croissants.",
@@ -144,7 +136,7 @@ DAT.dit={
       "En dessous : « Un message pour Singapour met un dixième de seconde. Ne marchez pas dessus : ça n'abîme rien, mais c'est une question de principe. »"],
     ["La trappe aux câbles. La moitié de l'internet de trois continents passe sous tes pieds, sans un bruit."]],
   affiche:[["Une affiche à la halte : « Pourquoi ici ? » Trois arguments, par ordre de taille : les câbles, le courant, le soleil. Le soleil est barré, avec la mention : « Non. Vraiment pas. Il chauffe. »"],
-    ["L'affiche de la halte. Même calcul, dix-sept fois moins de carbone qu'en Allemagne. Le soleil est toujours barré."]],
+    ["L'affiche de la halte. Même calcul, neuf fois moins de carbone que la moyenne européenne. Le soleil est toujours barré."]],
 
   // --- les vannes (aucune information à la clé)
   cafe:["Une machine à café. C'est le seul équipement du bâtiment à tourner à 100 % de sa capacité, le seul sans redondance, et le seul dont la panne déclenche une cellule de crise."],
@@ -169,7 +161,7 @@ DAT.questions=[
   Q("Le site appelle 13 MW au compteur, dont 10 MW pour les serveurs. Quel est son PUE ?","1,3","13 ÷ 10. Tout ce qui dépasse 1, c'est le froid, les pertes électriques et le reste.","0,77","C'est la division à l'envers. Un PUE ne peut pas descendre sous 1.","3","Ça, ce sont les mégawatts qui ne calculent rien, pas le rapport."),
   Q("Que devient l'électricité consommée par un serveur ?","De la chaleur, intégralement","Un serveur est un radiateur qui réfléchit. D'où tout le bâtiment autour.","Elle est stockée dans les données","Les données ne contiennent pas d'énergie. Un disque plein ne pèse pas plus lourd.","Moitié chaleur, moitié calcul","Le calcul n'est pas une forme d'énergie : tout finit en chaleur."),
   Q("13 MW appelés en continu, toute l'année. Quelle énergie sur un an ?","Environ 114 GWh","13 MW × 8 760 heures. La courbe plate fait de petites puissances d'énormes énergies.","Environ 13 GWh","Il manque les heures : une année en compte 8 760, pas 1 000.","Environ 4,7 GWh","Ça, c'est 13 MW fois 365 : des jours, pas des heures."),
-  Q("3 h du matin, le réseau tombe. Les groupes électrogènes mettent trente secondes à démarrer. Qui alimente les serveurs entre-temps ?","Les batteries des onduleurs","Elles prennent le relais sans la moindre coupure, pour une dizaine de minutes au plus.","Personne : trente secondes de coupure, c'est acceptable","Pour un serveur, une coupure d'un dixième de seconde est déjà un redémarrage.","Les panneaux solaires du toit","À 3 h du matin, ils ont d'autres projets."),
+  Q("3 h du matin, le réseau tombe. Les groupes électrogènes mettent trente secondes à démarrer. Qui alimente les serveurs entre-temps ?","Les batteries des onduleurs","Elles prennent le relais sans la moindre coupure, juste le temps que les groupes démarrent.","Personne : trente secondes de coupure, c'est acceptable","Pour un serveur, une coupure d'un dixième de seconde est déjà un redémarrage.","Les panneaux solaires du toit","À 3 h du matin, ils ont d'autres projets."),
   Q("Le local serveur de ta mairie est climatisé à 18 °C toute l'année. Que proposes-tu ?","Remonter la consigne vers 24-25 °C","Les serveurs acceptent jusqu'à 27 °C en entrée d'air. Chaque degré gagné allège la climatisation.","Descendre à 16 °C, par prudence","On refroidirait davantage une salle qui n'en a pas besoin. Demande à Régis.","Couper la climatisation","La chaleur des machines doit bien sortir : on règle, on ne coupe pas."),
-  Q("Un serveur qui ne fait rien depuis six mois consomme…","Encore près de la moitié de sa puissance maximale","D'où la chasse aux zombies : un serveur inutile coûte presque autant qu'un serveur utile.","Rien, puisqu'il ne travaille pas","Il est allumé, ventilé, refroidi. Seul un serveur éteint consomme zéro.","Autant qu'à pleine charge","Pas tout à fait : la moitié environ. C'est déjà beaucoup trop pour ne rien faire.")
+  Q("Un serveur qui ne fait rien depuis six mois consomme…","Encore environ un tiers de sa puissance maximale","D'où la chasse aux zombies : un serveur inutile coûte presque autant qu'un serveur utile.","Rien, puisqu'il ne travaille pas","Il est allumé, ventilé, refroidi. Seul un serveur éteint consomme zéro.","Autant qu'à pleine charge","Pas tout à fait : un tiers environ. C'est déjà beaucoup trop pour ne rien faire.")
 ];

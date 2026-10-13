@@ -159,7 +159,7 @@ export function demoAgir(zone, options) {
       <div class="kpi ok"><span class="v">${euros(arrondi(f))}</span><span class="l">économisés par an (HT)</span></div>
       <div class="kpi"><span class="v">${euros(h)}</span><span class="l">d’investissement</span></div>
       <div class="kpi"><span class="v">${f > 0 ? (h === 0 ? "immédiat" : `${nombre(h / f, 1)} ans`) : "—"}</span><span class="l">temps de retour global</span></div>
-      <div class="kpi"><span class="v">−${nombre(x, 1)} t</span><span class="l">de CO2e par an (facteurs à vérifier)</span></div>`;
+      <div class="kpi"><span class="v">−${nombre(x, 1)} t</span><span class="l">de CO2e par an (facteurs du décret tertiaire)</span></div>`;
     const v = new Set(r.map((w) => w.f));
     let j;
     if (r.length) {
