@@ -122,7 +122,7 @@ export default {
         ton: "verifier",
         titre: "À revérifier régulièrement",
         texte:
-          "Seuils en valeur absolue, bornes de l’année de référence, date limite OPERAT, facteurs d’émission : l’arrêté du 10 avril 2020 a déjà été modifié plusieurs fois (en dernier lieu en 2025). Vérifier la version en vigueur sur Légifrance et la FAQ OPERAT avant de coder une règle.",
+          "Seuils en valeur absolue, bornes de l’année de référence, date limite OPERAT, facteurs d’émission : l’arrêté du 10 avril 2020 a déjà été modifié plusieurs fois (en dernier lieu par un arrêté du 11 août 2026)[[legifrance-arrete-tertiaire-2020]]. Vérifier la version en vigueur sur Légifrance et la FAQ OPERAT avant de coder une règle.",
       },
       {
         type: "tableau",

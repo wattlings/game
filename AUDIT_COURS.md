@@ -1351,3 +1351,39 @@ Textes lus (fournis par l'auteur, les sites officiels refusant la machine de tra
 | Facteur de l'électricité 0,052 kgCO2e/kWh | Corrigé, sur décision de l'auteur : 0,064 (arrêté, annexe VII). Le jeton `FACTEURS_CO2.elec` passe à 0,064 : 5,5 t d'électricité pour l'école, et « le gaz émet environ 3 fois plus par kWh » (au lieu de 4) dans le cours et le jeu |
 
 Citations ajoutées : étape 8 (Approfondir et tableau), étape 1 (Comprendre), glossaire (décret tertiaire, OPERAT, PCI), démo « trajectoire du décret tertiaire ».
+
+### Lot 6 (13 octobre 2026) : relevés des étapes 1, 3, 4, 5, 6 et 7, fin de l'étape 8
+
+Chaque étape du cours a maintenant son relevé dans `outils/sources/` (`releve-cours-etape-1.json` à `releve-cours-etape-8.json`). Le réseau de la machine de travail étant fermé, seules ont servi des sources **déjà lues** (passages relevés pour l'étape 2, l'étape 8 et le voyage solaire) ; rien n'a été confirmé sans passage lu.
+
+| Étape | Informations | Faits et règles | Confirmés | Corrigés | Sans source |
+|---|---|---|---|---|---|
+| 1 Cadrer | 22 | 11 | 8 | 0 | 3 |
+| 3 Fiabiliser | 24 | 9 | 6 | 0 | 3 |
+| 4 Structurer | 17 | 6 | 4 | 0 | 2 |
+| 5 Analyser | 17 | 4 | 2 | 0 | 2 |
+| 6 Détecter | 12 | 1 | 1 | 0 | 0 |
+| 7 Agir | 16 | 8 | 5 | 0 | 3 |
+| 8 Mesurer | 25 | 16 | 7 | 6 | 3 |
+
+Correction : l'encadré « À revérifier » de l'étape 8 disait l'arrêté du 10 avril 2020 modifié « en dernier lieu en 2025 ». Le texte lu montre une modification par un arrêté du 11 août 2026 (annexe II, en vigueur depuis le 20 août 2026) : la phrase est corrigée et sourcée.
+
+Autres changements : les légendes des schémas et les consignes des démos acceptent maintenant les appels de note (et le gras, les termes du glossaire) ; la page Sources dit « Les 8 étapes sont référencées » et signale les faits qui attendent encore leur source.
+
+**Sources à lire pour finir le cours** (pages à ouvrir sur un poste, ou à fournir en fichier) :
+
+| Affirmations | Source à lire |
+|---|---|
+| Voyant de consommation du Linky (ce1-009) ; identifiant inchangé quand le compteur est remplacé (ce1-016, ce1-021, ce4-011, ce4-017) | Page Enedis de description du compteur Linky ; page Enedis ou GRDF sur le remplacement d'un compteur |
+| Puissance apparente en kVA (ce3-019) | Glossaire Enedis ou CRE |
+| Heure d'été et d'hiver (ce3-022, ce3-024) | Directive 2000/84/CE, sur EUR-Lex |
+| DJU base 18 °C, méthodes météo et COSTIC (ce5-010, ce5-011) | Fiche Météo-France ou Cerema sur les degrés-jours unifiés |
+| 1 °C de moins ≈ 7 % de chauffage (ce7-003) | Guide ADEME sur le chauffage ou la sobriété |
+| Autoconsommation : surplus vendu, autoconsommation collective (ce7-011) | Code de l'énergie, articles L. 315-1 et L. 315-2 |
+| Certificats d'économies d'énergie (ce7-012) | Page du ministère sur les CEE |
+| ISO 50001:2018 et amendement 2024 (ce8-020) | Fiche de la norme sur iso.org |
+| IPMVP (ce8-021, ce8-022) | Page de l'EVO sur l'IPMVP |
+
+Reste aussi à référencer : le glossaire (37 termes sans source), les démos hors étape 2, le quiz de synthèse, la page Patrimoine, et dans le jeu les étapes autres que la 2 et les voyages autres que le solaire.
+
+Vérification : `node outils/verifier.mjs` donne 388 réussites et 0 échec ; aucun appel de note ne s'affiche en texte brut sur les 24 vues des étapes.

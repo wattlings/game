@@ -18,7 +18,7 @@ export default {
   phrase: "Avant de mesurer quoi que ce soit, on décide quoi suivre, où, et dans quel but.",
   retenir: [
     "On délimite un **périmètre** : un site, un bâtiment, parfois un usage (chauffage, éclairage…).",
-    "Chaque énergie arrive par un {{point-de-comptage}} qui a un identifiant unique : le {{pdl}} pour l’électricité, le {{pce}} pour le gaz.",
+    "Chaque énergie arrive par un {{point-de-comptage}} qui a un identifiant unique : le {{pdl}} pour l’électricité, le {{pce}} pour le gaz[[enedis-pdl,grdf-guide-donnees-2026]].",
     "On fixe un objectif : baisser la facture, respecter le {{decret-tertiaire}}, réduire le CO2…",
   ],
   analogie: {
@@ -61,7 +61,7 @@ export default {
         type: "schema",
         id: "compteurs",
         legende:
-          "Ce qu’on lit sur les compteurs : 1. l’index (kWh pour l’électricité, m³ pour le gaz) ; 2. l’identifiant du point de livraison, PDL ou PCE, à 14 chiffres ; 3. le voyant qui clignote avec la consommation ; 4. le module radio du compteur gaz, qui transmet un relevé par jour. Dessin générique, numéros fictifs de l’école.",
+          "Ce qu’on lit sur les compteurs : 1. l’index (kWh pour l’électricité, m³ pour le gaz)[[mne-releve-compteur,grdf-guide-donnees-2026]] ; 2. l’identifiant du point de livraison, PDL ou PCE, à 14 chiffres[[enedis-pdl,grdf-guide-donnees-2026]] ; 3. le voyant qui clignote avec la consommation ; 4. le module radio du compteur gaz, qui transmet un relevé par jour[[grdf-guide-donnees-2026]]. Dessin générique, numéros fictifs de l’école.",
       },
       {
         type: "demo",
@@ -106,7 +106,7 @@ export default {
         type: "texte",
         titre: "Les identifiants",
         paragraphes: [
-          "Le {{pdl}} (Point De Livraison, appelé **PRM** par Enedis) identifie un raccordement électrique avec **14 chiffres**. Le {{pce}} (Point de Comptage et d’Estimation) identifie un point de livraison de gaz chez GRDF, en général avec 14 chiffres ; certains sites anciens ont encore un identifiant « GI » suivi de 6 chiffres.",
+          "Le {{pdl}} (Point De Livraison, appelé **PRM** par Enedis) identifie un raccordement électrique avec **14 chiffres**[[enedis-pdl]]. Le {{pce}} (Point de Comptage et d’Estimation) identifie un point de livraison de gaz chez GRDF, en général avec 14 chiffres ; certains sites anciens ont encore un identifiant « GI » suivi de 6 chiffres[[grdf-guide-donnees-2026]].",
           "Un identifiant désigne un **point de raccordement**, pas un appareil : quand le compteur est remplacé, le PDL ou le PCE reste le même, mais le numéro de série du compteur change. Le logiciel doit donc distinguer « point » et « compteur ».",
         ],
       },
@@ -168,7 +168,7 @@ export default {
       choix: ["3000123456789", "30001234567890", "3000-1234-5678"],
       bonne: 1,
       explication:
-        "Un PDL compte exactement 14 chiffres. Le premier en a 13, le troisième contient des tirets et 12 chiffres.",
+        "Un PDL compte exactement 14 chiffres[[enedis-pdl]]. Le premier en a 13, le troisième contient des tirets et 12 chiffres.",
     },
     {
       q: "La mairie veut seulement prévoir son budget énergie de l’an prochain. Quelle source suffit en priorité ?",

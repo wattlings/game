@@ -1,0 +1,196 @@
+[
+ {
+  "id": "ce5-001",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "retenir",
+  "texte": "Le {{talon}}, c’est ce que le bâtiment consomme quand il est vide.",
+  "affirmation": "Définition du talon.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-002",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "retenir",
+  "texte": "Le chauffage suit la météo : on la mesure avec les {{dju}}.",
+  "affirmation": "Les DJU mesurent la rigueur climatique.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-003",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "analogie",
+  "texte": "Le cardiologue regarde le rythme au repos",
+  "affirmation": "Analogie du cardiologue.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-004",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.comprendre › ratios",
+  "texte": "Électricité sur l’année scolaire : **86 000 kWh**, pour 2 000 m² et 250 élèves.",
+  "affirmation": "Données de l'école (fictives).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-005",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.comprendre › ratios",
+  "texte": "(86 000 + 208 000) / 2 000 = 147 kWh/m²",
+  "affirmation": "Ratios.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-006",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.approfondir › signature",
+  "texte": "La signature énergétique s’écrit **E = a + b × DJU**.",
+  "affirmation": "Signature énergétique.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-007",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.approfondir › signature",
+  "texte": "environ 83 kWh un jour de classe",
+  "affirmation": "Paramètres de l'école (modèle fictif).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-008",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.approfondir › normalisation",
+  "texte": "150 000 × 2 244 / 1 900 = 177 158 kWh",
+  "affirmation": "Normalisation climatique.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-009",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.approfondir › normalisation",
+  "texte": "177 158 / 196 157 − 1 = −9,7 %",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-010",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.approfondir › DJU",
+  "texte": "Le seuil de 18 °C est une convention : en dessous, on considère qu’il faut chauffer.",
+  "affirmation": "Les DJU de chauffage se calculent en base 18 °C.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : Météo-France ou le Cerema (définition des degrés-jours unifiés, base 18 °C)."
+ },
+ {
+  "id": "ce5-011",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.approfondir › DJU",
+  "texte": "La température moyenne du jour se calcule souvent comme la moyenne du minimum et du maximum (méthode dite « météo ») ; d’autres méthodes existent, comme celle du COSTIC.",
+  "affirmation": "Méthodes de calcul des DJU (météo, COSTIC).",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : une fiche Météo-France ou COSTIC qui décrit les deux méthodes."
+ },
+ {
+  "id": "ce5-012",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.approfondir › DJU",
+  "texte": "Les DJU viennent d’une station météo proche (Météo-France ou fournisseurs de données). Le décret tertiaire prévoit lui aussi un ajustement climatique des consommations.",
+  "affirmation": "Le décret tertiaire ajuste les consommations au climat, avec les DJU d'une station Météo-France.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   }
+  ]
+ },
+ {
+  "id": "ce5-013",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "niveaux.approfondir › ratios",
+  "texte": "[\"Talon / puissance max.\", \"≈ 6 kW / 57 kVA\", \"Repérer les usages permanents, régler la puissance\"]",
+  "affirmation": "Valeurs de l'école (fictives).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-014",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "demo puissance souscrite (consigne)",
+  "texte": "trop haut, on paie pour rien ; trop bas, on paie des pénalités.",
+  "affirmation": "Une puissance souscrite trop basse expose à des frais de dépassement ; trop haute, on paie une part fixe inutile.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l'utilisateur au-delà de sa puissance souscrite.",
+    "relu": true,
+    "page": "p. 7"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   }
+  ],
+  "note": "La brochure TURPE 7 facture la puissance souscrite et, à part, les dépassements au-delà de cette puissance."
+ },
+ {
+  "id": "ce5-015",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "quiz › 1",
+  "texte": "18 − 8 = 10 DJU.",
+  "affirmation": "Calcul des DJU.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-016",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "quiz › 3",
+  "texte": "Elle paie 43 kVA de puissance qu’elle n’utilise jamais.",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce5-017",
+  "fichier": "cours/contenu/etape-5.js",
+  "repere": "quiz › 4",
+  "texte": "Le talon tourne 24 h/24, et l’école est vide plus de 80 % des heures de l’année.",
+  "affirmation": "Heures d'inoccupation de l'école (calcul sur le calendrier fictif).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Environ 7 240 h vides sur 8 760 h (étape 6), soit 83 %."
+ }
+]

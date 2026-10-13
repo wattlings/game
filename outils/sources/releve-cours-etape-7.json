@@ -1,0 +1,218 @@
+[
+ {
+  "id": "ce7-001",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "phrase",
+  "texte": "On passe à l’action, du moins cher au plus lourd : régler, optimiser le contrat, puis investir.",
+  "affirmation": "Ordre des leviers.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce7-002",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "analogie",
+  "texte": "D’abord on éteint les lumières et on baisse le chauffage.",
+  "affirmation": "Analogie de la maison.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce7-003",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.comprendre › consigne",
+  "texte": "Règle d’ordre de grandeur souvent citée : **1 °C de moins ≈ 7 % de chauffage en moins**.",
+  "affirmation": "Baisser la consigne de 1 °C économise environ 7 % du chauffage.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : l'ADEME (guide « Chauffage » ou fiche sobriété), qui donne cet ordre de grandeur."
+ },
+ {
+  "id": "ce7-004",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.comprendre › consigne",
+  "texte": "196 157 × 7 % ≈ 13 730 kWh",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce7-005",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.comprendre › consigne",
+  "texte": "Économie financière, au prix du kWh de gaz évité (≈ 0,089 € HT) :",
+  "affirmation": "Prix du kWh de gaz évité de l'école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Calculé dans le modèle du cours à partir des taux sourcés à l'étape 2."
+ },
+ {
+  "id": "ce7-006",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.comprendre › consigne",
+  "texte": "CO2 évité (≈ 0,204 kgCO2e par kWh de gaz facturé) :",
+  "affirmation": "Facteur d'émission du gaz par kWh facturé (PCS).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   }
+  ],
+  "note": "0,227 kgCO2e par kWh PCI × 0,90 kWh PCI par kWh PCS ≈ 0,204 kgCO2e par kWh PCS (facturé)."
+ },
+ {
+  "id": "ce7-007",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.comprendre › puissance",
+  "texte": "Passer à 58 kVA économise, au tarif fictif de 13,50 €/kVA/an :",
+  "affirmation": "Tarif fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce7-008",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.comprendre › puissance",
+  "texte": "Il agit sur la part fixe de la facture, pas sur les kWh.",
+  "affirmation": "La puissance souscrite agit sur la part fixe de l'acheminement.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   }
+  ]
+ },
+ {
+  "id": "ce7-009",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.approfondir › leviers",
+  "texte": "Consigne à 19 °C, réduit la nuit, extinction des veilles",
+  "affirmation": "Exemples d'actions de sobriété.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce7-010",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.approfondir › autoconsommation",
+  "texte": "Deux taux à ne pas confondre : le **taux d’autoconsommation** (part de la production consommée sur place) et le **taux d’autoproduction** (part des besoins couverts par la production).",
+  "affirmation": "Définitions des taux d'autoconsommation et d'autoproduction.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "Sa maison pourra donc consommer entièrement la production locale : son taux d'autoconsommation atteindra 100 %.",
+    "relu": true
+   },
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "dans la mesure où la taille de l'installation ne permettra pas de produire à hauteur de la consommation totale de la maison, le taux d'autoproduction sera très faible",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce7-011",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.approfondir › autoconsommation",
+  "texte": "le surplus est injecté sur le réseau et peut être vendu. En **autoconsommation collective**, plusieurs bâtiments proches partagent une production.",
+  "affirmation": "Surplus injecté et vendable ; autoconsommation collective.",
+  "type": "regle",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : code de l'énergie, articles L. 315-1 et L. 315-2 (Légifrance), ou la fiche du ministère sur l'autoconsommation si elle le dit."
+ },
+ {
+  "id": "ce7-012",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.approfondir › temps de retour",
+  "texte": "Il ignore la hausse des prix, la durée de vie de l’équipement, la maintenance et les aides (par exemple les certificats d’économies d’énergie)",
+  "affirmation": "Les CEE sont une aide aux travaux d'économies d'énergie.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : la page du ministère sur les certificats d'économies d'énergie."
+ },
+ {
+  "id": "ce7-013",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.approfondir › kWh et puissance",
+  "texte": "Une action sur les **kWh** réduit la fourniture, la part variable de l’acheminement et l’accise.",
+  "affirmation": "L'accise est proportionnelle aux kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Tarif normal de l'accise sur le gaz naturel combustible, tenant compte de l'injection de biogaz dans le réseau (en €/MWh) […] 08/26 – 01/27 […] 16,66",
+    "relu": true,
+    "page": "p. 17 (tableau)"
+   }
+  ]
+ },
+ {
+  "id": "ce7-014",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "niveaux.approfondir › kWh et puissance",
+  "texte": "Une action sur la **puissance** réduit la part fixe de l’acheminement (et donc la CTA).",
+  "affirmation": "La CTA est un pourcentage de la part fixe de l'acheminement.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   }
+  ]
+ },
+ {
+  "id": "ce7-015",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "quiz › 2",
+  "texte": "1 − 0,9 × 0,9 = 19 %",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce7-016",
+  "fichier": "cours/contenu/etape-7.js",
+  "repere": "quiz › 3",
+  "texte": "30 000 / 2 500 = 12 ans.",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

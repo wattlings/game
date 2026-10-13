@@ -66,7 +66,7 @@ export default {
             calc: "13 730 × 0,0887 ≈ 1 220 € HT par an",
           },
           {
-            t: "CO2 évité (≈ 0,204 kgCO2e par kWh de gaz facturé) :",
+            t: "CO2 évité (≈ 0,204 kgCO2e par kWh de gaz facturé)[[legifrance-arrete-tertiaire-2020]] :",
             calc: "13 730 × 0,204 ≈ 2,8 tCO2e",
           },
         ],
@@ -90,7 +90,7 @@ export default {
           },
         ],
         conclusion:
-          "Un levier gratuit, mais modeste ici, et risqué si on descend trop près de la pointe. Il agit sur la part fixe de la facture, pas sur les kWh.",
+          "Un levier gratuit, mais modeste ici, et risqué si on descend trop près de la pointe. Il agit sur la part fixe de la facture, pas sur les kWh[[enedis-turpe7-brochure]].",
       },
       {
         type: "demo",
@@ -138,7 +138,7 @@ export default {
         titre: "Autoconsommation",
         paragraphes: [
           "En {{autoconsommation}} individuelle, l’école consomme directement ce que ses panneaux produisent ; le surplus est injecté sur le réseau et peut être vendu. En **autoconsommation collective**, plusieurs bâtiments proches partagent une production.",
-          "Deux taux à ne pas confondre : le **taux d’autoconsommation** (part de la production consommée sur place) et le **taux d’autoproduction** (part des besoins couverts par la production). Une école fermée l’été autoconsomme mal sa production estivale.",
+          "Deux taux à ne pas confondre : le **taux d’autoconsommation** (part de la production consommée sur place) et le **taux d’autoproduction** (part des besoins couverts par la production)[[ministere-autoconsommation]]. Une école fermée l’été autoconsomme mal sa production estivale.",
         ],
       },
       {
@@ -146,7 +146,7 @@ export default {
         titre: "Temps de retour et impact sur la facture",
         paragraphes: [
           "Le {{temps-de-retour}} simple = investissement / économie annuelle. Il ignore la hausse des prix, la durée de vie de l’équipement, la maintenance et les aides (par exemple les certificats d’économies d’énergie) : c’est un premier filtre, pas une étude financière.",
-          "Une action sur les **kWh** réduit la fourniture, la part variable de l’acheminement et l’accise. Une action sur la **puissance** réduit la part fixe de l’acheminement (et donc la CTA). Selon l’offre, l’abonnement du fournisseur peut aussi en dépendre.",
+          "Une action sur les **kWh** réduit la fourniture, la part variable de l’acheminement et l’accise[[ministere-guide-fiscalite-2026]]. Une action sur la **puissance** réduit la part fixe de l’acheminement (et donc la CTA)[[ministere-guide-fiscalite-2026,enedis-turpe7-brochure]]. Selon l’offre, l’abonnement du fournisseur peut aussi en dépendre.",
         ],
       },
       {

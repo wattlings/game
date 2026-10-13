@@ -60,9 +60,9 @@ function rendreBloc(bloc, indice) {
         ${bloc.conclusion ? `<p class="feedback ok conclusion" tabindex="-1" hidden>${icone("ok")}<span>${texteRiche(bloc.conclusion)}</span></p>` : ""}
       </section>`;
     case "demo":
-      return `<section class="demo" aria-labelledby="demo-${bloc.id}-t"><div class="demo-head"><span class="demo-tag">Démo</span><h3 id="demo-${bloc.id}-t">${echapper(bloc.titre)}</h3>${bloc.consigne ? `<p class="consigne">${echapper(bloc.consigne)}</p>` : ""}</div><div class="demo-body" data-demo="${bloc.id}"></div>${sourcesDeLaDemo(bloc.id)}</section>`;
+      return `<section class="demo" aria-labelledby="demo-${bloc.id}-t"><div class="demo-head"><span class="demo-tag">Démo</span><h3 id="demo-${bloc.id}-t">${echapper(bloc.titre)}</h3>${bloc.consigne ? `<p class="consigne">${texteRiche(bloc.consigne)}</p>` : ""}</div><div class="demo-body" data-demo="${bloc.id}"></div>${sourcesDeLaDemo(bloc.id)}</section>`;
     case "schema":
-      return `<figure class="schema" style="margin:0">${SCHEMAS[bloc.id]()}${bloc.legende ? `<figcaption>${echapper(bloc.legende)}</figcaption>` : ""}</figure>`;
+      return `<figure class="schema" style="margin:0">${SCHEMAS[bloc.id]()}${bloc.legende ? `<figcaption>${texteRiche(bloc.legende)}</figcaption>` : ""}</figure>`;
     case "quiz":
       return `<section class="demo quiz-bloc" aria-labelledby="quiz-t"><div class="demo-head"><span class="demo-tag">Quiz</span><h3 id="quiz-t">${echapper(bloc.titre || "Mini-quiz")}</h3><p class="consigne">Choisis une réponse : la correction s’affiche tout de suite.</p></div><div class="demo-body" data-quiz></div></section>`;
     case "sources":

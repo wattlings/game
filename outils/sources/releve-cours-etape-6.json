@@ -1,0 +1,131 @@
+[
+ {
+  "id": "ce6-001",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "retenir",
+  "texte": "Sans {{baseline}}, pas de détection : il faut savoir ce qui est « normal ».",
+  "affirmation": "Méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-002",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "retenir",
+  "texte": "Les dérives classiques : talon qui monte, chauffage le week-end ou l’été, {{depassement}} de puissance.",
+  "affirmation": "Dérives classiques.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-003",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "analogie",
+  "texte": "Une nuit où personne ne tire d’eau, le compteur d’eau devrait être immobile.",
+  "affirmation": "Analogie de la fuite d'eau.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-004",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "Un serveur ou un chauffe-eau reste allumé en permanence : +3 kW dès que l’école est vide.",
+  "affirmation": "Scénario fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-005",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "Heures « bâtiment vide » sur une année (nuits, week-ends, vacances) : environ **7 240 h**.",
+  "affirmation": "Heures vides de l'école (calendrier fictif).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-006",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "3 kW × 7 240 h = 21 720 kWh ≈ 21,7 MWh",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-007",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "Coût, au prix du kWh évité (≈ 0,186 € HT) :",
+  "affirmation": "Prix du kWh évité de l'école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Prix moyen de la part variable de la facture de l'école (fourniture, acheminement, accise), calculé dans le modèle du cours à partir des taux sourcés à l'étape 2."
+ },
+ {
+  "id": "ce6-008",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "21 720 / 86 000 ≈ 25 %",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-009",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "niveaux.approfondir › méthodes",
+  "texte": "Pointe au-dessus de 95 % de la puissance souscrite (le dépassement est facturé)",
+  "affirmation": "Le dépassement de la puissance souscrite est facturé ; l'alerte à 95 % le prévient.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l'utilisateur au-delà de sa puissance souscrite.",
+    "relu": true,
+    "page": "p. 7"
+   }
+  ],
+  "note": "Le seuil de 95 % est un choix de méthode ; le dépassement facturé vient de la brochure TURPE 7."
+ },
+ {
+  "id": "ce6-010",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "niveaux.approfondir › texte",
+  "texte": "Un {{faux-positif|faux positif}} est une alerte sans vrai problème",
+  "affirmation": "Méthode de détection.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-011",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "quiz › 1",
+  "texte": "3 kW × environ 7 000 h d’inoccupation ≈ 21 000 kWh.",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce6-012",
+  "fichier": "cours/contenu/etape-6.js",
+  "repere": "quiz › 5",
+  "texte": "En été et le week-end, la chaudière ne devrait pas tourner : une règle simple suffit.",
+  "affirmation": "Méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

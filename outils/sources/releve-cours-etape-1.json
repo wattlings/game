@@ -1,0 +1,325 @@
+[
+ {
+  "id": "ce1-001",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "retenir",
+  "texte": "Chaque énergie arrive par un {{point-de-comptage}} qui a un identifiant unique : le {{pdl}} pour l’électricité, le {{pce}} pour le gaz.",
+  "affirmation": "Chaque point de livraison a un identifiant unique : PDL pour l'électricité, PCE pour le gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "p. 39"
+   }
+  ]
+ },
+ {
+  "id": "ce1-002",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "retenir",
+  "texte": "On fixe un objectif : baisser la facture, respecter le {{decret-tertiaire}}, réduire le CO2…",
+  "affirmation": "Objectifs possibles d'un suivi énergétique.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-003",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "analogie",
+  "texte": "Avant les examens, le médecin décide qui il examine",
+  "affirmation": "Analogie du bilan de santé.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-004",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "legendeSchema",
+  "texte": "L'école Jean-Jaurès : un site, deux compteurs, deux identifiants.",
+  "affirmation": "L'école du cours est fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-005",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.comprendre › Du patrimoine au point de comptage › §1",
+  "texte": "Il suit des objets emboîtés : un **patrimoine** (toutes les écoles d’une ville), des **sites**, des **bâtiments**",
+  "affirmation": "Découpage patrimoine / site / bâtiment / point de comptage.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-006",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.comprendre › Du patrimoine au point de comptage › §2",
+  "texte": "L’école Jean-Jaurès est un site, avec un bâtiment de 2 000 m² et deux points de comptage",
+  "affirmation": "Surface et compteurs de l'école (cas fictif).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-007",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.comprendre › schéma compteurs",
+  "texte": "l’index (kWh pour l’électricité, m³ pour le gaz)",
+  "affirmation": "L'index du compteur électrique est en kWh, celui du compteur gaz en m³.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "index de fin de période – index de début de période = quantité d'énergie facturée",
+    "relu": true
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "champs du catalogue de données : « Index brut de releve (debut) », « Volume brut consomme (m³) », « Coefficient de conversion », « Energie consommee (kWh) »",
+    "relu": true
+   }
+  ],
+  "note": "L'unité de l'index électrique (kWh) se lit sur tout compteur ; le guide GRDF nomme le volume brut en m³ puis l'énergie en kWh après conversion."
+ },
+ {
+  "id": "ce1-008",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.comprendre › schéma compteurs",
+  "texte": "l’identifiant du point de livraison, PDL ou PCE, à 14 chiffres",
+  "affirmation": "PDL et PCE comptent 14 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "p. 39"
+   }
+  ]
+ },
+ {
+  "id": "ce1-009",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.comprendre › schéma compteurs",
+  "texte": "le voyant qui clignote avec la consommation",
+  "affirmation": "Le compteur électrique a un voyant qui clignote au rythme de la consommation.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : fiche Enedis de description du compteur Linky (voyant de consommation)."
+ },
+ {
+  "id": "ce1-010",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.comprendre › schéma compteurs",
+  "texte": "le module radio du compteur gaz, qui transmet un relevé par jour",
+  "affirmation": "Le compteur gaz communicant transmet un relevé quotidien.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Données quotidiennes A J+3",
+    "relu": true,
+    "page": "p. 38 (tableau des fréquences de relève, ligne « 1M »)"
+   }
+  ],
+  "note": "Le guide GRDF donne des données quotidiennes pour les PCE relevés « 1M » (compteurs communicants), disponibles à J+3."
+ },
+ {
+  "id": "ce1-011",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.comprendre › encadré",
+  "texte": "Pour connaître la consommation de l’éclairage seul, il faut un {{sous-compteur}} sur son circuit, ou une estimation.",
+  "affirmation": "Un usage se mesure par sous-comptage ou s'estime.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-012",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.approfondir › Les niveaux de périmètre",
+  "texte": "Les écoles de la ville (fictif)",
+  "affirmation": "Patrimoine fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-013",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.approfondir › Les niveaux de périmètre",
+  "texte": "{{pdl}} 30001234567890, {{pce}} 21456789012345",
+  "affirmation": "Identifiants de l'école (fictifs).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-014",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.approfondir › Les identifiants › §1",
+  "texte": "Le {{pdl}} (Point De Livraison, appelé **PRM** par Enedis) identifie un raccordement électrique avec **14 chiffres**.",
+  "affirmation": "Le PDL, appelé PRM chez Enedis, compte 14 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce1-015",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.approfondir › Les identifiants › §1",
+  "texte": "Le {{pce}} (Point de Comptage et d’Estimation) identifie un point de livraison de gaz chez GRDF, en général avec 14 chiffres ; certains sites anciens ont encore un identifiant « GI » suivi de 6 chiffres.",
+  "affirmation": "Le PCE compte 14 chiffres, ou « GI » suivi de 6 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "p. 39"
+   }
+  ]
+ },
+ {
+  "id": "ce1-016",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.approfondir › Les identifiants › §2",
+  "texte": "Un identifiant désigne un **point de raccordement**, pas un appareil : quand le compteur est remplacé, le PDL ou le PCE reste le même, mais le numéro de série du compteur change.",
+  "affirmation": "L'identifiant reste le même quand le compteur est remplacé.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   }
+  ],
+  "note": "La FAQ Enedis dit que le PDL « identifie le logement sur le réseau électrique » (un point, pas un appareil), mais ne parle pas du remplacement du compteur. À sourcer : une page Enedis ou GRDF qui le dise explicitement."
+ },
+ {
+  "id": "ce1-017",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.approfondir › encadré",
+  "texte": "Un site peut avoir **plusieurs** PDL (une extension raccordée à part). Un PDL peut alimenter **plusieurs** bâtiments",
+  "affirmation": "Cas de rattachement plusieurs à plusieurs.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-018",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.approfondir › L’objectif décide des données",
+  "texte": "le {{decret-tertiaire}} impose aux bâtiments tertiaires d’au moins 1 000 m² de réduire leur consommation et de la déclarer sur {{operat}}",
+  "affirmation": "Décret tertiaire : seuil de 1 000 m², réduction des consommations, déclaration sur OPERAT.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Sur la base de ces données corrigées, la plateforme OPERAT génère l'attestation numérique annuelle",
+    "relu": true,
+    "page": "article 13, III"
+   }
+  ],
+  "note": "Passages lus pour l'étape 8 (textes fournis par l'auteur, le 9 octobre 2026)."
+ },
+ {
+  "id": "ce1-019",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "niveaux.approfondir › L’objectif décide des données",
+  "texte": "**Climat** : on convertit les kWh en {{tco2}}.",
+  "affirmation": "Conversion des kWh en CO₂.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce1-020",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "quiz › 3",
+  "texte": "Un PDL compte exactement 14 chiffres.",
+  "affirmation": "Un PDL compte 14 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce1-021",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "quiz › 2",
+  "texte": "Le PDL (ou PRM) identifie le point de raccordement. Seul le numéro de série du compteur change.",
+  "affirmation": "Le PDL reste le même quand le compteur change.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   }
+  ],
+  "note": "Même réserve que ce1-016."
+ },
+ {
+  "id": "ce1-022",
+  "fichier": "cours/contenu/etape-1.js",
+  "repere": "quiz › 4",
+  "texte": "Pour un budget, on a besoin des montants en euros : les factures.",
+  "affirmation": "Méthode : les factures suffisent pour un budget.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

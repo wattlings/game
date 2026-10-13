@@ -26,7 +26,7 @@ const fichiers = (dossier, filtre) =>
 
 const VERDICTS = { confirme: "Confirmé", corrige: "Corrigé", "a-corriger": "À corriger", "sans-source": "Sans source", "sans-objet": "Sans objet" };
 const TYPES = { fait: "Fait", regle: "Règle", fictif: "Fictif", methode: "Méthode", calcul: "Calcul", vanne: "Vanne" };
-const PERIMETRES = { "releve-cours-etape-2.json": "Cours · étape 2", "releve-cours-etape-8.json": "Cours · étape 8", "releve-jeu-etape-2.json": "Jeu · étape 2", "releve-voyage-solaire.json": "Jeu · centrale solaire" };
+const PERIMETRES = { "releve-cours-etape-1.json": "Cours · étape 1", "releve-cours-etape-2.json": "Cours · étape 2", "releve-cours-etape-3.json": "Cours · étape 3", "releve-cours-etape-4.json": "Cours · étape 4", "releve-cours-etape-5.json": "Cours · étape 5", "releve-cours-etape-6.json": "Cours · étape 6", "releve-cours-etape-7.json": "Cours · étape 7", "releve-cours-etape-8.json": "Cours · étape 8", "releve-jeu-etape-2.json": "Jeu · étape 2", "releve-voyage-solaire.json": "Jeu · centrale solaire" };
 
 /** Le registre (on l'importe tel quel : c'est un module du site). */
 async function registre() {

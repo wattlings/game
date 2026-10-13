@@ -20,7 +20,7 @@ export default {
   retenir: [
     "Un modèle simple : un **site** contient des **compteurs**, qui produisent des **mesures**.",
     "Changer de {{pas-de-temps}} ({{agregation}}) lisse la courbe mais ne change pas l’énergie totale.",
-    "Pour comparer le gaz et l’électricité, on convertit les m³ en {{kwh}} avec le {{coef-conversion}}.",
+    "Pour comparer le gaz et l’électricité, on convertit les m³ en {{kwh}} avec le {{coef-conversion}}[[mne-releve-compteur]].",
   ],
   analogie: {
     icone: "tableau",
@@ -106,7 +106,7 @@ export default {
           [
             "Site",
             "nom, adresse, surface, activité",
-            "La surface sert aux ratios kWh/m² et au décret tertiaire",
+            "La surface sert aux ratios kWh/m² et au décret tertiaire[[legifrance-cch-r174-22]]",
           ],
           [
             "Point de comptage",
@@ -140,7 +140,7 @@ export default {
         titre: "Gérer l’historique",
         paragraphes: [
           "Tout ce qui change dans le temps porte des **dates de validité** : le compteur (pose, dépose), le contrat (puissance souscrite), la surface (extension), le rattachement site ↔ point de comptage. Ainsi, on peut recalculer correctement une année passée.",
-          "Les conversions d’unités sont faites au même endroit, avec la valeur en vigueur à la date de la mesure : le coefficient de conversion du gaz de janvier ne s’applique pas en juillet.",
+          "Les conversions d’unités sont faites au même endroit, avec la valeur en vigueur à la date de la mesure : le coefficient de conversion du gaz de janvier ne s’applique pas en juillet[[mne-coefficient-conversion]].",
         ],
       },
       {
@@ -159,7 +159,7 @@ export default {
           ["30 min / 1 h", "17 520 / 8 760", "Profils journaliers, comparaison de journées"],
           ["1 jour", "365", "Lien avec la météo (DJU), détection de dérives"],
           ["1 mois", "12", "Budget, comparaison aux factures, reporting"],
-          ["1 an", "1", "Décret tertiaire, bilans, classement des sites"],
+          ["1 an", "1", "Décret tertiaire[[legifrance-arrete-tertiaire-2020]], bilans, classement des sites"],
         ],
       },
       {

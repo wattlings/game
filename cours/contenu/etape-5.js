@@ -68,7 +68,7 @@ export default {
         id: "puissance",
         titre: "Régler la puissance souscrite",
         consigne:
-          "Déplace la puissance souscrite : trop haut, on paie pour rien ; trop bas, on paie des pénalités.",
+          "Déplace la puissance souscrite : trop haut, on paie pour rien ; trop bas, on paie des pénalités[[enedis-turpe7-brochure]].",
       },
       {
         type: "exemple",
@@ -127,7 +127,7 @@ export default {
         titre: "Les DJU en pratique",
         texte: [
           "Le seuil de 18 °C est une convention : en dessous, on considère qu’il faut chauffer. La température moyenne du jour se calcule souvent comme la moyenne du minimum et du maximum (méthode dite « météo ») ; d’autres méthodes existent, comme celle du COSTIC.",
-          "Les DJU viennent d’une station météo proche (Météo-France ou fournisseurs de données). Le décret tertiaire prévoit lui aussi un ajustement climatique des consommations.",
+          "Les DJU viennent d’une station météo proche (Météo-France ou fournisseurs de données). Le décret tertiaire prévoit lui aussi un ajustement climatique des consommations[[legifrance-arrete-tertiaire-2020]].",
         ],
       },
       {

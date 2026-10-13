@@ -1,0 +1,302 @@
+[
+ {
+  "id": "ce3-001",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "phrase",
+  "texte": "complète, sans doublon, plausible et cohérente entre sources",
+  "affirmation": "Les quatre qualités d'une donnée fiable.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-002",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "retenir",
+  "texte": "une journée au pas de 10 min doit avoir 144 points, sauf les jours de changement d’heure (138 ou 150 en heure locale)",
+  "affirmation": "144 pas de 10 min par jour ; 138 ou 150 les jours de 23 h et de 25 h.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "24 × 6 = 144 ; 23 × 6 = 138 ; 25 × 6 = 150."
+ },
+ {
+  "id": "ce3-003",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "retenir",
+  "texte": "un pic à 999,9 kW dans une école de 60 {{kva}}, c’est un bug de mesure",
+  "affirmation": "Un pic à 999,9 kW est impossible pour un raccordement de 60 kVA.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "999,9 kW dépasse de loin ce que peut fournir un raccordement de 60 kVA (au plus 60 kW de puissance active)."
+ },
+ {
+  "id": "ce3-004",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "retenir",
+  "texte": "On ne corrige jamais en silence : chaque valeur garde un statut",
+  "affirmation": "Traçabilité des corrections.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-005",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "analogie",
+  "texte": "Si le thermomètre affiche 45 °C",
+  "affirmation": "Analogie du thermomètre.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-006",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.comprendre › Un index qui recule",
+  "texte": "Relevé du 1er mars : **413 989 kWh**. Relevé du 1er avril : **404 989 kWh**.",
+  "affirmation": "Relevés de l'école (cas fictif).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-007",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.comprendre › Un index qui recule",
+  "texte": "404 989 − 413 989 = −9 000 kWh",
+  "affirmation": "Calcul de la consommation de mars.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-008",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.comprendre › Un index qui recule",
+  "texte": "Une consommation négative est impossible pour un compteur de consommation.",
+  "affirmation": "Un index de consommation ne peut que croître.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "Les index totalisateurs permettent de comptabiliser l'énergie durant l'intégralité de la période de fonctionnement du compteur",
+    "relu": true,
+    "page": "§ 1.3.2.1"
+   }
+  ],
+  "note": "Un index totalisateur cumule l'énergie depuis la mise en service du compteur : il ne recule pas."
+ },
+ {
+  "id": "ce3-009",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.comprendre › Un index qui recule",
+  "texte": "en mars (saison haute), le poste HPB ne tourne pas",
+  "affirmation": "Le poste HPB (saison basse) ne compte pas en saison haute.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Actuellement, la saison haute est constituée des mois de novembre inclus à mars inclus.",
+    "relu": true,
+    "page": "p. 22"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Heures Pleines saison Haute (HPH), Heures Creuses saison Haute (HCH), Heures Pleines saison Basse (HPB), Heures Creuses saison Basse (HCB)",
+    "relu": true,
+    "page": "p. 15"
+   }
+  ]
+ },
+ {
+  "id": "ce3-010",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.comprendre › Un index qui recule",
+  "texte": "418 534 − 413 989 = 4 545 kWh en avril",
+  "affirmation": "Consommation d'avril.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-011",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.comprendre › Un index qui recule",
+  "texte": "Règle de contrôle : un index doit toujours croître.",
+  "affirmation": "Règle de contrôle de continuité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-012",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Les règles de contrôle",
+  "texte": "144 points par jour au pas de 10 min (138 ou 150 les jours de changement d’heure, en heure locale)",
+  "affirmation": "144, 138 ou 150 points par jour.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-013",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Les règles de contrôle",
+  "texte": "999,9 kW pour un raccordement de 60 kVA : rejeté",
+  "affirmation": "Plausibilité.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-014",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Les règles de contrôle",
+  "texte": "Aucune donnée Gazpar depuis 3 jours : alerte de collecte",
+  "affirmation": "Fraîcheur : les données quotidiennes de gaz arrivent à J+3.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Données quotidiennes A J+3",
+    "relu": true,
+    "page": "p. 38 (tableau des fréquences de relève, ligne « 1M »)"
+   }
+  ],
+  "note": "Le guide GRDF annonce les données quotidiennes des compteurs communicants à J+3 : au-delà, un retard mérite une alerte."
+ },
+ {
+  "id": "ce3-015",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Puissance, énergie et unités › §1",
+  "texte": "Une {{courbe-de-charge}} contient des **{{puissance|puissances}} moyennes** ({{kw|kW}}) sur chaque {{pas-de-temps|pas}}.",
+  "affirmation": "La courbe de charge est une suite de puissances moyennes.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "correspond à la puissance moyenne constatée sur un pas de temps précis",
+    "relu": true,
+    "page": "§ 1.3.1"
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "Ensemble de valeurs moyennes horodatées de la puissance active soutirée sur des périodes d'intégration consécutives et de même durée",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce3-016",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Puissance, énergie et unités › §1",
+  "texte": "Pour obtenir de l’{{energie|énergie}} ({{kwh|kWh}}), on multiplie par la durée du pas en heures.",
+  "affirmation": "Énergie = puissance moyenne × durée.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-017",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Puissance, énergie et unités › §2",
+  "texte": "une API (le service qui livre les données) qui renvoie des **W** au lieu de kW (facteur 1 000)",
+  "affirmation": "Les données de courbe de charge peuvent être livrées en W.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "En puissance active, dont l'unité est le Watt (W)",
+    "relu": true,
+    "page": "§ 1.3.1"
+   }
+  ],
+  "note": "Le guide Enedis des flux R63 donne la courbe de charge en watts."
+ },
+ {
+  "id": "ce3-018",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Puissance, énergie et unités › §2",
+  "texte": "du gaz en **m³** comparé à des kWh",
+  "affirmation": "Le gaz se mesure en m³, se facture en kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "champs du catalogue de données : « Index brut de releve (debut) », « Volume brut consomme (m³) », « Coefficient de conversion », « Energie consommee (kWh) »",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce3-019",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Puissance, énergie et unités › §2",
+  "texte": "des **{{kva|kVA}}** (puissance apparente) comparés à des kW",
+  "affirmation": "Le kVA mesure une puissance apparente, différente de la puissance active en kW.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : une définition officielle de la puissance apparente (glossaire Enedis ou CRE)."
+ },
+ {
+  "id": "ce3-020",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › De la puissance à l’énergie",
+  "texte": "24 kW × 0,1667 h = 4 kWh",
+  "affirmation": "Exemple de calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-021",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "niveaux.approfondir › Le statut d’une donnée",
+  "texte": "On garde toujours la donnée brute : une correction doit pouvoir être expliquée et annulée.",
+  "affirmation": "Bonne pratique de traçabilité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-022",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "quiz › 1",
+  "texte": "Passage à l’heure d’été : la journée dure 23 h, soit 23 × 6 = 138 mesures.",
+  "affirmation": "Le 29 mars 2026, passage à l'heure d'été : journée de 23 h.",
+  "type": "regle",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : la directive 2000/84/CE (passage à l'heure d'été le dernier dimanche de mars, à 1 h UTC), sur EUR-Lex. Le 29 mars 2026 est bien le dernier dimanche de mars."
+ },
+ {
+  "id": "ce3-023",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "quiz › 3",
+  "texte": "Pour un raccordement de 60 kVA, 22 500 kW est impossible ; 22 500 W = 22,5 kW est plausible.",
+  "affirmation": "Ordre de grandeur.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce3-024",
+  "fichier": "cours/contenu/etape-3.js",
+  "repere": "quiz › 5",
+  "texte": "En heure locale, 2 h 00 à 2 h 50 existe deux fois le jour du passage à l’heure d’hiver. En UTC, jamais.",
+  "affirmation": "Au passage à l'heure d'hiver, l'heure de 2 h à 3 h se répète.",
+  "type": "regle",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Même source à lire que ce3-022 (directive 2000/84/CE : retour à l'heure d'hiver le dernier dimanche d'octobre, à 1 h UTC, soit 3 h → 2 h en France)."
+ }
+]

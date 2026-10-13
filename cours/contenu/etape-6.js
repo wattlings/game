@@ -111,7 +111,7 @@ export default {
           ],
           ["Écart au modèle", "Gaz au-dessus de la signature énergétique", "Gaz journalier et DJU"],
           ["Règle métier", "Chaudière qui consomme un samedi de juillet", "Gaz journalier et calendrier"],
-          ["Puissance", "Pointe au-dessus de 95 % de la puissance souscrite", "Courbe au pas fin"],
+          ["Puissance", "Pointe au-dessus de 95 % de la puissance souscrite (le dépassement est facturé[[enedis-turpe7-brochure]])", "Courbe au pas fin"],
         ],
       },
       {

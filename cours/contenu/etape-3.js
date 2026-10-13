@@ -70,10 +70,10 @@ export default {
             calc: "404 989 − 413 989 = −9 000 kWh",
           },
           {
-            t: "Une consommation négative est impossible pour un compteur de consommation. On cherche la cause : bouclage ? Non, le compteur est loin de son maximum. Changement de compteur ? Aucun n’est déclaré. Il reste l’erreur de saisie : 404 989 a été tapé au lieu de 413 989, deux chiffres mal recopiés.",
+            t: "Une consommation négative est impossible pour un compteur de consommation[[enedis-guide-flux-r6x]]. On cherche la cause : bouclage ? Non, le compteur est loin de son maximum. Changement de compteur ? Aucun n’est déclaré. Il reste l’erreur de saisie : 404 989 a été tapé au lieu de 413 989, deux chiffres mal recopiés.",
           },
           {
-            t: "On rejette le relevé, on le signale, et on l’estime en attendant le suivant. Indice supplémentaire : en mars (saison haute), le poste HPB ne tourne pas, donc son index aurait dû rester à 413 989. Le relevé du 1er mai (418 534 kWh) confirme la hausse normale d’avril.",
+            t: "On rejette le relevé, on le signale, et on l’estime en attendant le suivant. Indice supplémentaire : en mars (saison haute), le poste HPB ne tourne pas[[enedis-turpe7-brochure]], donc son index aurait dû rester à 413 989. Le relevé du 1er mai (418 534 kWh) confirme la hausse normale d’avril.",
             calc: "418 534 − 413 989 = 4 545 kWh en avril",
           },
         ],
@@ -118,7 +118,7 @@ export default {
           [
             "Fraîcheur",
             "La donnée est-elle arrivée à temps ?",
-            "Aucune donnée Gazpar depuis 3 jours : alerte de collecte",
+            "Aucune donnée Gazpar depuis 3 jours : alerte de collecte[[grdf-guide-donnees-2026]]",
           ],
         ],
       },
@@ -126,8 +126,8 @@ export default {
         type: "texte",
         titre: "Puissance, énergie et unités",
         paragraphes: [
-          "Une {{courbe-de-charge}} contient des **{{puissance|puissances}} moyennes** ({{kw|kW}}) sur chaque {{pas-de-temps|pas}}. Pour obtenir de l’{{energie|énergie}} ({{kwh|kWh}}), on multiplie par la durée du pas en heures. Additionner des kW sans tenir compte du pas est l’erreur la plus fréquente.",
-          "Autres pièges : une API (le service qui livre les données) qui renvoie des **W** au lieu de kW (facteur 1 000), du gaz en **m³** comparé à des kWh, des **{{kva|kVA}}** (puissance apparente) comparés à des kW.",
+          "Une {{courbe-de-charge}} contient des **{{puissance|puissances}} moyennes** ({{kw|kW}}) sur chaque {{pas-de-temps|pas}}[[enedis-guide-flux-r6x,enedis-nmo-cf-016e]]. Pour obtenir de l’{{energie|énergie}} ({{kwh|kWh}}), on multiplie par la durée du pas en heures. Additionner des kW sans tenir compte du pas est l’erreur la plus fréquente.",
+          "Autres pièges : une API (le service qui livre les données) qui renvoie des **W** au lieu de kW (facteur 1 000)[[enedis-guide-flux-r6x]], du gaz en **m³** comparé à des kWh, des **{{kva|kVA}}** (puissance apparente) comparés à des kW.",
         ],
       },
       {

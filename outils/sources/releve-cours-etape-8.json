@@ -197,5 +197,183 @@
    }
   ],
   "avant": "≈ 0,052 kg/kWh (élec, mix moyen)"
+ },
+ {
+  "id": "ce8-011",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › encadré À revérifier",
+  "texte": "l’arrêté du 10 avril 2020 a déjà été modifié plusieurs fois (en dernier lieu par un arrêté du 11 août 2026)",
+  "affirmation": "L'arrêté du 10 avril 2020 a été modifié plusieurs fois, en dernier lieu par un arrêté du 11 août 2026.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Annexe II · Version en vigueur depuis le 20 août 2026 · Modifié par Arrêté du 11 août 2026 - art. 1",
+    "relu": true,
+    "page": "annexe II"
+   }
+  ],
+  "avant": "l’arrêté du 10 avril 2020 a déjà été modifié plusieurs fois (en dernier lieu en 2025)",
+  "note": "Le texte lu mentionne aussi des modifications par les arrêtés du 13 avril 2022, du 28 novembre 2023, du 20 février 2024, du 5 juillet 2024 et du 1er août 2025."
+ },
+ {
+  "id": "ce8-012",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "phrase",
+  "texte": "On vérifie que l’action a vraiment marché, à conditions comparables",
+  "affirmation": "Méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce8-013",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "analogie",
+  "texte": "Tu te pèses en manteau en janvier et en t-shirt en juillet",
+  "affirmation": "Analogie de la balance.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce8-014",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "196 157 / 2 244 = 87,4 kWh par DJU",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce8-015",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "166 060 − 139 000 = 27 060 kWh, soit −16,3 %",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce8-016",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "139 000 / 196 157 − 1 = −29,1 %",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce8-017",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › indicateurs",
+  "texte": "≈ 44 000 € TTC par an",
+  "affirmation": "Facture de l'école (modèle fictif).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce8-018",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › indicateurs",
+  "texte": "≈ 5,5 t (élec) + 42 t (gaz)",
+  "affirmation": "Émissions de l'école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "86 000 × 0,064 ≈ 5,5 t ; 208 000 × 0,204 ≈ 42 t (facteurs sourcés en ce8-009 et ce8-010)."
+ },
+ {
+  "id": "ce8-019",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › décret tertiaire",
+  "texte": "L’école, avec 2 000 m², est concernée.",
+  "affirmation": "Application du seuil à l'école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce8-020",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › ISO 50001",
+  "texte": "La norme ISO 50001 (version 2018, complétée par un amendement de 2024 sur le changement climatique) ne fixe pas d’objectif chiffré : elle impose une démarche d’amélioration continue et documentée.",
+  "affirmation": "ISO 50001:2018 et son amendement de 2024 ; pas d'objectif chiffré, une démarche d'amélioration continue.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : la fiche de la norme sur iso.org (ISO 50001:2018 et Amd 1:2024)."
+ },
+ {
+  "id": "ce8-021",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › M&V",
+  "texte": "Le protocole international le plus utilisé est l’{{ipmvp}}.",
+  "affirmation": "L'IPMVP est le protocole de M&V le plus utilisé.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "À sourcer : la page de l'EVO (Efficiency Valuation Organization) sur l'IPMVP."
+ },
+ {
+  "id": "ce8-022",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "niveaux.approfondir › M&V",
+  "texte": "Il demande de fixer à l’avance la période de référence, le modèle d’ajustement et les facteurs pris en compte.",
+  "affirmation": "Exigences de l'IPMVP (plan de M&V).",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Même source à lire."
+ },
+ {
+  "id": "ce8-023",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "quiz › 2",
+  "texte": "Au moins 1 000 m² d’activités tertiaires, surfaces cumulées sur le site.",
+  "affirmation": "Seuil de 1 000 m².",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ]
+ },
+ {
+  "id": "ce8-024",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "quiz › 4",
+  "texte": "La plateforme OPERAT, chaque année au plus tard le 30 septembre pour l’année précédente.",
+  "affirmation": "Déclaration annuelle sur OPERAT avant le 30 septembre.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ]
+ },
+ {
+  "id": "ce8-025",
+  "fichier": "cours/contenu/etape-8.js",
+  "repere": "quiz › 5",
+  "texte": "Le gaz émet environ 3 fois plus de CO2 par kWh que l’électricité française (0,204 contre 0,064 kg par kWh facturé).",
+  "affirmation": "Rapport des facteurs d'émission gaz / électricité.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "0,204 / 0,064 ≈ 3,2 (facteurs sourcés en ce8-009 et ce8-010)."
  }
 ]

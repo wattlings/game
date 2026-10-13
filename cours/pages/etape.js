@@ -89,7 +89,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
         </div>
         <figure class="schema" style="margin:0">
           ${SCHEMAS[a.schema]()}
-          <figcaption>${echapper(a.legendeSchema)}</figcaption>
+          <figcaption>${texteRiche(a.legendeSchema)}</figcaption>
         </figure>
       </div>
 
@@ -97,7 +97,7 @@ export function pageEtape(conteneur, num, niveauDemande) {
         <div class="demo-head">
           <span class="demo-tag">Démo</span>
           <h2 id="demo-titre">${echapper(a.demo.titre)}</h2>
-          <p class="consigne">${echapper(a.demo.consigne)}</p>
+          <p class="consigne">${texteRiche(a.demo.consigne)}</p>
         </div>
         <div class="demo-body" id="demo-zone"></div>
         ${sourcesDeLaDemo(a.demo.id)}

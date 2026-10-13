@@ -1,0 +1,215 @@
+[
+ {
+  "id": "ce4-001",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "retenir",
+  "texte": "Un modèle simple : un **site** contient des **compteurs**, qui produisent des **mesures**.",
+  "affirmation": "Modèle de données.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce4-002",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "retenir",
+  "texte": "Changer de {{pas-de-temps}} ({{agregation}}) lisse la courbe mais ne change pas l’énergie totale.",
+  "affirmation": "L'agrégation conserve l'énergie.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce4-003",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "retenir",
+  "texte": "Pour comparer le gaz et l’électricité, on convertit les m³ en {{kwh}} avec le {{coef-conversion}}.",
+  "affirmation": "Le coefficient de conversion transforme les m³ de gaz en kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "La quantité d'énergie effectivement consommée est calculée en kWh en appliquant le coefficient de conversion",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce4-004",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "analogie",
+  "texte": "Les mêmes livres peuvent être classés par auteur",
+  "affirmation": "Analogie de la bibliothèque.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce4-005",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "Le lundi 12 janvier 2026, le compteur électrique de l’école a envoyé 144 puissances moyennes.",
+  "affirmation": "Mesures de l'école (cas fictif) ; une courbe de charge est une suite de puissances moyennes.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [
+   {
+    "cle": "enedis-guide-flux-r6x",
+    "passage": "correspond à la puissance moyenne constatée sur un pas de temps précis",
+    "relu": true,
+    "page": "§ 1.3.1"
+   }
+  ]
+ },
+ {
+  "id": "ce4-006",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "E = 2 503,5 × 1/6 = 417 kWh",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce4-007",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "Le même jour, le compteur gaz indique 229,1 m³, avec un coefficient de 11,21 kWh/m³ :",
+  "affirmation": "Valeurs de l'école (fictives), coefficient dans la plage réelle.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "varie selon le lieu et le temps entre 9 et 12,5 kWh/m3",
+    "relu": true
+   }
+  ],
+  "note": "11,21 kWh/m³ est dans la plage publiée (9 à 12,5 kWh/m³)."
+ },
+ {
+  "id": "ce4-008",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.comprendre › exemple",
+  "texte": "417 + 2 568 = 2 985 kWh pour le site ce jour-là",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce4-009",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.comprendre › encadré",
+  "texte": "Un {{sous-compteur}} mesure une partie de ce que mesure déjà le compteur principal.",
+  "affirmation": "Un sous-compteur ne s'ajoute pas à son parent.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce4-010",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.approfondir › modèle",
+  "texte": "La surface sert aux ratios kWh/m² et au décret tertiaire",
+  "affirmation": "Le décret tertiaire s'applique selon la surface.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ]
+ },
+ {
+  "id": "ce4-011",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.approfondir › modèle",
+  "texte": "Stable dans le temps, même si le compteur change",
+  "affirmation": "Le point de comptage reste le même quand le compteur change.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Même réserve qu'à l'étape 1 (ce1-016) : à sourcer par une page Enedis ou GRDF explicite."
+ },
+ {
+  "id": "ce4-012",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.approfondir › texte",
+  "texte": "le coefficient de conversion du gaz de janvier ne s’applique pas en juillet",
+  "affirmation": "Le coefficient de conversion varie dans le temps.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "varie selon le lieu et le temps entre 9 et 12,5 kWh/m3",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "ce4-013",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.approfondir › granularités",
+  "texte": "[\"10 min\", \"52 560\", \"Pointes de puissance, dépassements, talon précis\"]",
+  "affirmation": "Nombre de mesures par an selon le pas.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "365 × 144 = 52 560 ; 365 × 48 = 17 520 ; 365 × 24 = 8 760."
+ },
+ {
+  "id": "ce4-014",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "niveaux.approfondir › granularités",
+  "texte": "[\"1 an\", \"1\", \"Décret tertiaire, bilans, classement des sites\"]",
+  "affirmation": "Le décret tertiaire se suit à l'année.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ]
+ },
+ {
+  "id": "ce4-015",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "quiz › 1",
+  "texte": "Chaque valeur × 1/6 h donne des kWh : E = Σ P / 6.",
+  "affirmation": "Calcul.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce4-016",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "quiz › 4",
+  "texte": "Le prorata au nombre de jours est une approximation.",
+  "affirmation": "Méthode de rattachement d'une facture.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "ce4-017",
+  "fichier": "cours/contenu/etape-4.js",
+  "repere": "quiz › 5",
+  "texte": "Le PCE reste le même ; on garde l’historique des compteurs successifs avec leurs dates de pose et de dépose.",
+  "affirmation": "Le PCE reste le même quand le compteur est remplacé.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Même réserve que ce4-011."
+ }
+]
