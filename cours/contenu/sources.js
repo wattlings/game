@@ -34,7 +34,7 @@ export const SOURCES_DEMOS = {
 };
 
 /** Les sources de la page « Piloter un patrimoine » (références nationales, ratios) : la liste s'affiche sur la page. */
-export const SOURCES_PATRIMOINE = [];
+export const SOURCES_PATRIMOINE = ["ademe-epc-2005", "ademe-operat-bilan-2022-2023", "legifrance-arrete-tertiaire-2020"];
 
 export const sourcesData = {
   type: "sources",

@@ -1282,6 +1282,46 @@ export const SOURCES = {
     niveau: "officiel",
     vu: "2026-10-13",
   },
+  "ademe-epc-2005": {
+    t: "Énergie et patrimoine communal – Enquête 2005",
+    ed: "ADEME, avec EDF, Gaz de France et l’AITF",
+    date: "novembre 2007",
+    url: "https://www.banquedesterritoires.fr/sites/default/files/ra/La%20synth%C3%A8se%20de%20l'%C3%A9tude%20%22Energie%20et%20patrimoine%20communal%22.pdf",
+    niveau: "officiel",
+    vu: "2026-10-13",
+  },
+  "ademe-operat-bilan-2022-2023": {
+    t: "Performance énergétique du parc tertiaire : quel bilan de l’utilisation de la plateforme OPERAT en 2022-2023 ?",
+    ed: "ADEME",
+    date: "mai 2024",
+    url: "https://librairie.ademe.fr/7242-performance-energetique-du-parc-tertiaire-quel-bilan-de-l-utilisation-de-la-plateforme-operat-en-2022-2023-.html",
+    niveau: "officiel",
+    vu: "2026-10-13",
+  },
+  "enedis-cg-raccordement-bt": {
+    t: "Conditions générales de raccordement en soutirage au réseau public de distribution d’électricité basse tension d’un programme immobilier (Enedis-MOP-RAC_027E, version 3)",
+    ed: "Enedis",
+    date: "3 septembre 2026",
+    url: "https://www.enedis.fr/media/4658/download",
+    niveau: "officiel",
+    vu: "2026-10-13",
+  },
+  "cre-contrat-grd-f-gaz": {
+    t: "Conditions générales du contrat distributeur de gaz – fournisseur (GRDF)",
+    ed: "GRDF, publié par la CRE",
+    date: "version du 20 décembre 2018",
+    url: "https://www.cre.fr/fileadmin/Documents/Deliberations/import/ContratDistributeurGaz-Fournisseur.pdf",
+    niveau: "officiel",
+    vu: "2026-10-13",
+  },
+  "fournisseurs-electricite-pdl-prm": {
+    t: "Numéro PDL / PRM : qu’est-ce que c’est et où le trouver ?",
+    ed: "Fournisseurs-electricite.com",
+    date: "2026",
+    url: "https://fournisseurs-electricite.com/compteur/linky/pdl-prm",
+    niveau: "secondaire",
+    vu: "2026-10-13",
+  },
 };
 
 /** Une source, prête à afficher : « Éditeur, Titre (date) ». */

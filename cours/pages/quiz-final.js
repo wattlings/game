@@ -3,6 +3,7 @@
  */
 import { icone } from "../blocs/icones.js";
 import { echapper } from "../blocs/outils.js";
+import { majNotes, ouvrirNotes } from "../blocs/notes.js";
 import { monterQuiz } from "../blocs/quiz.js";
 import { ETAPES } from "../contenu/index.js";
 import { QUESTIONS_QUIZ_FINAL } from "../contenu/quiz-final.js";
@@ -11,6 +12,7 @@ import { magasin } from "../coquille/etat.js";
 /** Affiche le quiz de synthèse dans `conteneur`. */
 export function pageQuizFinal(conteneur) {
   const n = magasin.get().quizFinal;
+  ouvrirNotes(); // les appels de note de la page repartent de 1
   conteneur.innerHTML = `
   <div class="stack" style="gap:24px">
     <div class="stack" style="gap:8px">
@@ -20,6 +22,7 @@ export function pageQuizFinal(conteneur) {
     </div>
     <section class="demo quiz-bloc"><div class="demo-body" id="qf"></div></section>
     <div id="qf-fin" aria-live="polite"></div>
+    <section class="bloc sources" data-notes hidden></section>
   </div>`;
   const t = QUESTIONS_QUIZ_FINAL.map((a) => {
     const c = ETAPES.find((o) => o.num === a.etape);
@@ -29,6 +32,8 @@ export function pageQuizFinal(conteneur) {
       explication: `${a.explication} (Étape ${c.num}, ${c.titre}.)`,
     };
   });
+  // chaque correction affichée peut citer une source : la liste du bas suit
+  conteneur.querySelector("#qf").addEventListener("click", () => majNotes(conteneur));
   monterQuiz(conteneur.querySelector("#qf"), t, (a) => {
     magasin.set({
       quizFinal: Math.max(a, magasin.get().quizFinal || 0),
