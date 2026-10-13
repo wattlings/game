@@ -16,6 +16,8 @@ import {
 } from "../../commun/donnees/patrimoine.js";
 import { benchHTML, paretoHTML, tipify } from "../../commun/graphiques/barres.js";
 import { esc, fmt } from "../../commun/texte.js";
+import { appelsDeNote, majNotes, ouvrirNotes } from "../blocs/notes.js";
+import { SOURCES_PATRIMOINE } from "../contenu/sources.js";
 import { magasin } from "../coquille/etat.js";
 
 /** Les couleurs des graphiques, prises dans les jetons du cours. */
@@ -37,6 +39,7 @@ export function pagePatrimoine(c) {
     GT = PSITES.reduce((a, s) => a + gis(s), 0),
     pas = PSITES[1];
   c.className = "fam-energie";
+  ouvrirNotes(); // les appels de note de la page repartent de 1
   c.innerHTML = `<div class="stack qk-patri" style="gap:24px">
     <header class="etape-head"><div class="titre">
       <div class="row"><span class="badge energie">Énergie</span><span class="badge neutre">Bonus</span><span class="eyebrow">Au-delà des 8 étapes</span></div>
@@ -85,8 +88,9 @@ export function pagePatrimoine(c) {
       <li><span><strong>Le climat.</strong> Des sites d’une même ville se comparent entre eux sans correction. Face à une référence nationale, on corrige du climat (DJU).</span></li>
       <li><span><strong>Le périmètre.</strong> Un bâtiment privé de la ville (la boulangerie) n’entre pas dans le patrimoine ; un local loué par la ville (l’annexe du Carré) y entre.</span></li>
       <li><span><strong>Le contexte.</strong> Une résidence ouverte 24 h/24 ou un fournil ont des ratios élevés et normaux. Un ratio se lit toujours avec l’activité et les horaires.</span></li></ul>
-      <p class="muted" style="font-size:var(--t-s)">Références nationales utilisées ici : ordres de grandeur par activité issus de la synthèse de l’enquête ADEME « Énergie et patrimoine communal » (données anciennes, corrigées du climat) et, pour les EHPAD, un ordre de grandeur publié d’environ 250 kWh/m²/an. À actualiser avec les données OPERAT avant tout usage réel. Le patrimoine d’Ampère-sur-Loire est fictif.</p>
-      <p class="muted" style="font-size:var(--t-s)">Sources : <a href="https://www.banquedesterritoires.fr/sites/default/files/ra/La%20synth%C3%A8se%20de%20l'%C3%A9tude%20%22Energie%20et%20patrimoine%20communal%22.pdf" target="_blank" rel="noopener">ADEME, Énergie et patrimoine communal (synthèse)</a> · <a href="https://data.ademe.fr/datasets/epc-5-batiments" target="_blank" rel="noopener">ADEME, données « Énergie et patrimoine communal »</a> · <a href="https://www.lsmart.co/blog/conso-energie-ehpad-decret-tertiaire/" target="_blank" rel="noopener">Consommation des EHPAD (ordre de grandeur)</a></p></section>
+      <p class="muted" style="font-size:var(--t-s)">Références nationales utilisées ici : moyennes par famille de bâtiments de l’enquête ADEME « Énergie et patrimoine communal » de 2005 (données anciennes, corrigées du climat) et, pour la résidence seniors, la moyenne des établissements médico-sociaux déclarés sur OPERAT (consommations 2021, non corrigées du climat). À actualiser avec les données OPERAT les plus récentes avant tout usage réel. Le patrimoine d’Ampère-sur-Loire est fictif.</p>
+      <p class="muted demo-sources" style="font-size:var(--t-s)">Sources de cette page${appelsDeNote(SOURCES_PATRIMOINE)}</p></section>
+    <section class="bloc sources" data-notes hidden></section>
     <nav class="pager" aria-label="Pages voisines"><a href="#etape-8"><small>← Étape précédente</small><b>8. Mesurer</b></a><a class="next" href="#quiz-final"><small>Pour finir →</small><b>Quiz final</b></a></nav>
   </div>`;
   const pp = c.querySelector("#pp-chart"),
@@ -115,4 +119,5 @@ export function pagePatrimoine(c) {
   );
   drawP("mwh");
   drawB("ens");
+  majNotes(c);
 }

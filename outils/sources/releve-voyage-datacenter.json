@@ -173,7 +173,7 @@
     "cle": "arcep-numerique-soutenable-2026",
     "passage": "entre sa consommation électrique totale et la consommation électrique de ses équipements informatiques. Plus la valeur du PUE d’un centre de données est proche de 1 plus il est considéré comme performant d’un point de vue énergétique.",
     "relu": true,
-    "page": "p. 27"
+    "page": "p. 27 du PDF"
    }
   ],
   "note": null
@@ -202,7 +202,7 @@
     "cle": "uptime-survey-2025",
     "passage": "In 2025, respondents’ annual PUE had a weighted average of 1.54 (see Figure 2), marking the sixth consecutive year that this headline figure has virtually stood still.",
     "relu": true,
-    "page": "p. 6"
+    "page": "p. 7 du PDF"
    }
   ],
   "note": "Moyenne pondérée de l'enquête Uptime (source secondaire, la seule à publier une moyenne mondiale annuelle)."
@@ -220,7 +220,7 @@
     "cle": "arcep-numerique-soutenable-2026",
     "passage": "le PUE de l’ensemble des centres de données étudiés s’élève à 1,42 en 2024",
     "relu": true,
-    "page": "p. 27"
+    "page": "p. 27 du PDF"
    }
   ],
   "note": "Chiffre 2024 de l'enquête Arcep (opérateurs de centres de données interrogés)."
@@ -280,7 +280,7 @@
     "cle": "arcep-numerique-soutenable-2026",
     "passage": "Plus la valeur du PUE d’un centre de données est proche de 1 plus il est considéré comme performant d’un point de vue énergétique.",
     "relu": true,
-    "page": "p. 27"
+    "page": "p. 6 du PDF"
    }
   ],
   "note": null
@@ -776,13 +776,13 @@
     "cle": "uptime-survey-2025",
     "passage": "low-density facilities (under 4 kW per rack average) remain common even in those geographies",
     "relu": true,
-    "page": "p. 9"
+    "page": "p. 9 du PDF"
    },
    {
     "cle": "uptime-survey-2025",
     "passage": "When all systems are highly exercised, it does not take many servers (along with storage shelves and top of rack switches) to cross the 10 kW mark.",
     "relu": true,
-    "page": "p. 9"
+    "page": "p. 9 du PDF"
    }
   ],
   "note": "La figure 3 de l'enquête (illisible en texte) place la densité la plus courante à 4-5 kW par baie."
@@ -800,13 +800,13 @@
     "cle": "uptime-survey-2025",
     "passage": "it is only above 60 kW per rack that these computationally intense workloads take primacy over enterprise software as the main driver of densified infrastructure.",
     "relu": true,
-    "page": "p. 10"
+    "page": "p. 10 du PDF"
    },
    {
     "cle": "uptime-survey-2025",
     "passage": "Our survey identified even higher densities, including some cabinets exceeding 100 kW, but these are still rare.",
     "relu": true,
-    "page": "p. 10"
+    "page": "p. 10 du PDF"
    }
   ],
   "note": null
