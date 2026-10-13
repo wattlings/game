@@ -3,6 +3,8 @@
    Une question : Q("question", "bonne réponse", "explication", "mauvaise réponse 1", "pourquoi", "mauvaise réponse 2", "pourquoi"). */
 
 const ARENE_8={id:8,badge:'Piloter',name:'Arène de la Preuve',champ:'Mme Joule',theme:'preuve',col:'#c9a227',wall:'#f7f2e2',b:L.arena[8],
+  /* les références de ce qu'affirment les questions (registre commun/donnees/sources.js) : listées dans le menu, onglet Sources */
+  refs:['legifrance-cch-r174-22','evo-ipmvp','legifrance-arrete-tertiaire-2020','ministere-eet','ministere-iso-50001'],
   cpal:{shirt:'#8a3b8f',pants:'#2f3a5c',hair:'#9a9aa2',glasses:1,skin:'#e0ac7e',style:'carre',bun:1,lash:1},
   cIntro:["Alors, {name}. Tu croyais que la dernière championne serait une inconnue ?","Arène de la Preuve. Une action n'a marché que si on le prouve à conditions égales. Convaincs-moi."],
   cWin:["Preuve faite. Tu as bouclé les 8 étapes : voici le badge Mesurer.","Passe me voir au bureau. J'ai une nouvelle à t'annoncer."],

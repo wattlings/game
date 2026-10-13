@@ -15,8 +15,22 @@ export const SOURCES_DEMOS = {
   collecter: ["enedis-nmo-cf-015e", "enedis-guide-flux-r6x", "grdf-adict-faq", "mne-coefficient-conversion", "mne-elements-facture", "ministere-guide-fiscalite-2026"],
   consentement: ["enedis-nmo-cf-015e", "enedis-contrat-data-connect"],
   casIndex: ["enedis-turpe7-brochure"],
-  decretTertiaire: ["legifrance-arrete-tertiaire-2020", "ademe-operat-faq"],
+  decretTertiaire: ["legifrance-arrete-tertiaire-2020", "ademe-operat-faq", "cerema-essentiels-batiments-publics"],
   anatomieFacture: ["ministere-guide-fiscalite-2026", "enedis-turpe7-brochure", "cnieg-cta-note", "mne-elements-facture", "mne-prix-pro", "enedis-facturation-acheminement", "cre-atrd7", "minefi-tva"],
+  indicateurs: ["cerema-essentiels-batiments-publics", "legifrance-arrete-tertiaire-2020"],
+  cadrer: ["enedis-pdl", "grdf-guide-donnees-2026", "mne-acteurs-marche", "enedis-linky-puiss-depassee", "grdf-coefficient-conversion"],
+  agir: ["ademe-10-gestes-entreprises", "legifrance-arrete-tertiaire-2020"],
+  agregationSite: ["grdf-coefficient-conversion"],
+  autoconso: ["hespul-pv-couts", "ministere-autoconsommation", "hespul-pv-tarif-100kwc", "cre-avis-s21-2026", "legifrance-arrete-tertiaire-2020"],
+  changementHeure: ["eurlex-directive-2000-84"],
+  horodatage: ["eurlex-reglement-2017-459", "grdf-guide-donnees-2026"],
+  identifiants: ["grdf-guide-donnees-2026", "enedis-pdl"],
+  mesurer: ["evo-ipmvp"],
+  perimetre: ["legifrance-cch-r174-22", "legifrance-arrete-tertiaire-2020", "ademe-operat-faq", "cerema-essentiels-batiments-publics"],
+  puissance: ["enedis-segments-c1-c5", "enedis-turpe7-brochure", "enedis-linky-puiss-depassee"],
+  signature: ["costic-plaquette-dju"],
+  structurer: ["mne-coefficient-conversion"],
+  fiabiliser: ["eurlex-directive-2000-84"],
 };
 
 /** Les sources de la page « Piloter un patrimoine » (références nationales, ratios) : la liste s'affiche sur la page. */

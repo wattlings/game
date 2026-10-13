@@ -1,0 +1,1285 @@
+[
+ {
+  "id": "gl-001",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kva › def",
+  "texte": "Kilovoltampère : unité de puissance « apparente », utilisée pour les contrats et le dimensionnement des réseaux.",
+  "affirmation": "Le kVA est l'unité de la puissance apparente, celle des puissances souscrites.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-grandeurs-physiques-cap",
+    "passage": "Les puissances apparentes sont exprimées en VA.",
+    "relu": true,
+    "page": "§ 3.11"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "celle-ci est égale à la puissance souscrite apparente multipliée par 0,93",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ],
+  "note": "La brochure TURPE 7 parle de « puissance souscrite apparente » (contrats en kVA). Le dimensionnement des réseaux en kVA n'a pas de passage séparé (les formulaires de raccordement d'Enedis demandent la puissance apparente en kVA)."
+ },
+ {
+  "id": "gl-002",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kva › def",
+  "texte": "Elle est un peu supérieure à la puissance en kW (kW = kVA × cos φ).",
+  "affirmation": "La puissance active vaut la puissance apparente multipliée par le facteur de puissance (cos φ), d'où des kW un peu inférieurs aux kVA.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-grandeurs-physiques-cap",
+    "passage": "Le facteur de puissance est exprimé sans unité pour chaque phase et pour le total",
+    "relu": true,
+    "page": "§ 3.14 (FPt = Pt / St)"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "celle-ci est égale à la puissance souscrite apparente multipliée par 0,93",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ],
+  "note": "RTE définit le facteur de puissance comme P/S ; il vaut cos φ en régime sinusoïdal. Le TURPE retient 0,93 pour passer des kVA aux kW souscrits en BT > 36 kVA."
+ },
+ {
+  "id": "gl-003",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kva › ex",
+  "texte": "L’école a souscrit 60 kVA, soit environ 56 kW utilisables.",
+  "affirmation": "60 kVA × 0,93 ≈ 56 kW.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "60 × 0,93 = 55,8 kW, avec le coefficient 0,93 du TURPE."
+ },
+ {
+  "id": "gl-004",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › point-de-comptage › def",
+  "texte": "L’endroit précis où l’énergie est mesurée. Un site peut en avoir plusieurs, et un compteur peut couvrir plusieurs usages.",
+  "affirmation": "Définition du point de comptage telle que le cours l'emploie.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-005",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › point-de-comptage › ex",
+  "texte": "L’école a deux points de comptage : un pour l’électricité, un pour le gaz.",
+  "affirmation": "Les compteurs de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-006",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › horodatage › def",
+  "texte": "La date et l’heure attachées à une mesure. Il faut savoir si elles désignent le début ou la fin de l’intervalle, et dans quel fuseau.",
+  "affirmation": "Conseil de méthode : vérifier la convention début/fin d'intervalle et le fuseau.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-007",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › horodatage › ex",
+  "texte": "La mesure « 10:00 » de l’école couvre 10:00 à 10:10.",
+  "affirmation": "Convention des données fictives de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-008",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › utc › def",
+  "texte": "La France est à UTC+1 en hiver et UTC+2 en été.",
+  "affirmation": "Heure légale française : UTC+1 en hiver, UTC+2 en été.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "syrte-heure-ete-hiver",
+    "passage": "Note : L’heure d’hiver correspond en France à UTC+1 et l’heure d’été à UTC+2.",
+    "relu": true
+   }
+  ],
+  "note": "Observatoire de Paris, chargé du temps légal français."
+ },
+ {
+  "id": "gl-009",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › utc › def (UTC fixe)",
+  "texte": "Le temps universel, sans heure d’été ni d’hiver.",
+  "affirmation": "UTC ne change pas avec les saisons.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "syrte-heure-ete-hiver",
+    "passage": "Note : L’heure d’hiver correspond en France à UTC+1 et l’heure d’été à UTC+2.",
+    "relu": true
+   }
+  ],
+  "note": "Le passage d'une heure à l'autre se fait en changeant le décalage par rapport à UTC, qui lui reste fixe."
+ },
+ {
+  "id": "gl-010",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › utc › ex",
+  "texte": "Stocker en UTC évite les journées de 23 h et 25 h.",
+  "affirmation": "Conseil de stockage des données.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-011",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › interpolation › def",
+  "texte": "Estimer une valeur manquante à partir des valeurs voisines (par exemple une ligne droite entre la dernière valeur avant le trou et la première après).",
+  "affirmation": "Notion de méthode propre au cours (traitement des données).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-012",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › donnee-brute › def",
+  "texte": "Le statut d’une donnée : telle que reçue, modifiée par un contrôle, ou calculée faute de mesure. On garde toujours la trace du statut.",
+  "affirmation": "Notion de méthode propre au cours (traitement des données).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-013",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › agregation › def",
+  "texte": "Regrouper des données fines en données plus grossières : sommer des énergies, ou moyenner des puissances.",
+  "affirmation": "Notion de méthode propre au cours (traitement des données).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-014",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › sous-compteur › def",
+  "texte": "Un compteur privé placé en aval du compteur principal pour mesurer une partie des usages (une cuisine, un étage). Il ne s’additionne pas au compteur principal.",
+  "affirmation": "Notion de méthode propre au cours (traitement des données).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-015",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › interpolation › ex",
+  "texte": "Un trou de 30 min la nuit peut être interpolé sans risque ; un trou d’une journée, non.",
+  "affirmation": "Conseil de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-016",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › donnee-brute › ex",
+  "texte": "Le pic à 999,9 kW de l’école est marqué « brute, rejetée ».",
+  "affirmation": "Donnée fictive de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-017",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › agregation › ex",
+  "texte": "144 points de 10 min deviennent 1 énergie journalière.",
+  "affirmation": "144 × 10 min = 24 h.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "144 × 10 min = 1 440 min = 1 jour."
+ },
+ {
+  "id": "gl-018",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › sous-compteur › ex",
+  "texte": "Un sous-compteur sur la cuisine de l’école mesurerait environ 2 MWh par an, déjà inclus dans les 86 MWh du compteur principal.",
+  "affirmation": "Chiffres fictifs de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-019",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › thermosensibilite › def",
+  "texte": "Le nombre de kWh de chauffage en plus pour chaque degré-jour de froid : la pente de la signature énergétique.",
+  "affirmation": "Notion de méthode (pente de la signature énergétique).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-020",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › thermosensibilite › ex",
+  "texte": "Environ 134 kWh de gaz par DJU un jour de classe.",
+  "affirmation": "Valeur fictive de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-021",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › normalisation-climatique › def",
+  "texte": "Ramener une consommation de chauffage aux DJU d’une année de référence, pour comparer des hivers différents.",
+  "affirmation": "Méthode de correction climatique.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-022",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › normalisation-climatique › ex",
+  "texte": "150 000 kWh pour 1 900 DJU valent 177 158 kWh à 2 244 DJU.",
+  "affirmation": "150 000 × 2 244 / 1 900 ≈ 177 158 kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "150 000 × 2 244 / 1 900 = 177 157,9 : juste."
+ },
+ {
+  "id": "gl-023",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › ratio › def",
+  "texte": "Une consommation divisée par une grandeur de taille ou d’activité (m², élève, repas) pour comparer des bâtiments.",
+  "affirmation": "Méthode de comparaison.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-024",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › ratio › ex",
+  "texte": "147 kWh/m² tous usages pour l’école.",
+  "affirmation": "Ratio fictif de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-025",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › seuil-alerte › def",
+  "texte": "L’écart à la référence au-delà duquel le logiciel signale une anomalie, parfois avec une durée minimale (persistance).",
+  "affirmation": "Notion de méthode (réglage d'une alerte).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-026",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › seuil-alerte › ex",
+  "texte": "Plus de 10 % au-dessus de la référence, deux jours de suite.",
+  "affirmation": "Réglage d'exemple.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-027",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › faux-positif › def",
+  "texte": "Une alerte sans vrai problème (faux positif), ou un vrai problème sans alerte (faux négatif).",
+  "affirmation": "Notion de méthode (qualité des alertes).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-028",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › faux-positif › ex",
+  "texte": "Le pic à 999,9 kW déclenche une fausse alerte ; un seuil à 40 % laisse passer la dérive de janvier.",
+  "affirmation": "Cas fictifs de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-029",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › sobriete › def",
+  "texte": "Sobriété : consommer moins en changeant les usages. Efficacité : obtenir le même service avec moins d’énergie grâce à de meilleurs équipements.",
+  "affirmation": "Sobriété = consommer moins en changeant les usages ; efficacité = même service avec moins d'énergie.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-plan-sobriete",
+    "passage": "la sobriété énergétique, c’est-à-dire consommer moins ;",
+    "relu": true
+   },
+   {
+    "cle": "ademe-infos-sobriete-2026",
+    "passage": "L’efficacité consiste à réduire l’impact environnemental d’un produit ou d’un service à usage constant. On ne questionne pas le besoin, on conserve le même usage, mais on mobilise moins d’énergie ou de ressources pour y répondre.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-030",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › sobriete › ex",
+  "texte": "Baisser la consigne (sobriété) ; passer aux LED (efficacité).",
+  "affirmation": "Passer aux LED relève de l'efficacité.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-infos-sobriete-2026",
+    "passage": "Un véhicule plus performant, un éclairage LED ou un équipement industriel mieux optimisé relèvent de cette logique.",
+    "relu": true
+   }
+  ],
+  "note": "Baisser la consigne est un changement d'usage (sobriété)."
+ },
+ {
+  "id": "gl-031",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › autoconsommation › def",
+  "texte": "Consommer sur place l’électricité qu’on produit.",
+  "affirmation": "L'autoconsommation, c'est consommer l'électricité qu'on produit.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cre-autoconsommation",
+    "passage": "L’autoconsommation est la possibilité pour un consommateur de produire lui-même tout ou partie de sa consommation d’électricité.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-032",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › autoconsommation › def (taux et surplus)",
+  "texte": "Le taux d’autoconsommation est la part de la production consommée sur place ; le surplus part sur le réseau.",
+  "affirmation": "Taux d'autoconsommation = part de la production consommée sur place ; le surplus est injecté.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "Sa maison pourra donc consommer entièrement la production locale : son taux d'autoconsommation atteindra 100 %.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-acc-guide",
+    "passage": "La production qui n’est pas autoconsommée sur le site, appelée surplus, est injectée sur le réseau public.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-033",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › autoconsommation › ex",
+  "texte": "Avec 36 kWc, l’école consomme sur place une partie seulement de sa production d’été.",
+  "affirmation": "Installation fictive de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-034",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kwc › def",
+  "texte": "Kilowatt-crête : la puissance maximale d’une installation solaire dans des conditions standard d’ensoleillement.",
+  "affirmation": "Le kWc est la puissance d'une installation photovoltaïque dans les conditions de test standard.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cre-cdc-pv-batiment-2023",
+    "passage": "Puissance d’un composant photovoltaïque sous les conditions de test standard (irradiation de 1000 W/m², température des cellules de 25°C, spectre AM = 1,5). Elle est exprimée en Wc.",
+    "relu": true,
+    "page": "§ 1, définitions, p. 10"
+   },
+   {
+    "cle": "cre-cdc-pv-batiment-2023",
+    "passage": "Somme des puissances de chacun des Composants photovoltaïques de l’Installation.",
+    "relu": true,
+    "page": "§ 1, définitions, p. 10"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-035",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › kwc › ex",
+  "texte": "36 kWc produisent environ 40 MWh par an en Île-de-France (ordre de grandeur).",
+  "affirmation": "En Île-de-France, 36 kWc produisent environ 40 MWh par an.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "gsa-paris",
+    "passage": "Requête loc=48.86,2.35 : PVOUT_csi = 1 141,2 kWh/kWc/an ; OPTA = 36°",
+    "relu": true
+   }
+  ],
+  "note": "36 × 1 141 ≈ 41 MWh/an à Paris (plan fixe optimal) : 38 MWh était un peu bas ; 40 MWh reste un ordre de grandeur, cohérent avec la démo Agir (21 780 kWh = 55 % de ≈ 39,6 MWh).",
+  "avant": "36 kWc produisent environ 38 MWh par an en Île-de-France (ordre de grandeur)."
+ },
+ {
+  "id": "gl-036",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › temps-de-retour › def",
+  "texte": "Le nombre d’années pour que les économies remboursent l’investissement : investissement divisé par l’économie annuelle.",
+  "affirmation": "Formule du temps de retour simple.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-037",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › temps-de-retour › ex",
+  "texte": "30 000 € d’isolation pour 2 500 € d’économie par an : 12 ans.",
+  "affirmation": "30 000 / 2 500 = 12 ans.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-038",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › energie-finale › def",
+  "texte": "L’énergie livrée et facturée au bâtiment (kWh d’électricité, de gaz), par opposition à l’énergie primaire nécessaire pour la produire.",
+  "affirmation": "L'énergie finale est celle livrée au consommateur ; l'énergie primaire est celle prise avant transformation.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "insee-energie-finale",
+    "passage": "L'énergie finale ou disponible est l'énergie livrée au consommateur pour sa consommation finale (essence à la pompe, électricité au foyer, etc.).",
+    "relu": true
+   },
+   {
+    "cle": "insee-energie-primaire",
+    "passage": "L'énergie primaire est l'ensemble des produits énergétiques non transformés, exploités directement ou importés.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-039",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › energie-finale › ex",
+  "texte": "Le décret tertiaire compte l’énergie finale de l’école",
+  "affirmation": "Le décret tertiaire porte sur l'énergie finale.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": true,
+    "page": "G2 – Textes régissant le dispositif"
+   }
+  ],
+  "note": "Les 294 MWh de l'école sont fictifs."
+ },
+ {
+  "id": "gl-040",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › ipmvp › def",
+  "texte": "Le protocole international de mesure et de vérification de la performance, qui encadre la façon de prouver une économie d’énergie.",
+  "affirmation": "L'IPMVP est le protocole international de mesure et vérification des économies d'énergie.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "International Performance Measurement and Verification Protocol (IPMVP)",
+    "relu": true
+   },
+   {
+    "cle": "evo-ipmvp",
+    "passage": "the objective of its originators was to develop a consensus approach to measuring and verifying efficiency investments",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-041",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › ipmvp › ex",
+  "texte": "Il impose de consigner dans un plan de M&V la mesure avant et après, et l’ajustement aux conditions (les DJU, par exemple).",
+  "affirmation": "L'IPMVP demande un plan de M&V propre au projet, une mesure avant/après et des ajustements aux changements de conditions.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "Each project must be individually designed to suit the needs of all stakeholders in the reporting of energy or water savings. This individual design is recorded in the project’s M&V Plan, and savings are reported as defined therein.",
+    "relu": true
+   },
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are determined by comparing measured energy consumption or demand before and after implementation of an energy efficiency measure (EEM), making suitable adjustments for changes in conditions",
+    "relu": true,
+    "page": "Framework"
+   }
+  ],
+  "note": "La page de l'EVO dit que chaque projet consigne sa démarche dans un plan de M&V et que les économies se mesurent avant/après avec des ajustements aux conditions ; elle ne parle pas de « fixer à l'avance » ni des DJU en particulier.",
+  "avant": "Il impose de fixer à l’avance la période de référence et l’ajustement aux DJU."
+ },
+ {
+  "id": "gl-042",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › ipe › def",
+  "texte": "Indicateur de performance énergétique (ISO 50001) : une mesure choisie pour suivre la performance, comme les kWh/m² ou les kWh/DJU.",
+  "affirmation": "L'ISO 50001 exige des indicateurs de performance énergétique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "La norme exige par ailleurs la définition d’une consommation énergétique de référence, issue des données de la revue énergétique, et d’indicateurs de performance énergétique adaptés.",
+    "relu": true
+   }
+  ],
+  "note": "Les kWh/m² et kWh/DJU sont des exemples donnés par le cours."
+ },
+ {
+  "id": "gl-043",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › ipe › ex",
+  "texte": "L’école suit ses kWh de gaz par DJU chaque mois.",
+  "affirmation": "Suivi fictif de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-044",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › perimetre › def",
+  "texte": "Ce qu’on décide de suivre : un patrimoine, un site, un bâtiment, un usage. Tout ce qui est dedans est mesuré et comparé ; le reste est laissé de côté, volontairement.",
+  "affirmation": "Notion de méthode (choix du périmètre).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-045",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › perimetre › ex",
+  "texte": "Le périmètre de l’école : le bâtiment et la cour, sans le logement du gardien, qui a son propre compteur.",
+  "affirmation": "Périmètre fictif de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-046",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › anomalie › def",
+  "texte": "Une valeur qui ne peut pas être juste : un trou, un doublon, un pic impossible, une valeur négative, une mauvaise unité. On la repère, on la marque, on ne l’efface jamais.",
+  "affirmation": "Notion de méthode (qualité des données).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-047",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › anomalie › ex",
+  "texte": "Un pic à 999,9 kW sur un raccordement de 60 kVA est une anomalie.",
+  "affirmation": "Cas fictif de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-048",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pointe › def",
+  "texte": "La puissance la plus haute appelée sur une période.",
+  "affirmation": "Définition de la pointe.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-049",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pointe › def (puissance souscrite)",
+  "texte": "C’est elle qui doit tenir sous la puissance souscrite.",
+  "affirmation": "Les dépassements de la puissance souscrite sont facturés.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l'utilisateur au-delà de sa puissance souscrite.",
+    "relu": true,
+    "page": "p. 7"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-050",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pointe › ex",
+  "texte": "La pointe annuelle de l’école est de 57 kVA, un midi d’hiver.",
+  "affirmation": "Valeur fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-051",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › derive › def",
+  "texte": "Une hausse de consommation qui s’installe et dure, par rapport à la référence : un équipement oublié, un réglage modifié, une panne.",
+  "affirmation": "Notion de méthode (suivi).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-052",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › derive › ex",
+  "texte": "Un équipement resté allumé la nuit fait monter le talon de l’école de 3 kW.",
+  "affirmation": "Cas fictif de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-053",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › indicateur › def",
+  "texte": "Un chiffre suivi dans le temps pour savoir si l’on progresse : kWh, kWh/m², euros, CO2. On le choisit selon l’objectif.",
+  "affirmation": "Notion de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-054",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › indicateur › ex",
+  "texte": "L’école suit ses kWh/m² par an, ses euros et ses tonnes de CO2.",
+  "affirmation": "Indicateurs fictifs de l'école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-055",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pci › def",
+  "texte": "Pouvoir calorifique inférieur : l’énergie d’un combustible sans la chaleur qu’on récupérerait en condensant la vapeur d’eau des fumées.",
+  "affirmation": "Le PCI ne compte pas la chaleur de condensation de l'eau des fumées.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-cegibat-pci",
+    "passage": "Le pouvoir calorifique est dit « inférieur » quand l'eau de combustion est supposée à l'état de vapeur à 0 °C et sous 1 013 mbar.",
+    "relu": true
+   },
+   {
+    "cle": "grdf-cegibat-pci",
+    "passage": "Nb. Le PCI est égal au PCS diminué de la quantité de chaleur latente de l'eau des produits de combustion.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-056",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pci › def (PCS / PCI)",
+  "texte": "Le gaz se facture en PCS : 1 kWh PCS vaut 0,90 kWh PCI.",
+  "affirmation": "Le gaz est converti en kWh avec le PCS ; 1 kWh PCS = 0,90 kWh PCI.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "coeff_conversion = coeff_pta * valeur_pcs",
+    "relu": true
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-057",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pci › def (conséquence)",
+  "texte": "Un même facteur d’émission change donc selon la base.",
+  "affirmation": "Conséquence de la conversion PCS/PCI.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-058",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › pci › ex",
+  "texte": "≈ 0,204 kg de CO2 par kWh de gaz facturé (PCS), soit 0,227 kg par kWh PCI.",
+  "affirmation": "Gaz : 0,227 kgCO2e/kWh PCI, soit 0,204 par kWh PCS.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   }
+  ],
+  "note": "0,227 × 0,90 = 0,204."
+ },
+ {
+  "id": "gl-059",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › talon › def",
+  "texte": "La puissance minimale appelée quand le bâtiment est vide (nuit, week-end) : les appareils qui ne s’arrêtent jamais.",
+  "affirmation": "Notion de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-060",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › talon › ex",
+  "texte": "Le talon de l’école est d’environ 6 kW : serveurs, frigos, ventilation réduite.",
+  "affirmation": "Valeur fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-061",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › baseline › def",
+  "texte": "La consommation « normale » attendue, qui sert de point de comparaison pour repérer une dérive ou mesurer une économie.",
+  "affirmation": "Notion de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-062",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › baseline › ex",
+  "texte": "La référence de l’école est son année 2025-2026 sans dérive.",
+  "affirmation": "Référence fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-063",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › dju › def",
+  "texte": "Degrés-Jours Unifiés : pour chaque jour, l’écart entre 18 °C et la température moyenne extérieure quand elle est plus basse, additionné sur la période. Plus il y a de DJU, plus l’hiver est froid.",
+  "affirmation": "DJU : écart journalier entre 18 °C et la température moyenne extérieure quand elle est plus basse, cumulé sur la période.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Les degrés-jours correspondent à la valeur moyenne sur la journée de l'écart positif entre la température extérieure et une valeur de température de base.",
+    "relu": true
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Ils sont définis comme les degrés-jours calculés pour la température de base de 18 °C.",
+    "relu": true
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Si la température extérieure maximum de la journée <= 18°C (cas hiver)",
+    "relu": true,
+    "page": "méthode de calcul : DJU = 18 − (Tmin + Tmax)/2"
+   }
+  ],
+  "note": "Définition simplifiée : en mi-saison (Tmin < 18 °C < Tmax), la méthode COSTIC/Météo applique une formule corrigée."
+ },
+ {
+  "id": "gl-064",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › dju › ex",
+  "texte": "Un jour à 6 °C de moyenne compte 12 DJU.",
+  "affirmation": "18 − 6 = 12.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-065",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › dju › ex (cumul)",
+  "texte": "L’école cumule environ 2 240 DJU sur l’année.",
+  "affirmation": "Valeur fictive de la ville.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-066",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › signature › def",
+  "texte": "La relation entre la consommation de chauffage et les DJU, souvent une droite : chaque DJU coûte à peu près le même nombre de kWh.",
+  "affirmation": "Notion de méthode (signature énergétique).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-067",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › signature › ex",
+  "texte": "Pour l’école, environ 134 kWh de gaz par DJU un jour de classe.",
+  "affirmation": "Valeur fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-068",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › puissance-souscrite › def",
+  "texte": "La puissance maximale prévue au contrat. La part fixe de l’acheminement en dépend et, selon l’offre, l’abonnement du fournisseur.",
+  "affirmation": "La puissance souscrite fixe la part puissance de l'acheminement et, souvent, l'abonnement.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Pour l’établissement de leur composante annuelle de soutirage, les utilisateurs doivent choisir une option tarifaire ainsi qu’une puissance souscrite",
+    "relu": true,
+    "page": "p. 6 (composante annuelle de soutirage)"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l'utilisateur au-delà de sa puissance souscrite.",
+    "relu": true,
+    "page": "p. 7"
+   },
+   {
+    "cle": "mne-glossaire-pro",
+    "passage": "Le montant de l’abonnement pour l’électricité dépend de la puissance souscrite et de l’option tarifaire.",
+    "relu": true,
+    "page": "Abonnement"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-069",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › puissance-souscrite › ex",
+  "texte": "L’école a souscrit 60 kVA.",
+  "affirmation": "Contrat fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-070",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › depassement › def",
+  "texte": "Quand la puissance appelée dépasse la puissance souscrite.",
+  "affirmation": "Définition.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-071",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › depassement › def (C4 / ≤ 36 kVA)",
+  "texte": "En C4, il est facturé en pénalités ; jusqu’à 36 kVA, le compteur coupe.",
+  "affirmation": "Au-delà de 36 kVA, le dépassement est facturé (CMDPS) ; jusqu'à 36 kVA, le Linky coupe.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l'utilisateur au-delà de sa puissance souscrite.",
+    "relu": true,
+    "page": "p. 7"
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les dépassements sont sans objet pour les points de connexion dont la puissance souscrite est contrôlée par un disjoncteur et/ou un dispositif de comptage évolué.",
+    "relu": true,
+    "page": "p. 7"
+   },
+   {
+    "cle": "enedis-linky-puiss-depassee",
+    "passage": "Le compteur Linky disjoncte et affiche le message \"PUISS DEPASSEE\", que faire ?",
+    "relu": true,
+    "page": "titre"
+   },
+   {
+    "cle": "enedis-linky-puiss-depassee",
+    "passage": "Le compteur Linky assure un réglage conforme à votre contrat d’électricité.",
+    "relu": true
+   }
+  ],
+  "note": "Nuance : un site C4 dont la puissance est contrôlée par disjoncteur n'a pas de CMDPS (cas minoritaire)."
+ },
+ {
+  "id": "gl-072",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › depassement › ex",
+  "texte": "Avec des radiateurs d’appoint en janvier, l’école monte à 70 kVA.",
+  "affirmation": "Cas fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-073",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › mv › def",
+  "texte": "Mesure et Vérification : la méthode pour prouver une économie en comparant la consommation réelle à une référence ajustée (météo, occupation).",
+  "affirmation": "La M&V prouve une économie en comparant la consommation à une référence ajustée.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are determined by comparing measured energy consumption or demand before and after implementation of an energy efficiency measure (EEM), making suitable adjustments for changes in conditions",
+    "relu": true,
+    "page": "Framework"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-074",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › mv › ex",
+  "texte": "On corrige l’hiver doux avant de dire que la nouvelle régulation a fait gagner 10 %.",
+  "affirmation": "Exemple de méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-075",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › operat › def",
+  "texte": "La plateforme de l’ADEME où les assujettis au décret tertiaire déclarent chaque année",
+  "affirmation": "OPERAT est la plateforme de l'ADEME pour les déclarations annuelles du décret tertiaire.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-bilan-operat-2026",
+    "passage": "Sa mise en œuvre et son suivi reposent sur la plateforme OPERAT, opérée par l’ADEME, qui recueille chaque année les déclarations de consommation énergétique des acteurs assujettis.",
+    "relu": true
+   },
+   {
+    "cle": "ministere-eet",
+    "passage": "Une obligation de reporting chaque année, via la plateforme en ligne OPERAT, qui permet de mesurer les progrès accomplis en termes d’économie d’énergie.",
+    "relu": true,
+    "page": "Objectifs"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-076",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › operat › def (échéance)",
+  "texte": "au plus tard le 30 septembre, les consommations de l’année précédente.",
+  "affirmation": "Échéance : 30 septembre, pour l'année précédente.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-077",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › operat › ex",
+  "texte": "La mairie déclare l’école (2 000 m²) sur OPERAT.",
+  "affirmation": "Déclaration fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-078",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › decret-tertiaire › def",
+  "texte": "L’obligation, pour les bâtiments tertiaires d’au moins 1 000 m², de réduire leur consommation d’énergie finale",
+  "affirmation": "Seuil de 1 000 m² d'activités tertiaires.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   },
+   {
+    "cle": "ministere-eet",
+    "passage": "Toutes les constructions existantes et neuves, dont les bâtiments ont une surface d’activité tertiaire (ou un cumul de surfaces) égale ou supérieure à 1 000 m² sont concernées.",
+    "relu": true,
+    "page": "Qui est concerné ?"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-079",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › decret-tertiaire › def (objectifs)",
+  "texte": "−40 % en 2030, −50 % en 2040 et −60 % en 2050 par rapport à une année de référence",
+  "affirmation": "Objectifs −40/−50/−60 % par rapport à une année de référence.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": true,
+    "page": "G2 – Textes régissant le dispositif"
+   },
+   {
+    "cle": "ministere-eet",
+    "passage": "Éco Énergie Tertiaire impose la réduction des consommations d’énergie finale de l’ensemble du parc tertiaire d’au moins -40 % en 2030, -50 % en 2040, -60 % en 2050 (par rapport à 2010).",
+    "relu": true,
+    "page": "Objectifs"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "L'année de référence est comprise entre 2010 et 2022, ou correspond à la première année pleine d'exploitation dont les consommations énergétiques sont remontées sur la plateforme OPERAT. […] L'année de référence comporte 12 mois consécutifs.",
+    "relu": true,
+    "page": "article 3, I"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-080",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › decret-tertiaire › def (valeur absolue)",
+  "texte": "ou d’atteindre un seuil en valeur absolue fixé par catégorie d’activité.",
+  "affirmation": "Alternative : objectif en valeur absolue (Cabs).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Le niveau de consommation exprimé en valeur absolue (noté Cabs), l'objectif défini au I-2° de l'article L. 174-1 du code de la construction et de l'habitation. L'article 4 du présent arrêté précise les modalités de détermination de ce niveau",
+    "relu": true,
+    "page": "article 2, m)"
+   }
+  ],
+  "note": "L'article 4 de l'arrêté fixe ces valeurs par catégorie d'activité."
+ },
+ {
+  "id": "gl-081",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › decret-tertiaire › ex",
+  "texte": "Avec 2 000 m², l’école est concernée.",
+  "affirmation": "2 000 m² ≥ 1 000 m².",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-082",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › iso50001 › def",
+  "texte": "La norme internationale des systèmes de management de l’énergie, fondée sur la boucle planifier, faire, vérifier, agir.",
+  "affirmation": "L'ISO 50001 est la norme internationale des systèmes de management de l'énergie, fondée sur le PDCA.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "La norme NF EN ISO 50001 spécifie les exigences liées à un système de management de l’énergie et fournit des recommandations de mise en œuvre.",
+    "relu": true
+   },
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "elle repose sur l’approche PDCA (plan, do, check, act)",
+    "relu": true
+   },
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "Ils seront alors à même de démontrer leur conformité à la norme internationale par une auto-évaluation ou par une certification tierce partie.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-083",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › iso50001 › ex",
+  "texte": "Le cycle en 8 étapes de ce site suit cette même logique.",
+  "affirmation": "Rapprochement propre au site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "gl-084",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › tco2 › def",
+  "texte": "Tonne équivalent CO2 : l’unité commune pour additionner l’effet de différents gaz à effet de serre.",
+  "affirmation": "L'équivalent CO2 permet d'additionner les gaz à effet de serre.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "insee-prg",
+    "passage": "Le potentiel ou pouvoir de réchauffement global (PRG) est un indicateur qui vise à regrouper sous une seule valeur l'effet additionné de toutes les substances contribuant à l'accroissement de l'effet de serre.",
+    "relu": true
+   },
+   {
+    "cle": "insee-prg",
+    "passage": "Cet indicateur est exprimé en « équivalent CO2 » du fait que, par définition, l'effet de serre attribué au CO2 est fixé à 1 et celui des autres substances relativement au CO2.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "gl-085",
+  "fichier": "commun/donnees/glossaire.js",
+  "repere": "glossaire › tco2 › ex",
+  "texte": "Le gaz de l’école émet bien plus de CO2 par kWh que son électricité",
+  "affirmation": "Gaz de réseau : 0,227 kgCO2e/kWh PCI ; électricité : 0,064.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   }
+  ],
+  "note": "Facteurs de l'arrêté tertiaire : environ 3,5 fois plus pour le gaz."
+ }
+]

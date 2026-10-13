@@ -1,0 +1,2380 @@
+[
+ {
+  "id": "vd-001",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "déclaration › accroche",
+  "texte": "Des milliers de serveurs, un seul objectif : rester au frais.",
+  "affirmation": "Un data center doit avant tout évacuer la chaleur de ses serveurs.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
+    "relu": true,
+    "page": "p. 246, encadré 5.5"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-002",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "déclaration › accroche",
+  "texte": "Vos photos de vacances y sont, et elles consomment.",
+  "affirmation": "Clin d'œil : le stockage en ligne consomme.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-003",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "déclaration › bravo",
+  "texte": "Tu sais calculer un PUE, lire une courbe plate, compter une autonomie et repérer un serveur qui dort.",
+  "affirmation": "Acquis visés par le site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-004",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "déclaration › annonces",
+  "texte": "Le wifi à bord est indisponible. Nous allons justement voir où il habite.",
+  "affirmation": "Annonce du train (fictif).",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-005",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "déclaration › annonces",
+  "texte": "Les quatre autres lignes mènent là où l'on produit l'électricité. Celle-ci mène là où on la consomme. Jour et nuit. Dimanche compris.",
+  "affirmation": "Organisation fictive des lignes du jeu ; un data center consomme en continu.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-006",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "déclaration › annonces",
+  "texte": "Le data center, lui, n'ouvre jamais les fenêtres : il n'en a pas.",
+  "affirmation": "Le data center fictif n'a pas de fenêtres.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-007",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "déclaration › annoncesRetour",
+  "texte": "Les photos que vous venez de prendre sont déjà stockées dans le bâtiment que vous quittez. En trois exemplaires.",
+  "affirmation": "Plaisanterie sur la redondance du stockage.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-008",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › chaleur › x",
+  "texte": "chaque kilowattheure qu'il consomme ressort en chaleur, intégralement.",
+  "affirmation": "Toute l'électricité consommée par l'informatique finit en chaleur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
+    "relu": true,
+    "page": "p. 246, encadré 5.5"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-009",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › chaleur › x",
+  "texte": "Dix mégawatts de serveurs, ce sont dix mégawatts de radiateurs allumés jour et nuit dans une pièce fermée.",
+  "affirmation": "10 MW informatiques = 10 MW de chaleur.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Découle de la ligne précédente."
+ },
+ {
+  "id": "vd-010",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › chaleur › x",
+  "texte": "Tout le reste du bâtiment n'existe que pour évacuer cette chaleur, et pour que le courant n'y manque jamais.",
+  "affirmation": "Le froid et la continuité électrique constituent l'essentiel des installations annexes.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Cooling and environmental controls consist of equipment that regulates temperature and humidity to keep IT equipment operating at optimal conditions.",
+    "relu": true,
+    "page": "p. 53"
+   },
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Uninterruptible power supply batteries and backup power generators keep the data centre powered during outages.",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-011",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › chaleur › retiens",
+  "texte": "1 kWh d'informatique = 1 kWh de chaleur à évacuer.",
+  "affirmation": "Idem.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
+    "relu": true,
+    "page": "p. 246"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-012",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › pue › x",
+  "texte": "Le PUE compare toute l'électricité qui entre dans le bâtiment à celle qui arrive vraiment aux serveurs.",
+  "affirmation": "Définition du PUE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Power usage effectiveness (PUE) is the ratio of total facility electricity consumption to the electricity consumption of the IT equipment (PUE = total consumption/IT consumption).",
+    "relu": true,
+    "page": "p. 53"
+   },
+   {
+    "cle": "arcep-numerique-soutenable-2026",
+    "passage": "entre sa consommation électrique totale et la consommation électrique de ses équipements informatiques. Plus la valeur du PUE d’un centre de données est proche de 1 plus il est considéré comme performant d’un point de vue énergétique.",
+    "relu": true,
+    "page": "p. 27"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-013",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › pue › x",
+  "texte": "Ici : 13 MW au compteur pour 10 MW d'informatique, soit 1,3.",
+  "affirmation": "PUE du site fictif.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "13 ÷ 10 = 1,3."
+ },
+ {
+  "id": "vd-014",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › pue › x",
+  "texte": "Moyenne mondiale : 1,54.",
+  "affirmation": "PUE moyen mondial 1,54.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "uptime-survey-2025",
+    "passage": "In 2025, respondents’ annual PUE had a weighted average of 1.54 (see Figure 2), marking the sixth consecutive year that this headline figure has virtually stood still.",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ],
+  "note": "Moyenne pondérée de l'enquête Uptime (source secondaire, la seule à publier une moyenne mondiale annuelle)."
+ },
+ {
+  "id": "vd-015",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › pue › x",
+  "texte": "Moyenne française : 1,42.",
+  "affirmation": "PUE moyen français 1,42.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "arcep-numerique-soutenable-2026",
+    "passage": "le PUE de l’ensemble des centres de données étudiés s’élève à 1,42 en 2024",
+    "relu": true,
+    "page": "p. 27"
+   }
+  ],
+  "note": "Chiffre 2024 de l'enquête Arcep (opérateurs de centres de données interrogés)."
+ },
+ {
+  "id": "vd-016",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › pue › x",
+  "texte": "Les meilleurs sites descendent vers 1,1.",
+  "affirmation": "Les sites les plus efficaces approchent un PUE de 1,1.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "This measure can vary widely from around 2 (meaning 1 kilowatt hour [kWh] of electricity used for cooling and auxiliary equipment for every 1 kWh of electricity used by IT equipment) for enterprise data centres to just under 1.15 for hyperscale data centres",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-017",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › pue › x",
+  "texte": "Un PUE de 2 signifie qu'un watt sur deux ne calcule rien.",
+  "affirmation": "PUE 2 = autant d'énergie pour les annexes que pour l'informatique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "This measure can vary widely from around 2 (meaning 1 kilowatt hour [kWh] of electricity used for cooling and auxiliary equipment for every 1 kWh of electricity used by IT equipment) for enterprise data centres to just under 1.15 for hyperscale data centres",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-018",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › pue › retiens",
+  "texte": "PUE = énergie totale ÷ énergie informatique. Plus il est proche de 1, mieux c'est.",
+  "affirmation": "Formule du PUE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Power usage effectiveness (PUE) is the ratio of total facility electricity consumption to the electricity consumption of the IT equipment (PUE = total consumption/IT consumption).",
+    "relu": true,
+    "page": "p. 53"
+   },
+   {
+    "cle": "arcep-numerique-soutenable-2026",
+    "passage": "Plus la valeur du PUE d’un centre de données est proche de 1 plus il est considéré comme performant d’un point de vue énergétique.",
+    "relu": true,
+    "page": "p. 27"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-019",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › plate › x",
+  "texte": "Une école consomme le jour, en semaine, en hiver. Un data center consomme tout le temps : 13 MW à 3 h du matin comme à midi",
+  "affirmation": "Profil de charge comparé (site fictif).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-020",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › plate › x",
+  "texte": "Sur un an : 114 GWh, la consommation domestique d'une ville d'environ 45 000 habitants.",
+  "affirmation": "13 MW × 8 760 h = 114 GWh, soit la consommation domestique d'environ 45 000 habitants.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "edf-consommation-chiffres",
+    "passage": "Le secteur résidentiel occupe plus d'un tiers (39 %) de la consommation électrique française",
+    "relu": true
+   },
+   {
+    "cle": "edf-consommation-chiffres",
+    "passage": "En 2025, la consommation d'électricité en mode corrigé (des aléas climatiques et des effets calendaires) atteint 451 TWh.",
+    "relu": true
+   },
+   {
+    "cle": "insee-bilan-demographique-2025",
+    "passage": "Au 1er janvier 2026, la population en France est estimée à 69,1 millions d'habitants",
+    "relu": true
+   }
+  ],
+  "note": "Même méthode que le voyage solaire (vs-090) : 39 % de 451 TWh = 176 TWh pour 69,1 millions d'habitants, soit environ 2 550 kWh par habitant ; 114 GWh couvrent environ 44 700 habitants. 50 000 était un peu généreux. Passages repris du relevé solaire.",
+  "avant": "Sur un an : 114 GWh, la consommation domestique d'une ville de 50 000 habitants."
+ },
+ {
+  "id": "vd-021",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › plate › retiens",
+  "texte": "Une puissance modeste, tenue 8 760 heures, fait une énorme énergie.",
+  "affirmation": "Énergie = puissance × durée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-022",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › secours › x",
+  "texte": "Deux arrivées électriques distinctes.",
+  "affirmation": "Un data center est raccordé par au moins deux lignes.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "For additional redundancy, data centre operators also usually request a minimum of two lines to connect their facilities to the electricity grid.",
+    "relu": true,
+    "page": "p. 89, encadré 2.7"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-023",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › secours › x",
+  "texte": "Si le réseau tombe, des batteries prennent le relais instantanément et tiennent de quelques minutes à une heure (ici, une dizaine de minutes) : le temps que les groupes électrogènes démarrent et se stabilisent.",
+  "affirmation": "Les batteries d'onduleurs prennent le relais instantanément, pour quelques minutes à une heure, le temps que les groupes démarrent.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
+    "relu": true,
+    "page": "p. 89-90, encadré 2.7"
+   }
+  ],
+  "note": "L'AIE donne « de quelques minutes à une heure » ; la dizaine de minutes devient la valeur du site fictif. Le délai de démarrage des groupes (« dix à trente secondes ») n'a pas été trouvé dans une source lisible : retiré de l'information (il reste un paramètre du scénario fictif).",
+  "avant": "Si le réseau tombe, des batteries prennent le relais instantanément et tiennent une dizaine de minutes : le temps que les groupes électrogènes démarrent, en dix à trente secondes, et se stabilisent."
+ },
+ {
+  "id": "vd-024",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › secours › x",
+  "texte": "Ici, les cuves de fioul donnent 72 heures d'autonomie.",
+  "affirmation": "Autonomie en fioul du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Présenté désormais comme une donnée du site (avant : « Les cuves de fioul donnent 72 heures d'autonomie. »). L'AIE confirme seulement le stockage de fioul sur place.",
+  "avant": "Les cuves de fioul donnent 72 heures d'autonomie."
+ },
+ {
+  "id": "vd-025",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › secours › x",
+  "texte": "Tout est en double, parfois en triple : la disponibilité se paie en matériel qui attend.",
+  "affirmation": "La redondance repose sur du matériel rarement utilisé.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "These are rarely used but are necessary to ensure the extremely high levels of reliability that data centres must meet.",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-026",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › secours › retiens",
+  "texte": "Réseau, puis batteries, puis groupes : la continuité se construit par couches.",
+  "affirmation": "Séquence de secours.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
+    "relu": true,
+    "page": "p. 89-90"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-027",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › fatale › x",
+  "texte": "Elle sort tiède, autour de 30 °C : une pompe à chaleur la remonte à la température d'un réseau de chaleur.",
+  "affirmation": "La chaleur sort vers 30 °C et doit être remontée par pompe à chaleur.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "engie-equinix-saint-denis",
+    "passage": "L’eau du datacentre est récupérée à 28°C et permet de valoriser jusqu’à 6,6 MW de chaleur dégagée par le refroidissement des serveurs à l’aide de pompes à chaleur.",
+    "relu": true
+   },
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Air-cooled systems often require a heat pump to upgrade the heat to a usable temperature, but liquid cooling systems can provide higher-temperature heat – from 40 °C to 80 °C – which can directly supply existing district heating networks.",
+    "relu": true,
+    "page": "p. 246"
+   }
+  ],
+  "note": "Le chiffre « 30-35 °C » pour l'air n'a pas de source ; à Saint-Denis l'eau est récupérée à 28 °C. Formulation élargie et sourcée.",
+  "avant": "L'air sort des serveurs à 30-35 °C : une pompe à chaleur le remonte à la température d'un réseau de chaleur."
+ },
+ {
+  "id": "vd-028",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › fatale › x",
+  "texte": "Désormais, les sites de plus d'un mégawatt doivent valoriser leur chaleur ou justifier pourquoi ils ne le font pas.",
+  "affirmation": "Obligation européenne de valorisation de la chaleur fatale au-delà de 1 MW.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2023-1791",
+    "passage": "Les États membres veillent à ce que les centres de données dont la puissance totale nominale est supérieure à 1 MW utilisent la chaleur fatale ou d’autres applications de récupération de la chaleur fatale, à moins qu’il ne soit démontré, conformément à l’évaluation visée au paragraphe 7, que ce n’est pas techniquement ou économiquement faisable.",
+    "relu": true,
+    "page": "art. 26 § 6"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-029",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › fatale › x",
+  "texte": "À Saint-Denis, un data center chauffe ainsi le centre aquatique olympique.",
+  "affirmation": "La chaleur d'un data center Equinix alimente le réseau qui dessert le centre aquatique olympique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "engie-equinix-saint-denis",
+    "passage": "Cette nouvelle installation permet désormais d’alimenter via le réseau de chaleur du SMIREC, la ZAC Plaine Saulnier de Saint-Denis et son emblématique Centre Aquatique Olympique",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-030",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › fatale › retiens",
+  "texte": "La chaleur d'un data center est une ressource, à condition d'avoir un voisin qui en veut.",
+  "affirmation": "Il faut un débouché proche.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "establishing firm offtake agreements with clear tariff structures",
+    "relu": true,
+    "page": "p. 246-247"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-031",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › salle › x",
+  "texte": "une pièce climatisée à 18 °C toute l'année, des machines dont plus personne ne sait à quoi elles servent, un PUE proche de 2.",
+  "affirmation": "Les petites salles d'entreprise ont un PUE autour de 2.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "This measure can vary widely from around 2 (meaning 1 kilowatt hour [kWh] of electricity used for cooling and auxiliary equipment for every 1 kWh of electricity used by IT equipment) for enterprise data centres to just under 1.15 for hyperscale data centres",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-032",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › salle › x",
+  "texte": "Trois gestes : remonter la consigne vers 24-25 °C, éteindre ou regrouper les serveurs inutiles, fermer la porte.",
+  "affirmation": "Gestes recommandés pour un local serveur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ashrae-thermal-guidelines",
+    "passage": "Recommended (Suitable for all four classes; explore data center metrics in this paper for conditions outside this range.) [...] A1 to A4 18 to 27",
+    "relu": true,
+    "page": "tableau 2.1"
+   },
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Completely decommission and remove any equipment that is not required or used to support services no longer in use.",
+    "relu": true,
+    "page": "pratique 4.3.2"
+   },
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Existing services that do not achieve high utilisation of their hardware should be consolidated through use of resource sharing technologies to improve the use of physical resources.",
+    "relu": true,
+    "page": "pratique 4.3.4"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-033",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › salle › x",
+  "texte": "Et se souvenir que ce qui part « dans le cloud » consomme toujours, ailleurs, hors de la facture.",
+  "affirmation": "Le cloud consomme dans les data centers.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-034",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › salle › retiens",
+  "texte": "Un local serveur est un talon à lui tout seul : consigne, extinction, regroupement.",
+  "affirmation": "Résumé des gestes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-035",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › consigne › x",
+  "texte": "L'ASHRAE, la référence des ingénieurs du froid, recommande un air d'entrée entre 18 et 27 °C.",
+  "affirmation": "Plage recommandée d'air d'entrée : 18 à 27 °C.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ashrae-thermal-guidelines",
+    "passage": "Recommended (Suitable for all four classes; explore data center metrics in this paper for conditions outside this range.) [...] A1 to A4 18 to 27",
+    "relu": true,
+    "page": "tableau 2.1"
+   },
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "A summary of ASHRAE environmental guidelines can be found at:",
+    "relu": true,
+    "page": "pratique 5.3.1"
+   }
+  ],
+  "note": "La plage 18-27 °C est celle de l'ASHRAE (association d'ingénieurs), pas « des constructeurs ». Le code de conduite européen s'y réfère.",
+  "avant": "Les constructeurs de serveurs recommandent un air d'entrée entre 18 et 27 °C."
+ },
+ {
+  "id": "vd-036",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › consigne › x",
+  "texte": "Refroidir une salle à 18 °C ne protège rien de plus et coûte cher : chaque degré de consigne en plus allège le froid.",
+  "affirmation": "Le surrefroidissement gaspille de l'énergie.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Facilities are often overcooled with colder than necessary air temperatures (and hence chilled water temperatures, where used), resulting in an energy penalty.",
+    "relu": true,
+    "page": "§ 5.3"
+   },
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Data Centres should be designed and operated at their highest efficiency to deliver intake air to the IT equipment within the ASHRAE Class A2 allowable range for Data Centres. Operations in this range enable energy savings by reducing or eliminating overcooling.",
+    "relu": true,
+    "page": "pratique 5.3.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-037",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › consigne › x",
+  "texte": "On sépare aussi les allées : l'air froid arrive devant les machines, l'air chaud repart derrière, et les deux ne se mélangent pas.",
+  "affirmation": "Allées chaudes et froides.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "The hot / cold aisle concept aligns equipment air flow to create aisles between cabinets that are fed cold air from which all of the equipment draws intake air in conjunction with hot aisles with no cold air feed to which all equipment exhausts air.",
+    "relu": true,
+    "page": "pratique 5.1.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-038",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › consigne › retiens",
+  "texte": "Jusqu'à 27 °C en entrée des serveurs : inutile de climatiser comme une chambre froide.",
+  "affirmation": "Idem.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ashrae-thermal-guidelines",
+    "passage": "Recommended (Suitable for all four classes; explore data center metrics in this paper for conditions outside this range.) [...] A1 to A4 18 to 27",
+    "relu": true,
+    "page": "tableau 2.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-039",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › zombies › x",
+  "texte": "Dans les salles informatiques d'entreprise, un serveur travaille en moyenne à moins de 20 % de sa capacité.",
+  "affirmation": "Taux d'utilisation moyen inférieur à 20 % dans les salles d'entreprise.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Smaller and less-efficient enterprise data centres have average utilisation rates below 20%, while hyperscale data centres with optimised loads can have average utilisation rates of up to 50%.",
+    "relu": true,
+    "page": "p. 54"
+   }
+  ],
+  "note": "« 12 à 18 % » n'a pas été retrouvé ; l'AIE dit « below 20% ».",
+  "avant": "Dans les salles informatiques d'entreprise, un serveur ne travaille en moyenne qu'à 12 à 18 % de sa capacité."
+ },
+ {
+  "id": "vd-040",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › zombies › x",
+  "texte": "Une étude en a trouvé un quart « comateux » : aucune activité depuis six mois, mais toujours branchés.",
+  "affirmation": "Un quart de serveurs comateux (aucune activité depuis six mois).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "koomey-comatose-servers",
+    "passage": "Our analysis shows that about one quarter of physical servers were zombies in companies that had taken no action to remove them",
+    "relu": true,
+    "page": "résumé"
+   },
+   {
+    "cle": "koomey-comatose-servers",
+    "passage": "Comatose (Zombie) [...] activity in six months or more.",
+    "relu": true,
+    "page": "tableau des définitions"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-041",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › zombies › x",
+  "texte": "Or un serveur moderne qui ne fait rien consomme encore environ un tiers de sa puissance maximale.",
+  "affirmation": "Un serveur au repos consomme environ 35 % de sa puissance nominale.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Idle power has improved from around 60% in 2010 to around 35% of rated power in modern servers.",
+    "relu": true,
+    "page": "p. 54"
+   }
+  ],
+  "note": "« Près de la moitié » valait vers 2010 (60 %) ; aujourd'hui environ 35 %.",
+  "avant": "Or un serveur qui ne fait rien consomme encore près de la moitié de sa puissance maximale."
+ },
+ {
+  "id": "vd-042",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › zombies › x",
+  "texte": "Regrouper six machines sur une seule, c'est la virtualisation.",
+  "affirmation": "La virtualisation regroupe des services sur moins de machines.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Existing services that do not achieve high utilisation of their hardware should be consolidated through use of resource sharing technologies to improve the use of physical resources.",
+    "relu": true,
+    "page": "pratique 4.3.4"
+   },
+   {
+    "cle": "iea-energy-ai",
+    "passage": "increase utilisation rates and reduce the number of physical servers needed.",
+    "relu": true,
+    "page": "p. 66"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-043",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › zombies › retiens",
+  "texte": "Un serveur au repos consomme encore un bon tiers de sa puissance maximale : celui qui ne sert à rien, on l'éteint.",
+  "affirmation": "Idem.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Idle power has improved from around 60% in 2010 to around 35% of rated power in modern servers.",
+    "relu": true,
+    "page": "p. 54"
+   },
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Servers, networking and storage equipment that is idle for significant time and cannot be virtualised or archived should be shut down or put into a low power ‘sleep’ state.",
+    "relu": true,
+    "page": "pratique 4.3.6"
+   }
+  ],
+  "note": null,
+  "avant": "Un serveur au repos consomme encore la moitié de sa puissance maximale : celui qui ne sert à rien, on l'éteint."
+ },
+ {
+  "id": "vd-044",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › ia › x",
+  "texte": "Une baie de serveurs classique appelle 3 à 10 kW.",
+  "affirmation": "Densité typique d'une baie classique : quelques kW, jusqu'à 10.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "uptime-survey-2025",
+    "passage": "low-density facilities (under 4 kW per rack average) remain common even in those geographies",
+    "relu": true,
+    "page": "p. 9"
+   },
+   {
+    "cle": "uptime-survey-2025",
+    "passage": "When all systems are highly exercised, it does not take many servers (along with storage shelves and top of rack switches) to cross the 10 kW mark.",
+    "relu": true,
+    "page": "p. 9"
+   }
+  ],
+  "note": "La figure 3 de l'enquête (illisible en texte) place la densité la plus courante à 4-5 kW par baie."
+ },
+ {
+  "id": "vd-045",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › ia › x",
+  "texte": "Une baie de calcul pour l'intelligence artificielle : 40 à plus de 100 kW, dans le même mètre carré.",
+  "affirmation": "Baies IA : plusieurs dizaines de kW, parfois plus de 100.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "uptime-survey-2025",
+    "passage": "it is only above 60 kW per rack that these computationally intense workloads take primacy over enterprise software as the main driver of densified infrastructure.",
+    "relu": true,
+    "page": "p. 10"
+   },
+   {
+    "cle": "uptime-survey-2025",
+    "passage": "Our survey identified even higher densities, including some cabinets exceeding 100 kW, but these are still rare.",
+    "relu": true,
+    "page": "p. 10"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-046",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › ia › x",
+  "texte": "L'air ne suffit plus : de l'eau circule au contact des processeurs et ressort à 45-60 °C.",
+  "affirmation": "Refroidissement liquide direct, eau sortant chaude.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Air-cooled systems often require a heat pump to upgrade the heat to a usable temperature, but liquid cooling systems can provide higher-temperature heat – from 40 °C to 80 °C – which can directly supply existing district heating networks.",
+    "relu": true,
+    "page": "p. 246"
+   },
+   {
+    "cle": "iea-energy-ai",
+    "passage": "reducing energy use for cooling, e.g. liquid cooling systems (direct-to-chip, immersion).",
+    "relu": true,
+    "page": "p. 66"
+   }
+  ],
+  "note": "L'AIE donne 40 à 80 °C ; 45-60 °C est dans la fourchette."
+ },
+ {
+  "id": "vd-047",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › ia › x",
+  "texte": "Une réponse d'assistant consomme de quelques dixièmes de wattheure à quelques wattheures ; c'est leur nombre qui pèse.",
+  "affirmation": "Énergie d'une requête d'IA générative.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Text generation using a small language model takes around 0.3 Wh. Using a medium-sized language model consumes around 5 Wh.",
+    "relu": true,
+    "page": "p. 45"
+   },
+   {
+    "cle": "rte-data-centers",
+    "passage": "Selon l’Agence internationale de l’énergie (AIE), une requête sur ChatGPT se révélerait dix fois plus énergivore qu’une simple recherche sur Google, qui consomme 0,3 Wh d’électricité.",
+    "relu": true
+   }
+  ],
+  "note": "« Une fraction de wattheure » ne vaut que pour un petit modèle (0,3 Wh) ; un modèle moyen consomme environ 5 Wh.",
+  "avant": "Une réponse d'assistant consomme une fraction de wattheure ; c'est leur nombre qui pèse."
+ },
+ {
+  "id": "vd-048",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › ia › retiens",
+  "texte": "Dix fois plus de puissance par baie : le refroidissement passe de l'air à l'eau.",
+  "affirmation": "Ordre de grandeur (5-10 kW → 50-100 kW).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-049",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › monde › x",
+  "texte": "Dans le monde, les data centers ont consommé 415 TWh en 2024 : 1,5 % de l'électricité mondiale",
+  "affirmation": "415 TWh et 1,5 % en 2024.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Global electricity consumption by data centres is projected to reach around 945 TWh by 2030 in the Base Case, representing just under 3% of total global electricity consumption in 2030. This is more than double the estimated approximately 415 TWh for 2024 (Figure 2.10), which accounted for around 1.5% of today’s global electricity demand.",
+    "relu": true,
+    "page": "p. 70"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-050",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › monde › x",
+  "texte": "presque autant que toute la France.",
+  "affirmation": "La France consomme un peu plus (451 TWh).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "En 2025, la consommation électrique en France métropolitaine1, corrigée des aléas météorologiques et des effets calendaires) est restée stable par rapport à celle de l’année précédente, atteignant 451 TWh (+0,4 % par rapport à 2024).",
+    "relu": true,
+    "page": "p. 12"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-051",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › monde › x",
+  "texte": "L'Agence internationale de l'énergie attend environ 945 TWh en 2030.",
+  "affirmation": "945 TWh en 2030 (scénario de base).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Global electricity consumption by data centres is projected to reach around 945 TWh by 2030 in the Base Case, representing just under 3% of total global electricity consumption in 2030. This is more than double the estimated approximately 415 TWh for 2024 (Figure 2.10), which accounted for around 1.5% of today’s global electricity demand.",
+    "relu": true,
+    "page": "p. 70"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-052",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › monde › x",
+  "texte": "En France : une dizaine de TWh, soit environ 2 % de la consommation ; 15 à 20 TWh attendus en 2030.",
+  "affirmation": "France : environ 10 TWh (2 %), 15-20 TWh en 2030.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-data-centers",
+    "passage": "La consommation de ces centres de données est estimée à environ 10 TWh, soit environ 2 % de la consommation annuelle française d’électricité.",
+    "relu": true
+   },
+   {
+    "cle": "rte-data-centers",
+    "passage": "entre 15 et 20 TWh en 2030 (environ 3 % de la consommation électrique française),",
+    "relu": true
+   }
+  ],
+  "note": "RTE ne précise pas que les 10 TWh incluent les salles des entreprises : mention retirée. À noter : le Bilan électrique 2025 de RTE cite une estimation du SDES de 4 à 6 TWh en 2023 (note 29) ; le chiffre de la page RTE dédiée, plus récente, est conservé.",
+  "avant": "En France : une dizaine de TWh, soit 2 % de la consommation, en comptant les salles des entreprises ; 15 à 20 TWh attendus en 2030."
+ },
+ {
+  "id": "vd-053",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › monde › retiens",
+  "texte": "Environ 2 % de l'électricité aujourd'hui, et une croissance rapide.",
+  "affirmation": "Idem.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-data-centers",
+    "passage": "La consommation de ces centres de données est estimée à environ 10 TWh, soit environ 2 % de la consommation annuelle française d’électricité.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-054",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › tier › x",
+  "texte": "La disponibilité d'un data center se classe en quatre niveaux.",
+  "affirmation": "Classification Tier en quatre niveaux.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "uptime-tiers",
+    "passage": "Our data center classifications are divided into four Tiers",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-055",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › tier › x",
+  "texte": "Au niveau III, on peut tout entretenir sans rien arrêter. Au niveau IV, en plus, une panne n'importe où ne doit rien couper : tout est en deux circuits séparés.",
+  "affirmation": "Tier III maintenable sans arrêt ; Tier IV tolérant aux pannes, circuits indépendants.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "uptime-tiers",
+    "passage": "A Tier III data center is concurrently maintainable with redundant components as a key differentiator, with redundant distribution paths to serve the critical environment. Unlike Tier I and Tier II, these facilities require no shutdowns when equipment needs maintenance or replacement.",
+    "relu": true
+   },
+   {
+    "cle": "uptime-tiers",
+    "passage": "Tier IV facilities add fault tolerance to the Tier III topology. When a piece of equipment fails, or there is an interruption in the distribution path, IT operations will not be affected.",
+    "relu": true
+   },
+   {
+    "cle": "uptime-tiers",
+    "passage": "A Tier IV data center has several independent and physically isolated systems that act as redundant capacity components and distribution paths.",
+    "relu": true
+   }
+  ],
+  "note": "Les durées d'interruption annuelles (moins de 2 h, moins de 30 min) ne figurent pas dans la définition d'Uptime Institute : retirées.",
+  "avant": "Au niveau III, on peut tout entretenir sans rien arrêter : on vise moins de deux heures d'interruption par an. Au niveau IV, une panne n'importe où ne doit rien couper : moins d'une demi-heure par an."
+ },
+ {
+  "id": "vd-056",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › tier › x",
+  "texte": "Chaque « neuf » de plus après la virgule coûte une rangée de machines en double.",
+  "affirmation": "Image : la disponibilité se paie en redondance.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-057",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › tier › retiens",
+  "texte": "La disponibilité s'achète avec de la redondance : du matériel qui consomme en attendant de servir.",
+  "affirmation": "La redondance consomme.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "These are rarely used but are necessary to ensure the extremely high levels of reliability that data centres must meet.",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-058",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › eau › x",
+  "texte": "Une ancienne galerie de mine lui fournit une eau à 15 °C toute l'année, qui traverse des échangeurs et repart tiédie.",
+  "affirmation": "Refroidissement par l'eau d'une galerie de mine (site fictif inspiré du réel).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "Interxion's MRS2 and MRS3 are being cooled by underground water diverted from a former mine, through 3km of buried pipework",
+    "relu": true
+   },
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "along with 27 heat exchangers at the data centers themselves that use the 15C temperature of the underground water for cooling. Interxion says this will save up to 18,400MWh of energy per year",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-059",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › eau › x",
+  "texte": "Des data centers marseillais font réellement ainsi, et économisent des milliers de MWh par an.",
+  "affirmation": "Interxion Marseille économise jusqu'à 18 400 MWh/an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "along with 27 heat exchangers at the data centers themselves that use the 15C temperature of the underground water for cooling. Interxion says this will save up to 18,400MWh of energy per year",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-060",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › eau › x",
+  "texte": "Ailleurs, on utilise l'air extérieur dès qu'il est assez frais : c'est le « free cooling ».",
+  "affirmation": "Définition du free cooling.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Free cooling / economised cooling designs take advantage of cool ambient conditions to meet part or all of the facilities’ cooling requirements so that the dependency on any form of mechanical cooling including compressors is reduced or even removed entirely, which can result in significant energy reduction.",
+    "relu": true,
+    "page": "§ 5.4.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-061",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › eau › retiens",
+  "texte": "Le meilleur froid est celui qu'on ne produit pas : eau fraîche, air extérieur.",
+  "affirmation": "Idem.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Free cooling / economised cooling designs take advantage of cool ambient conditions to meet part or all of the facilities’ cooling requirements so that the dependency on any form of mechanical cooling including compressors is reduced or even removed entirely, which can result in significant energy reduction.",
+    "relu": true,
+    "page": "§ 5.4.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-062",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › cables › x",
+  "texte": "Une quinzaine de câbles sous-marins sortent de la mer à Marseille, venus d'Afrique, du Moyen-Orient et d'Asie : c'est l'un des grands carrefours mondiaux de l'internet.",
+  "affirmation": "Une quinzaine de câbles sous-marins atterrissent à Marseille.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "telegeography-marseille",
+    "passage": "Marseille, France [...] Submarine Cables 2Africa Africa-12027 Asia Africa Europe-1 (AAE-1) Atlas Offshore Blue EMC West-22027 Hawk IMEWE India Europe Xpress (IEX)2026 Med Cable Network Medloop Medusa Submarine Cable System PEACE Cable SeaMeWe-4 SeaMeWe-62027 TE North/TGN-Eurasia/SEACOM/Alexandros/Medex",
+    "relu": true
+   },
+   {
+    "cle": "afp-mrs3-base-sous-marine",
+    "passage": "« Nouveau hub mondial », Marseille se trouve aujourd’hui « au coeur » de l’industrie mondiale des câbles sous-marins",
+    "relu": true
+   },
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "due to its position as a gateway to fiber links across to Africa and the Middle East.",
+    "relu": true
+   }
+  ],
+  "note": "TeleGeography liste 16 câbles pour Marseille, dont 3 annoncés pour 2027 ; l'AFP en comptait 14 en 2020. « Une vingtaine » et « l'un des tout premiers » sont exagérés.",
+  "avant": "Une vingtaine de câbles sous-marins sortent de la mer à Marseille, venus d'Afrique, du Moyen-Orient et d'Asie : c'est l'un des tout premiers carrefours mondiaux de l'internet."
+ },
+ {
+  "id": "vd-063",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › cables › x",
+  "texte": "Les data centers s'installent là où les câbles arrivent.",
+  "affirmation": "Les data centers marseillais tiennent aux câbles.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "Interxion, Digital Realty's European subsidiary, has been developing a strong presence in Marseille for some time, due to its position as a gateway to fiber links across to Africa and the Middle East.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-064",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › cables › x",
+  "texte": "L'un d'eux occupe même une ancienne base de sous-marins de la Seconde Guerre mondiale, sous un toit de plus de cinq mètres de béton.",
+  "affirmation": "MRS3 est dans une ancienne base de sous-marins, toit de 5,5 m de béton.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "Its recently opened third data center there, MRS3, is in a converted WW2 submarine base.",
+    "relu": true
+   },
+   {
+    "cle": "afp-mrs3-base-sous-marine",
+    "passage": "« Cette base est indestructible et capable de résister à des bombes de 10 tonnes grâce à un toit en béton armé de 5,5 mères d’épaisseur« , glisse Fabrice Coquio",
+    "relu": true
+   }
+  ],
+  "note": "La date de 1943 n'a pas été trouvée dans une source lue : remplacée par « de la Seconde Guerre mondiale ».",
+  "avant": "L'un d'eux occupe même une ancienne base de sous-marins de 1943, sous un toit de plus de cinq mètres de béton."
+ },
+ {
+  "id": "vd-065",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › cables › retiens",
+  "texte": "Un data center s'installe où arrivent les réseaux, et où il y a du courant.",
+  "affirmation": "Implantation : réseaux et électricité.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-data-centers",
+    "passage": "les capacités de raccordement électrique ;",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-066",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › carbone › x",
+  "texte": "Un data center consomme la même chose où qu'il soit ; ce qu'il émet dépend du courant local.",
+  "affirmation": "Les émissions dépendent du mix électrique local.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-data-centers",
+    "passage": "Dans tous les cas, cela plaide pour l’installation des infrastructures propres à l’IA dans des pays où l’électricité est majoritairement décarbonée.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-067",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › carbone › x",
+  "texte": "En 2025, l'électricité française a émis 19,6 g de CO₂ par kWh produit, contre 175 en moyenne dans l'Union européenne.",
+  "affirmation": "Intensité carbone 2025 : France 19,6 g/kWh, UE 175.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-be2025-emissions",
+    "passage": "French electricity is among the least carbon-intensive in Europe, with 19.6 gCO2e per kWh generated in 2025",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "l’intensité carbone moyenne de l’électricité produite dans les 27 États membres de l’Union européenne a baissé de 41 %, passant de 297 gCO2/kWh en 2017 à 175 gCO2/kWh en 2025.",
+    "relu": true,
+    "page": "p. 133"
+   }
+  ],
+  "note": "Les valeurs « 344 en Allemagne » et « plus de 600 en Pologne » ne correspondent pas à la figure 7.14 du Bilan électrique (Pologne vers 552 g en 2025) ; remplacées par la moyenne de l'UE, donnée en clair par RTE.",
+  "avant": "En 2025, l'électricité française a émis 19,6 g de CO₂ par kWh produit, contre 344 en Allemagne et plus de 600 en Pologne."
+ },
+ {
+  "id": "vd-068",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › carbone › x",
+  "texte": "En Irlande, les data centers absorbent déjà 22 % de l'électricité du pays.",
+  "affirmation": "Irlande : 22 % de l'électricité mesurée consommée par les data centers (2024).",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "cso-data-centres-2024",
+    "passage": "% of metered electricity consumed by data centres, 5% in 2015, 21% in 2023, 22% in 2024",
+    "relu": true
+   }
+  ],
+  "note": "« Près d'un quart » remplacé par le chiffre officiel.",
+  "avant": "En Irlande, les data centers absorbent déjà près d'un quart de l'électricité du pays."
+ },
+ {
+  "id": "vd-069",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "infos › carbone › retiens",
+  "texte": "Le carbone d'un service numérique dépend du pays où tournent ses serveurs.",
+  "affirmation": "Idem.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-emissions",
+    "passage": "French electricity is among the least carbon-intensive in Europe, with 19.6 gCO2e per kWh generated in 2025",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-070",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.arrivee",
+  "texte": "Un grand bâtiment gris, sans une fenêtre, sans une enseigne.",
+  "affirmation": "Description du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-071",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.badge",
+  "texte": "Jamais, ça se mesure : moins de deux heures par an.",
+  "affirmation": "Engagement de disponibilité du site fictif (99,98 % ≈ 1,75 h/an, cf. panneau).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-072",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.badge",
+  "texte": "C'est que ce n'est pas très photogénique : des armoires, puis des armoires.",
+  "affirmation": "Plaisanterie.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-073",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.ecrans",
+  "texte": "« 415 TWh en 2024. Environ 945 en 2030.",
+  "affirmation": "Chiffres AIE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Global electricity consumption by data centres is projected to reach around 945 TWh by 2030 in the Base Case, representing just under 3% of total global electricity consumption in 2030. This is more than double the estimated approximately 415 TWh for 2024 (Figure 2.10), which accounted for around 1.5% of today’s global electricity demand.",
+    "relu": true,
+    "page": "p. 70"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-074",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.placard",
+  "texte": "Chez nous, la « salle serveur », c'est l'ancien placard à balais. Il y fait 17 degrés.",
+  "affirmation": "Personnage fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-075",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.placard",
+  "texte": "En rentrant, je monte la consigne à 24 degrés et j'éteins le serveur du jumelage.",
+  "affirmation": "Gestes conseillés (voir info salle).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-076",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.sonde",
+  "texte": "Une sonde de température, au milieu de l'allée chaude : 34 °C.",
+  "affirmation": "Température de l'allée chaude du site.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-077",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.sonde",
+  "texte": "Les données, elles, ne pèsent rien et ne chauffent pas : c'est de les calculer, de les garder et de les déplacer qui chauffe.",
+  "affirmation": "C'est l'électricité de l'informatique (calcul, stockage, réseau) qui devient chaleur.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
+    "relu": true,
+    "page": "p. 246"
+   },
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Servers are computers that process and store data.",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": "L'étiquette laissait croire que seul le déplacement des données chauffe ; serveurs, stockage et réseau consomment tous.",
+  "avant": "Les données, elles, ne pèsent rien et ne chauffent pas : c'est de les déplacer qui chauffe."
+ },
+ {
+  "id": "vd-078",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.sonde",
+  "texte": "34 degrés devant, 22 de l'autre côté des armoires.",
+  "affirmation": "Températures du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-079",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.thermostat",
+  "texte": "« Consigne d'entrée d'air : entre 18 et 27 °C. Les serveurs ne sont pas des yaourts. »",
+  "affirmation": "Plage ASHRAE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ashrae-thermal-guidelines",
+    "passage": "Recommended (Suitable for all four classes; explore data center metrics in this paper for conditions outside this range.) [...] A1 to A4 18 to 27",
+    "relu": true,
+    "page": "tableau 2.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-080",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.thermostat",
+  "texte": "« À celui qui a baissé à 16 pendant la canicule : on sait que c'est toi, Régis. »",
+  "affirmation": "Plaisanterie.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-081",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.octet",
+  "texte": "Deux mille armoires, vingt mille serveurs.",
+  "affirmation": "Taille du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-082",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.octet",
+  "texte": "Un serveur éteint consomme zéro.",
+  "affirmation": "Évidence.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-083",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.token",
+  "texte": "Quatre-vingts kilowatts chacune. Une seule consomme autant que seize armoires de la salle voisine",
+  "affirmation": "80 kW = 16 × 5 kW (baies classiques du site : 10 MW / 2 000 baies).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-084",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.token",
+  "texte": "De l'eau passe directement sur les processeurs et ressort à 50 degrés.",
+  "affirmation": "Refroidissement liquide direct.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Air-cooled systems often require a heat pump to upgrade the heat to a usable temperature, but liquid cooling systems can provide higher-temperature heat – from 40 °C to 80 °C – which can directly supply existing district heating networks.",
+    "relu": true,
+    "page": "p. 246"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-085",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.token",
+  "texte": "Quelques dixièmes de wattheure, parfois quelques wattheures.",
+  "affirmation": "Énergie d'une requête d'IA.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Text generation using a small language model takes around 0.3 Wh. Using a medium-sized language model consumes around 5 Wh.",
+    "relu": true,
+    "page": "p. 45"
+   }
+  ],
+  "note": null,
+  "avant": "Une fraction de wattheure."
+ },
+ {
+  "id": "vd-086",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.ratio",
+  "texte": "1,3 ici. Le jour où il passe à 1,29, j'apporte des croissants.",
+  "affirmation": "PUE du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-087",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.ratio",
+  "texte": "Un PUE, ça ne dit pas si les serveurs servent à quelque chose.",
+  "affirmation": "Le PUE ne mesure que l'infrastructure, pas l'utilité de l'informatique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "with a focus on minimising infrastructure electricity consumption (such as cooling and lighting) compared to the electricity consumption of IT equipment.",
+    "relu": true,
+    "page": "p. 54"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-088",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.talon",
+  "texte": "Treize mégawatts, 8 760 heures.",
+  "affirmation": "Site fictif en charge constante.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-089",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.talon",
+  "texte": "Justement : le jour où ça bouge, c'est que quelque chose ne va pas.",
+  "affirmation": "Méthode de suivi.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-090",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.redondance",
+  "texte": "Derrière nous : dix minutes d'autonomie en batteries. Dehors : huit groupes électrogènes et trois jours de fioul.",
+  "affirmation": "Équipements du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "L'AIE donne de quelques minutes à une heure pour les batteries : cohérent."
+ },
+ {
+  "id": "vd-091",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.redondance",
+  "texte": "Les groupes démarrent le premier mardi de chaque mois, pour vérifier.",
+  "affirmation": "Essais périodiques (site fictif).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-092",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.calorie",
+  "texte": "Ce bâtiment produit dix mégawatts de chaleur.",
+  "affirmation": "Calcul (10 MW informatiques).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-093",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.calorie",
+  "texte": "L'air sort à 32 degrés. Trop tiède pour un radiateur, parfait pour une pompe à chaleur, qui le remonte à 70.",
+  "affirmation": "Valeurs du site fictif ; l'air chaud doit être remonté par pompe à chaleur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Air-cooled systems often require a heat pump to upgrade the heat to a usable temperature, but liquid cooling systems can provide higher-temperature heat – from 40 °C to 80 °C – which can directly supply existing district heating networks.",
+    "relu": true,
+    "page": "p. 246"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-094",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.calorie",
+  "texte": "C'est de trouver un voisin qui en veut, toute l'année, à moins d'un kilomètre.",
+  "affirmation": "Difficulté de trouver un débouché.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "While the technology to recover heat from data centres already exists, there are notable obstacles to overcome.",
+    "relu": true,
+    "page": "p. 246"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-095",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.conduites",
+  "texte": "« Eau de galerie · 15 °C · toute l'année ». Elle vient d'une ancienne mine, à des kilomètres d'ici, et coulait déjà vers la mer avant qu'on ait l'idée de s'en servir.",
+  "affirmation": "L'eau de la galerie de mine allait déjà à la mer.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "Wastewater from that mine was \"traditionally pumped into the river and out to sea,” Digital's director of sustainability Aaron Binkley told DCD in 2020.",
+    "relu": true
+   },
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "along with 27 heat exchangers at the data centers themselves that use the 15C temperature of the underground water for cooling. Interxion says this will save up to 18,400MWh of energy per year",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-096",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.conduites",
+  "texte": "Aucun compresseur n'a été dérangé pour produire ce froid.",
+  "affirmation": "Pas de groupe froid.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "allowing Interxion's Marseille data centers to dispense with electric chillers.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-097",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.trappe",
+  "texte": "Ces câbles relient Marseille à l'Afrique, au Moyen-Orient et à l'Asie.",
+  "affirmation": "Destinations des câbles.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "telegeography-marseille",
+    "passage": "Marseille, France [...] Submarine Cables 2Africa Africa-12027 Asia Africa Europe-1 (AAE-1) Atlas Offshore Blue EMC West-22027 Hawk IMEWE India Europe Xpress (IEX)2026 Med Cable Network Medloop Medusa Submarine Cable System PEACE Cable SeaMeWe-4 SeaMeWe-62027 TE North/TGN-Eurasia/SEACOM/Alexandros/Medex",
+    "relu": true
+   },
+   {
+    "cle": "dcd-interxion-marseille",
+    "passage": "due to its position as a gateway to fiber links across to Africa and the Middle East.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-098",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.trappe",
+  "texte": "Un message pour Singapour met un dixième de seconde.",
+  "affirmation": "Latence Marseille-Singapour de l'ordre de 0,1 s.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Ordre de grandeur plausible (environ 12 000 km de fibre à 200 000 km/s, soit 60 ms aller), mais aucune source lisible trouvée. À lire : mesures de latence publiées par un opérateur (ex. tableaux de latence WonderNetwork ou d'un opérateur de câble)."
+ },
+ {
+  "id": "vd-099",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.trappe",
+  "texte": "La moitié de l'internet de trois continents passe sous tes pieds, sans un bruit.",
+  "affirmation": "Exagération assumée.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-100",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.affiche",
+  "texte": "Le soleil est barré, avec la mention : « Non. Vraiment pas. Il chauffe. »",
+  "affirmation": "Plaisanterie.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-101",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.affiche",
+  "texte": "Même calcul, neuf fois moins de carbone que la moyenne européenne.",
+  "affirmation": "175 ÷ 19,6 ≈ 9.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-be2025-emissions",
+    "passage": "French electricity is among the least carbon-intensive in Europe, with 19.6 gCO2e per kWh generated in 2025",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "l’intensité carbone moyenne de l’électricité produite dans les 27 États membres de l’Union européenne a baissé de 41 %, passant de 297 gCO2/kWh en 2017 à 175 gCO2/kWh en 2025.",
+    "relu": true,
+    "page": "p. 133"
+   }
+  ],
+  "note": "Suit la correction de l'info carbone.",
+  "avant": "Même calcul, dix-sept fois moins de carbone qu'en Allemagne."
+ },
+ {
+  "id": "vd-102",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.cafe",
+  "texte": "C'est le seul équipement du bâtiment à tourner à 100 % de sa capacité",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-103",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.baie",
+  "texte": "une photo de ton déjeuner de 2017 attend qu'on la regarde.",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-104",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.baieIA",
+  "texte": "Des tuyaux bleus y entrent, des tuyaux rouges en sortent.",
+  "affirmation": "Décor.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-105",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.groupe",
+  "texte": "« Ceci n'est pas une source d'énergie. C'est une assurance. »",
+  "affirmation": "Les groupes servent de secours.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "These are rarely used but are necessary to ensure the extremely high levels of reliability that data centres must meet.",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-106",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.cuve",
+  "texte": "Soixante-douze heures d'autonomie.",
+  "affirmation": "Site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-107",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.gabian",
+  "texte": "C'est le goéland d'ici, en plus gros et en plus sûr de lui.",
+  "affirmation": "Vanne régionale.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-108",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.conteneurs",
+  "texte": "« SERVEURS · HAUT »",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-109",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.pointu",
+  "texte": "Un pointu, la barque des pêcheurs d'ici.",
+  "affirmation": "Décor régional.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-110",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.bureau",
+  "texte": "Surtout pas le bouton vert.",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-111",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.chefHalte",
+  "texte": "Il faut bien que quelque chose, ici, fonctionne sans électricité.",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-112",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.quatreneufAttente",
+  "texte": "disponible à 99,99 %.",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-113",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.dit.quatreneufApres",
+  "texte": "La sixième étape, c'est la vôtre : ne pas en avoir besoin.",
+  "affirmation": "Sobriété.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-114",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[0]",
+  "texte": "13 ÷ 10. Tout ce qui dépasse 1, c'est le froid, les pertes électriques et le reste.",
+  "affirmation": "Calcul du PUE.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-115",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[0]",
+  "texte": "Un PUE ne peut pas descendre sous 1.",
+  "affirmation": "PUE ≥ 1 par définition.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Power usage effectiveness (PUE) is the ratio of total facility electricity consumption to the electricity consumption of the IT equipment (PUE = total consumption/IT consumption).",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-116",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[1]",
+  "texte": "Un serveur est un radiateur qui réfléchit.",
+  "affirmation": "Toute l'électricité devient chaleur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
+    "relu": true,
+    "page": "p. 246"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-117",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[1]",
+  "texte": "Le calcul n'est pas une forme d'énergie : tout finit en chaleur.",
+  "affirmation": "Idem.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Effectively all the electricity consumed by a data centre’s IT equipment is converted into heat.",
+    "relu": true,
+    "page": "p. 246"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-118",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[2]",
+  "texte": "13 MW × 8 760 heures.",
+  "affirmation": "13 × 8 760 = 113 880 MWh ≈ 114 GWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-119",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[3]",
+  "texte": "Elles prennent le relais sans la moindre coupure, juste le temps que les groupes démarrent.",
+  "affirmation": "Rôle des batteries d'onduleurs.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
+    "relu": true,
+    "page": "p. 89-90"
+   }
+  ],
+  "note": "« pour une dizaine de minutes au plus » contredisait l'AIE (de quelques minutes à une heure).",
+  "avant": "Elles prennent le relais sans la moindre coupure, pour une dizaine de minutes au plus."
+ },
+ {
+  "id": "vd-120",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[3]",
+  "texte": "Pour un serveur, une coupure d'un dixième de seconde est déjà un redémarrage.",
+  "affirmation": "Au-delà d'environ 20 ms de coupure, un équipement informatique n'est plus garanti de fonctionner.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iti-cbema-curve",
+    "passage": "A voltage dropout includes both severe RMS voltage sags and complete interruptions of the applied voltage, followed by immediate re-application of the nominal voltage. The interruption may last up to 20 milliseconds.",
+    "relu": true,
+    "page": "§ 3.6"
+   },
+   {
+    "cle": "iti-cbema-curve",
+    "passage": "The normal functional state of the ITE is not typically expected during these conditions, but no damage to the ITE should result.",
+    "relu": true,
+    "page": "§ 3.7"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-121",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[3]",
+  "texte": "À 3 h du matin, ils ont d'autres projets.",
+  "affirmation": "Pas de solaire la nuit.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-122",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[4]",
+  "texte": "Les serveurs acceptent jusqu'à 27 °C en entrée d'air.",
+  "affirmation": "Plage ASHRAE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ashrae-thermal-guidelines",
+    "passage": "Recommended (Suitable for all four classes; explore data center metrics in this paper for conditions outside this range.) [...] A1 to A4 18 to 27",
+    "relu": true,
+    "page": "tableau 2.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-123",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[4]",
+  "texte": "La chaleur des machines doit bien sortir : on règle, on ne coupe pas.",
+  "affirmation": "Méthode.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-124",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[5]",
+  "texte": "Encore environ un tiers de sa puissance maximale",
+  "affirmation": "Consommation au repos d'un serveur moderne.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Idle power has improved from around 60% in 2010 to around 35% of rated power in modern servers.",
+    "relu": true,
+    "page": "p. 54"
+   }
+  ],
+  "note": null,
+  "avant": "Encore près de la moitié de sa puissance maximale"
+ },
+ {
+  "id": "vd-125",
+  "fichier": "jeu/voyages/datacenter/textes.js",
+  "repere": "DAT.questions[5]",
+  "texte": "Pas tout à fait : un tiers environ. C'est déjà beaucoup trop pour ne rien faire.",
+  "affirmation": "Idem.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Idle power has improved from around 60% in 2010 to around 35% of rated power in modern servers.",
+    "relu": true,
+    "page": "p. 54"
+   }
+  ],
+  "note": null,
+  "avant": "Pas tout à fait : la moitié environ. C'est déjà beaucoup trop pour ne rien faire."
+ },
+ {
+  "id": "vd-126",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "DAT_PUE (paramètres)",
+  "texte": "froid:.6,                 // MW de froid par MW de serveurs, salle à 18 °C, sans rien d'autre",
+  "affirmation": "Paramètres du modèle simplifié.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Modèle pédagogique : PUE de départ 1,70, cohérent avec la plage 1,2-2 de l'AIE."
+ },
+ {
+  "id": "vd-127",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "missions[0] › x",
+  "texte": "Salle à 18 °C, air chaud et air froid mélangés, groupes froids à fond. PUE : 1,70.",
+  "affirmation": "PUE de départ du modèle.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "(10 + 6 + 0,85 + 0,15) ÷ 10 = 1,70."
+ },
+ {
+  "id": "vd-128",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "missions[0] › bravo",
+  "texte": "Pendant des années, on a climatisé des salles entières à 18 °C pour des machines qui en supportent 27.",
+  "affirmation": "Surrefroidissement historique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Facilities are often overcooled with colder than necessary air temperatures (and hence chilled water temperatures, where used), resulting in an energy penalty.",
+    "relu": true,
+    "page": "§ 5.3"
+   },
+   {
+    "cle": "ashrae-thermal-guidelines",
+    "passage": "Recommended (Suitable for all four classes; explore data center metrics in this paper for conditions outside this range.) [...] A1 to A4 18 to 27",
+    "relu": true,
+    "page": "tableau 2.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-129",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "missions[1] › bravo",
+  "texte": "Quand on peut refroidir avec de l'eau fraîche ou de l'air extérieur, on n'a plus besoin de fabriquer le froid, seulement de le faire circuler.",
+  "affirmation": "Free cooling.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "Free cooling / economised cooling designs take advantage of cool ambient conditions to meet part or all of the facilities’ cooling requirements so that the dependency on any form of mechanical cooling including compressors is reduced or even removed entirely, which can result in significant energy reduction.",
+    "relu": true,
+    "page": "§ 5.4.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-130",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "missions[2] › bravo",
+  "texte": "des onduleurs dimensionnés pour 10 MW perdent encore, à 3 MW, la moitié de ce qu'ils perdaient à pleine charge.",
+  "affirmation": "Résultat du modèle (0,43 MW contre 0,85 MW).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-131",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "missions[2] › bravo",
+  "texte": "Un équipement surdimensionné est inefficace quand il tourne loin de sa puissance",
+  "affirmation": "Principe général des charges partielles.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-132",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "reglages › eco",
+  "texte": "Ils ne convertissent le courant que lorsque c'est nécessaire : moins de pertes, surtout à faible charge.",
+  "affirmation": "Mode économe des onduleurs.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-133",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "DAT_SERVEURS",
+  "texte": "SRV-COMPTA-2011 · 3 % de processeur · aucune connexion depuis 14 mois",
+  "affirmation": "Serveurs fictifs de l'exercice.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-134",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "zombies › okMsg",
+  "texte": "Chacun consommait environ 150 watts sans rien faire, jour et nuit : 1 300 kWh par an et par machine",
+  "affirmation": "150 W × 8 760 h ≈ 1 314 kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-135",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "DAT_COUPURE",
+  "texte": "Les batteries des onduleurs prennent le relais, sans la moindre coupure",
+  "affirmation": "Séquence de secours.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
+    "relu": true,
+    "page": "p. 89-90"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-136",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "DAT_COUPURE",
+  "texte": "Les groupes électrogènes démarrent : dix à trente secondes",
+  "affirmation": "Délai de démarrage des groupes (scénario).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Paramètre du scénario fictif ; non retrouvé dans une source lisible (l'AIE ne donne de délais que pour les turbines : une à cinq minutes)."
+ },
+ {
+  "id": "vd-137",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "défi › okMsg",
+  "texte": "Les batteries ne servent qu'à tenir le temps que les groupes démarrent",
+  "affirmation": "Rôle des batteries.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
+    "relu": true,
+    "page": "p. 89-90"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-138",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "défi › batteries",
+  "texte": "13 MW × 10 minutes = 13 × 1/6 d'heure.",
+  "affirmation": "≈ 2,2 MWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-139",
+  "fichier": "jeu/voyages/datacenter/simulations.js",
+  "repere": "défi › merci",
+  "texte": "Il a été sauvegardé sur trois sites distants pendant que je l'apposais.",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-140",
+  "fichier": "jeu/voyages/datacenter/carte.js",
+  "repere": "lieux › Méditerranée",
+  "texte": "Des câbles sous-marins y arrivent de trois continents.",
+  "affirmation": "Câbles d'Afrique, d'Asie et du Moyen-Orient.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "telegeography-marseille",
+    "passage": "Marseille, France [...] Submarine Cables 2Africa Africa-12027 Asia Africa Europe-1 (AAE-1) Atlas Offshore Blue EMC West-22027 Hawk IMEWE India Europe Xpress (IEX)2026 Med Cable Network Medloop Medusa Submarine Cable System PEACE Cable SeaMeWe-4 SeaMeWe-62027 TE North/TGN-Eurasia/SEACOM/Alexandros/Medex",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-141",
+  "fichier": "jeu/voyages/datacenter/carte.js",
+  "repere": "lieux › groupes électrogènes",
+  "texte": "Ils ne tournent presque jamais : on les paie pour attendre.",
+  "affirmation": "Groupes rarement utilisés.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "These are rarely used but are necessary to ensure the extremely high levels of reliability that data centres must meet.",
+    "relu": true,
+    "page": "p. 53"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-142",
+  "fichier": "jeu/voyages/datacenter/carte.js",
+  "repere": "lieux › local des batteries",
+  "texte": "De quoi tenir une dizaine de minutes sans le réseau, le temps que les groupes électrogènes démarrent.",
+  "affirmation": "Autonomie des batteries du site.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "Battery-based uninterruptible power supply systems provide instantaneous power during outages, thereby preventing operational disruptions. [...] However, the duration of power supply from these systems is typically limited, ranging from a few minutes to an hour. The system is therefore usually only designed to bridge the time it takes for alternative backup power sources to start up.",
+    "relu": true,
+    "page": "p. 89-90"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-143",
+  "fichier": "jeu/voyages/datacenter/carte.js",
+  "repere": "lieux › salle des serveurs",
+  "texte": "Les baies, rangées en allées froides et allées chaudes.",
+  "affirmation": "Allées chaudes/froides.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "jrc-code-conduite-datacentres-2025",
+    "passage": "The hot / cold aisle concept aligns equipment air flow to create aisles between cabinets that are fed cold air from which all of the equipment draws intake air in conjunction with hot aisles with no cold air feed to which all equipment exhausts air.",
+    "relu": true,
+    "page": "pratique 5.1.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-144",
+  "fichier": "jeu/voyages/datacenter/carte.js",
+  "repere": "panneau du parvis",
+  "texte": "« Quai des Octets · 10 MW informatiques · 2 000 baies · disponibilité 99,98 % »",
+  "affirmation": "Données du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-145",
+  "fichier": "jeu/voyages/datacenter/carte.js",
+  "repere": "armoire de batteries",
+  "texte": "Elle ne sert presque jamais : quelques secondes par an.",
+  "affirmation": "Vanne sur la redondance.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "vd-146",
+  "fichier": "jeu/voyages/datacenter/carte.js",
+  "repere": "échangeur",
+  "texte": "Elles ne se touchent pas : seule la chaleur traverse.",
+  "affirmation": "Principe de l'échangeur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "iea-energy-ai",
+    "passage": "all essentially involve using a heat exchanger to heat a working fluid, increasing the temperature using a heat pump if necessary and then piping it to an offtaker, such as a district heat network or nearby industrial facility.",
+    "relu": true,
+    "page": "p. 246"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vd-147",
+  "fichier": "jeu/voyages/datacenter/carte.js",
+  "repere": "lieux › enceinte",
+  "texte": "Les données n'aiment pas les courants d'air.",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ }
+]

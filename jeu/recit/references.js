@@ -8,5 +8,7 @@ const REFS_ETAPES={
   2:['enedis-acces-donnees','enedis-nmo-cf-016e','enedis-modele-autorisation','grdf-adict-contrat','grdf-adict-consentement','grdf-coefficients-thermiques',
      'mne-acteurs-marche','mne-lire-index','cnil-linky-gazpar','cnil-minimisation','legifrance-r341-5'],
   5:['costic-plaquette-dju','sdes-dju-conditions-meteo','enedis-turpe7-brochure','enedis-linky-puiss-depassee'],
-  6:['education-sobriete-ecoles-2022','ademe-10-gestes-entreprises','evo-ipmvp','sdes-dju-conditions-meteo']
+  6:['education-sobriete-ecoles-2022','ademe-10-gestes-entreprises','evo-ipmvp','sdes-dju-conditions-meteo'],
+  7:['ademe-10-gestes-entreprises','ministere-gestes-ete','enedis-turpe7-brochure','ministere-guide-fiscalite-2026','cre-trve','ministere-cee','panorama-enr-2025'],
+  8:['evo-ipmvp','legifrance-arrete-tertiaire-2020','ademe-operat-faq','ministere-eet','legifrance-cch-r174-22','ministere-iso-50001']
 };

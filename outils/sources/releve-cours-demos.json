@@ -1,0 +1,1752 @@
+[
+ {
+  "id": "cd-001",
+  "fichier": "cours/demos/decret-tertiaire.js",
+  "repere": "sélecteur › année de référence",
+  "texte": "Année de référence (entre 2010 et 2022)",
+  "affirmation": "L’année de référence du décret tertiaire est choisie entre 2010 et 2022.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "L'année de référence est comprise entre 2010 et 2022, ou correspond à la première année pleine d'exploitation dont les consommations énergétiques sont remontées sur la plateforme OPERAT. […] L'année de référence comporte 12 mois consécutifs.",
+    "relu": true,
+    "page": "article 3, I"
+   }
+  ]
+ },
+ {
+  "id": "cd-002",
+  "fichier": "cours/demos/decret-tertiaire.js",
+  "repere": "données › CONSOMMATIONS_PASSEES",
+  "texte": "2012: 372,",
+  "affirmation": "Historique de consommation de l’école (2012 à 2025).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Historique fictif, signalé comme tel dans la démo."
+ },
+ {
+  "id": "cd-003",
+  "fichier": "cours/demos/decret-tertiaire.js",
+  "repere": "calcul des objectifs",
+  "texte": "2030: d * 0.6,",
+  "affirmation": "Objectifs : −40 % en 2030, −50 % en 2040, −60 % en 2050 par rapport à l’année de référence.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": true,
+    "page": "G2 – Textes régissant le dispositif"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "L'année de référence est comprise entre 2010 et 2022, ou correspond à la première année pleine d'exploitation dont les consommations énergétiques sont remontées sur la plateforme OPERAT. […] L'année de référence comporte 12 mois consécutifs.",
+    "relu": true,
+    "page": "article 3, I"
+   }
+  ],
+  "note": "La loi parle de 2010 ; l’arrêté (art. 3) permet de choisir l’année de référence entre 2010 et 2022."
+ },
+ {
+  "id": "cd-004",
+  "fichier": "cours/demos/decret-tertiaire.js",
+  "repere": "curseur › baisse annuelle",
+  "texte": "Baisse annuelle à partir de 2026",
+  "affirmation": "Projection simulée de la baisse de consommation.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-005",
+  "fichier": "cours/demos/decret-tertiaire.js",
+  "repere": "message › trajectoire insuffisante",
+  "texte": "Choisir une année de référence où l’école consommait plus rend l’objectif relatif plus accessible : c’est permis, et c’est un vrai choix stratégique.",
+  "affirmation": "L’assujetti choisit son année de référence dans la plage autorisée ; une référence plus haute rend l’objectif relatif plus facile.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "L'année de référence est comprise entre 2010 et 2022, ou correspond à la première année pleine d'exploitation dont les consommations énergétiques sont remontées sur la plateforme OPERAT. […] L'année de référence comporte 12 mois consécutifs.",
+    "relu": true,
+    "page": "article 3, I"
+   }
+  ],
+  "note": "L’arrêté ouvre une plage (2010-2022) sans imposer d’année ; la conséquence sur l’objectif est un calcul."
+ },
+ {
+  "id": "cd-006",
+  "fichier": "cours/demos/decret-tertiaire.js",
+  "repere": "message › valeur absolue",
+  "texte": "Alternative prévue par le texte : atteindre un seuil en **valeur absolue** (kWh/m² par type d’activité) au lieu du pourcentage.",
+  "affirmation": "Objectif alternatif : un seuil en valeur absolue, en kWh/m²/an par catégorie d’activité.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Le niveau de consommation exprimé en valeur absolue (noté Cabs), l'objectif défini au I-2° de l'article L. 174-1 du code de la construction et de l'habitation. L'article 4 du présent arrêté précise les modalités de détermination de ce niveau",
+    "relu": true,
+    "page": "article 2, m)"
+   },
+   {
+    "cle": "cerema-essentiels-batiments-publics",
+    "passage": "L’objectif est déterminé : pour chaque catégorie d’activité ; incluant tous les usages énergétiques sur une année ; par un seuil exprimé en kWh EF /m²/an",
+    "relu": true,
+    "page": "§ « 2 - L’atteinte de l’objectif en valeur absolue »"
+   }
+  ]
+ },
+ {
+  "id": "cd-007",
+  "fichier": "cours/demos/decret-tertiaire.js",
+  "repere": "message › déclaration",
+  "texte": "Consommations corrigées du climat, déclarées chaque année sur {{operat}}.",
+  "affirmation": "Les consommations sont ajustées du climat et déclarées chaque année sur OPERAT.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ]
+ },
+ {
+  "id": "cd-008",
+  "fichier": "cours/demos/decret-tertiaire.js",
+  "repere": "KPI › conformité",
+  "texte": "Trajectoire conforme aux trois échéances.",
+  "affirmation": "Comparaison de la projection aux trois objectifs.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-009",
+  "fichier": "cours/demos/indicateurs.js",
+  "repere": "message kWh",
+  "texte": "En énergie, le gaz pèse plus des deux tiers : le chauffage domine.",
+  "affirmation": "Le gaz représente plus des deux tiers de l’énergie de l’école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Vérifié sur le modèle : 207,9 MWh de gaz sur 293,9 MWh, soit 71 %."
+ },
+ {
+  "id": "cd-010",
+  "fichier": "cours/demos/indicateurs.js",
+  "repere": "message kWh/m²",
+  "texte": "Le ratio par m² permet de comparer l’école à d’autres bâtiments, quelle que soit leur taille.",
+  "affirmation": "Intérêt du ratio par m².",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-011",
+  "fichier": "cours/demos/indicateurs.js",
+  "repere": "message kWh/m²",
+  "texte": "C’est aussi l’unité des seuils en valeur absolue du décret tertiaire.",
+  "affirmation": "Les seuils en valeur absolue du décret tertiaire s’expriment en kWh/m²/an.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cerema-essentiels-batiments-publics",
+    "passage": "L’objectif est déterminé : pour chaque catégorie d’activité ; incluant tous les usages énergétiques sur une année ; par un seuil exprimé en kWh EF /m²/an",
+    "relu": true,
+    "page": "§ « 2 - L’atteinte de l’objectif en valeur absolue »"
+   }
+  ]
+ },
+ {
+  "id": "cd-012",
+  "fichier": "cours/demos/indicateurs.js",
+  "repere": "message €",
+  "texte": "En euros, l’électricité pèse beaucoup plus qu’en kWh : son kWh coûte environ deux fois plus cher que celui du gaz.",
+  "affirmation": "Dans les factures de l’école, le kWh d’électricité coûte environ deux fois celui du gaz.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Vérifié sur le modèle : 0,248 € TTC/kWh d’électricité contre 0,111 € TTC/kWh de gaz (rapport 2,2)."
+ },
+ {
+  "id": "cd-013",
+  "fichier": "cours/demos/indicateurs.js",
+  "repere": "message CO2",
+  "texte": "l’électricité française est peu carbonée",
+  "affirmation": "Facteurs d’émission : ≈ 64 g/kWh pour l’électricité, ≈ 204 g par kWh de gaz facturé (PCS).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   }
+  ],
+  "note": "0,227 kg par kWh PCI × 0,90 = 0,204 kg par kWh PCS. Les valeurs affichées viennent de FACTEURS_CO2 (commun/donnees/references.js)."
+ },
+ {
+  "id": "cd-014",
+  "fichier": "cours/demos/indicateurs.js",
+  "repere": "message CO2",
+  "texte": "Facteurs de l’arrêté du 10 avril 2020 (décret tertiaire).",
+  "affirmation": "Les facteurs utilisés sont ceux de l’annexe VII de l’arrêté du 10 avril 2020.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   }
+  ],
+  "note": "Les valeurs affichées (0,064 et 0,2043) sont celles de l’arrêté, pas de la Base Empreinte : la mention « à vérifier » était dépassée.",
+  "avant": "Facteurs à vérifier dans la Base Empreinte de l’ADEME."
+ },
+ {
+  "id": "cd-015",
+  "fichier": "cours/demos/indicateurs.js",
+  "repere": "note",
+  "texte": "Le même bâtiment, quatre classements différents : l’indicateur choisi change les priorités. On le décide à l’étape Cadrer.",
+  "affirmation": "Le choix de l’indicateur change les priorités.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-016",
+  "fichier": "cours/demos/usages.js",
+  "repere": "message (compteur)",
+  "texte": "Un compteur ne donne qu’un total par énergie. Pour savoir ce que consomme chaque usage, il faut des sous-compteurs ou une estimation.",
+  "affirmation": "Un compteur général ne donne qu’un total.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-017",
+  "fichier": "cours/demos/usages.js",
+  "repere": "message (répartition)",
+  "texte": "Surprise : le talon pèse plus de la moitié de l’électricité, car l’école est vide la plupart du temps.",
+  "affirmation": "Le talon représente plus de la moitié de l’électricité de l’école.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Vérifié sur le modèle : 50,8 MWh de talon sur 85,6 MWh, soit 59 %."
+ },
+ {
+  "id": "cd-018",
+  "fichier": "cours/demos/usages.js",
+  "repere": "libellés USAGES_ELEC / USAGES_GAZ",
+  "texte": "Cuisson et eau chaude",
+  "affirmation": "Répartition estimée des usages de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-019",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquette PDL › pourquoi",
+  "texte": "Le PDL identifie un raccordement électrique chez Enedis.",
+  "affirmation": "Le PDL (ou PRM) identifie un point de raccordement au réseau électrique.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-020",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquette PCE › pourquoi",
+  "texte": "Le PCE identifie un point de livraison de gaz chez GRDF.",
+  "affirmation": "Le PCE identifie un point de livraison de gaz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "p. 39"
+   }
+  ]
+ },
+ {
+  "id": "cd-021",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquette Enedis › pourquoi",
+  "texte": "Enedis gère le réseau électrique et les compteurs d’électricité.",
+  "affirmation": "Enedis est le gestionnaire du réseau de distribution d’électricité (95 % du territoire) et relève les compteurs.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Électricité : ENEDIS (95 % du territoire), ou entreprises locales Gaz : GRDF (95 % du territoire), ou entreprises locales",
+    "relu": true
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Les gestionnaires assurent l’acheminement de l’énergie, son entretien et la relève des compteurs.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-022",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquette GRDF › pourquoi",
+  "texte": "GRDF gère le réseau de gaz et le compteur Gazpar.",
+  "affirmation": "GRDF gère la distribution du gaz (95 % du territoire) ; Gazpar est son compteur communicant.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Électricité : ENEDIS (95 % du territoire), ou entreprises locales Gaz : GRDF (95 % du territoire), ou entreprises locales",
+    "relu": true
+   },
+   {
+    "cle": "mne-acteurs-marche",
+    "passage": "Les gestionnaires assurent l’acheminement de l’énergie, son entretien et la relève des compteurs.",
+    "relu": true
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "P011 : Client Gazpar (compteur 1M)",
+    "relu": true,
+    "page": "p. 42 (profils de consommation)"
+   }
+  ]
+ },
+ {
+  "id": "cd-023",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquettes usages",
+  "texte": "Les ventilateurs sont des moteurs électriques.",
+  "affirmation": "Éclairage, informatique et ventilation fonctionnent à l’électricité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-024",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquette chaudière",
+  "texte": "Le chauffage de l’école est produit par une chaudière au gaz.",
+  "affirmation": "L’école est chauffée au gaz.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-025",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquette kVA › pourquoi",
+  "texte": "est la puissance maximale prévue au contrat d’électricité",
+  "affirmation": "La puissance souscrite est la puissance maximale prévue au contrat.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-linky-puiss-depassee",
+    "passage": "Dans ce cas, vous pouvez consommer plus que la puissance souscrite dans votre contrat, sans que votre installation électrique disjoncte. Le compteur Linky assure un réglage conforme à votre contrat d’électricité",
+    "relu": true
+   }
+  ],
+  "note": "Enedis : le compteur est réglé selon le contrat ; au-delà de la puissance souscrite, il disjoncte."
+ },
+ {
+  "id": "cd-026",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquette kVA",
+  "texte": "Contrat de 60 kVA",
+  "affirmation": "Puissance souscrite de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-027",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "étiquette m³ › pourquoi",
+  "texte": "Le compteur de gaz mesure un volume (m³), converti ensuite en kWh.",
+  "affirmation": "Le compteur gaz mesure un volume en m³ ; l’énergie facturée est en kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Les compteurs de gaz mesurent les volumes de gaz livrés sur place, exprimés en mètres-cubes (m3).",
+    "relu": true
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "votre fournisseur vous facture l'énergie consommée, exprimée en kWh",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-028",
+  "fichier": "cours/demos/cadrer.js",
+  "repere": "retour › parfait",
+  "texte": "C’est la base du modèle de données « site → compteur → mesure ».",
+  "affirmation": "Modèle de données du cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-029",
+  "fichier": "cours/demos/agir.js",
+  "repere": "action consigne › note",
+  "texte": "environ 7 % de chauffage en moins par degré",
+  "affirmation": "Baisser la consigne de 1 °C économise environ 7 % de l’énergie de chauffage.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-10-gestes-entreprises",
+    "passage": "Baisser la température de 1 °C, c’est 7 % de consommation d’énergie en moins.",
+    "relu": true,
+    "page": "geste 1"
+   }
+  ]
+ },
+ {
+  "id": "cd-030",
+  "fichier": "cours/demos/agir.js",
+  "repere": "action veilles › note",
+  "texte": "−1,5 kW de talon, prises programmables",
+  "affirmation": "10 950 kWh/an = 1,5 kW coupés environ 7 300 heures par an.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "1,5 × 7 300 = 10 950 ; cohérent avec un bâtiment vide plus de 80 % du temps."
+ },
+ {
+  "id": "cd-031",
+  "fichier": "cours/demos/agir.js",
+  "repere": "action fourniture › note",
+  "texte": "−8 % sur le prix du kWh, aucune énergie économisée",
+  "affirmation": "Gain contractuel fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-032",
+  "fichier": "cours/demos/agir.js",
+  "repere": "action ps › note",
+  "texte": "gain faible, risque de dépassement l’hiver",
+  "affirmation": "Baisser la puissance souscrite fait gagner 2 × 13,5 € par an sur la part puissance (valeur fictive), avec un risque de dépassement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-033",
+  "fichier": "cours/demos/agir.js",
+  "repere": "action pv",
+  "texte": "Poser 36 kWc de panneaux solaires en autoconsommation",
+  "affirmation": "Action fictive : 36 kWc, 21 780 kWh autoconsommés, 50 000 €.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "50 000 € pour 36 kWc ≈ 1 390 €/kWc, dans la fourchette relevée pour autoconso.js."
+ },
+ {
+  "id": "cd-034",
+  "fichier": "cours/demos/agir.js",
+  "repere": "action pv › note",
+  "texte": "55 % de la production consommée sur place (école fermée l’été)",
+  "affirmation": "Taux d’autoconsommation de l’installation fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-035",
+  "fichier": "cours/demos/agir.js",
+  "repere": "note",
+  "texte": "Les économies de gaz se combinent (deux actions de 10 % donnent 19 %, pas 20 %).",
+  "affirmation": "Des économies relatives se multiplient : 1 − 0,9 × 0,9 = 0,19.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-036",
+  "fichier": "cours/demos/agir.js",
+  "repere": "note",
+  "texte": "Valeurs fictives d’ordre de grandeur.",
+  "affirmation": "Coûts et gains des actions fictifs.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-037",
+  "fichier": "cours/demos/agir.js",
+  "repere": "note › prix du kWh évité",
+  "texte": "Prix du kWh évité : ${nombre(PRIX_KWH_ELEC, 3)} € (élec) et ${nombre(PRIX_KWH_GAZ, 3)} € (gaz) HT.",
+  "affirmation": "Prix évités calculés à partir des tarifs du site (0,186 € et 0,089 €).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-038",
+  "fichier": "cours/demos/agir.js",
+  "repere": "KPI CO2",
+  "texte": "de CO2e par an (facteurs du décret tertiaire)",
+  "affirmation": "Les tonnes évitées sont calculées avec les facteurs de l’arrêté du 10 avril 2020.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   }
+  ],
+  "avant": "de CO2e par an (facteurs à vérifier)"
+ },
+ {
+  "id": "cd-039",
+  "fichier": "cours/demos/agir.js",
+  "repere": "message › investir sans régler",
+  "texte": "Tu investis sans avoir réglé l’existant. Les réglages sont gratuits ou presque : on commence toujours par là, sinon on paie des travaux pour chauffer un bâtiment vide.",
+  "affirmation": "Ordre recommandé : régler avant d’investir.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-040",
+  "fichier": "cours/demos/agir.js",
+  "repere": "message › plan complet",
+  "texte": "Plan complet : sobriété d’abord, contrat ensuite, investissements en dernier. C’est l’ordre recommandé.",
+  "affirmation": "Ordre recommandé par le cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-041",
+  "fichier": "cours/demos/agregation-site.js",
+  "repere": "compteur gaz › aide",
+  "texte": "m³ × coefficient",
+  "affirmation": "Le gaz en kWh = m³ × coefficient de conversion.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Les compteurs de gaz mesurent les volumes de gaz livrés sur place, exprimés en mètres-cubes (m3).",
+    "relu": true
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "votre fournisseur vous facture l'énergie consommée, exprimée en kWh",
+    "relu": true
+   },
+   {
+    "cle": "grdf-coefficient-conversion",
+    "passage": "Pour passer de l'un à l'autre, votre gestionnaire de réseau utilise un coefficient de conversion gaz.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-042",
+  "fichier": "cours/demos/agregation-site.js",
+  "repere": "message › sous-compteur",
+  "texte": "est compté deux fois : il est déjà dans le compteur principal.",
+  "affirmation": "Un sous-compteur est inclus dans le compteur principal.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-043",
+  "fichier": "cours/demos/agregation-site.js",
+  "repere": "message › m³ + kWh",
+  "texte": "Des m³ sont additionnés à des kWh : le total n’a plus de sens physique.",
+  "affirmation": "On n’additionne pas des unités différentes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-044",
+  "fichier": "cours/demos/agregation-site.js",
+  "repere": "message › bonne agrégation",
+  "texte": "Bonne agrégation : le compteur principal d’électricité et le gaz converti en kWh. Le sous-compteur sert à analyser la cuisine, pas à calculer le total du site.",
+  "affirmation": "Règle d’agrégation d’un site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-045",
+  "fichier": "cours/demos/analyser.js",
+  "repere": "retour › talon",
+  "texte": "la puissance appelée quand personne n’est là (serveurs, frigos, ventilation réduite, veilles)",
+  "affirmation": "Définition du talon.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-046",
+  "fichier": "cours/demos/analyser.js",
+  "repere": "KPI talon",
+  "texte": "talon (10 % des mesures « bâtiment vide » les plus basses)",
+  "affirmation": "Méthode d’estimation du talon : décile bas des mesures hors occupation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-047",
+  "fichier": "cours/demos/analyser.js",
+  "repere": "KPI coût",
+  "texte": "par an HT, juste pour le bâtiment vide (fictif)",
+  "affirmation": "Coût du talon à partir des factures fictives.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-048",
+  "fichier": "cours/demos/analyser.js",
+  "repere": "note",
+  "texte": "Une école est vide plus de 80 % des heures de l’année (nuits, week-ends, vacances).",
+  "affirmation": "L’école est inoccupée plus de 80 % des heures.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Calendrier du modèle : 138 jours de classe et 36 mercredis, soit environ 1 550 heures occupées sur 8 760 (18 %)."
+ },
+ {
+  "id": "cd-049",
+  "fichier": "cours/demos/analyser.js",
+  "repere": "note",
+  "texte": "chaque kW de talon coûte ${nombre(8760)} kWh par an",
+  "affirmation": "1 kW pendant 8 760 h = 8 760 kWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-050",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "données › PRODUCTIBLE_MENSUEL",
+  "texte": "const PRODUCTIBLE_MENSUEL = [35, 55, 90, 120, 135, 140, 145, 125, 100, 65, 35, 25];",
+  "affirmation": "Productible mensuel de la ville fictive : 1 070 kWh/kWc/an.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Même valeur que le productible d’Ampère-sur-Loire du voyage solaire (vs-019), comparé là à Nevers et Orléans."
+ },
+ {
+  "id": "cd-051",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "curseur › surface",
+  "texte": "kWc (≈ ${nombre(t * 5)} m² de panneaux)",
+  "affirmation": "Un kWc de panneaux occupe environ 5 m².",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "hespul-pv-couts",
+    "passage": "en 2024, compter environ 220 Wc/m 2 de panneaux pour du matériel standard",
+    "relu": true
+   }
+  ],
+  "note": "220 Wc/m² donnent 4,5 m² par kWc : « ≈ 5 m² » est un ordre de grandeur juste. Source secondaire (Hespul)."
+ },
+ {
+  "id": "cd-052",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "KPI taux d’autoconsommation",
+  "texte": "taux d’autoconsommation (part de la production consommée sur place)",
+  "affirmation": "Définition du taux d’autoconsommation.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "Sa maison pourra donc consommer entièrement la production locale : son taux d'autoconsommation atteindra 100 %.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-053",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "KPI taux d’autoproduction",
+  "texte": "taux d’autoproduction (part des besoins couverts)",
+  "affirmation": "Définition du taux d’autoproduction.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "dans la mesure où la taille de l'installation ne permettra pas de produire à hauteur de la consommation totale de la maison, le taux d'autoproduction sera très faible",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-054",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "constante PRIX_SURPLUS",
+  "texte": "const PRIX_SURPLUS = 0.011;",
+  "affirmation": "Le surplus injecté est acheté 1,1 c€/kWh (tarif unique pour les demandes depuis le 5 juin 2026, ≤ 100 kWc).",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "hespul-pv-tarif-100kwc",
+    "passage": "Pour les demandes de contrat* à partir du 5 juin 2026 , les installations photovoltaïques sont éligibles à un tarif unique de 1,1 c€/kWh. Il n'existe plus de prime à l'investissement. Ce tarif concerne les installations de puissance P+Q ≤ 100 kWc en vente de la totalité ou vente du surplus",
+    "relu": true
+   },
+   {
+    "cle": "cre-avis-s21-2026",
+    "passage": "un tarif unique de 11 €/MWh pour les surplus injectés par l’ensemble des installations éligibles, versé uniquement durant les pas de temps de prix Spot positif",
+    "relu": true
+   }
+  ],
+  "note": "L’ancien 0,04 €/kWh correspondait au tarif de surplus d’avant juin 2026. Affichage passé à 3 décimales (0,011 €/kWh). Le tarif est indexé de 2 % par an ; la CRE (avis sur le projet) donne 11 €/MWh. Le temps de retour affiché s’allonge.",
+  "avant": "const PRIX_SURPLUS = 0.04;"
+ },
+ {
+  "id": "cd-055",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "KPI gain",
+  "texte": "surplus vendu ${nombre(PRIX_SURPLUS, 3)} €/kWh",
+  "affirmation": "Gain annuel = autoconsommé × prix évité + surplus × tarif d’achat.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Avant : ${nombre(PRIX_SURPLUS, 2)} (deux décimales)."
+ },
+ {
+  "id": "cd-056",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "constante COUT_KWC",
+  "texte": "const COUT_KWC = 1400;",
+  "affirmation": "Coût d’une installation en toiture de cette taille : environ 1 400 € HT par kWc.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "hespul-pv-couts",
+    "passage": "9 à 36 kWc 1,2 à 1,7 € HT/Wc 36 à 100 kWc 1,0 à 1,2 € HT/Wc",
+    "relu": true,
+    "page": "tableau « Prix moyen constaté en 2023 d'une installation en surimposition en toitures »"
+   }
+  ],
+  "note": "Prix constatés en 2023 : 1,2 à 1,7 €HT/Wc entre 9 et 36 kWc, 1,0 à 1,2 au-delà ; 1 400 €/kWc va pour 36 kWc, un peu haut pour les grandes tailles du curseur. Source secondaire (Hespul)."
+ },
+ {
+  "id": "cd-057",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "KPI CO2",
+  "texte": "CO2e évité par l’autoconsommation",
+  "affirmation": "CO2 évité calculé avec le facteur de l’électricité (0,064 kg/kWh).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   }
+  ]
+ },
+ {
+  "id": "cd-058",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "message",
+  "texte": "Le soleil produit surtout de mai à août… et l’école est fermée en juillet et en août.",
+  "affirmation": "Production maximale de mai à août ; l’école est fermée en juillet-août.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Calcul sur le productible du site (135 à 145 kWh/kWc de mai à juillet). Ancien texte : « … quand l’école est fermée », inexact pour mai et juin (l’école est ouverte)."
+ },
+ {
+  "id": "cd-059",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "message",
+  "texte": "Une grande partie de la production est donc vendue au réseau, bien moins cher que le kWh acheté.",
+  "affirmation": "Le surplus est vendu bien moins cher que le kWh acheté.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "0,011 €/kWh contre 0,186 € pour le kWh évité."
+ },
+ {
+  "id": "cd-060",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "message",
+  "texte": "Plus l’installation est grande, plus le taux d’autoconsommation baisse.",
+  "affirmation": "Effet de taille sur le taux d’autoconsommation, montré par la simulation.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-061",
+  "fichier": "cours/demos/autoconso.js",
+  "repere": "message",
+  "texte": "Valeurs fictives d’ordre de grandeur.",
+  "affirmation": "Avertissement.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-062",
+  "fichier": "cours/demos/changement-heure.js",
+  "repere": "bouton heure d’été",
+  "texte": "29 mars 2026 : heure d’été",
+  "affirmation": "Passage à l’heure d’été le 29 mars 2026 (dernier dimanche de mars).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ],
+  "note": "1 h UTC = 2 h à Paris, qui devient 3 h."
+ },
+ {
+  "id": "cd-063",
+  "fichier": "cours/demos/changement-heure.js",
+  "repere": "bouton heure d’hiver",
+  "texte": "26 oct. 2025 : heure d’hiver",
+  "affirmation": "Retour à l’heure d’hiver le 26 octobre 2025 (dernier dimanche d’octobre).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ]
+ },
+ {
+  "id": "cd-064",
+  "fichier": "cours/demos/changement-heure.js",
+  "repere": "tableau › ligne grave",
+  "texte": "De 02:00 à 02:50 : ces heures n’existent pas ce jour-là (à 2 h, il est 3 h).",
+  "affirmation": "Au passage à l’heure d’été, l’heure de 2 h à 3 h n’existe pas.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ]
+ },
+ {
+  "id": "cd-065",
+  "fichier": "cours/demos/changement-heure.js",
+  "repere": "message heure d’été",
+  "texte": "En UTC, les horodatages se suivent sans trou : 00:50Z puis 01:00Z. En heure locale, on saute de 01:50 à 03:00.",
+  "affirmation": "Continuité en UTC, saut en heure locale.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ],
+  "note": "01:50 locale (+01:00) = 00:50Z ; 03:00 locale (+02:00) = 01:00Z."
+ },
+ {
+  "id": "cd-066",
+  "fichier": "cours/demos/changement-heure.js",
+  "repere": "message heure d’été",
+  "texte": "La journée consomme environ 1/24 de moins qu’un dimanche normal.",
+  "affirmation": "Une journée de 23 h au talon consomme 1/24 de moins.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-067",
+  "fichier": "cours/demos/changement-heure.js",
+  "repere": "message heure d’hiver",
+  "texte": "En heure locale, 02:00 à 02:50 apparaît deux fois : sans le décalage (+02:00 puis +01:00)",
+  "affirmation": "Au retour à l’heure d’hiver, l’heure de 2 h à 3 h se répète ; décalage +02:00 puis +01:00.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ]
+ },
+ {
+  "id": "cd-068",
+  "fichier": "cours/demos/changement-heure.js",
+  "repere": "KPI durée",
+  "texte": "durée de la journée locale",
+  "affirmation": "23 h et 25 h ; 138 et 150 mesures au lieu de 144.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-069",
+  "fichier": "cours/demos/detecter.js",
+  "repere": "message",
+  "texte": "Les mois en rouge dépassent la {{baseline}} de plus de 3 %.",
+  "affirmation": "Seuil de la démo : +3 % au-dessus de la référence.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-070",
+  "fichier": "cours/demos/detecter.js",
+  "repere": "KPI puissance",
+  "texte": "puissance max. (souscrit : 60)",
+  "affirmation": "Puissance souscrite de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-071",
+  "fichier": "cours/demos/detecter.js",
+  "repere": "KPI surcoût",
+  "texte": "de surcoût TTC (fictif)",
+  "affirmation": "Surcoût calculé sur les factures fictives.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-072",
+  "fichier": "cours/demos/detecter.js",
+  "repere": "note",
+  "texte": "Ces dérives s’appliquent aussi aux autres démos et à la page de l’école.",
+  "affirmation": "Fonctionnement du site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-073",
+  "fichier": "cours/demos/ecart-sources.js",
+  "repere": "message",
+  "texte": "Regarde si chaque alerte correspond à une anomalie réelle (vrai positif) ou si le seuil est trop bas (faux positif).",
+  "affirmation": "Vrais et faux positifs.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-074",
+  "fichier": "cours/demos/ecart-sources.js",
+  "repere": "message",
+  "texte": "le seuil est peut-être trop haut : l’anomalie passe inaperçue (faux négatif)",
+  "affirmation": "Faux négatif.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-075",
+  "fichier": "cours/demos/ecart-sources.js",
+  "repere": "note",
+  "texte": "Un trou de 5 heures en novembre représente environ 2 % du mois ; une journée de classe entière en février, plus de 5 %.",
+  "affirmation": "Poids des trous de données dans l’énergie du mois.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Recalculé sur le modèle (écart courbe/index) : −2,1 % en novembre (trou de 9 h à 14 h le 18) et −5,5 % en février (3 février, jour de classe). Ancien texte : « environ 0,5 % du mois ; une journée entière en février, environ 3 % », qui comptait des heures et non l’énergie."
+ },
+ {
+  "id": "cd-076",
+  "fichier": "cours/demos/horodatage.js",
+  "repere": "message (accord)",
+  "texte": "il faut que la documentation de l’API dise clairement si l’horodatage marque le début ou la fin du pas.",
+  "affirmation": "Vérifier la convention d’horodatage.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-077",
+  "fichier": "cours/demos/horodatage.js",
+  "repere": "message (désaccord)",
+  "texte": "Avec des données journalières, ce serait une journée entière de décalage.",
+  "affirmation": "Effet d’un décalage d’un pas.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-078",
+  "fichier": "cours/demos/horodatage.js",
+  "repere": "note",
+  "texte": "la journée gazière, qui court en général de 6 h à 6 h le lendemain, et non de minuit à minuit",
+  "affirmation": "La journée gazière va de 6 h à 6 h (heure française).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-reglement-2017-459",
+    "passage": "«journée gazière»: la période allant de 5 h 00 à 5 h 00 TUC le jour suivant pour l'heure d'hiver et de 4 h 00 à 4 h 00 TUC le jour suivant lorsque l'heure d'été est appliquée;",
+    "relu": true,
+    "page": "article 3, point 16"
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "AAAA-MM-JJT06:00:00+01:00 (heure hiver) […] AAAA-MM-JJT06:00:00+02:00 (heure été)",
+    "relu": true,
+    "page": "p. 39 (Date de fin de consommation)"
+   }
+  ],
+  "note": "5 h TUC en hiver et 4 h TUC en été = 6 h à Paris. GRDF horodate aussi ses relevés à 06:00."
+ },
+ {
+  "id": "cd-079",
+  "fichier": "cours/demos/identifiants.js",
+  "repere": "résultat › ancien format",
+  "texte": "Ancien format de PCE (GI + 6 chiffres)",
+  "affirmation": "Un PCE peut s’écrire GI suivi de 6 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "p. 39"
+   }
+  ]
+ },
+ {
+  "id": "cd-080",
+  "fichier": "cours/demos/identifiants.js",
+  "repere": "résultat › 14 chiffres",
+  "texte": "14 chiffres : format de PDL (PRM) ou de PCE",
+  "affirmation": "PDL (PRM) et PCE comptent 14 chiffres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-pdl",
+    "passage": "Il s'agit d'une suite de 14 chiffres qui identifie le logement sur le réseau électrique.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-pdl",
+    "passage": "Le numéro de PRM est le nom donné au PDL sur le compteur Enedis Linky.",
+    "relu": true
+   },
+   {
+    "cle": "grdf-guide-donnees-2026",
+    "passage": "Chaque PCE est identifié par un identifiant unique, composé soit de 14 chiffres, soit des lettres \"GI\" suivies de 6 chiffres",
+    "relu": true,
+    "page": "p. 39"
+   }
+  ]
+ },
+ {
+  "id": "cd-081",
+  "fichier": "cours/demos/identifiants.js",
+  "repere": "message",
+  "texte": "Le format seul ne dit pas si c’est un {{pdl}} ou un {{pce}}, ni si le point existe : seul le distributeur peut le confirmer.",
+  "affirmation": "Un format valide ne prouve pas l’existence du point.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-082",
+  "fichier": "cours/demos/identifiants.js",
+  "repere": "exemples",
+  "texte": "30001234567890",
+  "affirmation": "Identifiants d’exemple inventés.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-083",
+  "fichier": "cours/demos/mesurer.js",
+  "repere": "introduction",
+  "texte": "L’école a baissé sa consigne de 1 °C et programmé le chauffage réduit.",
+  "affirmation": "Scénario de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-084",
+  "fichier": "cours/demos/mesurer.js",
+  "repere": "constante ECONOMIE_CHAUFFAGE",
+  "texte": "const ECONOMIE_CHAUFFAGE = 0.16299999999999992;",
+  "affirmation": "Économie de chauffage du scénario : 16,3 %.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Cohérent avec 7 % (consigne) et 10 % (réduit) combinés : 1 − 0,93 × 0,90 = 0,163."
+ },
+ {
+  "id": "cd-085",
+  "fichier": "cours/demos/mesurer.js",
+  "repere": "message",
+  "texte": "La correction divise le chauffage par le rapport des {{dju}} : c’est le principe de la {{mv}}.",
+  "affirmation": "La M&V compare avant/après en ajustant les conditions (climat).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-086",
+  "fichier": "cours/demos/mesurer.js",
+  "repere": "message (hiver doux)",
+  "texte": "Sans correction, on attribuerait à l’action un gain qui vient de la météo.",
+  "affirmation": "Nécessité de corriger du climat.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-087",
+  "fichier": "cours/demos/perimetre.js",
+  "repere": "fiche décret › Périmètre",
+  "texte": "Le bâtiment (≥ 1 000 m² de surface tertiaire)",
+  "affirmation": "Le décret tertiaire vise les surfaces tertiaires d’au moins 1 000 m².",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ]
+ },
+ {
+  "id": "cd-088",
+  "fichier": "cours/demos/perimetre.js",
+  "repere": "fiche décret › Historique",
+  "texte": "Une année de référence (2010 au plus tôt)",
+  "affirmation": "L’année de référence ne peut pas être antérieure à 2010.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "L'année de référence est comprise entre 2010 et 2022, ou correspond à la première année pleine d'exploitation dont les consommations énergétiques sont remontées sur la plateforme OPERAT. […] L'année de référence comporte 12 mois consécutifs.",
+    "relu": true,
+    "page": "article 3, I"
+   }
+  ]
+ },
+ {
+  "id": "cd-089",
+  "fichier": "cours/demos/perimetre.js",
+  "repere": "fiche décret › Indicateurs",
+  "texte": "kWh d’énergie finale, kWh/m², écart à l’objectif 2030",
+  "affirmation": "Le décret raisonne en énergie finale et en kWh/m².",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": true,
+    "page": "G2 – Textes régissant le dispositif"
+   },
+   {
+    "cle": "cerema-essentiels-batiments-publics",
+    "passage": "L’objectif est déterminé : pour chaque catégorie d’activité ; incluant tous les usages énergétiques sur une année ; par un seuil exprimé en kWh EF /m²/an",
+    "relu": true,
+    "page": "§ « 2 - L’atteinte de l’objectif en valeur absolue »"
+   }
+  ]
+ },
+ {
+  "id": "cd-090",
+  "fichier": "cours/demos/perimetre.js",
+  "repere": "fiche décret › Suivi",
+  "texte": "Chaque année (déclaration {{operat|OPERAT}})",
+  "affirmation": "Déclaration annuelle sur OPERAT.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ]
+ },
+ {
+  "id": "cd-091",
+  "fichier": "cours/demos/perimetre.js",
+  "repere": "fiche économies › Pas de temps",
+  "texte": "10 min (élec, celui de l’école), 1 jour (gaz)",
+  "affirmation": "Pas de temps des données de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-092",
+  "fichier": "cours/demos/perimetre.js",
+  "repere": "message",
+  "texte": "environ **52 560 mesures électriques par an** (10 min) et 365 relevés de gaz",
+  "affirmation": "6 × 24 × 365 = 52 560.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-093",
+  "fichier": "cours/demos/perimetre.js",
+  "repere": "message",
+  "texte": "Mais on ne pourra pas expliquer **pourquoi** l’école consomme.",
+  "affirmation": "Des données agrégées n’expliquent pas les consommations.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-094",
+  "fichier": "cours/demos/perimetre.js",
+  "repere": "fiche budget",
+  "texte": "2 à 3 ans de factures",
+  "affirmation": "Fiches de cadrage proposées par le cours.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-095",
+  "fichier": "cours/demos/rattachement.js",
+  "repere": "message",
+  "texte": "Facture ${t === \"elec\" ? \"d’électricité\" : \"de gaz\"} du 14 janvier au 13 février 2026",
+  "affirmation": "Période de facture de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-096",
+  "fichier": "cours/demos/rattachement.js",
+  "repere": "message prorata",
+  "texte": "Le prorata suppose une consommation identique chaque jour.",
+  "affirmation": "Limite du prorata.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-097",
+  "fichier": "cours/demos/rattachement.js",
+  "repere": "message prorata (gaz)",
+  "texte": "Pour le gaz, qui suit la météo, l’erreur peut être importante d’un mois à l’autre.",
+  "affirmation": "Le gaz de chauffage dépend de la météo.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-098",
+  "fichier": "cours/demos/rattachement.js",
+  "repere": "message données journalières",
+  "texte": "on sait exactement quelle part tombe dans chaque mois. Le montant en euros peut ensuite être réparti avec la même clé.",
+  "affirmation": "Rattachement par données journalières.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-099",
+  "fichier": "cours/demos/profils.js",
+  "repere": "message journée type",
+  "texte": "Un jour de classe monte vers 8 h, culmine au déjeuner (cuisine) et redescend après 17 h.",
+  "affirmation": "Profil journalier de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-100",
+  "fichier": "cours/demos/profils.js",
+  "repere": "message semaine type",
+  "texte": "Les nuits aussi restent au talon : c’est là que se cachent souvent les gaspillages.",
+  "affirmation": "Les gaspillages se cachent souvent la nuit.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-101",
+  "fichier": "cours/demos/profils.js",
+  "repere": "message saisons",
+  "texte": "Le gaz suit l’hiver (chauffage de mi-octobre à fin avril). L’électricité suit le calendrier scolaire : elle s’effondre en août, école fermée.",
+  "affirmation": "Saisonnalité de l’école.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-102",
+  "fichier": "cours/demos/puissance.js",
+  "repere": "message dépassement",
+  "texte": "En C4, chaque dépassement est facturé ; jusqu’à 36 kVA, le compteur couperait.",
+  "affirmation": "Au-delà de 36 kVA (C4), le dépassement est facturé ; jusqu’à 36 kVA (C5), le compteur disjoncte.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "point de connexion raccordé en BT > 36 kVA et auquel est associé un contrat unique",
+    "relu": true
+   },
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "La composante mensuelle des dépassements couvre le coût des dépassements de puissance appelée par l'utilisateur au-delà de sa puissance souscrite.",
+    "relu": true,
+    "page": "p. 7"
+   },
+   {
+    "cle": "enedis-segments-c1-c5",
+    "passage": "point de connexion raccordé en BT ≤ 36 kVA et auquel est associé un contrat unique",
+    "relu": true
+   },
+   {
+    "cle": "enedis-linky-puiss-depassee",
+    "passage": "Dans ce cas, vous pouvez consommer plus que la puissance souscrite dans votre contrat, sans que votre installation électrique disjoncte. Le compteur Linky assure un réglage conforme à votre contrat d’électricité",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-103",
+  "fichier": "cours/demos/puissance.js",
+  "repere": "KPI pénalités",
+  "texte": "pénalités de dépassement / an (calcul simplifié)",
+  "affirmation": "Pénalités calculées avec un tarif fictif (12,4 €).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Tarif réel BT > 36 kVA au 1er août 2026 : 12,79 € par heure de dépassement (voir ce2-139)."
+ },
+ {
+  "id": "cd-104",
+  "fichier": "cours/demos/puissance.js",
+  "repere": "KPI part puissance",
+  "texte": "part puissance de l’acheminement / an (fictif)",
+  "affirmation": "Part puissance : 13,5 €/kVA/an (valeur fictive).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-105",
+  "fichier": "cours/demos/puissance.js",
+  "repere": "message sur-souscription",
+  "texte": "payés ${euros(m * TARIF_ELEC.turpePuissanceKvaAn)} par an pour rien",
+  "affirmation": "Coût de la marge inutilisée.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-106",
+  "fichier": "cours/demos/puissance.js",
+  "repere": "message",
+  "texte": "On cherche la {{puissance-souscrite}} qui minimise « abonnement + pénalités », en gardant une marge de sécurité.",
+  "affirmation": "Méthode d’optimisation de la puissance souscrite.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-107",
+  "fichier": "cours/demos/puissance.js",
+  "repere": "conversion kW → kVA",
+  "texte": "const p = i / TARIF_ELEC.cosPhi;",
+  "affirmation": "kVA = kW / cos φ (0,93, valeur du site).",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-108",
+  "fichier": "cours/demos/seuil-detection.js",
+  "repere": "scénario",
+  "texte": "à partir du **12 janvier**, un équipement reste allumé la nuit et le week-end (+3 kW)",
+  "affirmation": "Scénario de dérive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-109",
+  "fichier": "cours/demos/seuil-detection.js",
+  "repere": "interrupteur données sales",
+  "texte": "Doublons, pic à 999,9 kW, trous",
+  "affirmation": "Anomalies simulées.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-110",
+  "fichier": "cours/demos/seuil-detection.js",
+  "repere": "message faux négatif",
+  "texte": "La dérive n’est jamais détectée : **faux négatif**.",
+  "affirmation": "Faux négatif.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-111",
+  "fichier": "cours/demos/seuil-detection.js",
+  "repere": "message faux positifs",
+  "texte": "trop d’alertes inutiles, l’équipe finira par les ignorer.",
+  "affirmation": "Effet des fausses alertes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-112",
+  "fichier": "cours/demos/seuil-detection.js",
+  "repere": "message référence glissante",
+  "texte": "Avec une référence glissante, la dérive finit par entrer dans la référence : après quelques semaines, l’alerte s’éteint alors que le gaspillage continue.",
+  "affirmation": "Limite d’une référence glissante.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-113",
+  "fichier": "cours/demos/signature.js",
+  "repere": "curseur température",
+  "texte": "${nombre(a, 1)} °C, soit ${nombre(i, 1)} DJU",
+  "affirmation": "DJU du jour = 18 °C − température moyenne (si positive).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Ils sont définis comme les degrés-jours calculés pour la température de base de 18 °C.",
+    "relu": true
+   }
+  ]
+ },
+ {
+  "id": "cd-114",
+  "fichier": "cours/demos/signature.js",
+  "repere": "KPI R²",
+  "texte": "R² : qualité de la droite (1 = parfaite)",
+  "affirmation": "Le R² mesure la qualité de l’ajustement.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-115",
+  "fichier": "cours/demos/signature.js",
+  "repere": "KPI base",
+  "texte": "base hors chauffage (cuisine, eau chaude)",
+  "affirmation": "Interprétation de l’ordonnée à l’origine.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-116",
+  "fichier": "cours/demos/signature.js",
+  "repere": "message",
+  "texte": "Un jour réel très au-dessus de la droite mérite une enquête.",
+  "affirmation": "Usage de la signature pour détecter les dérives.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-117",
+  "fichier": "cours/demos/structurer.js",
+  "repere": "message pas",
+  "texte": "l’{{agregation}} ne crée ni ne perd d’énergie",
+  "affirmation": "L’agrégation conserve l’énergie.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-118",
+  "fichier": "cours/demos/structurer.js",
+  "repere": "message pas",
+  "texte": "un pas trop grossier cache les pointes, ce qui compte pour la {{puissance-souscrite}}",
+  "affirmation": "Un pas grossier lisse les pointes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-119",
+  "fichier": "cours/demos/structurer.js",
+  "repere": "message unités",
+  "texte": "Attention : tu compares des kWh et des m³.",
+  "affirmation": "On ne compare pas des unités différentes.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-120",
+  "fichier": "cours/demos/structurer.js",
+  "repere": "message unités (kWh)",
+  "texte": "kWh/m³ en janvier",
+  "affirmation": "Coefficient de conversion du modèle (≈ 11 kWh/m³).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "mne-coefficient-conversion",
+    "passage": "varie selon le lieu et le temps entre 9 et 12,5 kWh/m3",
+    "relu": true
+   }
+  ],
+  "note": "La valeur affichée vient du modèle ; elle est dans la plage officielle."
+ },
+ {
+  "id": "cd-121",
+  "fichier": "cours/demos/structurer.js",
+  "repere": "message unités (kWh)",
+  "texte": "En hiver, le chauffage domine.",
+  "affirmation": "Le gaz pèse plusieurs fois l’électricité en hiver.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-122",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « Le trou » › profil comparable",
+  "texte": "Bonne pratique : le profil d’un jour similaire respecte la forme de la journée, et le statut « estimé » garde la trace de la correction.",
+  "affirmation": "Combler un trou par un jour comparable et marquer « estimé ».",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-123",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « Le trou » › zéro",
+  "texte": "Zéro est une vraie valeur : l’école aurait été totalement éteinte. On invente une donnée fausse.",
+  "affirmation": "0 n’est pas une absence de donnée.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-124",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « Les doublons »",
+  "texte": "C’est la règle : une mesure par pas de temps. Les doublons exacts sont retirés.",
+  "affirmation": "Une mesure par pas de temps.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-125",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « Le pic impossible »",
+  "texte": "999,9 kW dans une école de 60 kVA, c’est 17 fois la puissance maximale du raccordement.",
+  "affirmation": "999,9 / 60 ≈ 17.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "60 kVA est la puissance souscrite de l’école fictive, prise ici comme ordre de grandeur du raccordement."
+ },
+ {
+  "id": "cd-126",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « La journée de 23 h »",
+  "texte": "Cette heure n’a jamais existé : à 2 h, il était 3 h.",
+  "affirmation": "Au passage à l’heure d’été, 2 h devient 3 h.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ]
+ },
+ {
+  "id": "cd-127",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « La journée de 23 h » › UTC",
+  "texte": "Passage à l’heure d’été : la journée locale dure 23 h, donc 138 points. En UTC, il n’y a ni trou ni doublon.",
+  "affirmation": "Journée de 23 h, 138 points au pas de 10 min.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ],
+  "note": "23 × 6 = 138."
+ },
+ {
+  "id": "cd-128",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « La journée de 25 h »",
+  "texte": "Ce ne sont pas des doublons : l’heure de 2 h à 3 h a vraiment eu lieu deux fois.",
+  "affirmation": "Au retour à l’heure d’hiver, l’heure de 2 h à 3 h se répète.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ]
+ },
+ {
+  "id": "cd-129",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « La journée de 25 h » › UTC",
+  "texte": "Passage à l’heure d’hiver : 25 h, donc 150 points.",
+  "affirmation": "Journée de 25 h, 150 points.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ],
+  "note": "25 × 6 = 150."
+ },
+ {
+  "id": "cd-130",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "cas « La journée disparue »",
+  "texte": "L’index (source fiable) donne le total du mois : on s’en sert pour ajuster l’estimation. C’est le recoupement entre sources.",
+  "affirmation": "Recaler une estimation sur l’index.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": []
+ },
+ {
+  "id": "cd-131",
+  "fichier": "cours/demos/fiabiliser.js",
+  "repere": "dates des cas",
+  "texte": "Les doublons",
+  "affirmation": "Dates et anomalies du jeu fictives.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": []
+ }
+]

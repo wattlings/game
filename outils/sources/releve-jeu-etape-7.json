@@ -1,0 +1,726 @@
+[
+ {
+  "id": "ja7-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s7p › x et say",
+  "texte": "On passe à l’action, du moins cher au plus lourd : régler, optimiser le contrat, puis investir.",
+  "affirmation": "Le cours ordonne l'action : réglages, contrat, investissements.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Démarche du cours (même texte que ce7-001)."
+ },
+ {
+  "id": "ja7-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s7r1 › x",
+  "texte": "Sobriété d’abord : régler les horaires, baisser la consigne, éteindre. Coût quasi nul.",
+  "affirmation": "La sobriété (horaires, consigne, extinction) ne coûte presque rien.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Conseil de méthode ; l'effet chiffré de la consigne est sourcé à la ligne de l'action « consigne »."
+ },
+ {
+  "id": "ja7-003",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s7r1 › quiz (question et réponses)",
+  "texte": "Baisser le thermostat et éteindre ce qui ne sert pas",
+  "affirmation": "Mme Dupuis a commencé par la sobriété.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Personnage et anecdote inventés."
+ },
+ {
+  "id": "ja7-004",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s7r2 › x",
+  "texte": "Puis le contrat : puissance souscrite ajustée, bonne option tarifaire.",
+  "affirmation": "Le contrat se règle par la puissance souscrite et l'option tarifaire.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   }
+  ],
+  "note": "Le TURPE demande à chaque utilisateur de choisir une option tarifaire et une puissance souscrite : ce sont bien les deux leviers du contrat."
+ },
+ {
+  "id": "ja7-005",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s7r2 › say",
+  "texte": "beaucoup de clients paient une puissance qu’ils n’utilisent jamais",
+  "affirmation": "Beaucoup de clients ont une puissance souscrite surdimensionnée.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Aucune statistique publique lue sur la part de sites surdimensionnés. À lire si on veut la garder : une étude CRE ou Enedis sur l'adéquation des puissances souscrites ; sinon, la réplique reste un clin d'œil du conseiller."
+ },
+ {
+  "id": "ja7-006",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s7r3 › x",
+  "texte": "Enfin l’efficacité et la production : travaux, équipements, panneaux solaires. Coûteux, rentable sur plusieurs années.",
+  "affirmation": "Les travaux et la production viennent en dernier, plus chers et rentables sur plusieurs années.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Démarche sobriété → efficacité → production, propre au cours."
+ },
+ {
+  "id": "ja7-007",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s7r3 › say",
+  "texte": "Si on a d’abord réduit la consommation, sinon on produit pour le gaspillage.",
+  "affirmation": "Produire avant d'avoir réduit, c'est produire pour le gaspillage.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-008",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s7a › x et say",
+  "texte": "D’abord on éteint les lumières et on baisse le chauffage. Ensuite on renégocie ses abonnements. Enfin, si ça vaut le coup, on isole la maison.",
+  "affirmation": "Analogie du budget du foyer.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Analogie (même texte que ce7-002)."
+ },
+ {
+  "id": "ja7-009",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.installateur › idle (Installatrice solaire)",
+  "texte": "Mes panneaux produisent surtout l’été.",
+  "affirmation": "La production photovoltaïque est concentrée en été.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "panorama-enr-2025",
+    "passage": "Production solaire et facteurs de charge mensuels (graphique, p. 33) : environ 4 900 GWh en juin 2025 contre environ 1 400 GWh en janvier 2025",
+    "relu": true,
+    "page": "p. 33"
+   }
+  ],
+  "note": "En France, la production solaire de juin 2025 est environ 3,5 fois celle de janvier 2025."
+ },
+ {
+  "id": "ja7-010",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.artisan › idle (Artisan)",
+  "texte": "isoler un bâtiment chauffé le week-end, c’est chauffer le vide avec style.",
+  "affirmation": "Isoler avant de régler le chauffage est un mauvais ordre.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-011",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "champion Chef Sobriété › cIntro",
+  "texte": "Budget : 12 000 €. Objectif : 4 000 € d'économies par an.",
+  "affirmation": "Budget et objectif de l'arène.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Chiffres du jeu. Attention : l'épreuve (planStep) fixe l'objectif en kWh et le fonds selon la partie ; la réplique du champion ne correspond pas forcément aux chiffres affichés."
+ },
+ {
+  "id": "ja7-012",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "champion Chef Sobriété › cWin",
+  "texte": "Sobriété, contrat, puis travaux.",
+  "affirmation": "Rappel de l'ordre d'action.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-013",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Apprenti Rémi › question 1",
+  "texte": "Baisser la consigne et régler les horaires de chauffage",
+  "affirmation": "Baisser la consigne et régler les horaires relèvent de la sobriété ; chaudière = efficacité, panneaux = production.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Classement du cours."
+ },
+ {
+  "id": "ja7-014",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Apprenti Rémi › question 2",
+  "texte": "Payer des travaux pour chauffer du vide : on règle d'abord",
+  "affirmation": "On règle le chauffage avant d'isoler.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-015",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Cheffe d’équipe Anna › question 1",
+  "texte": "Le contrat : puissance souscrite ajustée, bonne option tarifaire",
+  "affirmation": "Le contrat se règle par la puissance souscrite et l'option tarifaire.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja7-016",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Cheffe d’équipe Anna › question 1 › explication",
+  "texte": "Beaucoup de sites paient une puissance qu'ils n'utilisent jamais.",
+  "affirmation": "Beaucoup de sites ont une puissance souscrite surdimensionnée.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Même affirmation que la fiche s7r2 : aucune statistique publique lue."
+ },
+ {
+  "id": "ja7-017",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Cheffe d’équipe Anna › question 2 › bonne réponse et explication",
+  "texte": "Plus la production est grande, plus une part dépasse la consommation instantanée.",
+  "affirmation": "Une installation plus grande produit davantage d'excédent : le taux d'autoconsommation baisse.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-autoconsommation",
+    "passage": "il est très probable que, pour couvrir sa consommation, l’installation soit surdimensionnée et produise en excès à des moments de consommation faible. Dans ce cas, l’autoconsommateur aura également besoin du réseau traditionnel pour réinjecter l’électricité produite localement et son taux d’autoconsommation sera vraisemblablement très faible",
+    "relu": true,
+    "page": "Exemple 2"
+   }
+  ],
+  "note": "Le ministère donne l'exemple d'une installation surdimensionnée qui produit en excès aux moments de consommation faible, avec un taux d'autoconsommation très faible. Les vacances d'été (école fermée) sont un tel moment."
+ },
+ {
+  "id": "ja7-018",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Cheffe d’équipe Anna › question 2 › mauvaise réponse 2",
+  "texte": "Le surplus est injecté, mais il n'est pas autoconsommé.",
+  "affirmation": "Le surplus est injecté sur le réseau.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-acc-guide",
+    "passage": "La production qui n’est pas autoconsommée sur le site, appelée surplus, est injectée sur le réseau public.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja7-019",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Conducteur de travaux Ali › question 1",
+  "texte": "40 000 / 3 200 = 12,5 ans.",
+  "affirmation": "Temps de retour simple des panneaux.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Chiffres fictifs, division juste."
+ },
+ {
+  "id": "ja7-020",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Conducteur de travaux Ali › questions 2 et 3",
+  "texte": "Sinon, on produit pour alimenter le gaspillage",
+  "affirmation": "Ordre sobriété → efficacité → production ; ordre du foyer.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-021",
+  "fichier": "jeu/recit/arenes/arene-7.js",
+  "repere": "Conducteur de travaux Ali › question 2 › mauvaise réponse 1",
+  "texte": "Parce que le soleil se lève tard",
+  "affirmation": "Plaisanterie.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-022",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "gameAgir › écran « Trois marches »",
+  "texte": "Chaque marche coûte plus cher et prend plus de temps.",
+  "affirmation": "Les trois marches de l'action coûtent de plus en plus cher.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-023",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "gameAgir › question « Dans quel ordre agir ? »",
+  "texte": "On réduit d\\'abord le besoin (souvent gratuit), puis on consomme mieux, puis on produit.",
+  "affirmation": "Ordre sobriété, efficacité, production.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Démarche du cours."
+ },
+ {
+  "id": "ja7-024",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "planStep › écran du plan",
+  "texte": "Fonds de travaux : <b class=\"num\">${fmt(f)} €</b> pour démarrer.",
+  "affirmation": "Fonds de travaux et objectif du plan.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Valeurs fictives, annoncées comme telles."
+ },
+ {
+  "id": "ja7-025",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "planStep › message d'échec",
+  "texte": "La puissance souscrite, elle, n'économise aucun kWh.",
+  "affirmation": "Ajuster la puissance souscrite ne change pas les kWh consommés.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ],
+  "note": "La puissance souscrite agit sur la part fixe (composante de soutirage, CTA), pas sur l'énergie consommée."
+ },
+ {
+  "id": "ja7-026",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "planStep › message de réussite",
+  "texte": "Isoler un bâtiment qu'on chauffe le week-end, c'est payer des travaux pour chauffer du vide.",
+  "affirmation": "Régler avant d'isoler.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-027",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "gameAgir › question « Deux actions de 10 % »",
+  "texte": "1 − 0,9 × 0,9 = 19 %",
+  "affirmation": "Deux réductions de 10 % se composent.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Même calcul que ce7-015."
+ },
+ {
+  "id": "ja7-028",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "gameAgir › question « temps de retour simple » › bonne réponse",
+  "texte": "30 000 / 2 500 = 12 ans.",
+  "affirmation": "Temps de retour simple.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Même calcul que ce7-016."
+ },
+ {
+  "id": "ja7-029",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "gameAgir › question « temps de retour simple » › explication",
+  "texte": "il ignore la hausse des prix, la durée de vie et les aides (CEE)",
+  "affirmation": "Les CEE sont une aide aux travaux d'économies d'énergie, que le temps de retour simple ignore.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-cee",
+    "passage": "Les CEE sont attribués, sous certaines conditions, par les services du ministère chargé de l’énergie, aux acteurs éligibles (obligés mais aussi d’autres personnes morales non obligées) réalisant des opérations d’économies d’énergie.",
+    "relu": true
+   },
+   {
+    "cle": "ministere-cee",
+    "passage": "Il mentionne clairement le montant de la contribution qui sera versée au bénéficiaire sous réserve de la conformité de ses travaux aux fiches standardisées.",
+    "relu": true
+   }
+  ],
+  "note": "Les CEE donnent lieu à une contribution versée au bénéficiaire des travaux : c'est bien une aide (même source que ce7-012)."
+ },
+ {
+  "id": "ja7-030",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "gameAgir › question « puissance souscrite » › bonne réponse",
+  "texte": "La part fixe de l\\'acheminement (et la CTA)",
+  "affirmation": "Baisser la puissance souscrite réduit la part fixe de l'acheminement et la CTA.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ],
+  "note": "La CTA est un pourcentage de la part fixe du tarif d'acheminement (même sources que ce7-014)."
+ },
+ {
+  "id": "ja7-031",
+  "fichier": "jeu/epreuves/agir.js",
+  "repere": "gameAgir › question « puissance souscrite » › mauvaise réponse 2",
+  "texte": "Il peut baisser aussi, mais parce qu\\'il contient la part fixe de l\\'acheminement.",
+  "affirmation": "L'abonnement d'une offre de fourniture contient l'acheminement et dépend de la puissance souscrite.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "cre-trve",
+    "passage": "des offres de fourniture d’électricité sous la forme d’un contrat unique (comprenant les coûts d’acheminement)",
+    "relu": true,
+    "page": "Introduction"
+   },
+   {
+    "cle": "cre-trve",
+    "passage": "BASE 3kVA\t144,52\t19,40 […] BASE 6kVA\t188,24\t19,40",
+    "relu": true,
+    "page": "tableau « Option et puissance souscrite / Part fixe en €/an »"
+   }
+  ],
+  "note": "Le texte disait que l'abonnement du fournisseur « ne bouge pas » : dans les tarifs réglementés (contrat unique, acheminement compris), la part fixe annuelle monte avec la puissance souscrite (144,52 € à 3 kVA, 188,24 € à 6 kVA). L'abonnement n'est donc pas insensible à la puissance ; la bonne réponse reste l'acheminement.",
+  "avant": "Celui-là ne bouge pas."
+ },
+ {
+  "id": "ja7-032",
+  "fichier": "jeu/simulation/modele-energie.js",
+  "repere": "EN_ACT › consigne › why (affiché au plan d'action et au tableau de bord)",
+  "texte": "1 °C de moins, c’est environ 7 % de chauffage en moins.",
+  "affirmation": "Baisser la consigne de 1 °C économise environ 7 % du chauffage.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-10-gestes-entreprises",
+    "passage": "Baisser la température de 1 °C, c’est 7 % de consommation d’énergie en moins.",
+    "relu": true,
+    "page": "geste 1"
+   }
+  ],
+  "note": "Même ordre de grandeur que ce7-003 ; le modèle du jeu l'applique (×0,07)."
+ },
+ {
+  "id": "ja7-033",
+  "fichier": "jeu/simulation/modele-energie.js",
+  "repere": "EN_ACT › ps › why",
+  "texte": "La facture baisse, pas la consommation : 0 kWh.",
+  "affirmation": "Ajuster la puissance souscrite baisse la facture sans réduire les kWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   },
+   {
+    "cle": "ministere-guide-fiscalite-2026",
+    "passage": "Les taux de la CTA sont fixés par arrêté et constituent un pourcentage de la part fixe hors taxe du tarif d'utilisation des réseaux",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja7-034",
+  "fichier": "jeu/simulation/modele-energie.js",
+  "repere": "EN_ACT › led › why",
+  "texte": "Le même éclairage pour moitié moins d’électricité.",
+  "affirmation": "Un relamping LED divise par deux la consommation d'éclairage.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Ordre de grandeur courant, non vérifié ici. À lire : une fiche ADEME sur l'éclairage LED (agirpourlatransition.ademe.fr est bloqué ; essayer librairie.ademe.fr)."
+ },
+ {
+  "id": "ja7-035",
+  "fichier": "jeu/simulation/modele-energie.js",
+  "repere": "EN_ACT › combles › why",
+  "texte": "La chaleur s’échappe d’abord par le toit.",
+  "affirmation": "Le toit est le premier poste de déperditions.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Non vérifié ici. À lire : le guide ADEME « Isoler sa maison » (librairie.ademe.fr), qui donne la répartition des déperditions (toiture 25 à 30 % selon l'ADEME)."
+ },
+ {
+  "id": "ja7-036",
+  "fichier": "jeu/simulation/modele-energie.js",
+  "repere": "EN_ACT › pac › why",
+  "texte": "Près de trois fois moins d’énergie pour la même chaleur.",
+  "affirmation": "Une pompe à chaleur consomme environ trois fois moins d'énergie qu'une chaudière pour la même chaleur.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Correspond à un coefficient de performance d'environ 3 ; aucune source lue ici. À lire : une fiche ADEME sur les pompes à chaleur (librairie.ademe.fr)."
+ },
+ {
+  "id": "ja7-037",
+  "fichier": "jeu/simulation/modele-energie.js",
+  "repere": "EN_ACT › pv › why",
+  "texte": "Produire n’est pas économiser : le compteur de kWh économisés ne bouge pas, la facture oui.",
+  "affirmation": "Produire ne réduit pas la consommation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-038",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › école › choix du régime",
+  "texte": "['16','Réduit, 16 °C'],['8','Hors-gel, 8 °C']",
+  "affirmation": "Réduit à 16 °C et hors-gel à 8 °C pour un bâtiment inoccupé.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-10-gestes-entreprises",
+    "passage": "19 °C pour les pièces occupées, 16 °C hors période d’occupation, 8 °C si les lieux sont inoccupés plus de deux jours.",
+    "relu": true,
+    "page": "geste 1"
+   }
+  ],
+  "note": "L'ADEME recommande 16 °C hors période d'occupation et 8 °C si les lieux sont inoccupés plus de deux jours : les deux semaines de vacances relèvent du hors-gel."
+ },
+ {
+  "id": "ja7-039",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › école › message de réussite",
+  "texte": "Hors-gel et relance la veille : le meilleur réglage.",
+  "affirmation": "Pendant de longues vacances, le hors-gel est le bon régime.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-10-gestes-entreprises",
+    "passage": "19 °C pour les pièces occupées, 16 °C hors période d’occupation, 8 °C si les lieux sont inoccupés plus de deux jours.",
+    "relu": true,
+    "page": "geste 1"
+   }
+  ],
+  "note": "Même recommandation ADEME (8 °C au-delà de deux jours d'inoccupation). L'heure de relance est propre au modèle du jeu."
+ },
+ {
+  "id": "ja7-040",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › école › message de réussite (suite)",
+  "texte": "Quatre périodes de vacances par an, et ça se répète.",
+  "affirmation": "L'école a quatre périodes de vacances par an où le réglage se répète.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Le calendrier scolaire compte cinq périodes de vacances (Toussaint, Noël, hiver, printemps, été), dont quatre en saison de chauffe : la phrase est juste si on l'entend ainsi. La page du ministère (education.gouv.fr/calendrier-scolaire-100148) n'affiche pas ses dates en texte lisible : rien n'a pu être cité."
+ },
+ {
+  "id": "ja7-041",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › école › messages d'échec",
+  "texte": "Le hors-gel existe pour une raison.",
+  "affirmation": "Couper tout le chauffage en hiver fait courir un risque de gel.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Réplique humoristique."
+ },
+ {
+  "id": "ja7-042",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › bureaux › message de réussite",
+  "texte": "26 °C, c’est la consigne que recommandent les pouvoirs publics : personne ne fond, promis.",
+  "affirmation": "Les pouvoirs publics recommandent une climatisation réglée à 26 °C.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-gestes-ete",
+    "passage": "Si je mets la clim au bureau, en voiture ou à la maison, je la règle à 26°C",
+    "relu": true
+   },
+   {
+    "cle": "ministere-gestes-ete",
+    "passage": "régler la température de consigne à 26°C (au lieu de 22°C) permet de consommer deux fois moins d’électricité.",
+    "relu": true
+   }
+  ],
+  "note": "Le ministère de la Transition écologique : « je la règle à 26°C » ; 26 °C au lieu de 22 °C fait consommer deux fois moins."
+ },
+ {
+  "id": "ja7-043",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › bureaux › chiffres de la simulation",
+  "texte": "{22:1.24,24:1,26:.78}",
+  "affirmation": "Effet de la consigne de climatisation dans le modèle.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Coefficients du modèle, fictifs ; ils donnent −37 % de 22 à 26 °C, plus prudent que le « deux fois moins » du ministère."
+ },
+ {
+  "id": "ja7-044",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › boulangerie › intro et prix",
+  "texte": "const ENJ_PRIX={base:.186,hp:.205,hc:.145};",
+  "affirmation": "Prix Base, heures pleines et heures creuses de la boulangerie.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Tous les chiffres de l'enjeu sont fictifs (en-tête du fichier)."
+ },
+ {
+  "id": "ja7-045",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › boulangerie › intro",
+  "texte": "l'EMS compare les deux options sur ta propre courbe",
+  "affirmation": "Le choix de l'option tarifaire se fait sur la courbe du site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-046",
+  "fichier": "jeu/epreuves/ems-enjeu.js",
+  "repere": "enjeuStep › transfert EMS",
+  "texte": "Un EMS qui ne connaît pas le calendrier du site donne des conseils dangereux.",
+  "affirmation": "Un EMS doit connaître le calendrier d'occupation.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-047",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[7] › énigme des leviers",
+  "texte": "Trois leviers, trois marches : Sobriété, Efficacité, Production.",
+  "affirmation": "Énigme du donjon : l'ordre des trois marches.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-048",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "Ouvrier › 1re réplique",
+  "texte": "Le chef dit : d'abord on règle, ensuite on isole.",
+  "affirmation": "Régler avant d'isoler.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-049",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "Cheffe de chantier › 1re réplique",
+  "texte": "ce qui ne coûte rien, ce qui se négocie, ce qui se construit. Dans cet ordre.",
+  "affirmation": "Ordre sobriété, contrat, travaux.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-050",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[8]",
+  "texte": "Sobriété d'abord, contrat ensuite, travaux enfin.",
+  "affirmation": "Ordre de l'action.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-051",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[7] › erreur et questions",
+  "texte": "Commencer par les gros travaux avant la sobriété : isoler un bâtiment qu'on chauffe le week-end.",
+  "affirmation": "Bilan de l'étape Agir.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Récapitulatif ; le calcul des 19 % est un calcul, l'ordre une démarche."
+ },
+ {
+  "id": "ja7-052",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "secret « arbre »",
+  "texte": "sans subvention ni certificat d'économies d'énergie",
+  "affirmation": "Clin d'œil aux CEE et à OPERAT.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-053",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "secret « konami »",
+  "texte": "Économie estimée : 3 %.",
+  "affirmation": "Mode sobriété de l'écran.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja7-054",
+  "fichier": "jeu/interface/evolution-fin.js",
+  "repere": "DIP_SAVOIR › ligne 7",
+  "texte": "Sobriété → efficacité → production ; plan chiffré sous budget ; enjeu du site",
+  "affirmation": "Résumé de l'étape 7.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ }
+]

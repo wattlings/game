@@ -1,0 +1,894 @@
+[
+ {
+  "id": "ja8-001",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8p › x",
+  "texte": "On vérifie que l’action a vraiment marché, à conditions comparables, puis on repart au début de la boucle.",
+  "affirmation": "Vérifier à conditions comparables, puis relancer la boucle.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Même texte que ce8-012."
+ },
+ {
+  "id": "ja8-002",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8p › say",
+  "texte": "Sinon on attribue au médicament ce qui revient à la météo.",
+  "affirmation": "Analogie du traitement.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-003",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8r1 › x",
+  "texte": "Un hiver doux fait baisser la consommation de gaz… sans que personne n’ait rien fait.",
+  "affirmation": "La consommation de chauffage dépend de la rigueur de l'hiver.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   }
+  ],
+  "note": "C'est la raison pour laquelle l'arrêté du 10 avril 2020 fait ajuster les consommations par les DJU d'une station Météo-France."
+ },
+ {
+  "id": "ja8-004",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8r2 › x",
+  "texte": "On corrige la comparaison avec les DJU : c’est le principe de la mesure et vérification (M&V).",
+  "affirmation": "La M&V compare avant/après en ajustant aux conditions (dont le climat, par les DJU).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   }
+  ],
+  "note": "L'IPMVP calcule les économies avant et après le projet « making suitable adjustments for changes in conditions » ; pour le chauffage, la condition principale est le climat, que l'arrêté tertiaire ajuste par les DJU."
+ },
+ {
+  "id": "ja8-005",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8r2 › say",
+  "texte": "1 900 DJU, contre 2 244 d’habitude",
+  "affirmation": "DJU de la station du jeu.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Valeurs du jeu (l'atelier ems-mesurer.js utilise 2 070 et 2 435 : deux jeux de chiffres fictifs différents)."
+ },
+ {
+  "id": "ja8-006",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8r2 › quiz",
+  "texte": "Rien sans corriger du climat : l’effet réel est proche de 0",
+  "affirmation": "Une baisse égale à l'adoucissement de l'hiver ne prouve rien.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-007",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8r3 › x",
+  "texte": "Le résultat alimente le prochain tour de boucle (logique ISO 50001) et les déclarations OPERAT.",
+  "affirmation": "ISO 50001 est une boucle d'amélioration continue ; le résultat sert aux déclarations OPERAT.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "elle repose sur l’approche PDCA (plan, do, check, act) et s’appuie sur l’analyse des usages et consommation énergétiques pour identifier les usages énergétiques significatifs et les potentiels d’amélioration.",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   },
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "La norme fixe comme priorité l’amélioration continue de la performance énergétique de l’organisme, objectif mesurable inscrit dans la durée",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   },
+   {
+    "cle": "ministere-eet",
+    "passage": "Une obligation de reporting chaque année, via la plateforme en ligne OPERAT",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-008",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8r3 › say",
+  "texte": "« ISO 50001 : Planifier, Faire, Vérifier, Agir » et « OPERAT : déclarer chaque année, au plus tard le 30 septembre »",
+  "affirmation": "ISO 50001 suit le cycle PDCA ; la déclaration OPERAT est annuelle, au plus tard le 30 septembre.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "elle repose sur l’approche PDCA (plan, do, check, act) et s’appuie sur l’analyse des usages et consommation énergétiques pour identifier les usages énergétiques significatifs et les potentiels d’amélioration.",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ],
+  "note": "« avant le 30 septembre » devient « au plus tard le 30 septembre », comme l'arrêté (et le cours, ce8-005).",
+  "avant": "« ISO 50001 : Planifier, Faire, Vérifier, Agir » et « OPERAT : déclarer chaque année avant le 30 septembre »"
+ },
+ {
+  "id": "ja8-009",
+  "fichier": "jeu/recit/fiches-savoir.js",
+  "repere": "fiche s8a › x et say",
+  "texte": "Tu te pèses en manteau en janvier et en t-shirt en juillet : tu as « perdu » 3 kg.",
+  "affirmation": "Analogie de la balance.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Même analogie que ce8-013."
+ },
+ {
+  "id": "ja8-010",
+  "fichier": "jeu/recit/lieux-savoir.js",
+  "repere": "SRC.rayonRegl › idle",
+  "texte": "Les livres sont rangés par date d’abrogation.",
+  "affirmation": "Clin d'œil.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-011",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "champion Mme Joule › cIntro",
+  "texte": "Une action n'a marché que si on le prouve à conditions égales.",
+  "affirmation": "Méthode de la preuve.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-012",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Greffier Louis › question 1",
+  "texte": "Sinon, on attribue à l'action ce qui revient à la météo.",
+  "affirmation": "Comparer à conditions comparables.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-013",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Greffier Louis › question 2 › bonne réponse et explication",
+  "texte": "Au moins 1 000 m² d'activités tertiaires, surfaces cumulées sur le site.",
+  "affirmation": "Le décret tertiaire s'applique dès 1 000 m² d'activités tertiaires cumulés sur un site.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ],
+  "note": "Même texte que ce8-023."
+ },
+ {
+  "id": "ja8-014",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Experte Clara › question 1",
+  "texte": "C'est le principe de la mesure et vérification.",
+  "affirmation": "On corrige le chauffage avec les DJU pour comparer deux années.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-015",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Experte Clara › question 1 › mauvaise réponse 1",
+  "texte": "Le prix ne change pas les kWh.",
+  "affirmation": "Le prix ne corrige pas les kWh du climat.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-016",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Experte Clara › question 2",
+  "texte": "Tout le monde a baissé, personne n'a rien fait, tout le monde s'en est félicité.",
+  "affirmation": "Hiver doux : baisse sans action.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-017",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Experte Clara › question 3 › bonne réponse",
+  "texte": "Sur OPERAT (ADEME)",
+  "affirmation": "La déclaration du décret tertiaire se fait sur OPERAT, gérée par l'ADEME.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-eet",
+    "passage": "Gérée par l’Ademe, cette plateforme en ligne permet le suivi des obligations pour les assujettis et l’administration. Les propriétaires, bailleurs ou occupants doivent y déclarer les consommations de leurs locaux.",
+    "relu": true,
+    "page": "Plateforme OPERAT"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-018",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Experte Clara › question 3 › explication",
+  "texte": "Chaque année, au plus tard le 30 septembre, pour l'année précédente.",
+  "affirmation": "La déclaration est annuelle, au plus tard le 30 septembre pour l'année précédente.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ],
+  "note": "« avant le 30 septembre » devient « au plus tard le 30 septembre », la formule de l'arrêté.",
+  "avant": "Chaque année, avant le 30 septembre, pour l'année précédente."
+ },
+ {
+  "id": "ja8-019",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Experte Clara › question 3 › mauvaises réponses",
+  "texte": "On y trouve des données, pas la déclaration.",
+  "affirmation": "Ni le distributeur ni la facture ne portent la déclaration.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-eet",
+    "passage": "Gérée par l’Ademe, cette plateforme en ligne permet le suivi des obligations pour les assujettis et l’administration. Les propriétaires, bailleurs ou occupants doivent y déclarer les consommations de leurs locaux.",
+    "relu": true,
+    "page": "Plateforme OPERAT"
+   }
+  ],
+  "note": "La déclaration se fait sur OPERAT, pas ailleurs."
+ },
+ {
+  "id": "ja8-020",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Auditeur Yann › question 1",
+  "texte": "Dans ISO 50001 (Planifier, Faire, Vérifier, Agir)",
+  "affirmation": "ISO 50001 suit le cycle Planifier, Faire, Vérifier, Agir.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "elle repose sur l’approche PDCA (plan, do, check, act) et s’appuie sur l’analyse des usages et consommation énergétiques pour identifier les usages énergétiques significatifs et les potentiels d’amélioration.",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   }
+  ],
+  "note": "Le rattachement de « Vérifier » à Mesurer et Détecter est une lecture du cours (méthode)."
+ },
+ {
+  "id": "ja8-021",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Auditeur Yann › question 2",
+  "texte": "Nouvelles données, nouveaux objectifs : la boucle continue.",
+  "affirmation": "Amélioration continue : on recommence la boucle.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "La norme fixe comme priorité l’amélioration continue de la performance énergétique de l’organisme, objectif mesurable inscrit dans la durée",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   },
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "les organismes évalueront et réviseront leur système de management de l’énergie pour adapter leur politique énergétique et la mettre en œuvre.",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-022",
+  "fichier": "jeu/recit/arenes/arene-8.js",
+  "repere": "Auditeur Yann › question 3",
+  "texte": "Pour un bâtiment, les « mêmes conditions », c'est d'abord la météo.",
+  "affirmation": "Analogie de la balance appliquée au bâtiment.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-023",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › écran d'introduction",
+  "texte": "Pour un bâtiment, les conditions, c'est surtout la météo : on corrige avec les DJU. C'est la <b>mesure et vérification</b> (M&V).",
+  "affirmation": "La M&V corrige la comparaison des conditions, surtout du climat avec les DJU.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-024",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question décret tertiaire › bonne réponse",
+  "texte": "−40 % (puis −50 % en 2040, −60 % en 2050)",
+  "affirmation": "Objectifs du décret tertiaire : −40 % en 2030, −50 % en 2040, −60 % en 2050.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": true,
+    "page": "G2 – Textes régissant le dispositif"
+   }
+  ],
+  "note": "La loi dit « par rapport à 2010 », l'arrêté permet une année de référence entre 2010 et 2022 (voir ce8-002)."
+ },
+ {
+  "id": "ja8-025",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question décret tertiaire › explication",
+  "texte": "Ou atteindre un seuil en valeur absolue (kWh/m²/an) fixé par activité.",
+  "affirmation": "Alternative : un niveau de consommation en valeur absolue par activité.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Le niveau de consommation exprimé en valeur absolue (noté Cabs), l'objectif défini au I-2° de l'article L. 174-1 du code de la construction et de l'habitation. L'article 4 du présent arrêté précise les modalités de détermination de ce niveau",
+    "relu": true,
+    "page": "article 2, m)"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-026",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question OPERAT (site assujetti) › bonne réponse",
+  "texte": "Au plus tard le 30 septembre, chaque année",
+  "affirmation": "Déclaration annuelle, au plus tard le 30 septembre.",
+  "type": "regle",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ],
+  "note": "« Avant le 30 septembre » (et la question « Avant quelle date ») deviennent « au plus tard le 30 septembre » (« Jusqu'à quelle date »), la formule de l'arrêté.",
+  "avant": "Avant le 30 septembre, chaque année"
+ },
+ {
+  "id": "ja8-027",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question OPERAT › explication",
+  "texte": "Sur la plateforme OPERAT de l\\'ADEME.",
+  "affirmation": "OPERAT est la plateforme de l'ADEME.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-eet",
+    "passage": "Gérée par l’Ademe, cette plateforme en ligne permet le suivi des obligations pour les assujettis et l’administration. Les propriétaires, bailleurs ou occupants doivent y déclarer les consommations de leurs locaux.",
+    "relu": true,
+    "page": "Plateforme OPERAT"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-028",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question OPERAT › explication (suite)",
+  "texte": "Ces paramètres évoluent par arrêté : toujours revérifier sur les textes officiels.",
+  "affirmation": "Les paramètres du dispositif sont modifiés par arrêté.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Annexe II · Version en vigueur depuis le 20 août 2026 · Modifié par Arrêté du 11 août 2026 - art. 1",
+    "relu": true,
+    "page": "annexe II"
+   }
+  ],
+  "note": "L'arrêté du 10 avril 2020 a encore été modifié le 11 août 2026."
+ },
+ {
+  "id": "ja8-029",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question OPERAT (site non assujetti)",
+  "texte": "Non : moins de 1 000 m² de surface tertiaire",
+  "affirmation": "Sous 1 000 m², pas d'obligation.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-030",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question OPERAT (site non assujetti) › mauvaise réponse 2",
+  "texte": "Même les assujettis déclarent une fois par an.",
+  "affirmation": "La déclaration est annuelle.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Chaque année à partir de 2022 sont transmises, au plus tard le 30 septembre, les données relatives à l'année précédente.",
+    "relu": true,
+    "page": "article 13, II"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-031",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question indicateur CO₂",
+  "texte": "Le gaz émet environ 3 fois plus de CO₂ par kWh que l\\'électricité française.",
+  "affirmation": "Par kWh, le gaz émet environ 3 fois plus que l'électricité.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   }
+  ],
+  "note": "0,227 × 0,90 ≈ 0,204 kgCO2e par kWh de gaz facturé, contre 0,064 pour l'électricité : rapport ≈ 3,2 (comme ce8-025)."
+ },
+ {
+  "id": "ja8-032",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question ISO 50001",
+  "texte": "La norme ISO 50001 repose sur une boucle d\\'amélioration continue.",
+  "affirmation": "ISO 50001 repose sur le cycle PDCA d'amélioration continue.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "elle repose sur l’approche PDCA (plan, do, check, act) et s’appuie sur l’analyse des usages et consommation énergétiques pour identifier les usages énergétiques significatifs et les potentiels d’amélioration.",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   },
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "La norme fixe comme priorité l’amélioration continue de la performance énergétique de l’organisme, objectif mesurable inscrit dans la durée",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   }
+  ],
+  "note": "« impose une boucle » devient « repose sur une boucle » : le ministère écrit que la norme « repose sur l'approche PDCA ».",
+  "avant": "La norme ISO 50001 impose une boucle d\\'amélioration continue."
+ },
+ {
+  "id": "ja8-033",
+  "fichier": "jeu/epreuves/piloter.js",
+  "repere": "gamePiloter › question ISO 50001 › ordre",
+  "texte": "items:['Planifier','Faire','Vérifier','Agir']",
+  "affirmation": "Ordre du cycle PDCA.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-iso-50001",
+    "passage": "elle repose sur l’approche PDCA (plan, do, check, act) et s’appuie sur l’analyse des usages et consommation énergétiques pour identifier les usages énergétiques significatifs et les potentiels d’amélioration.",
+    "relu": true,
+    "page": "Caractéristiques et principales exigences"
+   }
+  ],
+  "note": "plan, do, check, act."
+ },
+ {
+  "id": "ja8-034",
+  "fichier": "jeu/epreuves/ems-mesurer.js",
+  "repere": "mvStep › choix de la méthode",
+  "texte": "Corriger seulement le chauffage du rapport des DJU",
+  "affirmation": "Seule la part chauffage dépend des DJU.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Méthode du cours (signature énergétique)."
+ },
+ {
+  "id": "ja8-035",
+  "fichier": "jeu/epreuves/ems-mesurer.js",
+  "repere": "MES_DJU0, MES_DJU1, MES_TENU, MES_GRAIN",
+  "texte": "const MES_DJU0=2435,MES_DJU1=2070,MES_TENU=.8;",
+  "affirmation": "Chiffres de l'atelier.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-036",
+  "fichier": "jeu/epreuves/ems-mesurer.js",
+  "repere": "mesChiffres › facteurs d'émission",
+  "texte": "elec*.064+gaz*.204",
+  "affirmation": "Facteurs d'émission : 0,064 kgCO2e/kWh d'électricité, 0,204 kgCO2e par kWh de gaz facturé (PCS).",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Électricité (hors autoconsommation) tous usages confondus 0,064",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Gaz méthane (naturel) issu des réseaux 0,227 [Equivalent kg CO2 par kilowattheure d'énergie finale en PCI]",
+    "relu": true,
+    "page": "annexe VII, tableau VII-2"
+   },
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "1 kWh (PCS) de gaz naturel (méthane) issu des réseaux : 0,90 [kWh (PCI)]",
+    "relu": true,
+    "page": "annexe I"
+   }
+  ],
+  "note": "Le calcul utilisait 0,052 pour l'électricité et 0,227 pour le gaz : 0,064 est la valeur réglementaire (hors autoconsommation), et 0,227 s'entend par kWh PCI, soit 0,204 par kWh facturé en PCS (mêmes valeurs que le cours, ce8-009, ce8-010, et la fiche pR2).",
+  "avant": "elec*.052+gaz*.227"
+ },
+ {
+  "id": "ja8-037",
+  "fichier": "jeu/epreuves/ems-mesurer.js",
+  "repere": "indicateur › décret",
+  "texte": "L'objectif 2030 est −40 %",
+  "affirmation": "Objectif 2030 du décret tertiaire : −40 %.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": true,
+    "page": "G2 – Textes régissant le dispositif"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-038",
+  "fichier": "jeu/epreuves/ems-mesurer.js",
+  "repere": "transfert EMS",
+  "texte": "la mesure et vérification compare le suivi à une référence ajustée (météo, occupation), jamais au chiffre brut de l’an dernier",
+  "affirmation": "La M&V compare à une référence ajustée aux conditions.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   },
+   {
+    "cle": "evo-ipmvp",
+    "passage": "This individual design is recorded in the project’s M&V Plan, and savings are reported as defined therein.",
+    "relu": true
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-039",
+  "fichier": "jeu/epreuves/ems-mesurer.js",
+  "repere": "conclusion › grain de sable",
+  "texte": "Ça a marché, mais ${Math.round((1-MES_TENU)*100)} % de moins que prévu : on cherche pourquoi",
+  "affirmation": "Un écart au plan se cherche sur place.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-040",
+  "fichier": "jeu/epreuves/finale.js",
+  "repere": "gameFinale › tableau du patrimoine",
+  "texte": "À l'échelle d'un patrimoine, on compare, on classe et on priorise.",
+  "affirmation": "Démarche patrimoniale.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-041",
+  "fichier": "jeu/epreuves/finale.js",
+  "repere": "gameFinale › question « assujettis »",
+  "texte": "Tous deux dépassent 1 000 m². La boulangerie (140 m²) n\\'est pas concernée.",
+  "affirmation": "Seuls les sites d'au moins 1 000 m² sont assujettis.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ],
+  "note": "Surfaces des sites fictives ; le seuil est réglementaire."
+ },
+ {
+  "id": "ja8-042",
+  "fichier": "jeu/epreuves/finale.js",
+  "repere": "gameFinale › question « assujettis » › mauvaise réponse 2",
+  "texte": "Le seuil porte sur la surface, pas sur le ratio.",
+  "affirmation": "Le seuil d'assujettissement est une surface.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-043",
+  "fichier": "jeu/epreuves/finale.js",
+  "repere": "gameFinale › question « ratio de la boulangerie »",
+  "texte": "La boulangerie a le plus gros ratio (786 kWh/m²).",
+  "affirmation": "Ratio de la boulangerie.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Calculé à partir des données fictives des sites."
+ },
+ {
+  "id": "ja8-044",
+  "fichier": "jeu/epreuves/finale.js",
+  "repere": "gameFinale › question « ratio » › explication",
+  "texte": "Un ratio compare des bâtiments comparables.",
+  "affirmation": "Un ratio se lit selon l'activité.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-045",
+  "fichier": "jeu/epreuves/finale.js",
+  "repere": "gameFinale › question « par où commencer »",
+  "texte": "On combine l\\'ordre sobriété → efficacité → production avec l\\'obligation réglementaire et le potentiel.",
+  "affirmation": "Priorisation patrimoniale.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-046",
+  "fichier": "jeu/epreuves/finale.js",
+  "repere": "gameFinale › question « corriger du climat »",
+  "texte": "Corriger du climat avec les DJU de la station locale",
+  "affirmation": "On corrige le chauffage avec les DJU de la station la plus proche.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-arrete-tertiaire-2020",
+    "passage": "Les données climatiques prises en considération sont celles de la station Météo France la plus représentative du site. […] L'ajustement de ces consommations par les degrés jours unifiés est réalisé automatiquement par la plateforme de recueil et de suivi",
+    "relu": true,
+    "page": "article 5, I"
+   }
+  ],
+  "note": "L'arrêté retient la station Météo-France la plus représentative du site."
+ },
+ {
+  "id": "ja8-047",
+  "fichier": "jeu/recit/arenes/donjons.js",
+  "repere": "DONJONS[8] › énigme de la balance",
+  "texte": "Pousse le poids de la météo sur le bon plateau pour comparer à conditions égales.",
+  "affirmation": "Énigme du donjon.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-048",
+  "fichier": "jeu/recit/habitants.js",
+  "repere": "Auditrice › 1re réplique",
+  "texte": "Avant, après, à météo comparable. Sinon ce n'est pas une preuve, c'est une impression.",
+  "affirmation": "Méthode de la preuve.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-049",
+  "fichier": "jeu/recit/histoire.js",
+  "repere": "JOULE_HINTS[9]",
+  "texte": "Une action n'a marché que si on le prouve à conditions égales.",
+  "affirmation": "Méthode de la preuve.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-050",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[8] › pourquoi",
+  "texte": "Une économie prouvée finance la suivante et répond aux obligations, comme le décret tertiaire.",
+  "affirmation": "Lien entre preuve et obligations.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-051",
+  "fichier": "jeu/recit/bilans.js",
+  "repere": "BILANS[8] › questions",
+  "texte": "L'éclairage et les ordinateurs ne savent pas qu'il fait doux.",
+  "affirmation": "Seul le chauffage se corrige des DJU.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-052",
+  "fichier": "jeu/recit/secrets.js",
+  "repere": "réplique « Le décret tertiaire, c'est comme le sport »",
+  "texte": "tout le monde a une année de référence où il était en meilleure forme.",
+  "affirmation": "Clin d'œil à l'année de référence.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ },
+ {
+  "id": "ja8-053",
+  "fichier": "jeu/interface/menu.js",
+  "repere": "fiche du site › ligne Décret tertiaire",
+  "texte": "'Assujetti (≥ 1 000 m²)'",
+  "affirmation": "Assujetti au-delà de 1 000 m².",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "legifrance-cch-r174-22",
+    "passage": "Tout ensemble de bâtiments situés sur une même unité foncière ou sur un même site dès lors que ces bâtiments hébergent des activités tertiaires sur une surface de plancher cumulée supérieure ou égale à 1 000 m2",
+    "relu": true,
+    "page": "article R174-22, II, 3°"
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "ja8-054",
+  "fichier": "jeu/simulation/partie.js",
+  "repere": "paliers du parc › toast à −40 %",
+  "texte": "Objectif atteint : −40 % sur le parc. Le décret tertiaire 2030 est tenu !",
+  "affirmation": "−40 % en 2030 est l'objectif du décret tertiaire.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-operat-faq",
+    "passage": "afin de parvenir à une réduction de la consommation d'énergie finale pour l'ensemble des bâtiments soumis à l'obligation d'au moins 40 % en 2030, 50 % en 2040 et 60 % en 2050, par rapport à 2010",
+    "relu": true,
+    "page": "G2 – Textes régissant le dispositif"
+   }
+  ],
+  "note": "L'objectif s'entend « pour l'ensemble des bâtiments soumis à l'obligation » ; le jeu le mesure sur le parc."
+ },
+ {
+  "id": "ja8-055",
+  "fichier": "jeu/interface/evolution-fin.js",
+  "repere": "DIP_SAVOIR › ligne 8",
+  "texte": "Mesure et vérification corrigée des DJU ; décret tertiaire, OPERAT, ISO 50001",
+  "affirmation": "Résumé de l'étape 8.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": ""
+ }
+]
