@@ -99,7 +99,7 @@ EOL.dit={
     ["L'éolienne n° 2. Le bout de sa pale va aussi vite qu'un TGV. Le centre, lui, fait tranquillement un tour toutes les quatre secondes."]],
   moulin:[["Les ruines du moulin de Kerwatt, 1742. Quatre ailes en bois, un meunier, de la farine. Une plaque : « Premier parc éolien de la commune. Puissance : quelques kilowatts. Disponibilité : quand le meunier était réveillé. »",
       "Plus bas : « Limite de Betz : aucune machine ne prend plus de 59 % de l'énergie du vent. Le meunier l'ignorait. Ses ailes de toile en étaient loin, et il s'en portait très bien. »"],
-    ["Le vieux moulin. Trois siècles de moins que les éoliennes, et déjà le même problème : pas de vent, pas de pain."]],
+    ["Le vieux moulin. Trois siècles de plus que les éoliennes, et déjà le même problème : pas de vent, pas de pain."]],
   yann:[["Yann, pêcheur. Le vent, je le connais depuis avant les éoliennes. En février, il te couche les casiers. En juin, il fait la sieste, et moi avec.",
       "Les ingénieurs sont venus m'expliquer que l'éolien produit surtout l'hiver. Je leur ai dit que mon grand-père le savait. Ils ont noté."],
     ["Les éoliennes en mer ? Les homards adorent les fondations. Moi, je dois contourner. Chacun son avis, le homard a le sien."]],

@@ -1,0 +1,2488 @@
+[
+ {
+  "id": "ve-001",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "déclaration › accroche",
+  "texte": "Douze éoliennes sur la lande, quarante en mer. Les goélands ont déposé un recours. Il est à l'étude.",
+  "affirmation": "Le site fictif compte 12 éoliennes à terre et 40 en mer ; le recours des goélands est une blague.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-002",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "déclaration › bravo",
+  "texte": "Tu sais lire une courbe de puissance, calculer un facteur de charge et expliquer une offre verte sans mentir.",
+  "affirmation": "Résumé des acquis visés par le site.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-003",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "déclaration › annonces[0]",
+  "texte": "Vent d'ouest à l'arrivée, comme hier, comme demain, comme depuis le Néolithique.",
+  "affirmation": "Clin d'œil : sur la côte bretonne, le vent dominant vient de l'ouest.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-004",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "déclaration › annonces[1]",
+  "texte": "Elles tournent lentement. C'est une illusion : le bout de la pale file à trois cents kilomètres à l'heure.",
+  "affirmation": "Le bout de pale d'une éolienne de 3 MW va à environ 300 km/h.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Rotor de 116,8 m (Nordex N117) à 14 tr/min au plus : π × 116,8 × 14 / 60 ≈ 86 m/s ≈ 310 km/h. Voir ve-012."
+ },
+ {
+  "id": "ve-005",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "déclaration › annoncesRetour",
+  "texte": "Le vent, lui, reste. Il a un contrat à durée indéterminée.",
+  "affirmation": "Blague sur le vent.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-006",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info cube › x",
+  "info": "cube",
+  "texte": "La puissance du vent varie comme le cube de sa vitesse : deux fois plus de vent, huit fois plus de puissance.",
+  "affirmation": "La puissance du vent est proportionnelle au cube de sa vitesse : doubler le vent multiplie la puissance par 8.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-wind-brief",
+    "passage": "Wind power is proportional to the dimensions of the rotor and to the cube of the wind speed. Theoretically, when the wind speed doubles, the wind power increases eight times.",
+    "relu": true,
+    "page": "p. 9"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-007",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info cube › x",
+  "info": "cube",
+  "texte": "Entre un site à 6 m/s et un site à 7 m/s de moyenne, l'écart de production approche 50 %.",
+  "affirmation": "Passer de 6 à 7 m/s de vent moyen augmente la production d'environ 50 %.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "(7/6)³ = 1,59 pour la puissance du vent ; avec la courbe de puissance et la loi de Rayleigh de la simulation « Un an de vent », le facteur de charge passe de 16,7 % à 24,7 % (+47 %)."
+ },
+ {
+  "id": "ve-008",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info cube › x",
+  "info": "cube",
+  "texte": "C'est pour cela qu'on mesure le vent pendant un an, à hauteur de nacelle, avant de couler le moindre mètre cube de béton.",
+  "affirmation": "Avant un projet éolien, on mesure le vent sur le site pendant au moins un an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "Des mâts de mesure de la vitesse et de l’orientation du vent sont installés pour connaître précisément le gisement de vent sur une année.",
+    "relu": true,
+    "page": "p. 21"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-009",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info courbe › x",
+  "info": "courbe",
+  "texte": "Une éolienne de 3 MW démarre vers 3 m/s (11 km/h), atteint sa pleine puissance vers 13 m/s (47 km/h) et s'arrête à 25 m/s (90 km/h) pour se protéger.",
+  "affirmation": "Une éolienne de 3 MW démarre vers 3 m/s, atteint sa puissance nominale vers 13 m/s et s'arrête à 25 m/s.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "nordex-n117",
+    "passage": "Cut-in wind speed 3.0 m/s",
+    "relu": true
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "Cut-out wind speed 25 m / s",
+    "relu": true
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "The maximum rated power can be adjusted (e.g. 3 MW)",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "Les éoliennes fonctionnent à des vitesses de vent généralement comprises entre 10 et 90 km/h.",
+    "relu": true,
+    "page": "p. 9"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "À l’inverse, un vent trop fort entraîne son arrêt, de manière à éviter tout risque de casse des équipements et minimiser leur usure.",
+    "relu": true,
+    "page": "p. 11"
+   }
+  ],
+  "note": "Démarrage et coupure confirmés par la fiche Nordex N117 (réglable à 3 MW) et par l'ADEME (10 à 90 km/h). La vitesse nominale (≈ 13 m/s) n'est pas donnée sur la fiche lue : ordre de grandeur cohérent avec la courbe, non sourcé à lui seul."
+ },
+ {
+  "id": "ve-010",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info courbe › x",
+  "info": "courbe",
+  "texte": "au-delà, les pales pivotent pour laisser filer le vent en trop, et la courbe devient un plateau.",
+  "affirmation": "Au-delà de la vitesse nominale, l'orientation des pales (pitch) limite la puissance.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-wind-brief",
+    "passage": "A pitch control system actively adjusts the angle of the blades to the wind speed.",
+    "relu": true,
+    "page": "p. 10"
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "Main brake Aerodynamic brake (pitch)",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-011",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info charge › x",
+  "info": "charge",
+  "texte": "Le parc de la lande : 12 éoliennes de 3 MW, soit 36 MW.",
+  "affirmation": "Le parc fictif fait 36 MW.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-012",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info charge › x",
+  "info": "charge",
+  "texte": "Sur une année, il fournit environ 24 % de ce maximum : 76 GWh.",
+  "affirmation": "36 MW × 8 760 h × 24 % ≈ 76 GWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "36 × 8 760 × 0,24 = 75,7 GWh."
+ },
+ {
+  "id": "ve-013",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info charge › x",
+  "info": "charge",
+  "texte": "En France, il tourne entre 21 et 27 % à terre selon les années (21,4 % en 2025, année peu ventée), et approche 40 % en mer.",
+  "affirmation": "Le facteur de charge de l'éolien terrestre français varie entre 21 et 27 % selon les années (21,4 % en 2025) ; en mer il approche 40 %.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Le facteur de charge de la filière éolienne terrestre française s’est établi à 21,4 % au cours de l’année 2025. Il s’agit d’un niveau exceptionnellement faible",
+    "relu": true,
+    "page": "p. 35"
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Figure 2.17 - Évolution du facteur de charge annuel moyen de l’éolien terrestre entre 2014 et 2025",
+    "relu": true,
+    "page": "p. 35 (valeurs de la figure : de 21,4 % à 26,6 %)"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "En un an, elle produit autant d'électricité que si elle avait tourné 25 % du temps à puissance maximale en moyenne (ce chiffre a varié entre 21,4 % et 26,6 % entre 2020 et 2025",
+    "relu": true,
+    "page": "p. 11"
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Le facteur de charge des parcs éoliens en mer commerciaux […] ayant été mis en service avant le 1er janvier 2025 s’est établi à 38,8 % sur l’ensemble de l’année 2025",
+    "relu": true,
+    "page": "p. 37"
+   }
+  ],
+  "note": "RTE : 21,4 % en 2025, valeurs annuelles 2014-2025 entre 21,4 % et 26,6 % ; 38,8 % en mer en 2025. L'ancienne fourchette 22-26 % excluait 2017, 2020, 2023, 2024 et 2025.",
+  "avant": "En France, il tourne entre 22 et 26 % à terre (21,4 % en 2025, année peu ventée), et approche 40 % en mer."
+ },
+ {
+  "id": "ve-014",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info charge › retiens",
+  "info": "charge",
+  "texte": "Énergie annuelle = puissance × 8 760 heures × facteur de charge.",
+  "affirmation": "Définition du facteur de charge.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-fc-mensuels-eolien-solaire",
+    "passage": "Facteur de charge : rapport entre l'électricité effectivement produite par la filière et celle qu'elle aurait pu produire si elle avait fonctionné à sa puissance maximale théorique durant la même période",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "En un an, elle produit autant d'électricité que si elle avait tourné 25 % du temps à puissance maximale en moyenne (ce chiffre a varié entre 21,4 % et 26,6 % entre 2020 et 2025",
+    "relu": true,
+    "page": "p. 11"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-015",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info anatomie › x",
+  "info": "anatomie",
+  "texte": "Un mât d'une centaine de mètres, trois pales de 57 m, un rotor de 117 m de diamètre.",
+  "affirmation": "Une éolienne de 3 MW a un rotor d'environ 117 m (pales de 57 m) sur un mât d'une centaine de mètres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "nordex-n117",
+    "passage": "Diameter 116.8 m",
+    "relu": true
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "The turbine is available with hub heights of 84 to 141 meters",
+    "relu": true
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "The maximum rated power can be adjusted (e.g. 3 MW)",
+    "relu": true
+   }
+  ],
+  "note": "Nordex N117 : rotor 116,8 m, moyeu de 84 à 141 m, puissance réglable à 3 MW (fabricant, source secondaire). L'éolienne n° 2 elle-même est fictive."
+ },
+ {
+  "id": "ve-016",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info anatomie › x",
+  "info": "anatomie",
+  "texte": "Le rotor tourne à 14 tours par minute au plus : cela semble lent, mais le bout de la pale file à plus de 300 km/h.",
+  "affirmation": "Le rotor tourne à 14 tr/min au plus ; le bout de pale dépasse alors 300 km/h.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "nordex-n117",
+    "passage": "Operating range rotational speed 7.9–14.1 rpm",
+    "relu": true
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "Diameter 116.8 m",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "font tourner un axe (le rotor) de 10 à 25 tours par minute",
+    "relu": true,
+    "page": "p. 9"
+   }
+  ],
+  "note": "14,1 tr/min max (Nordex) ; π × 116,8 m × 14 / 60 = 85,6 m/s = 308 km/h. Au régime nominal (12,6 tr/min), la fiche donne 77 m/s, soit 277 km/h."
+ },
+ {
+  "id": "ve-017",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info anatomie › x",
+  "info": "anatomie",
+  "texte": "Plus on monte, plus le vent est fort et régulier : c'est la raison de la hauteur.",
+  "affirmation": "Le vent est plus fort en altitude, d'où des éoliennes hautes.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-wind-brief",
+    "passage": "Because larger turbines harness strong wind at higher altitudes, they produce more electricity per unit of installation area",
+    "relu": true,
+    "page": "p. 2"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-018",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info betz › x",
+  "info": "betz",
+  "texte": "si elle l'arrêtait net, l'air s'entasserait derrière elle et plus rien ne passerait.",
+  "affirmation": "Une éolienne ne peut pas arrêter complètement l'air, sinon le flux serait bloqué.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dtu-betz-joukowsky",
+    "passage": "it is impossible to stop a wind/fluid motion in the stream tube to take 100 % efficiency […] because this implies a full blockage of the flow downstream of the disc.",
+    "relu": true,
+    "page": "p. 1-2"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-019",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info betz › x",
+  "info": "betz",
+  "texte": "Le maximum théorique est de 16/27, soit 59,3 % : c'est la limite de Betz, publiée en 1920.",
+  "affirmation": "La limite de Betz, 16/27 ≈ 59,3 %, a été publiée en 1920.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "dtu-betz-joukowsky",
+    "passage": "no more than 59.3% of the kinetic energy of fluid contained in a stream tube having the same cross section as the area of a rotor disc (or any energy transformer) can be converted to useful work by the disc.",
+    "relu": true,
+    "page": "p. 1"
+   },
+   {
+    "cle": "dtu-betz-joukowsky",
+    "passage": "this result about the maximum of kinetic energy which can be utilized by an ideal wind-driven generator, was known as the Betz limit published in 1920",
+    "relu": true,
+    "page": "p. 2"
+   }
+  ],
+  "note": "Okulov et van Kuik (DTU) : limite publiée par Betz en 1920 (Joukowsky la trouve la même année) ; 1919 est la date d'un autre modèle de Betz (théorie tourbillonnaire). 16/27 = 0,593.",
+  "avant": "Le maximum théorique est de 16/27, soit 59,3 % : c'est la limite de Betz, établie en 1919."
+ },
+ {
+  "id": "ve-020",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info betz › x",
+  "info": "betz",
+  "texte": "Les meilleures machines atteignent environ 45 %.",
+  "affirmation": "Le rotor des meilleures éoliennes récupère environ 45 % de l'énergie du vent.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-wind-brief",
+    "passage": "The aerodynamic loss of energy at the blade/rotor is about 50-60%",
+    "relu": true,
+    "page": "p. 11"
+   }
+  ],
+  "note": "IRENA : 50 à 60 % de pertes aérodynamiques au rotor, soit 40 à 50 % captés."
+ },
+ {
+  "id": "ve-021",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info saison › x",
+  "info": "saison",
+  "texte": "le facteur de charge de l'éolien passe d'environ 14 % en juin à 34 % en février, en moyenne sur dix ans.",
+  "affirmation": "Le facteur de charge mensuel de l'éolien français est d'environ 14 % en juin et 34 % en février (moyenne 2016-2025).",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-fc-mensuels-eolien-solaire",
+    "passage": "2025-06;1.2;13.8;53.1;0.6;8.0;35.9;20.4;77.1;11.5;40.0 […] 2025-02;1.5;22.5;58.3;0.6;8.9;28.5;9.4;59.9;3.7;24.0 […] 2024-02;4.9;36.4;80.5;1.7;14.6;34.5;7.8;48.5;2.6;17.3",
+    "relu": true,
+    "page": "colonnes : mois ; fc_minimum_eolien ; fc_moyen_eolien ; … ; fc_moyen_solaire ; … (export CSV complet, 2012-2026)"
+   },
+   {
+    "cle": "rte-fc-mensuels-eolien-solaire",
+    "passage": "Facteur de charge : rapport entre l'électricité effectivement produite par la filière et celle qu'elle aurait pu produire si elle avait fonctionné à sa puissance maximale théorique durant la même période",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "L’énergie éolienne est précieuse, notamment en hiver, quand les besoins électriques pour le chauffage sont importants. À cette saison, les vents sont plus fréquents",
+    "relu": true,
+    "page": "p. 7"
+   }
+  ],
+  "note": "Moyennes des facteurs de charge mensuels RTE 2016-2025 (calcul sur le jeu de données) : juin 14,2 % (10,3 à 16,8 %), février 33,8 % (22,5 à 50,6 %). « 10 % en juin » n'est jamais atteint en moyenne mensuelle sur cette période.",
+  "avant": "le facteur de charge de l'éolien passe d'environ 10 % en juin à 35 % en février."
+ },
+ {
+  "id": "ve-022",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info saison › x",
+  "info": "saison",
+  "texte": "En 2025, six dixièmes de la production sont tombés en automne et en hiver, au moment où le pays se chauffe.",
+  "affirmation": "En 2025, environ 60 % de la production éolienne a eu lieu aux 1er et 4e trimestres.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "sdes-eolien-t1-2025",
+    "passage": "La production d’électricité éolienne s’est élevée à 13,7 TWh au premier trimestre 2025",
+    "relu": true
+   },
+   {
+    "cle": "sdes-eolien-t2-2025",
+    "passage": "La production d’électricité éolienne s’est élevée à 23,2 TWh au premier semestre 2025",
+    "relu": true
+   },
+   {
+    "cle": "sdes-eolien-t3-2025",
+    "passage": "La production d’électricité éolienne s’est élevée à 9,5 TWh au troisième trimestre 2025",
+    "relu": true
+   },
+   {
+    "cle": "sdes-eolien-t4-2025",
+    "passage": "La production d’électricité éolienne s’est élevée à 16,49 TWh au quatrième trimestre 2025",
+    "relu": true
+   }
+  ],
+  "note": "SDES : T1 13,7 TWh, S1 23,2 TWh (donc T2 9,5), T3 9,5, T4 16,49 TWh ; (13,7 + 16,49) / 49,2 = 61 % sur janvier-mars et octobre-décembre."
+ },
+ {
+  "id": "ve-023",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info saison › x",
+  "info": "saison",
+  "texte": "Le solaire fait l'inverse : les deux se complètent sur l'année.",
+  "affirmation": "Le solaire produit surtout en été, l'éolien surtout en hiver.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-fc-mensuels-eolien-solaire",
+    "passage": "2025-06;1.2;13.8;53.1;0.6;8.0;35.9;20.4;77.1;11.5;40.0 […] 2025-02;1.5;22.5;58.3;0.6;8.9;28.5;9.4;59.9;3.7;24.0 […] 2024-02;4.9;36.4;80.5;1.7;14.6;34.5;7.8;48.5;2.6;17.3",
+    "relu": true,
+    "page": "colonnes : mois ; fc_minimum_eolien ; fc_moyen_eolien ; … ; fc_moyen_solaire ; … (export CSV complet, 2012-2026)"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "L’énergie éolienne est précieuse, notamment en hiver, quand les besoins électriques pour le chauffage sont importants. À cette saison, les vents sont plus fréquents",
+    "relu": true,
+    "page": "p. 7"
+   }
+  ],
+  "note": "Même jeu de données RTE : facteur de charge solaire moyen 2016-2025 de 21,7 % en juillet contre 5,2 % en décembre (calcul)."
+ },
+ {
+  "id": "ve-024",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info voisins › x",
+  "info": "voisins",
+  "texte": "En France, une éolienne s'installe à 500 mètres au moins des habitations.",
+  "affirmation": "Distance minimale de 500 m entre une éolienne et une habitation.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "À 500 mètres de distance (distance minimale entre une éolienne et une habitation), il est généralement inférieur à 35 décibels : c’est moins qu’une conversation à voix basse.",
+    "relu": true,
+    "page": "p. 13"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "éloignés d’au moins 500 mètres de l’habitation la plus proche",
+    "relu": true,
+    "page": "p. 20"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-025",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info voisins › x",
+  "info": "voisins",
+  "texte": "À cette distance, elle s'entend à environ 35 décibels : moins qu'une conversation à voix basse.",
+  "affirmation": "À 500 m, une éolienne s'entend généralement à moins de 35 dB.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "À 500 mètres de distance (distance minimale entre une éolienne et une habitation), il est généralement inférieur à 35 décibels : c’est moins qu’une conversation à voix basse.",
+    "relu": true,
+    "page": "p. 13"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-026",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info voisins › x",
+  "info": "voisins",
+  "texte": "Au pied du mât, comptez 55 décibels.",
+  "affirmation": "Au pied d'une éolienne, le bruit est d'environ 55 dB.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cde-bruit-eoliennes",
+    "passage": "Au pied d’une éolienne, le bruit avoisine en moyenne 55 décibels (dBA)",
+    "relu": true
+   }
+  ],
+  "note": "Source secondaire (Connaissance des Énergies, citant Engie Green) : pas trouvé de chiffre ADEME ou ministère."
+ },
+ {
+  "id": "ve-027",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info voisins › x",
+  "info": "voisins",
+  "texte": "La réglementation limite surtout le bruit qu'elle ajoute au bruit ambiant : 5 décibels le jour, 3 la nuit.",
+  "affirmation": "Émergence sonore maximale : 5 dB(A) de 7 h à 22 h, 3 dB(A) de 22 h à 7 h (au-delà de 35 dB(A) ambiants).",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ecologie-eolien-terrestre",
+    "passage": "La réglementation prévoit notamment pour un niveau de bruit supérieur à 35dB (A) une émergence maximale de 5dB(A) entre 7h et 22h et de 3dB(A) entre 22h et 7h.",
+    "relu": true
+   },
+   {
+    "cle": "ecologie-eolien-terrestre",
+    "passage": "c’est-à-dire la différence entre le niveau de bruit lorsque le parc est en fonctionnement et le niveau de bruit lorsque le parc est arrêté",
+    "relu": true
+   }
+  ],
+  "note": "Arrêté du 26 août 2011 (art. 26), cité par le ministère."
+ },
+ {
+  "id": "ve-028",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info bridage › x",
+  "info": "bridage",
+  "texte": "On la bride la nuit pour les chauves-souris, par vent précis pour le bruit,",
+  "affirmation": "Les éoliennes sont bridées pour protéger les chauves-souris et pour respecter les plafonds de bruit.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-infos-eolien-2023",
+    "passage": "Des programmes de bridage ont notamment été développés : ils consistent à ralentir ou arrêter le fonctionnement des éoliennes aux « heures de pointe » du passage des oiseaux ou des chauves-souris et en période migratoire.",
+    "relu": true
+   },
+   {
+    "cle": "ademe-infos-eolien-2023",
+    "passage": "En mars 2022, le gouvernement a autorisé les préfets à mettre en œuvre des plans de bridage pouvant aller jusqu’à l’arrêt de l’installation en cas de dépassement de ces plafonds.",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "comme le ralentissement des éoliennes lors des périodes de fortes activités de ces animaux",
+    "relu": true,
+    "page": "p. 15"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-029",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info bridage › x",
+  "info": "bridage",
+  "texte": "en 2025, les prix ont été négatifs 513 heures en France, et environ 1,3 TWh d'éolien terrestre a été volontairement retenu.",
+  "affirmation": "513 heures de prix négatifs en 2025 ; modulation de l'éolien terrestre d'environ 1,3 TWh.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "The hourly spot price was negative for 513 hours in 2025, a higher number of occurrences than the previous year (352 in 2024)",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "ces modulations ont conduit à un effet baissier sur la production éolienne terrestre de l’ordre de 1,3 TWh",
+    "relu": true,
+    "page": "p. 36"
+   }
+  ],
+  "note": "Passage RTE sur les 513 h repris du relevé du voyage solaire (vs-072). Les 1,3 TWh incluent aussi les modulations demandées par RTE (part minoritaire)."
+ },
+ {
+  "id": "ve-030",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "Fabrication, transport, chantier et démontage compris, l'éolien émet environ 16 g de CO₂e par kWh à terre et 17 g en mer.",
+  "affirmation": "Empreinte carbone en cycle de vie : 16 gCO₂e/kWh à terre, 17 en mer.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "16 gCO2éq/kWh pour l’éolien terrestre, 17 gCO2éq/kWh l’éolien en mer",
+    "relu": true,
+    "page": "partie Émissions"
+   }
+  ],
+  "note": "RTE, Bilan électrique 2025 : 16 et 17 gCO₂éq/kWh (l'ADEME donnait 12,7 g à terre en 2023). Les 14 et 16 g de l'ancienne version ne correspondaient pas à la source la plus récente.",
+  "avant": "Fabrication, transport, chantier et démontage compris, l'éolien émet environ 14 g de CO₂e par kWh à terre et 16 g en mer."
+ },
+ {
+  "id": "ve-031",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "Une éolienne « rembourse » en un an l'énergie qu'elle a coûtée, puis tourne 20 à 25 ans.",
+  "affirmation": "Temps de retour énergétique d'environ un an ; durée de vie de 20 à 25 ans.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-terrestre-territoire",
+    "passage": "L’énergie nécessaire à la construction, l’exploitation et le démantèlement d’une éolienne est compensée par sa production d’électricité en 12 mois seulement.",
+    "relu": true,
+    "page": "p. 4"
+   },
+   {
+    "cle": "ademe-defi-eolien-2020",
+    "passage": "DURÉE DE VIE MOYENNE D'UNE ÉOLIENNE 20 À 25 ANS",
+    "relu": true,
+    "page": "p. 14"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "20 ANS durée de vie pour laquelle une éolienne est certifiée",
+    "relu": true,
+    "page": "p. 14"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-032",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info carbone › x",
+  "info": "carbone",
+  "texte": "Environ 90 % de sa masse se recycle : acier, béton, cuivre. Les pales, en composite, restent le point dur.",
+  "affirmation": "Environ 90 % de la masse d'une éolienne est recyclable ; les pales en composite sont plus difficiles à recycler.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "L’acier, le béton, le cuivre et l’aluminium sont recyclables à 100 %. Les pales, constituées de composite associant résine et fibres de verre ou carbone, sont plus difficiles à recycler.",
+    "relu": true,
+    "page": "p. 14"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "90 % D’ACIER ET BÉTON, 6 % DE RÉSINE ET FIBRES DE VERREOU DE CARBONE (contenues dans les pales) et 3 % DE CUIVRE ET ALUMINIUM",
+    "relu": true,
+    "page": "p. 14"
+   },
+   {
+    "cle": "ademe-eolien-terrestre-territoire",
+    "passage": "93 % du poids est totalement recyclable (acier, béton, cuivre et aluminium)",
+    "relu": true,
+    "page": "p. 1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-033",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info carbone › retiens",
+  "info": "carbone",
+  "texte": "Environ 16 g de CO₂e par kWh, un an pour rembourser l'énergie de fabrication.",
+  "affirmation": "Résumé de l'empreinte carbone (RTE) et du temps de retour (ADEME).",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "16 gCO2éq/kWh pour l’éolien terrestre, 17 gCO2éq/kWh l’éolien en mer",
+    "relu": true,
+    "page": "partie Émissions"
+   },
+   {
+    "cle": "ademe-eolien-terrestre-territoire",
+    "passage": "L’énergie nécessaire à la construction, l’exploitation et le démantèlement d’une éolienne est compensée par sa production d’électricité en 12 mois seulement.",
+    "relu": true,
+    "page": "p. 4"
+   }
+  ],
+  "note": null,
+  "avant": "Environ 15 g de CO₂e par kWh, un an pour rembourser l'énergie de fabrication."
+ },
+ {
+  "id": "ve-034",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info verte › x",
+  "info": "verte",
+  "texte": "Une garantie d'origine certifie qu'un MWh renouvelable a été injecté quelque part sur le réseau. Un fournisseur d'« offre verte » en achète autant que tu consommes.",
+  "affirmation": "Une GO correspond à 1 MWh renouvelable injecté ; une offre verte couvre la consommation par autant de GO.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cre-deliberation-2023-294",
+    "passage": "une garantie d’origine correspond à un volume type de 1 MWh",
+    "relu": true,
+    "page": "p. 1"
+   },
+   {
+    "cle": "energie-info-offre-verte",
+    "passage": "Une offre est considérée comme « verte » si le fournisseur injecte sur le réseau une quantité équivalente d’électricité d’origine renouvelable à celle consommée par ses clients. Cette garantie repose sur des certificats appelés garanties d’origine (GO), délivrés au niveau européen.",
+    "relu": true
+   },
+   {
+    "cle": "energie-info-offre-verte",
+    "passage": "Les Garanties d’Origine peuvent être achetées séparément de l’électricité qu’elles certifient.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-035",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info verte › x",
+  "info": "verte",
+  "texte": "Dans tes prises, rien ne change : les électrons sont les mêmes pour tout le monde.",
+  "affirmation": "Physiquement, chaque client reçoit le même mélange d'électricité.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "energie-info-offre-verte",
+    "passage": "Non, physiquement, ce n’est pas possible. L’électricité verte est mélangée à toute l’électricité sur le réseau. Chaque client reçoit donc un mix commun.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-036",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info verte › x",
+  "info": "verte",
+  "texte": "Un contrat direct avec un producteur, sur 15 à 20 ans, s'appelle un PPA.",
+  "affirmation": "Un PPA est un contrat d'achat direct entre un producteur et un acheteur, en France souvent sur 15 à 20 ans.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cre-observatoire-ppa-2025",
+    "passage": "Un contrat d’achat d’électricité, ou « Power Purchase Agreement » (PPA) en anglais, est un contrat d’approvisionnement d’électricité entre deux contreparties, un producteur et un acheteur, sur une période déterminée",
+    "relu": true,
+    "page": "§ 1"
+   },
+   {
+    "cle": "cre-observatoire-ppa-2025",
+    "passage": "La durée moyenne des PPA du panel est de 19 ans, à la fois pour les PPA portant sur des actifs photovoltaïques et éoliens à terre.",
+    "relu": true,
+    "page": "§ 2.4.1"
+   },
+   {
+    "cle": "ademe-eolien-terrestre-territoire",
+    "passage": "l’intermédiaire d’un contrat d’achat direct d’électricité (PPA) passé entre la collectivité et un producteur d’électricité",
+    "relu": true,
+    "page": "p. 3"
+   }
+  ],
+  "note": "CRE : durée moyenne 19 ans (panel 2023, PPA d'au moins 10 ans)."
+ },
+ {
+  "id": "ve-037",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info mer › x",
+  "info": "mer",
+  "texte": "Au large, rien ne freine le vent : il est plus fort et plus régulier.",
+  "affirmation": "En mer, le vent est plus fort et plus régulier.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "En mer, les vents sont plus forts et plus réguliers. Les éoliennes qui y sont installées sont plus grandes et plus puissantes.",
+    "relu": true,
+    "page": "p. 16"
+   },
+   {
+    "cle": "irena-wind-brief",
+    "passage": "Because wind speeds at sea are generally higher than those on land, and there are fewer obstacles at sea which can cause turbulence, offshore wind power is more efficient than onshore wind power.",
+    "relu": true,
+    "page": "p. 1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-038",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info mer › x",
+  "info": "mer",
+  "texte": "Les machines y sont géantes : 8 MW pièce ici, des pales de 81 mètres, 207 mètres du bas au sommet.",
+  "affirmation": "Une éolienne en mer de 8 MW a des pales d'environ 81 m (≈ 207 m en bout de pale).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "siemensgamesa-sg8-167",
+    "passage": "A larger rotor fitted with new aerodynamic 81.4-meter-long B81 blades enables the SG 8.0-167",
+    "relu": true
+   },
+   {
+    "cle": "siemensgamesa-sg8-167",
+    "passage": "The 8 MW rating is made possible through the use of a new and more powerful magnet generator",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "d'une éolienne en mer est de 6 À 15 MW, voire plus, contre 2 À 6 MW pour une éolienne terrestre",
+    "relu": true,
+    "page": "p. 16"
+   }
+  ],
+  "note": "Siemens Gamesa SG 8.0-167 DD (fabricant, secondaire), modèle des parcs de Saint-Brieuc et Yeu-Noirmoutier. Les 207 m dépendent de la hauteur de moyeu (« site specific ») : valeur du parc fictif."
+ },
+ {
+  "id": "ve-039",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info mer › x",
+  "info": "mer",
+  "texte": "Quarante éoliennes, 320 MW, environ 1 100 GWh par an : un facteur de charge proche de 40 %.",
+  "affirmation": "1 100 GWh / (320 MW × 8 760 h) ≈ 39 %.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "1 100 / 2 803 = 39,2 %, cohérent avec les 38,8 % mesurés par RTE en 2025."
+ },
+ {
+  "id": "ve-040",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info mer › x",
+  "info": "mer",
+  "texte": "Le revers : un chantier en mer, du sel partout, et un bateau pour chaque tournevis oublié.",
+  "affirmation": "L'éolien en mer coûte plus cher à installer et à entretenir.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "Leur installation, comme les matériaux utilisés pour garantir leur résistance, sont donc plus coûteux qu'à terre.",
+    "relu": true,
+    "page": "p. 16"
+   },
+   {
+    "cle": "irena-wind-brief",
+    "passage": "Because wind speeds at sea are generally higher than those on land, and there are fewer obstacles at sea which can cause turbulence, offshore wind power is more efficient than onshore wind power.",
+    "relu": true,
+    "page": "p. 1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-041",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info cable › x",
+  "info": "cable",
+  "texte": "Chaque éolienne en mer sort son courant à 66 000 volts. Des câbles posés au fond le rassemblent au poste électrique en mer, qui l'élève à 225 000 volts.",
+  "affirmation": "Câbles inter-éoliennes à 66 kV vers un poste en mer qui élève la tension à 225 kV.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-raccordement-dunkerque",
+    "passage": "1 poste électrique en mer qui collecte l'électricité produite par les éoliennes et la transforme de 66 000 à 225 000 volts",
+    "relu": true
+   },
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "Les éoliennes, à l’intérieur d’un parc, seront reliées entre elles et raccordées à un poste électrique en mer par des câbles électriques installés par le développeur du parc.",
+    "relu": true,
+    "page": "§ 1.3"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-042",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info cable › x",
+  "info": "cable",
+  "texte": "Deux liaisons sous-marines, puis souterraines, le ramènent à terre. En France, c'est RTE qui construit ce raccordement.",
+  "affirmation": "Double liaison sous-marine puis souterraine à 225 kV, construite par RTE.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-raccordement-yeu-noirmoutier",
+    "passage": "RTE prévoit la création d’une double liaison sous-marine puis souterraine de 225 000 Volts",
+    "relu": true
+   },
+   {
+    "cle": "rte-raccordement-dunkerque",
+    "passage": "17 km de double liaison sous-marine, 2 chambres de jonction à l'atterage et 6,5 km de double liaison souterraine",
+    "relu": true
+   },
+   {
+    "cle": "rte-raccordement-dunkerque",
+    "passage": "RTE (Réseau de Transport d’Électricité), le gestionnaire du réseau de transport d’électricité français, chargé par l’État de la maîtrise d’ouvrage du raccordement électrique du parc éolien en mer de Dunkerque",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-043",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info fondations › x",
+  "info": "fondations",
+  "texte": "Le monopieu : un tube d'acier enfoncé dans le fond (Saint-Nazaire).",
+  "affirmation": "Saint-Nazaire repose sur des monopieux.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "Saint-Nazaire et Yeu-Noirmoutier utilisent des fondations monopieux.",
+    "relu": true,
+    "page": "§ 1.2.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-044",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info fondations › x",
+  "info": "fondations",
+  "texte": "Le jacket : un treillis à plusieurs pieds (Saint-Brieuc).",
+  "affirmation": "Saint-Brieuc repose sur des jackets (treillis).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "La fondation jacket est constituée d’un treillis métallique fixé sur le fond marin.",
+    "relu": true,
+    "page": "§ 1.2.1"
+   },
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "Les parcs éoliens en mer de Saint-Brieuc et de […] disposent de ce type de fondation.",
+    "relu": true,
+    "page": "§ 1.2.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-045",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info fondations › x",
+  "info": "fondations",
+  "texte": "La fondation gravitaire : 5 000 tonnes de béton simplement posées (Fécamp).",
+  "affirmation": "Fécamp repose sur des fondations gravitaires d'environ 5 000 t posées sur le fond.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "Ce type de fondation est utilisé sur le parc de Fécamp pour lequel des turbines de 7 MW sont utilisées. Le diamètre au sol des fondations atteint plus de 30 mètres et la masse unitaire est de l’ordre de 5 000 tonnes.",
+    "relu": true,
+    "page": "§ 1.2.1"
+   },
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "La fondation gravitaire est constituée d’une large structure en béton ou en acier, posée sur le fond marin",
+    "relu": true,
+    "page": "§ 1.2.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-046",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info fondations › x",
+  "info": "fondations",
+  "texte": "Et le flotteur, ancré par des chaînes, pour les grands fonds : trois fermes pilotes ont été construites en Méditerranée.",
+  "affirmation": "Trois fermes pilotes flottantes ont été construites en Méditerranée.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "Trois fermes pilotes de trois éoliennes flottantes chacune ont été construites en Méditerranée",
+    "relu": true,
+    "page": "p. 17"
+   }
+  ],
+  "note": "ADEME (août 2026) : trois fermes construites, une en service depuis 2024-2025 (Provence Grand Large, 25 MW, mise en service en juin 2025 selon RTE), deux autres (Leucate, Gruissan) annoncées pour début 2026 sans confirmation lue de leur mise en service : « tournent » était trop affirmatif.",
+  "avant": "Et le flotteur, ancré par des chaînes, pour les grands fonds : trois fermes pilotes tournent en Méditerranée."
+ },
+ {
+  "id": "ve-047",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "Fin 2025, la France comptait 23,9 GW d'éolien à terre et 1,9 GW en mer.",
+  "affirmation": "Puissance installée fin 2025 : 23,9 GW à terre, 1,9 GW en mer (métropole).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Fin 2025, les capacités éoliennes terrestres en service sur le territoire métropolitain français représentaient 23,9 GW.",
+    "relu": true,
+    "page": "p. 36"
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Au 31 décembre 2025, la puissance totale du parc éolien en mer installé au large des côtes françaises métropolitaines atteignait 1,9 GW.",
+    "relu": true,
+    "page": "p. 37"
+   }
+  ],
+  "note": "Le SDES donne 24,1 et 2,0 GW (périmètre et méthode différents)."
+ },
+ {
+  "id": "ve-048",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "Production 2025 : 49,6 TWh, soit 9 % de l'électricité du pays, dont 5,7 TWh venus de la mer.",
+  "affirmation": "Production éolienne 2025 : 49,6 TWh (43,9 + 5,7), soit 9 % des 547,5 TWh produits.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "la production éolienne terrestre s’est légèrement redressée en 2025, atteignant 43,9 TWh",
+    "relu": true,
+    "page": "p. 34"
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "En 2025, la production éolienne en mer française s’est établie à 5,7 TWh",
+    "relu": true,
+    "page": "p. 37"
+   },
+   {
+    "cle": "rte-be2025-production",
+    "passage": "La production d’électricité en France métropolitaine a atteint 547,5 TWh en 2025.",
+    "relu": true
+   }
+  ],
+  "note": "43,9 + 5,7 = 49,6 TWh ; 49,6 / 547,5 = 9,1 %."
+ },
+ {
+  "id": "ve-049",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "info france › x",
+  "info": "france",
+  "texte": "Quatre grands parcs en mer sont en service : Saint-Nazaire, Fécamp, Saint-Brieuc, Yeu-Noirmoutier.",
+  "affirmation": "Quatre parcs commerciaux en mer sont en service en France fin 2025.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "En 2025, un quatrième parc commercial dont les éoliennes sont posées en mer au large des îles d’Yeu et Noirmoutier a été mis en service progressivement",
+    "relu": true,
+    "page": "p. 37"
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Les parcs éoliens posés en mer de Saint-Brieuc et Fécamp ont été progressivement mis en service au cours de l’année 2024",
+    "relu": true,
+    "page": "p. 37"
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "le facteur de charge du parc de Saint-Nazaire, seul parc exploité à sa puissance définitive sur cette année, avait été de 32,9 %",
+    "relu": true,
+    "page": "p. 37"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-050",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.mat[0]",
+  "texte": "Un mât de mesure, cent mètres de treillis, un anémomètre tous les vingt mètres.",
+  "affirmation": "Description du mât de mesure fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-051",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.mat[0]",
+  "texte": "Si v double, P fait fois huit.",
+  "affirmation": "Loi du cube.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-wind-brief",
+    "passage": "Wind power is proportional to the dimensions of the rotor and to the cube of the wind speed. Theoretically, when the wind speed doubles, the wind power increases eight times.",
+    "relu": true,
+    "page": "p. 9"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-052",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.mat[1]",
+  "texte": "L'anémomètre du haut tourne plus vite que celui du bas.",
+  "affirmation": "Le vent est plus fort en hauteur.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-wind-brief",
+    "passage": "Because larger turbines harness strong wind at higher altitudes, they produce more electricity per unit of installation area",
+    "relu": true,
+    "page": "p. 2"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-053",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.bourrasque[0]",
+  "texte": "Je réponds avec une distribution de Rayleigh.",
+  "affirmation": "La distribution des vitesses de vent se modélise par une loi de Rayleigh (c'est celle de la simulation).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-054",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.bourrasque[1]",
+  "texte": "Un jour sur quatre à pleine puissance, en moyenne.",
+  "affirmation": "Un facteur de charge d'environ 25 % équivaut à un jour sur quatre à pleine puissance.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "En un an, elle produit autant d'électricité que si elle avait tourné 25 % du temps à puissance maximale en moyenne (ce chiffre a varié entre 21,4 % et 26,6 % entre 2020 et 2025",
+    "relu": true,
+    "page": "p. 11"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-055",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.bourrasque[1]",
+  "texte": "Leur voiture, elle, roule une heure sur vingt-quatre, et personne ne parle de facteur de charge.",
+  "affirmation": "Blague.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-056",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.rafale[0]",
+  "texte": "depuis qu'un visiteur a appuyé sur « arrêt d'urgence » pour voir, il est en mode démonstration.",
+  "affirmation": "Récit.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-057",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.rafale[1]",
+  "texte": "Démarrage à 3 mètres par seconde, pleine puissance à 13, arrêt à 25.",
+  "affirmation": "Les trois vitesses de la courbe de puissance.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "nordex-n117",
+    "passage": "Cut-in wind speed 3.0 m/s",
+    "relu": true
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "Cut-out wind speed 25 m / s",
+    "relu": true
+   }
+  ],
+  "note": "Même remarque que ve-008 pour la vitesse nominale."
+ },
+ {
+  "id": "ve-058",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.plaque[0]",
+  "texte": "Éolienne n° 2 · 3 MW · mât 100 m · pales 57 m · 14 tours par minute au plus",
+  "affirmation": "Fiche de l'éolienne fictive (cohérente avec une Nordex N117 réglée à 3 MW).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-059",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.plaque[0]",
+  "texte": "La nacelle, là-haut, a la taille d'un autocar.",
+  "affirmation": "La nacelle d'une éolienne de 3 MW a la taille d'un autocar.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Ordre de grandeur (une dizaine de mètres de long) ; pas de dimension de nacelle sur la fiche Nordex lue. À sourcer avec une fiche technique complète du fabricant."
+ },
+ {
+  "id": "ve-060",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.plaque[1]",
+  "texte": "Le bout de sa pale va aussi vite qu'un TGV. Le centre, lui, fait tranquillement un tour toutes les quatre secondes.",
+  "affirmation": "Bout de pale ≈ 300 km/h ; 14 tr/min ≈ un tour toutes les 4 s.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "60 / 14 = 4,3 s ; 308 km/h (voir ve-016), l'ordre de la vitesse commerciale d'un TGV."
+ },
+ {
+  "id": "ve-061",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.moulin[0]",
+  "texte": "Les ruines du moulin de Kerwatt, 1742.",
+  "affirmation": "Moulin fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-062",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.moulin[0]",
+  "texte": "Limite de Betz : aucune machine ne prend plus de 59 % de l'énergie du vent.",
+  "affirmation": "Limite de Betz.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "dtu-betz-joukowsky",
+    "passage": "no more than 59.3% of the kinetic energy of fluid contained in a stream tube having the same cross section as the area of a rotor disc (or any energy transformer) can be converted to useful work by the disc.",
+    "relu": true,
+    "page": "p. 1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-063",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.moulin[0]",
+  "texte": "Ses ailes de toile en étaient loin, et il s'en portait très bien.",
+  "affirmation": "Les moulins à ailes de toile ont un rendement bien inférieur à la limite de Betz.",
+  "type": "fait",
+  "verdict": "sans-source",
+  "sources": [],
+  "note": "Pas de source lue sur le coefficient de puissance des moulins traditionnels (chercher dans un manuel DTU ou NREL d'aérodynamique des rotors)."
+ },
+ {
+  "id": "ve-064",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.moulin[1]",
+  "texte": "Trois siècles de plus que les éoliennes, et déjà le même problème : pas de vent, pas de pain.",
+  "affirmation": "Le moulin (1742) est trois siècles plus vieux que les éoliennes.",
+  "type": "fictif",
+  "verdict": "corrige",
+  "sources": [],
+  "note": "Cohérence interne : le moulin de 1742 a trois siècles DE PLUS que les éoliennes, pas de moins.",
+  "avant": "Trois siècles de moins que les éoliennes, et déjà le même problème : pas de vent, pas de pain."
+ },
+ {
+  "id": "ve-065",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.yann[0]",
+  "texte": "En février, il te couche les casiers. En juin, il fait la sieste, et moi avec.",
+  "affirmation": "Plus de vent en février qu'en juin.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-fc-mensuels-eolien-solaire",
+    "passage": "2025-06;1.2;13.8;53.1;0.6;8.0;35.9;20.4;77.1;11.5;40.0 […] 2025-02;1.5;22.5;58.3;0.6;8.9;28.5;9.4;59.9;3.7;24.0 […] 2024-02;4.9;36.4;80.5;1.7;14.6;34.5;7.8;48.5;2.6;17.3",
+    "relu": true,
+    "page": "colonnes : mois ; fc_minimum_eolien ; fc_moyen_eolien ; … ; fc_moyen_solaire ; … (export CSV complet, 2012-2026)"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-066",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.yann[1]",
+  "texte": "Les homards adorent les fondations.",
+  "affirmation": "Les fondations en mer font un effet récif favorable à la faune.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "l’existence d’un effet de « récif artificiel », favorable à la reproduction des poissons et des mollusques, a été très nettement observée",
+    "relu": true,
+    "page": "p. 17"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-067",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.legoff[0]",
+  "texte": "L'éolienne la plus proche est à 520 mètres. J'ai mesuré : 500, c'est la loi, les 20 autres, c'est moi qui ai insisté.",
+  "affirmation": "Distance minimale de 500 m aux habitations.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "éloignés d’au moins 500 mètres de l’habitation la plus proche",
+    "relu": true,
+    "page": "p. 20"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "À 500 mètres de distance (distance minimale entre une éolienne et une habitation), il est généralement inférieur à 35 décibels : c’est moins qu’une conversation à voix basse.",
+    "relu": true,
+    "page": "p. 13"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-068",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.legoff[0]",
+  "texte": "Trente-cinq décibels à cette distance. Ma crêpière en fait soixante.",
+  "affirmation": "Environ 35 dB à 500 m ; la crêpière est une blague.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "À 500 mètres de distance (distance minimale entre une éolienne et une habitation), il est généralement inférieur à 35 décibels : c’est moins qu’une conversation à voix basse.",
+    "relu": true,
+    "page": "p. 13"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-069",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.loic[0]",
+  "texte": "La nuit en été, c'est pour les chauves-souris.",
+  "affirmation": "Bridage pour les chauves-souris aux périodes de forte activité.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-infos-eolien-2023",
+    "passage": "Des programmes de bridage ont notamment été développés : ils consistent à ralentir ou arrêter le fonctionnement des éoliennes aux « heures de pointe » du passage des oiseaux ou des chauves-souris et en période migratoire.",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "comme le ralentissement des éoliennes lors des périodes de fortes activités de ces animaux",
+    "relu": true,
+    "page": "p. 15"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-070",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.loic[0]",
+  "texte": "Aujourd'hui, c'est le prix : il y a trop de courant sur le réseau, il vaut moins que zéro. On nous demande d'attendre.",
+  "affirmation": "Les éoliennes s'arrêtent lors des prix négatifs.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "ces modulations ont conduit à un effet baissier sur la production éolienne terrestre de l’ordre de 1,3 TWh",
+    "relu": true,
+    "page": "p. 36"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-071",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.loic[1]",
+  "texte": "Plus de trois cents barreaux d'échelle.",
+  "affirmation": "Cent mètres d'échelle à environ 30 cm par barreau.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "100 m / 0,3 m ≈ 330 barreaux."
+ },
+ {
+  "id": "ve-072",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.pale[0]",
+  "texte": "57 mètres de fibre de verre et de résine.",
+  "affirmation": "Les pales sont en composite fibre de verre et résine.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "L’acier, le béton, le cuivre et l’aluminium sont recyclables à 100 %. Les pales, constituées de composite associant résine et fibres de verre ou carbone, sont plus difficiles à recycler.",
+    "relu": true,
+    "page": "p. 14"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-073",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.pale[0]",
+  "texte": "Remplacée après un impact de foudre.",
+  "affirmation": "Récit.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-074",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.pale[0]",
+  "texte": "Le reste de l'éolienne se recycle sans histoire : c'est de l'acier, du béton, du cuivre. La pale, elle, finit broyée en cimenterie.",
+  "affirmation": "L'acier, le béton et le cuivre se recyclent ; les pales broyées vont en cimenterie.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "L’acier, le béton, le cuivre et l’aluminium sont recyclables à 100 %. Les pales, constituées de composite associant résine et fibres de verre ou carbone, sont plus difficiles à recycler.",
+    "relu": true,
+    "page": "p. 14"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "utiliser le composite comme combustible en cimenterie, le broyer et l’incorporer dans des produits BTP",
+    "relu": true,
+    "page": "p. 14"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-075",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.pale[0]",
+  "texte": "Ils ont vingt ans devant eux : c'est sa durée de vie.",
+  "affirmation": "Durée de vie d'environ 20 ans.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "20 ANS durée de vie pour laquelle une éolienne est certifiée",
+    "relu": true,
+    "page": "p. 14"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-076",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.origine[0]",
+  "texte": "Un certificat par mégawattheure renouvelable injecté.",
+  "affirmation": "Une garantie d'origine = 1 MWh.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cre-deliberation-2023-294",
+    "passage": "une garantie d’origine correspond à un volume type de 1 MWh",
+    "relu": true,
+    "page": "p. 1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-077",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.origine[0]",
+  "texte": "le réseau ne trie pas les électrons.",
+  "affirmation": "Le réseau délivre le même mélange à tous.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "energie-info-offre-verte",
+    "passage": "Non, physiquement, ce n’est pas possible. L’électricité verte est mélangée à toute l’électricité sur le réseau. Chaque client reçoit donc un mix commun.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-078",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.origine[1]",
+  "texte": "qu'elle signe un contrat direct avec le producteur, sur vingt ans. Ça s'appelle un PPA.",
+  "affirmation": "PPA : contrat direct producteur-acheteur, souvent autour de 20 ans.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cre-observatoire-ppa-2025",
+    "passage": "Un contrat d’achat d’électricité, ou « Power Purchase Agreement » (PPA) en anglais, est un contrat d’approvisionnement d’électricité entre deux contreparties, un producteur et un acheteur, sur une période déterminée",
+    "relu": true,
+    "page": "§ 1"
+   },
+   {
+    "cle": "cre-observatoire-ppa-2025",
+    "passage": "La durée moyenne des PPA du panel est de 19 ans, à la fois pour les PPA portant sur des actifs photovoltaïques et éoliens à terre.",
+    "relu": true,
+    "page": "§ 2.4.1"
+   },
+   {
+    "cle": "ademe-eolien-terrestre-territoire",
+    "passage": "l’intermédiaire d’un contrat d’achat direct d’électricité (PPA) passé entre la collectivité et un producteur d’électricité",
+    "relu": true,
+    "page": "p. 3"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-079",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.affiche[1]",
+  "texte": "Neuf pour cent de l'électricité du pays.",
+  "affirmation": "L'éolien a produit 9 % de l'électricité française en 2025.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "la production éolienne terrestre s’est légèrement redressée en 2025, atteignant 43,9 TWh",
+    "relu": true,
+    "page": "p. 34"
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "En 2025, la production éolienne en mer française s’est établie à 5,7 TWh",
+    "relu": true,
+    "page": "p. 37"
+   },
+   {
+    "cle": "rte-be2025-production",
+    "passage": "La production d’électricité en France métropolitaine a atteint 547,5 TWh en 2025.",
+    "relu": true
+   }
+  ],
+  "note": "49,6 / 547,5 = 9,1 %."
+ },
+ {
+  "id": "ve-080",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.longuevue[0]",
+  "texte": "Dans l'œilleton, une éolienne : 207 mètres de haut, des pales de 81 mètres.",
+  "affirmation": "Pales de 81 m d'une 8 MW en mer.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "siemensgamesa-sg8-167",
+    "passage": "A larger rotor fitted with new aerodynamic 81.4-meter-long B81 blades enables the SG 8.0-167",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-081",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.longuevue[1]",
+  "texte": "Quarante machines de 8 MW : à elles seules, autant d'énergie que quatorze parcs comme celui de la lande.",
+  "affirmation": "1 100 GWh / 76 GWh ≈ 14.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "1 100 / 75,7 = 14,5."
+ },
+ {
+  "id": "ve-082",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.alize[0]",
+  "texte": "Ici, on rassemble le courant de quarante éoliennes et on l'envoie à terre.",
+  "affirmation": "Le poste en mer collecte la production du parc.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-raccordement-dunkerque",
+    "passage": "1 poste électrique en mer qui collecte l'électricité produite par les éoliennes et la transforme de 66 000 à 225 000 volts",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-083",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.alize[0]",
+  "texte": "Une multiprise de deux mille tonnes, posée sur l'Atlantique.",
+  "affirmation": "Masse fictive du poste.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-084",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.alize[1]",
+  "texte": "225 000 volts sous la mer.",
+  "affirmation": "Liaison sous-marine à 225 kV.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-raccordement-yeu-noirmoutier",
+    "passage": "RTE prévoit la création d’une double liaison sous-marine puis souterraine de 225 000 Volts",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-085",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.alize[1]",
+  "texte": "Les ancres de chalutiers, si : le câble est enfoui, et tout le monde s'en porte mieux.",
+  "affirmation": "Les câbles sous-marins sont ensouillés pour les protéger des ancres et engins de pêche.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-dmo-sud-bretagne-raccordement",
+    "passage": "celles-ci seront préférentiellement ensouillées dans le sédiment marin […] afin d’éviter le risque d’endommagement des câbles par les ancres des navires ou engins de pêche",
+    "relu": true,
+    "page": "fiche 16, § b"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-086",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.fondations[1]",
+  "texte": "Le socle de béton pèse 5 000 tonnes. Il n'est pas fixé.",
+  "affirmation": "Fondation gravitaire d'environ 5 000 t posée sur le fond.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "Ce type de fondation est utilisé sur le parc de Fécamp pour lequel des turbines de 7 MW sont utilisées. Le diamètre au sol des fondations atteint plus de 30 mètres et la masse unitaire est de l’ordre de 5 000 tonnes.",
+    "relu": true,
+    "page": "§ 1.2.1"
+   },
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "La fondation gravitaire est constituée d’une large structure en béton ou en acier, posée sur le fond marin",
+    "relu": true,
+    "page": "§ 1.2.1"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-087",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.goeland",
+  "texte": "Motif : « concurrence déloyale sur l'usage du vent ».",
+  "affirmation": "Blague.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-088",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.menhirs",
+  "texte": "Première tentative locale de capter une énergie venue du ciel, il y a six mille ans.",
+  "affirmation": "Les menhirs bretons ont environ 6 000 ans.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cmn-carnac-histoire",
+    "passage": "Recent preventive excavations in the area around Carnac have yielded dates that range, for the most part, between 4,800 and 3,500 BC.",
+    "relu": true
+   }
+  ],
+  "note": "Carnac : surtout entre 4 800 et 3 500 av. J.-C., soit 5 500 à 6 800 ans."
+ },
+ {
+  "id": "ve-089",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.casiers",
+  "texte": "Le homard est livré sans garantie d'origine.",
+  "affirmation": "Blague (les GO ne concernent que l'énergie).",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-090",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.phare",
+  "texte": "Il éclaire depuis 1867, à heure fixe, sans se soucier du prix de gros.",
+  "affirmation": "Phare fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-091",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.mouton",
+  "texte": "Une brebis de pré-salé. Elle broute sous une machine de trois mégawatts",
+  "affirmation": "Vanne.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-092",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.transfo",
+  "texte": "il fait plus de vingt-cinq fois le travail.",
+  "affirmation": "320 MW contre 12 MWc à Saint-Photon.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "320 / 12 = 26,7."
+ },
+ {
+  "id": "ve-093",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.transfo",
+  "texte": "66 000 V → 225 000 V.",
+  "affirmation": "Le transformateur du poste en mer passe de 66 à 225 kV.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-raccordement-dunkerque",
+    "passage": "1 poste électrique en mer qui collecte l'électricité produite par les éoliennes et la transforme de 66 000 à 225 000 volts",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-094",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.helico",
+  "texte": "Par mauvaise mer, on vient ici en hélicoptère.",
+  "affirmation": "Récit.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-095",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.capitaine[0]",
+  "texte": "Seize kilomètres, vingt minutes, et un sac en papier dans la poche du siège.",
+  "affirmation": "Distance fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-096",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.capitaine[1]",
+  "texte": "On dit « noroît » pour le vent de nord-ouest.",
+  "affirmation": "Noroît désigne le nord-ouest et le vent qui en vient.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cnrtl-noroit",
+    "passage": "Direction du nord-ouest; aire de vent correspondante. Vent de noroît.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-097",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.dit.suroitApres[1]",
+  "texte": "Le parc en mer produit quatorze fois plus que la lande.",
+  "affirmation": "1 100 / 76 ≈ 14.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-098",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.questions[0]",
+  "texte": "Le cube : 2 × 2 × 2. C'est la loi qui explique tout le reste",
+  "affirmation": "Doubler le vent multiplie la puissance par 8.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-wind-brief",
+    "passage": "Wind power is proportional to the dimensions of the rotor and to the cube of the wind speed. Theoretically, when the wind speed doubles, the wind power increases eight times.",
+    "relu": true,
+    "page": "p. 9"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-099",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.questions[1]",
+  "texte": "36 MW × 8 760 h × 0,24. La puissance installée ne dit rien sans le facteur de charge.",
+  "affirmation": "Calcul de l'énergie annuelle.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-100",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.questions[2]",
+  "texte": "Au-delà de 90 km/h, elles se protègent. Trop de vent, c'est comme pas de vent : zéro.",
+  "affirmation": "Arrêt au-delà de 90 km/h (25 m/s).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "Les éoliennes fonctionnent à des vitesses de vent généralement comprises entre 10 et 90 km/h.",
+    "relu": true,
+    "page": "p. 9"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "À l’inverse, un vent trop fort entraîne son arrêt, de manière à éviter tout risque de casse des équipements et minimiser leur usure.",
+    "relu": true,
+    "page": "p. 11"
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "Cut-out wind speed 25 m / s",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-101",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.questions[2]",
+  "texte": "Elles se mettent à l'arrêt, pales en drapeau",
+  "affirmation": "À l'arrêt par vent fort, les pales sont mises en drapeau (frein aérodynamique par pitch).",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "nordex-n117",
+    "passage": "Main brake Aerodynamic brake (pitch)",
+    "relu": true
+   },
+   {
+    "cle": "irena-wind-brief",
+    "passage": "Wind turbines incorporate a control system to prevent excessive rotation speeds in high wind, which could otherwise break the blades or other components.",
+    "relu": true,
+    "page": "p. 10"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-102",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.questions[3]",
+  "texte": "Le vent y est plus fort et plus régulier : le facteur de charge approche 40 %",
+  "affirmation": "En mer, vent plus fort et plus régulier ; facteur de charge ≈ 40 %.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "En mer, les vents sont plus forts et plus réguliers. Les éoliennes qui y sont installées sont plus grandes et plus puissantes.",
+    "relu": true,
+    "page": "p. 16"
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Le facteur de charge des parcs éoliens en mer commerciaux […] ayant été mis en service avant le 1er janvier 2025 s’est établi à 38,8 % sur l’ensemble de l’année 2025",
+    "relu": true,
+    "page": "p. 37"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-103",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.questions[3]",
+  "texte": "Et les machines peuvent être géantes : 8 MW ici, davantage sur les parcs récents.",
+  "affirmation": "Les éoliennes en mer font de 6 à 15 MW.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "d'une éolienne en mer est de 6 À 15 MW, voire plus, contre 2 À 6 MW pour une éolienne terrestre",
+    "relu": true,
+    "page": "p. 16"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-104",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.questions[4]",
+  "texte": "Rien : le fournisseur achète des garanties d'origine pour le même volume",
+  "affirmation": "Offre verte = GO pour le même volume.",
+  "type": "regle",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "energie-info-offre-verte",
+    "passage": "Une offre est considérée comme « verte » si le fournisseur injecte sur le réseau une quantité équivalente d’électricité d’origine renouvelable à celle consommée par ses clients. Cette garantie repose sur des certificats appelés garanties d’origine (GO), délivrés au niveau européen.",
+    "relu": true
+   },
+   {
+    "cle": "energie-info-offre-verte",
+    "passage": "Non, physiquement, ce n’est pas possible. L’électricité verte est mélangée à toute l’électricité sur le réseau. Chaque client reçoit donc un mix commun.",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-105",
+  "fichier": "jeu/voyages/eolien/textes.js",
+  "repere": "EOL.questions[5]",
+  "texte": "513 heures de prix négatifs en 2025. On retient la production quand personne n'en veut.",
+  "affirmation": "513 h de prix négatifs en 2025 ; modulation de la production.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-prix",
+    "passage": "The hourly spot price was negative for 513 hours in 2025, a higher number of occurrences than the previous year (352 in 2024)",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "ces modulations ont conduit à un effet baissier sur la production éolienne terrestre de l’ordre de 1,3 TWh",
+    "relu": true,
+    "page": "p. 36"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-106",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "EOL_MODELE",
+  "texte": "demarrage:3,nominale:13,coupure:25",
+  "affirmation": "Modèle simplifié de courbe de puissance (cube entre 3 et 13 m/s, plateau, coupure à 25 m/s).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Démarrage et coupure : fiche Nordex ; voir ve-008."
+ },
+ {
+  "id": "ve-107",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "1. courbe › mission 1 › bravo",
+  "texte": "Dès que le vent dépasse 3 m/s, soit 11 km/h, elle démarre",
+  "affirmation": "Démarrage vers 3 m/s.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "nordex-n117",
+    "passage": "Cut-in wind speed 3.0 m/s",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "Un vent inférieur à 10 km/h est insuffisant pour faire démarrer et tourner une éolienne.",
+    "relu": true,
+    "page": "p. 11"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-108",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "1. courbe › mission 1 › bravo",
+  "texte": "une petite brise, celle qui agite les feuilles",
+  "affirmation": "Image de la petite brise.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-109",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "1. courbe › mission 2 › bravo",
+  "texte": "13 m/s, soit 47 km/h : à ce vent-là, les parapluies se retournent.",
+  "affirmation": "Image du vent nominal.",
+  "type": "vanne",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-110",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "1. courbe › mission 2 › bravo",
+  "texte": "Au-delà, les pales pivotent pour laisser filer le surplus : c'est le plateau.",
+  "affirmation": "Régulation par pitch au-delà du nominal.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-wind-brief",
+    "passage": "A pitch control system actively adjusts the angle of the blades to the wind speed.",
+    "relu": true,
+    "page": "p. 10"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-111",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "1. courbe › mission 3 › bravo",
+  "texte": "10,5 m/s : il faut 80 % du vent nominal pour obtenir 50 % de la puissance. Et à la moitié du vent nominal, 6,5 m/s, il n'en reste que 11 %.",
+  "affirmation": "Valeurs lues sur la courbe du modèle.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "(10,5³ − 27) / (13³ − 27) = 52 % ; (6,5³ − 27) / 2 170 = 11 %."
+ },
+ {
+  "id": "ve-112",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "1. courbe › tempête › constat",
+  "texte": "Au-delà de 25 m/s, soit 90 km/h, l'éolienne se protège : elle met ses pales en drapeau, dans le lit du vent, et s'arrête.",
+  "affirmation": "Arrêt et mise en drapeau au-delà de 25 m/s.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "nordex-n117",
+    "passage": "Cut-out wind speed 25 m / s",
+    "relu": true
+   },
+   {
+    "cle": "nordex-n117",
+    "passage": "Main brake Aerodynamic brake (pitch)",
+    "relu": true
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "À l’inverse, un vent trop fort entraîne son arrêt, de manière à éviter tout risque de casse des équipements et minimiser leur usure.",
+    "relu": true,
+    "page": "p. 11"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-113",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "2. un an de vent › mission 1 › bravo",
+  "texte": "7 m/s de moyenne à cent mètres du sol : c'est la lande de Port-Rafale.",
+  "affirmation": "Dans le modèle, 7 m/s de moyenne donnent 25 % de facteur de charge.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "eolAnnee(7).fc = 24,7 %."
+ },
+ {
+  "id": "ve-114",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "2. un an de vent › mission 2 › bravo",
+  "texte": "De 5 à 6,5 m/s : 30 % de vent en plus, deux fois plus d'énergie.",
+  "affirmation": "Dans le modèle, le facteur de charge passe de 9,8 % à 20,7 %.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-115",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "2. un an de vent › mission 2 › bravo",
+  "texte": "C'est pour cela qu'on plante un mât de mesure pendant un an avant de planter quoi que ce soit d'autre.",
+  "affirmation": "Mesure du vent pendant un an.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "Des mâts de mesure de la vitesse et de l’orientation du vent sont installés pour connaître précisément le gisement de vent sur une année.",
+    "relu": true,
+    "page": "p. 21"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-116",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "2. un an de vent › mission 3 › bravo",
+  "texte": "Cinq machines à terre pour une seule en mer.",
+  "affirmation": "Dans le modèle : 8 MW à 9 m/s = 28,2 GWh ; 3 MW à 7 m/s = 6,5 GWh.",
+  "type": "calcul",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-117",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "2. un an de vent › mission 3 › bravo",
+  "texte": "40 % de facteur de charge au lieu de 25.",
+  "affirmation": "Facteurs de charge en mer et à terre.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-be2025-rapport",
+    "passage": "Le facteur de charge des parcs éoliens en mer commerciaux […] ayant été mis en service avant le 1er janvier 2025 s’est établi à 38,8 % sur l’ensemble de l’année 2025",
+    "relu": true,
+    "page": "p. 37"
+   },
+   {
+    "cle": "ademe-eolien-tout-comprendre",
+    "passage": "En un an, elle produit autant d'électricité que si elle avait tourné 25 % du temps à puissance maximale en moyenne (ce chiffre a varié entre 21,4 % et 26,6 % entre 2020 et 2025",
+    "relu": true,
+    "page": "p. 11"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-118",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "3. du large à la prise › EOL_CHEMIN",
+  "texte": "Un câble posé au fond relie les éoliennes, à 66 000 volts",
+  "affirmation": "Câbles inter-éoliennes à 66 kV.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-raccordement-dunkerque",
+    "passage": "1 poste électrique en mer qui collecte l'électricité produite par les éoliennes et la transforme de 66 000 à 225 000 volts",
+    "relu": true
+   },
+   {
+    "cle": "cndp-fiche-33-eolien-mer",
+    "passage": "Les éoliennes, à l’intérieur d’un parc, seront reliées entre elles et raccordées à un poste électrique en mer par des câbles électriques installés par le développeur du parc.",
+    "relu": true,
+    "page": "§ 1.3"
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-119",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "3. du large à la prise › EOL_CHEMIN",
+  "texte": "La double liaison sous-marine, puis souterraine",
+  "affirmation": "Double liaison sous-marine puis souterraine.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-raccordement-yeu-noirmoutier",
+    "passage": "RTE prévoit la création d’une double liaison sous-marine puis souterraine de 225 000 Volts",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-120",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "3. du large à la prise › okMsg",
+  "texte": "plus la tension est haute, moins on perd en route.",
+  "affirmation": "Plus la tension est élevée, plus les pertes par effet Joule sont faibles.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-infrastructures-transport",
+    "passage": "Élever la tension en sortie de centrale de 20 000 à 400 000 volts, permet de transporter l’électricité produite sur de longues distances (plus la tension est élevée, plus les pertes électriques dues à l’effet Joule sont faibles).",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-121",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "4. douze mois › EOL_MOIS.vent",
+  "texte": "vent:[.31,.34,.31,.22,.19,.14,.15,.14,.18,.25,.28,.32]",
+  "affirmation": "Facteurs de charge mensuels de l'éolien (moyennes 2016-2025).",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rte-fc-mensuels-eolien-solaire",
+    "passage": "2025-06;1.2;13.8;53.1;0.6;8.0;35.9;20.4;77.1;11.5;40.0 […] 2025-02;1.5;22.5;58.3;0.6;8.9;28.5;9.4;59.9;3.7;24.0 […] 2024-02;4.9;36.4;80.5;1.7;14.6;34.5;7.8;48.5;2.6;17.3",
+    "relu": true,
+    "page": "colonnes : mois ; fc_minimum_eolien ; fc_moyen_eolien ; … ; fc_moyen_solaire ; … (export CSV complet, 2012-2026)"
+   }
+  ],
+  "note": "Moyennes calculées sur le jeu de données RTE (2016-2025) : 31,3 / 33,8 / 30,6 / 22,2 / 19,2 / 14,2 / 15,0 / 14,4 / 17,5 / 24,6 / 27,9 / 31,7 %. L'ancien profil sous-estimait l'été (10 % en juin). L'épreuve reste faisable (80 % ou 90 % d'éolien < 4,5 %).",
+  "avant": "vent:[.33,.35,.28,.22,.17,.10,.13,.13,.17,.24,.28,.32]"
+ },
+ {
+  "id": "ve-122",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "4. douze mois › EOL_MOIS.conso",
+  "texte": "conso:[52,46,44,36,33,31,33,30,32,37,43,50]",
+  "affirmation": "Profil mensuel de consommation stylisé (hiver fort).",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Profil simplifié du jeu ; non comparé terme à terme à éCO2mix."
+ },
+ {
+  "id": "ve-123",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "4. douze mois › EOL_MOIS.soleil",
+  "texte": "soleil:[60,79,118,139,160,174,190,177,138,100,64,52]",
+  "affirmation": "Profil mensuel du solaire (kWh/kWc), repris du site de Saint-Photon.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-124",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "4. douze mois › bravo",
+  "texte": "Seul, le solaire ne couvre que 43 % des besoins d'hiver et déborde de 85 % en été ; seul, l'éolien manque d'un quart en juin.",
+  "affirmation": "Résultats de l'épreuve pour 0 % et 100 % d'éolien.",
+  "type": "calcul",
+  "verdict": "corrige",
+  "sources": [],
+  "note": "Recalculé avec le nouveau profil de vent : éolien seul en juin = 75 % des besoins visés (avant : 55 %, « de moitié »).",
+  "avant": "Seul, le solaire ne couvre que 43 % des besoins d'hiver et déborde de 85 % en été ; seul, l'éolien manque de moitié en juin."
+ },
+ {
+  "id": "ve-125",
+  "fichier": "jeu/voyages/eolien/simulations.js",
+  "repere": "4. douze mois › bravo",
+  "texte": "Reste un problème que ce graphique ne montre pas : la semaine de janvier sans vent ni soleil. Celle-là, ce sont les barrages et les centrales qui la passent.",
+  "affirmation": "Les moyens pilotables couvrent les périodes sans vent ni soleil.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-126",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "lande › zones › poste de livraison",
+  "texte": "la sortie vers le réseau à 20 000 volts",
+  "affirmation": "Le parc à terre est raccordé au réseau de distribution en HTA 20 kV.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "un transformateur dont le rôle est d'élever la tension de sortie des onduleurs à la tension de raccordement (HTA, généralement 20 kV)",
+    "relu": true
+   }
+  ],
+  "note": "Passage Enedis sur la production renouvelable en général (repris du relevé solaire, vs-036)."
+ },
+ {
+  "id": "ve-127",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "lande › zones › voie ferrée",
+  "texte": "La ligne d'Ampère-sur-Loire, par Le Mans et Rennes.",
+  "affirmation": "Trajet fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-128",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "lande › panneau de la halte",
+  "texte": "Parc éolien de Port-Rafale · 12 éoliennes de 3 MW sur la lande · 40 éoliennes de 8 MW en mer",
+  "affirmation": "Panneau du site fictif.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-129",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "lande › transformateur",
+  "texte": "Le transformateur du parc de la lande : 20 000 volts en sortie, direction le réseau de distribution.",
+  "affirmation": "Raccordement en HTA 20 kV.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-technologies-enr",
+    "passage": "un transformateur dont le rôle est d'élever la tension de sortie des onduleurs à la tension de raccordement (HTA, généralement 20 kV)",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-130",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "lande › transformateur",
+  "texte": "Il bourdonne à cent hertz, deux fois la fréquence du réseau.",
+  "affirmation": "Le bourdonnement d'un transformateur est à 100 Hz sur un réseau à 50 Hz.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "rex-transformateur-bourdonnement",
+    "passage": "On a 50 hertz system, the corresponding component is around 100 hertz.",
+    "relu": true
+   }
+  ],
+  "note": "Même correction que sur le site solaire (vs-120) ; passage repris de ce relevé.",
+  "avant": "Il bourdonne à cinquante hertz."
+ },
+ {
+  "id": "ve-131",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "lande › zones › l'océan",
+  "texte": "Les quarante éoliennes en mer sont à seize kilomètres, derrière l'horizon.",
+  "affirmation": "Distance fictive.",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ },
+ {
+  "id": "ve-132",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "eolienMer › zones › le pont du poste",
+  "texte": "Les câbles des quarante éoliennes y arrivent ; deux liaisons en repartent vers la côte.",
+  "affirmation": "Le poste en mer collecte les câbles inter-éoliennes ; une double liaison part à terre.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-raccordement-dunkerque",
+    "passage": "1 poste électrique en mer qui collecte l'électricité produite par les éoliennes et la transforme de 66 000 à 225 000 volts",
+    "relu": true
+   },
+   {
+    "cle": "rte-raccordement-dunkerque",
+    "passage": "17 km de double liaison sous-marine, 2 chambres de jonction à l'atterage et 6,5 km de double liaison souterraine",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "ve-133",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "eolEmbarquer › annonces",
+  "texte": "Chacune fait deux cents mètres de haut.",
+  "affirmation": "Les 8 MW du parc font environ 200 m (207 m).",
+  "type": "fictif",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": "Cohérent avec les 207 m du parc fictif."
+ },
+ {
+  "id": "ve-134",
+  "fichier": "jeu/voyages/eolien/carte.js",
+  "repere": "eolEnDirect",
+  "texte": "Calme plat aujourd'hui : elle attend. Les goélands aussi.",
+  "affirmation": "Texte dynamique selon le vent du jeu.",
+  "type": "methode",
+  "verdict": "sans-objet",
+  "sources": [],
+  "note": null
+ }
+]
