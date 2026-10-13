@@ -305,20 +305,43 @@
   "texte": "La norme ISO 50001 (version 2018, complétée par un amendement de 2024 sur le changement climatique) ne fixe pas d’objectif chiffré : elle impose une démarche d’amélioration continue et documentée.",
   "affirmation": "ISO 50001:2018 et son amendement de 2024 ; pas d'objectif chiffré, une démarche d'amélioration continue.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : la fiche de la norme sur iso.org (ISO 50001:2018 et Amd 1:2024)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "afnor-iso-50001",
+    "passage": "Il ne prescrit pas de niveaux d''amélioration de la performance énergétique à atteindre.",
+    "relu": true
+   },
+   {
+    "cle": "afnor-iso-50001",
+    "passage": "permettre à tout organisme de parvenir, par une démarche méthodique, à l''amélioration continue de sa performance énergétique",
+    "relu": true
+   },
+   {
+    "cle": "afnor-iso-50001-a1",
+    "passage": "Amendement 1 : actions relatives aux changements climatiques",
+    "relu": true
+   }
+  ],
+  "note": "iso.org est inaccessible depuis l'environnement de travail (protection anti-robots) ; la fiche AFNOR reprend le résumé officiel de la norme. L'amendement ISO date de février 2024, sa version NF EN de septembre 2024. Les doubles apostrophes sont celles de la page AFNOR."
  },
  {
   "id": "ce8-021",
   "fichier": "cours/contenu/etape-8.js",
   "repere": "niveaux.approfondir › M&V",
-  "texte": "Le protocole international le plus utilisé est l’{{ipmvp}}.",
+  "texte": "Le protocole international de référence est l’{{ipmvp}}",
   "affirmation": "L'IPMVP est le protocole de M&V le plus utilisé.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : la page de l'EVO (Efficiency Valuation Organization) sur l'IPMVP."
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "evo-ipmvp-2022",
+    "passage": "the most recognized energy and water savings measurement and verification (M&V) protocols",
+    "relu": true
+   }
+  ],
+  "note": "Aucune source ne mesure l'usage : « le plus utilisé » devient « de référence ». L'EVO, qui édite le protocole, le dit « le plus reconnu » : c'est son propre jugement.",
+  "avant": "Le protocole international le plus utilisé est l’{{ipmvp}}."
  },
  {
   "id": "ce8-022",
@@ -327,9 +350,20 @@
   "texte": "Il demande de fixer à l’avance la période de référence, le modèle d’ajustement et les facteurs pris en compte.",
   "affirmation": "Exigences de l'IPMVP (plan de M&V).",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Même source à lire."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "evo-ipmvp",
+    "passage": "This individual design is recorded in the project’s M&V Plan, and savings are reported as defined therein.",
+    "relu": true
+   },
+   {
+    "cle": "evo-ipmvp",
+    "passage": "savings are based on measurements of each fuel type or energy source impacted within a given measurement boundary before and after implementing a project, making suitable adjustments for changes in conditions",
+    "relu": true
+   }
+  ],
+  "note": "Le plan de M&V fixe la méthode avant le calcul, et les économies sont calculées comme il le prévoit, avec des ajustements aux conditions."
  },
  {
   "id": "ce8-023",

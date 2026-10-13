@@ -243,9 +243,16 @@
   "texte": "des **{{kva|kVA}}** (puissance apparente) comparés à des kW",
   "affirmation": "Le kVA mesure une puissance apparente, différente de la puissance active en kW.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : une définition officielle de la puissance apparente (glossaire Enedis ou CRE)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "celle-ci est égale à la puissance souscrite apparente multipliée par 0,93",
+    "relu": true,
+    "page": "p. 6"
+   }
+  ],
+  "note": "La brochure distingue la puissance souscrite apparente (kVA) de la puissance souscrite active (kW), avec un rapport de 0,93 en BT > 36 kVA."
  },
  {
   "id": "ce3-020",
@@ -274,9 +281,16 @@
   "texte": "Passage à l’heure d’été : la journée dure 23 h, soit 23 × 6 = 138 mesures.",
   "affirmation": "Le 29 mars 2026, passage à l'heure d'été : journée de 23 h.",
   "type": "regle",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : la directive 2000/84/CE (passage à l'heure d'été le dernier dimanche de mars, à 1 h UTC), sur EUR-Lex. Le 29 mars 2026 est bien le dernier dimanche de mars."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été commence, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche de mars",
+    "relu": true,
+    "page": "art. 2"
+   }
+  ],
+  "note": "1 h UTC = 2 h heure de Paris, qui devient 3 h : la journée perd une heure. Le 29 mars 2026 est le dernier dimanche de mars."
  },
  {
   "id": "ce3-023",
@@ -295,8 +309,15 @@
   "texte": "En heure locale, 2 h 00 à 2 h 50 existe deux fois le jour du passage à l’heure d’hiver. En UTC, jamais.",
   "affirmation": "Au passage à l'heure d'hiver, l'heure de 2 h à 3 h se répète.",
   "type": "regle",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Même source à lire que ce3-022 (directive 2000/84/CE : retour à l'heure d'hiver le dernier dimanche d'octobre, à 1 h UTC, soit 3 h → 2 h en France)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "eurlex-directive-2000-84",
+    "passage": "la période de l'heure d'été se termine, dans chaque État membre, à 1 heure du matin, temps universel, le dernier dimanche d'octobre",
+    "relu": true,
+    "page": "art. 3"
+   }
+  ],
+  "note": "1 h UTC = 3 h heure d'été de Paris, qui redevient 2 h : l'heure de 2 h à 3 h est vécue deux fois en heure locale, jamais en UTC."
  }
 ]

@@ -126,7 +126,7 @@ export default {
         ton: "info",
         titre: "Les DJU en pratique",
         texte: [
-          "Le seuil de 18 °C est une convention : en dessous, on considère qu’il faut chauffer. La température moyenne du jour se calcule souvent comme la moyenne du minimum et du maximum (méthode dite « météo ») ; d’autres méthodes existent, comme celle du COSTIC.",
+          "Le seuil de 18 °C est une convention : en dessous, on considère qu’il faut chauffer[[costic-plaquette-dju,sdes-dju-conditions-meteo]]. La température moyenne du jour se calcule souvent comme la moyenne du minimum et du maximum (méthode dite « météo ») ; d’autres méthodes existent, comme celle du COSTIC[[costic-plaquette-dju]].",
           "Les DJU viennent d’une station météo proche (Météo-France ou fournisseurs de données). Le décret tertiaire prévoit lui aussi un ajustement climatique des consommations[[legifrance-arrete-tertiaire-2020]].",
         ],
       },

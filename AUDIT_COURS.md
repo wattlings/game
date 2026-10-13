@@ -1387,3 +1387,29 @@ Autres changements : les légendes des schémas et les consignes des démos acce
 Reste aussi à référencer : le glossaire (37 termes sans source), les démos hors étape 2, le quiz de synthèse, la page Patrimoine, et dans le jeu les étapes autres que la 2 et les voyages autres que le solaire.
 
 Vérification : `node outils/verifier.mjs` donne 388 réussites et 0 échec ; aucun appel de note ne s'affiche en texte brut sur les 24 vues des étapes.
+
+### Lot 7 (13 octobre 2026) : sources lues une fois le réseau ouvert
+
+Le réseau de la machine de travail est maintenant ouvert. Douze des vingt affirmations « sans source » de l'étape 8 et des étapes 1 à 7 sont confirmées par un passage lu. Une est corrigée. Douze sources entrent au registre, toutes de niveau officiel.
+
+| Affirmation | Source lue | Passage relevé |
+|---|---|---|
+| Le voyant du Linky clignote avec la consommation (ce1-009) | FAQ Enedis « Pourquoi le compteur Linky clignote ? » | « clignote plus ou moins rapidement de manière à vous indiquer la quantité d’électricité consommée » |
+| kVA = puissance apparente, différente des kW (ce3-019) | Brochure TURPE 7 d'Enedis, p. 6 | « la puissance souscrite apparente multipliée par 0,93 » |
+| Heure d'été, heure d'hiver (ce3-022, ce3-024) | Directive 2000/84/CE, art. 2 et 3 (EUR-Lex) | « à 1 heure du matin, temps universel, le dernier dimanche de mars » / « … d'octobre » |
+| DJU en base 18 °C, une convention (ce5-010) | Plaquette DJU du COSTIC ; SDES, février 2025 | « température de base de 18 °C » ; « en général de 18 °C dans la littérature économique » |
+| Moyenne min/max et méthode COSTIC (ce5-011) | Plaquette DJU du COSTIC | Les trois cas de calcul (été, hiver, mi-saison). Le nom « méthode météo » n'y figure pas : c'est l'usage courant. |
+| 1 °C de moins ≈ 7 % (ce7-003) | ADEME, « 10 gestes … dans les entreprises », novembre 2023 | « Baisser la température de 1 °C, c’est 7 % de consommation d’énergie en moins. » |
+| Surplus injecté et vendu ; autoconsommation collective (ce7-011) | Guide Enedis sur l'autoconsommation collective ; page Autoconsommation de la CRE | « appelée surplus, est injectée sur le réseau public » ; « Vente du surplus » ; « plusieurs consommateurs s’associent avec un ou plusieurs producteurs » |
+| Les CEE, une aide aux travaux (ce7-012) | Page du ministère sur le dispositif CEE | « le montant de la contribution qui sera versée au bénéficiaire » |
+| ISO 50001 : pas d'objectif chiffré ; amendement 2024 (ce8-020) | Fiches AFNOR de NF EN ISO 50001 (août 2018) et de son amendement A1 (septembre 2024) | « Il ne prescrit pas de niveaux d'amélioration de la performance énergétique à atteindre. » |
+| IPMVP (ce8-021) — **corrigé** | EVO, annonce des Core Concepts 2022 | « the most recognized … M&V protocols ». Aucune source ne mesure l'usage, donc « le plus utilisé » devient « de référence ». |
+| Plan de M&V de l'IPMVP (ce8-022) | Page IPMVP de l'EVO | « This individual design is recorded in the project’s M&V Plan, and savings are reported as defined therein. » |
+
+Trois sites restent fermés aux robots, même avec un navigateur : **Légifrance**, **iso.org** et **agirpourlatransition.ademe.fr**. Les textes ont été lus chez la CRE, Enedis, AFNOR et la librairie ADEME, qui en reprennent le contenu.
+
+Encore sans source :
+- **L'identifiant reste le même quand le compteur change** (ce1-016, ce1-021, ce4-011, ce4-017) : aucune page Enedis ou GRDF lue ne l'écrit explicitement. Les FAQ disent seulement que le PDL identifie le point de livraison.
+- **Délais des index et de la facture** dans l'étape 2 (ce2-051, ce2-052, ce2-081, ce2-084).
+
+Vérification : `node outils/sources.mjs` passe sans échec. Les étapes 3, 5, 7 et 8 n'ont plus aucun fait sans source. `node outils/verifier.mjs` donne 388 réussites et 0 échec.

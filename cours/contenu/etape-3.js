@@ -127,7 +127,7 @@ export default {
         titre: "Puissance, énergie et unités",
         paragraphes: [
           "Une {{courbe-de-charge}} contient des **{{puissance|puissances}} moyennes** ({{kw|kW}}) sur chaque {{pas-de-temps|pas}}[[enedis-guide-flux-r6x,enedis-nmo-cf-016e]]. Pour obtenir de l’{{energie|énergie}} ({{kwh|kWh}}), on multiplie par la durée du pas en heures. Additionner des kW sans tenir compte du pas est l’erreur la plus fréquente.",
-          "Autres pièges : une API (le service qui livre les données) qui renvoie des **W** au lieu de kW (facteur 1 000)[[enedis-guide-flux-r6x]], du gaz en **m³** comparé à des kWh, des **{{kva|kVA}}** (puissance apparente) comparés à des kW.",
+          "Autres pièges : une API (le service qui livre les données) qui renvoie des **W** au lieu de kW (facteur 1 000)[[enedis-guide-flux-r6x]], du gaz en **m³** comparé à des kWh, des **{{kva|kVA}}** (puissance apparente) comparés à des kW[[enedis-turpe7-brochure]].",
         ],
       },
       {
@@ -187,7 +187,7 @@ export default {
       choix: ["144", "138", "150"],
       bonne: 1,
       explication:
-        "Passage à l’heure d’été : la journée dure 23 h, soit 23 × 6 = 138 mesures. Ce n’est pas un trou.",
+        "Passage à l’heure d’été : la journée dure 23 h, soit 23 × 6 = 138 mesures[[eurlex-directive-2000-84]]. Ce n’est pas un trou.",
     },
     {
       q: "Une mesure indique 24 kW pendant 10 minutes. Quelle énergie ?",
@@ -222,7 +222,7 @@ export default {
       ],
       bonne: 1,
       explication:
-        "En heure locale, 2 h 00 à 2 h 50 existe deux fois le jour du passage à l’heure d’hiver. En UTC, jamais.",
+        "En heure locale, 2 h 00 à 2 h 50 existe deux fois le jour du passage à l’heure d’hiver. En UTC, jamais[[eurlex-directive-2000-84]].",
     },
   ],
 };

@@ -138,13 +138,13 @@ export default {
           ["Vérifier (Check)", "6. Détecter · 8. Mesurer", "Suivi des alertes, M&V corrigée des DJU"],
           ["Agir / améliorer (Act)", "8 → 1", "Nouveaux objectifs, nouveau périmètre"],
         ],
-        note: "La norme ISO 50001 (version 2018, complétée par un amendement de 2024 sur le changement climatique) ne fixe pas d’objectif chiffré : elle impose une démarche d’amélioration continue et documentée.",
+        note: "La norme ISO 50001 (version 2018, complétée par un amendement de 2024 sur le changement climatique) ne fixe pas d’objectif chiffré : elle impose une démarche d’amélioration continue et documentée[[afnor-iso-50001,afnor-iso-50001-a1]].",
       },
       {
         type: "texte",
         titre: "Mesure et vérification (M&V)",
         paragraphes: [
-          "La {{mv}} compare la consommation mesurée après l’action à ce qu’on aurait consommé sans elle, dans les mêmes conditions (météo, occupation, surface). Le protocole international le plus utilisé est l’{{ipmvp}}. Il demande de fixer à l’avance la période de référence, le modèle d’ajustement et les facteurs pris en compte.",
+          "La {{mv}} compare la consommation mesurée après l’action à ce qu’on aurait consommé sans elle, dans les mêmes conditions (météo, occupation, surface). Le protocole international de référence est l’{{ipmvp}}[[evo-ipmvp-2022]]. Il demande de fixer à l’avance la période de référence, le modèle d’ajustement et les facteurs pris en compte[[evo-ipmvp]].",
         ],
       },
       {

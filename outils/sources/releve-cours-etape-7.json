@@ -26,9 +26,16 @@
   "texte": "Règle d’ordre de grandeur souvent citée : **1 °C de moins ≈ 7 % de chauffage en moins**.",
   "affirmation": "Baisser la consigne de 1 °C économise environ 7 % du chauffage.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : l'ADEME (guide « Chauffage » ou fiche sobriété), qui donne cet ordre de grandeur."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-10-gestes-entreprises",
+    "passage": "Baisser la température de 1 °C, c’est 7 % de consommation d’énergie en moins.",
+    "relu": true,
+    "page": "geste 1"
+   }
+  ],
+  "note": "Ordre de grandeur repris par l'ADEME dans sa fiche pour les entreprises (novembre 2023)."
  },
  {
   "id": "ce7-004",
@@ -140,9 +147,25 @@
   "texte": "le surplus est injecté sur le réseau et peut être vendu. En **autoconsommation collective**, plusieurs bâtiments proches partagent une production.",
   "affirmation": "Surplus injecté et vendable ; autoconsommation collective.",
   "type": "regle",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : code de l'énergie, articles L. 315-1 et L. 315-2 (Légifrance), ou la fiche du ministère sur l'autoconsommation si elle le dit."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-acc-guide",
+    "passage": "La production qui n’est pas autoconsommée sur le site, appelée surplus, est injectée sur le réseau public.",
+    "relu": true
+   },
+   {
+    "cle": "enedis-acc-guide",
+    "passage": "Vente du surplus de production restant après affectation aux consommateurs de l’opération.",
+    "relu": true
+   },
+   {
+    "cle": "cre-autoconsommation",
+    "passage": "l’autoconsommation collective, où plusieurs consommateurs s’associent avec un ou plusieurs producteurs pour échanger de l’électricité",
+    "relu": true
+   }
+  ],
+  "note": "Légifrance (articles L. 315-1 et L. 315-2) reste inaccessible depuis l'environnement de travail (protection anti-robots) ; la CRE et Enedis en reprennent le contenu."
  },
  {
   "id": "ce7-012",
@@ -151,9 +174,20 @@
   "texte": "Il ignore la hausse des prix, la durée de vie de l’équipement, la maintenance et les aides (par exemple les certificats d’économies d’énergie)",
   "affirmation": "Les CEE sont une aide aux travaux d'économies d'énergie.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : la page du ministère sur les certificats d'économies d'énergie."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ministere-cee",
+    "passage": "Les CEE sont attribués, sous certaines conditions, par les services du ministère chargé de l’énergie, aux acteurs éligibles (obligés mais aussi d’autres personnes morales non obligées) réalisant des opérations d’économies d’énergie.",
+    "relu": true
+   },
+   {
+    "cle": "ministere-cee",
+    "passage": "Il mentionne clairement le montant de la contribution qui sera versée au bénéficiaire sous réserve de la conformité de ses travaux aux fiches standardisées.",
+    "relu": true
+   }
+  ],
+  "note": "Les fournisseurs obligés versent une contribution au bénéficiaire des travaux : c'est bien une aide."
  },
  {
   "id": "ce7-013",

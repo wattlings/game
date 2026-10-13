@@ -55,7 +55,7 @@ export default {
         intro: "On passe la consigne des classes de 20 °C à 19 °C.",
         etapes: [
           {
-            t: "Règle d’ordre de grandeur souvent citée : **1 °C de moins ≈ 7 % de chauffage en moins**.",
+            t: "Règle d’ordre de grandeur souvent citée : **1 °C de moins ≈ 7 % de chauffage en moins**[[ademe-10-gestes-entreprises]].",
           },
           {
             t: "Chauffage de l’école sur l’année : **196 000 kWh** de gaz.",
@@ -137,7 +137,7 @@ export default {
         type: "texte",
         titre: "Autoconsommation",
         paragraphes: [
-          "En {{autoconsommation}} individuelle, l’école consomme directement ce que ses panneaux produisent ; le surplus est injecté sur le réseau et peut être vendu. En **autoconsommation collective**, plusieurs bâtiments proches partagent une production.",
+          "En {{autoconsommation}} individuelle, l’école consomme directement ce que ses panneaux produisent ; le surplus est injecté sur le réseau et peut être vendu. En **autoconsommation collective**, plusieurs bâtiments proches partagent une production[[enedis-acc-guide,cre-autoconsommation]].",
           "Deux taux à ne pas confondre : le **taux d’autoconsommation** (part de la production consommée sur place) et le **taux d’autoproduction** (part des besoins couverts par la production)[[ministere-autoconsommation]]. Une école fermée l’été autoconsomme mal sa production estivale.",
         ],
       },
@@ -145,7 +145,7 @@ export default {
         type: "texte",
         titre: "Temps de retour et impact sur la facture",
         paragraphes: [
-          "Le {{temps-de-retour}} simple = investissement / économie annuelle. Il ignore la hausse des prix, la durée de vie de l’équipement, la maintenance et les aides (par exemple les certificats d’économies d’énergie) : c’est un premier filtre, pas une étude financière.",
+          "Le {{temps-de-retour}} simple = investissement / économie annuelle. Il ignore la hausse des prix, la durée de vie de l’équipement, la maintenance et les aides (par exemple les certificats d’économies d’énergie)[[ministere-cee]] : c’est un premier filtre, pas une étude financière.",
           "Une action sur les **kWh** réduit la fourniture, la part variable de l’acheminement et l’accise[[ministere-guide-fiscalite-2026]]. Une action sur la **puissance** réduit la part fixe de l’acheminement (et donc la CTA)[[ministere-guide-fiscalite-2026,enedis-turpe7-brochure]]. Selon l’offre, l’abonnement du fournisseur peut aussi en dépendre.",
         ],
       },

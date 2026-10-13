@@ -61,7 +61,7 @@ export default {
         type: "schema",
         id: "compteurs",
         legende:
-          "Ce qu’on lit sur les compteurs : 1. l’index (kWh pour l’électricité, m³ pour le gaz)[[mne-releve-compteur,grdf-guide-donnees-2026]] ; 2. l’identifiant du point de livraison, PDL ou PCE, à 14 chiffres[[enedis-pdl,grdf-guide-donnees-2026]] ; 3. le voyant qui clignote avec la consommation ; 4. le module radio du compteur gaz, qui transmet un relevé par jour[[grdf-guide-donnees-2026]]. Dessin générique, numéros fictifs de l’école.",
+          "Ce qu’on lit sur les compteurs : 1. l’index (kWh pour l’électricité, m³ pour le gaz)[[mne-releve-compteur,grdf-guide-donnees-2026]] ; 2. l’identifiant du point de livraison, PDL ou PCE, à 14 chiffres[[enedis-pdl,grdf-guide-donnees-2026]] ; 3. le voyant qui clignote avec la consommation[[enedis-faq-linky-clignote]] ; 4. le module radio du compteur gaz, qui transmet un relevé par jour[[grdf-guide-donnees-2026]]. Dessin générique, numéros fictifs de l’école.",
       },
       {
         type: "demo",

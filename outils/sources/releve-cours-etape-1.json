@@ -122,8 +122,14 @@
   "texte": "le voyant qui clignote avec la consommation",
   "affirmation": "Le compteur électrique a un voyant qui clignote au rythme de la consommation.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "enedis-faq-linky-clignote",
+    "passage": "Le compteur Linky clignote plus ou moins rapidement de manière à vous indiquer la quantité d’électricité consommée",
+    "relu": true
+   }
+  ],
   "note": "À sourcer : fiche Enedis de description du compteur Linky (voyant de consommation)."
  },
  {

@@ -96,9 +96,20 @@
   "texte": "Le seuil de 18 °C est une convention : en dessous, on considère qu’il faut chauffer.",
   "affirmation": "Les DJU de chauffage se calculent en base 18 °C.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : Météo-France ou le Cerema (définition des degrés-jours unifiés, base 18 °C)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Ils sont définis comme les degrés-jours calculés pour la température de base de 18 °C.",
+    "relu": true
+   },
+   {
+    "cle": "sdes-dju-conditions-meteo",
+    "passage": "Ce seuil, fixé a priori, sans être nécessairement adapté au contexte, est en général de 18 °C dans la littérature économique.",
+    "relu": true
+   }
+  ],
+  "note": "Le SDES rappelle que c'est une convention : il retient lui-même 17 °C puis 15 °C selon ses estimations."
  },
  {
   "id": "ce5-011",
@@ -107,9 +118,20 @@
   "texte": "La température moyenne du jour se calcule souvent comme la moyenne du minimum et du maximum (méthode dite « météo ») ; d’autres méthodes existent, comme celle du COSTIC.",
   "affirmation": "Méthodes de calcul des DJU (météo, COSTIC).",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "À sourcer : une fiche Météo-France ou COSTIC qui décrit les deux méthodes."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Si la température extérieure maximum de la journée <= 18°C (cas hiver)",
+    "relu": true
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Si la température extérieure minimum < 18°C < température extérieure maximum (cas en misaison de chauffe)",
+    "relu": true
+   }
+  ],
+  "note": "Le COSTIC calcule 18 − (Tmin + Tmax)/2 les jours froids et une formule pondérée quand la journée franchit 18 °C : c'est bien une méthode distincte de la simple moyenne. Le nom « méthode météo » est l'usage courant ; il n'est pas écrit dans la plaquette."
  },
  {
   "id": "ce5-012",
