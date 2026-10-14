@@ -43,8 +43,8 @@ voyDeclarer('nucleaire',{
     {id:'ordres',refs:['rte-be2025-rapport','rte-be2025-production','asnr-parc-reacteurs'],ou:"Mme Gigawatt, au pied du transformateur",cle:1,t:"Les ordres de grandeur",
       x:"Un réacteur de 1 300 MW produit 8 à 9 TWh par an ; les deux de Neutron-sur-Mer, 17 TWh, la consommation de plus de trois millions de foyers. La France compte 57 réacteurs sur 18 sites : 63 GW, 373 TWh en 2025, soit 68 % de son électricité. En moyenne, un réacteur est disponible les trois quarts du temps.",
       retiens:"Un réacteur : 8 à 9 TWh par an. Le parc : deux tiers de l'électricité française."},
-    {id:'inertie',refs:['edf-fa3-rapport-surete-ch10','rte-faq-blackout-iberique'],ou:"la baie vitrée de la salle des machines",t:"1 500 tours par minute",
-      x:"L'alternateur tourne à 1 500 tours par minute, ni plus ni moins : c'est ce qui donne les 50 hertz du réseau. L'ensemble turbine et alternateur pèse des centaines de tonnes. Cette masse lancée ne ralentit pas d'un coup : quand un incident survient sur le réseau, elle amortit le choc pendant les premières secondes. On appelle cela l'inertie.",
+    {id:'inertie',refs:['sfen-turbines-arabelle','edf-fa3-rapport-surete-ch10','rte-faq-blackout-iberique'],ou:"la baie vitrée de la salle des machines",t:"1 500 tours par minute",
+      x:"L'alternateur tourne à 1 500 tours par minute, ni plus ni moins : c'est ce qui donne les 50 hertz du réseau. Sur les plus grosses tranches, la turbine seule dépasse mille tonnes. Cette masse lancée ne ralentit pas d'un coup : quand un incident survient sur le réseau, elle amortit le choc pendant les premières secondes. On appelle cela l'inertie.",
       retiens:"Les grosses machines tournantes stabilisent la fréquence du réseau."},
     {id:'barrieres',refs:['asnr-composants-reacteur','asnr-missions','asn-cahier-1300-reexamen'],ou:"l'inspectrice Rigueur, devant le bâtiment réacteur",t:"Trois barrières",
       x:"Entre le combustible et l'extérieur, trois enveloppes successives : la gaine métallique des crayons, le circuit primaire en acier épais, et l'enceinte de béton du bâtiment réacteur. Une autorité indépendante, l'ASNR, contrôle l'exploitant et peut arrêter un réacteur. Tous les dix ans, chaque réacteur subit une visite complète avant d'être autorisé à continuer.",
@@ -76,7 +76,7 @@ voyDeclarer('nucleaire',{
      les panneaux et les simulations. Les clés sont celles du registre commun/donnees/sources.js. */
   refs:['rte-be2025-rapport','edf-flexibilite-nucleaire','asnr-fonctionnement-reacteur','asnr-composants-reacteur','asnr-rejets-thermiques','asnr-expop-2026-rapport',
     'asnr-missions','cea-livret-reacteurs','cea-fonctionnement-reacteur','andra-essentiels-2026','andra-gestion-dechets-2024','legifrance-arrete-tertiaire-2020','cre-heures-creuses','asnr-parc-reacteurs',
-    'asnr-gravelines-meduses','rte-pertes-en-ligne','asnr-radioactivite-aliments','irsn-accidents-fusion-ch2','irsn-elements-surete-rep-ch5','asn-rapport-2011-centrales','edf-fa3-rapport-surete-ch10','ifremer-penly-2020','senat-rapport-714-electricite','wna-penly-1']
+    'asnr-gravelines-meduses','rte-pertes-en-ligne','asnr-radioactivite-aliments','irsn-accidents-fusion-ch2','irsn-elements-surete-rep-ch5','asn-rapport-2011-centrales','edf-fa3-rapport-surete-ch10','ifremer-penly-2020','senat-rapport-714-electricite','wna-penly-1','irena-etsap-hydropower','sfen-turbines-arabelle']
 });
 
 /* ================= CE QUE DISENT LES GENS ET LES CHOSES =================
@@ -117,7 +117,7 @@ NUC.dit={
     ["Deux tiers de la chaleur partent à la mer. Ce n'est pas du gâchis, c'est de la thermodynamique : toutes les centrales à vapeur font pareil, au charbon comme au gaz. La nôtre, au moins, ne fume pas."]],
   baie:[["Une baie vitrée sur la salle des machines. En bas, un cylindre vert long comme deux autobus : l'alternateur. Un compteur au mur : « 1 500 tours par minute ». Il n'a pas bougé d'un tour depuis que tu regardes.",
       "Une note : « Si ce chiffre change, toute l'Europe change avec. Merci de ne pas souffler sur la vitre. »"],
-    ["La baie vitrée. 1 500 tours par minute, 50 hertz. C'est le métronome du réseau, et il pèse plusieurs centaines de tonnes."]],
+    ["La baie vitrée. 1 500 tours par minute, 50 hertz. C'est le métronome du réseau, et sur les plus grosses tranches, la turbine seule dépasse mille tonnes."]],
   gigawatt:[["Mme Gigawatt, exploitation. On m'appelle comme ça parce que je refuse de parler en mégawatts. Le site : 2,6 gigawatts. Le transformateur derrière moi : 400 000 volts. Mon café : une tasse, je sais rester raisonnable.",
       "Dix-sept térawattheures par an sortent d'ici. C'est mille fois la centrale solaire de Saint-Photon. Je ne dis pas ça contre eux : ils ont des brebis, c'est charmant."],
     ["Cinquante-sept réacteurs en France. Quand on en arrête un pour le recharger, les cinquante-six autres ne s'en aperçoivent pas. C'est ça, un parc."]],

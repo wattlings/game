@@ -503,18 +503,29 @@
   "id": "vn-027",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info inertie › x",
-  "texte": "L'ensemble turbine et alternateur pèse des centaines de tonnes.",
+  "texte": "Sur les plus grosses tranches, la turbine seule dépasse mille tonnes.",
   "affirmation": "Masse du groupe turbo-alternateur.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "sources": [
+   {
+    "cle": "sfen-turbines-arabelle",
+    "passage": "Arabelle, c'est un mastodonte d'une cinquantaine de mètres de long pour huit mètres de diamètre affichant, sur la balance, plus de 1 000 tonnes.",
+    "relu": true
+   },
+   {
+    "cle": "sfen-turbines-arabelle",
+    "passage": "Avec un stator de 440 tonnes, c'est l'un des plus gros composants d'une centrale nucléaire",
+    "relu": true
+   },
    {
     "cle": "rte-faq-blackout-iberique",
     "passage": "Ces alternateurs (qui pèsent plusieurs tonnes) étant en rotation, leur mouvement procure une inertie au système électrique (propriété physique qui fait que le mouvement et la masse de ces alternateurs stabilisent naturellement les variations brusques de la fréquence).",
     "relu": true
    }
   ],
-  "note": "RTE dit seulement que les alternateurs « pèsent plusieurs tonnes » ; la masse du groupe (centaines de tonnes) est sur edf.fr, inaccessible aux robots."
+  "note": "Sfen (secondaire) : turbine Arabelle de plus de 1 000 t, stator d'alternateur de 440 t ; « des centaines de tonnes » sous-estimait l'ensemble. Modèles des EPR et N4 ; pas de chiffre lu pour le palier 1 300 MWe. Reformulé ensuite : la source (turbines Arabelle des EPR et du palier N4) ne parle que des plus grosses tranches, pas des 1 300 MWe du jeu.",
+  "avant": "L'ensemble turbine et alternateur pèse des centaines de tonnes."
  },
  {
   "id": "vn-028",
@@ -1426,6 +1437,29 @@
  {
   "id": "vn-072",
   "fichier": "jeu/voyages/nucleaire/textes.js",
+  "repere": "NUC.dit › baie (suite)",
+  "texte": "C'est le métronome du réseau, et sur les plus grosses tranches, la turbine seule dépasse mille tonnes.",
+  "affirmation": "Masse du groupe turbo-alternateur.",
+  "type": "fait",
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "sfen-turbines-arabelle",
+    "passage": "Arabelle, c'est un mastodonte d'une cinquantaine de mètres de long pour huit mètres de diamètre affichant, sur la balance, plus de 1 000 tonnes.",
+    "relu": true
+   },
+   {
+    "cle": "sfen-turbines-arabelle",
+    "passage": "Avec un stator de 440 tonnes, c'est l'un des plus gros composants d'une centrale nucléaire",
+    "relu": true
+   }
+  ],
+  "note": "Voir l'info « inertie ». Reformulé ensuite : la source (turbines Arabelle des EPR et du palier N4) ne parle que des plus grosses tranches, pas des 1 300 MWe du jeu.",
+  "avant": "C'est le métronome du réseau, et il pèse plusieurs centaines de tonnes."
+ },
+ {
+  "id": "vn-073",
+  "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › baie",
   "texte": "Si ce chiffre change, toute l'Europe change avec.",
   "affirmation": "Réseau européen synchrone (clin d'œil).",
@@ -1435,7 +1469,7 @@
   "note": null
  },
  {
-  "id": "vn-073",
+  "id": "vn-074",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gigawatt",
   "texte": "Le site : 2,6 gigawatts. Le transformateur derrière moi : 400 000 volts.",
@@ -1446,7 +1480,7 @@
   "note": "2 × 1 300 MW. Le 400 kV est confirmé ailleurs (ASN 2011, rapport de sûreté FA3)."
  },
  {
-  "id": "vn-074",
+  "id": "vn-075",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gigawatt",
   "texte": "C'est mille fois la centrale solaire de Saint-Photon.",
@@ -1457,7 +1491,7 @@
   "note": null
  },
  {
-  "id": "vn-075",
+  "id": "vn-076",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gigawatt (suite)",
   "texte": "Cinquante-sept réacteurs en France.",
@@ -1479,7 +1513,7 @@
   "note": null
  },
  {
-  "id": "vn-076",
+  "id": "vn-077",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › planning",
   "texte": "Règle numéro un : on ne recharge pas en janvier. En janvier, le pays a froid et le réseau a besoin de tout le monde.",
@@ -1497,7 +1531,7 @@
   "note": null
  },
  {
-  "id": "vn-077",
+  "id": "vn-078",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › planning (suite)",
   "texte": "Trente-cinq jours pour un rechargement, quatre-vingt-dix pour une visite partielle, des mois pour la décennale.",
@@ -1525,7 +1559,7 @@
   "avant": "Trente-cinq jours pour un rechargement, soixante pour une visite partielle, des mois pour la décennale."
  },
  {
-  "id": "vn-078",
+  "id": "vn-079",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gaston",
   "texte": "l'eau y est dix degrés plus chaude qu'ailleurs.",
@@ -1543,7 +1577,7 @@
   "note": null
  },
  {
-  "id": "vn-079",
+  "id": "vn-080",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gaston",
   "texte": "Cinquante mètres cubes à la seconde, par réacteur. Ça entre froid, ça sort tiède, et ça retourne à la mer. La tour, c'est pour ceux qui n'ont qu'une rivière. Et ça ne fume pas, ça fait des nuages.",
@@ -1570,7 +1604,7 @@
   "note": null
  },
  {
-  "id": "vn-080",
+  "id": "vn-081",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gaston (suite)",
   "texte": "Je réponds : moins que le granit de votre cuisine.",
@@ -1581,7 +1615,7 @@
   "note": null
  },
  {
-  "id": "vn-081",
+  "id": "vn-082",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › bouton",
   "texte": "« Arrêt automatique du réacteur. Ce bouton ne fait rien exploser. Il fait exactement le contraire.",
@@ -1592,7 +1626,7 @@
   "note": null
  },
  {
-  "id": "vn-082",
+  "id": "vn-083",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › beignets",
   "texte": "Interdits en salle de commande depuis qu'un dessin animé a donné une mauvaise image de la profession.",
@@ -1603,7 +1637,7 @@
   "note": null
  },
  {
-  "id": "vn-083",
+  "id": "vn-084",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › zone",
   "texte": "« Zone contrôlée. Accès réservé. »",
@@ -1614,7 +1648,7 @@
   "note": null
  },
  {
-  "id": "vn-084",
+  "id": "vn-085",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › pompe",
   "texte": "« Par forte arrivée de méduses, on baisse la puissance. Ce n'est pas une blague. »",
@@ -1631,7 +1665,7 @@
   "note": "Gravelines, août 2025 : baisse de puissance puis arrêts automatiques."
  },
  {
-  "id": "vn-085",
+  "id": "vn-086",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › ligne",
   "texte": "Les lignes à 400 000 volts partent vers l'intérieur des terres.",
@@ -1642,7 +1676,7 @@
   "note": "Décor du site fictif (tension usuelle des grandes centrales)."
  },
  {
-  "id": "vn-086",
+  "id": "vn-087",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › chefHalte",
   "texte": "Présentez votre billet, puis votre billet.",
@@ -1653,7 +1687,7 @@
   "note": null
  },
  {
-  "id": "vn-087",
+  "id": "vn-088",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › isotopeApres",
   "texte": "C'est d'expliquer à tout le monde, chaque jour, que les tours ne fument pas.",
@@ -1664,7 +1698,7 @@
   "note": null
  },
  {
-  "id": "vn-088",
+  "id": "vn-089",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 1",
   "texte": "Moins d'un, la réaction s'éteint ; plus d'un, elle s'emballe. Les barres de contrôle servent à tenir ce « un ».",
@@ -1688,7 +1722,7 @@
   "note": null
  },
  {
-  "id": "vn-089",
+  "id": "vn-090",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 2",
   "texte": "Un tiers en électricité, deux tiers en chaleur rejetée : c'est le lot de toutes les centrales à vapeur.",
@@ -1717,7 +1751,7 @@
   "note": null
  },
  {
-  "id": "vn-090",
+  "id": "vn-091",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 2",
   "texte": "Les pertes en ligne se comptent en quelques pour cent, pas en deux tiers.",
@@ -1734,7 +1768,7 @@
   "note": null
  },
  {
-  "id": "vn-091",
+  "id": "vn-092",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 3",
   "texte": "1,3 GW × 8 760 h × 0,75. Retiens l'ordre de grandeur : 8 à 9 TWh par réacteur.",
@@ -1745,7 +1779,7 @@
   "note": null
  },
  {
-  "id": "vn-092",
+  "id": "vn-093",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 3",
   "texte": "Il manque un zéro : ça, c'est un parc éolien en mer.",
@@ -1756,7 +1790,7 @@
   "note": null
  },
  {
-  "id": "vn-093",
+  "id": "vn-094",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 4",
   "texte": "C'est le suivi de charge : une trentaine de TWh ainsi modulés en 2025.",
@@ -1775,7 +1809,7 @@
   "avant": "C'est le suivi de charge : 33 TWh ainsi modulés en 2025."
  },
  {
-  "id": "vn-094",
+  "id": "vn-095",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 4",
   "texte": "Idée répandue, et fausse pour le parc français, conçu pour moduler.",
@@ -1793,7 +1827,7 @@
   "note": null
  },
  {
-  "id": "vn-095",
+  "id": "vn-096",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 5",
   "texte": "\"Environ 64 g de CO₂e par kWh\",\"C'est le chiffre que retient la réglementation tertiaire, contre 227 g pour un kWh de gaz,",
@@ -1818,7 +1852,7 @@
   "avant": "\"Environ 50 g de CO₂e par kWh\",\"Contre plus de 200 g pour un kWh de gaz,"
  },
  {
-  "id": "vn-096",
+  "id": "vn-097",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 6",
   "texte": "Jusqu'à trois heures creuses entre 11 h et 17 h, au moins cinq la nuit : on suit le solaire.",
@@ -1836,7 +1870,7 @@
   "note": null
  },
  {
-  "id": "vn-097",
+  "id": "vn-098",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › info",
   "texte": "Enfoncées dans le cœur, elles avalent les neutrons et la puissance baisse ; sorties, elle monte.",
@@ -1854,7 +1888,7 @@
   "note": null
  },
  {
-  "id": "vn-098",
+  "id": "vn-099",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › réglages",
   "texte": "Dans le simulateur, une seconde vaut une minute. Trois façons de perdre : varier trop vite, dépasser 105 %, ou laisser passer le temps.",
@@ -1865,7 +1899,7 @@
   "note": null
  },
  {
-  "id": "vn-099",
+  "id": "vn-100",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › manœuvre 1 › bravo",
   "texte": "Dans la réalité, cette montée prend une bonne demi-heure.",
@@ -1883,7 +1917,7 @@
   "note": null
  },
  {
-  "id": "vn-100",
+  "id": "vn-101",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › manœuvre 2 › bravo",
   "texte": "Les réacteurs français le font surtout les après-midi, d'avril à octobre, et particulièrement le week-end.",
@@ -1902,7 +1936,7 @@
   "avant": "Les réacteurs français font cela presque tous les jours, et de plus en plus souvent."
  },
  {
-  "id": "vn-101",
+  "id": "vn-102",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "arrêt automatique › bravo",
   "texte": "✔ Les barres sont tombées d'un coup : la réaction en chaîne s'est arrêtée presque instantanément.",
@@ -1921,7 +1955,7 @@
   "avant": "✔ Deux secondes : les barres sont tombées, la réaction en chaîne est arrêtée."
  },
  {
-  "id": "vn-102",
+  "id": "vn-103",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "arrêt automatique › bravo",
   "texte": "le cœur dégage encore ${C.residuelle} % de sa chaleur, puis de moins en moins, pendant des jours.",
@@ -1944,7 +1978,7 @@
   "note": null
  },
  {
-  "id": "vn-103",
+  "id": "vn-104",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "arrêt automatique › bravo",
   "texte": "Un réacteur arrêté doit continuer à être refroidi : c'est pour cela qu'il a des pompes de secours, des diesels de secours, et des secours de secours.",
@@ -1966,7 +2000,7 @@
   "note": null
  },
  {
-  "id": "vn-104",
+  "id": "vn-105",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › M. Bore",
   "texte": "Deux : si quoi que ce soit sort des clous, le réacteur s'arrête tout seul, presque instantanément, sans demander l'avis de personne.",
@@ -1985,7 +2019,7 @@
   "avant": "Deux : si quoi que ce soit sort des clous, le réacteur s'arrête tout seul, en deux secondes, sans demander l'avis de personne."
  },
  {
-  "id": "vn-105",
+  "id": "vn-106",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › étapes",
   "texte": "L'eau du circuit primaire s'échauffe à 320 °C, sous 155 bars",
@@ -2008,7 +2042,7 @@
   "note": "Texte d'origine rétabli (ASN 2011 : 320 °C)."
  },
  {
-  "id": "vn-106",
+  "id": "vn-107",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › étapes",
   "texte": "Dans le générateur de vapeur, elle fait bouillir l'eau du circuit secondaire",
@@ -2025,7 +2059,7 @@
   "note": null
  },
  {
-  "id": "vn-107",
+  "id": "vn-108",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › étapes",
   "texte": "L'alternateur produit le courant, à 1 500 tours par minute",
@@ -2043,7 +2077,7 @@
   "note": "Voir l'info « inertie »."
  },
  {
-  "id": "vn-108",
+  "id": "vn-109",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › étapes",
   "texte": "Le transformateur l'élève à 400 000 volts",
@@ -2067,7 +2101,7 @@
   "note": null
  },
  {
-  "id": "vn-109",
+  "id": "vn-110",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › okMsg",
   "texte": "l'eau qui touche le combustible reste dans le bâtiment réacteur, celle qui fait tourner la turbine ne voit jamais le cœur, et l'eau de mer ne voit que des tuyaux.",
@@ -2084,7 +2118,7 @@
   "note": null
  },
  {
-  "id": "vn-110",
+  "id": "vn-111",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › bilan",
   "texte": "Environ 34 % ; les 2 500 MW restants partent en chaleur dans la mer",
@@ -2107,18 +2141,25 @@
   "note": null
  },
  {
-  "id": "vn-111",
+  "id": "vn-112",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › bilan",
   "texte": "Environ 90 %, comme une turbine hydraulique",
-  "affirmation": "Rendement hydraulique ~90 %.",
+  "affirmation": "Le rendement d'une turbine hydraulique approche 90 %.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Mauvaise réponse du quiz ; ordre de grandeur non sourcé ici."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irena-etsap-hydropower",
+    "passage": "Efficiency (turbine, Cp max), % […] Large hydro […] Up to 92",
+    "relu": true,
+    "page": "Table 2"
+   }
+  ],
+  "note": "IRENA/ETSAP : rendement des turbines jusqu'à 92 %."
  },
  {
-  "id": "vn-112",
+  "id": "vn-113",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "planning des arrêts › besoin",
   "texte": "besoin:[100,96,85,70,60,56,58,54,60,72,86,97],",
@@ -2129,7 +2170,7 @@
   "note": null
  },
  {
-  "id": "vn-113",
+  "id": "vn-114",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "planning des arrêts › bravo",
   "texte": "C'est pour cela que la disponibilité du parc français se lit en dents de scie : haute en janvier, basse en été.",
@@ -2153,7 +2194,7 @@
   "note": null
  },
  {
-  "id": "vn-114",
+  "id": "vn-115",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "halte › panneau",
   "texte": "« Centrale nucléaire de Neutron-sur-Mer · 2 réacteurs de 1 300 MW · 17 TWh par an ».",
@@ -2164,7 +2205,7 @@
   "note": null
  },
  {
-  "id": "vn-115",
+  "id": "vn-116",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "lieux › centre d'information",
   "texte": "La maquette, la pastille, le fût, le simulateur de conduite. Ici on peut toucher : rien n'est branché.",
@@ -2175,7 +2216,7 @@
   "note": null
  },
  {
-  "id": "vn-116",
+  "id": "vn-117",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "lieux › station de pompage",
   "texte": "L'eau de mer entre ici pour refroidir le circuit. Elle repart un peu plus chaude, et c'est tout ce qu'elle emporte.",
@@ -2197,7 +2238,7 @@
   "note": null
  },
  {
-  "id": "vn-117",
+  "id": "vn-118",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "lieux › la mer",
   "texte": "La source froide de la centrale : sans elle, pas de condensation, donc pas de turbine.",
@@ -2214,7 +2255,7 @@
   "note": null
  },
  {
-  "id": "vn-118",
+  "id": "vn-119",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "esplanade › compteur",
   "texte": "« Électricité française, en ce moment : 20 g de CO₂ par kWh ».",
@@ -2232,7 +2273,7 @@
   "note": null
  },
  {
-  "id": "vn-119",
+  "id": "vn-120",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "salle des machines › transformateur",
   "texte": "Le transformateur principal : 400 000 volts en sortie.",
@@ -2243,7 +2284,7 @@
   "note": "Décor (non sourcé)."
  },
  {
-  "id": "vn-120",
+  "id": "vn-121",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "lieux › voie ferrée",
   "texte": "La ligne d'Ampère-sur-Loire, par Paris et Amiens.",

@@ -70,7 +70,7 @@ const EN_ACT=[
   {id:'reduit',t:'Programmer le réduit de nuit et de week-end',cat:'Sobriété',cost:800,rev:6,no:['ehpad','pisc'],why:'On ne chauffe plus un bâtiment vide.'},
   {id:'ps',t:'Ajuster la puissance souscrite',cat:'Contrat',cost:0,rev:5,zero:1,why:'La facture baisse, pas la consommation : 0 kWh.'},
   {id:'led',t:'Relamping LED',cat:'Efficacité',cost:9000,rev:5,why:'Le même éclairage pour moitié moins d’électricité.'},
-  {id:'combles',t:'Isolation des combles',cat:'Efficacité',cost:22000,rev:5,why:'La chaleur s’échappe d’abord par le toit.'},
+  {id:'combles',t:'Isolation des combles',cat:'Efficacité',cost:22000,rev:5,why:'Dans un bâtiment ancien non isolé, la chaleur s’échappe d’abord par le toit.'},
   {id:'couv',t:'Couverture thermique du bassin, la nuit',cat:'Équipement',cost:18000,rev:7,only:'pisc',why:'L’eau chaude s’évapore : couvrir le bassin la nuit garde la chaleur dedans.'},
   {id:'pac',t:'Remplacer la chaudière par une pompe à chaleur',cat:'Équipement',cost:45000,rev:7,why:'Près de trois fois moins d’énergie pour la même chaleur. Beaucoup de kWh en moins, peu d’euros : l’électricité coûte plus cher que le gaz.'},
   {id:'pv',t:'Panneaux photovoltaïques',cat:'Production',cost:40000,rev:7,prod:1,why:'Produire n’est pas économiser : le compteur de kWh économisés ne bouge pas, la facture oui.'}];

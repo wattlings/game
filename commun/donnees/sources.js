@@ -1842,6 +1842,53 @@ export const SOURCES = {
     niveau: "officiel",
     vu: "2026-10-14",
   },
+  "irena-etsap-hydropower": {
+    t: "Hydropower Technology Brief (IEA-ETSAP and IRENA Technology Brief E06)",
+    ed: "IRENA / IEA-ETSAP",
+    date: "février 2015",
+    url: "https://www.irena.org/-/media/Files/IRENA/Agency/Publication/2015/IRENA-ETSAP_Tech_Brief_E06_Hydropower.pdf",
+    niveau: "officiel",
+    vu: "2026-10-14",
+  },
+  "sfen-turbines-arabelle": {
+    t: "Les turbines Arabelle : des monstres de puissance parés de dentelle",
+    ed: "Sfen (Revue générale nucléaire)",
+    date: "25 octobre 2024",
+    url: "https://www.sfen.org/rgn/les-turbines-arabelle-des-monstres-de-puissance-pares-de-dentelle/",
+    niveau: "secondaire",
+    vu: "2026-10-14",
+  },
+  "ademe-isoler-logement-infographie": {
+    t: "Pourquoi et comment isoler son logement ? (transcription de l’infographie)",
+    ed: "ADEME",
+    date: "décembre 2022",
+    url: "https://librairie.ademe.fr/index.php?controller=attachment&id_attachment=6864",
+    niveau: "officiel",
+    vu: "2026-10-14",
+  },
+  "ademe-choisir-pac-2025": {
+    t: "Choisir sa pompe à chaleur (Clés pour agir)",
+    ed: "ADEME",
+    date: "décembre 2025",
+    url: "https://librairie.ademe.fr/index.php?controller=attachment&id_attachment=8284",
+    niveau: "officiel",
+    vu: "2026-10-14",
+  },
+  "ademe-renover-eclairage-tertiaire": {
+    t: "Rénover l’éclairage des bâtiments tertiaires (brochure réf. 011133, copie hébergée par la CAPEB)",
+    ed: "ADEME, Syndicat de l’éclairage",
+    date: "juillet 2020",
+    url: "https://www.capeb.fr/www/capeb/media//aube/document/Guide%20ECLAIRAGE%20TERTIAIRE.pdf",
+    niveau: "officiel",
+    vu: "2026-10-14",
+  },
+  "education-calendrier-scolaire": {
+    t: "Calendrier scolaire (jeu de données fr-en-calendrier-scolaire)",
+    ed: "Ministère de l’Éducation nationale",
+    url: "https://data.education.gouv.fr/explore/dataset/fr-en-calendrier-scolaire/",
+    niveau: "officiel",
+    vu: "2026-10-14",
+  },
 };
 
 /** Une source, prête à afficher : « Éditeur, Titre (date) ». */

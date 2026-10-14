@@ -54,12 +54,31 @@
   "id": "ja7-005",
   "fichier": "jeu/recit/fiches-savoir.js",
   "repere": "fiche s7r2 › say",
-  "texte": "beaucoup de clients paient une puissance qu’ils n’utilisent jamais",
-  "affirmation": "Beaucoup de clients ont une puissance souscrite surdimensionnée.",
+  "texte": "une puissance trop haute se paie toute l’année, même si on ne l’utilise jamais",
+  "affirmation": "La part fixe liée à la puissance souscrite se paie quelle que soit l'utilisation.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Aucune statistique publique lue sur la part de sites surdimensionnés. À lire si on veut la garder : une étude CRE ou Enedis sur l'adéquation des puissances souscrites ; sinon, la réplique reste un clin d'œil du conseiller."
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   },
+   {
+    "cle": "cre-trve",
+    "passage": "BASE 3kVA\t144,52\t19,40 […] BASE 6kVA\t188,24\t19,40",
+    "relu": true,
+    "page": "tableau « Option et puissance souscrite / Part fixe en €/an »"
+   },
+   {
+    "cle": "mne-elements-facture",
+    "passage": "Quelle que soit la quantité d'énergie consommée le montant de l'abonnement est le même.",
+    "relu": true
+   }
+  ],
+  "note": "Aucune statistique publique ne chiffre les sites surdimensionnés (recherche CRE, Enedis, énergie-info) : la phrase n'affirme plus que ce qui est sourcé. La part fixe monte avec les kVA (144,52 € à 3 kVA, 188,24 € à 6 kVA) et ne dépend pas de la consommation.",
+  "avant": "beaucoup de clients paient une puissance qu’ils n’utilisent jamais"
  },
  {
   "id": "ja7-006",
@@ -189,12 +208,31 @@
   "id": "ja7-016",
   "fichier": "jeu/recit/arenes/arene-7.js",
   "repere": "Cheffe d’équipe Anna › question 1 › explication",
-  "texte": "Beaucoup de sites paient une puissance qu'ils n'utilisent jamais.",
-  "affirmation": "Beaucoup de sites ont une puissance souscrite surdimensionnée.",
+  "texte": "Une puissance trop haute se paie toute l'année, qu'on l'utilise ou non.",
+  "affirmation": "La part fixe liée à la puissance souscrite se paie quelle que soit l'utilisation.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Même affirmation que la fiche s7r2 : aucune statistique publique lue."
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "enedis-turpe7-brochure",
+    "passage": "Les utilisateurs doivent choisir une option tarifaire ainsi qu'une puissance souscrite",
+    "relu": true,
+    "page": "p. 6-7 (composante annuelle de soutirage)"
+   },
+   {
+    "cle": "cre-trve",
+    "passage": "BASE 3kVA\t144,52\t19,40 […] BASE 6kVA\t188,24\t19,40",
+    "relu": true,
+    "page": "tableau « Option et puissance souscrite / Part fixe en €/an »"
+   },
+   {
+    "cle": "mne-elements-facture",
+    "passage": "Quelle que soit la quantité d'énergie consommée le montant de l'abonnement est le même.",
+    "relu": true
+   }
+  ],
+  "note": "Même reformulation que la fiche s7r2 : pas de statistique lisible sur le surdimensionnement.",
+  "avant": "Beaucoup de sites paient une puissance qu'ils n'utilisent jamais."
  },
  {
   "id": "ja7-017",
@@ -474,20 +512,35 @@
   "texte": "Le même éclairage pour moitié moins d’électricité.",
   "affirmation": "Un relamping LED divise par deux la consommation d'éclairage.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Ordre de grandeur courant, non vérifié ici. À lire : une fiche ADEME sur l'éclairage LED (agirpourlatransition.ademe.fr est bloqué ; essayer librairie.ademe.fr)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-renover-eclairage-tertiaire",
+    "passage": "La réduction des consommations électriques dues à l’éclairage dépasse fréquemment 50 %.",
+    "relu": true,
+    "page": "dernière page"
+   }
+  ],
+  "note": "Guide ADEME et Syndicat de l'éclairage (2020), lu dans la copie PDF hébergée par la CAPEB ; la page de la librairie ADEME redirige vers une liste."
  },
  {
   "id": "ja7-035",
   "fichier": "jeu/simulation/modele-energie.js",
   "repere": "EN_ACT › combles › why",
-  "texte": "La chaleur s’échappe d’abord par le toit.",
-  "affirmation": "Le toit est le premier poste de déperditions.",
+  "texte": "Dans un bâtiment ancien non isolé, la chaleur s’échappe d’abord par le toit.",
+  "affirmation": "Dans un bâtiment ancien non isolé, le toit est le premier poste de déperditions.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Non vérifié ici. À lire : le guide ADEME « Isoler sa maison » (librairie.ademe.fr), qui donne la répartition des déperditions (toiture 25 à 30 % selon l'ADEME)."
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "ademe-isoler-logement-infographie",
+    "passage": "Prenons l’exemple d’une maison non isolée d’avant 1974. La chaleur s’échappe : […] De 25 à 30 % par le toit : il doit être isolé en priorité car c’est l’action la plus rentable !",
+    "relu": true,
+    "page": "La pose d’isolant : où et comment ?"
+   }
+  ],
+  "note": "L'ADEME ne donne ces 25 à 30 % que pour un bâtiment non isolé d'avant 1974. Son guide de 2025 (« Comment isoler sa maison ? ») attribue au toit 9 % des pertes sur le parc actuel, d'où la précision ajoutée.",
+  "avant": "La chaleur s’échappe d’abord par le toit."
  },
  {
   "id": "ja7-036",
@@ -496,9 +549,16 @@
   "texte": "Près de trois fois moins d’énergie pour la même chaleur.",
   "affirmation": "Une pompe à chaleur consomme environ trois fois moins d'énergie qu'une chaudière pour la même chaleur.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Correspond à un coefficient de performance d'environ 3 ; aucune source lue ici. À lire : une fiche ADEME sur les pompes à chaleur (librairie.ademe.fr)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ademe-choisir-pac-2025",
+    "passage": "UNE POMPE À CHALEUR AÉROTHERMIQUE PRODUIT, EN MOYENNE, 3 FOIS PLUS DE CHALEUR qu’elle ne consomme d’électricité",
+    "relu": true,
+    "page": "encadré"
+   }
+  ],
+  "note": "L'ADEME donne un rapport moyen de 3 entre chaleur produite et électricité consommée ; une chaudière restitue environ autant de chaleur qu'elle consomme d'énergie : « près de trois fois moins » tient."
  },
  {
   "id": "ja7-037",
@@ -551,12 +611,20 @@
   "id": "ja7-040",
   "fichier": "jeu/epreuves/ems-enjeu.js",
   "repere": "enjeuStep › école › message de réussite (suite)",
-  "texte": "Quatre périodes de vacances par an, et ça se répète.",
-  "affirmation": "L'école a quatre périodes de vacances par an où le réglage se répète.",
+  "texte": "Quatre périodes de vacances hors été, et ça se répète.",
+  "affirmation": "Hors été, l'école a quatre périodes de vacances.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Le calendrier scolaire compte cinq périodes de vacances (Toussaint, Noël, hiver, printemps, été), dont quatre en saison de chauffe : la phrase est juste si on l'entend ainsi. La page du ministère (education.gouv.fr/calendrier-scolaire-100148) n'affiche pas ses dates en texte lisible : rien n'a pu être cité."
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "education-calendrier-scolaire",
+    "passage": "Vacances de la Toussaint […] Vacances de Noël […] Vacances d'Hiver […] Vacances de Printemps […] Vacances d'Été",
+    "relu": true,
+    "page": "API, année 2026-2027, Paris (zone C)"
+   }
+  ],
+  "note": "Le calendrier compte cinq périodes de vacances, dont l'été : « par an » était faux, « hors été » est juste (Toussaint, Noël, hiver, printemps). Lu dans le jeu de données data.education.gouv.fr.",
+  "avant": "Quatre périodes de vacances par an, et ça se répète."
  },
  {
   "id": "ja7-041",
