@@ -1464,3 +1464,15 @@ Chaque partie du site a maintenant son relevé dans `outils/sources/` : les 8 é
   - l'arène 7 annonce un objectif en € alors que l'épreuve le fixe en kWh.
 
 Vérification : `node outils/sources.mjs` passe sans échec, et `node outils/verifier.mjs` donne 452 réussites et 0 échec.
+
+### Lot 9 (14 octobre 2026) : suites du lot 8
+
+- **DJU de l'étape 8 du jeu** : la fiche s8r2 reprend les chiffres de l'atelier et de l'année type de la signature (2 070 contre 2 435 DJU, toujours 15 % plus doux). Le cours et le glossaire gardent leur exemple (1 900 / 2 244).
+- **Arène 7** : le champion n'annonce plus « 12 000 € de budget et 4 000 €/an d'objectif », chiffres que l'épreuve n'utilisait pas. Il annonce un fonds de travaux et un objectif en kWh, comme l'épreuve.
+- **Voyage nucléaire** : edf.fr bloque les robots (page « maintenance » avec un identifiant d'incident). 21 des 23 faits sans source sont donc sourcés autrement : ASN (rapport 2011), IRSN, CEA, rapport de sûreté de Flamanville 3, Ifremer, RTE, Sénat, ASNR. Trois sources sont secondaires : WNA, qui reprend les données de l'AIEA (PRIS), et deux articles de presse pour les dates de l'EPR.
+  - Corrections :
+    - visite partielle de 60 → 90 jours (Sénat, rapport n° 714) ;
+    - cuve « d'une vingtaine de centimètres » ;
+    - la banane ne « dose » pas davantage quand on en mange plus (ASNR) ;
+    - les 320 °C du primaire sont rétablis (ASN).
+  - Restent sans source : la masse du groupe turbo-alternateur (« des centaines de tonnes ») et le rendement d'environ 90 % d'une turbine hydraulique (mauvaise réponse d'un quiz).

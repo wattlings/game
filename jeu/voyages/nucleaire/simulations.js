@@ -74,7 +74,7 @@ function nucSimConduite(fin){
 }
 
 /* ================= 2. DU NEUTRON À LA PRISE ================= */
-const NUC_CHAINE=["Un neutron casse un noyau d'uranium : de la chaleur","L'eau du circuit primaire s'échauffe à plus de 300 °C, sous 155 bars","Dans le générateur de vapeur, elle fait bouillir l'eau du circuit secondaire","La vapeur fait tourner la turbine","L'alternateur produit le courant, à 1 500 tours par minute","Le transformateur l'élève à 400 000 volts","L'eau de mer refroidit la vapeur, qui redevient de l'eau"];
+const NUC_CHAINE=["Un neutron casse un noyau d'uranium : de la chaleur","L'eau du circuit primaire s'échauffe à 320 °C, sous 155 bars","Dans le générateur de vapeur, elle fait bouillir l'eau du circuit secondaire","La vapeur fait tourner la turbine","L'alternateur produit le courant, à 1 500 tours par minute","Le transformateur l'élève à 400 000 volts","L'eau de mer refroidit la vapeur, qui redevient de l'eau"];
 function nucSimChaine(fin){
   trk('voyage_sim',{site:'nucleaire',sim:'chaine'});
   voyEtapes('Du neutron à la prise',[

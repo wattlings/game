@@ -157,19 +157,24 @@
   "id": "vn-011",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info bouilloire › x",
-  "texte": "Le cœur chauffe l'eau du circuit primaire : plus de 300 °C, sous 155 bars pour qu'elle ne bouille pas.",
-  "affirmation": "L'eau primaire, à plus de 300 °C, est maintenue liquide à 155 bars.",
+  "texte": "Le cœur chauffe l'eau du circuit primaire : 320 °C, sous 155 bars pour qu'elle ne bouille pas.",
+  "affirmation": "L'eau primaire sort du cœur vers 320 °C, maintenue liquide à 155 bars.",
   "type": "fait",
-  "verdict": "corrige",
+  "verdict": "confirme",
   "sources": [
+   {
+    "cle": "asn-rapport-2011-centrales",
+    "passage": "remonte le long des crayons combustibles et ressort par la partie supérieure à une température de l'ordre de 320 °C.",
+    "relu": true,
+    "page": "§ 1.1.2"
+   },
    {
     "cle": "asnr-composants-reacteur",
     "passage": "la maîtrise de la pression dans le circuit primaire à 155 bars, afin de maintenir sous forme liquide l'eau chauffée à plus de 300°C.",
     "relu": true
    }
   ],
-  "note": "La source lue donne « plus de 300 °C » ; la valeur de 320 °C (EDF) n'a pas pu être lue.",
-  "avant": "Le cœur chauffe l'eau du circuit primaire : 320 °C, sous 155 bars pour qu'elle ne bouille pas."
+  "note": "Un temps corrigé en « plus de 300 °C » faute de source ; l'ASN (rapport 2011) donne bien 320 °C, le texte d'origine est rétabli."
  },
  {
   "id": "vn-012",
@@ -200,9 +205,21 @@
   "texte": "Rendement : un tiers. Pour 1 300 MW d'électricité, le réacteur produit 3 800 MW de chaleur.",
   "affirmation": "Rendement d'un tiers ; un réacteur de 1 300 MWe produit environ 3 800 MWth.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Le site edf.fr (pages du groupe et des centrales, étude de modulation, ACV) affichait « en cours de maintenance » toute la journée du 13/10/2026 : non lu. Aucune source officielle lisible (ASNR, CEA, AIEA PRIS redirigé) ne donne la puissance thermique des 1 300 MWe (3 817 MWth). À lire : fiche EDF d'une centrale 1 300 MWe ou AIEA PRIS."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "wna-penly-1",
+    "passage": "Capacity Net 1330 MWe Capacity Gross 1382 MWe Thermal Capacity 3817 MWt",
+    "relu": true
+   },
+   {
+    "cle": "irsn-elements-surete-rep-ch5",
+    "passage": "(les valeurs indiquées correspondent au cas des réacteurs de 1 450 MWe du palier N4) : Puissance thermique extraite du cœur (palier N4) 4 250 MW",
+    "relu": true,
+    "page": "§ 5.3"
+   }
+  ],
+  "note": "Penly 1 : 1 330 MWe nets pour 3 817 MWth (données AIEA PRIS, via la WNA, source secondaire), soit 35 % ; palier N4 : 1 450 MWe pour 4 250 MWth (IRSN), soit 34 %."
  },
  {
   "id": "vn-014",
@@ -325,9 +342,20 @@
   "texte": "Le combustible : des pastilles d'oxyde d'uranium de 7 grammes, grosses comme une gomme de crayon. Chacune libère autant d'énergie qu'une tonne de charbon.",
   "affirmation": "Une pastille de 7 g équivaut à une tonne de charbon.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Le site edf.fr (pages du groupe et des centrales, étude de modulation, ACV) affichait « en cours de maintenance » toute la journée du 13/10/2026 : non lu. Seul le diamètre (8,2 mm, oxyde d'uranium) est confirmé par l'ASNR. À lire : EDF, « L'uranium, combustible nucléaire »."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cea-fabrication-combustible",
+    "passage": "Chaque pastille, qui ne mesure qu'un centimètre de long et pèse seulement 7g, peut libérer autant d'énergie qu'une tonne de charbon !",
+    "relu": true
+   },
+   {
+    "cle": "asnr-composants-reacteur",
+    "passage": "A l'intérieur des crayons sont empilées des pastilles de 8,2 mm de diamètre de dioxyde d'uranium (UO2)",
+    "relu": true
+   }
+  ],
+  "note": null
  },
  {
   "id": "vn-021",
@@ -363,9 +391,27 @@
   "texte": "il y en a 193 dans le cœur d'un réacteur de 1 300 MW. L'uranium y est enrichi à 3 à 5 %.",
   "affirmation": "193 assemblages dans un cœur 1 300 MW ; enrichissement 3 à 5 %.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Le site edf.fr (pages du groupe et des centrales, étude de modulation, ACV) affichait « en cours de maintenance » toute la journée du 13/10/2026 : non lu. Ni l'ASNR ni le CEA (pages lues) ne donnent le nombre d'assemblages ni le taux d'enrichissement."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irsn-accidents-fusion-ch2",
+    "passage": "Tableau 2.1. Caractéristiques des cœurs des différents paliers. Palier 900 MWe 1 300 MWe 1 450 MWe EPR Nombre d'assemblages combustibles 157 193 205 241",
+    "relu": true,
+    "page": "tableau 2.1"
+   },
+   {
+    "cle": "cea-fabrication-combustible",
+    "passage": "il faut disposer d'un combustible dont la proportion d'uranium 235 se situe entre 3% et 5 %",
+    "relu": true
+   },
+   {
+    "cle": "irsn-accidents-fusion-ch2",
+    "passage": "L'enrichissement en 235U varie de 3 % à 4,5 % suivant le mode de gestion du combustible",
+    "relu": true,
+    "page": "§ 2.2"
+   }
+  ],
+  "note": "Le CEA dit 3 à 5 % ; l'IRSN précise 3 à 4,5 % pour les REP français."
  },
  {
   "id": "vn-023",
@@ -439,26 +485,56 @@
   "id": "vn-026",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info inertie › x",
-  "texte": "L'alternateur tourne à 1 500 tours par minute, ni plus ni moins : c'est ce qui donne les 50 hertz du réseau. L'ensemble turbine et alternateur pèse des centaines de tonnes.",
-  "affirmation": "L'alternateur d'une tranche nucléaire tourne à 1 500 tr/min (50 Hz).",
+  "texte": "L'alternateur tourne à 1 500 tours par minute, ni plus ni moins : c'est ce qui donne les 50 hertz du réseau.",
+  "affirmation": "Le groupe turbo-alternateur tourne à 1 500 tr/min.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Le site edf.fr (pages du groupe et des centrales, étude de modulation, ACV) affichait « en cours de maintenance » toute la journée du 13/10/2026 : non lu. Aucune page officielle lue ne donne la vitesse ni la masse du groupe turbo-alternateur."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "edf-fa3-rapport-surete-ch10",
+    "passage": "La vapeur provenant des 4 générateurs de vapeur actionne une turbine multicellulaire à action accouplée à un alternateur triphasé, tournant à 1500 tr/min.",
+    "relu": true,
+    "page": "§ 1"
+   }
+  ],
+  "note": "Valeur donnée par le rapport de sûreté de l'EPR de Flamanville 3 ; les tranches 1 300 MWe ont la même vitesse (turbines à 4 pôles pour 50 Hz), sans passage lu pour elles."
  },
  {
   "id": "vn-027",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info inertie › x",
-  "texte": "Cette masse lancée ne ralentit pas d'un coup : quand un incident survient sur le réseau, elle amortit le choc pendant les premières secondes. On appelle cela l'inertie.",
-  "affirmation": "Les machines tournantes apportent de l'inertie au réseau.",
+  "texte": "L'ensemble turbine et alternateur pèse des centaines de tonnes.",
+  "affirmation": "Masse du groupe turbo-alternateur.",
   "type": "fait",
   "verdict": "sans-source",
-  "sources": [],
-  "note": "Le Bilan électrique 2025 de RTE évoque l'inertie mais pas dans un passage explicatif lisible ; à sourcer avec RTE (stabilité de fréquence)."
+  "sources": [
+   {
+    "cle": "rte-faq-blackout-iberique",
+    "passage": "Ces alternateurs (qui pèsent plusieurs tonnes) étant en rotation, leur mouvement procure une inertie au système électrique (propriété physique qui fait que le mouvement et la masse de ces alternateurs stabilisent naturellement les variations brusques de la fréquence).",
+    "relu": true
+   }
+  ],
+  "note": "RTE dit seulement que les alternateurs « pèsent plusieurs tonnes » ; la masse du groupe (centaines de tonnes) est sur edf.fr, inaccessible aux robots."
  },
  {
   "id": "vn-028",
+  "fichier": "jeu/voyages/nucleaire/textes.js",
+  "repere": "info inertie › x",
+  "texte": "Cette masse lancée ne ralentit pas d'un coup : quand un incident survient sur le réseau, elle amortit le choc pendant les premières secondes. On appelle cela l'inertie.",
+  "affirmation": "Les machines tournantes apportent de l'inertie au réseau.",
+  "type": "fait",
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-faq-blackout-iberique",
+    "passage": "Ces alternateurs (qui pèsent plusieurs tonnes) étant en rotation, leur mouvement procure une inertie au système électrique (propriété physique qui fait que le mouvement et la masse de ces alternateurs stabilisent naturellement les variations brusques de la fréquence).",
+    "relu": true
+   }
+  ],
+  "note": null
+ },
+ {
+  "id": "vn-029",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info barrieres › x",
   "texte": "Entre le combustible et l'extérieur, trois enveloppes successives : la gaine métallique des crayons, le circuit primaire en acier épais, et l'enceinte de béton du bâtiment réacteur.",
@@ -485,7 +561,7 @@
   "note": null
  },
  {
-  "id": "vn-029",
+  "id": "vn-030",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info barrieres › x",
   "texte": "Une autorité indépendante, l'ASNR, contrôle l'exploitant et peut arrêter un réacteur.",
@@ -507,7 +583,7 @@
   "note": "L'arrêt d'un réacteur relève des décisions et sanctions de l'ASNR."
  },
  {
-  "id": "vn-030",
+  "id": "vn-031",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info barrieres › x",
   "texte": "Tous les dix ans, chaque réacteur subit une visite complète avant d'être autorisé à continuer.",
@@ -531,7 +607,7 @@
   "note": null
  },
  {
-  "id": "vn-031",
+  "id": "vn-032",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info refroidissement › x",
   "texte": "chaque réacteur pompe 40 à 60 m³ d'eau de mer par seconde, s'en sert pour refroidir sa vapeur, et la rend presque entièrement",
@@ -548,18 +624,25 @@
   "note": null
  },
  {
-  "id": "vn-032",
+  "id": "vn-033",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info refroidissement › x",
   "texte": "une dizaine de degrés plus chaude",
   "affirmation": "L'eau rejetée est environ 10 °C plus chaude.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "L'ASNR dit seulement que l'échauffement est proportionnel à la puissance et donne des limites pour des centrales de rivière ; le chiffre pour le bord de mer est à lire chez EDF (pages Gravelines, Penly, Paluel, en maintenance)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ifremer-penly-2020",
+    "passage": "L'écart de température journalier maximum entre la sortie des condenseurs et l'eau du canal d'amenée est présenté sur la Figure A-9. Les variations de cet écart thermique sont en moyenne de 11.8°C en 2020",
+    "relu": true,
+    "page": "§ A, conditions de fonctionnement du CNPE"
+   }
+  ],
+  "note": "Penly (bord de mer, 1 300 MWe) : écart moyen de 11,8 °C en 2020."
  },
  {
-  "id": "vn-033",
+  "id": "vn-034",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info refroidissement › x",
   "texte": "Les tours des centrales de rivière servent à prélever beaucoup moins d'eau ; ce qui en sort est de la vapeur d'eau, pas de la fumée.",
@@ -581,7 +664,7 @@
   "note": null
  },
  {
-  "id": "vn-034",
+  "id": "vn-035",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info arret › x",
   "texte": "Tous les 12 à 18 mois, on arrête le réacteur pour remplacer un tiers ou un quart du combustible et tout inspecter",
@@ -603,14 +686,29 @@
   "note": null
  },
  {
-  "id": "vn-035",
+  "id": "vn-036",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info arret › x",
-  "texte": "environ 35 jours pour un simple rechargement, 60 pour une visite partielle, plusieurs mois pour la visite des dix ans.",
+  "texte": "environ 35 jours pour un simple rechargement, 90 pour une visite partielle, plusieurs mois pour la visite des dix ans.",
   "affirmation": "Durées types des arrêts.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "sources": [
+   {
+    "cle": "senat-rapport-714-electricite",
+    "passage": "Ces arrêts comptent 3 800 à 4 500 activités et sont planifiés sur une durée moyenne de 35 jours.",
+    "relu": true
+   },
+   {
+    "cle": "senat-rapport-714-electricite",
+    "passage": "Ces arrêts comptent 10 000 à 11 500 activités et sont planifiés sur une durée moyenne de 90 jours.",
+    "relu": true
+   },
+   {
+    "cle": "senat-rapport-714-electricite",
+    "passage": "Ces arrêts comptent 15 000 à 20 000 activités et sont planifiés sur une durée moyenne supérieure ou égale à 180 jours.",
+    "relu": true
+   },
    {
     "cle": "asn-cahier-1300-reexamen",
     "passage": "Visite décennale : arrêt long du réacteur (environ cinq mois)",
@@ -618,10 +716,11 @@
     "page": "glossaire"
    }
   ],
-  "note": "Le site edf.fr (pages du groupe et des centrales, étude de modulation, ACV) affichait « en cours de maintenance » toute la journée du 13/10/2026 : non lu. Seule la visite décennale (« environ cinq mois », ASN) est confirmée ; 35 et 60 jours restent à lire chez EDF."
+  "note": "Le Sénat (d'après EDF) donne 90 jours en moyenne pour une visite partielle, pas 60.",
+  "avant": "environ 35 jours pour un simple rechargement, 60 pour une visite partielle, plusieurs mois pour la visite des dix ans."
  },
  {
-  "id": "vn-036",
+  "id": "vn-037",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info arret › x",
   "texte": "Ces arrêts se programment du printemps à l'automne, quand le pays consomme le moins.",
@@ -640,7 +739,7 @@
   "avant": "Ces arrêts se programment au printemps et en été, quand le pays consomme le moins."
  },
  {
-  "id": "vn-037",
+  "id": "vn-038",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info dechets › x",
   "texte": "La France produit environ 2 kg de déchets radioactifs par habitant et par an, toutes origines confondues.",
@@ -658,7 +757,7 @@
   "note": null
  },
  {
-  "id": "vn-038",
+  "id": "vn-039",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info dechets › x",
   "texte": "Les plus dangereux, dits de haute activité, pèsent 0,2 % du volume et 97 % de la radioactivité : 4 720 m³ en tout, moins de deux piscines olympiques.",
@@ -682,7 +781,7 @@
   "note": "Graphique Andra : HA = 0,2 % du volume, 97,2 % de la radioactivité ; 4 720 m³ fin 2024 (une piscine olympique ≈ 2 500 m³)."
  },
  {
-  "id": "vn-039",
+  "id": "vn-040",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info dechets › x",
   "texte": "Ils sont vitrifiés et entreposés ; leur stockage à 500 mètres sous terre, le projet Cigéo, attend son autorisation.",
@@ -710,7 +809,7 @@
   "note": null
  },
  {
-  "id": "vn-040",
+  "id": "vn-041",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info doses › x",
   "texte": "Un habitant de la France reçoit en moyenne 7,1 millisieverts par an : plus de la moitié vient du radon, un gaz naturel du sol, près d'un quart des examens médicaux.",
@@ -727,7 +826,7 @@
   "note": null
  },
  {
-  "id": "vn-041",
+  "id": "vn-042",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info doses › x",
   "texte": "Habiter à côté d'une centrale y ajoute moins d'un millième de millisievert.",
@@ -746,7 +845,7 @@
   "avant": "Habiter à côté d'une centrale y ajoute environ un millième de millisievert."
  },
  {
-  "id": "vn-042",
+  "id": "vn-043",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info doses › x",
   "texte": "La limite légale pour le public, hors nature et médecine, est de 1 millisievert par an.",
@@ -764,7 +863,7 @@
   "note": null
  },
  {
-  "id": "vn-043",
+  "id": "vn-044",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info carbone › x",
   "texte": "Sur tout son cycle de vie, le nucléaire émet environ 7 g de CO₂e par kWh.",
@@ -783,7 +882,7 @@
   "avant": "Sur tout son cycle de vie, le nucléaire émet 4 à 6 g de CO₂e par kWh."
  },
  {
-  "id": "vn-044",
+  "id": "vn-045",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info carbone › x",
   "texte": "en 2025, l'électricité produite en France a émis 19,6 g de CO₂ par kWh, contre 175 en moyenne dans l'Union européenne.",
@@ -802,7 +901,7 @@
   "avant": "en 2025, l'électricité produite en France a émis 19,6 g de CO₂ par kWh, contre 344 en Allemagne."
  },
  {
-  "id": "vn-045",
+  "id": "vn-046",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info carbone › x",
   "texte": "Pour un bâtiment tertiaire, la réglementation retient 64 g par kWh consommé, tous usages confondus. Un kWh de gaz en pèse 227",
@@ -827,7 +926,7 @@
   "avant": "Pour un bilan carbone de bâtiment, l'ADEME retient environ 50 g par kWh consommé, tout compris. Un kWh de gaz en pèse plus de 200"
  },
  {
-  "id": "vn-046",
+  "id": "vn-047",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info carbone › x",
   "texte": "passer d'une chaudière à une pompe à chaleur change tout.",
@@ -838,7 +937,7 @@
   "note": null
  },
  {
-  "id": "vn-047",
+  "id": "vn-048",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info creuses › x",
   "texte": "Dans les années 1960, on a donc inventé les heures creuses : de l'électricité moins chère la nuit, pour y déplacer les chauffe-eau.",
@@ -856,7 +955,7 @@
   "note": null
  },
  {
-  "id": "vn-048",
+  "id": "vn-049",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info creuses › x",
   "texte": "Depuis novembre 2025, elles migrent : jusqu'à trois heures creuses passent l'après-midi, entre 11 h et 17 h, là où le solaire abonde.",
@@ -880,7 +979,7 @@
   "note": null
  },
  {
-  "id": "vn-049",
+  "id": "vn-050",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info creuses › x",
   "texte": "Celles mal placées, entre 7 h et 11 h ou entre 17 h et 23 h, sont peu à peu déplacées.",
@@ -899,7 +998,7 @@
   "avant": "Plus aucune entre 7 h et 11 h, ni entre 17 h et 23 h."
  },
  {
-  "id": "vn-050",
+  "id": "vn-051",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info epr › x",
   "texte": "Le 57e réacteur français est l'EPR de Flamanville : 1 600 MW, raccordé au réseau en décembre 2024",
@@ -921,24 +1020,34 @@
   "note": null
  },
  {
-  "id": "vn-051",
+  "id": "vn-052",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info epr › x",
   "texte": "à pleine puissance pour la première fois le 14 décembre 2025. Fin septembre 2026, il s'est arrêté près d'un an pour sa première grande visite.",
   "affirmation": "Dates de pleine puissance et de la première visite complète.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "sources": [
+   {
+    "cle": "24matins-epr-pleine-puissance",
+    "passage": "publié le 16 décembre 2025 […] Ce dimanche, l'unité EPR 3 a, pour la première fois, atteint « 100 % de puissance nucléaire », selon l'annonce officielle de son exploitant, le groupe EDF.",
+    "relu": true
+   },
+   {
+    "cle": "ici-epr-vc1",
+    "passage": "Depuis la nuit du 25 au 26 septembre 2026, les opérations de maintenance de la première visite complète de l'EPR de Flamanville (VC1) ont été lancées. […] l'exploitant est engagé dans un \"marathon\" de 350 jours.",
+    "relu": true
+   },
    {
     "cle": "asnr-epr-flamanville",
     "passage": "En 2025, le contrôle de l'ASNR s'est focalisé sur la poursuite des essais de démarrage, l'exploitation du réacteur jusqu'à sa pleine puissance",
     "relu": true
    }
   ],
-  "note": "Le site edf.fr (pages du groupe et des centrales, étude de modulation, ACV) affichait « en cours de maintenance » toute la journée du 13/10/2026 : non lu. L'ASNR confirme la pleine puissance en 2025 et la première visite complète « prévue en 2026 », sans les dates exactes ni la durée. À lire : EDF, « Début de la visite complète n°1 (VC1) »."
+  "note": "Sources de presse (secondaires) : article du mardi 16/12/2025 (« ce dimanche » = 14/12) ; arrêt dans la nuit du 25 au 26/09/2026 pour 350 jours. L'ASNR confirme la pleine puissance en 2025."
  },
  {
-  "id": "vn-052",
+  "id": "vn-053",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info epr › x",
   "texte": "Six réacteurs d'un modèle voisin, les EPR2, sont en projet à Penly, Gravelines et au Bugey.",
@@ -955,7 +1064,7 @@
   "note": null
  },
  {
-  "id": "vn-053",
+  "id": "vn-054",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "info epr › retiens",
   "texte": "Un nouveau réacteur se compte en décennies, de la décision à la pleine puissance.",
@@ -966,7 +1075,7 @@
   "note": null
  },
  {
-  "id": "vn-054",
+  "id": "vn-055",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › maquette",
   "texte": "Un neutron entre, un seul ressort travailler. Les deux autres ont été absorbés",
@@ -977,18 +1086,24 @@
   "note": null
  },
  {
-  "id": "vn-055",
+  "id": "vn-056",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › pastille",
   "texte": "L'étiquette : « Pastille factice. 7 grammes. La vraie vaut une tonne de charbon. »",
   "affirmation": "Pastille de 7 g = 1 t de charbon.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Voir l'info « pastille » (EDF illisible ce jour)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "cea-fabrication-combustible",
+    "passage": "Chaque pastille, qui ne mesure qu'un centimètre de long et pèse seulement 7g, peut libérer autant d'énergie qu'une tonne de charbon !",
+    "relu": true
+   }
+  ],
+  "note": null
  },
  {
-  "id": "vn-056",
+  "id": "vn-057",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › fut",
   "texte": "Déchets de haute activité de toute la France depuis soixante ans : moins de deux piscines olympiques.",
@@ -999,7 +1114,7 @@
   "note": "4 720 m³ (Andra) / ~2 500 m³."
  },
  {
-  "id": "vn-057",
+  "id": "vn-058",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › fut",
   "texte": "D'où le projet de les mettre à 500 mètres sous terre",
@@ -1017,7 +1132,7 @@
   "note": null
  },
  {
-  "id": "vn-058",
+  "id": "vn-059",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › carbone",
   "texte": "Moins de 20 grammes par kWh l'an dernier. En moyenne dans l'Union européenne, près de neuf fois plus.",
@@ -1036,7 +1151,7 @@
   "avant": "Moins de 20 grammes par kWh l'an dernier. Chez nos voisins allemands, dix-sept fois plus."
  },
  {
-  "id": "vn-059",
+  "id": "vn-060",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › carbone (suite)",
   "texte": "chaque kWh pèse 227 grammes. À l'électricité, avec une pompe à chaleur, trois à quatre fois moins de kWh, et chacun pèse plus de trois fois moins.",
@@ -1061,7 +1176,7 @@
   "avant": "chaque kWh pèse plus de 200 grammes. À l'électricité, avec une pompe à chaleur, trois à quatre fois moins de kWh, et chacun pèse quatre fois moins."
  },
  {
-  "id": "vn-060",
+  "id": "vn-061",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › ballon",
   "texte": "Un vieux chauffe-eau de 1968, posé sur un socle comme une statue.",
@@ -1072,7 +1187,7 @@
   "note": null
  },
  {
-  "id": "vn-061",
+  "id": "vn-062",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › ballon",
   "texte": "Depuis novembre 2025, ses petits-enfants chauffent aussi l'après-midi.",
@@ -1096,7 +1211,7 @@
   "note": null
  },
  {
-  "id": "vn-062",
+  "id": "vn-063",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › affiche",
   "texte": "Une affiche à la halte : « Le 57e réacteur ».",
@@ -1118,7 +1233,7 @@
   "note": null
  },
  {
-  "id": "vn-063",
+  "id": "vn-064",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › sievert",
   "texte": "Si ça sonne à l'entrée, c'est que vous revenez de chez le radiologue.",
@@ -1129,7 +1244,7 @@
   "note": null
  },
  {
-  "id": "vn-064",
+  "id": "vn-065",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › sievert",
   "texte": "Vous recevez sept millisieverts par an, comme tout le monde. La moitié vient de votre cave. Vivre ici en ajoute moins d'un millième.",
@@ -1153,18 +1268,30 @@
   "avant": "Vous recevez sept millisieverts par an, comme tout le monde. La moitié vient de votre cave. Vivre ici en ajoute un millième."
  },
  {
-  "id": "vn-065",
+  "id": "vn-066",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › sievert (suite)",
-  "texte": "Une banane contient du potassium, donc un peu de radioactivité : un dixième de microsievert. Il faudrait en manger dix par an pour égaler ce que la centrale ajoute à un riverain.",
-  "affirmation": "Dose d'une banane ≈ 0,1 µSv.",
+  "texte": "Une banane contient du potassium, donc un peu de radioactivité : 130 becquerels par kilo, de quoi faire sonner certains portiques. Mais le corps régule son potassium : en manger plus n'augmente pas la dose.",
+  "affirmation": "Activité d'une banane ; le potassium 40 est régulé par l'organisme.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Ordre de grandeur courant (« dose équivalente banane ») sans source officielle lue ; cohérent avec < 1 µSv/an pour un riverain."
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "asnr-radioactivite-aliments",
+    "passage": "Les bananes (130 Bq/kg de potassium 40) sont par exemple suffisamment radioactives pour être détectées par les portiques de sécurité aux États-Unis.",
+    "relu": true
+   },
+   {
+    "cle": "asnr-radioactivite-aliments",
+    "passage": "Le potassium et le carbone sont régulés par l'organisme humain, le potassium 40 et le carbone 14 maintenus à des niveaux constants, et les doses ne dépendent donc pas de ce qui est ingéré.",
+    "relu": true
+   }
+  ],
+  "note": "L'ASNR explique que la dose due au potassium 40 ne dépend pas de ce qu'on mange : la « dose par banane » (0,1 µSv, à multiplier) n'a pas de sens.",
+  "avant": "Une banane contient du potassium, donc un peu de radioactivité : un dixième de microsievert. Il faudrait en manger dix par an pour égaler ce que la centrale ajoute à un riverain."
  },
  {
-  "id": "vn-066",
+  "id": "vn-067",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › rigueur",
   "texte": "Inspectrice Rigueur, ASNR. Non, je ne travaille pas pour l'exploitant.",
@@ -1186,14 +1313,26 @@
   "note": null
  },
  {
-  "id": "vn-067",
+  "id": "vn-068",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › rigueur",
-  "texte": "Derrière ce mur : un mètre de béton, puis une cuve d'acier de vingt centimètres, puis des gaines de métal autour de chaque pastille. Trois barrières.",
-  "affirmation": "Épaisseurs de l'enceinte et de la cuve.",
+  "texte": "Derrière ce mur : un mètre de béton, puis une cuve d'acier d'une vingtaine de centimètres, puis des gaines de métal autour de chaque pastille. Trois barrières.",
+  "affirmation": "Épaisseurs de l'enceinte et de la cuve ; trois barrières.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "sources": [
+   {
+    "cle": "irsn-accidents-fusion-ch2",
+    "passage": "Épaisseur courante de la partie cylindrique (m) 0,85 (CP0) 0,90 (CPY) 0,90 (paroi intérieure) 0,55 (paroi extérieure) 1,20 (paroi intérieure) 0,55 (paroi extérieure)",
+    "relu": true,
+    "page": "tableau 2.5"
+   },
+   {
+    "cle": "asn-rapport-2011-centrales",
+    "passage": "d'un diamètre de 4 mètres pour une épaisseur de 20 cm (pour les réacteurs de 900 MWe)",
+    "relu": true,
+    "page": "§ 3.4.3"
+   },
    {
     "cle": "asnr-composants-reacteur",
     "passage": "La gaine des crayons combustibles constitue la première des trois barrières de sûreté",
@@ -1210,10 +1349,11 @@
     "relu": true
    }
   ],
-  "note": "Les trois barrières sont confirmées (ASNR) ; les épaisseurs (≈ 1 m de béton, ≈ 20 cm d'acier) n'ont pas de source lue."
+  "note": "Enceinte 1 300 MWe : paroi intérieure de 0,90 m (P4) ou 1,20 m (P'4), plus 0,55 m à l'extérieur ; cuve de 20 cm pour les 900 MWe (ASN), sans chiffre lu pour les 1 300 : « vingt centimètres » devient « une vingtaine ».",
+  "avant": "Derrière ce mur : un mètre de béton, puis une cuve d'acier de vingt centimètres, puis des gaines de métal autour de chaque pastille. Trois barrières."
  },
  {
-  "id": "vn-068",
+  "id": "vn-069",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › rigueur (suite)",
   "texte": "Tous les dix ans, visite complète.",
@@ -1237,29 +1377,54 @@
   "note": null
  },
  {
-  "id": "vn-069",
+  "id": "vn-070",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › vapeur",
   "texte": "Deux tiers de la chaleur partent à la mer. Ce n'est pas du gâchis, c'est de la thermodynamique : toutes les centrales à vapeur font pareil",
   "affirmation": "Rendement thermodynamique d'environ un tiers.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Voir l'info « bouilloire » : rendement non sourcé ce jour."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irsn-elements-surete-rep-ch5",
+    "passage": "(les valeurs indiquées correspondent au cas des réacteurs de 1 450 MWe du palier N4) : Puissance thermique extraite du cœur (palier N4) 4 250 MW",
+    "relu": true,
+    "page": "§ 5.3"
+   },
+   {
+    "cle": "wna-penly-1",
+    "passage": "Capacity Net 1330 MWe Capacity Gross 1382 MWe Thermal Capacity 3817 MWt",
+    "relu": true
+   },
+   {
+    "cle": "asn-rapport-2011-centrales",
+    "passage": "Toute centrale électrique thermique produit, en faisant passer de la chaleur d'une source chaude vers une source froide, de l'énergie mécanique qu'elle transforme en électricité.",
+    "relu": true,
+    "page": "§ 1.1.1"
+   }
+  ],
+  "note": null
  },
  {
-  "id": "vn-070",
+  "id": "vn-071",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › baie",
   "texte": "« 1 500 tours par minute ». Il n'a pas bougé d'un tour depuis que tu regardes.",
   "affirmation": "Vitesse de l'alternateur.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "edf-fa3-rapport-surete-ch10",
+    "passage": "La vapeur provenant des 4 générateurs de vapeur actionne une turbine multicellulaire à action accouplée à un alternateur triphasé, tournant à 1500 tr/min.",
+    "relu": true,
+    "page": "§ 1"
+   }
+  ],
   "note": "Voir l'info « inertie »."
  },
  {
-  "id": "vn-071",
+  "id": "vn-072",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › baie",
   "texte": "Si ce chiffre change, toute l'Europe change avec.",
@@ -1270,7 +1435,7 @@
   "note": null
  },
  {
-  "id": "vn-072",
+  "id": "vn-073",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gigawatt",
   "texte": "Le site : 2,6 gigawatts. Le transformateur derrière moi : 400 000 volts.",
@@ -1278,10 +1443,10 @@
   "type": "calcul",
   "verdict": "sans-objet",
   "sources": [],
-  "note": "2 × 1 300 MW. 400 kV est la tension usuelle d'évacuation des grandes centrales (non sourcé)."
+  "note": "2 × 1 300 MW. Le 400 kV est confirmé ailleurs (ASN 2011, rapport de sûreté FA3)."
  },
  {
-  "id": "vn-073",
+  "id": "vn-074",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gigawatt",
   "texte": "C'est mille fois la centrale solaire de Saint-Photon.",
@@ -1292,7 +1457,7 @@
   "note": null
  },
  {
-  "id": "vn-074",
+  "id": "vn-075",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gigawatt (suite)",
   "texte": "Cinquante-sept réacteurs en France.",
@@ -1314,7 +1479,7 @@
   "note": null
  },
  {
-  "id": "vn-075",
+  "id": "vn-076",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › planning",
   "texte": "Règle numéro un : on ne recharge pas en janvier. En janvier, le pays a froid et le réseau a besoin de tout le monde.",
@@ -1332,36 +1497,53 @@
   "note": null
  },
  {
-  "id": "vn-076",
+  "id": "vn-077",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › planning (suite)",
-  "texte": "Trente-cinq jours pour un rechargement, soixante pour une visite partielle, des mois pour la décennale.",
+  "texte": "Trente-cinq jours pour un rechargement, quatre-vingt-dix pour une visite partielle, des mois pour la décennale.",
   "affirmation": "Durées des arrêts.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "sources": [
    {
-    "cle": "asn-cahier-1300-reexamen",
-    "passage": "Visite décennale : arrêt long du réacteur (environ cinq mois)",
-    "relu": true,
-    "page": "glossaire"
+    "cle": "senat-rapport-714-electricite",
+    "passage": "Ces arrêts comptent 3 800 à 4 500 activités et sont planifiés sur une durée moyenne de 35 jours.",
+    "relu": true
+   },
+   {
+    "cle": "senat-rapport-714-electricite",
+    "passage": "Ces arrêts comptent 10 000 à 11 500 activités et sont planifiés sur une durée moyenne de 90 jours.",
+    "relu": true
+   },
+   {
+    "cle": "senat-rapport-714-electricite",
+    "passage": "Ces arrêts comptent 15 000 à 20 000 activités et sont planifiés sur une durée moyenne supérieure ou égale à 180 jours.",
+    "relu": true
    }
   ],
-  "note": "Voir l'info « arret »."
+  "note": "Visite partielle : 90 jours en moyenne (Sénat).",
+  "avant": "Trente-cinq jours pour un rechargement, soixante pour une visite partielle, des mois pour la décennale."
  },
  {
-  "id": "vn-077",
+  "id": "vn-078",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gaston",
   "texte": "l'eau y est dix degrés plus chaude qu'ailleurs.",
   "affirmation": "Échauffement de l'eau rejetée.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Voir l'info « refroidissement »."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "ifremer-penly-2020",
+    "passage": "L'écart de température journalier maximum entre la sortie des condenseurs et l'eau du canal d'amenée est présenté sur la Figure A-9. Les variations de cet écart thermique sont en moyenne de 11.8°C en 2020",
+    "relu": true,
+    "page": "§ A, conditions de fonctionnement du CNPE"
+   }
+  ],
+  "note": null
  },
  {
-  "id": "vn-078",
+  "id": "vn-079",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gaston",
   "texte": "Cinquante mètres cubes à la seconde, par réacteur. Ça entre froid, ça sort tiède, et ça retourne à la mer. La tour, c'est pour ceux qui n'ont qu'une rivière. Et ça ne fume pas, ça fait des nuages.",
@@ -1388,7 +1570,7 @@
   "note": null
  },
  {
-  "id": "vn-079",
+  "id": "vn-080",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › gaston (suite)",
   "texte": "Je réponds : moins que le granit de votre cuisine.",
@@ -1399,7 +1581,7 @@
   "note": null
  },
  {
-  "id": "vn-080",
+  "id": "vn-081",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › bouton",
   "texte": "« Arrêt automatique du réacteur. Ce bouton ne fait rien exploser. Il fait exactement le contraire.",
@@ -1410,7 +1592,7 @@
   "note": null
  },
  {
-  "id": "vn-081",
+  "id": "vn-082",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › beignets",
   "texte": "Interdits en salle de commande depuis qu'un dessin animé a donné une mauvaise image de la profession.",
@@ -1421,7 +1603,7 @@
   "note": null
  },
  {
-  "id": "vn-082",
+  "id": "vn-083",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › zone",
   "texte": "« Zone contrôlée. Accès réservé. »",
@@ -1432,18 +1614,24 @@
   "note": null
  },
  {
-  "id": "vn-083",
+  "id": "vn-084",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › pompe",
   "texte": "« Par forte arrivée de méduses, on baisse la puissance. Ce n'est pas une blague. »",
   "affirmation": "Les méduses peuvent obliger à baisser la puissance.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Fait connu (Gravelines, Paluel) mais aucune page officielle lue ce jour ; à lire chez EDF ou dans les avis d'incident ASNR."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "asnr-gravelines-meduses",
+    "passage": "Ces mises à l'arrêt ont été provoquées par l'arrivée massive de méduses dans les tambours filtrants des stations de pompage d'eau de mer […] conduisant dans un premier temps à abaisser la puissance des réacteurs.",
+    "relu": true
+   }
+  ],
+  "note": "Gravelines, août 2025 : baisse de puissance puis arrêts automatiques."
  },
  {
-  "id": "vn-084",
+  "id": "vn-085",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › ligne",
   "texte": "Les lignes à 400 000 volts partent vers l'intérieur des terres.",
@@ -1454,7 +1642,7 @@
   "note": "Décor du site fictif (tension usuelle des grandes centrales)."
  },
  {
-  "id": "vn-085",
+  "id": "vn-086",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › chefHalte",
   "texte": "Présentez votre billet, puis votre billet.",
@@ -1465,7 +1653,7 @@
   "note": null
  },
  {
-  "id": "vn-086",
+  "id": "vn-087",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.dit › isotopeApres",
   "texte": "C'est d'expliquer à tout le monde, chaque jour, que les tours ne fument pas.",
@@ -1476,7 +1664,7 @@
   "note": null
  },
  {
-  "id": "vn-087",
+  "id": "vn-088",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 1",
   "texte": "Moins d'un, la réaction s'éteint ; plus d'un, elle s'emballe. Les barres de contrôle servent à tenir ce « un ».",
@@ -1500,29 +1688,53 @@
   "note": null
  },
  {
-  "id": "vn-088",
+  "id": "vn-089",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 2",
   "texte": "Un tiers en électricité, deux tiers en chaleur rejetée : c'est le lot de toutes les centrales à vapeur.",
   "affirmation": "Rendement d'un tiers.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Voir l'info « bouilloire »."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irsn-elements-surete-rep-ch5",
+    "passage": "(les valeurs indiquées correspondent au cas des réacteurs de 1 450 MWe du palier N4) : Puissance thermique extraite du cœur (palier N4) 4 250 MW",
+    "relu": true,
+    "page": "§ 5.3"
+   },
+   {
+    "cle": "wna-penly-1",
+    "passage": "Capacity Net 1330 MWe Capacity Gross 1382 MWe Thermal Capacity 3817 MWt",
+    "relu": true
+   },
+   {
+    "cle": "asn-rapport-2011-centrales",
+    "passage": "Toute centrale électrique thermique produit, en faisant passer de la chaleur d'une source chaude vers une source froide, de l'énergie mécanique qu'elle transforme en électricité.",
+    "relu": true,
+    "page": "§ 1.1.1"
+   }
+  ],
+  "note": null
  },
  {
-  "id": "vn-089",
+  "id": "vn-090",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 2",
   "texte": "Les pertes en ligne se comptent en quelques pour cent, pas en deux tiers.",
   "affirmation": "Pertes réseau de quelques %.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Non recherché dans ce périmètre ; à sourcer avec RTE (pertes sur le réseau de transport, ~2 %)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "rte-pertes-en-ligne",
+    "passage": "Ces pertes représentent entre 2% et 3% de l'électricité acheminée.",
+    "relu": true
+   }
+  ],
+  "note": null
  },
  {
-  "id": "vn-090",
+  "id": "vn-091",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 3",
   "texte": "1,3 GW × 8 760 h × 0,75. Retiens l'ordre de grandeur : 8 à 9 TWh par réacteur.",
@@ -1533,7 +1745,7 @@
   "note": null
  },
  {
-  "id": "vn-091",
+  "id": "vn-092",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 3",
   "texte": "Il manque un zéro : ça, c'est un parc éolien en mer.",
@@ -1544,7 +1756,7 @@
   "note": null
  },
  {
-  "id": "vn-092",
+  "id": "vn-093",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 4",
   "texte": "C'est le suivi de charge : une trentaine de TWh ainsi modulés en 2025.",
@@ -1563,7 +1775,7 @@
   "avant": "C'est le suivi de charge : 33 TWh ainsi modulés en 2025."
  },
  {
-  "id": "vn-093",
+  "id": "vn-094",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 4",
   "texte": "Idée répandue, et fausse pour le parc français, conçu pour moduler.",
@@ -1581,7 +1793,7 @@
   "note": null
  },
  {
-  "id": "vn-094",
+  "id": "vn-095",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 5",
   "texte": "\"Environ 64 g de CO₂e par kWh\",\"C'est le chiffre que retient la réglementation tertiaire, contre 227 g pour un kWh de gaz,",
@@ -1606,7 +1818,7 @@
   "avant": "\"Environ 50 g de CO₂e par kWh\",\"Contre plus de 200 g pour un kWh de gaz,"
  },
  {
-  "id": "vn-095",
+  "id": "vn-096",
   "fichier": "jeu/voyages/nucleaire/textes.js",
   "repere": "NUC.questions › 6",
   "texte": "Jusqu'à trois heures creuses entre 11 h et 17 h, au moins cinq la nuit : on suit le solaire.",
@@ -1624,7 +1836,7 @@
   "note": null
  },
  {
-  "id": "vn-096",
+  "id": "vn-097",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › info",
   "texte": "Enfoncées dans le cœur, elles avalent les neutrons et la puissance baisse ; sorties, elle monte.",
@@ -1642,7 +1854,7 @@
   "note": null
  },
  {
-  "id": "vn-097",
+  "id": "vn-098",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › réglages",
   "texte": "Dans le simulateur, une seconde vaut une minute. Trois façons de perdre : varier trop vite, dépasser 105 %, ou laisser passer le temps.",
@@ -1653,7 +1865,7 @@
   "note": null
  },
  {
-  "id": "vn-098",
+  "id": "vn-099",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › manœuvre 1 › bravo",
   "texte": "Dans la réalité, cette montée prend une bonne demi-heure.",
@@ -1671,7 +1883,7 @@
   "note": null
  },
  {
-  "id": "vn-099",
+  "id": "vn-100",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › manœuvre 2 › bravo",
   "texte": "Les réacteurs français le font surtout les après-midi, d'avril à octobre, et particulièrement le week-end.",
@@ -1690,7 +1902,7 @@
   "avant": "Les réacteurs français font cela presque tous les jours, et de plus en plus souvent."
  },
  {
-  "id": "vn-100",
+  "id": "vn-101",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "arrêt automatique › bravo",
   "texte": "✔ Les barres sont tombées d'un coup : la réaction en chaîne s'est arrêtée presque instantanément.",
@@ -1709,24 +1921,30 @@
   "avant": "✔ Deux secondes : les barres sont tombées, la réaction en chaîne est arrêtée."
  },
  {
-  "id": "vn-101",
+  "id": "vn-102",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "arrêt automatique › bravo",
   "texte": "le cœur dégage encore ${C.residuelle} % de sa chaleur, puis de moins en moins, pendant des jours.",
   "affirmation": "Puissance résiduelle d'environ 7 % juste après l'arrêt.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "sources": [
+   {
+    "cle": "irsn-elements-surete-rep-ch5",
+    "passage": "Bien que décroissante, la puissance produite est longtemps supérieure au millième de la puissance nominale, exigeant la poursuite d'un certain refroidissement. […] 30 secondes […] 7 à 8%",
+    "relu": true,
+    "page": "§ 5.4, tableau 5.1"
+   },
    {
     "cle": "asnr-fonctionnement-reacteur",
     "passage": "Quand le réacteur est arrêté, il faut également évacuer la chaleur résiduelle qui subsiste après la fin de la réaction en chaîne",
     "relu": true
    }
   ],
-  "note": "La chaleur résiduelle est confirmée (ASNR) ; la valeur de 7 % n'a pas de source lue."
+  "note": null
  },
  {
-  "id": "vn-102",
+  "id": "vn-103",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "arrêt automatique › bravo",
   "texte": "Un réacteur arrêté doit continuer à être refroidi : c'est pour cela qu'il a des pompes de secours, des diesels de secours, et des secours de secours.",
@@ -1748,7 +1966,7 @@
   "note": null
  },
  {
-  "id": "vn-103",
+  "id": "vn-104",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "simulateur › M. Bore",
   "texte": "Deux : si quoi que ce soit sort des clous, le réacteur s'arrête tout seul, presque instantanément, sans demander l'avis de personne.",
@@ -1767,25 +1985,30 @@
   "avant": "Deux : si quoi que ce soit sort des clous, le réacteur s'arrête tout seul, en deux secondes, sans demander l'avis de personne."
  },
  {
-  "id": "vn-104",
+  "id": "vn-105",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › étapes",
-  "texte": "L'eau du circuit primaire s'échauffe à plus de 300 °C, sous 155 bars",
+  "texte": "L'eau du circuit primaire s'échauffe à 320 °C, sous 155 bars",
   "affirmation": "Température et pression primaire.",
   "type": "fait",
-  "verdict": "corrige",
+  "verdict": "confirme",
   "sources": [
+   {
+    "cle": "asn-rapport-2011-centrales",
+    "passage": "remonte le long des crayons combustibles et ressort par la partie supérieure à une température de l'ordre de 320 °C.",
+    "relu": true,
+    "page": "§ 1.1.2"
+   },
    {
     "cle": "asnr-composants-reacteur",
     "passage": "la maîtrise de la pression dans le circuit primaire à 155 bars, afin de maintenir sous forme liquide l'eau chauffée à plus de 300°C.",
     "relu": true
    }
   ],
-  "note": "320 °C non sourcé ce jour.",
-  "avant": "L'eau du circuit primaire s'échauffe à 320 °C, sous 155 bars"
+  "note": "Texte d'origine rétabli (ASN 2011 : 320 °C)."
  },
  {
-  "id": "vn-105",
+  "id": "vn-106",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › étapes",
   "texte": "Dans le générateur de vapeur, elle fait bouillir l'eau du circuit secondaire",
@@ -1802,29 +2025,49 @@
   "note": null
  },
  {
-  "id": "vn-106",
+  "id": "vn-107",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › étapes",
   "texte": "L'alternateur produit le courant, à 1 500 tours par minute",
   "affirmation": "Vitesse de l'alternateur.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "edf-fa3-rapport-surete-ch10",
+    "passage": "La vapeur provenant des 4 générateurs de vapeur actionne une turbine multicellulaire à action accouplée à un alternateur triphasé, tournant à 1500 tr/min.",
+    "relu": true,
+    "page": "§ 1"
+   }
+  ],
   "note": "Voir l'info « inertie »."
  },
  {
-  "id": "vn-107",
+  "id": "vn-108",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › étapes",
   "texte": "Le transformateur l'élève à 400 000 volts",
   "affirmation": "Tension de sortie.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Non sourcé (tension usuelle des grandes centrales)."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "asn-rapport-2011-centrales",
+    "passage": "une turbine qui entraîne un alternateur générant un courant électrique triphasé d'une tension de 400 000 V.",
+    "relu": true,
+    "page": "§ 1.1.1"
+   },
+   {
+    "cle": "edf-fa3-rapport-surete-ch10",
+    "passage": "est élevée par des transformateurs à la tension de 400 kV pour être évacuée sur le réseau électrique.",
+    "relu": true,
+    "page": "§ 1"
+   }
+  ],
+  "note": null
  },
  {
-  "id": "vn-108",
+  "id": "vn-109",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › okMsg",
   "texte": "l'eau qui touche le combustible reste dans le bâtiment réacteur, celle qui fait tourner la turbine ne voit jamais le cœur, et l'eau de mer ne voit que des tuyaux.",
@@ -1841,18 +2084,30 @@
   "note": null
  },
  {
-  "id": "vn-109",
+  "id": "vn-110",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › bilan",
   "texte": "Environ 34 % ; les 2 500 MW restants partent en chaleur dans la mer",
   "affirmation": "Rendement et chaleur rejetée.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Voir l'info « bouilloire »."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "irsn-elements-surete-rep-ch5",
+    "passage": "(les valeurs indiquées correspondent au cas des réacteurs de 1 450 MWe du palier N4) : Puissance thermique extraite du cœur (palier N4) 4 250 MW",
+    "relu": true,
+    "page": "§ 5.3"
+   },
+   {
+    "cle": "wna-penly-1",
+    "passage": "Capacity Net 1330 MWe Capacity Gross 1382 MWe Thermal Capacity 3817 MWt",
+    "relu": true
+   }
+  ],
+  "note": null
  },
  {
-  "id": "vn-110",
+  "id": "vn-111",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "chaîne › bilan",
   "texte": "Environ 90 %, comme une turbine hydraulique",
@@ -1863,7 +2118,7 @@
   "note": "Mauvaise réponse du quiz ; ordre de grandeur non sourcé ici."
  },
  {
-  "id": "vn-111",
+  "id": "vn-112",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "planning des arrêts › besoin",
   "texte": "besoin:[100,96,85,70,60,56,58,54,60,72,86,97],",
@@ -1874,7 +2129,7 @@
   "note": null
  },
  {
-  "id": "vn-112",
+  "id": "vn-113",
   "fichier": "jeu/voyages/nucleaire/simulations.js",
   "repere": "planning des arrêts › bravo",
   "texte": "C'est pour cela que la disponibilité du parc français se lit en dents de scie : haute en janvier, basse en été.",
@@ -1898,7 +2153,7 @@
   "note": null
  },
  {
-  "id": "vn-113",
+  "id": "vn-114",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "halte › panneau",
   "texte": "« Centrale nucléaire de Neutron-sur-Mer · 2 réacteurs de 1 300 MW · 17 TWh par an ».",
@@ -1909,7 +2164,7 @@
   "note": null
  },
  {
-  "id": "vn-114",
+  "id": "vn-115",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "lieux › centre d'information",
   "texte": "La maquette, la pastille, le fût, le simulateur de conduite. Ici on peut toucher : rien n'est branché.",
@@ -1920,7 +2175,7 @@
   "note": null
  },
  {
-  "id": "vn-115",
+  "id": "vn-116",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "lieux › station de pompage",
   "texte": "L'eau de mer entre ici pour refroidir le circuit. Elle repart un peu plus chaude, et c'est tout ce qu'elle emporte.",
@@ -1942,7 +2197,7 @@
   "note": null
  },
  {
-  "id": "vn-116",
+  "id": "vn-117",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "lieux › la mer",
   "texte": "La source froide de la centrale : sans elle, pas de condensation, donc pas de turbine.",
@@ -1959,7 +2214,7 @@
   "note": null
  },
  {
-  "id": "vn-117",
+  "id": "vn-118",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "esplanade › compteur",
   "texte": "« Électricité française, en ce moment : 20 g de CO₂ par kWh ».",
@@ -1977,7 +2232,7 @@
   "note": null
  },
  {
-  "id": "vn-118",
+  "id": "vn-119",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "salle des machines › transformateur",
   "texte": "Le transformateur principal : 400 000 volts en sortie.",
@@ -1988,7 +2243,7 @@
   "note": "Décor (non sourcé)."
  },
  {
-  "id": "vn-119",
+  "id": "vn-120",
   "fichier": "jeu/voyages/nucleaire/carte.js",
   "repere": "lieux › voie ferrée",
   "texte": "La ligne d'Ampère-sur-Loire, par Paris et Amiens.",
