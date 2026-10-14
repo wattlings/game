@@ -1413,3 +1413,54 @@ Encore sans source :
 - **Délais des index et de la facture** dans l'étape 2 (ce2-051, ce2-052, ce2-081, ce2-084).
 
 Vérification : `node outils/sources.mjs` passe sans échec. Les étapes 3, 5, 7 et 8 n'ont plus aucun fait sans source. `node outils/verifier.mjs` donne 388 réussites et 0 échec.
+
+### Lot 8 (14 octobre 2026) : tout le site a son relevé
+
+Chaque partie du site a maintenant son relevé dans `outils/sources/` : les 8 étapes du cours, les démos, le quiz final, le glossaire, la page Patrimoine (cours et jeu), le jeu (cycle et étapes 1 à 8) et les cinq voyages. Le registre passe de 117 à 216 sources.
+
+| Périmètre | Faits et règles | Confirmés | Corrigés | À corriger | Sans source |
+|---|---|---|---|---|---|
+| Cours, étapes 1 à 8 | 169 | 142 | 27 | 0 | 0 |
+| Cours, démos | 43 | 40 | 3 | 0 | 0 |
+| Cours, quiz final | 11 | 11 | 0 | 0 | 0 |
+| Glossaire | 31 | 29 | 2 | 0 | 0 |
+| Patrimoine (cours et jeu) | 17 | 12 | 5 | 0 | 0 |
+| Jeu, cycle et étapes 1 à 8 | 209 | 174 | 18 | 6 | 11 |
+| Voyage solaire | 115 | 90 | 5 | 4 | 16 |
+| Voyage éolien | 88 | 78 | 8 | 0 | 2 |
+| Voyage barrage | 64 | 44 | 20 | 0 | 0 |
+| Voyage nucléaire | 88 | 47 | 18 | 0 | 23 |
+| Voyage datacenter | 85 | 64 | 20 | 0 | 1 |
+| **Total** | **920** | **731** | **126** | **10** | **53** |
+
+**Corrections les plus visibles**
+- Cours :
+  - Délai des index : « quelques jours » devient « le lendemain (élec), mensuel (gaz) ».
+  - Le délai de facture est présenté comme le cas de l'école.
+- Démos :
+  - Tarif du surplus solaire : 0,04 → 0,011 €/kWh (contrats demandés depuis le 5 juin 2026).
+  - Les facteurs CO₂ citent l'arrêté du décret tertiaire.
+- Patrimoine :
+  - Références ADEME (2005) et OPERAT : sport 148 → 145 kWh/m², résidence seniors 250 → 177. Le 250 venait d'un blog commercial.
+  - Les données fictives des Glycines sont ajustées pour que l'épreuve reste juste.
+- Jeu :
+  - Facteurs CO₂ 0,052/0,227 → 0,064/0,204, et « le gaz émet quatre fois plus » → trois fois.
+  - « Avant le 30 septembre » → « au plus tard le 30 septembre ».
+  - Le Linky coupe le courant à 36 kVA ou moins ; le pas de 5 ou 10 minutes au-delà.
+  - Arène 8 : « badge Mesurer » → « badge Piloter ».
+- Voyages :
+  - Datacenter : un serveur au repos consomme environ un tiers de sa puissance maximale, et non la moitié.
+  - Datacenter et nucléaire : l'intensité carbone est comparée à la moyenne européenne (175 g), et non plus à l'Allemagne.
+  - Éolien : facteurs de charge et saisonnalité alignés sur RTE ; Betz publié en 1920 ; transformateur à 100 Hz.
+  - Barrage : plages des turbines, pointes du matin et du soir, âge du parc autour de soixante ans.
+  - Nucléaire : primaire à plus de 300 °C, environ 7 g/kWh sur le cycle de vie, modulation d'une trentaine de TWh.
+
+**Ce qui reste**
+- Les 23 faits nucléaires sans source attendent surtout edf.fr, en maintenance les 13 et 14 octobre : rendement, 3 800 MWth, assemblages, enrichissement, durées d'arrêt, épaisseurs, etc.
+- Restent sans source : 6 faits de l'étape 7 du jeu (puissance payée et inutilisée, gains LED, toit, pompe à chaleur, vacances), 2 faits éoliens (nacelle, moulins), 1 fait datacenter (latence vers Singapour) et le délai d'une facture.
+- Sites bloqués : Légifrance, iso.org, agirpourlatransition.ademe.fr, operat.ademe.fr et, pendant ce lot, edf.fr.
+- Incohérences fictives relevées, non corrigées :
+  - les DJU de la fiche s8r2 (1 900 / 2 244) ne sont pas ceux de l'atelier (2 070 / 2 435) ;
+  - l'arène 7 annonce un objectif en € alors que l'épreuve le fixe en kWh.
+
+Vérification : `node outils/sources.mjs` passe sans échec, et `node outils/verifier.mjs` donne 452 réussites et 0 échec.

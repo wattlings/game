@@ -7,7 +7,7 @@ const ARENE_8={id:8,badge:'Piloter',name:'Arène de la Preuve',champ:'Mme Joule'
   refs:['legifrance-cch-r174-22','evo-ipmvp','legifrance-arrete-tertiaire-2020','ministere-eet','ministere-iso-50001'],
   cpal:{shirt:'#8a3b8f',pants:'#2f3a5c',hair:'#9a9aa2',glasses:1,skin:'#e0ac7e',style:'carre',bun:1,lash:1},
   cIntro:["Alors, {name}. Tu croyais que la dernière championne serait une inconnue ?","Arène de la Preuve. Une action n'a marché que si on le prouve à conditions égales. Convaincs-moi."],
-  cWin:["Preuve faite. Tu as bouclé les 8 étapes : voici le badge Mesurer.","Passe me voir au bureau. J'ai une nouvelle à t'annoncer."],
+  cWin:["Preuve faite. Tu as bouclé les 8 étapes : voici le badge Piloter.","Passe me voir au bureau. J'ai une nouvelle à t'annoncer."],
   next:"",
   tr:[
    {n:'Greffier Louis',pal:{shirt:'#1c2440',pants:'#1c2440',hair:'#9a9aa2',tie:'#c43d3d',skin:'#e8b98f',hat:'#1c2440',hatType:'kippa'},intro:"Silence dans la salle ! Le candidat est prié de répondre.",lose:"La cour prend note. Avancez.",qs:[
