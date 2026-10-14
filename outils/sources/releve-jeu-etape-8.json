@@ -66,12 +66,12 @@
   "id": "ja8-005",
   "fichier": "jeu/recit/fiches-savoir.js",
   "repere": "fiche s8r2 › say",
-  "texte": "1 900 DJU, contre 2 244 d’habitude",
+  "texte": "2 070 DJU, contre 2 435 d’habitude",
   "affirmation": "DJU de la station du jeu.",
   "type": "fictif",
   "verdict": "sans-objet",
   "sources": [],
-  "note": "Valeurs du jeu (l'atelier ems-mesurer.js utilise 2 070 et 2 435 : deux jeux de chiffres fictifs différents)."
+  "note": "Valeurs du jeu, les mêmes que l'atelier ems-mesurer.js et l'année type de la signature (2 435 DJU) ; 2 070 / 2 435 = 0,85, soit un hiver 15 % plus doux comme dans le quiz de la fiche."
  },
  {
   "id": "ja8-006",

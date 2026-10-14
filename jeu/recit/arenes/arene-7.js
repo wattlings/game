@@ -6,7 +6,7 @@ const ARENE_7={id:7,badge:'Agir',name:'Arène du Chantier',champ:'Chef Sobriét�
   /* les références de ce qu'affirment les questions (registre commun/donnees/sources.js) : listées dans le menu, onglet Sources */
   refs:['enedis-turpe7-brochure','ministere-autoconsommation','enedis-acc-guide'],
   cpal:{shirt:'#e2573b',pants:'#2c2c34',hair:'#2b1d14',hat:'#f2c12e',vest:1,skin:'#c68a5c'},
-  cIntro:["Arène du Chantier. Avant de sortir la bétonnière, on éteint la lumière.","Budget : 12 000 €. Objectif : 4 000 € d'économies par an. Compose ton plan, dans le bon ordre."],
+  cIntro:["Arène du Chantier. Avant de sortir la bétonnière, on éteint la lumière.","Un fonds de travaux pour démarrer, un objectif en kWh économisés par an. Compose ton plan, dans le bon ordre. Et non, la bétonnière ne compte pas comme de la sobriété."],
   cWin:["Sobriété, contrat, puis travaux. Voici le badge Agir.","Un an passe, les actions sont en place. Reste à prouver que ça a marché."],
   next:"Badge Agir ! Reste la question qui fâche : est-ce que ça a vraiment marché ? Renseigne-toi en ville sur la mesure et la vérification. Ensuite… rendez-vous à la dernière arène.",
   tr:[

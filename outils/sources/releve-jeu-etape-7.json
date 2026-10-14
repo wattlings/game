@@ -127,12 +127,12 @@
   "id": "ja7-011",
   "fichier": "jeu/recit/arenes/arene-7.js",
   "repere": "champion Chef Sobriété › cIntro",
-  "texte": "Budget : 12 000 €. Objectif : 4 000 € d'économies par an.",
-  "affirmation": "Budget et objectif de l'arène.",
+  "texte": "Un fonds de travaux pour démarrer, un objectif en kWh économisés par an.",
+  "affirmation": "L'épreuve donne un fonds de travaux et un objectif en kWh (valeurs propres à chaque site).",
   "type": "fictif",
   "verdict": "sans-objet",
   "sources": [],
-  "note": "Chiffres du jeu. Attention : l'épreuve (planStep) fixe l'objectif en kWh et le fonds selon la partie ; la réplique du champion ne correspond pas forcément aux chiffres affichés."
+  "note": "Aligné sur l'épreuve (jeu/epreuves/agir.js), qui fixe l'objectif en kWh ; l'ancienne réplique annonçait 12 000 € et 4 000 €/an, des chiffres que l'épreuve n'utilisait pas."
  },
  {
   "id": "ja7-012",
