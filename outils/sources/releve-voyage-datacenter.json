@@ -1678,12 +1678,19 @@
   "id": "vd-098",
   "fichier": "jeu/voyages/datacenter/textes.js",
   "repere": "DAT.dit.trappe",
-  "texte": "Un message pour Singapour met un dixième de seconde.",
-  "affirmation": "Latence Marseille-Singapour de l'ordre de 0,1 s.",
+  "texte": "Un message pour Singapour met moins d'un dixième de seconde.",
+  "affirmation": "Un message met moins de 0,1 s pour aller de Marseille à Singapour.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Ordre de grandeur plausible (environ 12 000 km de fibre à 200 000 km/s, soit 60 ms aller), mais aucune source lisible trouvée. À lire : mesures de latence publiées par un opérateur (ex. tableaux de latence WonderNetwork ou d'un opérateur de câble)."
+  "verdict": "corrige",
+  "sources": [
+   {
+    "cle": "wondernetwork-marseille-singapour",
+    "passage": "Table generated with the unix command line tool ping, executing 30 pings from Marseille to Singapore. [...] avg min max mdev timestamp 142.790ms 142.728ms 142.858ms 0.030ms 2026-10-14 12:51:21",
+    "relu": true
+   }
+  ],
+  "note": "Ping Marseille-Singapour mesuré par WonderNetwork : environ 143 ms. Un ping est un aller-retour, donc l'aller prend environ 71 ms, moins d'un dixième de seconde. « Un dixième de seconde » tout court surestimait un peu : ajout de « moins d' ».",
+  "avant": "Un message pour Singapour met un dixième de seconde."
  },
  {
   "id": "vd-099",

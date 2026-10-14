@@ -74,7 +74,7 @@ voyDeclarer('datacenter',{
 
   /* les références : chaque information porte les siennes (refs, ci-dessus) ; celles-ci appuient ce que disent les habitants,
      les panneaux et les simulations. Les clés sont celles du registre commun/donnees/sources.js. */
-  refs:['iti-cbema-curve']
+  refs:['iti-cbema-curve','wondernetwork-marseille-singapour']
 });
 
 /* ================= CE QUE DISENT LES GENS ET LES CHOSES =================
@@ -133,7 +133,7 @@ DAT.dit={
       "Une seconde plaque, plus récente : « Elle entre à 15 degrés, elle ressort tiédie, elle retourne à la mer. Aucun compresseur n'a été dérangé pour produire ce froid. »"],
     ["Les conduites bleues. Pose la main : celle de gauche est fraîche, celle de droite tiède. Tout le refroidissement du site tient dans cette différence."]],
   trappe:[["Une trappe d'acier jaune dans le quai. Dessous, on devine des câbles gros comme le bras, qui plongent dans le port. Une plaque : « Chambre d'atterrage. Ces câbles relient Marseille à l'Afrique, au Moyen-Orient et à l'Asie. »",
-      "En dessous : « Un message pour Singapour met un dixième de seconde. Ne marchez pas dessus : ça n'abîme rien, mais c'est une question de principe. »"],
+      "En dessous : « Un message pour Singapour met moins d'un dixième de seconde. Ne marchez pas dessus : ça n'abîme rien, mais c'est une question de principe. »"],
     ["La trappe aux câbles. La moitié de l'internet de trois continents passe sous tes pieds, sans un bruit."]],
   affiche:[["Une affiche à la halte : « Pourquoi ici ? » Trois arguments, par ordre de taille : les câbles, le courant, le soleil. Le soleil est barré, avec la mention : « Non. Vraiment pas. Il chauffe. »"],
     ["L'affiche de la halte. Même calcul, neuf fois moins de carbone que la moyenne européenne. Le soleil est toujours barré."]],

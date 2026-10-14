@@ -1819,6 +1819,14 @@ export const SOURCES = {
     niveau: "secondaire",
     vu: "2026-10-14",
   },
+  "wondernetwork-marseille-singapour": {
+    t: "Ping time between Marseille and Singapore (Global Ping Statistics)",
+    ed: "WonderNetwork",
+    date: "mesures du 14 octobre 2026",
+    url: "https://wondernetwork.com/pings/Marseille/Singapore",
+    niveau: "secondaire",
+    vu: "2026-10-14",
+  },
 };
 
 /** Une source, prête à afficher : « Éditeur, Titre (date) ». */
