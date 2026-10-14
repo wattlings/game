@@ -90,40 +90,39 @@
   "id": "ja2-006",
   "fichier": "jeu/recit/fiches-savoir.js",
   "repere": "fiche s2r1 › x",
-  "texte": "Le télérelevé est fin et rapide : une courbe de charge au pas de 10 min pour l’électricité, un volume par jour pour le gaz (Gazpar).",
-  "affirmation": "La courbe de charge électrique télérelevée est au pas de 10 minutes ; Gazpar donne un volume par jour.",
+  "texte": "Le télérelevé est fin et rapide : une courbe de charge au pas de 30 min avec un Linky (36 kVA ou moins), de 5 min au-delà de 36 kVA, et un volume par jour pour le gaz (Gazpar).",
+  "affirmation": "La courbe de charge électrique est au pas de 30 min avec un Linky (≤ 36 kVA), 5 min au-delà ; Gazpar donne un volume par jour.",
   "type": "fait",
-  "verdict": "a-corriger",
-  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "Le télérelevé est fin et rapide : une courbe de charge au pas de 30 min avec un Linky (36 kVA ou moins), de 5 min au-delà de 36 kVA, et un volume par jour pour le gaz (Gazpar).",
-  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min (réductible à 15 min, voire 10 min selon les services souscrits). Au-delà de 36 kVA : Enedis a reprogrammé la relève des courbes de charge au pas 5 min (note Enedis en vigueur au 03/07/2026 ; « depuis le 8 décembre 2025 ») ; le pas 10 min n'est plus qu'une restitution reconstituée. Le « 10 min » était exact pour les compteurs > 36 kVA avant cette réforme. La partie gaz (une valeur par jour) est confirmée. Variante plus légère si l'on veut garder le chiffre 10 : « …de 30 min avec un Linky, plus fine au-delà de 36 kVA (5 min, restituable à 10 min)… ».",
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min. Au-delà de 36 kVA, Enedis relève désormais les courbes au pas 5 min (« depuis le 8 décembre 2025 », note du 3 juillet 2026) ; le 10 min n'est plus qu'une restitution reconstituée. Texte corrigé en conséquence ; partie gaz inchangée.",
   "sources": [
    {
     "cle": "enedis-nmo-cf-016e",
-    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
-    "relu": null
+    "passage": "L’activation de la collecte de la courbe de charge entraîne l’enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d’information du GRD.",
+    "relu": true,
+    "page": "p. 12 (§ 4)"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
-    "relu": null
+    "passage": "Pour Enedis, cette réforme s’est traduite par une reprogrammation du pas de relève des courbes de charge à 5’ pour les sites HTA et BT > 36 kVA.",
+    "relu": true,
+    "page": "p. 5"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Les courbes au pas 5' permettent de reconstituer des mesures au pas 10' ou 15' selon la nature des publications.",
-    "relu": null
-   },
-   {
-    "cle": "cre-compteurs-evolues",
-    "passage": "Le compteur évolué permet d'accéder simplement à des données fines (par exemple la courbe de charge jusqu'à un pas de 30 minutes)",
-    "relu": null
+    "passage": "Les courbes au pas 5’ permettent de reconstituer des mesures au pas 10’ ou 15’ selon la nature des publications.",
+    "relu": true,
+    "page": "p. 5"
    },
    {
     "cle": "grdf-compteur-communicant",
     "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
-    "relu": null
+    "relu": true,
+    "page": "page web (passage repris du relevé, déjà lu)"
    }
-  ]
+  ],
+  "avant": "Le télérelevé est fin et rapide : une courbe de charge au pas de 10 min pour l’électricité, un volume par jour pour le gaz (Gazpar)."
  },
  {
   "id": "ja2-007",
@@ -182,30 +181,33 @@
   "id": "ja2-009",
   "fichier": "jeu/recit/fiches-savoir.js",
   "repere": "fiche s2r1 › quiz › mauvaise réponse 1",
-  "texte": "Ça, c’est la courbe électrique au pas de 10 min.",
-  "affirmation": "144 points par jour correspondent à la courbe de charge électrique au pas de 10 minutes.",
+  "texte": "Ça, c’est la courbe électrique d’un Linky au pas de 30 min.",
+  "affirmation": "48 points par jour correspondent à la courbe de charge d'un Linky au pas de 30 minutes.",
   "type": "fait",
-  "verdict": "a-corriger",
-  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "Réponse : « 48, comme un Linky » ; explication : « Ça, c’est la courbe électrique d’un Linky au pas de 30 min. »",
-  "note": "144 = 6 × 24 reste juste comme calcul, mais le pas de 10 min n'est plus le pas de relève d'aucun segment : 30 min pour un Linky (48 points), 5 min au-delà de 36 kVA (288 points). Autre option : garder « 144 » et écrire « Ça, c’est une courbe électrique restituée au pas de 10 min. »",
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min. Au-delà de 36 kVA, Enedis relève désormais les courbes au pas 5 min (« depuis le 8 décembre 2025 », note du 3 juillet 2026) ; le 10 min n'est plus qu'une restitution reconstituée. La mauvaise réponse passe de « 144 valeurs » à « 48 valeurs, comme l’électricité » (48 = 24 × 2 au pas 30 min), et son explication en conséquence.",
   "sources": [
    {
     "cle": "enedis-nmo-cf-016e",
-    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
-    "relu": null
+    "passage": "L’activation de la collecte de la courbe de charge entraîne l’enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d’information du GRD.",
+    "relu": true,
+    "page": "p. 12 (§ 4)"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
-    "relu": null
+    "passage": "Pour Enedis, cette réforme s’est traduite par une reprogrammation du pas de relève des courbes de charge à 5’ pour les sites HTA et BT > 36 kVA.",
+    "relu": true,
+    "page": "p. 5"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Les courbes au pas 5' permettent de reconstituer des mesures au pas 10' ou 15' selon la nature des publications.",
-    "relu": null
+    "passage": "Les courbes au pas 5’ permettent de reconstituer des mesures au pas 10’ ou 15’ selon la nature des publications.",
+    "relu": true,
+    "page": "p. 5"
    }
-  ]
+  ],
+  "avant": "Ça, c’est la courbe électrique au pas de 10 min."
  },
  {
   "id": "ja2-010",
@@ -270,14 +272,33 @@
   "id": "ja2-013",
   "fichier": "jeu/recit/fiches-savoir.js",
   "repere": "fiche s2r3 › x",
-  "texte": "La facture donne le coût en euros, avec du retard et sur des périodes qui ne suivent pas les mois.",
-  "affirmation": "La facture arrive après la consommation et porte sur des périodes qui ne coïncident pas avec les mois civils.",
+  "texte": "La facture donne le coût en euros, après coup, et sur sa propre période : d’un relevé d’index au suivant, pas forcément du 1er au 31.",
+  "affirmation": "La facture arrive après coup et porte sur la période entre deux index, qui n'est pas forcément le mois civil.",
   "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
-  "correction": "La facture donne le coût en euros, après coup, et sur des périodes de facturation qui ne coïncident pas toujours avec les mois civils.",
-  "note": "Aucune source lue ne dit que les périodes de facturation « ne suivent pas les mois » : c'est fréquent, pas général (certains contrats facturent au mois civil). Les fiches du médiateur lues confirment seulement que la facture se calcule entre un index de début et un index de fin de période, et qu'elle peut reposer sur des estimations. Formulation prudente proposée.",
-  "sources": []
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Aucune source ne dit que les périodes « ne suivent pas les mois » (certains fournisseurs facturent au mois). Le médiateur dit que la consommation facturée va de l'index de la facture précédente à celui de la facture, que l'on peut être facturé tous les mois, tous les 2 mois ou une fois par an, avec régularisation ensuite : texte reformulé pour n'affirmer que cela.",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "il faut faire la différence entre l’index à la date de la facture (index de fin de période) et l’index de la facture précédente (index de début de période).",
+    "relu": true,
+    "page": "page web, « Comment calculer ma consommation »"
+   },
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "Généralement, je peux choisir de recevoir une facture par mois, une facture tous les 2 mois ou d’être mensualisé (une facture par an).",
+    "relu": true,
+    "page": "page web, chapeau"
+   },
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "Une régularisation intervient ensuite, en fonction de ma consommation réelle.",
+    "relu": true,
+    "page": "page web, « Mensualisation avec facture annuelle »"
+   }
+  ],
+  "avant": "La facture donne le coût en euros, avec du retard et sur des périodes qui ne suivent pas les mois."
  },
  {
   "id": "ja2-014",
@@ -668,14 +689,27 @@
   "id": "ja2-036",
   "fichier": "jeu/recit/arenes/arene-2.js",
   "repere": "Comptable Rose › question 2 › bonne réponse",
-  "texte": "La facture va souvent du 14 au 13 : elle ne suit pas le mois civil.",
-  "affirmation": "Une facture d'énergie couvre souvent une période à cheval sur deux mois civils.",
+  "texte": "La facture va d’un relevé d’index au suivant, du 14 au 13 par exemple : pas forcément le mois civil.",
+  "affirmation": "La période d'une facture va d'un index au suivant et ne coïncide pas forcément avec le mois civil.",
   "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
-  "correction": "La période d'une facture ne suit pas toujours le mois civil : elle peut aller, par exemple, du 14 au 13.",
-  "note": "Les dates « du 14 au 13 » sont fictives (Volt&Co). Le « souvent » n'est appuyé par aucune source lue. Le conseil de méthode (aligner les périodes avant de comparer) relève du cours.",
-  "sources": []
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Le « souvent » n'avait pas de source : reformulé. La période facturée va de l'index de la facture précédente à celui de la facture (médiateur) ; « du 14 au 13 » reste un exemple du jeu.",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "il faut faire la différence entre l’index à la date de la facture (index de fin de période) et l’index de la facture précédente (index de début de période).",
+    "relu": true,
+    "page": "page web, « Comment calculer ma consommation »"
+   },
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "Généralement, je peux choisir de recevoir une facture par mois, une facture tous les 2 mois ou d’être mensualisé (une facture par an).",
+    "relu": true,
+    "page": "page web, chapeau"
+   }
+  ],
+  "avant": "La facture va souvent du 14 au 13 : elle ne suit pas le mois civil."
  },
  {
   "id": "ja2-037",
@@ -693,14 +727,27 @@
   "id": "ja2-038",
   "fichier": "jeu/recit/arenes/arene-2.js",
   "repere": "Comptable Rose › question 3 › bonne réponse",
-  "texte": "Avec du retard, et sur des périodes qui ne suivent pas les mois.",
-  "affirmation": "La facture donne le coût en euros, avec du retard et sur des périodes qui ne suivent pas les mois.",
+  "texte": "Après coup, et sur sa propre période, d’un relevé d’index au suivant.",
+  "affirmation": "La facture donne le coût après coup, sur la période entre deux index.",
   "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
-  "correction": "Après coup, et sur des périodes qui ne coïncident pas toujours avec les mois.",
-  "note": "Même affirmation que la fiche s2r3 : généralisation non sourcée (voir cette ligne).",
-  "sources": []
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Même reformulation que la fiche s2r3 : la période facturée va d'un index au suivant (médiateur) ; la facture annuelle est régularisée ensuite.",
+  "sources": [
+   {
+    "cle": "mne-releve-compteur",
+    "passage": "il faut faire la différence entre l’index à la date de la facture (index de fin de période) et l’index de la facture précédente (index de début de période).",
+    "relu": true,
+    "page": "page web, « Comment calculer ma consommation »"
+   },
+   {
+    "cle": "mne-frequence-facturation",
+    "passage": "Une régularisation intervient ensuite, en fonction de ma consommation réelle.",
+    "relu": true,
+    "page": "page web, « Mensualisation avec facture annuelle »"
+   }
+  ],
+  "avant": "Avec du retard, et sur des périodes qui ne suivent pas les mois."
  },
  {
   "id": "ja2-039",
@@ -718,35 +765,39 @@
   "id": "ja2-040",
   "fichier": "jeu/epreuves/collecter.js",
   "repere": "gameCollecte › écran d'information › tableau, ligne Télérelevé",
-  "texte": "<td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'10 min':'30 min'} (élec), 1 jour (gaz)</td>",
-  "affirmation": "Courbe de charge électrique : pas de 10 min au-delà de 36 kVA, 30 min jusqu'à 36 kVA ; gaz : 1 valeur par jour.",
+  "texte": "<td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'5 min':'30 min'} (élec), 1 jour (gaz)</td>",
+  "affirmation": "Courbe de charge électrique : pas de 5 min au-delà de 36 kVA, 30 min jusqu'à 36 kVA ; gaz : 1 valeur par jour.",
   "type": "fait",
-  "verdict": "a-corriger",
-  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "<td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'5 min':'30 min'} (élec), 1 jour (gaz)</td>",
-  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min (réductible à 15 min, voire 10 min selon les services souscrits). Au-delà de 36 kVA : Enedis a reprogrammé la relève des courbes de charge au pas 5 min (note Enedis en vigueur au 03/07/2026 ; « depuis le 8 décembre 2025 ») ; le pas 10 min n'est plus qu'une restitution reconstituée. Le « 10 min » était exact pour les compteurs > 36 kVA avant cette réforme. Les branches « 30 min » (Linky) et « 1 jour » (gaz) sont confirmées ; seule la branche « 10 min » est à revoir (école et bureaux).",
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min. Au-delà de 36 kVA, Enedis relève désormais les courbes au pas 5 min (« depuis le 8 décembre 2025 », note du 3 juillet 2026) ; le 10 min n'est plus qu'une restitution reconstituée. Branche « 10 min » passée à « 5 min » (école, bureaux) ; branches « 30 min » et « 1 jour » inchangées.",
   "sources": [
    {
     "cle": "enedis-nmo-cf-016e",
-    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
-    "relu": null
+    "passage": "L’activation de la collecte de la courbe de charge entraîne l’enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d’information du GRD.",
+    "relu": true,
+    "page": "p. 12 (§ 4)"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
-    "relu": null
+    "passage": "Pour Enedis, cette réforme s’est traduite par une reprogrammation du pas de relève des courbes de charge à 5’ pour les sites HTA et BT > 36 kVA.",
+    "relu": true,
+    "page": "p. 5"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes, au format « flux de données ».",
-    "relu": null
+    "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes, au format « flux de données »",
+    "relu": true,
+    "page": "p. 10"
    },
    {
     "cle": "grdf-compteur-communicant",
     "passage": "Il transmet deux fois par jour, par radio, sur la fréquence 169 MHz, les données de consommation de la veille à un concentrateur installé en hauteur.",
-    "relu": null
+    "relu": true,
+    "page": "page web (passage repris du relevé, déjà lu)"
    }
-  ]
+  ],
+  "avant": "<td>Télérelevé (courbe de charge)</td><td>${s.souscrit>36?'10 min':'30 min'} (élec), 1 jour (gaz)</td>"
  },
  {
   "id": "ja2-041",
@@ -888,30 +939,27 @@
   "id": "ja2-047",
   "fichier": "jeu/epreuves/collecter.js",
   "repere": "gameCollecte › formulaire « Mandat unique » › contexte, canal électricité",
-  "texte": "Enedis, canal ${canal} (${s.souscrit>36?'plus de 36 kVA':'Linky, 36 kVA ou moins'})",
-  "affirmation": "Les données Enedis passent par le SGE au-delà de 36 kVA et par Data Connect pour un Linky (36 kVA ou moins).",
+  "texte": "Enedis, via le SGE (${s.souscrit>36?'plus de 36 kVA':'Linky, 36 kVA ou moins'})",
+  "affirmation": "Pour un tiers, les données Enedis d'un site professionnel passent par le SGE, quelle que soit la puissance.",
   "type": "fait",
-  "verdict": "a-corriger",
-  "attente": "Canal Enedis : SGE ou Data Connect selon la puissance (à vérifier dans la documentation Enedis réservée aux inscrits)",
-  "correction": "Enedis, via le SGE (${s.souscrit>36?'plus de 36 kVA':'Linky, 36 kVA ou moins'})",
-  "note": "Enedis présente le SGE comme le canal des tiers pour tous les clients (particuliers, professionnels, entreprises) et Data Connect comme le parcours de partage proposé aux clients particuliers équipés d'un Linky. La frontière « 36 kVA » sépare bien Linky et compteurs plus gros, mais pas SGE et Data Connect : une SARL (la boulangerie) relève du SGE. Réserve : la documentation détaillée (datahub-enedis.fr) refuse les robots, je n'ai pas pu vérifier si Data Connect accepte aussi les petits professionnels.",
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Enedis présente le SGE comme le canal des tiers pour les particuliers, professionnels et entreprises « quel que soit le type de compteur », et Data Connect comme le partage proposé aux clients particuliers équipés d'un Linky. Les sites de l'épreuve sont des professionnels : canal affiché « SGE » pour tous (la fonction elecChannel de jeu/monde/sites.js n'est plus affichée ici).",
   "sources": [
    {
     "cle": "enedis-acces-donnees",
-    "passage": "Accédez en toute autonomie aux données techniques et de mesures de consommation électrique des clients particuliers, professionnels et entreprises, avec leur consentement.",
-    "relu": null
+    "passage": "Accédez en toute autonomie aux données techniques (n° de série du compteur électrique, domaine de tension…) et de mesures de consommation électrique des clients particuliers, professionnels et entreprises, avec leur consentement, quel que soit le type de compteur.",
+    "relu": true,
+    "page": "page web, « SGE, la plateforme d’échanges de données »"
    },
    {
     "cle": "enedis-acces-donnees",
-    "passage": "Proposez à vos clients particuliers consommateurs et producteurs d'électricité équipés d'un compteur Linky de partager leurs données avec vous.",
-    "relu": null
-   },
-   {
-    "cle": "enedis-nmo-cf-016e",
-    "passage": "puissance souscrite inférieure ou égale à 36 kVA équipé d'un compteur électrique communicant",
-    "relu": null
+    "passage": "Proposez à vos clients particuliers consommateurs et producteurs d’électricité équipés d’un compteur Linky de partager leurs données avec vous.",
+    "relu": true,
+    "page": "page web, « Service Data Connect »"
    }
-  ]
+  ],
+  "avant": "Enedis, canal ${canal} (${s.souscrit>36?'plus de 36 kVA':'Linky, 36 kVA ou moins'})"
  },
  {
   "id": "ja2-048",
@@ -1159,30 +1207,33 @@
   "id": "ja2-059",
   "fichier": "jeu/epreuves/collecter.js",
   "repere": "gameCollecte › « Données demandées » › courbe de charge électrique",
-  "texte": "Courbe de charge (pas de ${s.souscrit>36?10:30} min)",
-  "affirmation": "La courbe de charge est au pas de 10 min au-delà de 36 kVA et de 30 min jusqu'à 36 kVA.",
+  "texte": "Courbe de charge (pas de ${s.souscrit>36?5:30} min)",
+  "affirmation": "La courbe de charge est au pas de 5 min au-delà de 36 kVA et de 30 min jusqu'à 36 kVA.",
   "type": "fait",
-  "verdict": "a-corriger",
-  "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "Courbe de charge (pas de ${s.souscrit>36?5:30} min)",
-  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min (réductible à 15 min, voire 10 min selon les services souscrits). Au-delà de 36 kVA : Enedis a reprogrammé la relève des courbes de charge au pas 5 min (note Enedis en vigueur au 03/07/2026 ; « depuis le 8 décembre 2025 ») ; le pas 10 min n'est plus qu'une restitution reconstituée. Le « 10 min » était exact pour les compteurs > 36 kVA avant cette réforme.",
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Linky (≤ 36 kVA) : enregistrement au pas 30 min. Au-delà de 36 kVA, Enedis relève désormais les courbes au pas 5 min (« depuis le 8 décembre 2025 », note du 3 juillet 2026) ; le 10 min n'est plus qu'une restitution reconstituée. Branche « 10 » passée à « 5 ».",
   "sources": [
    {
     "cle": "enedis-nmo-cf-016e",
-    "passage": "L'activation de la collecte de la courbe de charge entraîne l'enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d'information du GRD.",
-    "relu": null
+    "passage": "L’activation de la collecte de la courbe de charge entraîne l’enregistrement au pas 30 minutes dans le compteur et la remontée quotidienne de la courbe de charge dans le système d’information du GRD.",
+    "relu": true,
+    "page": "p. 12 (§ 4)"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Pour Enedis, cette réforme s'est traduite par une reprogrammation du pas de relève des courbes de charge à 5' pour les sites HTA et BT > 36 kVA.",
-    "relu": null
+    "passage": "Pour Enedis, cette réforme s’est traduite par une reprogrammation du pas de relève des courbes de charge à 5’ pour les sites HTA et BT > 36 kVA.",
+    "relu": true,
+    "page": "p. 5"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes, au format « flux de données ».",
-    "relu": null
+    "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes, au format « flux de données »",
+    "relu": true,
+    "page": "p. 10"
    }
-  ]
+  ],
+  "avant": "Courbe de charge (pas de ${s.souscrit>36?10:30} min)"
  },
  {
   "id": "ja2-060",
@@ -1461,14 +1512,27 @@
   "id": "ja2-073",
   "fichier": "jeu/epreuves/collecter.js",
   "repere": "gameCollecte › dernière question › mauvaise réponse 2",
-  "texte": "Elle ne renvoie rien.",
-  "affirmation": "Sans consentement valide, l'API ne renvoie aucune donnée (pas même estimée).",
+  "texte": "Non : sans consentement, la consultation est bloquée. Estimée ou pas.",
+  "affirmation": "Sans consentement valide, le distributeur bloque la consultation des données.",
   "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "verdict": "corrige",
   "correction": null,
-  "note": "Conséquence logique de la règle, mais je n'ai lu aucune documentation technique décrivant la réponse des API : datahub-enedis.fr interdit les robots, et la documentation de l'API GRDF ADICT n'est proposée qu'en téléchargements. Proposition : garder la phrase et la sourcer à la main avec la documentation d'erreurs de Data Connect / SGE et de GRDF ADICT.",
-  "sources": []
+  "note": "Pas de documentation d'erreurs des API lisible (datahub-enedis.fr refuse les robots) : l'explication ne décrit plus la réponse technique de l'API, seulement la règle d'Enedis — les données de mesure exigent l'autorisation du client et la consultation est bloquée quand le consentement prend fin.",
+  "sources": [
+   {
+    "cle": "enedis-acces-donnees",
+    "passage": "Les données contractuelles et de mesure de la consommation d’électricité sont soumises au recueil préalable de l’autorisation expresse du client final.",
+    "relu": true,
+    "page": "page web, « SGE »"
+   },
+   {
+    "cle": "enedis-nmo-cf-016e",
+    "passage": "La consultation par l’acteur est bloquée par le GRD à l’échéance ou en cas d’interruption du consentement",
+    "relu": true,
+    "page": "p. 20 (§ 4.2.11)"
+   }
+  ],
+  "avant": "Elle ne renvoie rien."
  },
  {
   "id": "ja2-074",
@@ -1486,14 +1550,27 @@
   "id": "ja2-075",
   "fichier": "jeu/monde/objets.js",
   "repere": "panneau de la ville › 1re ligne (suite)",
-  "texte": "Zone climatique H1 · Station météo de référence : Orléans-Bricy.",
-  "affirmation": "Le Loiret est en zone climatique H1 et sa station météo de référence est Orléans-Bricy.",
+  "texte": "Zone climatique H1 · Station météo des DJU : Orléans.",
+  "affirmation": "Le Loiret est en zone climatique H1 ; la station DJU du COSTIC pour le Loiret est Orléans.",
   "type": "fait",
-  "verdict": "sans-source",
-  "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
+  "verdict": "corrige",
   "correction": null,
-  "note": "Hors étape 2, relevé parce que le panneau était cité. Les pages qui portent le classement n'ont pas pu être ouvertes (Légifrance : erreur 403 sur l'annexe ; ecologie.gouv.fr : robots.txt illisible). À sourcer avec l'annexe III de l'arrêté du 10 avril 2020 (colonne « Zclim ») ; « station de référence » n'est pas une notion que j'ai vue définie : écrire plutôt « station météo la plus proche » si l'on ne trouve pas de texte.",
-  "sources": []
+  "note": "Zone H1 du Loiret : passage du ministère déjà lu (relevé étape 1, PDF inaccessible aujourd'hui : connexion coupée). Station : le COSTIC donne pour le Loiret (H1b) la station ORLEANS, sans le mot « Bricy » ni la notion de « station de référence » : texte du panneau ramené à « Station météo des DJU : Orléans ». (menu.js et ems-cadrer.js, hors périmètre, écrivent encore « Orléans-Bricy », relevé étape 1 comme choix du jeu.)",
+  "sources": [
+   {
+    "cle": "ecologie-zones-climatiques",
+    "passage": "Zone climatique H1 […] 45 Loiret",
+    "relu": true,
+    "page": "tableau, colonne « Zone climatique H1 » (passage repris du relevé étape 1)"
+   },
+   {
+    "cle": "costic-plaquette-dju",
+    "passage": "Zone climatique H1b […] 45 Loiret 123 m ORLEANS",
+    "relu": true,
+    "page": "p. 7 (et p. 4, « Liste de nos stations Degrés-Jours Unifiés »)"
+   }
+  ],
+  "avant": "Zone climatique H1 · Station météo de référence : Orléans-Bricy."
  },
  {
   "id": "ja2-076",
@@ -1527,25 +1604,27 @@
   "id": "ja2-077",
   "fichier": "jeu/monde/objets.js",
   "repere": "Agent Enedis › 2e réplique",
-  "texte": "Au-dessus de 36 kVA, les données passent par le SGE. En dessous, avec un Linky, par Data Connect.",
-  "affirmation": "Le canal d'accès aux données dépend de la puissance : SGE au-dessus de 36 kVA, Data Connect en dessous.",
+  "texte": "Pour un tiers, les données passent par le SGE, quel que soit le compteur. Un particulier avec un Linky peut aussi les partager par Data Connect.",
+  "affirmation": "Les tiers accèdent aux données par le SGE quel que soit le compteur ; Data Connect permet aux particuliers équipés d'un Linky de partager leurs données.",
   "type": "fait",
-  "verdict": "a-corriger",
-  "attente": "Canal Enedis : SGE ou Data Connect selon la puissance (à vérifier dans la documentation Enedis réservée aux inscrits)",
-  "correction": "Pour les tiers, les données passent par le SGE, quel que soit le site. Avec un Linky, un particulier peut aussi partager les siennes par Data Connect.",
-  "note": "Voir la ligne « canal électricité » de l'épreuve : selon Enedis, le SGE sert pour les particuliers, les professionnels et les entreprises ; Data Connect vise les clients particuliers équipés d'un Linky. Même réserve (datahub-enedis.fr non lisible).",
+  "verdict": "corrige",
+  "correction": null,
+  "note": "Selon Enedis, le SGE sert pour les clients particuliers, professionnels et entreprises « quel que soit le type de compteur » ; Data Connect vise les clients particuliers équipés d'un Linky. La frontière 36 kVA ne sépare pas les deux canaux.",
   "sources": [
    {
     "cle": "enedis-acces-donnees",
-    "passage": "Accédez en toute autonomie aux données techniques et de mesures de consommation électrique des clients particuliers, professionnels et entreprises, avec leur consentement.",
-    "relu": null
+    "passage": "Accédez en toute autonomie aux données techniques (n° de série du compteur électrique, domaine de tension…) et de mesures de consommation électrique des clients particuliers, professionnels et entreprises, avec leur consentement, quel que soit le type de compteur.",
+    "relu": true,
+    "page": "page web, « SGE, la plateforme d’échanges de données »"
    },
    {
     "cle": "enedis-acces-donnees",
-    "passage": "Proposez à vos clients particuliers consommateurs et producteurs d'électricité équipés d'un compteur Linky de partager leurs données avec vous.",
-    "relu": null
+    "passage": "Proposez à vos clients particuliers consommateurs et producteurs d’électricité équipés d’un compteur Linky de partager leurs données avec vous.",
+    "relu": true,
+    "page": "page web, « Service Data Connect »"
    }
-  ]
+  ],
+  "avant": "Au-dessus de 36 kVA, les données passent par le SGE. En dessous, avec un Linky, par Data Connect."
  },
  {
   "id": "ja2-078",

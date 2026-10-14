@@ -55,7 +55,7 @@ function ficheEmsStep(el,next){
     if(!okAd)bad.push('adresse');if(su!==s.surface)bad.push('surface');if(ac!==s.activite)bad.push('activité');
     if(bad.length){essais++;emsRate('Créer le site dans l’EMS',bad.join(', '));fbz.innerHTML=`<div class="fb ko">✘ ${bad.length} champ${bad.length>1?'s':''} à corriger. ${essais>=2?revoirFiche():''}</div>`;return}
     el.querySelectorAll('input,select').forEach(i=>i.disabled=true);f('cadOk').remove();
-    fbz.innerHTML=`<div class="fb ok">✔ Site créé. L'EMS déduit de l'adresse la localisation : <b>Ampère-sur-Loire (45), zone climatique H1, station météo Orléans-Bricy</b>. C'est elle qui fournira les DJU pour corriger la consommation de l'hiver.</div>${emsTransfert('la fiche du site (adresse, surface, activité) est la base de tout le reste : ratios, comparaison entre sites, correction météo. Une surface fausse, et tous les kWh/m² sont faux, sans que personne ne s’en aperçoive.')}`;
+    fbz.innerHTML=`<div class="fb ok">✔ Site créé. L'EMS déduit de l'adresse la localisation : <b>Ampère-sur-Loire (45), zone climatique H1, station météo Orléans</b>. C'est elle qui fournira les DJU pour corriger la consommation de l'hiver.</div>${emsTransfert('la fiche du site (adresse, surface, activité) est la base de tout le reste : ratios, comparaison entre sites, correction météo. Une surface fausse, et tous les kWh/m² sont faux, sans que personne ne s’en aperçoive.')}`;
     gainXP(essais?5:20);contBtn(fbz,next)};
 }
 

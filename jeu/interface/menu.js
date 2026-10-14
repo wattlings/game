@@ -145,7 +145,7 @@ const MENU_ECRANS={
         <tr><th>Adresse</th><td>${S.notes.adresse?esc(S.notes.adresse):'<i>à trouver (boîte aux lettres)</i>'}</td></tr>
         <tr><th>Surface</th><td>${S.notes.surface?fmt(S.notes.surface)+' m²':'<i>à trouver (fiche technique)</i>'}</td></tr>
         <tr><th>Activité</th><td>${S.notes.activite?esc(S.notes.activite):'<i>à trouver</i>'}</td></tr>
-        <tr><th>Localisation</th><td>${S.notes.adresse?'Ampère-sur-Loire (45), zone H1, météo Orléans-Bricy':'<i>—</i>'}</td></tr>
+        <tr><th>Localisation</th><td>${S.notes.adresse?'Ampère-sur-Loire (45), zone H1, météo Orléans':'<i>—</i>'}</td></tr>
         <tr><th>PDL (élec)</th><td class="num">${S.notes.pdl||'<i>à trouver</i>'}</td></tr>
         <tr><th>PCE (gaz)</th><td class="num">${S.notes.pce||'<i>à trouver</i>'}</td></tr>
         <tr><th>Décret tertiaire</th><td>${S.ch>=2?(assujetti(s)?'Assujetti (≥ 1 000 m²)':'Non concerné (< 1 000 m²)'):'<i>—</i>'}</td></tr></table></div>`:'<p>Parle à Mme Joule pour choisir ton site.</p>'}},

@@ -1009,12 +1009,12 @@
   "id": "ja1-060",
   "fichier": "jeu/epreuves/ems-cadrer.js",
   "repere": "ficheEmsStep › site créé",
-  "texte": "station météo Orléans-Bricy",
+  "texte": "station météo Orléans",
   "affirmation": "Station météo de référence du site.",
   "type": "fictif",
   "verdict": "sans-objet",
   "sources": [],
-  "note": "Choix du jeu : Orléans-Bricy est une vraie station Météo-France du Loiret."
+  "note": "Choix du jeu, aligné sur le panneau de la ville (relevé étape 2, ja2-075) : la plaquette COSTIC donne la station ORLEANS pour le Loiret (H1b)."
  },
  {
   "id": "ja1-061",
