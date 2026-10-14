@@ -1261,11 +1261,28 @@
   "fichier": "jeu/voyages/eolien/textes.js",
   "repere": "EOL.dit.plaque[0]",
   "texte": "La nacelle, là-haut, a la taille d'un autocar.",
-  "affirmation": "La nacelle d'une éolienne de 3 MW a la taille d'un autocar.",
+  "affirmation": "La nacelle d'une éolienne d'environ 3 MW est à peu près aussi longue qu'un autocar.",
   "type": "fait",
-  "verdict": "sans-source",
-  "sources": [],
-  "note": "Ordre de grandeur (une dizaine de mètres de long) ; pas de dimension de nacelle sur la fiche Nordex lue. À sourcer avec une fiche technique complète du fabricant."
+  "verdict": "confirme",
+  "sources": [
+   {
+    "cle": "vestas-v126-345",
+    "passage": "NACELLE DIMENSIONS Height for transport 3.4 m Height installed (incl. CoolerTop®) 6.9 m Length 12.8 m Width 4.2 m",
+    "relu": true
+   },
+   {
+    "cle": "vestas-v126-345",
+    "passage": "Rated power 3,450kW",
+    "relu": true
+   },
+   {
+    "cle": "eurlex-directive-96-53",
+    "passage": "— autobus à 2 essieux 13,50 m",
+    "relu": true,
+    "page": "annexe I, point 1.1 (longueur maximale)"
+   }
+  ],
+  "note": "Vestas V126-3.45 MW : nacelle de 12,8 m de long, 4,2 m de large ; un autocar à 2 essieux mesure au plus 13,50 m (directive 96/53/CE). La fiche Nordex lue ne donnait pas la nacelle."
  },
  {
   "id": "ve-060",
@@ -1311,12 +1328,13 @@
   "id": "ve-063",
   "fichier": "jeu/voyages/eolien/textes.js",
   "repere": "EOL.dit.moulin[0]",
-  "texte": "Ses ailes de toile en étaient loin, et il s'en portait très bien.",
-  "affirmation": "Les moulins à ailes de toile ont un rendement bien inférieur à la limite de Betz.",
-  "type": "fait",
-  "verdict": "sans-source",
+  "texte": "Le meunier l'ignorait, et il s'en portait très bien.",
+  "affirmation": "Blague : le meunier ne connaissait pas la limite de Betz.",
+  "type": "vanne",
+  "verdict": "corrige",
   "sources": [],
-  "note": "Pas de source lue sur le coefficient de puissance des moulins traditionnels (chercher dans un manuel DTU ou NREL d'aérodynamique des rotors)."
+  "note": "Reformulé : l'ancienne phrase affirmait que les ailes de toile des moulins étaient loin de la limite de Betz ; aucune source lisible (fabricant, DTU, TU Delft, ADEME) n'a été trouvée sur le rendement des moulins anciens, la phrase n'affirme donc plus rien.",
+  "avant": "Le meunier l'ignorait. Ses ailes de toile en étaient loin, et il s'en portait très bien."
  },
  {
   "id": "ve-064",

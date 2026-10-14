@@ -1827,6 +1827,21 @@ export const SOURCES = {
     niveau: "secondaire",
     vu: "2026-10-14",
   },
+  "vestas-v126-345": {
+    t: "V126-3.45 MW : caractéristiques techniques",
+    ed: "Vestas (fabricant)",
+    url: "https://www.vestas.com/en/energy-solutions/onshore-wind-turbines/4-mw-platform/V126-3-45-MW",
+    niveau: "secondaire",
+    vu: "2026-10-14",
+  },
+  "eurlex-directive-96-53": {
+    t: "Directive 96/53/CE du Conseil fixant, pour certains véhicules routiers circulant dans la Communauté, les dimensions maximales autorisées (version consolidée du 14 août 2019)",
+    ed: "Union européenne (EUR-Lex)",
+    date: "14 août 2019 (version consolidée)",
+    url: "https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX:01996L0053-20190814",
+    niveau: "officiel",
+    vu: "2026-10-14",
+  },
 };
 
 /** Une source, prête à afficher : « Éditeur, Titre (date) ». */
