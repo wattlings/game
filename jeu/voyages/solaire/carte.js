@@ -138,7 +138,7 @@ function solEnDirect(){
 }
 function solTrackersEnDirect(){
   const p=solPenche();
-  return SKY.el<=0?"Il fait nuit : les panneaux sont rangés à plat, en attendant le lever du soleil.":Math.abs(p)<.15?"Le soleil est au plus haut : les panneaux sont presque à plat.":p<0?"C'est le matin : toutes les rangées penchent vers l'est.":"C'est l'après-midi : toutes les rangées penchent vers l'ouest.";
+  return SKY.el<=0?"Il fait nuit : ici, on range les panneaux à plat, en attendant le lever du soleil.":Math.abs(p)<.15?"Le soleil est au plus haut : les panneaux sont presque à plat.":p<0?"C'est le matin : toutes les rangées penchent vers l'est.":"C'est l'après-midi : toutes les rangées penchent vers l'ouest.";
 }
 /* à l'arrivée du train */
 VOY.sites.solaire.arriver=()=>{if(!busy&&!dlg.open&&!voyEtat().faits['solaire.arrivee']){voyEtat().faits['solaire.arrivee']=1;save();voyParler(SOL.dit.arrivee)}};

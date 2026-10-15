@@ -7,13 +7,16 @@
 
 /* ================= LE MODÈLE : CE QUE REÇOIT UN PANNEAU =================
    Un calcul simplifié mais honnête : position du soleil heure par heure, lumière directe et diffuse, part de ciel couvert par mois.
-   Calé pour donner 1 450 kWh par kWc et par an au meilleur réglage fixe (35°, plein sud), à la latitude de Saint-Photon. */
+   Calé sur PVGIS (Commission européenne, JRC) au point de Saint-Photon : 1 450 kWh par kWc et par an à 35° plein sud, avec les mêmes
+   écarts que PVGIS entre les mois et entre les réglages (inclinaison, orientation, tracker). */
 const SOL_MODELE={
   latitude:43.8,
   jourType:[17,47,75,105,135,162,198,228,258,288,318,344],       // un jour représentatif par mois (numéro du jour dans l'année)
   joursParMois:[31,28,31,30,31,30,31,31,30,31,30,31],
-  beauTemps:[.50,.55,.60,.62,.66,.76,.84,.80,.70,.58,.50,.46],   // part de ciel clair, de janvier à décembre
-  rendement:.878,                                                // du soleil reçu à l'électricité livrée (chaleur, onduleur, câbles)
+  beauTemps:[.63,.63,.61,.56,.54,.59,.67,.67,.61,.58,.55,.60],   // part de ciel clair, de janvier à décembre
+  tAir:[6,9,11,15,19,24,28,27,22,17,11,7],                       // température de l'air en journée (°C), de janvier à décembre
+  pertesTemp:.0029,                                              // perte par degré de cellule au-dessus de 25 °C (fiche du module)
+  rendement:.86,                                                 // du soleil reçu à l'électricité livrée, hors chaleur (onduleur, câbles, poussière)
   butee:55,                                                      // un tracker ne pivote pas au-delà de 55°
   mois:['J','F','M','A','M','J','J','A','S','O','N','D']
 };
@@ -21,17 +24,19 @@ const SOL_MODELE={
 function solEclairement(jour,heure,incl,azim,suivi,clair){
   const r=Math.PI/180,L=SOL_MODELE.latitude*r,d=23.45*r*Math.sin(2*Math.PI*(284+jour)/365),w=(heure-12)*15*r;
   const hauteur=Math.sin(L)*Math.sin(d)+Math.cos(L)*Math.cos(d)*Math.cos(w);if(hauteur<=.02)return 0;
-  const direct=1.353*Math.pow(.7,Math.pow(1/hauteur,.678)),diffus=.1*direct*hauteur+.03,global=direct*hauteur+diffus;
+  const direct=1.353*Math.pow(.68,Math.pow(1/hauteur,.28)),diffus=.1*direct*hauteur+.03,global=direct*hauteur+diffus;
   let b=incl*r,g=azim*r;
   if(suivi){const cote=Math.cos(d)*Math.sin(w);b=Math.min(Math.atan2(Math.abs(cote),hauteur),SOL_MODELE.butee*r);g=(cote>0?90:-90)*r}
   const face=Math.sin(d)*Math.sin(L)*Math.cos(b)-Math.sin(d)*Math.cos(L)*Math.sin(b)*Math.cos(g)+Math.cos(d)*Math.cos(L)*Math.cos(b)*Math.cos(w)+Math.cos(d)*Math.sin(L)*Math.sin(b)*Math.cos(g)*Math.cos(w)+Math.cos(d)*Math.sin(b)*Math.sin(g)*Math.sin(w);
   const ciel=(1+Math.cos(b))/2,sol=.2*(1-Math.cos(b))/2;
   return clair*(direct*Math.max(0,face)+diffus*ciel+global*sol)+(1-clair)*.28*global*(ciel+sol);
 }
+/* ce que livre 1 kWc sous cet éclairement (kW) : les cellules chauffent d'environ 30 °C par kW/m² au-dessus de l'air */
+const solLivre=(g,m)=>g*SOL_MODELE.rendement*(1-SOL_MODELE.pertesTemp*(SOL_MODELE.tAir[m]+30*g-25));
 /* une année pour un réglage : production par mois et sur l'année (kWh par kWc), journée claire de juin (kW par kWc), heure du pic */
 function solAnnee(incl,azim,suivi){
-  const M=SOL_MODELE,mois=M.jourType.map((j,m)=>{let e=0;for(let h=4;h<=20;h+=.25)e+=solEclairement(j,h,incl,azim,suivi,M.beauTemps[m])*.25;return e*M.joursParMois[m]*M.rendement});
-  const juin=[];let pic=12,pMax=0;for(let h=4;h<=20;h+=.25){const v=solEclairement(162,h,incl,azim,suivi,1)*M.rendement;juin.push([h,v]);if(v>pMax+1e-9){pMax=v;pic=h}}
+  const M=SOL_MODELE,mois=M.jourType.map((j,m)=>{let e=0;for(let h=4;h<=20;h+=.25)e+=solLivre(solEclairement(j,h,incl,azim,suivi,M.beauTemps[m]),m)*.25;return e*M.joursParMois[m]});
+  const juin=[];let pic=12,pMax=0;for(let h=4;h<=20;h+=.25){const v=solLivre(solEclairement(162,h,incl,azim,suivi,1),5);juin.push([h,v]);if(v>pMax+1e-9){pMax=v;pic=h}}
   return{mois,total:mois.reduce((a,b)=>a+b,0),juin,pic};
 }
 
@@ -58,22 +63,22 @@ const SOL_ORIENTATION={
     {t:"Mission 1 · Le maximum sur l'année",vue:'mois',
       x:"Un hangar tout neuf, un toit qu'on peut tourner comme on veut. Le client veut « le maximum ». Trouve l'inclinaison et l'orientation qui produisent le plus sur l'année.",
       ok:r=>r.total>=SOL_REF.total*.99,
-      bravo:"Plein sud, entre 30 et 40° : la règle en France. Et regarde comme le sommet est plat : à 20° ou à 45°, on ne perd que 2 à 3 %. Inutile de se fâcher avec le charpentier pour cinq degrés.",
+      bravo:"Plein sud, entre 30 et 40° : la règle en France. Et regarde comme le sommet est plat : à 25° ou à 50°, on ne perd que 1 à 3 %. Inutile de se fâcher avec le charpentier pour cinq degrés.",
       indice:(r,s)=>Math.abs(s.azim)>15?"Regarde la boussole : à midi, le soleil est au sud. Tes panneaux regardent ailleurs.":s.incl<30?"Trop à plat : tu attrapes bien le soleil d'été, tu rates celui d'hiver. Redresse un peu.":"Trop debout : tu soignes l'hiver et tu sacrifies l'été, qui pèse bien plus lourd. Couche un peu."},
     {t:"Mission 2 · Le maximum en décembre",vue:'mois',
       x:"Un refuge de montagne chauffé à l'électricité, fermé tout l'été. Son seul problème s'appelle décembre. Règle les panneaux pour produire le plus possible ce mois-là.",
       ok:r=>r.mois[11]>=SOL_REF.decembre*.985,
-      bravo:"Entre 60 et 70° : en décembre, à midi, le soleil ne monte qu'à 23° au-dessus de l'horizon, alors on se redresse pour le regarder en face. Prix à payer : 8 à 15 % de moins sur l'année. Le « meilleur » réglage dépend de la question qu'on pose.",
+      bravo:"Entre 60 et 70° : en décembre, à midi, le soleil ne monte qu'à 23° au-dessus de l'horizon, alors on se redresse pour le regarder en face. Prix à payer : 5 à 11 % de moins sur l'année. Le « meilleur » réglage dépend de la question qu'on pose.",
       indice:(r,s)=>Math.abs(s.azim)>15?"En hiver, le soleil se lève tard, se couche tôt et reste au sud. Reviens-y.":s.incl<60?"Le soleil de décembre est très bas. Tes panneaux le regardent de travers : redresse encore.":"Là, c'est presque un mur. Un peu moins debout."},
     {t:"Mission 3 · Du courant le matin",vue:'jour',
       x:"Une école : la cantine chauffe dès 10 h, plus personne après 16 h 30. Fais tomber le pic d'une belle journée de juin à 10 h 30 au soleil, ou avant, sans perdre plus de 12 % sur l'année.",
       ok:r=>r.pic<=10.5&&r.total>=SOL_REF.total*.88,
-      bravo:"Tournés vers l'est-sud-est, les panneaux produisent quand l'école consomme. On y laisse une dizaine de pour cent, mais chaque kWh tombe au bon moment : il est consommé sur place au lieu d'être bradé à midi, quand tout le monde en a trop.",
+      bravo:"Tournés entre le sud-est et l'est-sud-est, les panneaux produisent quand l'école consomme. On y laisse 6 à 11 %, mais chaque kWh tombe au bon moment : il est consommé sur place au lieu d'être bradé à midi, quand tout le monde en a trop.",
       indice:r=>r.pic>10.5?"Le pic arrive encore trop tard. Le soleil du matin est à l'est : tourne les panneaux vers lui.":"Tu as le matin, mais tu as trop perdu sur l'année. Plein est ou très redressé, c'est trop : cherche entre le sud et l'est, pas trop debout."},
     {t:"Essai libre · Et si les panneaux bougeaient ?",vue:'jour',libre:1,bouton:'Rendre le pupitre',
       x:"Dernier réglage : coche « tracker ». Les panneaux pivotent d'est en ouest et suivent le soleil toute la journée. Compare la journée de juin, puis l'année.",
       fini:(r,e)=>e.suivi,
-      constat:(r,e)=>e.suivi?`Avec un tracker : ${fmt(Math.round(r.total/10)*10)} kWh par kWc, soit ${Math.round((r.total/SOL_REF.total-1)*100)} % de plus que le meilleur réglage fixe. Et la cloche de juin est devenue un plateau : on produit fort dès 8 h et jusqu'à 18 h.`:''}]
+      constat:(r,e)=>e.suivi?`Avec un tracker : ${fmt(Math.round(r.total/10)*10)} kWh par kWc, soit ${Math.round((r.total/SOL_REF.total-1)*100)} % de plus que le meilleur réglage fixe. Et la cloche de juin est devenue un plateau : on produit fort dès 8 h et jusqu'à 16 h.`:''}]
 };
 function solSimOrientation(fin){
   trk('voyage_sim',{site:'solaire',sim:'orientation'});
@@ -116,17 +121,17 @@ const SOL_JOURNEES=[
   {jour:'Jeudi',diag:'ombre',mesure:(t,a)=>a*(t<8.2?.3:t<9.8?.3+.7*(t-8.2)/1.6:1),
     bravo:"Le matin est mangé jusqu'à 9 h 45, puis tout rentre dans l'ordre : c'est une ombre portée, ici la colline à l'est. Elle revient chaque jour à la même heure, et on la retrouve dans la prévision une fois qu'on la connaît."},
   {jour:'Samedi',diag:'sale',mesure:(t,a)=>a*.91,
-    bravo:"Même forme, 9 % plus bas, du matin au soir : les modules sont sales. Lundi, il a plu du sable du Sahara. Soit on attend une vraie pluie, soit on nettoie : on compare le prix du lavage à celui des kWh perdus."},
+    bravo:"Même forme, 9 % plus bas, du matin au soir : les modules sont sales. Lundi, il a plu du sable du Sahara sur Saint-Photon. Soit on attend une vraie pluie, soit on nettoie : on compare le prix du lavage à celui des kWh perdus."},
   {jour:'Dimanche',diag:'ecretage',mesure:(t,a)=>Math.min(a,8),
-    bravo:"Un sommet raboté bien à plat, à 8 MW : la centrale a reçu la consigne de plafonner. Dimanche, grand soleil, peu de consommation : les prix étaient négatifs. Les modules pouvaient faire mieux, on leur a demandé de ne pas le faire."}
+    bravo:"Un sommet raboté bien à plat, à 8 MW : la centrale a reçu la consigne de plafonner. Dimanche, grand soleil, peu de consommation : il y avait trop d'électricité sur le réseau. Les modules pouvaient faire mieux, on leur a demandé de ne pas le faire."}
 ];
 /* la production attendue par ciel clair un jour de mai, en MW, à l'heure de la montre */
 const solAttendu=t=>t<=6.3||t>=20.9?0:10.2*Math.pow(Math.sin(Math.PI*(t-6.3)/14.6),1.25);
 function solSimCourbes(fin){
   trk('voyage_sim',{site:'solaire',sim:'courbes'});
-  const intro=info(`<h3>Qu'est-ce qui cloche ?</h3><p>Cinq journées de mai, toutes ensoleillées sur le papier. Pour chacune, l'écran montre deux courbes au pas de 10 minutes :</p><p><b>l'attendu</b> (en pointillés) : ce que la centrale devait produire par ciel clair ce jour-là ;<br><b>le mesuré</b> (en plein) : ce que le compteur du poste de livraison a vraiment vu passer.</p><p>Entre les deux, il y a toujours une histoire. Trouve laquelle.</p>`,'Voir mardi');
+  const intro=info(`<h3>Qu'est-ce qui cloche ?</h3><p>Cinq journées de mai, toutes ensoleillées sur le papier. Pour chacune, l'écran montre deux courbes au pas de 5 minutes :</p><p><b>l'attendu</b> (en pointillés) : ce que la centrale devait produire par ciel clair ce jour-là ;<br><b>le mesuré</b> (en plein) : ce que le compteur du poste de livraison a vraiment vu passer.</p><p>Entre les deux, il y a toujours une histoire. Trouve laquelle.</p>`,'Voir mardi');
   const cas=SOL_JOURNEES.map((J,n)=>(el,suite)=>{
-    const A=[],M=[];let eA=0,eM=0;for(let t=5;t<=22;t+=1/6){const a=solAttendu(t),m=Math.max(0,J.mesure(t,a));A.push([t,a]);M.push([t,m]);eA+=a/6;eM+=m/6}
+    const A=[],M=[];let eA=0,eM=0;for(let t=5;t<=22;t+=1/12){const a=solAttendu(t),m=Math.max(0,J.mesure(t,a));A.push([t,a]);M.push([t,m]);eA+=a/12;eM+=m/12}
     choice({title:`${J.jour} · journée ${n+1} sur ${SOL_JOURNEES.length}`,
       ctx:`<canvas class="chart" width="640" height="270" role="img" aria-label="Production attendue et mesurée, ${J.jour}"></canvas><p class="voy-bilan">Attendu : <b class="num">${Math.round(eA)} MWh</b> · Mesuré : <b class="num">${Math.round(eM)} MWh</b> · Écart : <b class="num">${Math.round((eM/eA-1)*100)} %</b></p>`,
       q:"Que s'est-il passé ?",opts:Object.entries(SOL_DIAGS).map(([k,[nom,non]])=>[nom,k===J.diag,k===J.diag?J.bravo:non])})(el,suite);

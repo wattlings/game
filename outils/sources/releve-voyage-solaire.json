@@ -463,11 +463,32 @@
   "texte": "Les meilleures heures de l'année tombent souvent au printemps, par temps clair, frais et un peu venté.",
   "affirmation": "Les puissances instantanées les plus élevées s'observent souvent au printemps (ciel clair, air frais, vent).",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Conséquence logique du coefficient de température (un module froid et bien éclairé donne plus), mais aucune source lue n'affirme que les meilleures heures tombent « souvent au printemps ». Proposition : « Les meilleures heures tombent par temps clair, frais et un peu venté : plus souvent au printemps qu'en pleine canicule. », ou appuyer la phrase sur les données de supervision d'un exploitant.",
-  "sources": []
+  "note": "Série horaire PVGIS 2014-2023 (35° plein sud, au point du site) : sur les 100 heures de plus forte production, 55 tombent en avril, 26 en mars, 17 en mai, aucune en juin, juillet ou août ; la meilleure heure de chaque année tombe en mars, avril ou mai. Ces heures ont un vent moyen de 5,1 m/s (2,3 m/s en moyenne sur les heures de jour) et un air entre 6 et 17 °C. Comparaison citée : la meilleure heure de juillet sur dix ans (835 W) reste sous les meilleures d'avril (946 W) pour un éclairement voisin. Comptage fait sur le fichier lu ; les passages sont des lignes du fichier.",
+  "sources": [
+   {
+    "cle": "jrc-pvgis-sp-horaire-10ans",
+    "passage": "{\"time\":\"20210407:1110\",\"P\":946.46,\"G(i)\":1131.04,\"H_sun\":52.33,\"T2m\":6.46,\"WS10m\":5.38,\"Int\":0.0}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-10ans",
+    "passage": "{\"time\":\"20230327:1210\",\"P\":926.69,\"G(i)\":1118.09,\"H_sun\":48.13,\"T2m\":12.23,\"WS10m\":7.38,\"Int\":0.0}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-10ans",
+    "passage": "{\"time\":\"20170428:1110\",\"P\":914.72,\"G(i)\":1108.56,\"H_sun\":59.75,\"T2m\":11.62,\"WS10m\":6.34,\"Int\":0.0}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-10ans",
+    "passage": "{\"time\":\"20160714:1110\",\"P\":835.23,\"G(i)\":1046.97,\"H_sun\":66.78,\"T2m\":19.95,\"WS10m\":6.48,\"Int\":0.0}",
+    "relu": true
+   }
+  ]
  },
  {
   "id": "vs-028",
@@ -645,41 +666,63 @@
   "texte": "puis le poste de livraison le remet au gestionnaire de réseau",
   "affirmation": "Le poste de livraison est l'interface entre l'installation de production et le réseau public de distribution.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Notion standard (poste de livraison HTA, norme NF C 13-100), mentionnée dans les documents Enedis lus (« Protection générale de poste de livraison NF C 13-100 ») sans définition citable. À étayer avec le modèle de convention de raccordement HTA d'Enedis (non lu).",
-  "sources": []
+  "note": "La limite de propriété entre l'installation et le réseau public géré par Enedis est fixée dans les cellules « arrivée » du poste de livraison (convention de raccordement HTA d'une installation de production, conditions générales).",
+  "sources": [
+   {
+    "cle": "enedis-mop-res-055e",
+    "passage": "Les Ouvrages de Raccordement situés en amont de la Limite de Propriété des ouvrages électriques du Demandeur, y compris ceux situés dans le domaine privé du Demandeur, font partie du Réseau Public de Distribution géré par Enedis.",
+    "relu": true,
+    "page": "§ 3.2.1"
+   },
+   {
+    "cle": "enedis-mop-res-055e",
+    "passage": "dans le cas d’un raccordement souterrain, immédiatement en amont des bornes de raccordement des extrémités de câbles dans les cellules \"arrivée\" du poste de livraison",
+    "relu": true,
+    "page": "§ 3.2.1"
+   }
+  ]
  },
  {
   "id": "vs-038",
   "fichier": "jeu/voyages/solaire/textes.js",
   "repere": "info reseau › x",
   "info": "reseau",
-  "texte": "C'est là que se trouve le compteur de production : une courbe de charge au pas de 10 minutes, exactement comme pour un bâtiment, mais dans l'autre sens.",
-  "affirmation": "Le compteur du producteur (au poste de livraison) enregistre une courbe de charge au pas de 10 minutes.",
+  "texte": "C'est là que se trouve le compteur de production : une courbe de charge au pas de 5 minutes, exactement comme pour un bâtiment, mais dans l'autre sens.",
+  "affirmation": "Le compteur du producteur (au poste de livraison) enregistre une courbe de charge au pas de 5 minutes.",
   "type": "regle",
-  "verdict": "a-corriger",
+  "verdict": "corrige",
   "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "C'est là que se trouve le compteur de production : une courbe de charge au pas de 5 minutes, exactement comme pour un bâtiment, mais dans l'autre sens.",
-  "note": "Pour les sites HTA et BT > 36 kVA, Enedis enregistre et publie les courbes au pas nominal de 5 minutes depuis le 8 décembre 2025 (soutirage et injection) ; quelques compteurs restent au pas 10 minutes. Le pas 10 minutes était exact jusqu'en 2025.",
+  "correction": null,
+  "note": "Enedis enregistre et publie les courbes de charge des sites HTA et BT > 36 kVA au pas nominal de 5 minutes (depuis le 8 décembre 2025 pour la transmission récurrente), en injection comme en soutirage ; quelques compteurs restent au pas 10 minutes.",
   "sources": [
    {
     "cle": "enedis-nmo-cf-015e",
     "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes",
-    "relu": null
+    "relu": true,
+    "page": "§ 4.1.2"
    },
    {
     "cle": "enedis-nmo-cf-015e",
-    "passage": "Pour Enedis, depuis le 8 décembre 2025",
-    "relu": null
+    "passage": "Pour Enedis, depuis le 8 décembre 2025.",
+    "relu": true,
+    "page": "§ 4.1.2, note 3"
+   },
+   {
+    "cle": "enedis-nmo-cf-015e",
+    "passage": "Courbe de charge active et réactive pour le soutirage et l’injection, courbe de tension.",
+    "relu": true
    },
    {
     "cle": "enedis-nmo-cf-077e",
-    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes.",
-    "relu": null
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes1. Il peut rester quelques compteurs dont le pas d’enregistrement est encore au pas 10 minutes2.",
+    "relu": true,
+    "page": "§ 1.3.2, p. 6"
    }
-  ]
+  ],
+  "avant": "C'est là que se trouve le compteur de production : une courbe de charge au pas de 10 minutes, exactement comme pour un bâtiment, mais dans l'autre sens."
  },
  {
   "id": "vs-039",
@@ -746,11 +789,42 @@
   "texte": "et surtout une courbe plus large, le matin et le soir",
   "affirmation": "Avec un tracker, le profil journalier est plus large (plus de production le matin et le soir).",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Effet connu et visible dans le simulateur, mais aucune source lue ne le dit explicitement (la fiche IEA-PVPS ne donne que le gain annuel). Proposition : garder, et appuyer par une simulation PVGIS horaire (« suivi à un axe ») faite à la main, PVGIS étant inaccessible depuis cet environnement.",
-  "sources": []
+  "note": "Série horaire PVGIS 2023 au point du site, journée claire du 25 juin (heures UTC, soit environ 25 min de moins que l'heure solaire) : le champ fixe à 35° fait 0,31 kW/kWc à 7 h 10 UTC, 0,76 à 11 h 10 et 0,29 à 16 h 10 ; le tracker fait 0,68, 0,73 et 0,68 aux mêmes heures : un plateau d'environ 7 h 30 à 16 h 30 au soleil.",
+  "sources": [
+   {
+    "cle": "jrc-pvgis-sp-horaire-fixe",
+    "passage": "{\"time\":\"20230625:0710\",\"P\":309.14,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-fixe",
+    "passage": "{\"time\":\"20230625:1110\",\"P\":759.42,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-fixe",
+    "passage": "{\"time\":\"20230625:1610\",\"P\":293.12,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-tracker",
+    "passage": "{\"time\":\"20230625:0710\",\"P\":678.8,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-tracker",
+    "passage": "{\"time\":\"20230625:1110\",\"P\":732.6,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-tracker",
+    "passage": "{\"time\":\"20230625:1610\",\"P\":682.51,",
+    "relu": true
+   }
+  ]
  },
  {
   "id": "vs-043",
@@ -1634,14 +1708,33 @@
   "fichier": "jeu/voyages/solaire/textes.js",
   "repere": "SOL.dit.cellule[1]",
   "info": "effet",
-  "texte": "Un photon, un électron, du courant continu. La physique la plus rentable du site tient dans dix centimètres.",
-  "affirmation": "Une cellule photovoltaïque mesure une dizaine de centimètres.",
+  "texte": "Un photon, un électron, du courant continu. La physique la plus rentable du site tient dans neuf centimètres sur dix-huit.",
+  "affirmation": "Une demi-cellule d'un module LONGi LR5 (celui du site) mesure environ 9 × 18 cm.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "L'effet (photon, électron, courant continu) est sourcé ailleurs (CEA). La taille « dix centimètres » n'a pas de source lue : le module de 430 Wc pris en référence compte 108 demi-cellules, et les cellules actuelles mesurent plutôt 18 cm de côté (9 cm une fois coupées en deux, ce que montre justement la vitrine). Proposition : garder si la vitrine montre bien une demi-cellule, sinon écrire « tient dans une vingtaine de centimètres ».",
-  "sources": []
+  "note": "Le module de référence (LR5-54HTH-430M) a des demi-cellules de 182 × 91 mm : la vitrine montre une cellule coupée en deux, donc 9 cm sur 18, pas « dix centimètres ».",
+  "sources": [
+   {
+    "cle": "csa-longi-certificat-80027925",
+    "passage": "LR5 is for models with 182mm cells.",
+    "relu": true,
+    "page": "p. 3, note 12"
+   },
+   {
+    "cle": "csa-longi-certificat-80027925",
+    "passage": "All modules model with suffix ‘HTH’ are models with 1/2 cut cells T technology high voltage.",
+    "relu": true,
+    "page": "p. 3, note 16"
+   },
+   {
+    "cle": "csa-longi-certificat-80027925",
+    "passage": "half cut 182(±2) x 91(±2) mm",
+    "relu": true
+   }
+  ],
+  "avant": "Un photon, un électron, du courant continu. La physique la plus rentable du site tient dans dix centimètres."
  },
  {
   "id": "vs-094",
@@ -1736,14 +1829,36 @@
   "fichier": "jeu/voyages/solaire/textes.js",
   "repere": "SOL.dit.crete[1]",
   "info": "chaleur",
-  "texte": "Par contre, en avril, par mistral, ils se surpassent.",
-  "affirmation": "Les meilleures puissances s'observent au printemps, par temps frais et venté.",
+  "texte": "Par contre, en avril, par grand vent frais, ils se surpassent.",
+  "affirmation": "Les meilleures puissances s'observent au printemps (avril), par temps frais et venté.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Même affirmation que l'info chaleur (meilleures puissances au printemps, par temps frais et venté) : plausible, non sourcée. Le vent refroidit bien les modules (la norme NOCT fixe 1 m/s de vent), mais « ils se surpassent en avril » reste à étayer.",
-  "sources": []
+  "note": "Série horaire PVGIS 2014-2023 (35° plein sud, au point du site) : sur les 100 heures de plus forte production, 55 tombent en avril, 26 en mars, 17 en mai, aucune en juin, juillet ou août ; la meilleure heure de chaque année tombe en mars, avril ou mai. Ces heures ont un vent moyen de 5,1 m/s (2,3 m/s en moyenne sur les heures de jour) et un air entre 6 et 17 °C. Comparaison citée : la meilleure heure de juillet sur dix ans (835 W) reste sous les meilleures d'avril (946 W) pour un éclairement voisin. Comptage fait sur le fichier lu ; les passages sont des lignes du fichier. PVGIS (ERA5) donne la vitesse du vent, pas sa direction : « mistral » remplacé par « grand vent frais », qui est ce que montrent les données.",
+  "sources": [
+   {
+    "cle": "jrc-pvgis-sp-horaire-10ans",
+    "passage": "{\"time\":\"20210407:1110\",\"P\":946.46,\"G(i)\":1131.04,\"H_sun\":52.33,\"T2m\":6.46,\"WS10m\":5.38,\"Int\":0.0}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-10ans",
+    "passage": "{\"time\":\"20230327:1210\",\"P\":926.69,\"G(i)\":1118.09,\"H_sun\":48.13,\"T2m\":12.23,\"WS10m\":7.38,\"Int\":0.0}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-10ans",
+    "passage": "{\"time\":\"20170428:1110\",\"P\":914.72,\"G(i)\":1108.56,\"H_sun\":59.75,\"T2m\":11.62,\"WS10m\":6.34,\"Int\":0.0}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-10ans",
+    "passage": "{\"time\":\"20160714:1110\",\"P\":835.23,\"G(i)\":1046.97,\"H_sun\":66.78,\"T2m\":19.95,\"WS10m\":6.48,\"Int\":0.0}",
+    "relu": true
+   }
+  ],
+  "avant": "Par contre, en avril, par mistral, ils se surpassent."
  },
  {
   "id": "vs-100",
@@ -2028,13 +2143,24 @@
   "repere": "SOL.dit.palette[0][0]",
   "info": "carbone",
   "texte": "Sur l'un d'eux, un autocollant de 2009 : 180 Wc.",
-  "affirmation": "Un module posé en 2009 affichait de l'ordre de 180 Wc.",
+  "affirmation": "Un module de la fin des années 2000 affichait de l'ordre de 180 Wc.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Accessoire fictif plausible (les modules courants de 2009 faisaient 170 à 230 Wc), mais aucune fiche technique d'époque n'a été lue. Fraunhofer ISE indique seulement que le rendement des modules commerciaux est passé « d'environ 17 % à un peu moins de 25 % » en dix ans. Proposition : garder.",
-  "sources": []
+  "note": "Fiche Sharp de 2006 d'un module courant de 180 W (rendement 13,8 %, contre 22 % pour le module de 430 Wc du site) : un module posé en 2009 à 180 Wc est conforme à l'époque. L'autocollant lui-même est un accessoire du jeu.",
+  "sources": [
+   {
+    "cle": "sharp-nt-180u1",
+    "passage": "This mono-crystalline 180 watt module features 13.8% module efficiency",
+    "relu": true
+   },
+   {
+    "cle": "sharp-nt-180u1",
+    "passage": "SSD-180-506 ©2006 Sharp Electronics Corporation",
+    "relu": true
+   }
+  ]
  },
  {
   "id": "vs-116",
@@ -2496,13 +2622,13 @@
   "fichier": "jeu/voyages/solaire/textes.js",
   "repere": "question 6 › mauvaise réponse 1",
   "info": "batiment",
-  "texte": "Efficace, mais c'est le levier le plus cher. On commence par déplacer.",
-  "affirmation": "La batterie est le levier le plus coûteux pour augmenter l'autoconsommation.",
-  "type": "fait",
-  "verdict": "sans-source",
+  "texte": "Efficace, mais c'est un appareil de plus à acheter. On commence par déplacer : ça, c'est gratuit.",
+  "affirmation": "Une batterie est un investissement ; déplacer des usages n'en demande pas, d'où l'ordre conseillé.",
+  "type": "methode",
+  "verdict": "sans-objet",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Aucune source lue ne compare le coût des leviers (le cahier des charges ADEME « étude d'autoconsommation » est bloqué par robots.txt). Proposition : « Efficace, mais c'est un investissement de plus. On commence par déplacer : ça ne coûte rien. »",
+  "note": "Aucune source lisible ne compare le coût des leviers (avis ADEME autoconsommation 2025, photovoltaique.info, rapport CGE flexibilité : bloqués ou illisibles depuis l'outil ; délibération CRE 2025-69 lue, sans comparaison de coûts). Texte reformulé pour ne plus affirmer que la batterie est « le levier le plus cher » : il ne dit plus que ce qui est évident (une batterie s'achète, une programmation non) et l'ordre conseillé, propre au cours.",
   "sources": []
  },
  {
@@ -2543,19 +2669,35 @@
   "repere": "Incline et oriente › chiffres « décembre · juin »",
   "info": "variable",
   "texte": "'décembre · juin'",
-  "affirmation": "Le simulateur affiche, à 35° plein sud, environ 52 kWh/kWc en décembre et 174 en juin (rapport 3,4).",
+  "affirmation": "Le simulateur affiche, à 35° plein sud, environ 86 kWh/kWc en décembre et 141 en juin, pour 1 450 sur l'année.",
   "type": "fait",
-  "verdict": "a-corriger",
+  "verdict": "corrige",
   "attente": "Simulateur solaire à recaler",
-  "correction": "Recaler le modèle (tableau beauTemps et part de diffus de SOL_MODELE) pour que le réglage de référence donne environ 85-90 kWh/kWc en décembre et 155-165 en juin, au lieu de 52 et 174 : en Provence, l'écart décembre/juin d'un plan incliné à 35-38° est d'un facteur 1,8 à 1,9, pas 3,4.",
-  "note": "Le simulateur présente ses chiffres mensuels comme ceux du site : il sous-estime décembre d'environ 40 % (52 contre 88 kWh/kWc) et surestime juin (174 contre 155). Le total annuel reste bon. Conséquence : la mission 2 (« décembre ») garde son sens, mais ses valeurs affichées sont trop basses. PVGIS non interrogeable d'ici : contrôle fait avec le Global Solar Atlas.",
+  "correction": null,
+  "note": "Modèle recalé sur PVGIS (35° plein sud : déc. 91, juin 151, an 1 543 kWh/kWc, ramenés à 1 450 sur l'année) : atmosphère plus transparente par soleil bas (0,68^(AM^0,28), calée sur le ciel clair PVGIS de décembre et juin), pertes de chaleur explicites (−0,29 %/°C, cellules à air + 30 °C par kW/m², air de 6 à 28 °C selon le mois, tiré de la série PVGIS), rendement hors chaleur 0,86, part de ciel clair réajustée mois par mois. Résultat : déc. 86, juin 141, juil. 155, an 1 450 ; optimum 40° (PVGIS : 40°) ; 20° → 96,4 % de 35° (PVGIS 95,3), 60° → 94,9 % (95,6), 70° → 89,1 % (89,6), 60° vers l'est → 90,3 % (89,1), tracker → +22 % (PVGIS sans butée +18 %, IEA ~20 %). Les quatre missions restent faisables. Le passage GSA est repris de vs-143.",
   "sources": [
+   {
+    "cle": "jrc-pvgis-sp-35",
+    "passage": "{\"month\":12,\"E_d\":2.94,\"E_m\":91.06,\"H(i)_d\":3.46,\"H(i)_m\":107.2,\"SD_m\":11.23}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-35",
+    "passage": "{\"month\":6,\"E_d\":5.02,\"E_m\":150.63,\"H(i)_d\":6.66,\"H(i)_m\":199.87,\"SD_m\":7.18}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-35",
+    "passage": "\"E_y\":1542.61",
+    "relu": true
+   },
    {
     "cle": "gsa-saint-photon",
     "passage": "Requête loc=44.0,5.95 : PVOUT_csi = 1 576,8 kWh/kWc/an ; inclinaison optimale OPTA = 38° ; mensuel : déc. 88,1 ; juin 155,2 ; juil. 167,4 kWh/kWc",
-    "relu": null
+    "relu": true
    }
-  ]
+  ],
+  "avant": "Modèle (beauTemps .50-.84, rendement .878, atmosphère 0,7^(AM^0,678)) : 52 kWh/kWc en décembre, 174 en juin à 35° plein sud"
  },
  {
   "id": "vs-145",
@@ -2615,14 +2757,36 @@
   "fichier": "jeu/voyages/solaire/simulations.js",
   "repere": "Mission 1 › bravo",
   "info": "tracker",
-  "texte": "à 20° ou à 45°, on ne perd que 2 à 3 %",
-  "affirmation": "À 20° ou 45° d'inclinaison (plein sud), on ne perd que 2 à 3 % de production annuelle.",
+  "texte": "à 25° ou à 50°, on ne perd que 1 à 3 %",
+  "affirmation": "À 25° ou 50° d'inclinaison (plein sud), on ne perd que 1 à 3 % de production annuelle par rapport à l'optimum.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Sortie du modèle du jeu, cohérente avec les abaques usuels, mais non vérifiable ici : PVGIS (API et outil) est inaccessible et les pages de photovoltaique.info sont illisibles par l'outil de lecture. À vérifier à la main dans PVGIS avant de l'afficher comme un fait. Valeurs du modèle : 98,0 % à 20° et 98,4 % à 45°.",
-  "sources": []
+  "note": "PVGIS au point du site : optimum 40° (1 548 kWh/kWc), 25° : 1 503 (−2,9 %), 50° : 1 530 (−1,2 %) ; à 20° on perdait 5 %, d'où la correction. Le modèle recalé du jeu donne −2 % et −1,5 %.",
+  "sources": [
+   {
+    "cle": "jrc-pvgis-sp-optimum",
+    "passage": "\"slope\":{\"value\":40,\"optimal\":true}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-optimum",
+    "passage": "\"E_y\":1547.84",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-25",
+    "passage": "\"totals\":{\"fixed\":{\"E_d\":4.12,\"E_m\":125.26,\"E_y\":1503.07",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-50",
+    "passage": "\"totals\":{\"fixed\":{\"E_d\":4.19,\"E_m\":127.49,\"E_y\":1529.93",
+    "relu": true
+   }
+  ],
+  "avant": "à 20° ou à 45°, on ne perd que 2 à 3 %"
  },
  {
   "id": "vs-148",
@@ -2664,11 +2828,32 @@
   "texte": "Entre 60 et 70° : en décembre, à midi",
   "affirmation": "La production de décembre est maximale pour une inclinaison de 60 à 70° (plein sud) en Provence.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Sortie du modèle du jeu, cohérente avec les abaques usuels, mais non vérifiable ici : PVGIS (API et outil) est inaccessible et les pages de photovoltaique.info sont illisibles par l'outil de lecture. À vérifier à la main dans PVGIS avant de l'afficher comme un fait. Géométriquement, un soleil à 23° de hauteur frappe de face un plan incliné à 67°.",
-  "sources": []
+  "note": "PVGIS au point du site, production de décembre : 91 kWh/kWc à 35°, 107 à 60°, 109 à 70°, 109 à 75° : le maximum est atteint vers 70°, et 60-70° en sont à moins de 2 %. Le modèle recalé du jeu donne 100 à 60° et 101 à 70°.",
+  "sources": [
+   {
+    "cle": "jrc-pvgis-sp-35",
+    "passage": "{\"month\":12,\"E_d\":2.94,\"E_m\":91.06,\"H(i)_d\":3.46,\"H(i)_m\":107.2,\"SD_m\":11.23}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-60",
+    "passage": "{\"month\":12,\"E_d\":3.47,\"E_m\":107.42,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-70",
+    "passage": "{\"month\":12,\"E_d\":3.52,\"E_m\":108.98,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-75",
+    "passage": "{\"month\":12,\"E_d\":3.51,\"E_m\":108.69,",
+    "relu": true
+   }
+  ]
  },
  {
   "id": "vs-151",
@@ -2688,14 +2873,36 @@
   "fichier": "jeu/voyages/solaire/simulations.js",
   "repere": "Mission 2 › bravo",
   "info": "tracker",
-  "texte": "Prix à payer : 8 à 15 % de moins sur l'année.",
-  "affirmation": "Incliner à 60-70° coûte 8 à 15 % de production annuelle par rapport à l'optimum.",
+  "texte": "Prix à payer : 5 à 11 % de moins sur l'année.",
+  "affirmation": "Incliner à 60-70° coûte 5 à 11 % de production annuelle par rapport à l'optimum.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Sortie du modèle du jeu, cohérente avec les abaques usuels, mais non vérifiable ici : PVGIS (API et outil) est inaccessible et les pages de photovoltaique.info sont illisibles par l'outil de lecture. À vérifier à la main dans PVGIS avant de l'afficher comme un fait. Valeurs du modèle : 91,7 % à 60° et 84,5 % à 70°.",
-  "sources": []
+  "note": "PVGIS : 1 475 kWh/kWc à 60° et 1 383 à 70°, contre 1 548 à l'optimum (40°) : −4,7 % et −10,7 %. Le modèle recalé du jeu donne −5 % et −11 %.",
+  "sources": [
+   {
+    "cle": "jrc-pvgis-sp-optimum",
+    "passage": "\"slope\":{\"value\":40,\"optimal\":true}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-optimum",
+    "passage": "\"E_y\":1547.84",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-60",
+    "passage": "\"totals\":{\"fixed\":{\"E_d\":4.04,\"E_m\":122.9,\"E_y\":1474.83",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-70",
+    "passage": "\"totals\":{\"fixed\":{\"E_d\":3.79,\"E_m\":115.22,\"E_y\":1382.6",
+    "relu": true
+   }
+  ],
+  "avant": "Prix à payer : 8 à 15 % de moins sur l'année."
  },
  {
   "id": "vs-153",
@@ -2728,14 +2935,36 @@
   "fichier": "jeu/voyages/solaire/simulations.js",
   "repere": "Mission 3 › bravo",
   "info": "tracker",
-  "texte": "Tournés vers l'est-sud-est, les panneaux produisent quand l'école consomme. On y laisse une dizaine de pour cent",
-  "affirmation": "Une orientation est-sud-est avance le pic de production vers le matin et coûte une dizaine de pour cent de production annuelle.",
+  "texte": "Tournés entre le sud-est et l'est-sud-est, les panneaux produisent quand l'école consomme. On y laisse 6 à 11 %",
+  "affirmation": "Orientés entre le sud-est et 60° vers l'est, des panneaux à 35° perdent 6 à 11 % de production annuelle par rapport à l'optimum.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Sortie du modèle du jeu, cohérente avec les abaques usuels, mais non vérifiable ici : PVGIS (API et outil) est inaccessible et les pages de photovoltaique.info sont illisibles par l'outil de lecture. À vérifier à la main dans PVGIS avant de l'afficher comme un fait. Valeur du modèle : 90,2 % à 35° d'inclinaison et 60° vers l'est, pic à 10 h 30 solaire.",
-  "sources": []
+  "note": "PVGIS à 35° : 1 447 kWh/kWc plein sud-est (−6,5 %), 1 375 à 60° vers l'est (−11,2 %), contre 1 548 à l'optimum. La mission accepte les deux (pic à 10 h 30 au plus tard, perte ≤ 12 %) : le texte donne maintenant la fourchette au lieu d'« une dizaine de pour cent » vers l'est-sud-est seul.",
+  "sources": [
+   {
+    "cle": "jrc-pvgis-sp-optimum",
+    "passage": "\"slope\":{\"value\":40,\"optimal\":true}",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-optimum",
+    "passage": "\"E_y\":1547.84",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-sud-est",
+    "passage": "\"totals\":{\"fixed\":{\"E_d\":3.97,\"E_m\":120.62,\"E_y\":1447.4",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-est-sud-est",
+    "passage": "\"totals\":{\"fixed\":{\"E_d\":3.77,\"E_m\":114.6,\"E_y\":1375.2",
+    "relu": true
+   }
+  ],
+  "avant": "Tournés vers l'est-sud-est, les panneaux produisent quand l'école consomme. On y laisse une dizaine de pour cent"
  },
  {
   "id": "vs-156",
@@ -2780,14 +3009,46 @@
   "fichier": "jeu/voyages/solaire/simulations.js",
   "repere": "Essai libre › constat",
   "info": "tracker",
-  "texte": "Et la cloche de juin est devenue un plateau : on produit fort dès 8 h et jusqu'à 18 h.",
-  "affirmation": "Avec un tracker, le profil d'une journée claire de juin s'élargit en plateau, avec une production élevée de 8 h à 18 h (heure solaire).",
+  "texte": "Et la cloche de juin est devenue un plateau : on produit fort dès 8 h et jusqu'à 16 h.",
+  "affirmation": "Avec un tracker, le profil d'une journée claire de juin s'élargit en plateau, avec une production élevée de 8 h à 16 h (heure solaire).",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "corrige",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Même remarque que l'info tracker : le plateau de 8 h à 18 h est une sortie du modèle du jeu (0,79 kW/kWc à 8 h, 0,49 à 18 h, heure solaire, soit une courbe non symétrique autour de midi : 18 h correspond à 6 h du matin, pas à 8 h). Proposition : « on produit fort dès 8 h et jusqu'à 16 h » (symétrique), ou vérifier avec PVGIS.",
-  "sources": []
+  "note": "Série horaire PVGIS 2023 au point du site, journée claire du 25 juin (heures UTC, soit environ 25 min de moins que l'heure solaire) : le champ fixe à 35° fait 0,31 kW/kWc à 7 h 10 UTC, 0,76 à 11 h 10 et 0,29 à 16 h 10 ; le tracker fait 0,68, 0,73 et 0,68 aux mêmes heures : un plateau d'environ 7 h 30 à 16 h 30 au soleil. « jusqu'à 18 h » n'était pas symétrique autour de midi solaire ; le modèle recalé du jeu donne lui aussi 0,76 kW/kWc à 8 h comme à 16 h.",
+  "sources": [
+   {
+    "cle": "jrc-pvgis-sp-horaire-fixe",
+    "passage": "{\"time\":\"20230625:0710\",\"P\":309.14,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-fixe",
+    "passage": "{\"time\":\"20230625:1110\",\"P\":759.42,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-fixe",
+    "passage": "{\"time\":\"20230625:1610\",\"P\":293.12,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-tracker",
+    "passage": "{\"time\":\"20230625:0710\",\"P\":678.8,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-tracker",
+    "passage": "{\"time\":\"20230625:1110\",\"P\":732.6,",
+    "relu": true
+   },
+   {
+    "cle": "jrc-pvgis-sp-horaire-tracker",
+    "passage": "{\"time\":\"20230625:1610\",\"P\":682.51,",
+    "relu": true
+   }
+  ],
+  "avant": "Et la cloche de juin est devenue un plateau : on produit fort dès 8 h et jusqu'à 18 h."
  },
  {
   "id": "vs-159",
@@ -2917,18 +3178,18 @@
   "fichier": "jeu/voyages/solaire/simulations.js",
   "repere": "Qu'est-ce qui cloche › Samedi",
   "info": "cloche",
-  "texte": "Même forme, 9 % plus bas, du matin au soir : les modules sont sales. Lundi, il a plu du sable du Sahara.",
-  "affirmation": "Un dépôt de poussières sahariennes peut faire perdre de l'ordre de 9 % de production jusqu'au prochain lavage.",
-  "type": "fait",
-  "verdict": "sans-source",
+  "texte": "Même forme, 9 % plus bas, du matin au soir : les modules sont sales. Lundi, il a plu du sable du Sahara sur Saint-Photon.",
+  "affirmation": "Le samedi du jeu, après une pluie de sable saharien sur le site, la production mesurée est 9 % sous l'attendu.",
+  "type": "fictif",
+  "verdict": "sans-objet",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "L'IEA-PVPS donne 3 à 5 % de pertes annuelles moyennes dans le monde. Une perte de 9 % après un épisode de poussières sahariennes est plausible mais n'a pas de source lue. Proposition : garder comme scénario, ou ramener à « 5 % plus bas » pour rester dans la fourchette sourcée.",
+  "note": "Le 9 % est l'écart de la journée inventée (mesure = attendu × 0,91 dans simulations.js) et l'épisode de sable est un événement du site, désormais situé « sur Saint-Photon ». Aucune source lisible ne donne la perte typique après un dépôt de poussières sahariennes (rapport complet IEA-PVPS T13 derrière un formulaire, articles Micheli 2024 et Jaén non accessibles) ; pour ordre de grandeur, l'IEA-PVPS donne 3 à 5 % de pertes annuelles moyennes par salissure dans le monde. La forme (même cloche, plus basse) est sourcée à part (vs-163).",
   "sources": [
    {
     "cle": "iea-pvps-salissures",
-    "passage": "soiling is estimated to cause a loss of annual PV energy production of 3-5%, corresponding to an economic loss on the order of 3-5 billion euros",
-    "relu": null
+    "passage": "soiling is estimated to cause a loss of annual PV energy production of 3-5%",
+    "relu": true
    }
   ]
  },
@@ -2950,30 +3211,32 @@
   "fichier": "jeu/voyages/solaire/simulations.js",
   "repere": "Qu'est-ce qui cloche › Dimanche",
   "info": "midi",
-  "texte": "Un sommet raboté bien à plat, à 8 MW : la centrale a reçu la consigne de plafonner. Dimanche, grand soleil, peu de consommation : les prix étaient négatifs.",
-  "affirmation": "Lors d'un épisode de prix négatifs (dimanche ensoleillé, faible consommation), la centrale reçoit une consigne de plafonnement à 8 MW.",
+  "texte": "Un sommet raboté bien à plat, à 8 MW : la centrale a reçu la consigne de plafonner. Dimanche, grand soleil, peu de consommation : il y avait trop d'électricité sur le réseau.",
+  "affirmation": "Un dimanche ensoleillé et de faible consommation, il y a trop d'électricité sur le réseau et la centrale reçoit une consigne de plafonnement.",
   "type": "fait",
-  "verdict": "a-corriger",
+  "verdict": "corrige",
   "attente": "Simulateur solaire à recaler",
-  "correction": "Un sommet raboté bien à plat, à 8 MW : la centrale a reçu la consigne de plafonner. Dimanche, grand soleil, peu de consommation : il y avait trop d'électricité sur le réseau.",
-  "note": "Imprécis : quand le prix devient négatif, une centrale sous complément de rémunération s'arrête complètement (la prime est conditionnée à la non-production) ; la courbe montre alors un trou jusqu'à zéro, pas un plateau aux deux tiers. Un plateau à 8 MW correspond plutôt à une limitation de puissance demandée par le réseau ou à la saturation des onduleurs. Soit on garde le plateau en retirant la mention des prix négatifs (correction proposée), soit on ajoute une sixième courbe « arrêt pour prix négatif ». À noter aussi : en 2025, la moitié des heures négatives sont tombées en semaine.",
+  "correction": null,
+  "note": "Quand le prix devient négatif, une centrale sous complément de rémunération a intérêt à s'arrêter complètement (trou jusqu'à zéro), pas à plafonner aux deux tiers : la mention des prix négatifs est retirée, le plateau reste une consigne de limitation par trop-plein d'électricité. Passage CRE relu dans la note de novembre 2024 ; passages RTE repris des lignes vs-071 et vs-073 (déjà lus).",
   "sources": [
    {
+    "cle": "rte-be2025-prix",
+    "passage": "the mid-day plateau has become a trough, as a result of lower consumption levels combined with the growth of solar generation in France and ",
+    "relu": true
+   },
+   {
+    "cle": "rte-be2025-synthese",
+    "passage": "The modulation of solar and wind farms during periods of negative spot prices doubled by volume in 2025 compared with the previous year, reaching around 3 TWh",
+    "relu": true
+   },
+   {
     "cle": "cre-prix-negatifs",
-    "passage": "ceux sous complément de rémunération (CR) sont contractuellement incités à s'arrêter, sous peine de perdre le bénéfice du CR et de la prime pour prix négatifs",
-    "relu": null
-   },
-   {
-    "cle": "rte-be2025-prix",
-    "passage": "renewable energy sources that benefit from the premium scheme have an economic incentive to stop generating",
-    "relu": null
-   },
-   {
-    "cle": "rte-be2025-prix",
-    "passage": "51% of hours with negative prices were recorded on weekdays in 2025, compared with 32% in 2024",
-    "relu": null
+    "passage": "ceux sous complément de rémunération (CR) sont contractuellement incités à s’arrêter, sous peine de perdre le bénéfice du CR et de la prime pour prix négatifs",
+    "relu": true,
+    "page": "§ 1"
    }
-  ]
+  ],
+  "avant": "Un sommet raboté bien à plat, à 8 MW : la centrale a reçu la consigne de plafonner. Dimanche, grand soleil, peu de consommation : les prix étaient négatifs."
  },
  {
   "id": "vs-171",
@@ -2993,25 +3256,28 @@
   "fichier": "jeu/voyages/solaire/simulations.js",
   "repere": "Qu'est-ce qui cloche › introduction",
   "info": "reseau",
-  "texte": "l'écran montre deux courbes au pas de 10 minutes",
-  "affirmation": "Les courbes de production (attendu et mesuré au compteur) sont au pas de 10 minutes.",
+  "texte": "l'écran montre deux courbes au pas de 5 minutes",
+  "affirmation": "Les courbes de production (attendu et mesuré au compteur) sont au pas de 5 minutes.",
   "type": "regle",
-  "verdict": "a-corriger",
+  "verdict": "corrige",
   "attente": "Pas de la courbe de charge : 10 min partout, alors qu'Enedis relève à 5 min depuis fin 2025",
-  "correction": "l'écran montre deux courbes au pas de 5 minutes",
-  "note": "Même correction que l'info « reseau ». Dans simulations.js, le calcul avance par pas de 1/6 d'heure (t+=1/6, eA+=a/6) : passer à 1/12 si l'on veut que le tracé corresponde au texte. Variante sans toucher au code : « deux courbes au pas de 10 minutes (le compteur, lui, enregistre toutes les 5 minutes) ».",
+  "correction": null,
+  "note": "Même correction que l'info « reseau ». Le calcul de simulations.js avance désormais par pas de 1/12 d'heure (t+=1/12, énergies /12), pour que le tracé corresponde au texte.",
   "sources": [
    {
     "cle": "enedis-nmo-cf-015e",
     "passage": "Courbe de charge brute ou corrigée, au pas de 5 minutes",
-    "relu": null
+    "relu": true,
+    "page": "§ 4.1.2"
    },
    {
     "cle": "enedis-nmo-cf-077e",
-    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes. Il peut rester quelques compteurs dont le pas d'enregistrement est encore au pas 10 minutes.",
-    "relu": null
+    "passage": "le pas de mesure des courbes de charge est en nominal de 5 minutes1. Il peut rester quelques compteurs dont le pas d’enregistrement est encore au pas 10 minutes2.",
+    "relu": true,
+    "page": "§ 1.3.2, p. 6"
    }
-  ]
+  ],
+  "avant": "l'écran montre deux courbes au pas de 10 minutes"
  },
  {
   "id": "vs-173",
@@ -3151,11 +3417,30 @@
   "texte": "La porte de sortie du site : toute la production passe par ici avant de rejoindre le réseau.",
   "affirmation": "Toute la production d'une centrale transite par le poste de livraison avant le réseau public.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Notion standard (poste de livraison HTA, norme NF C 13-100), mentionnée dans les documents Enedis lus (« Protection générale de poste de livraison NF C 13-100 ») sans définition citable. À étayer avec le modèle de convention de raccordement HTA d'Enedis (non lu).",
-  "sources": []
+  "note": "L'énergie est injectée au réseau au point de raccordement, qui se trouve au poste de livraison (limite de propriété dans ses cellules « arrivée ») ; le comptage y mesure l'énergie injectée.",
+  "sources": [
+   {
+    "cle": "enedis-mop-res-055e",
+    "passage": "Point physique où l’énergie électrique est injectée au Réseau.",
+    "relu": true,
+    "page": "§ 2.4"
+   },
+   {
+    "cle": "enedis-mop-res-055e",
+    "passage": "dans le cas d’un raccordement souterrain, immédiatement en amont des bornes de raccordement des extrémités de câbles dans les cellules \"arrivée\" du poste de livraison",
+    "relu": true,
+    "page": "§ 3.2.1"
+   },
+   {
+    "cle": "enedis-mop-res-055e",
+    "passage": "la mesure au Point de Raccordement des énergies actives injectées et réactives injectées ou soutirées",
+    "relu": true,
+    "page": "§ 4.2"
+   }
+  ]
  },
  {
   "id": "vs-184",
@@ -3289,13 +3574,26 @@
   "repere": "objet mouton (répliques paires)",
   "info": "surface",
   "texte": "Elle tond sous les panneaux huit heures par jour, sans contrat ni préavis.",
-  "affirmation": "Une brebis pâture environ huit heures par jour.",
+  "affirmation": "Une brebis adulte pâture de l'ordre de six à douze heures par jour.",
   "type": "fait",
-  "verdict": "sans-source",
+  "verdict": "confirme",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "Ordre de grandeur usuel du temps de pâturage d'une brebis, mais aucune source lue. Proposition : garder « toute la journée » ou sourcer auprès de l'Institut de l'élevage.",
-  "sources": []
+  "note": "Pour une brebis adulte au pâturage, la durée d'ingestion est de 350 à 750 minutes par jour (6 à 12 h 30) : huit heures est dans la fourchette.",
+  "sources": [
+   {
+    "cle": "inrae-ingestion-herbe-paturage",
+    "passage": "TABLEAU 1 : Principales caractéristiques du comportement alimentaire journalier des bovins et des ovins au pâturage.",
+    "relu": true,
+    "page": "p. 191, tableau 1"
+   },
+   {
+    "cle": "inrae-ingestion-herbe-paturage",
+    "passage": "Durée d’ingestion (minutes)                          450-650              350-550                 350-750",
+    "relu": true,
+    "page": "tableau 1, colonne « Brebis adulte (60 kg) »"
+   }
+  ]
  },
  {
   "id": "vs-193",
@@ -3367,13 +3665,13 @@
   "fichier": "jeu/voyages/solaire/carte.js",
   "repere": "solTrackersEnDirect",
   "info": "tracker",
-  "texte": "Il fait nuit : les panneaux sont rangés à plat, en attendant le lever du soleil.",
-  "affirmation": "La nuit, les trackers sont en position de repos à plat.",
-  "type": "fait",
-  "verdict": "sans-source",
+  "texte": "Il fait nuit : ici, on range les panneaux à plat, en attendant le lever du soleil.",
+  "affirmation": "La nuit, les trackers du site sont rangés à plat.",
+  "type": "fictif",
+  "verdict": "sans-objet",
   "attente": "Sans source : à reformuler, à retirer, ou à garder en l'état",
   "correction": null,
-  "note": "La position de repos nocturne dépend du fabricant (à plat ou légèrement inclinée) ; aucune source lue. Proposition prudente : « Il fait nuit : les panneaux sont au repos, en attendant le lever du soleil. »",
+  "note": "La position de repos nocturne dépend de l'exploitant et du fabricant (à plat ou inclinée, par exemple contre l'encrassement) ; aucune source lisible trouvée (pages Sandia, NREL, Cal Poly, brevets : inaccessibles ou hors sujet). Le texte dit désormais que c'est le choix du site (« ici, on range… »), donnée du site fictif.",
   "sources": []
  },
  {

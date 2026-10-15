@@ -29,7 +29,7 @@ voyDeclarer('solaire',{
     "Prochain arrêt : Ampère-sur-Loire, terminus. Là-bas, les bâtiments consomment. Vous venez de voir d'où ça peut venir à midi."],
 
   infos:[
-    {id:'effet',refs:['cea-cellules-pv','enedis-technologies-enr'],ou:"la vitrine de l'espace d'accueil",cle:1,t:"L'effet photovoltaïque",
+    {id:'effet',refs:['cea-cellules-pv','enedis-technologies-enr','csa-longi-certificat-80027925'],ou:"la vitrine de l'espace d'accueil",cle:1,t:"L'effet photovoltaïque",
       x:"Un grain de lumière, un photon, frappe une cellule en silicium et y bouscule un électron. Des milliards d'électrons bousculés dans le même sens, c'est un courant. Aucune pièce ne bouge, rien ne brûle : la cellule fournit du courant continu tant qu'elle est éclairée.",
       retiens:"Lumière → courant continu, directement. Ni turbine, ni vapeur."},
     {id:'module',refs:['solartraders-module-430','fraunhofer-pv-report'],ou:"M. Crête, à l'espace d'accueil",cle:1,t:"Le module et le kilowatt-crête",
@@ -38,16 +38,16 @@ voyDeclarer('solaire',{
     {id:'productible',refs:['gsa-saint-photon','gsa-orleans','gsa-lille'],ou:"le grand panneau du site, à la sortie du quai",cle:1,t:"Le productible : des kWc aux kWh",
       x:"Ici, chaque kWc installé produit environ 1 450 kWh par an. À Ampère-sur-Loire, ce serait plutôt 1 070 ; à Lille, autour de 1 000. La centrale : 12 MWc, 28 000 modules, environ 17 GWh par an. C'est comme si elle tournait à pleine puissance 1 450 heures sur les 8 760 de l'année : un facteur de charge de 16,6 %.",
       retiens:"Production annuelle = puissance crête × productible du lieu."},
-    {id:'chaleur',refs:['solartraders-module-430','pveducation-noct'],ou:"la station météo, dans le champ de panneaux fixes",t:"Le soleil, oui. La chaleur, non.",
+    {id:'chaleur',refs:['solartraders-module-430','pveducation-noct','jrc-pvgis-sp-horaire-10ans'],ou:"la station météo, dans le champ de panneaux fixes",t:"Le soleil, oui. La chaleur, non.",
       x:"Un module perd environ 0,3 % de puissance par degré au-dessus de 25 °C. En plein été, ses cellules montent à 65 °C : 12 % de moins que sur l'étiquette. Les meilleures heures de l'année tombent souvent au printemps, par temps clair, frais et un peu venté.",
       retiens:"Le photovoltaïque aime la lumière, pas la canicule."},
     {id:'onduleur',refs:['enedis-technologies-enr','krannich-onduleur-350','enedis-protections-decouplage'],ou:"M. Sinus, devant les armoires des onduleurs",cle:1,t:"L'onduleur",
       x:"Les modules produisent du courant continu ; le réseau est en alternatif, à 50 hertz. L'onduleur fait la conversion, avec environ 98 % de rendement. Il cherche aussi en permanence le meilleur point de fonctionnement des modules, et se coupe tout seul si le réseau disparaît. Il y en a six ici : quand l'un tombe, un sixième de la production s'éteint.",
       retiens:"Pas d'onduleur, pas d'injection. C'est aussi lui qui surveille le mieux la production."},
-    {id:'reseau',refs:['enedis-technologies-enr','enedis-nmo-cf-015e'],ou:"le transformateur, près du poste de livraison",t:"Du champ à la prise",
-      x:"En sortie d'onduleur, le courant est à quelques centaines de volts. Un transformateur l'élève à 20 000 volts, la tension du réseau de distribution, puis le poste de livraison le remet au gestionnaire de réseau. C'est là que se trouve le compteur de production : une courbe de charge au pas de 10 minutes, exactement comme pour un bâtiment, mais dans l'autre sens.",
+    {id:'reseau',refs:['enedis-technologies-enr','enedis-nmo-cf-015e','enedis-nmo-cf-077e','enedis-mop-res-055e'],ou:"le transformateur, près du poste de livraison",t:"Du champ à la prise",
+      x:"En sortie d'onduleur, le courant est à quelques centaines de volts. Un transformateur l'élève à 20 000 volts, la tension du réseau de distribution, puis le poste de livraison le remet au gestionnaire de réseau. C'est là que se trouve le compteur de production : une courbe de charge au pas de 5 minutes, exactement comme pour un bâtiment, mais dans l'autre sens.",
       retiens:"Un producteur a lui aussi un point de livraison, un compteur et une courbe de charge."},
-    {id:'tracker',refs:['iea-pvps-trackers'],ou:"le pupitre de Mlle Azimut, dans le champ des trackers",t:"Suivre le soleil",
+    {id:'tracker',refs:['iea-pvps-trackers','jrc-pvgis-sp-horaire-fixe','jrc-pvgis-sp-horaire-tracker'],ou:"le pupitre de Mlle Azimut, dans le champ des trackers",t:"Suivre le soleil",
       x:"Un tracker fait pivoter les modules d'est en ouest au fil de la journée. Gain : environ 20 % de production en plus, et surtout une courbe plus large, le matin et le soir. Prix à payer : un moteur, des pièces qui bougent, de l'entretien, et plus d'espace entre les rangées.",
       retiens:"Orientation et inclinaison décident de la quantité produite, et de l'heure à laquelle on la produit."},
     {id:'cloche',refs:['rte-be2025-production'],ou:"l'écran de supervision de Mlle Cloche",cle:1,t:"La courbe en cloche",
@@ -76,7 +76,9 @@ voyDeclarer('solaire',{
   /* les références : chaque information porte les siennes (refs, ci-dessus) ; celles-ci appuient ce que disent les habitants,
      les panneaux et les simulations. Les clés sont celles du registre commun/donnees/sources.js. */
   refs:['rte-be2025-rapport','rte-be2025-consommation','rte-interconnexions','edf-solaire-chiffres','edf-consommation-chiffres','insee-bilan-demographique-2025','edf-gravelines','edf-chooz',
-    'iea-pvps-salissures','iea-pvps-acv','fraunhofer-pv-report','gsa-nevers','cre-services-systeme','enedis-nmo-cf-077e','utrecht-cameras-ciel','kippzonen-pyranometre','reussir-patre-moutons','rex-transformateur-bourdonnement']
+    'iea-pvps-salissures','iea-pvps-acv','fraunhofer-pv-report','gsa-nevers','cre-services-systeme','enedis-nmo-cf-077e','utrecht-cameras-ciel','kippzonen-pyranometre','reussir-patre-moutons','rex-transformateur-bourdonnement',
+    'jrc-pvgis-sp-35','jrc-pvgis-sp-optimum','jrc-pvgis-sp-25','jrc-pvgis-sp-50','jrc-pvgis-sp-60','jrc-pvgis-sp-70','jrc-pvgis-sp-75','jrc-pvgis-sp-sud-est','jrc-pvgis-sp-est-sud-est','jrc-pvgis-sp-tracker',
+    'cre-prix-negatifs','sharp-nt-180u1','inrae-ingestion-herbe-paturage']
 });
 
 /* ================= CE QUE DISENT LES GENS ET LES CHOSES =================
@@ -92,7 +94,7 @@ SOL.dit={
     ["Le panneau du site : 12 MWc, 28 000 modules, 14 hectares, environ 17 GWh par an. Quelqu'un a ajouté un soleil souriant. Il a l'air de savoir ce qu'il vaut."]],
   cellule:[["Une vitrine. Dedans, une cellule de silicium coupée en deux, et un schéma : un photon arrive, un électron s'en va.",
       "La légende précise : « Aucun électron n'a été maltraité. Ils sont juste un peu bousculés. »"],
-    ["La cellule en vitrine. Un photon, un électron, du courant continu. La physique la plus rentable du site tient dans dix centimètres."]],
+    ["La cellule en vitrine. Un photon, un électron, du courant continu. La physique la plus rentable du site tient dans neuf centimètres sur dix-huit."]],
   maquette:[["Une maquette : une école, des panneaux sur le toit, et deux curseurs marqués « autoconsommation » et « autoproduction ».",
       "Un écriteau : « Ne pas confondre. Vraiment. Mme Zénith pose la question à tout le monde. »"],
     ["La maquette de l'école. Les deux curseurs sont usés à force d'être confondus."]],
@@ -102,7 +104,7 @@ SOL.dit={
   // --- les gens
   crete:[["Crête. Kilowatt-Crête, pour les intimes. C'est moi qui visse les modules. Vingt-huit mille. J'ai compté.",
       "Regarde l'étiquette au dos : 430 Wc. Les gens lisent ça comme une promesse. C'est une note obtenue en labo, un jour de printemps, sans vent et sans pigeon."],
-    ["Un module qui donne sa puissance crête en plein mois d'août ? Je cherche encore. Par contre, en avril, par mistral, ils se surpassent. Comme quoi le confort, ça ne motive personne."]],
+    ["Un module qui donne sa puissance crête en plein mois d'août ? Je cherche encore. Par contre, en avril, par grand vent frais, ils se surpassent. Comme quoi le confort, ça ne motive personne."]],
   sinus:[["M. Sinus, exploitation. Mes onduleurs prennent du continu et rendent de l'alternatif, cinquante fois par seconde, sans jamais se plaindre. J'aimerais en dire autant des stagiaires.",
       "Six armoires. Si l'une s'arrête, un sixième du champ produit pour rien. Les modules, eux, ne remarquent rien. Ils sont très détendus, les modules."],
     ["Quatre-vingt-dix-huit pour cent de rendement. Les deux pour cent qui manquent, c'est la chaleur que tu sens sur la porte. On ne peut pas tout réussir."]],
@@ -152,5 +154,5 @@ SOL.questions=[
   Q("Sur la courbe du jour, la production décroche d'un sixième à 11 h, d'un coup, et ne remonte pas. Tu appelles…","M. Sinus : un onduleur est tombé","Une marche nette, d'une fraction ronde : c'est un équipement qui s'arrête, pas la météo.","Dr Nuage : c'est un nuage","Un nuage creuse une dent, puis s'en va. Il ne retire pas un sixième pile.","Marius : une brebis a débranché un câble","Elles n'ont aucune opinion, et aucun tournevis."),
   Q("Ton école a 36 kWc en toiture. En juillet, elle consomme peu et injecte 70 % de sa production sur le réseau. Son taux d'autoconsommation est de…","30 %","L'autoconsommation, c'est la part de la production consommée sur place : 100 − 70.","70 %","Ça, c'est la part injectée, le surplus.","On ne peut pas savoir sans la facture","La courbe de charge suffit : production moins injection."),
   Q("Fin 2025, la France a plus de puissance solaire installée que de puissance hydraulique. Qui a produit le plus d'électricité en 2025 ?","Les barrages, presque deux fois plus","62,4 TWh contre 32,9 : l'eau tourne bien plus d'heures par an que le soleil ne brille.","Le solaire, forcément","Plus de GW ne veut pas dire plus de TWh. Tout dépend du nombre d'heures.","Égalité","À puissance voisine, le facteur de charge fait toute la différence."),
-  Q("Pour un bâtiment équipé de panneaux, quel est le levier le moins cher pour mieux utiliser sa production ?","Déplacer vers midi les usages qui peuvent attendre","Chauffe-eau, recharge, lavage : zéro investissement, juste une programmation.","Ajouter une batterie","Efficace, mais c'est le levier le plus cher. On commence par déplacer.","Doubler la surface de panneaux","On couvre un peu plus, et on déborde beaucoup plus à midi.")
+  Q("Pour un bâtiment équipé de panneaux, quel est le levier le moins cher pour mieux utiliser sa production ?","Déplacer vers midi les usages qui peuvent attendre","Chauffe-eau, recharge, lavage : zéro investissement, juste une programmation.","Ajouter une batterie","Efficace, mais c'est un appareil de plus à acheter. On commence par déplacer : ça, c'est gratuit.","Doubler la surface de panneaux","On couvre un peu plus, et on déborde beaucoup plus à midi.")
 ];
