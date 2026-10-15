@@ -17,7 +17,8 @@ import { creerRendu, h, icone, mettreEnForme, nombre, pluriel, surligner } from 
 import { creerEdition } from "./edition.js";
 import { monterModifs } from "./vue-modifs.js";
 import { monterJoueurs } from "./vue-joueurs.js";
-import { etiquettes } from "./suivi.js";
+import { monterPourCombien } from "./vue-pour-combien.js";
+import { dateDe, etiquettes } from "./suivi.js";
 import { CHAPITRES_JEU } from "../commun/donnees/etapes.js";
 import { SOURCES } from "../commun/donnees/sources.js";
 import { SUIVI } from "../commun/config.js";
@@ -67,7 +68,7 @@ async function demarrer() {
   const boutonModifier = h("button", { class: "bouton bascule", type: "button", "aria-pressed": "false", title: "Quand c'est allumé, un clic sur un texte du jeu permet de le réécrire." }, h("span", { html: icone("crayon", 14) }), " Modifier les textes");
   const tete = h("header", { class: "tete" },
     h("div", { class: "marque" }, h("strong", null, "Pilotage"), h("span", null, "Wattlings · le parcours du jeu"), h("span", { class: "prive", title: "Cette page n'est liée nulle part, mais quiconque en connaît l'adresse peut la lire : elle montre toutes les réponses." }, "page non listée")),
-    h("nav", { class: "onglets", role: "tablist" }, onglet("parcours", "Le parcours"), onglet("modifs", "Mes modifications"), onglet("joueurs", "Les joueurs")),
+    h("nav", { class: "onglets", role: "tablist" }, onglet("parcours", "Le parcours"), onglet("modifs", "Mes modifications"), onglet("joueurs", "Les joueurs"), onglet("pourcombien", "Pour combien ?")),
     h("div", { class: "outils" }, champ, boutonModifier));
 
   // ---------------------------------------------------------------- l'onglet « Le parcours »
@@ -187,9 +188,10 @@ async function demarrer() {
   edition.surChangement(() => { majCompte(); modifs.rafraichir(); });
 
   // ---------------------------------------------------------------- les deux autres onglets
-  const vueModifs = h("div", { class: "vue", id: "vue-modifs", hidden: true }), vueJoueurs = h("div", { class: "vue", id: "vue-joueurs", hidden: true });
+  const vueModifs = h("div", { class: "vue", id: "vue-modifs", hidden: true }), vueJoueurs = h("div", { class: "vue", id: "vue-joueurs", hidden: true }), vuePourCombien = h("div", { class: "vue", id: "vue-pourcombien", hidden: true });
+  const pourCombien = monterPourCombien(vuePourCombien, { questions: FF.map((F) => F.donnees.POUR_COMBIEN_LISTE).find(Boolean), dateDe });
   const modifs = monterModifs(vueModifs, { edition, voir: (m) => { const id = ouTexte.get(m.f + ":" + m.a); if (id) ouvrir(id); }, ouEst: (m) => { const x = noeuds.get(ouTexte.get(m.f + ":" + m.a)); return x ? x.rang.titre + " · " + x.n.titre : ""; }, allumer: () => regler(true) });
-  monterJoueurs(vueJoueurs, { P, config: SUIVI, ouQuestion: (q) => ouQuestion.get(q), nomDe: (id) => { const x = noeuds.get(id); return x ? x.rang.titre : ""; }, ouvrir, surStats: (A, exemple) => { etat.stats = A; etat.exemple = exemple; poserSuivi(); } });
+  monterJoueurs(vueJoueurs, { P, config: SUIVI, ouQuestion: (q) => ouQuestion.get(q), nomDe: (id) => { const x = noeuds.get(id); return x ? x.rang.titre : ""; }, ouvrir, surStats: (A, exemple) => { etat.stats = A; etat.exemple = exemple; poserSuivi(); }, surLignes: (L, exemple) => pourCombien.recevoir(L, exemple) });
 
   // ---- les chiffres des joueurs, posés sur les frises
   function poserSuivi() {
@@ -209,10 +211,10 @@ async function demarrer() {
   // ---------------------------------------------------------------- navigation
   function montrer(vue, { adresse = true } = {}) {
     etat.vue = vue;
-    [["parcours", vueParcours], ["modifs", vueModifs], ["joueurs", vueJoueurs]].forEach(([id, e]) => (e.hidden = id !== vue));
+    [["parcours", vueParcours], ["modifs", vueModifs], ["joueurs", vueJoueurs], ["pourcombien", vuePourCombien]].forEach(([id, e]) => (e.hidden = id !== vue));
     tete.querySelectorAll(".onglet").forEach((b) => b.setAttribute("aria-selected", b.dataset.vue === vue ? "true" : "false"));
     if (vue === "modifs") modifs.rafraichir();
-    if (adresse) { history.replaceState(null, "", vue === "parcours" ? (etat.ouvert ? "#n=" + encodeURIComponent(etat.ouvert) : location.pathname + location.search) : "#" + (vue === "modifs" ? "modifications" : "joueurs")); scrollTo({ top: 0 }); }
+    if (adresse) { history.replaceState(null, "", vue === "parcours" ? (etat.ouvert ? "#n=" + encodeURIComponent(etat.ouvert) : location.pathname + location.search) : "#" + (vue === "pourcombien" ? "pour-combien" : vue === "modifs" ? "modifications" : "joueurs")); scrollTo({ top: 0 }); }
   }
   function regler(modifier) {
     etat.modifier = modifier;
@@ -232,9 +234,9 @@ async function demarrer() {
   });
   addEventListener("keydown", (e) => { if (e.key === "Escape" && etat.ouvert && !editeur.open) fermer(); if (e.key === "/" && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && !editeur.open) { e.preventDefault(); champ.focus(); } });
 
-  app.replaceChildren(tete, h("main", null, vueParcours, vueModifs, vueJoueurs), editeur);
+  app.replaceChildren(tete, h("main", null, vueParcours, vueModifs, vueJoueurs, vuePourCombien), editeur);
   majCompte();
-  const route = () => { const a = decodeURIComponent(location.hash.slice(1)); if (a === "modifications") montrer("modifs", { adresse: false }); else if (a === "joueurs") montrer("joueurs", { adresse: false }); else if (a.startsWith("n=")) ouvrir(a.slice(2), { adresse: false }); };
+  const route = () => { const a = decodeURIComponent(location.hash.slice(1)); if (a === "modifications") montrer("modifs", { adresse: false }); else if (a === "pour-combien") montrer("pourcombien", { adresse: false }); else if (a === "joueurs") montrer("joueurs", { adresse: false }); else if (a.startsWith("n=")) ouvrir(a.slice(2), { adresse: false }); };
   route();
   addEventListener("hashchange", route);
   // pour les contrôles automatiques (outils/verifier.mjs)

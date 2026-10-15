@@ -12,7 +12,7 @@ const CLE_PROJET = "pilotage-projet-v1";
 const jour = (d) => d.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
 const duree = (s) => (s === null || s === undefined ? "–" : s < 90 ? Math.round(s) + " s" : Math.round(s / 60) + " min");
 
-export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, surStats }) {
+export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, surStats, surLignes }) {
   let projet = { url: config.url || "", cle: config.cle || "" };
   if (!projet.url) { try { projet = Object.assign(projet, JSON.parse(localStorage.getItem(CLE_PROJET) || "{}")); } catch { /* sans stockage : on redemandera */ } }
   let jeton = null, lignes = null, estExemple = false, periode = 30, charge = null; // charge : { url, cle, periode } de la dernière lecture
@@ -54,6 +54,7 @@ export function monterJoueurs(racine, { P, config, ouQuestion, nomDe, ouvrir, su
   function montrer() {
     const A = agreger(lignes, { depuis: depuis() });
     surStats(A, estExemple);
+    if (surLignes) surLignes(lignes, estExemple);
     const C = Object.keys(A.chapitres).map(Number).sort((a, b) => a - b), base = Math.max(1, ...C.map((c) => A.chapitres[c].debut.size));
     const chapitres = P.sections.find((s) => s.id === "histoire").rangs.filter((r) => r.suivi && r.suivi.ch !== undefined);
     const avecProfil = [...A.joueurs].filter(estProfil).length;

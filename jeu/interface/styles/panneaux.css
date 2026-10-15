@@ -17,6 +17,7 @@
 .opt.good{border-color:var(--ok);background:#e3f4e6}
 .opt.badc{border-color:var(--bad);background:#f8e1dd;opacity:.8}
 .opt .mono{font-family:var(--f-pix);letter-spacing:.06em}
+.opts.det .opt b{display:block}.opts.det .opt small{display:block;color:var(--muted);font-size:14px;margin-top:2px}
 .fb{border-radius:6px;padding:9px 12px;margin:8px 0;font-size:16.5px}
 .fb.ok{background:#e3f4e6;border:2px solid var(--ok)}
 .fb.ko{background:#f8e1dd;border:2px solid var(--bad)}

@@ -205,7 +205,7 @@ function crabeParler(){
   const t=CRABE_DIT[CRABE.n%CRABE_DIT.length];CRABE.n++;
   say([{w:'Dr Crabouillard',t},{w:'Dr Crabouillard',t:"Dites… Vous n'auriez pas quelque chose à manger ? Quelque chose de sucré ?"}],()=>{
     const ov=openPanel('Dr Crabouillard',{sansCours:true}),b=ov.querySelector('.pbody');
-    b.innerHTML=`<p>Il fixe le sachet de chouquettes qui dépasse de ta poche. Ses tentacules frémissent.</p><div class="opts"><button class="opt" id="crOui"><b>Lui donner une chouquette</b><small>Une seule. Qu'est-ce qui pourrait mal tourner ?</small></button><button class="opt" id="crNon"><b>Non</b><small>Tu gardes tes chouquettes.</small></button></div>`;
+    b.innerHTML=`<p>Il fixe le sachet de chouquettes qui dépasse de ta poche. Ses tentacules frémissent.</p><div class="opts det"><button class="opt" id="crOui"><b>Lui donner une chouquette</b><small>Une seule. Qu'est-ce qui pourrait mal tourner ?</small></button><button class="opt" id="crNon"><b>Non</b><small>Tu gardes tes chouquettes.</small></button></div>`;
     b.querySelector('#crNon').onclick=()=>closePanel();
     b.querySelector('#crOui').onclick=()=>{closePanel();say([{t:"Tu lui tends une chouquette. Il l'avale d'un coup, sachet compris. Ses yeux se mettent à tourner."}],()=>{CRABE.fou=420;CRABE.dest=null;sfx('secret')})};
     b.querySelector('#crOui').focus();

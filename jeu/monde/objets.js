@@ -44,7 +44,7 @@ function objsFor(id){
   savoirObjs(id,o);
   if(id==='town'){o.push({x:L.machine[0],y:L.machine[1],kind:'machine',solid:1,act:actMachine},{x:L.machine[0]+1,y:L.machine[1],kind:'none',solid:1,act:actMachine});[[95,8],[100,13],[103,20],[96,25],[101,31],[94,37],[102,45],[97,51],[103,57],[95,63],[100,67],[98,39],[94,47]].forEach(([x,y])=>o.push({x,y,kind:'turbine',solid:1}))}
   secretObjs(id,o);
-  eggObjs(id,o);
+  eggObjs(id,o);pcObjs(id,o);
   if(MAPS[id]&&MAPS[id].arena)arenaObjs(MAPS[id].arena,o);
   lifeObjs(id,o);decorObjs(id,o);
   if(MAPS[id]&&MAPS[id].objets)MAPS[id].objets(o);   // cartes de voyage : chacune fournit ses objets (jeu/voyages/)

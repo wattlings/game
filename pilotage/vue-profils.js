@@ -42,7 +42,7 @@ function decrire(l, I) {
     jump: ["jeu", "Saute à " + chap(p.ch)], fiche: ["jeu", "Trouve la fiche " + g(I.fiches[p.id] || p.id)], badge: ["jeu", "Gagne le badge " + g(p.name)],
     battle: ["jeu", "Duel " + (p.a ? "contre " + p.a : "") + " : " + ({ win: "gagné", lose: "perdu", flee: "fuite" }[p.r] || p.r)],
     wrong_answer: ["jeu", "Se trompe" + (p.t ? " (" + p.t + ")" : "") + " : " + g(p.q) + (p.a ? " → " + g(p.a) : "")],
-    secret: ["jeu", "Trouve le secret " + g(I.secrets[p.id] || p.id)], mission: ["jeu", "Termine la mission " + (p.n || "") + (p.titre ? " " + g(p.titre) : "")], evolve: ["jeu", "Passe au rang " + p.rank],
+    secret: ["jeu", "Trouve le secret " + g(I.secrets[p.id] || p.id)], mission: ["jeu", "Termine la mission " + (p.n || "") + (p.titre ? " " + g(p.titre) : "")], evolve: ["jeu", "Passe au rang " + p.rank], pour_combien: ["jeu", "Répond à Mme Combien (" + g(p.q) + ") : " + (p.jamais ? "jamais de la vie" : (typeof p.eur === "number" ? p.eur.toLocaleString("fr-FR") : "?") + " €")],
     setting: ["jeu", "Réglage : " + p.k + " = " + p.v], guest_leave: ["jeu", "Quitte sans profil : " + ({ profil: "crée un profil", quitter: "quitte sans enregistrer", rester: "reste" }[p.choix] || p.choix)],
     game_to_course: ["jeu", "Va au cours : " + pg(p.target)],
     voyage_train: ["jeu", "Prend le train vers " + site(p.vers)], voyage_info: ["jeu", "Trouve une info à " + site(p.site)], voyage_defi: ["jeu", "Commence le défi de " + site(p.site)],

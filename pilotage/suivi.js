@@ -56,7 +56,7 @@ export async function charger({ url, cle, jeton, depuis, surProgres, plafond = 6
 
 export const dateDe = (l) => { const d = l.ts || l.created_at || l.inserted_at || l.date || l.t; const x = d ? new Date(d) : null; return x && !isNaN(x) ? x : null; };
 /** Les événements du jeu (les autres viennent du cours, ou de la fenêtre « Mon compte »). */
-export const estDuJeu = (n) => /^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$|intro$|video$|avatar$|aide$|menu$|setting$|guest_leave$|slot_erase$)/.test(n);
+export const estDuJeu = (n) => /^(game_|chapter_|fiche$|battle$|badge$|wrong_answer$|secret$|voyage_|site_choice$|mission$|evolve$|jump$|intro$|video$|avatar$|aide$|menu$|setting$|guest_leave$|slot_erase$|pour_combien$)/.test(n);
 const mediane = (L) => { if (!L.length) return null; const s = L.slice().sort((a, b) => a - b), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
 
 /** Le profil (identifiant du compte) d'un événement, s'il a été envoyé par un joueur connecté. */
@@ -201,6 +201,9 @@ export function exemple(P) {
       }
     }
     P.sections.find((s) => s.id === "secrets").rangs.forEach((r) => r.noeuds.forEach((n) => { if (n.suivi && n.suivi.secret && alea() < 0.07) ev("secret", { id: n.suivi.secret }); }));
+    // Mme Combien : un joueur sur deux lui répond (tirage à part, pour ne pas changer les autres chiffres de l'exemple)
+    const pc = ((j * 2654435761) >>> 0) / 4294967296, pc2 = ((j * 40503 + 7) % 997) / 997;
+    if (pc < 0.5) ev("pour_combien", pc2 < 0.15 ? { q: "boucle-oreille", jamais: 1 } : { q: "boucle-oreille", eur: Math.round(Math.exp(3 + pc2 * 9) / 10) * 10 });
   }
   return L;
 }

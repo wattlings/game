@@ -160,6 +160,8 @@ La page ne recopie rien : elle lit les fichiers du jeu tels qu'ils sont en ligne
 | L'allure des pastilles, d'un bloc du détail | `pilotage/rendu.js`, `pilotage/styles.css` |
 | Les chiffres de l'onglet « Les joueurs » | `pilotage/suivi.js` (lecture et comptage), `pilotage/vue-joueurs.js` (affichage) |
 | La section « Les profils » et le texte de chaque action dans le journal | `pilotage/vue-profils.js` (`decrire`) |
+| Les « Pour combien ? » de Mme Combien : la liste (une ligne « identifiant \| question » par question), ses répliques | `jeu/recit/pour-combien.js` (`POUR_COMBIEN_LISTE`), ou dans le pilotage : « La ville », pastille « Mme Combien » |
+| Les réponses aux « Pour combien ? » (prix moyen, médian, « Jamais de la vie », réponses par profil) | onglet « Pour combien ? » du pilotage, `pilotage/vue-pour-combien.js` ; les réponses sont les événements `pour_combien` (`q`, `eur` ou `jamais`) de la table `events`, et la dernière réponse est gardée dans la sauvegarde (`S.pourCombien`) |
 | Le calcul du temps de jeu estimé (vitesse de lecture, temps de réflexion par question, déplacements, marge) | `pilotage/duree.js` (les constantes en tête du fichier) |
 | Les endroits où « Tester » sait ouvrir le jeu | `jeu/moteur/essai.js` |
 
