@@ -1476,3 +1476,31 @@ Vérification : `node outils/sources.mjs` passe sans échec, et `node outils/ver
     - la banane ne « dose » pas davantage quand on en mange plus (ASNR) ;
     - les 320 °C du primaire sont rétablis (ASN).
   - Restent sans source : la masse du groupe turbo-alternateur (« des centaines de tonnes ») et le rendement d'environ 90 % d'une turbine hydraulique (mauvaise réponse d'un quiz).
+
+### Lot 10 (15 octobre 2026) : plus aucun fait en attente
+
+Le cours et le jeu n'ont plus aucun fait « sans source » ni « à corriger ». Il y a 918 faits et règles relevés : 762 sont confirmés par un passage lu et 156 sont corrigés. Le registre compte 256 sources.
+
+- **Jeu, étape 2** : les 11 lignes en attente sont corrigées.
+  - Pas de la courbe de charge : 30 min avec un Linky, 5 min au-delà de 36 kVA.
+  - Données d'un tiers : elles passent par le SGE, quel que soit le compteur.
+  - Facture : elle va d'un relevé d'index au suivant.
+  - Consultation sans consentement : bloquée.
+  - Station météo « Orléans », partout dans le jeu.
+- **Jeu, étape 7** : 
+  - LED (ADEME, éclairage tertiaire) et pompe à chaleur (ADEME 2025) : confirmés.
+  - Toit : la phrase est précisée (bâtiment ancien non isolé).
+  - Vacances : « quatre hors été ».
+  - Puissance souscrite : reformulée sur la part fixe (CRE, TURPE 7).
+- **Voyage solaire** :
+  - 7 faits confirmés, dont plusieurs par des requêtes PVGIS (JRC) au point du site.
+  - 10 faits corrigés : pas de 5 min, inclinaisons et orientations recalées sur PVGIS, prix négatifs.
+  - Le simulateur est recalé sur PVGIS (optimum à 40°, mêmes écarts entre réglages) ; les 4 missions restent faisables.
+  - 3 phrases sans source lisible sont reformulées en choix du site ou en conseil.
+- **Voyage éolien** : la nacelle « taille d'un autocar » est confirmée (fiche Vestas, directive 96/53/CE). La phrase sur le rendement des moulins anciens est retirée.
+- **Voyage datacenter** : la latence vers Singapour devient « moins d'un dixième de seconde » (WonderNetwork, environ 71 ms à l'aller).
+- **Voyage nucléaire** : le rendement hydraulique est confirmé (IRENA/ETSAP). La masse de la turbine est reformulée : plus de mille tonnes « sur les plus grosses tranches » (Sfen, source secondaire).
+
+Quand aucune source lisible n'existait, le texte a été réécrit pour n'affirmer que ce qui est sourcé, ou présenté comme un choix propre au jeu. Chaque cas est expliqué dans la note de la ligne.
+
+Vérification : `node outils/sources.mjs` passe sans échec, et `node outils/verifier.mjs` donne 452 réussites et 0 échec.
